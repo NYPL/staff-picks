@@ -32,10 +32,45 @@ if (env.production) {
   });
 }
 
+
+var parser = require('jsonapi-parserinator');
+var options = {
+    endpoint: '/api/nypl/ndo/v0.1/staff-picks',
+    includes: ['item', 'list']
+  },
+  host = 'dev.refinery.aws.nypl.org',
+  data;
+
+// app.get('/parser', function () {
+
+//   parser
+//     .setHost({
+//       api_root: 'dev.refinery.aws.nypl.org',
+//       api_version: 'v0.1'
+//     })
+//     .get(options, function (apiData) {
+//       data = apiData;
+//       var parsedData = parser.parse(data);
+//       console.log(parsedData);
+//     });
+
+// });
+
 app.get('/*', function(req, res) {
-  res.render('index', {
-    env: env
-  });
+  parser
+    .setHost({
+      api_root: host,
+      api_version: 'v0.1'
+    })
+    .get(options, function (apiData) {
+      data = apiData;
+      var parsedData = parser.parse(data);
+      // console.log(parsedData);
+      res.render('index', {
+        staffPicks: JSON.stringify({'staff-picks': parsedData}),
+        env: env
+      });
+    });
 });
 
 var port = Number(process.env.PORT || 3001);

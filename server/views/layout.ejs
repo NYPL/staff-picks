@@ -3,8 +3,17 @@
   <title>react-webpack-boilerplate</title>
 </head>
   <body>
+  <div id="header-container"></div>
 
-  <%- body %>
+    <div id="content">
+      <%- body %>
+    </div>
+
+    <div id="footer-container"></div>
+
+  <script type="text/javascript">
+    var staffPicks = <%- staffPicks %>;
+  </script>
 
   <% if (env.production) { %>
     <script async src="<%= env.assets.main.js %>"></script>
