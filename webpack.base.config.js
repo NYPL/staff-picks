@@ -47,9 +47,9 @@ module.exports = {
   ],
 
   module: {
-    preLoaders: [
-      {test: /\.js$/, loader: 'eslint-loader', exclude: /node_modules/}
-    ],
+    // preLoaders: [
+    //   {test: /\.js$/, loader: 'eslint-loader', exclude: /node_modules/}
+    // ],
 
     loaders: [
       {test: /\.scss$/, loader: 'style!css!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded'}

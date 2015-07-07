@@ -1,6 +1,211 @@
-$background: lightblue;
+$libraryRed: #E43534;
+$libraryBlue: #0095c8;
+$headerHeight: 175px;
+$headerPaddingR: 70px;
+$headerPaddingL: 120px;
+
+/* first for IE 4–8 */
+@font-face {
+    font-family: KievitScWeb-Book;
+    src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitScWeb-Book.eot");
+}
+
+/* then for WOFF-capable browsers */
+@font-face {
+    font-family: KievitScWeb-Book;
+    src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitScWeb-Book.woff") format("woff");
+}
+
+/** MIXINS **/
+@mixin display-arrow($direction: 'up', $color: #ededed, $size: 10px, $position: 50%) {
+  &:after {
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: transparent;
+    @if $direction == 'up' {
+      bottom: 100%;
+      right: $position;
+      border-bottom-color: $color;
+      border-width: $size;
+      margin-left: -$size;
+    }
+    @if $direction == 'down' {
+      top: 100%;
+      left: $position;
+      border-top-color: $color;
+      border-width: $size;
+      margin-left: -$size;
+    }
+    @if $direction == 'right' {
+      left: 100%;
+      top: $position;
+      border-left-color: $color;
+      border-width: $size;
+      margin-top: -$size;
+    }
+    @if $direction == 'left' {
+      right: 100%;
+      top: $position;
+      border-right-color: $color;
+      border-width: $size;
+      margin-top: -$size;
+    }
+  }
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Utility Classes */
+.up-arrow {
+  @include display-arrow('up', $position: 100px);
+}
+
+.signIn-up-arrow {
+  @include display-arrow('up', $color: #666, $position: 170px); 
+}
 
 body {
-  background: $background;
-  font-family: "Helvetica Neue", serif;
+    font-family: KievitScWeb-Book, sans-serif;
+}
+
+/* Header global rules */
+#Header {
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.mega-menu {
+  background-color: $libraryRed;
+  height: 215px;
+  width: 100%;
+  margin-top: -8px; // temporary fix
+
+  &.active {
+    display: flex;
+  }
+
+  .sub-nav {
+    width: 200px;
+    padding-left: 236px;
+    background-color: #414141;
+
+    h2 {
+      color: #B1B1B1;
+      font-size: 16px;
+      font-weight: normal
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      color: white;
+      font-weight: bold;
+    }
+  }
+
+  .features {
+    display: flex;
+    color: white;
+    width: 100%;
+
+    .image-column {
+  margin-right: 20px;
+  img {
+      border-radius: 50%;
+  }
+    }
+
+    .feature-item {
+      flex-grow: 1;
+      padding: 20px 0 20px 50px;
+      display: flex;
+    }
+  }
+}
+
+ul#nav_menu {
+  list-style: none;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  right: $headerPaddingR;
+  font-size: 14px;
+  margin: 0;
+
+  li {
+    padding: 1em 0.5em;
+  }
+}
+      
+#header-container + div {
+  margin-top: $headerHeight;
+}
+
+#content {
+  padding-left: 236px;
+  padding-right: $headerPaddingR;
+  padding-top: $headerHeight;
+  min-height: 200px;
+}
+
+#login-form {
+  input {
+    padding: 10px;
+  }
+
+  a {
+    text-decoration: underline;
+  }
 }
