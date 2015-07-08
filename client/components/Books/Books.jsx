@@ -2,7 +2,15 @@ import React from 'react';
 import Radium from 'radium';
 import MasonryMixin from 'react-masonry-mixin';
 import Book from '../Book/Book.jsx';
+import BookContent from '../BookContent/BookContent.jsx';
 import API from '../../utils/ApiService.js';
+
+import Modal from '../modal/modal.js';
+
+let bookContainer = document.getElementById('book-container');
+
+Modal.setAppElement(bookContainer);
+Modal.injectCSS();
 
 let bookData = API.getBooks();
 console.log(bookData);
@@ -17,18 +25,40 @@ let masonryOptions = {
 
 // class Books extends React.Component {
 var Books = React.createClass({
-  // Constructor used in ES6
-  // constructor(props) {
-  //   super(props);
-  // }
+  getInitialState: function () {
+    return {
+      book: {},
+      modalIsOpen: false
+    }
+  },
 
   mixins: [MasonryMixin('masonryContainer', masonryOptions)],
 
+  openModal: function (book) {
+    console.log(book);
+    this.setState({
+      book: book,
+      modalIsOpen: true
+    });
+  },
+
+  closeModal: function () {
+    this.setState({
+      book: {},
+      modalIsOpen: false
+    });
+  },
+
   render: function () {
-    var books = bookData['staff-picks'].map(function (element){
+    var openModal = this.openModal;
+    var _this = this;
+
+    var books = bookData['staff-picks'].map(function (element) {
       return (
-        <div className='book-item' style={styles.bookItem}>
-          <Book book={element} />
+        <div className='book-item'
+          onClick={openModal.bind(_this, element)}>
+          <Book book={element} style={styles.bookItem}
+            height={'250px'} width={'150px'} />
         </div>
       );
     });
@@ -36,6 +66,13 @@ var Books = React.createClass({
     return (
       <div ref="masonryContainer" width='600px'>
         {books}
+        <Modal isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}>
+          <div style={{'width':'30%', 'float':'left'}}>
+            <Book book={this.state.book} height={'400px'} width={'250px'} />
+          </div>
+          <BookContent book={this.state.book} />
+        </Modal>
       </div>
     );
   }
@@ -52,7 +89,8 @@ const styles = {
 
   },
   bookItem: {
-    marginBottom: '20px'
+    marginBottom: '20px',
+    maxWidth: '200px'
   }
 };
 
