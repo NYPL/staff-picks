@@ -27,7 +27,7 @@ export default class Hero extends React.Component {
             <BookIntro bookTitle='The Amazing Adventures of Kavalier & Clay' quote='"I loved this book. It&#39;s a great story with complex, interesting characters in a fascinating setting. The creation of the comic book history is not only fascinating but the fictional elements are so well integrated that without looking it up."' />  
           </div>
           <div key='HeroImageContainer' className='HeroImageContainer' style={styles.HeroImageContainer}>
-            <HeroImage />
+            <HeroImage src={src.HeroImageLink}/>
           </div>
         </div>
       </div>
@@ -80,6 +80,10 @@ const styles = {
     position: 'relative',
     width: '60%'
   }
+};
+
+const src = {
+  HeroImageLink: 'https://chicago.bibliocms.com/wp-content/uploads/sites/3/2015/01/kccover.png'
 };
 
 export default Radium(Hero);
