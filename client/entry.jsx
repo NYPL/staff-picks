@@ -3,7 +3,7 @@ import 'styles/main.scss';
 import React from 'react/addons';
 
 // NYPL Components
-import Header from 'components/Header/Header.jsx';
+import Header from 'components/HeaderOld/Header.jsx';
 import Hero from 'components/Hero/Hero.jsx';
 import Footer from 'dgx-react-footer';
 
