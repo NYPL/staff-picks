@@ -36,7 +36,6 @@ const styles = {
     color: 'white',
     fontFamily: 'MiloSlabPro',
     margin: '20px auto',
-    overflow: 'auto',
     position: 'relative',
     width: '100%',
   },
