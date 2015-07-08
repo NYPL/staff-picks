@@ -52,7 +52,7 @@ const styles = {
     '@media (max-width: 1200px)': { fontSize: '1.2em' },
     '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '1em' },
     '@media (max-width: 767px)': { fontSize: '0.8em' },
-    '@media (max-width: 480px)': { fontSize: '0.8em' },
+    '@media (max-width: 480px)': { },
     fontSize: '1.2em',
     marginTop: '20px'
   }
