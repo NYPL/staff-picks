@@ -41,14 +41,16 @@ const styles = {
     width: '100%'
   },
   HeroTitle: {
-    '@media (max-width: 568px)': { marginTop: '24px' },
+    '@media (max-width: 480px)': { marginTop: '24px' },
     fontFamily: 'KievitComp-Bold',
     marginTop: '0px',
     marginBottom: '4px',
     textTransform: 'uppercase'
   },
   HeroDes: {
-    '@media (max-width: 568px)': { display: 'none' },
+    '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '1em' },
+    '@media (max-width: 767px)': { fontSize: '1em' },
+    '@media (max-width: 480px)': { display: 'none' },
     fontSize: '1.5em',
     lineHeight: '1.2em', 
   }

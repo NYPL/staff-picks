@@ -56,7 +56,10 @@ const styles = {
     position: 'relative',
   },
   HeroImageContainer: {
-    '@media (max-width: 568px)': { display: 'none' },
+    '@media (max-width: 1200px)': {  },
+    '@media (min-width: 768px) and (max-width: 979px)': {  },
+    '@media (max-width: 767px)': { display: 'none' },
+    '@media (max-width: 480px)': { display: 'none' },
     borderRadius: '50%',
     display: 'block',
     float: 'right',
@@ -67,6 +70,12 @@ const styles = {
     position: 'relative'
   },
   TextContainer: {
+    '@media (max-width: 1200px)': { width: '50%' },
+    '@media (min-width: 827px) and (max-width: 979px)': { width: '45%' },
+    '@media (min-width: 768px) and (max-width: 826px)': { width: '40%' },
+    '@media (max-width: 767px)': {  },
+    '@media (max-width: 480px)': {  },
+
     float: 'left',
     position: 'relative',
     width: '60%'

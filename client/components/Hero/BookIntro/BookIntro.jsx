@@ -31,7 +31,7 @@ BookIntro.defaultProps = {
 
 const styles = {
   base: {
-    '@media (max-width: 568px)': { display: 'none' },
+    '@media (max-width: 480px)': { display: 'none' },
     boxSizing: 'border-box',
     color: 'white',
     fontFamily: 'MiloSlabPro',
@@ -41,10 +41,18 @@ const styles = {
     width: '100%',
   },
   BookTitle: {
+    '@media (max-width: 1200px)': { fontSize: '3em' },
+    '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '2em' },
+    '@media (max-width: 767px)': { fontSize: '1em' },
+    '@media (max-width: 480px)': { fontSize: '1em' },
     fontSize: '3em',
     lineHeight: '1em',
   },
   BookQuote: {
+    '@media (max-width: 1200px)': { fontSize: '1.2em' },
+    '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '1em' },
+    '@media (max-width: 767px)': { fontSize: '0.8em' },
+    '@media (max-width: 480px)': { fontSize: '0.8em' },
     fontSize: '1.2em',
     marginTop: '20px'
   }
