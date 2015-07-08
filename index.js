@@ -36,7 +36,7 @@ if (env.production) {
 var parser = require('jsonapi-parserinator');
 var options = {
     endpoint: '/api/nypl/ndo/v0.1/staff-picks',
-    includes: ['item', 'list']
+    includes: ['item.tags', 'list', 'age']
   },
   host = 'dev.refinery.aws.nypl.org',
   data;
