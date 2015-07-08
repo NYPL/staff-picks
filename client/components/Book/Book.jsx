@@ -7,6 +7,7 @@ class Book extends React.Component {
     super(props);
 
     this.state = {
+      modalIsOpen: false,
       modal: false
     };
 
@@ -16,7 +17,8 @@ class Book extends React.Component {
   render () {
     const book = this.props.book,
       bookImgSrc = book['staff-pick-item']['attributes']['image-slug'],
-      bookTarget = book['staff-pick-item']['attributes']['catalog-slug'];
+      bookTarget = book['staff-pick-item']['attributes']['catalog-slug'],
+      href = `https://nypl.bibliocommons.com/item/show/${bookTarget}`;
 
     return (
       <div ref='Book' className={this.props.className}
@@ -25,12 +27,12 @@ class Book extends React.Component {
           this.props.style
         ]}>
         
-        <a href={`https://nypl.bibliocommons.com/item/show/${bookTarget}`}
+        <a href='#'
           onClick={this._handleClick}>
           <img
             src={`https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${bookImgSrc}&content=M&Return=1&Type=M`}
-            height='250'
-            width='150' />
+            height={this.props.height}
+            width={this.props.width} />
         </a>
       </div>
     );
@@ -38,9 +40,6 @@ class Book extends React.Component {
 
   _handleClick (e) {
     e.preventDefault();
-
-    console.log(this.props.book);
-    this.setState({modal: !this.state.modal});
   }
 };
 
