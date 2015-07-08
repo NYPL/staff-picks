@@ -16,7 +16,7 @@ class ImageComponent extends React.Component {
 
 ImageComponent.defaultProps = {
   id: '',
-  className: 'Image-Component',
+  className: 'BasicImageComponent',
   label: '',
   lang: 'en'
 };
