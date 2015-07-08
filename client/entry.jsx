@@ -29,3 +29,6 @@ React.render(<Header data={data} />, document.getElementById("header-container")
 React.render(<Hero />, document.getElementById('hero'));
 React.render(<Footer />, document.getElementById("footer-container"));
 
+import Books from 'components/Books/Books.jsx';
+
+React.render(<Books />, document.getElementById('book-container'));
