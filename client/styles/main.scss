@@ -189,9 +189,9 @@ ul#nav_menu {
   }
 }
       
-#header-container + div {
-  margin-top: $headerHeight;
-}
+// #header-container + div {
+//   margin-top: $headerHeight;
+// }
 
 #content {
   padding-left: 236px;
@@ -209,3 +209,7 @@ ul#nav_menu {
     text-decoration: underline;
   }
 }
+
+@import 'transitions';
+@import 'breakpoint';
+@import 'header';
