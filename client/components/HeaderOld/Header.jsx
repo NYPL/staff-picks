@@ -4,9 +4,6 @@ import Radium from 'radium';
 
 // NYPL module imports
 import SSOContainer from '../SSOContainer/SSOContainer.jsx';
-import DonateButton from '../DonateButton/DonateButton.jsx';
-import SubscribeButton from '../SubscribeButton/SubscribeButton.jsx';
-import NavMenu from '../NavMenu/NavMenu.jsx';
 
 class Header extends React.Component {
 

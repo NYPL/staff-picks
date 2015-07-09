@@ -26,9 +26,6 @@ class SignInContainer extends React.Component {
     let showDialog = this.state.showDialog;
     const classes =  cx({ show: showDialog, hide: !showDialog });
 
-    // styles.SimpleButton.backgroundColor = this.state.showDialog ? '#E43534' : 'transparent';
-    // styles.SimpleButton.color = this.state.showDialog ? 'white' : 'black';
-
     return (
       <div style={styles.base}>
         {this.state.logged_in}
