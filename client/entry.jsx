@@ -3,7 +3,8 @@ import 'styles/main.scss';
 import React from 'react/addons';
 
 // NYPL Components
-import Header from 'components/Header/Header.jsx';
+import Header from 'components/HeaderOld/Header.jsx';
+import Hero from 'components/Hero/Hero.jsx';
 import Footer from 'dgx-react-footer';
 
 // Utilities
@@ -25,5 +26,9 @@ const data = API.getData();
 const books = API.getBooks();
 
 React.render(<Header data={data} />, document.getElementById("header-container"));
+React.render(<Hero />, document.getElementById('hero'));
 React.render(<Footer />, document.getElementById("footer-container"));
 
+import Books from 'components/Books/Books.jsx';
+
+React.render(<Books />, document.getElementById('book-container'));
