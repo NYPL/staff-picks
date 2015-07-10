@@ -210,6 +210,69 @@ ul#nav_menu {
   }
 }
 
+.BookContent {
+  margin-left: 30px;
+  display: inline-block;
+  position: absolute;
+  width: 550px;
+
+  h2 {
+    font-size: 3em;
+  }
+
+  .author {
+    margin-top: 30px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 1.6em;
+    font-size: 16px;
+  }
+
+  .description {
+    font-size: 1.5em;
+    font-size: 15px;
+  }
+
+  .staff-pick {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 25px 0;
+
+    .staff-pick-icon {
+      background: url('/client/images/icon.thumbsup.svg') no-repeat;
+      padding: 11px 20px 10px 10px;
+      margin-right: 10px;
+    }
+  }
+
+  .borrow {
+    font-size: 14px;
+    color: #fff;
+
+    li {
+      background: blue;
+      border-radius: 5px;
+      display: inline-block;
+      padding: 20px 15px;
+      margin-right: 20px;
+      background: light-blue;
+
+      .checkout {
+        background: url('/client/images/icon.book.svg') no-repeat;
+        padding: 5px 20px 10px 10px;
+        margin-right: 10px;
+      }
+      .ebook {
+        background: url('/client/images/icon.eReader.svg') no-repeat;
+        padding: 11px 20px 10px 10px;
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+
+
 @import 'transitions';
 @import 'breakpoint';
 @import 'header';
