@@ -16,7 +16,7 @@ class SocialMediaList extends React.Component {
 			);
   	});
 		return (
-			<div className="SocialMediaList">
+			<div className={this.props.className} style={this.props.style}>
 				{SocialMediaNodes}
 			</div>
 		);

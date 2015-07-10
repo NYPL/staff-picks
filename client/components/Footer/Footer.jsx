@@ -4,10 +4,7 @@ import Radium from 'radium';
 
 // Import components
 import SocialMediaList from 'components/Footer/SocialMedia/SocialMediaList.jsx'
-import FooterLinkList01 from 'components/Footer/FooterLinkLists/FooterLinkList01.jsx'
-import FooterLinkList02 from 'components/Footer/FooterLinkLists/FooterLinkList02.jsx'
-import FooterLinkList03 from 'components/Footer/FooterLinkLists/FooterLinkList03.jsx'
-import FooterLinkList04 from 'components/Footer/FooterLinkLists/FooterLinkList04.jsx'
+import FooterLinkList from 'components/Footer/FooterLinkLists/FooterLinkList.jsx'
 
 class Footer extends React.Component {
   // Constructor used in ES6
@@ -24,25 +21,25 @@ class Footer extends React.Component {
 					className='SocialMediaList' 
 					style={styles.SocialMediaList} />				
 				
-				<FooterLinkList01 
+				<FooterLinkList 
 					key='FooterLinklist01' 
 					data={data.FooterLinkList01} 
 					id='FooterLinkList01' 
 					className='FooterLinkList' style={styles.FooterLinkList} />
 
-					<FooterLinkList02 
+					<FooterLinkList
 					key='FooterLinklist02' 
 					data={data.FooterLinkList02} 
 					id='FooterLinkList02' 
 					className='FooterLinkList' style={styles.FooterLinkList} />
 
-					<FooterLinkList03 
+					<FooterLinkList 
 					key='FooterLinklist03' 
 					data={data.FooterLinkList03} 
 					id='FooterLinkList03' 
 					className='FooterLinkList' style={styles.FooterLinkList} />
 
-					<FooterLinkList04 
+					<FooterLinkList 
 					key='FooterLinklists04' 
 					data={data.FooterLinkList04} 
 					id='FooterLinkList04' 
@@ -75,21 +72,20 @@ const styles = {
 	  fontSize: '1em',
 	  marginTop: '20px',
     padding: '30px 20px 100px',
-	  position: 'relative',
-	  textDecoration: 'none'
+	  position: 'relative'
 	},
 	SocialMediaList: {
 		float: 'right',
 		marginRight: '20px',
 		position: 'absolute',
 		right: '0px',
-		textAlign: 'right'
+		textAlign: 'right',
 	},
 	FooterLinkList: {
 		display: 'block',
 		float: 'left',
 		margin: '0px',
-		width: '35%'
+		width: '20%',
 	},
 	Copyright: {
     background: 'url(http://cdn-prod.www.aws.nypl.org/sites/all/themes/nypl_new/images/main-logo-lion.png) no-repeat',

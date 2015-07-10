@@ -17,7 +17,7 @@ class FooterLinkList01 extends React.Component {
 			);
   	});
 		return (
-			<div className='FooterLinkList01'>
+			<div className={this.props.className} style={this.props.style}>
 				{FooterLinkListNodes}
 			</div>
 		);

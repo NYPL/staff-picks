@@ -10,7 +10,7 @@ class SocialMediaNode extends React.Component {
   render () {
 			return (
 	      <li key='SocialMediaNode' className='SocialMediaNode' style={styles.SocialMediaNode}>
-		      <a key='SocialMediaLink' className='SocialMediaLink' href={this.props.link}>
+		      <a key='SocialMediaLink' className='SocialMediaLink' style={styles.SocialMediaLink} href={this.props.link}>
 			      <span>
 							{this.props.name}
 						</span>
@@ -23,6 +23,10 @@ class SocialMediaNode extends React.Component {
 const styles = {
 	SocialMediaNode: {
 		display: 'inline-block'
+	},
+	SocialMediaLink: {
+		color: '#ffffff',
+	  textDecoration: 'none'
 	}
 }
 

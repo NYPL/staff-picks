@@ -9,18 +9,19 @@ class FooterLinkListNode extends React.Component {
   }
   render () {
 			return (
-	      <li key='FooterLinkListNode' className='FooterLinkListNode' style={styles.FooterLinkListNode}>
-		      <a key='NodeUrl' className='NodeUrl' href={this.props.link}>
+	      <p key='FooterLinkListNode' className='FooterLinkListNode' style={styles.FooterLinkListNode}>
+		      <a key='NodeUrl' className='NodeUrl' href={this.props.link} style={styles.FooterLinkListLink}>
 						{this.props.name}
 					</a>
-	      </li>
+	      </p>
 			);
 	};
 };
 
 const styles = {
-	FooterLinkListNode: {
-		display: 'inline-block'
+	FooterLinkListLink: {
+		color: '#ffffff',
+	  textDecoration: 'none'
 	}
 };
 
