@@ -4,7 +4,7 @@ import Radium from 'radium';
 
 import FooterLinkListNode from 'components/Footer/FooterLinkLists/FooterLinkListNode.jsx'
 
-class FooterLinkList01 extends React.Component {
+class FooterLinkList extends React.Component {
   // Constructor used in ES6
 	constructor(props) {
     super(props);
@@ -28,4 +28,4 @@ const styles = {
 	
 }
 
-export default Radium(FooterLinkList01);
+export default Radium(FooterLinkList);
