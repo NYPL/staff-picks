@@ -86,6 +86,13 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
 body {
   line-height: 1;
 }
@@ -276,3 +283,4 @@ ul#nav_menu {
 @import 'transitions';
 @import 'breakpoint';
 @import 'header';
+@import 'footer';

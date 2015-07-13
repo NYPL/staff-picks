@@ -14,83 +14,35 @@ class Footer extends React.Component {
   render () {
 	  	var FooterLinkLists = data.FooterLinkLists.map ( function ( link ) {
 	  		return (
-				<FooterLinkList className='FooterLinkList' style={styles.FooterLinkList} data={link.FooterLinkList} />
-			);
+					<FooterLinkList className={link.ulClass} data={link.FooterLinkList} />
+				);
 	  	}); 
 		return (
-			<div id={this.props.id} className={this.props.className} style={styles.base}>
+			<footer id={this.props.id} className={this.props.className} >
 				<SocialMediaList 
 					key='SocialMediaList' 
 					data={data.SocialMedia} 
 					id='SocialMediaList' 
-					className='SocialMediaList' 
-					style={styles.SocialMediaList} />
-            
-				{FooterLinkLists}				
-				
-				<div key='Copyright' id='Copyright' className='Copyright' style={styles.base, styles.Copyright}>
-					<p style={styles.base, styles.Copyright.p}>© The New York Public Library, {new Date().getFullYear()}</p>
+					className='socialmedia' />
+				<div className='footerlinks'>
+					{FooterLinkLists}				
 				</div>
-			</div>
+				<div key='Copyright' id='copyright' className='copyright' >
+					<p className='ng-binding'>© The New York Public Library, {new Date().getFullYear()}</p>
+				</div>
+			</footer>
     );
   }
 };
 
 Footer.defaultProps = {
-  id: 'Footer',
-  className: 'Footer',
+  id: 'footer',
+  className: 'ng-isolate-scope',
   label: '',
   lang: 'en',
 };
 
-const styles = {
-	base: {
-		backgroundColor: '#7d7972',
-	    clear: 'both',
-	    color: '#ffffff',
-	    display: 'block',
-	    fontFamily:'Lato, Lucida Grande, Helvetica, Arial, sans-serif',
-	    fontHeigh: '1.5px',
-	    fontWeight: '300px',
-	    fontSize: '1.5em',
-	    marginTop: '20px',
-        padding: '30px 20px 100px',
-	    position: 'relative'
-	},
-	SocialMediaList: {
-		'@media (max-width: 480px)': { float: 'none', margin: '0 0 20px 0', position: 'relative', textAlign: 'left' },
-		display: 'block',
-		float: 'right',
-		marginRight: '20px',
-		position: 'absolute',
-		right: '0px',
-		textAlign: 'right',
-	},
-	FooterLinkList: {
-		'@media (min-width: 768px) and (max-width: 979px)': { width: '16%' },
-		'@media (min-width: 481px) and (max-width: 767px)': { width: '40%' },
-		'@media (max-width: 480px)': { width: '100%' },
-		display: 'block',
-		float: 'left',
-		marginRight: '5px',
-		width: '20%'
-	},
-	Copyright: {
-    background: 'url(http://cdn-prod.www.aws.nypl.org/sites/all/themes/nypl_new/images/main-logo-lion.png) no-repeat',
-    backgroundSize: '60px',
-    backgroundPosition: '50%',
-		clear: 'both',
-	  lineHeight: '1.5',
-    letterSpacing: '.07em',
-    textAlign: 'center',
-    p: {
-			fontSize: '14px',
-			fontWeight: '300px',
-	    paddingTop: '30px',
-	    paddingBottom: '140px',
-	   }
-	}
-};
+const styles = {};
 
 const data = {
 	SocialMedia: [
@@ -101,31 +53,35 @@ const data = {
 	],
 	FooterLinkLists: [
 		{FooterLinkList: [
-			{name: 'About NYPL', link: '/help/about-nypl'},
+			{name: 'About NYPL', link: '/help/about-nypl', className: 'footer1'},
 			{name: 'President and Leadership', link: '/help/about-nypl/president-and-leadership'},
 			{name: 'Space Rental', link: '/spacerental'},
 			{name: 'Careers at NYPL', link: '/help/about-nypl/careers-nypl'},
 			{name: 'Resources for Teachers', link: '/help/getting-oriented/resources-teachers'}
-		]},
+		],
+		ulClass: ''},
 		{FooterLinkList: [
-			{name: 'E-Newsletters', link: '/eNews'},
+			{name: 'E-Newsletters', link: '/eNews', className: 'footer1'},
 			{name: 'Media Center', link: '/help/about-nypl/media-center'},
 			{name: 'Connect with NYPL', link: '/voices/connect-nypl'},
 			{name: 'Mobile Apps', link: '/mobile-help'},
 			{name: 'Reserve a PC', link: '/help/computers-internet-and-wireless-access/reserving-computer'}
-		]},
+		],
+		ulClass: ''},
 		{FooterLinkList: [
-			{name: 'The Library Shop', link: 'http://shop.nypl.org/'},
+			{name: 'The Library Shop', link: 'http://shop.nypl.org/', className: 'footer1'},
 			{name: 'Privacy Policy', link: '/help/about-nypl/legal-notices/privacy-policy'},
 			{name: 'Rules and Regulations', link: '/help/about-nypl/legal-notices/rules-and-regulations'},
 			{name: 'Using the Internet', link: '/help/computers-internet-and-wireless-access/a-safety-net-for-the-internet'},
 			{name: 'Gifts of Materials to NYPL', link: '/help/about-nypl/legal-notices/policy-gifts-materials'},
-		]},
+		],
+		ulClass: ''},
 		{FooterLinkList: [
-			{name: 'Español', link: '/node/57438'},
-			{name: '中文', link: '/node/107747'},
-			{name: 'русский', link: '/node/107749'},
-		]}
+			{name: 'Español', link: '/node/57438', className: 'footer1'},
+			{name: '中文', link: '/node/107747', className: 'footer1'},
+			{name: 'русский', link: '/node/107749', className: 'footer1'}
+		],
+		ulClass: 'last'}
 	]
 };
 

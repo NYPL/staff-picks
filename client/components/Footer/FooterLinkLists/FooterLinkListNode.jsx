@@ -9,29 +9,15 @@ class FooterLinkListNode extends React.Component {
   }
   render () {
 			return (
-	      <p key='FooterLinkListNode' className='FooterLinkListNode' style={styles.FooterLinkListNode}>
-		      <a key='NodeUrl' className='NodeUrl' href={this.props.link} style={styles.FooterLinkListLink}>
+				<li className={this.props.className}>
+		      <a key='NodeUrl' href={this.props.link} >
 						{this.props.name}
 					</a>
-	      </p>
+				</li>
 			);
 	};
 };
 
-const styles = {
-	FooterLinkListLink: {
-		color: '#ffffff',
-	  textDecoration: 'none',
-		':hover': {
-			textDecoration: 'underline'
-		}
-	},
-	FooterLinkListNode: {
-		fontFamily:'Lato, Lucida Grande, Helvetica, Arial, sans-serif',
-    fontHeigh: '1.5px',
-    fontWeight: '300px',
-	  marginBottom: '20px'
-	}
-};
+const styles = {};
 
 export default Radium(FooterLinkListNode);
