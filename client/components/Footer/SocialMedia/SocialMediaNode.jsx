@@ -9,9 +9,9 @@ class SocialMediaNode extends React.Component {
   }
   render () {
 			return (
-	      <li key='SocialMediaNode' style={styles.SocialMediaNode} >
+	      <li key='SocialMediaNode' id={this.props.name} >
 		      <a key='SocialMediaLink' className={this.props.className} style={styles.SocialMediaLink} href={this.props.link}>
-			      <span className='replaced-text'>
+			      <span className='replaced-text' style={styles.ReplacedText} >
 							{this.props.name}
 						</span>
 					</a>
@@ -20,14 +20,6 @@ class SocialMediaNode extends React.Component {
 	};
 };
 
-const styles = {
-	SocialMediaNode: {
-		display: 'inline-block'
-	},
-	SocialMediaLink: {
-		color: '#ffffff',
-	  textDecoration: 'none'
-	}
-}
+const styles = {};
 
 export default Radium(SocialMediaNode);

@@ -13,19 +13,15 @@ class FooterLinkList extends React.Component {
   render () {
   	var FooterLinkListNodes = this.props.data.map ( function ( node ) {
   		return (
-				<FooterLinkListNode name={node.name} link={node.link} />
+				<FooterLinkListNode name={node.name} link={node.link} className={node.className} />
 			);
   	});
 		return (
-			<div className={this.props.className} style={this.props.style}>
+			<ul className={this.props.className}>
 				{FooterLinkListNodes}
-			</div>
+			</ul>
 		);
 	};
 };
-
-const styles = {
-	
-}
 
 export default Radium(FooterLinkList);

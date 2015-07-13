@@ -16,9 +16,9 @@ class SocialMediaList extends React.Component {
 		);
   	});
 		return (
-			<div className={this.props.className} style={this.props.style}>
+			<ul className={this.props.className} style={this.props.style}>
 				{SocialMediaNodes}
-			</div>
+			</ul>
 		);
 	};
 };
