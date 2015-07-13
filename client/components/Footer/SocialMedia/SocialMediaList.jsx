@@ -12,8 +12,8 @@ class SocialMediaList extends React.Component {
   render () {
   	var SocialMediaNodes = this.props.data.map ( function ( node ) {
   		return (
-				<SocialMediaNode name={node.name} link={node.link} />
-			);
+			<SocialMediaNode name={node.name} link={node.link} />
+		);
   	});
 		return (
 			<div className={this.props.className} style={this.props.style}>

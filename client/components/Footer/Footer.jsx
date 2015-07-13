@@ -12,9 +12,9 @@ class Footer extends React.Component {
     super(props);
   }
   render () {
-	  	var FooterLinkList = data.FooterLinkList.map ( function ( link ) {
+	  	var FooterLinkLists = data.FooterLinkLists.map ( function ( link ) {
 	  		return (
-				<FooterLinkList key='FooterLinkList' className='FooterLinkList' style={styles.FooterLinkList} data={link} />
+				<FooterLinkList className='FooterLinkList' style={styles.FooterLinkList} data={link.FooterLinkList} />
 			);
 	  	}); 
 		return (
@@ -25,8 +25,8 @@ class Footer extends React.Component {
 					id='SocialMediaList' 
 					className='SocialMediaList' 
 					style={styles.SocialMediaList} />
-
-				{FooterLinkList}				
+            
+				{FooterLinkLists}				
 				
 				<div key='Copyright' id='Copyright' className='Copyright' style={styles.base, styles.Copyright}>
 					<p style={styles.base, styles.Copyright.p}>© The New York Public Library, {new Date().getFullYear()}</p>
@@ -94,29 +94,29 @@ const data = {
 		{name: 'Tumblr', link: 'http://www.facebook.com/newyorkpubliclibrary'},
 		{name: 'Pinterest', link: 'http://www.facebook.com/newyorkpubliclibrary'}
 	],
-	FooterLinkList: [
-		{FooterLinkList01: [
+	FooterLinkLists: [
+		{FooterLinkList: [
 			{name: 'About NYPL', link: '/help/about-nypl'},
 			{name: 'President and Leadership', link: '/help/about-nypl/president-and-leadership'},
 			{name: 'Space Rental', link: '/spacerental'},
 			{name: 'Careers at NYPL', link: '/help/about-nypl/careers-nypl'},
 			{name: 'Resources for Teachers', link: '/help/getting-oriented/resources-teachers'}
 		]},
-		{FooterLinkList02: [
+		{FooterLinkList: [
 			{name: 'E-Newsletters', link: '/eNews'},
 			{name: 'Media Center', link: '/help/about-nypl/media-center'},
 			{name: 'Connect with NYPL', link: '/voices/connect-nypl'},
 			{name: 'Mobile Apps', link: '/mobile-help'},
 			{name: 'Reserve a PC', link: '/help/computers-internet-and-wireless-access/reserving-computer'}
 		]},
-		{FooterLinkList03: [
+		{FooterLinkList: [
 			{name: 'The Library Shop', link: 'http://shop.nypl.org/'},
 			{name: 'Privacy Policy', link: '/help/about-nypl/legal-notices/privacy-policy'},
 			{name: 'Rules and Regulations', link: '/help/about-nypl/legal-notices/rules-and-regulations'},
 			{name: 'Using the Internet', link: '/help/computers-internet-and-wireless-access/a-safety-net-for-the-internet'},
 			{name: 'Gifts of Materials to NYPL', link: '/help/about-nypl/legal-notices/policy-gifts-materials'},
 		]},
-		{FooterLinkList04: [
+		{FooterLinkList: [
 			{name: 'Español', link: '/node/57438'},
 			{name: '中文', link: '/node/107747'},
 			{name: 'русский', link: '/node/107749'},
