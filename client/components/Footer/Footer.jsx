@@ -52,12 +52,14 @@ const styles = {
 	    fontFamily:'Lato, Lucida Grande, Helvetica, Arial, sans-serif',
 	    fontHeigh: '1.5px',
 	    fontWeight: '300px',
-	    fontSize: '1em',
+	    fontSize: '1.5em',
 	    marginTop: '20px',
         padding: '30px 20px 100px',
 	    position: 'relative'
 	},
 	SocialMediaList: {
+		'@media (max-width: 480px)': { float: 'none', margin: '0 0 20px 0', position: 'relative', textAlign: 'left' },
+		display: 'block',
 		float: 'right',
 		marginRight: '20px',
 		position: 'absolute',
@@ -65,9 +67,12 @@ const styles = {
 		textAlign: 'right',
 	},
 	FooterLinkList: {
+		'@media (min-width: 768px) and (max-width: 979px)': { width: '16%' },
+		'@media (min-width: 481px) and (max-width: 767px)': { width: '40%' },
+		'@media (max-width: 480px)': { width: '100%' },
 		display: 'block',
 		float: 'left',
-		margin: '0px',
+		marginRight: '5px',
 		width: '20%'
 	},
 	Copyright: {
@@ -90,9 +95,9 @@ const styles = {
 const data = {
 	SocialMedia: [
 		{name: 'Facebook', link: 'http://www.facebook.com/newyorkpubliclibrary', className: 'icon-facebook'},
-		{name: 'Twitter', link: 'http://www.facebook.com/newyorkpubliclibrary', className: 'icon-twitter2'},
-		{name: 'Tumblr', link: 'http://www.facebook.com/newyorkpubliclibrary', className: 'icon-tumblr2'},
-		{name: 'Pinterest', link: 'http://www.facebook.com/newyorkpubliclibrary', className: 'icon-pinterest'}
+		{name: 'Twitter', link: 'http://twitter.com/nypl', className: 'icon-twitter2'},
+		{name: 'Tumblr', link: 'http://nypl.tumblr.com/', className: 'icon-tumblr2'},
+		{name: 'Pinterest', link: 'http://pinterest.com/nypl', className: 'icon-pinterest'}
 	],
 	FooterLinkLists: [
 		{FooterLinkList: [
