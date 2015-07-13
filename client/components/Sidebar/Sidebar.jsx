@@ -27,8 +27,8 @@ class BookFilters extends React.Component {
     return (
       <div className='BookFilters'>
         <hr />
-        <p>What would you like to read today?</p>
-        <div>
+        <h2>What would you like to read today?</h2>
+        <div className='BookFilters-lists'>
           <ul>Driven by...
             <li>Character</li>
             <li>Setting</li>

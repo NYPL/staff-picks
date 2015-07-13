@@ -283,6 +283,7 @@ ul#nav_menu {
 
   #sidebar {
     float: left;
+    padding: 10px 25px 0 0;
   }
 
   #books {
@@ -291,6 +292,38 @@ ul#nav_menu {
   }
 }
 
+.BookDisplayButtons {
+  .BookDisplayButtons-list {
+    li {
+      padding: 15px;
+
+      a {
+        padding: 15px;
+      }
+    }
+  }
+}
+
+.BookFilters {
+  font-size: 14px;
+
+  hr {
+    width: 40px;
+    display: inline-block;
+  }
+
+  .BookFilters-lists {
+    text-align: right;
+
+    ul {
+      padding: 20px 0;
+
+      li {
+        padding: 5px 0;
+      }
+    }
+  }
+}
 
 @import 'transitions';
 @import 'breakpoint';
