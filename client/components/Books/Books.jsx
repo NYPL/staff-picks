@@ -18,9 +18,9 @@ console.log(bookData);
 let masonryOptions = {
   isResizable: true,
   isFitWidth: false,
-  columnWidth: 150,
+  columnWidth: 175,
   itemSelector: '.book-item',
-  gutter: 20
+  gutter: 30
 };
 
 // class Books extends React.Component {
@@ -58,7 +58,7 @@ var Books = React.createClass({
         <div className='book-item'
           onClick={openModal.bind(_this, element)}>
           <Book book={element} style={styles.bookItem}
-            height={'250px'} width={'150px'} />
+            height={'270px'} width={'175px'} />
         </div>
       );
     });

@@ -290,12 +290,14 @@ ul#nav_menu {
 
   #sidebar {
     float: left;
-    padding: 10px 25px 0 0;
+    padding: 0;
+    margin-right: 30px;
+    width: 140px;
   }
 
   #books {
     float: left;
-    width: 700px;
+    width: 790px;
   }
 }
 
@@ -312,21 +314,35 @@ ul#nav_menu {
 }
 
 .BookFilters {
-  font-size: 14px;
+  h2 {
+    color: red;
+    font-size: 15px;
+  }
 
-  hr {
+  .divider {
     width: 40px;
+    height: 2px;
+    margin: 5px 0;
+    background: red;
     display: inline-block;
   }
 
   .BookFilters-lists {
+    font-size: 12px;
     text-align: right;
+    padding-top: 20px;
 
     ul {
-      padding: 20px 0;
+      padding: 10px 0;
 
       li {
+        font-size: 14px;
         padding: 5px 0;
+
+        a {
+          text-decoration: none;
+          color: #0090c4;
+        }
       }
     }
   }

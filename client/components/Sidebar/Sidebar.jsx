@@ -26,19 +26,21 @@ class BookFilters extends React.Component {
   render () {
     return (
       <div className='BookFilters'>
-        <hr />
-        <h2>What would you like to read today?</h2>
+        <span className='divider'></span> 
+        <h2>What would you like to read?</h2>
         <div className='BookFilters-lists'>
-          <ul>Driven by...
-            <li>Character</li>
-            <li>Setting</li>
+          <span>Driven by...</span>
+          <ul>
+            <li><a href='#'>Character</a></li>
+            <li><a href='#'>Setting</a></li>
           </ul>
-          <ul>Themes...
-            <li>Arty</li>
-            <li>Creepy</li>
-            <li>Dangerous</li>
-            <li>Techie</li>
-            <li>Nail-biters</li>
+          <span>Themes...</span>
+          <ul>
+            <li><a href='#'>Arty</a></li>
+            <li><a href='#'>Creepy</a></li>
+            <li><a href='#'>Dangerous</a></li>
+            <li><a href='#'>Techie</a></li>
+            <li><a href='#'>Nail-biters</a></li>
           </ul>
           <div className='clearFilters'>
             Clear Filters X
