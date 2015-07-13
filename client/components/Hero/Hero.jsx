@@ -42,6 +42,8 @@ Hero.defaultProps = {
 
 const styles = {
   Hero: {
+    '@media (max-width: 767px)': { width: '100%' },
+    height: 'auto',
     backgroundColor: '#CC1a16',
     color: 'white',
     minHeight: '72px',
@@ -49,6 +51,7 @@ const styles = {
     width: '70%'
   },
   HeroContainer: {
+    '@media (max-width: 719px)': { margin: '50px 0 0 0' },
     height: 'auto',
     margin: '0 auto',
     maxWidth: '900px',
@@ -73,8 +76,9 @@ const styles = {
     '@media (max-width: 1200px)': { width: '50%' },
     '@media (min-width: 827px) and (max-width: 979px)': { width: '45%' },
     '@media (min-width: 768px) and (max-width: 826px)': { width: '40%' },
-    '@media (max-width: 767px)': {  },
-    '@media (max-width: 480px)': {  },
+    '@media (min-wdith: 720px) and (max-width: 767px)': { width: '60%' },
+    '@media (max-width: 719px)': { width: '60%', left: '10%' },
+    '@media (max-width: 480px)': { width: '100%' },
 
     float: 'left',
     position: 'relative',

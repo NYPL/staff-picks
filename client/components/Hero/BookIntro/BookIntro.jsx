@@ -41,17 +41,17 @@ const styles = {
   BookTitle: {
     '@media (max-width: 1200px)': { fontSize: '3em' },
     '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '2em' },
-    '@media (max-width: 767px)': { fontSize: '1em' },
-    '@media (max-width: 480px)': { fontSize: '1em' },
-    fontSize: '3em',
+    '@media (max-width: 767px)': { fontSize: '2em' },
+    '@media (max-width: 480px)': { fontSize: '2em' },
+    fontSize: '4em',
     lineHeight: '1em',
   },
   BookQuote: {
-    '@media (max-width: 1200px)': { fontSize: '1.2em' },
-    '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '1em' },
-    '@media (max-width: 767px)': { fontSize: '0.8em' },
+    '@media (max-width: 1200px)': { fontSize: '1.4em' },
+    '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '1.4em' },
+    '@media (max-width: 767px)': { fontSize: '01.4em' },
     '@media (max-width: 480px)': { },
-    fontSize: '1.2em',
+    fontSize: '1.4em',
     marginTop: '20px'
   }
 };
