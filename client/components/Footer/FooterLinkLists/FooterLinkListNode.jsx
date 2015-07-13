@@ -30,7 +30,7 @@ const styles = {
 		fontFamily:'Lato, Lucida Grande, Helvetica, Arial, sans-serif',
     fontHeigh: '1.5px',
     fontWeight: '300px',
-	  margin: '20px 0'
+	  marginBottom: '20px'
 	}
 };
 

@@ -9,9 +9,9 @@ class SocialMediaNode extends React.Component {
   }
   render () {
 			return (
-	      <li key='SocialMediaNode' className='SocialMediaNode' style={styles.SocialMediaNode}>
-		      <a key='SocialMediaLink' className='SocialMediaLink' style={styles.SocialMediaLink} href={this.props.link}>
-			      <span>
+	      <li key='SocialMediaNode' style={styles.SocialMediaNode} >
+		      <a key='SocialMediaLink' className={this.props.className} style={styles.SocialMediaLink} href={this.props.link}>
+			      <span className='replaced-text'>
 							{this.props.name}
 						</span>
 					</a>

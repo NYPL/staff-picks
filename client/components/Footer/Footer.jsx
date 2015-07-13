@@ -81,18 +81,18 @@ const styles = {
     p: {
 			fontSize: '14px',
 			fontWeight: '300px',
-		    paddingTop: '30px',
-		    paddingBottom: '104px',
+	    paddingTop: '30px',
+	    paddingBottom: '140px',
 	   }
 	}
 };
 
 const data = {
 	SocialMedia: [
-		{name: 'Facebook', link: 'http://www.facebook.com/newyorkpubliclibrary'},
-		{name: 'Twitter', link: 'http://www.facebook.com/newyorkpubliclibrary'},
-		{name: 'Tumblr', link: 'http://www.facebook.com/newyorkpubliclibrary'},
-		{name: 'Pinterest', link: 'http://www.facebook.com/newyorkpubliclibrary'}
+		{name: 'Facebook', link: 'http://www.facebook.com/newyorkpubliclibrary', className: 'icon-facebook'},
+		{name: 'Twitter', link: 'http://www.facebook.com/newyorkpubliclibrary', className: 'icon-twitter2'},
+		{name: 'Tumblr', link: 'http://www.facebook.com/newyorkpubliclibrary', className: 'icon-tumblr2'},
+		{name: 'Pinterest', link: 'http://www.facebook.com/newyorkpubliclibrary', className: 'icon-pinterest'}
 	],
 	FooterLinkLists: [
 		{FooterLinkList: [
