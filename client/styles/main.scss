@@ -194,10 +194,19 @@ ul#nav_menu {
 // }
 
 #content {
-  padding-left: 236px;
-  padding-right: $headerPaddingR;
-  padding-top: $headerHeight;
-  min-height: 200px;
+  // padding-left: 236px;
+  // padding-right: $headerPaddingR;
+  // padding-top: $headerHeight;
+  // min-height: 200px;
+  width: 960px;
+  margin: 0 auto;
+}
+
+#age-tabs {
+  width: 100%;
+  height: 50px;
+  border: 1px solid black;
+  margin: 25px 0 0 0;
 }
 
 #login-form {
@@ -247,7 +256,11 @@ ul#nav_menu {
 
   .borrow {
     font-size: 14px;
-    color: #fff;
+
+    a {
+      text-decoration: none;
+      color: #fff;
+    }
 
     li {
       background: blue;
@@ -271,7 +284,53 @@ ul#nav_menu {
   }
 }
 
+.main-container {
+  overflow: auto;
+  padding: 15px 0;
 
+  #sidebar {
+    float: left;
+    padding: 10px 25px 0 0;
+  }
+
+  #books {
+    float: left;
+    width: 700px;
+  }
+}
+
+.BookDisplayButtons {
+  .BookDisplayButtons-list {
+    li {
+      padding: 15px;
+
+      a {
+        padding: 15px;
+      }
+    }
+  }
+}
+
+.BookFilters {
+  font-size: 14px;
+
+  hr {
+    width: 40px;
+    display: inline-block;
+  }
+
+  .BookFilters-lists {
+    text-align: right;
+
+    ul {
+      padding: 20px 0;
+
+      li {
+        padding: 5px 0;
+      }
+    }
+  }
+}
 
 @import 'transitions';
 @import 'breakpoint';

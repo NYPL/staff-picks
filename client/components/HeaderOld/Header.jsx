@@ -135,7 +135,7 @@ class Header extends React.Component {
                 </ul>
               </fieldset>
 
-              <input className="form-text" maxLength="128" id="search-block-form-input" name="search_block_form" type="text" placeholder="Find books, music, movies and more" autoComplete="false"/>
+              <input className="form-text" id="search-block-form-input" name="search_block_form" type="text" placeholder="Find books, music, movies and more" autoComplete="false"/>
               <button alt="Search" className="search-button icon-search" name="commit" title="Search"></button>
             </form>
             <div className="search-classic-catalog">
