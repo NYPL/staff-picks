@@ -13,7 +13,6 @@ class BookIntro extends React.Component {
       className={this.props.className}
       style={[
         styles.base,
-        this.props.style
       ]}>
         <p key='BookTitle' style={styles.base, styles.BookTitle}>{this.props.bookTitle}</p>
         <p key='BookQuote' style={styles.base, styles.BookQuote}>{this.props.quote}</p>
