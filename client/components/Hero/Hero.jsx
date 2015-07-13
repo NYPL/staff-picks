@@ -48,7 +48,6 @@ const styles = {
     color: 'white',
     minHeight: '72px',
     padding: '4% 15%',
-    width: '70%'
   },
   HeroContainer: {
     '@media (max-width: 719px)': { margin: '50px 0 0 0' },
@@ -78,7 +77,6 @@ const styles = {
     '@media (min-width: 768px) and (max-width: 826px)': { width: '40%' },
     '@media (min-wdith: 720px) and (max-width: 767px)': { width: '60%' },
     '@media (max-width: 719px)': { width: '60%', left: '10%' },
-    '@media (max-width: 480px)': { width: '100%' },
 
     float: 'left',
     position: 'relative',
