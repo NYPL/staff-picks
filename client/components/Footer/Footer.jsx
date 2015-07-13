@@ -68,7 +68,7 @@ const styles = {
 		display: 'block',
 		float: 'left',
 		margin: '0px',
-		width: '20%',
+		width: '20%'
 	},
 	Copyright: {
     background: 'url(http://cdn-prod.www.aws.nypl.org/sites/all/themes/nypl_new/images/main-logo-lion.png) no-repeat',

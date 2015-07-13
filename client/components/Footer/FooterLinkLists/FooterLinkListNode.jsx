@@ -21,7 +21,16 @@ class FooterLinkListNode extends React.Component {
 const styles = {
 	FooterLinkListLink: {
 		color: '#ffffff',
-	  textDecoration: 'none'
+	  textDecoration: 'none',
+		':hover': {
+			textDecoration: 'underline'
+		}
+	},
+	FooterLinkListNode: {
+		fontFamily:'Lato, Lucida Grande, Helvetica, Arial, sans-serif',
+    fontHeigh: '1.5px',
+    fontWeight: '300px',
+	  margin: '20px 0'
 	}
 };
 
