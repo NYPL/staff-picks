@@ -31,8 +31,11 @@ React.render(<Hero />, document.getElementById('hero'));
 React.render(<Footer />, document.getElementById("footer-container"));
 
 import Books from 'components/Books/Books.jsx';
+import Sidebar from 'components/Sidebar/Sidebar.jsx';
 
-React.render(<Books />, document.getElementById('book-container'));
+
+React.render(<Sidebar />, document.getElementById('sidebar'));
+React.render(<Books />, document.getElementById('books'));
 
 
 function initData() {

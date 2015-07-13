@@ -7,7 +7,7 @@ import API from '../../utils/ApiService.js';
 
 import Modal from '../modal/modal.js';
 
-let bookContainer = document.getElementById('book-container');
+let bookContainer = document.getElementById('books');
 
 Modal.setAppElement(bookContainer);
 Modal.injectCSS();
@@ -64,7 +64,7 @@ var Books = React.createClass({
     });
 
     return (
-      <div ref="masonryContainer" width='600px'>
+      <div ref="masonryContainer" style={{'width':'100%'}}>
         {books}
         <Modal isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}>

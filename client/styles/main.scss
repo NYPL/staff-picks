@@ -194,10 +194,12 @@ ul#nav_menu {
 // }
 
 #content {
-  padding-left: 236px;
-  padding-right: $headerPaddingR;
-  padding-top: $headerHeight;
-  min-height: 200px;
+  // padding-left: 236px;
+  // padding-right: $headerPaddingR;
+  // padding-top: $headerHeight;
+  // min-height: 200px;
+  width: 960px;
+  margin: 0 auto;
 }
 
 #login-form {
@@ -247,7 +249,11 @@ ul#nav_menu {
 
   .borrow {
     font-size: 14px;
-    color: #fff;
+
+    a {
+      text-decoration: none;
+      color: #fff;
+    }
 
     li {
       background: blue;
@@ -271,6 +277,19 @@ ul#nav_menu {
   }
 }
 
+.main-container {
+  overflow: auto;
+  padding: 15px 0;
+
+  #sidebar {
+    float: left;
+  }
+
+  #books {
+    float: left;
+    width: 700px;
+  }
+}
 
 
 @import 'transitions';
