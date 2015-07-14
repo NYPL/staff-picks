@@ -28,8 +28,18 @@ class BookDisplayButtons extends React.Component {
     return (
       <div className='BookDisplayButtons'>
         <ul className='BookDisplayButtons-list'>
-          <li><a onClick={this._handleClick.bind(this, 'grid')}>Cover</a></li>
-          <li><a onClick={this._handleClick.bind(this, 'list')}>List</a></li>
+          <li >
+            <a onClick={this._handleClick.bind(this, 'grid')}>
+              <span className='BookDisplayButtons-grid-icon'></span>
+              COVERS
+            </a>
+          </li>
+          <li>
+            <a onClick={this._handleClick.bind(this, 'list')}>
+              <span className='BookDisplayButtons-list-icon'></span>
+              LIST
+            </a>
+          </li>
         </ul>
       </div>
     );
