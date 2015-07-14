@@ -10,7 +10,7 @@ class TabElement extends React.Component {
   render () {
   	return (
   		<li key={`tab-${this.props.name}`} id={this.props.name} className='tab-element' style={styles.TabElement}>
-        <a href='#' style={styles.ElementLink} onClick={this.handleClick}>{this.props.name}</a>
+        <a style={styles.ElementLink} onClick={this.props.clickFn}>{this.props.name}</a>
   		</li>
 		);
   }
@@ -25,20 +25,32 @@ const styles = {
   },
   ElementLink: {
     ':active': {
-      border: '1px solid #cc1a16',
-      borderStyle: 'solid solid none solid',
+      borderColor: '#cc1a16',
+      borderBottomStyle: 'none',
+      borderLeftStyle: 'solid',
+      borderRightStyle: 'solid',
+      borderTopStyle: 'solid',
+      borderWidth: '1px',
       color: '#cc1a16',
       padding: '20px 5% 21px 5%'
     },
     ':hover': {
-      border: '1px solid #cc1a16',
-      borderStyle: 'solid solid none solid',
+      borderColor: '#cc1a16',
+      borderBottomStyle: 'none',
+      borderLeftStyle: 'solid',
+      borderRightStyle: 'solid',
+      borderTopStyle: 'solid',
+      borderWidth: '1px',
       color: '#cc1a16',
       padding: '20px 5% 21px 5%'
     },
     backgroundColor: '#ffffff',
-    border: '1px solid #cc1a16',
-    borderStyle: 'none none solid none',
+    borderColor: '#cc1a16',
+    borderBottomStyle: 'solid',
+    borderLeftStyle: 'none',
+    borderRightStyle: 'none',
+    borderTopStyle: 'none',
+    borderWidth: '1px',
     color: '#bfbfbf',
     padding: '20px 5%',
     textDecoration: 'none',

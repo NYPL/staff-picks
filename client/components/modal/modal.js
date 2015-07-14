@@ -363,6 +363,7 @@ module.exports = function() {
     // '  padding: 20px;',
     // '}',
     '.ReactModal__Content {',
+    '  min-height: 500px;',
     '  z-index: 2000;',
     '  position: absolute;',
     '  top: 20%;',

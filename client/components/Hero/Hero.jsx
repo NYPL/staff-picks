@@ -19,7 +19,7 @@ export default class Hero extends React.Component {
       <div key='Hero' className='Hero' style={styles.Hero}>
         <div key='HeroContainer' className='HeroContainer' style={styles.HeroContainer}>
           <div key='TextContainer' className='TextContainer' style={styles.TextContainer}>
-            <HeroTitle title='staff picks' intro='NYPL&#39;s librarians share their favorite reads each month. Explore their book selections by choosing a tag below.' />
+            <HeroTitle title='staff picks' intro='NYPL&#39;s librarians share their all-time favorite reads each month. Explore their book selections by choosing a tag below.' />
             <BookIntro bookTitle='The Amazing Adventures of Kavalier & Clay' quote='"I loved this book. It&#39;s a great story with complex, interesting characters in a fascinating setting. The creation of the comic book history is not only fascinating but the fictional elements are so well integrated that without looking it up."' />  
           </div>
           <div key='HeroImageContainer' className='HeroImageContainer' style={styles.HeroImageContainer}>

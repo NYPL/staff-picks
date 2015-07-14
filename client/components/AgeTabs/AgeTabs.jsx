@@ -1,18 +1,34 @@
 import React from 'react';
 import Radium from 'radium';
 
-import TabElement from 'components/AgeTabs/TabElement.jsx'
+import TabElement from 'components/AgeTabs/TabElement.jsx';
+import BookStore from '../../stores/BookStore.js';
+import BookActions from '../../actions/BookActions.js';
 
 class AgeTabs extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
+    this.state = { 
+      age: BookStore.getAge()
+    };
+    this._handleClick = this._handleClick.bind(this);
+    this._onChange = this._onChange.bind(this);
+  }
+
+  componentDidMount () {
+    BookStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount () {
+    BookStore.removeChangeListener(this._onChange);
   }
 
   render () {
+    var _this = this;
     var TabElements = data.map ( function (element) {
       return (
-        <TabElement key={element.name} id={element.name} className='tab-elements' name={element.name} />
+        <TabElement clickFn={_this._handleClick(this, element.name)} key={element.name} id={element.name} className='tab-elements' name={element.name} />
       );
     });
   	return (
@@ -23,6 +39,17 @@ class AgeTabs extends React.Component {
       </nav>
 		);
   }
+
+  _handleClick (age) {
+    BookActions.updateFilterAge(age);
+    // console.log(age);
+  }
+  
+  _onChange () {
+    this.setState({
+      age: BookStore.getAge()
+    });
+  }
 };
 
 const styles = {
@@ -31,8 +58,12 @@ const styles = {
   },
   TabContainer: {
     backgroundColor: '#ffffff',
-    border: '1px solid #cc1a16',
-    borderStyle: 'none none solid none',
+    borderColor: '#cc1a16',
+    borderBottomStyle: 'solid',
+    borderLeftStyle: 'none',
+    borderRightStyle: 'none',
+    borderTopStyle: 'none',
+    borderWidth: '1px',
     display: 'block',
     fontSize: '16px',
     height: 'auto',
