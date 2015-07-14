@@ -42,7 +42,7 @@ class AgeTabs extends React.Component {
 
   _handleClick (age) {
     BookActions.updateFilterAge(age);
-    console.log(age);
+    // console.log(age);
   }
   
   _onChange () {
@@ -58,8 +58,12 @@ const styles = {
   },
   TabContainer: {
     backgroundColor: '#ffffff',
-    border: '1px solid #cc1a16',
-    borderStyle: 'none none solid none',
+    borderColor: '#cc1a16',
+    borderBottomStyle: 'solid',
+    borderLeftStyle: 'none',
+    borderRightStyle: 'none',
+    borderTopStyle: 'none',
+    borderWidth: '1px',
     display: 'block',
     fontSize: '16px',
     height: 'auto',
