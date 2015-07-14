@@ -7,5 +7,6 @@ import keyMirror from 'react/lib/keyMirror';
 * as the single source of truth in our FLUX application.
 */
 export default keyMirror({
-  DISPLAY_TYPE: null
+  DISPLAY_TYPE: null,
+  AGE_TYPE: null
 });

@@ -3,7 +3,8 @@ import AppDispatcher from '../dispatcher/AppDispatcher';
 import BookConstants from '../constants/BookConstants';
 import _ from 'underscore';
 // Boolean flag that initially hides the Subscribe Form
-let _bookDisplay =  'grid';
+let _bookDisplay =  'grid',
+    _age = 'adult';
 
 // Simple reference to a repetitive non-changing string
 const CHANGE_EVENT = 'change';
@@ -14,10 +15,18 @@ function setBookDisplay (bookDisplay) {
   _bookDisplay = bookDisplay;
 }
 
+function setAgeDisplay (age) {
+  _age = age;
+}
+
 const BookStore = _.extend({}, EventEmitter.prototype, {
   // Gets the state of the Subscribe Form Visibility boolean
   getBookDisplay () {
     return _bookDisplay;
+  },
+  // Gets age from the tabs
+  getAge () {
+    return _age;
   },
   // Emits change event to all registered event listeners
   emitChange () {
@@ -40,6 +49,12 @@ BookStore.dispatchToken = AppDispatcher.register((action) => {
       setBookDisplay(action.displayType);
       BookStore.emitChange();
     break;
+
+    case BookConstants.AGE_TYPE:
+      setAgeDisplay(action.age);
+      BookStore.emitChange();
+    break;
+    
     default:
     // Do nothing
   }

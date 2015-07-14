@@ -10,7 +10,7 @@ class TabElement extends React.Component {
   render () {
   	return (
   		<li key={`tab-${this.props.name}`} id={this.props.name} className='tab-element' style={styles.TabElement}>
-        <a href='#' style={styles.ElementLink} onClick={this.handleClick}>{this.props.name}</a>
+        <a style={styles.ElementLink} onClick={this.props.clickFn}>{this.props.name}</a>
   		</li>
 		);
   }

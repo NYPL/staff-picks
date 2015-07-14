@@ -7,6 +7,13 @@ export default {
       actionType: BookConstants.DISPLAY_TYPE,
       displayType: displayType
     });
+  },
+
+  updateFilterAge(age) {
+		AppDispatcher.dispatch({
+      actionType: BookConstants.AGE_TYPE,
+      age: age
+    });
   }
 
 };
