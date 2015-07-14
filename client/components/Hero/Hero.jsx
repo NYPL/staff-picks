@@ -12,10 +12,6 @@ export default class Hero extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
-    // replaces getInitialState()
-    this.state = {
-      data: this.props.data
-    };
   }
 
   render() {
