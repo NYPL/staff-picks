@@ -1,20 +1,48 @@
 import React from 'react';
 import Radium from 'radium';
 
+import BookStore from '../../stores/BookStore.js';
+import BookActions from '../../actions/BookActions.js';
+
 class BookDisplayButtons extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      displayType: BookStore.getBookDisplay()
+    };
+
+    this._handleClick = this._handleClick.bind(this);
+    this._onChange = this._onChange.bind(this);
+  }
+
+  componentDidMount () {
+    BookStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount () {
+    BookStore.removeChangeListener(this._onChange);
   }
 
   render () {
     return (
       <div className='BookDisplayButtons'>
         <ul className='BookDisplayButtons-list'>
-          <li><a href='#'>Cover</a></li>
-          <li><a href='#'>List</a></li>
+          <li><a onClick={this._handleClick.bind(this, 'grid')}>Cover</a></li>
+          <li><a onClick={this._handleClick.bind(this, 'list')}>List</a></li>
         </ul>
       </div>
     );
+  }
+
+    /* Utility Methods should be declared below the render method */
+  _handleClick (displayType) {
+    BookActions.updateBookDisplay(displayType);
+  }
+  _onChange () {
+    this.setState({
+      displayType: BookStore.getBookDisplay()
+    });
   }
 }
 
