@@ -52,12 +52,14 @@ class BookContent extends React.Component {
 
         <ul className='borrow'>
           <li>
-            <span className='checkout'></span>
-            <a href={href}>Check Out This Book</a>
+            <a href={href}>
+              <span className='checkout'></span>Check Out This Book
+            </a>
           </li>
           <li>
-            <span className='ebook'></span>
-            <a href='#'>Read the eBook!</a>
+            <a href='#'>
+              <span className='ebook'></span>Read the eBook!
+            </a>
           </li>
         </ul>
 
