@@ -30,6 +30,8 @@ const styles = {
       borderLeftStyle: 'solid',
       borderRightStyle: 'solid',
       borderTopStyle: 'solid',
+      borderTopLeftRadius: '12px',
+      borderTopRightRadius: '12px',
       borderWidth: '1px',
       color: '#cc1a16',
       padding: '20px 5% 21px 5%'
@@ -40,6 +42,8 @@ const styles = {
       borderLeftStyle: 'solid',
       borderRightStyle: 'solid',
       borderTopStyle: 'solid',
+      borderTopLeftRadius: '12px',
+      borderTopRightRadius: '12px',
       borderWidth: '1px',
       color: '#cc1a16',
       padding: '20px 5% 21px 5%'
@@ -52,6 +56,7 @@ const styles = {
     borderTopStyle: 'none',
     borderWidth: '1px',
     color: '#bfbfbf',
+    cursor: 'pointer',
     padding: '20px 5%',
     textDecoration: 'none',
     width: 'auto'
