@@ -46,9 +46,9 @@ class AgeTabs extends React.Component {
   }
   
   _onChange () {
-    this.setState({
-      age: BookStore.getAge()
-    });
+    // this.setState({
+    //   age: BookStore.getAge()
+    // });
   }
 };
 
