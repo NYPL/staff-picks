@@ -38,6 +38,7 @@ var Books = React.createClass({
   },
 
   componentDidMount: function () {
+    this._handleClick = this._handleClick.bind(this);
     BookStore.addChangeListener(this.onChange.bind(this));
   },
 
@@ -84,8 +85,9 @@ var Books = React.createClass({
 
     var booksLists = bookData['staff-picks'].map(function (element) {
       return (
-        <li className='book-item' onClick={openModal.bind(_this, element)}>
-          {element['staff-pick-item']['attributes']['title']}
+        <li className='book-item'>
+          <h2 onClick={openModal.bind(_this, element)}>{element['staff-pick-item']['attributes']['title']}</h2>
+          <p>By: {element['staff-pick-item']['attributes']['author']}</p>
         </li>
       );
     });
@@ -101,11 +103,26 @@ var Books = React.createClass({
 
     return (
       <div>
+        <div className='month-picker' style={styles.monthPicker}>
+          <a href='#' style={styles.previousMonth} onClick={this._handleClick}>
+            Picks for June
+            <span className='left-icon'></span>
+          </a>
+
+          <p style={styles.month}> July 2015 </p>
+
+          <a href='#' style={styles.nextMonth} onClick={this._handleClick}>
+            Picks for August
+            <span className='right-icon'></span>
+          </a>
+        </div>
         <div ref="masonryContainer" style={{'width':'100%', 'display': gridDisplay}}>
           {books}
         </div>
         <div style={{'display': listDisplay}}>
-          {booksLists}
+          <ul className='list-view'>
+            {booksLists}
+          </ul>
         </div>
         <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
           <div style={{'width':'30%', 'display':'inline-block'}}>
@@ -115,6 +132,10 @@ var Books = React.createClass({
         </Modal>
       </div>
     );
+  },
+
+  _handleClick: function (e) {
+    e.preventDefault();
   }
 });
 
@@ -131,6 +152,21 @@ const styles = {
   bookItem: {
     marginBottom: '20px',
     maxWidth: '200px'
+  },
+  monthPicker: {
+    height: '35px',
+    paddingTop: '6px'
+  },
+  month: {
+    display: 'inline-block',
+    marginLeft: '44%',
+    color: '#0095c8'
+  },
+  nextMonth: {
+    float: 'right'
+  },
+  previousMonth: {
+    marginLeft: '25px'
   }
 };
 

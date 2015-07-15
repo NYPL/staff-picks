@@ -51,12 +51,12 @@ class BookContent extends React.Component {
         </div>
 
         <ul className='borrow'>
-          <li>
+          <li style={styles.li}>
             <a href={href}>
               <span className='checkout'></span>Check Out This Book
             </a>
           </li>
-          <li>
+          <li style={styles.li}>
             <a href='#'>
               <span className='ebook'></span>Read the eBook!
             </a>
@@ -81,6 +81,12 @@ BookContent.defaultProps = {
 const styles = {
   base: {
 
+  },
+  li: {
+    background: '#0095c8',
+    borderRadius: '5px',
+    marginRight: '20px',
+    display: 'inline-block'
   }
 };
 
