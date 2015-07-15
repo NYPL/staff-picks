@@ -38,6 +38,7 @@ var Books = React.createClass({
   },
 
   componentDidMount: function () {
+    this._handleClick = this._handleClick.bind(this);
     BookStore.addChangeListener(this.onChange.bind(this));
   },
 
@@ -103,14 +104,14 @@ var Books = React.createClass({
     return (
       <div>
         <div className='month-picker' style={styles.monthPicker}>
-          <a href='#' style={styles.previousMonth}>
+          <a href='#' style={styles.previousMonth} onClick={this._handleClick}>
             Picks for June
             <span className='left-icon'></span>
           </a>
 
           <p style={styles.month}> July 2015 </p>
 
-          <a href='#' style={styles.nextMonth}>
+          <a href='#' style={styles.nextMonth} onClick={this._handleClick}>
             Picks for August
             <span className='right-icon'></span>
           </a>
@@ -131,6 +132,10 @@ var Books = React.createClass({
         </Modal>
       </div>
     );
+  },
+
+  _handleClick: function (e) {
+    e.preventDefault();
   }
 });
 
