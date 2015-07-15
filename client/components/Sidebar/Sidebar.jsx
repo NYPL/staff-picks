@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import cx from 'classnames';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
@@ -9,7 +10,9 @@ class BookDisplayButtons extends React.Component {
     super(props);
 
     this.state = {
-      displayType: BookStore.getBookDisplay()
+      displayType: BookStore.getBookDisplay(),
+      gridActive: BookStore.getActiveGrid(),
+      listActive: BookStore.getActiveList()
     };
 
     this._handleClick = this._handleClick.bind(this);
@@ -25,18 +28,23 @@ class BookDisplayButtons extends React.Component {
   }
 
   render () {
+    let gridActive = this.state.gridActive;
+    let listActive = !this.state.gridActive;
+    const gridActiveButton = cx({ gridActive: gridActive, active: gridActive});
+    const listActiveButton = cx({ listActive: listActive, active: listActive});
+
     return (
       <div className='BookDisplayButtons'>
         <ul className='BookDisplayButtons-list'>
-          <li >
+          <li className={gridActiveButton}>
             <a onClick={this._handleClick.bind(this, 'grid')}>
-              <span className='BookDisplayButtons-grid-icon'></span>
+              <span className='BookDisplayButtons-grid-icon icon'></span>
               COVERS
             </a>
           </li>
-          <li>
+          <li className={listActiveButton}>
             <a onClick={this._handleClick.bind(this, 'list')}>
-              <span className='BookDisplayButtons-list-icon'></span>
+              <span className='BookDisplayButtons-list-icon icon'></span>
               LIST
             </a>
           </li>
@@ -51,7 +59,9 @@ class BookDisplayButtons extends React.Component {
   }
   _onChange () {
     this.setState({
-      displayType: BookStore.getBookDisplay()
+      displayType: BookStore.getBookDisplay(),
+      gridActive: BookStore.getActiveGrid(),
+      listActive: BookStore.getActiveList()
     });
   }
 }
@@ -111,6 +121,10 @@ Sidebar.defaultProps = {
 const styles = {
   base: {
 
+  },
+  active: {
+    border: '2px solid #0095c8',
+    color: 'red'
   }
 };
 

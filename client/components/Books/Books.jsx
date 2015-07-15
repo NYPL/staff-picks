@@ -126,7 +126,7 @@ var Books = React.createClass({
         </div>
         <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
           <div style={{'width':'30%', 'display':'inline-block'}}>
-            <Book book={this.state.book} height={'350px'} width={'240px'} />
+            <Book book={this.state.book}  />
           </div>
           <BookContent book={this.state.book} />
         </Modal>
