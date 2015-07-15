@@ -4,21 +4,23 @@
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic' rel='stylesheet' type='text/css'>
 </head>
   <body>
-    <div id="header-container"></div>
+    <div id='header-container'></div>
     
-    <div id="hero"></div>
+    <div id='hero'></div>
     
-    <div id="content">
-      <%- body %>
-      
-      <div id="book-container">
+    <div id='content'>
+      <div id='age-tabs' class='age-tabs'>
+      </div>
+      <div class='main-container'>
+        <div id='sidebar' ></div>
+        <div id="books" ></div>
       </div>
 
     </div>
 
-    <div id="footer-container"></div>
+    <div id='footer-container'></div>
 
-  <script type="text/javascript">
+  <script type='text/javascript'>
     var staffPicks = <%- staffPicks %>;
   </script>
 

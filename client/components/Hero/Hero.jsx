@@ -12,10 +12,6 @@ export default class Hero extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
-    // replaces getInitialState()
-    this.state = {
-      data: this.props.data
-    };
   }
 
   render() {
@@ -23,7 +19,7 @@ export default class Hero extends React.Component {
       <div key='Hero' className='Hero' style={styles.Hero}>
         <div key='HeroContainer' className='HeroContainer' style={styles.HeroContainer}>
           <div key='TextContainer' className='TextContainer' style={styles.TextContainer}>
-            <HeroTitle title='staff picks' intro='NYPL&#39;s librarians share their favorite reads each month. Explore their book selections by choosing a tag below.' />
+            <HeroTitle title='staff picks' intro='NYPL&#39;s librarians share their all-time favorite reads each month. Explore their book selections by choosing a tag below.' />
             <BookIntro bookTitle='The Amazing Adventures of Kavalier & Clay' quote='"I loved this book. It&#39;s a great story with complex, interesting characters in a fascinating setting. The creation of the comic book history is not only fascinating but the fictional elements are so well integrated that without looking it up."' />  
           </div>
           <div key='HeroImageContainer' className='HeroImageContainer' style={styles.HeroImageContainer}>
@@ -42,13 +38,15 @@ Hero.defaultProps = {
 
 const styles = {
   Hero: {
+    '@media (max-width: 767px)': { width: '100%' },
+    height: 'auto',
     backgroundColor: '#CC1a16',
     color: 'white',
     minHeight: '72px',
     padding: '4% 15%',
-    width: '70%'
   },
   HeroContainer: {
+    '@media (max-width: 719px)': { margin: '50px 0 0 0' },
     height: 'auto',
     margin: '0 auto',
     maxWidth: '900px',
@@ -73,8 +71,8 @@ const styles = {
     '@media (max-width: 1200px)': { width: '50%' },
     '@media (min-width: 827px) and (max-width: 979px)': { width: '45%' },
     '@media (min-width: 768px) and (max-width: 826px)': { width: '40%' },
-    '@media (max-width: 767px)': {  },
-    '@media (max-width: 480px)': {  },
+    '@media (min-wdith: 720px) and (max-width: 767px)': { width: '60%' },
+    '@media (max-width: 719px)': { width: '60%', left: '10%' },
 
     float: 'left',
     position: 'relative',

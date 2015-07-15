@@ -3,6 +3,10 @@ $libraryBlue: #0095c8;
 $headerHeight: 175px;
 $headerPaddingR: 70px;
 $headerPaddingL: 120px;
+$lib-red: #cc1a16;
+$lib-blue: #0095c8;
+$text-gray: #bfbfbf;
+$dark-lib-gray: #776E64;
 
 /* first for IE 4–8 */
 @font-face {
@@ -86,6 +90,13 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
 body {
   line-height: 1;
 }
@@ -127,7 +138,7 @@ body {
 }
 
 .mega-menu {
-  background-color: $libraryRed;
+  background-color: $lib-red;
   height: 215px;
   width: 100%;
   margin-top: -8px; // temporary fix
@@ -194,10 +205,12 @@ ul#nav_menu {
 // }
 
 #content {
-  padding-left: 236px;
-  padding-right: $headerPaddingR;
-  padding-top: $headerHeight;
-  min-height: 200px;
+  // padding-left: 236px;
+  // padding-right: $headerPaddingR;
+  // padding-top: $headerHeight;
+  // min-height: 200px;
+  width: 960px;
+  margin: 0 auto;
 }
 
 #login-form {
@@ -210,11 +223,18 @@ ul#nav_menu {
   }
 }
 
+span[class*="icon-"] {
+  display: table-cell;
+  &:before {
+    margin-right: 10px;
+  }
+}
+
 .BookContent {
   margin-left: 30px;
   display: inline-block;
   position: absolute;
-  width: 550px;
+  width: 520px;
 
   h2 {
     font-size: 3em;
@@ -239,7 +259,7 @@ ul#nav_menu {
     margin: 25px 0;
 
     .staff-pick-icon {
-      background: url('/client/images/icon.thumbsup.svg') no-repeat;
+      background: url('/client/images/icons/icon.thumbsup.svg') no-repeat;
       padding: 11px 20px 10px 10px;
       margin-right: 10px;
     }
@@ -247,23 +267,30 @@ ul#nav_menu {
 
   .borrow {
     font-size: 14px;
-    color: #fff;
 
     li {
-      background: blue;
+      background: $lib-blue;
       border-radius: 5px;
-      display: inline-block;
-      padding: 20px 15px;
+      // width: 200px;
       margin-right: 20px;
       background: light-blue;
+      display: inline-block;
+
+      a {
+        text-decoration: none;
+        cursor: pointer;
+        color: #fff;
+        display: inline-block;
+        padding: 20px;
+      }
 
       .checkout {
-        background: url('/client/images/icon.book.svg') no-repeat;
+        background: url('/client/images/icons/icon.book.svg') no-repeat;
         padding: 5px 20px 10px 10px;
         margin-right: 10px;
       }
       .ebook {
-        background: url('/client/images/icon.eReader.svg') no-repeat;
+        background: url('/client/images/icons/icon.eReader.svg') no-repeat;
         padding: 11px 20px 10px 10px;
         margin-right: 10px;
       }
@@ -271,8 +298,91 @@ ul#nav_menu {
   }
 }
 
+.main-container {
+  overflow: auto;
+  padding: 15px 0;
 
+  #sidebar {
+    float: left;
+    padding: 0;
+    margin-right: 30px;
+    width: 140px;
+  }
+
+  #books {
+    float: left;
+    width: 790px;
+  }
+}
+
+.BookDisplayButtons {
+  .BookDisplayButtons-list {
+    margin-bottom: 20px;
+
+    li {
+      border-radius: 15px;
+      border: 2px solid $text-gray;
+      width: 95px;
+      margin: 0px 0px 10px 30px;
+
+      a {
+        display: inline-block;
+        cursor: pointer;
+        padding: 10px 10px 10px 12px;
+        width: 90px;
+        color: $text-gray;
+      }
+
+      .BookDisplayButtons-list-icon {
+        background: url('/client/images/icons/SmallListIconGray.svg') no-repeat;
+        padding: 1px 6px 5px 15px;
+      }
+
+      .BookDisplayButtons-grid-icon {
+        background: url('/client/images/icons/SmallBookGray.svg') no-repeat;
+        padding: 1px 6px 5px 15px;
+      }
+    }
+  }
+}
+
+.BookFilters {
+  h2 {
+    color: $lib-red;
+    font-size: 15px;
+  }
+
+  .divider {
+    width: 40px;
+    height: 2px;
+    margin: 5px 0;
+    background: $lib-red;
+    display: inline-block;
+  }
+
+  .BookFilters-lists {
+    font-size: 12px;
+    text-align: right;
+    padding-top: 20px;
+
+    ul {
+      padding: 10px 0;
+
+      li {
+        font-size: 14px;
+        padding: 5px 0;
+
+        a {
+          text-decoration: none;
+          color: $lib-blue;
+        }
+      }
+    }
+  }
+}
 
 @import 'transitions';
 @import 'breakpoint';
 @import 'header';
+@import 'footer';
+@import 'ageTabs';

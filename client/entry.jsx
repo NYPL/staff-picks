@@ -5,7 +5,8 @@ import React from 'react/addons';
 // NYPL Components
 import Header from 'components/HeaderOld/Header.jsx';
 import Hero from 'components/Hero/Hero.jsx';
-import Footer from 'dgx-react-footer';
+import Footer from 'components/Footer/Footer.jsx';
+import AgeTabs from 'components/AgeTabs/AgeTabs.jsx';
 
 // Utilities
 // import initData from 'headerData/HeaderData.js';
@@ -28,11 +29,15 @@ const books = API.getBooks();
 
 React.render(<Header data={data} />, document.getElementById("header-container"));
 React.render(<Hero />, document.getElementById('hero'));
-React.render(<Footer />, document.getElementById("footer-container"));
+React.render(<Footer />, document.getElementById('footer-container'));
+React.render(<AgeTabs />, document.getElementById('age-tabs'));
 
 import Books from 'components/Books/Books.jsx';
+import Sidebar from 'components/Sidebar/Sidebar.jsx';
 
-React.render(<Books />, document.getElementById('book-container'));
+
+React.render(<Sidebar />, document.getElementById('sidebar'));
+React.render(<Books />, document.getElementById('books'));
 
 
 function initData() {
