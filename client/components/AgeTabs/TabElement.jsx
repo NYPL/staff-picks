@@ -1,10 +1,9 @@
 import React from 'react';
 import Radium from 'radium';
 
-
+// Import Staff Pick components
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
-
 
 class TabElement extends React.Component {
   // Constructor used in ES6
@@ -25,16 +24,10 @@ class TabElement extends React.Component {
     BookStore.removeChangeListener(this._onChange);
   }
 
-  render () {
-  	return (
-  		<li key={`tab-${this.props.name}`} id={this.props.name} className='tab-element' style={styles.TabElement}>
-        <a style={styles.ElementLink} onClick={this._handleClick.bind(this, this.props.name)}>{this.props.name}</a>
-  		</li>
-		);
-  }
-
   _handleClick (age) {
+    event.preventDefault();
     BookActions.updateFilterAge(age);
+    className = 'tab-active';
     console.log(age);
   }
   
@@ -43,7 +36,22 @@ class TabElement extends React.Component {
       age: BookStore.getAge()
     });
   }
+
+  render () {
+  	return (
+  		<li key={`tab-${this.props.name}`} id={this.props.name} 
+        className='tab-element' style={styles.TabElement}>
+          <a style={styles.ElementLink}
+             className={className} 
+            onClick={this._handleClick.bind(this, this.props.value)}>
+            {this.props.name}
+          </a>
+  		</li>
+		);
+  }
 };
+
+const className=''
 
 const styles = {
   TabElement: {
@@ -53,18 +61,6 @@ const styles = {
     whiteSpace: 'pre',
   },
   ElementLink: {
-    ':active': {
-      borderColor: '#cc1a16',
-      borderBottomStyle: 'none',
-      borderLeftStyle: 'solid',
-      borderRightStyle: 'solid',
-      borderTopStyle: 'solid',
-      borderTopLeftRadius: '12px',
-      borderTopRightRadius: '12px',
-      borderWidth: '1px',
-      color: '#cc1a16',
-      padding: '20px 5% 21px 5%'
-    },
     ':hover': {
       borderColor: '#cc1a16',
       borderBottomStyle: 'none',
