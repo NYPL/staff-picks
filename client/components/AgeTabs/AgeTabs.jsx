@@ -67,7 +67,7 @@ const styles = {
     display: 'block',
     fontSize: '16px',
     height: 'auto',
-    margin: '40px auto',
+    margin: '40px auto 5px',
     padding: '20px 0 21px 0',
     position: 'relative',
     textAlign: 'center',
