@@ -11,8 +11,7 @@ class TabElement extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      age: BookStore.getAge(),
-            currentTab: 'adult'
+      age: BookStore.getAge()
     };
     this._handleClick = this._handleClick.bind(this);
     this._onChange = this._onChange.bind(this);
@@ -26,13 +25,10 @@ class TabElement extends React.Component {
     BookStore.removeChangeListener(this._onChange);
   }
 
-  _handleClick (age) {
+  _handleClick (value) {
     event.preventDefault();
-    this.setState({ 
-      currentTab: age, 
-      isActive: (this.state.currentTab === this.props.value)
-    });
-    BookActions.updateFilterAge(age);
+    this._changeTab(value);
+    BookActions.updateFilterAge(value);
     console.log(this.state.currentTab);
   }
   

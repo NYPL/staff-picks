@@ -12,7 +12,18 @@ class AgeTabs extends React.Component {
     }
   }
 
-  
+  getInitialState () {
+    return {
+      currentTab: 'adult'
+    }
+  }
+
+  _changeTab (value) {
+    this.setState({ 
+      currentTab: value, 
+      isActive: (this.state.currentTab === value)
+    });
+  }
 
   render () {
     var _this = this;
