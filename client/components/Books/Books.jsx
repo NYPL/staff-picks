@@ -22,7 +22,6 @@ let masonryOptions = {
   isResizable: true,
   isFitWidth: false,
   columnWidth: 175,
-  transition: 0,
   itemSelector: '.book-item',
   gutter: 30
 };
