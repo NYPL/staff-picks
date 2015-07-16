@@ -64,10 +64,13 @@ app.get('/*', function(req, res) {
     })
     .get(options, function (apiData) {
       data = apiData;
+
       var parsedData = parser.parse(data);
-      // console.log(parsedData);
+      var filters = parser.getOfType(apiData.included, 'staff-pick-tag');
+
       res.render('index', {
         staffPicks: JSON.stringify({'staff-picks': parsedData}),
+        filters: JSON.stringify({'filters': filters}),
         env: env
       });
     });
