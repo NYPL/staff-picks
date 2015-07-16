@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import cx from 'classnames';
 
 // Import Staff Pick components
 import BookStore from '../../stores/BookStore.js';
@@ -10,7 +11,8 @@ class TabElement extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      age: BookStore.getAge()
+      age: BookStore.getAge(),
+            currentTab: 'adult'
     };
     this._handleClick = this._handleClick.bind(this);
     this._onChange = this._onChange.bind(this);
@@ -26,24 +28,29 @@ class TabElement extends React.Component {
 
   _handleClick (age) {
     event.preventDefault();
+    this.setState({ 
+      currentTab: age, 
+      isActive: (this.state.currentTab === this.props.value)
+    });
     BookActions.updateFilterAge(age);
-    className = 'tab-active';
-    console.log(age);
+    console.log(this.state.currentTab);
   }
   
   _onChange () {
     this.setState({
-      age: BookStore.getAge()
+      age: BookStore.getAge(),
+      currentTab: this.props.value
     });
   }
 
   render () {
+
   	return (
   		<li key={`tab-${this.props.name}`} id={this.props.name} 
         className='tab-element' style={styles.TabElement}>
-          <a style={styles.ElementLink}
-             className={className} 
-            onClick={this._handleClick.bind(this, this.props.value)}>
+          <a
+            onClick={this._handleClick.bind(this, this.props.value)}
+            className={(this.state.currentTab === this.props.value) ? 'active' : null}>
             {this.props.name}
           </a>
   		</li>
@@ -51,40 +58,12 @@ class TabElement extends React.Component {
   }
 };
 
-const className=''
-
 const styles = {
   TabElement: {
     display: 'inline',
     margin: '0',
     textTransform: 'uppercase',
     whiteSpace: 'pre',
-  },
-  ElementLink: {
-    ':hover': {
-      borderColor: '#cc1a16',
-      borderBottomStyle: 'none',
-      borderLeftStyle: 'solid',
-      borderRightStyle: 'solid',
-      borderTopStyle: 'solid',
-      borderTopLeftRadius: '12px',
-      borderTopRightRadius: '12px',
-      borderWidth: '1px',
-      color: '#cc1a16',
-      padding: '20px 5% 21px 5%'
-    },
-    backgroundColor: '#ffffff',
-    borderColor: '#cc1a16',
-    borderBottomStyle: 'solid',
-    borderLeftStyle: 'none',
-    borderRightStyle: 'none',
-    borderTopStyle: 'none',
-    borderWidth: '1px',
-    color: '#bfbfbf',
-    cursor: 'pointer',
-    padding: '20px 5%',
-    textDecoration: 'none',
-    width: 'auto'
   }
 }
 

@@ -7,19 +7,28 @@ class AgeTabs extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
+    this.state = {
+      currentTab: 'adult'
+    }
   }
+
+  
 
   render () {
     var _this = this;
     var TabElements = data.map ( function (element) {
       return (
-        <TabElement key={element.name} id={element.name} 
-        name={element.name} value={element.value} />
+        <TabElement 
+          key={element.name} 
+          id={element.name} 
+          name={element.name} 
+          value={element.value} />
       );
     });
   	return (
       <nav style={styles.Nav}>
-        <ul className='tab-ul' style={styles.TabContainer}>
+        <ul className='tab-ul' 
+          style={styles.TabContainer}>
           {TabElements}
         </ul>
       </nav>

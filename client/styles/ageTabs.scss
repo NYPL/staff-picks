@@ -1,12 +1,29 @@
-.tab-active {
-  borderColor: #cc1a16;
-  borderBottomStyle: none;
-  borderLeftStyle: solid;
-  borderRightStyle: solid;
-  borderTopStyle: solid;
-  borderTopLeftRadius: 12px;
-  borderTopRightRadius: 12px;
-  borderWidth: 1px;
-  color: #cc1a16;
-  padding: 20px 5% 21px 5%;
+.tab-element {
+  a {
+	  background-color: #ffffff;
+	  border-color: #cc1a16;
+	  border-bottom-style: solid;
+	  border-left-style: none;
+	  border-right-style: none;
+	  border-top-style: none;
+	  border-top-left-radius: 12px;
+	  border-top-right-radius: 12px;
+	  border-width: 1px;
+	  color: #bfbfbf;
+	  cursor: pointer;
+	  padding: 20px 5%;
+	  text-decoration: none;
+	  width: auto;
+	  &:hover {
+  	  color: #cc1a16;
+	  }
+	  &.active{
+		  border-bottom-style: none;
+		  border-left-style: solid;
+		  border-right-style: solid;
+		  border-top-style: solid;
+		  color: #cc1a16;
+		  padding: 20px 5% 21px 5%;
+	  }
+  }
 }
