@@ -1,15 +1,21 @@
 import React from 'react';
 import Radium from 'radium';
+import cx from 'classnames';
+import _ from 'underscore';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
+
+import API from '../../utils/ApiService.js';
 
 class BookDisplayButtons extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      displayType: BookStore.getBookDisplay()
+      displayType: BookStore.getBookDisplay(),
+      gridActive: BookStore.getActiveGrid(),
+      listActive: BookStore.getActiveList()
     };
 
     this._handleClick = this._handleClick.bind(this);
@@ -25,18 +31,23 @@ class BookDisplayButtons extends React.Component {
   }
 
   render () {
+    let gridActive = this.state.gridActive;
+    let listActive = !this.state.gridActive;
+    const gridActiveButton = cx({ gridActive: gridActive, active: gridActive });
+    const listActiveButton = cx({ listActive: listActive, active: listActive });
+
     return (
       <div className='BookDisplayButtons'>
         <ul className='BookDisplayButtons-list'>
-          <li >
+          <li className={gridActiveButton}>
             <a onClick={this._handleClick.bind(this, 'grid')}>
-              <span className='BookDisplayButtons-grid-icon'></span>
+              <span className='BookDisplayButtons-grid-icon icon'></span>
               COVERS
             </a>
           </li>
-          <li>
+          <li className={listActiveButton}>
             <a onClick={this._handleClick.bind(this, 'list')}>
-              <span className='BookDisplayButtons-list-icon'></span>
+              <span className='BookDisplayButtons-list-icon icon'></span>
               LIST
             </a>
           </li>
@@ -51,7 +62,9 @@ class BookDisplayButtons extends React.Component {
   }
   _onChange () {
     this.setState({
-      displayType: BookStore.getBookDisplay()
+      displayType: BookStore.getBookDisplay(),
+      gridActive: BookStore.getActiveGrid(),
+      listActive: BookStore.getActiveList()
     });
   }
 }
@@ -59,9 +72,33 @@ class BookDisplayButtons extends React.Component {
 class BookFilters extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      filterList: API.getFilters()
+    };
   }
 
   render () {
+    var themeFilters = [];
+    var drivenByFilters = [];
+
+    _.each(this.state.filterList, function (filter) {
+      if (filter.attributes.tag.indexOf('Driven') !== -1) {
+        filter.attributes.tag = (filter.attributes.tag).replace(/\bDriven/ig,'');
+        drivenByFilters.push(filter);
+      } else {
+        themeFilters.push(filter);
+      }
+    });
+
+    var filterItems = function (list) {
+      return list.map(function (elem) {
+        return (
+          <li><a href='#'>{elem.attributes.tag}</a></li>
+        );
+      });
+    }
+
     return (
       <div className='BookFilters'>
         <span className='divider'></span> 
@@ -69,20 +106,13 @@ class BookFilters extends React.Component {
         <div className='BookFilters-lists'>
           <span>Driven by...</span>
           <ul>
-            <li><a href='#'>Character</a></li>
-            <li><a href='#'>Setting</a></li>
+            {filterItems(drivenByFilters)}
           </ul>
           <span>Themes...</span>
           <ul>
-            <li><a href='#'>Arty</a></li>
-            <li><a href='#'>Creepy</a></li>
-            <li><a href='#'>Dangerous</a></li>
-            <li><a href='#'>Techie</a></li>
-            <li><a href='#'>Nail-biters</a></li>
+            {filterItems(themeFilters)}
           </ul>
-          <div className='clearFilters'>
-            Clear Filters X
-          </div>
+          <div className='clearFilters'>Clear Filters X</div>
         </div>
       </div>
     );
@@ -111,6 +141,10 @@ Sidebar.defaultProps = {
 const styles = {
   base: {
 
+  },
+  active: {
+    border: '2px solid #0095c8',
+    color: 'red'
   }
 };
 

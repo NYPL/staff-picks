@@ -22,7 +22,6 @@ let masonryOptions = {
   isResizable: true,
   isFitWidth: false,
   columnWidth: 175,
-  transition: 0,
   itemSelector: '.book-item',
   gutter: 30
 };
@@ -126,7 +125,7 @@ var Books = React.createClass({
         </div>
         <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
           <div style={{'width':'30%', 'display':'inline-block'}}>
-            <Book book={this.state.book} height={'350px'} width={'240px'} />
+            <Book book={this.state.book}  />
           </div>
           <BookContent book={this.state.book} />
         </Modal>

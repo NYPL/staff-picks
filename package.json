@@ -39,7 +39,7 @@
     "eventemitter3": "^1.1.1",
     "express": "4.13.0",
     "express-ejs-layouts": "1.1.0",
-    "jsonapi-parserinator": "1.0.1",
+    "jsonapi-parserinator": "0.2.0",
     "object-assign": "3.0.0",
     "react": "0.13.3",
     "react-masonry-mixin": "0.5.7",
