@@ -37,7 +37,7 @@ class TabElement extends React.Component {
   _onChange () {
     this.setState({
       age: BookStore.getAge(),
-      currentTab: this.props.value,
+      currentTab: this.props.value
     });
   }
 
