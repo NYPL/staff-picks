@@ -11,7 +11,12 @@ const API = {
   },
   getBooks() {
     const books = staffPicks;
+    console.log(books);
     return books;
+  },
+  getFilters() {
+    const filterList = filters.filters;
+    return filterList;
   }
 };
 

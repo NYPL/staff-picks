@@ -369,14 +369,35 @@ span[class*="icon-"] {
         color: $text-gray;
       }
 
+      .icon {
+        padding: 1px 6px 5px 15px;
+      }
+
       .BookDisplayButtons-list-icon {
         background: url('/client/images/icons/SmallListIconGray.svg') no-repeat;
-        padding: 1px 6px 5px 15px;
       }
 
       .BookDisplayButtons-grid-icon {
         background: url('/client/images/icons/SmallBookGray.svg') no-repeat;
-        padding: 1px 6px 5px 15px;
+      }
+    }
+
+    .active {
+      border: 2px solid $lib-blue;
+
+      a {
+        color: $lib-blue;
+      }
+    }
+
+    .gridActive {
+      .BookDisplayButtons-grid-icon {
+        background: url('/client/images/icons/SmallBookBlue.svg') no-repeat;
+      }
+    }
+    .listActive {
+      .BookDisplayButtons-list-icon {
+        background: url('/client/images/icons/SmallListIconBlue.svg') no-repeat;
       }
     }
   }

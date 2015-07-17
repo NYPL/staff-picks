@@ -12,22 +12,21 @@ class Footer extends React.Component {
     super(props);
   }
   render () {
-	  	var FooterLinkLists = data.FooterLinkLists.map ( function ( link ) {
+	  	var FooterLinkLists = data.FooterLinkLists.map ( function ( link, i ) {
 	  		return (
-					<FooterLinkList className={link.ulClass} data={link.FooterLinkList} />
+					<FooterLinkList className={link.ulClass} data={link.FooterLinkList} key={i}/>
 				);
 	  	}); 
 		return (
 			<footer id={this.props.id} className={this.props.className} >
 				<SocialMediaList 
-					key='SocialMediaList' 
 					data={data.SocialMedia} 
 					id='SocialMediaList' 
 					className='socialmedia' />
 				<div className='footerlinks'>
 					{FooterLinkLists}				
 				</div>
-				<div key='Copyright' id='copyright' className='copyright' >
+				<div id='copyright' className='copyright' >
 					<p className='ng-binding'>© The New York Public Library, {new Date().getFullYear()}</p>
 				</div>
 			</footer>

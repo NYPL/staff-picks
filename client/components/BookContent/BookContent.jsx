@@ -35,9 +35,22 @@ class BookContent extends React.Component {
   render () {
     const book = this.props.book,
       bookTarget = book['staff-pick-item']['attributes']['catalog-slug'],
-      href = `https://nypl.bibliocommons.com/item/show/${bookTarget}`;
+      ebookTarget = book['staff-pick-item']['attributes']['ebook-slug'];
 
-    console.log(book);
+    let bookHREF = `https://nypl.bibliocommons.com/item/show/${bookTarget}`,
+      ebookHREF = `https://nypl.bibliocommons.com/item/show/${ebookTarget}`,
+      bookStyle = styles.available,
+      ebookStyle = styles.available;
+
+    if (!ebookTarget) {
+      ebookStyle = styles.unavailable;
+      ebookHREF = '#';
+    }
+    if (!bookTarget) {
+      bookStyle = styles.unavailable;
+      bookHREF = '#';
+    }
+
     return (
       <div ref='BookContent' className={this.props.className}>
         <h2>{book['staff-pick-item']['attributes']['title']}</h2>
@@ -51,13 +64,13 @@ class BookContent extends React.Component {
         </div>
 
         <ul className='borrow'>
-          <li style={styles.li}>
-            <a href={href}>
+          <li style={[ styles.li, bookStyle ]}>
+            <a href={bookHREF}>
               <span className='checkout'></span>Check Out This Book
             </a>
           </li>
-          <li style={styles.li}>
-            <a href='#'>
+          <li style={[ styles.li, ebookStyle ]}>
+            <a href={ebookHREF}>
               <span className='ebook'></span>Read the eBook!
             </a>
           </li>
@@ -83,10 +96,15 @@ const styles = {
 
   },
   li: {
-    background: '#0095c8',
     borderRadius: '5px',
     marginRight: '20px',
     display: 'inline-block'
+  },
+  available: {
+    background: '#0095c8'
+  },
+  unavailable: {
+    background: '#776E64'
   }
 };
 
