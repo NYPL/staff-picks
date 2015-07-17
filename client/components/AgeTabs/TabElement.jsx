@@ -11,8 +11,7 @@ class TabElement extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      age: BookStore.getAge(),
-
+      age: BookStore.getAge()
     };
     this._handleClick = this._handleClick.bind(this);
     this._onChange = this._onChange.bind(this);
@@ -27,15 +26,12 @@ class TabElement extends React.Component {
   }
 
   _handleClick (age) {
-    event.preventDefault();
-    // currentTab = value;
     BookActions.updateFilterAge(age);
   }
   
   _onChange () {
     this.setState({
-      age: BookStore.getAge(),
-      currentTab: this.props.value
+      age: BookStore.getAge()
     });
   }
 
