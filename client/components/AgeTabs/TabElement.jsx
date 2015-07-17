@@ -26,12 +26,8 @@ class TabElement extends React.Component {
 
   _handleClick (value) {
     event.preventDefault();
- 
     currentTab = value;
-
     BookActions.updateFilterAge(value);
-    console.log('this is value: ' + value);
-    console.log('this is tab: ' + currentTab);
   }
   
   _onChange () {
