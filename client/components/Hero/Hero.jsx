@@ -34,12 +34,37 @@ export default class Hero extends React.Component {
   }
 
   render() {
+
+var BookIntros = function (age) {   
+      switch (age) { 
+        case 'adult':
+          return (
+          <BookIntro bookTitle={bookIntros.adult.bookTitle} 
+          quote={bookIntros.adult.quote} /> );
+        break;
+
+        case 'youngAdult':
+          return (
+          <BookIntro bookTitle={bookIntros.youngAdult.bookTitle} 
+          quote={bookIntros.youngAdult.quote} /> );
+        break;
+
+        case 'child':
+          return (
+          <BookIntro bookTitle={bookIntros.child.bookTitle} 
+          quote={bookIntros.child.quote} /> );
+        break;
+
+        default:
+      }
+    }(this.state.age);
+    
     return (
-      <div key='Hero' className={`'hero-'${this.state.age}`} style={styles.Hero}>
+      <div key='Hero' style={styles.Hero}>
         <div key='HeroContainer' className='hero-container' style={styles.HeroContainer}>
           <div key='TextContainer' className='text-container' style={styles.TextContainer}>
             <HeroTitle title='staff picks' intro='NYPL&#39;s librarians share their all-time favorite reads each month. Explore their book selections by choosing a tag below.' />
-            <BookIntro bookTitle={bookIntros.youngAdult.bookTitle} quote={bookIntros.adult.quote}  />  
+            {BookIntros}
           </div>
           <div key='HeroImageContainer' className='hero-image-container' style={styles.HeroImageContainer}>
             <HeroImage src={src.HeroImageLink}/>
@@ -49,8 +74,6 @@ export default class Hero extends React.Component {
     );
   }
 }
-
-const heroFeature = 'bookIntros.youngAdult.bookTitle'
 
 const bookIntros = {
   adult: {
@@ -62,7 +85,7 @@ const bookIntros = {
     quote: '"The wild--and weird--west! The strange town of Golgotha with its even stranger citizens isn\'t the sort of place to visit . . . but makes for great reading!"'
   },
   child: {
-    bookTitle: 'The Whispering Skul',
+    bookTitle: 'The Whispering Skull',
     quote: '"Ghost-hunting, murder and mysteries, oh my! This second book in the author\'s Lockwood & Co. series delivers just as much suspenseful, spine-tingling action."'
   }
 }
