@@ -2,7 +2,7 @@ import React from 'react';
 import Radium from 'radium';
 import cx from 'classnames';
 
-// Import Staff Pick components
+// Component import
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
@@ -36,10 +36,8 @@ class TabElement extends React.Component {
   }
 
   render () {
-
     let active = (this.state.age===this.props.value);
     const classes =  cx({ active: active, inactive: !active });
-
   	return (
   		<li key={`tab-${this.props.name}`} id={this.props.name} 
         className='tab-element' style={styles.TabElement}>

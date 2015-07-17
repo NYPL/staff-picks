@@ -6,23 +6,42 @@ import Radium from 'radium';
 import HeroTitle from 'components/Hero/HeroTitle/HeroTitle.jsx';
 import BookIntro from 'components/Hero//BookIntro/BookIntro.jsx';
 import HeroImage from 'components/Hero/HeroImage/HeroImage.jsx';
+import BookStore from '../../stores/BookStore.js';
 
 export default class Hero extends React.Component {
 
   // Constructor used in ES6
   constructor(props) {
     super(props);
+    this.state = { 
+      age: BookStore.getAge(),
+    };
+    this._onChange = this._onChange.bind(this);
+  }
+
+  componentDidMount () {
+    BookStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount () {
+    BookStore.removeChangeListener(this._onChange);
+  }
+
+  _onChange () {
+    this.setState({
+      age: BookStore.getAge()
+    });
   }
 
   render() {
     return (
-      <div key='Hero' className='Hero' style={styles.Hero}>
-        <div key='HeroContainer' className='HeroContainer' style={styles.HeroContainer}>
-          <div key='TextContainer' className='TextContainer' style={styles.TextContainer}>
+      <div key='Hero' className={`'hero-'${this.state.age}`} style={styles.Hero}>
+        <div key='HeroContainer' className='hero-container' style={styles.HeroContainer}>
+          <div key='TextContainer' className='text-container' style={styles.TextContainer}>
             <HeroTitle title='staff picks' intro='NYPL&#39;s librarians share their all-time favorite reads each month. Explore their book selections by choosing a tag below.' />
-            <BookIntro bookTitle='The Amazing Adventures of Kavalier & Clay' quote='"I loved this book. It&#39;s a great story with complex, interesting characters in a fascinating setting. The creation of the comic book history is not only fascinating but the fictional elements are so well integrated that without looking it up."' />  
+            <BookIntro bookTitle={bookIntros.youngAdult.bookTitle} quote={bookIntros.adult.quote}  />  
           </div>
-          <div key='HeroImageContainer' className='HeroImageContainer' style={styles.HeroImageContainer}>
+          <div key='HeroImageContainer' className='hero-image-container' style={styles.HeroImageContainer}>
             <HeroImage src={src.HeroImageLink}/>
           </div>
         </div>
@@ -31,10 +50,22 @@ export default class Hero extends React.Component {
   }
 }
 
-Hero.defaultProps = {
+const heroFeature = 'bookIntros.youngAdult.bookTitle'
 
-};
-
+const bookIntros = {
+  adult: {
+    bookTitle: 'The Amazing Adventures of Kavalier & Clay',
+    quote: '"I loved this book. It\'s a great story with complex, interesting characters in a fascinating setting. The creation of the comic book history is not only fascinating but the fictional elements are so well integrated that without looking it up."'
+  },
+  youngAdult: {
+    bookTitle: 'The Six-Gun Tarot',
+    quote: '"The wild--and weird--west! The strange town of Golgotha with its even stranger citizens isn\'t the sort of place to visit . . . but makes for great reading!"'
+  },
+  child: {
+    bookTitle: 'The Whispering Skul',
+    quote: '"Ghost-hunting, murder and mysteries, oh my! This second book in the author\'s Lockwood & Co. series delivers just as much suspenseful, spine-tingling action."'
+  }
+}
 
 const styles = {
   Hero: {
