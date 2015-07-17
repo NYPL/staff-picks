@@ -10,9 +10,9 @@ class SocialMediaList extends React.Component {
     super(props);
   }
   render () {
-  	var SocialMediaNodes = this.props.data.map ( function ( node ) {
+  	var SocialMediaNodes = this.props.data.map ( function ( node, i ) {
   		return (
-			<SocialMediaNode name={node.name} link={node.link} className={node.className} />
+			<SocialMediaNode name={node.name} link={node.link} className={node.className} key={i}/>
 		);
   	});
 		return (
