@@ -36,13 +36,12 @@ const BookStore = _.extend({}, EventEmitter.prototype, {
   getBookDisplay () {
     return _bookDisplay;
   },
-  getActiveGrid() {
-    return _gridDisplay;
-  },
   getActiveList() {
     return _listDisplay;
   },
-
+  getActiveGrid() {
+    return _gridDisplay;
+  },
   // Gets age from the tabs
   getAge () {
     return _age;
