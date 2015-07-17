@@ -37,7 +37,6 @@ var Books = React.createClass({
   },
 
   componentDidMount: function () {
-    this._handleClick = this._handleClick.bind(this);
     BookStore.addChangeListener(this.onChange.bind(this));
   },
 
@@ -72,19 +71,18 @@ var Books = React.createClass({
     var openModal = this.openModal;
     var _this = this;
 
-    var books = bookData['staff-picks'].map(function (element) {
+    var books = bookData['staff-picks'].map(function (element, i) {
       return (
-        <div className='book-item'
-          onClick={openModal.bind(_this, element)}>
+        <div className='book-item' onClick={openModal.bind(_this, element)} key={i} >
           <Book book={element} style={styles.bookItem}
             height={'270px'} width={'175px'} />
         </div>
       );
     });
 
-    var booksLists = bookData['staff-picks'].map(function (element) {
+    var booksLists = bookData['staff-picks'].map(function (element, i) {
       return (
-        <li className='book-item'>
+        <li className='book-item' key={i}>
           <h2 onClick={openModal.bind(_this, element)}>{element['staff-pick-item']['attributes']['title']}</h2>
           <p>By: {element['staff-pick-item']['attributes']['author']}</p>
         </li>

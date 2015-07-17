@@ -92,9 +92,9 @@ class BookFilters extends React.Component {
     });
 
     var filterItems = function (list) {
-      return list.map(function (elem) {
+      return list.map(function (elem, i) {
         return (
-          <li><a href='#'>{elem.attributes.tag}</a></li>
+          <li key={i}><a href='#'>{elem.attributes.tag}</a></li>
         );
       });
     }
