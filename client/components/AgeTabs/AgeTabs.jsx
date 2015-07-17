@@ -7,22 +7,6 @@ class AgeTabs extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
-    this.state = {
-      currentTab: 'adult'
-    }
-  }
-
-  getInitialState () {
-    return {
-      currentTab: 'adult'
-    }
-  }
-
-  _changeTab (value) {
-    this.setState({ 
-      currentTab: value, 
-      isActive: (this.state.currentTab === value)
-    });
   }
 
   render () {
@@ -62,7 +46,7 @@ const styles = {
     display: 'block',
     fontSize: '16px',
     height: 'auto',
-    margin: '40px auto 5px',
+    margin: '40px auto 40px',
     padding: '20px 0 21px 0',
     position: 'relative',
     textAlign: 'center',

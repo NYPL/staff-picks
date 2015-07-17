@@ -1,6 +1,5 @@
 import React from 'react';
 import Radium from 'radium';
-import cx from 'classnames';
 
 // Import Staff Pick components
 import BookStore from '../../stores/BookStore.js';
@@ -27,26 +26,28 @@ class TabElement extends React.Component {
 
   _handleClick (value) {
     event.preventDefault();
-    this._changeTab(value);
+ 
+    currentTab = value;
+
     BookActions.updateFilterAge(value);
-    console.log(this.state.currentTab);
+    console.log('this is value: ' + value);
+    console.log('this is tab: ' + currentTab);
   }
   
   _onChange () {
     this.setState({
       age: BookStore.getAge(),
-      currentTab: this.props.value
+      currentTab: this.props.value,
     });
   }
 
   render () {
-
   	return (
   		<li key={`tab-${this.props.name}`} id={this.props.name} 
         className='tab-element' style={styles.TabElement}>
-          <a
+          <a 
             onClick={this._handleClick.bind(this, this.props.value)}
-            className={(this.state.currentTab === this.props.value) ? 'active' : null}>
+            className={(currentTab===this.props.value) ? 'active': null}>
             {this.props.name}
           </a>
   		</li>
@@ -62,5 +63,7 @@ const styles = {
     whiteSpace: 'pre',
   }
 }
+
+const currentTab = 'adult';
 
 export default Radium(TabElement);
