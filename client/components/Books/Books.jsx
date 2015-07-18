@@ -32,11 +32,21 @@ var Books = React.createClass({
     return {
       book: {},
       modalIsOpen: false,
-      type: BookStore.getBookDisplay()
+      type: BookStore.getBookDisplay(),
+      ageFilter: BookStore.getAge()
     }
   },
 
   componentDidMount: function () {
+    var grid = document.getElementById('masonryContainer');
+    var iso = new Isotope(grid, {
+      itemSelector: '.book-item',
+      masonry: {
+        columnWidth: 175,
+        gutter: 30
+      }
+    });
+
     BookStore.addChangeListener(this.onChange.bind(this));
   },
 
@@ -45,12 +55,17 @@ var Books = React.createClass({
   },
 
   onChange: function () {
+    console.log(BookStore.getAge());
+    $(document.getElementById('masonryContainer')).isotope({
+      filter: BookStore.getAge()
+    });
     this.setState({
-      type: BookStore.getBookDisplay()
+      type: BookStore.getBookDisplay(),
+      age: BookStore.getAge()
     });
   },
 
-  mixins: [MasonryMixin('masonryContainer', masonryOptions)],
+  // mixins: [MasonryMixin('masonryContainer', masonryOptions)],
 
   openModal: function (book) {
     console.log(book);
@@ -72,8 +87,9 @@ var Books = React.createClass({
     var _this = this;
 
     var books = bookData['staff-picks'].map(function (element, i) {
+      var age = element['staff-pick-age']['attributes']['age'];
       return (
-        <div className='book-item' onClick={openModal.bind(_this, element)} key={i} >
+        <div className={'book-item' + ' ' + age} onClick={openModal.bind(_this, element)} key={i} >
           <Book book={element} style={styles.bookItem}
             height={'270px'} width={'175px'} />
         </div>
@@ -113,7 +129,7 @@ var Books = React.createClass({
             <span className='right-icon'></span>
           </a>
         </div>
-        <div ref="masonryContainer" style={{'width':'100%', 'display': gridDisplay}}>
+        <div id="masonryContainer" ref="masonryContainer" style={{'width':'100%', 'display': gridDisplay}}>
           {books}
         </div>
         <div style={{'display': listDisplay}}>

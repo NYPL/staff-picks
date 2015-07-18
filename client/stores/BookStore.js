@@ -4,7 +4,7 @@ import BookConstants from '../constants/BookConstants';
 import _ from 'underscore';
 // Boolean flag that initially hides the Subscribe Form
 let _bookDisplay =  'grid',
-    _age = 'adult',
+    _age = '.Adult',
     _gridDisplay = true,
     _listDisplay = false;
 
