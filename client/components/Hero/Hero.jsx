@@ -34,8 +34,7 @@ export default class Hero extends React.Component {
   }
 
   render() {
-
-var BookIntros = function (age) {   
+    var BookIntros = function (age) {   
       switch (age) { 
         case 'adult':
           return (
@@ -58,6 +57,24 @@ var BookIntros = function (age) {
         default:
       }
     }(this.state.age);
+
+    var HeroImages = function (age) {
+      switch (age) {
+        case 'adult':
+        return (<HeroImage src={src.HeroImageLink.adult} />);
+        break;
+
+        case 'youngAdult':
+        return (<HeroImage src={src.HeroImageLink.youngAdult} />);
+        break;
+
+        case 'child':
+        return (<HeroImage src={src.HeroImageLink.child} />);
+        break;
+
+        default:
+      }
+    }(this.state.age);
     
     return (
       <div key='Hero' style={styles.Hero}>
@@ -67,7 +84,7 @@ var BookIntros = function (age) {
             {BookIntros}
           </div>
           <div key='HeroImageContainer' className='hero-image-container' style={styles.HeroImageContainer}>
-            <HeroImage src={src.HeroImageLink}/>
+            {HeroImages}
           </div>
         </div>
       </div>
@@ -135,7 +152,11 @@ const styles = {
 };
 
 const src = {
-  HeroImageLink: 'https://chicago.bibliocms.com/wp-content/uploads/sites/3/2015/01/kccover.png'
+  HeroImageLink: {
+    adult: 'https://chicago.bibliocms.com/wp-content/uploads/sites/3/2015/01/kccover.png',
+    youngAdult: 'http://manyatruenerd.com/wp-content/uploads/2013/09/sixgun2.jpeg',
+    child: 'http://ecx.images-amazon.com/images/I/91U6ZmLmu4L.jpg'
+  }
 };
 
 export default Radium(Hero);
