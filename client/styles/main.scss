@@ -331,6 +331,25 @@ span[class*="icon-"] {
   }
 }
 
+// Temporary overrides for the modal window
+body {
+  .ReactModal__Content {
+    min-height: 500px;
+    z-index: 2000;
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    border: 1px solid #ccc;
+    background: #fff;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 4px;
+    outline: none;
+    padding: 30px 20px 20px 30px;
+    width: 850px;
+  }
+}
+
 .month-picker {
   font-size: 12px;
 
