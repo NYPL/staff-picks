@@ -5,7 +5,7 @@ import Book from '../Book/Book.jsx';
 import BookContent from '../BookContent/BookContent.jsx';
 import API from '../../utils/ApiService.js';
 
-import Modal from '../modal/modal.js';
+import Modal from 'react-modal';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
