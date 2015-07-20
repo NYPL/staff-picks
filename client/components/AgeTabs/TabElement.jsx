@@ -36,7 +36,7 @@ class TabElement extends React.Component {
   }
 
   render () {
-    var active = (this.state.age===this.props.value);
+    let active = this.state.age === this.props.value;
 
   	return (
   		<li key={`tab-${this.props.name}`} id={this.props.name} 
@@ -64,7 +64,11 @@ const styles = {
   TabElementLink: {
     backgroundColor: '#ffffff',
     borderColor: '#cc1a16',
-    color: '#cc1a16',
+    borderWidth: '1px',
+    color: '#bfbfbf',
+    cursor: 'pointer',
+    textDecoration: 'none',
+    width: 'auto'
     ':hover': {
       color: '#cc1a16'
     }
@@ -81,12 +85,7 @@ const styles = {
     borderLeftStyle: 'none',
     borderRightRtyle: 'none',
     borderTopStyle: 'none',
-    borderWidth: '1px',
-    color: '#bfbfbf',
-    cursor: 'pointer',
     padding: '20px 5%',
-    textDecoration: 'none',
-    width: 'auto'
   }
 }
 
