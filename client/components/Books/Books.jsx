@@ -4,6 +4,7 @@ import MasonryMixin from 'react-masonry-mixin';
 import Book from '../Book/Book.jsx';
 import BookContent from '../BookContent/BookContent.jsx';
 import API from '../../utils/ApiService.js';
+import CloseButton from 'components/Books/CloseButton.jsx';
 
 import Modal from 'react-modal';
 
@@ -122,6 +123,7 @@ var Books = React.createClass({
           </ul>
         </div>
         <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
+          <CloseButton />
           <div style={{'width':'30%', 'display':'inline-block'}}>
             <Book book={this.state.book}  />
           </div>

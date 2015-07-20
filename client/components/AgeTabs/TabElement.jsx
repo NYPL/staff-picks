@@ -68,7 +68,7 @@ const styles = {
     color: '#bfbfbf',
     cursor: 'pointer',
     textDecoration: 'none',
-    width: 'auto'
+    width: 'auto',
     ':hover': {
       color: '#cc1a16'
     }
@@ -83,7 +83,7 @@ const styles = {
   TabElementLinkInactive: {
     borderBottomStyle: 'solid',
     borderLeftStyle: 'none',
-    borderRightRtyle: 'none',
+    borderRightStyle: 'none',
     borderTopStyle: 'none',
     padding: '20px 5%',
   }
