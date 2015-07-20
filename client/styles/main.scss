@@ -10,14 +10,14 @@ $dark-lib-gray: #776E64;
 
 /* first for IE 4–8 */
 @font-face {
-    font-family: KievitScWeb-Book;
-    src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitScWeb-Book.eot");
+    font-family: KievitWeb-Book;
+    src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book.eot");
 }
 
 /* then for WOFF-capable browsers */
 @font-face {
-    font-family: KievitScWeb-Book;
-    src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitScWeb-Book.woff") format("woff");
+    font-family: KievitWeb-Book;
+    src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book.woff") format("woff");
 }
 
 /** MIXINS **/
@@ -126,7 +126,7 @@ table {
 }
 
 body {
-    font-family: KievitScWeb-Book, sans-serif;
+    font-family: KievitWeb-Book, sans-serif;
 }
 
 /* Header global rules */
