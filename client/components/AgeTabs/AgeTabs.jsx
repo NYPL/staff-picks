@@ -56,7 +56,7 @@ const styles = {
 
 const data = [
   { name: 'adult', value: 'adult' },
-  { name: 'young adult', value: 'youngAdult' },
+  { name: 'young  adult', value: 'youngAdult' },
   { name: 'child', value: 'child' }
 ];
 
