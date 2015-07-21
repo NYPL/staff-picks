@@ -61,7 +61,8 @@ var Books = React.createClass({
     });
   },
 
-  closeModal: function () {
+  closeModal: function (e) {
+    e.preventDefault();
     this.setState({
       book: {},
       modalIsOpen: false
@@ -70,6 +71,7 @@ var Books = React.createClass({
 
   render: function () {
     var openModal = this.openModal;
+
     var _this = this;
 
     var books = bookData['staff-picks'].map(function (element, i) {
@@ -123,7 +125,7 @@ var Books = React.createClass({
           </ul>
         </div>
         <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-          <CloseButton />
+          <CloseButton onClick={this.closeModal} />
           <div style={{'width':'30%', 'display':'inline-block'}}>
             <Book book={this.state.book}  />
           </div>

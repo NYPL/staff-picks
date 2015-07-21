@@ -16,7 +16,7 @@ class TagList extends React.Component {
     return (
       <div>
         <p>Filed under:</p>
-        <ul style={{'list-style': 'none'}}>
+        <ul style={{'listStyle': 'none'}}>
           {tags}
         </ul>
       </div>

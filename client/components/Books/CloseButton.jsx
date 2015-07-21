@@ -10,29 +10,33 @@ class CloseButton extends React.Component {
     this._handleClick = this._handleClick.bind(this);
   }
 
-  _handleClick (age) {
+  _handleClick () {
 
   }
 
   render () {
   	return (
-  		<div>
-				<SimpleButton style={styles.CloseButton} 
-											label='X' 
-											onClick={this._handleClick.bind(this)} />
-			</div>
+			<SimpleButton style={styles.CloseButton}
+										id='close-button' 
+										label=''
+										onClick={this.props.onClick} />
 		);
   }
 }
 
 const styles = {
   CloseButton: {
+  	backgroundImage: 'url("/client/images/icons/gray_x_button.svg")',
+  	backgroundPosition: 'center',
+  	backgroundRepeat: 'no-repeat',
 		color: '#bfbfbf',
 		clear: 'both',
 		float: 'right',
-		fontSize: '20px',
-		margin: '-20px 0 40px -10px',
+		fontSize: '24px',
+		height: '28px',
+		margin: '-16px -6px 0 0',
 		textDecoration: 'none',
+		width: '28px',
 		':hover': {color: '#000000'}
   }
 };
