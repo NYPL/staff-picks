@@ -36,19 +36,19 @@ export default class Hero extends React.Component {
   render() {
     var BookIntros = function (age) {   
       switch (age) { 
-        case 'adult':
+        case 'Adult':
           return (
           <BookIntro bookTitle={bookIntros.adult.bookTitle} 
           quote={bookIntros.adult.quote} /> );
         break;
 
-        case 'youngAdult':
+        case 'YA':
           return (
           <BookIntro bookTitle={bookIntros.youngAdult.bookTitle} 
           quote={bookIntros.youngAdult.quote} /> );
         break;
 
-        case 'child':
+        case 'Children':
           return (
           <BookIntro bookTitle={bookIntros.child.bookTitle} 
           quote={bookIntros.child.quote} /> );

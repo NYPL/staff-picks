@@ -339,6 +339,7 @@ body {
     position: absolute;
     top: 20%;
     left: 15%;
+    bottom: 60%;
     border: 1px solid #ccc;
     background: #fff;
     overflow: auto;
@@ -455,6 +456,51 @@ body {
       }
     }
   }
+}
+
+.book-item {
+  transition: all 3s linear;
+  display: block;
+}
+
+.activeClass {
+  display: block;
+}
+
+
+.removed {
+  display: none;
+}
+
+.visuallyhidden {
+  opacity: 0;
+}
+
+.example-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+}
+
+.example-leave {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+}
+
+.example-appear {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
 }
 
 @import 'transitions';
