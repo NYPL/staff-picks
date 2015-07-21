@@ -60,15 +60,15 @@ export default class Hero extends React.Component {
 
     var HeroImages = function (age) {
       switch (age) {
-        case 'adult':
+        case 'Adult':
         return (<HeroImage src={src.HeroImageLink.adult} />);
         break;
 
-        case 'youngAdult':
+        case 'YA':
         return (<HeroImage src={src.HeroImageLink.youngAdult} />);
         break;
 
-        case 'child':
+        case 'Children':
         return (<HeroImage src={src.HeroImageLink.child} />);
         break;
 
