@@ -34,7 +34,6 @@ const styles = {
   base: {
     boxSizing: 'border-box',
     color: 'white',
-    fontFamily: 'KievitComp-Book',
     marginTop: '0px',
     marginBottom: '0px',
     position: 'relative',
@@ -42,7 +41,6 @@ const styles = {
   },
   HeroTitle: {
     '@media (max-width: 480px)': { marginTop: '24px' },
-    fontFamily: 'KievitComp-Bold',
     fontSize: '16px',
     marginTop: '0px',
     marginBottom: '4px',
