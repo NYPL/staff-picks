@@ -91,10 +91,14 @@ class BookFilters extends React.Component {
       }
     });
 
+    var _this = this;
     var filterItems = function (list) {
+      var _handleClick = _this._handleClick;
       return list.map(function (elem, i) {
         return (
-          <li key={i}><a href='#'>{elem.attributes.tag}</a></li>
+          <li key={i}><a onClick={_handleClick.bind(_this, elem.attributes.tag)}>
+            {elem.attributes.tag}
+          </a></li>
         );
       });
     }
@@ -116,6 +120,11 @@ class BookFilters extends React.Component {
         </div>
       </div>
     );
+  }
+
+  _handleClick(filterType) {
+    console.log(filterType);
+    // BookActions.addBookFilter(filterType);
   }
 }
 
