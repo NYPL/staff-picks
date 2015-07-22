@@ -7,6 +7,11 @@ import HeroTitle from 'components/Hero/HeroTitle/HeroTitle.jsx';
 import BookIntro from 'components/Hero//BookIntro/BookIntro.jsx';
 import HeroImage from 'components/Hero/HeroImage/HeroImage.jsx';
 import BookStore from '../../stores/BookStore.js';
+import API from '../../utils/ApiService.js';
+
+var featuredBooks = API.getFeaturedPicks();
+
+console.log(featuredBooks);
 
 export default class Hero extends React.Component {
 
@@ -36,19 +41,19 @@ export default class Hero extends React.Component {
   render() {
     var BookIntros = function (age) {   
       switch (age) { 
-        case 'adult':
+        case 'Adult':
           return (
           <BookIntro bookTitle={bookIntros.adult.bookTitle} 
           quote={bookIntros.adult.quote} /> );
         break;
 
-        case 'youngAdult':
+        case 'YA':
           return (
           <BookIntro bookTitle={bookIntros.youngAdult.bookTitle} 
           quote={bookIntros.youngAdult.quote} /> );
         break;
 
-        case 'child':
+        case 'Children':
           return (
           <BookIntro bookTitle={bookIntros.child.bookTitle} 
           quote={bookIntros.child.quote} /> );
@@ -60,15 +65,15 @@ export default class Hero extends React.Component {
 
     var HeroImages = function (age) {
       switch (age) {
-        case 'adult':
+        case 'Adult':
         return (<HeroImage src={src.HeroImageLink.adult} />);
         break;
 
-        case 'youngAdult':
+        case 'YA':
         return (<HeroImage src={src.HeroImageLink.youngAdult} />);
         break;
 
-        case 'child':
+        case 'Children':
         return (<HeroImage src={src.HeroImageLink.child} />);
         break;
 
