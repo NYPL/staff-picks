@@ -7,6 +7,7 @@ import Header from 'components/HeaderOld/Header.jsx';
 import Hero from 'components/Hero/Hero.jsx';
 import Footer from 'components/Footer/Footer.jsx';
 import AgeTabs from 'components/AgeTabs/AgeTabs.jsx';
+import Error from 'components/Error404/Error404.jsx';
 
 // Utilities
 // import initData from 'headerData/HeaderData.js';
@@ -27,11 +28,15 @@ initData();
 const data = API.getData();
 const books = API.getBooks();
 
-
 React.render(<Header data={data} />, document.getElementById("header-container"));
-React.render(<Hero />, document.getElementById('hero'));
-React.render(<Footer />, document.getElementById('footer-container'));
-React.render(<AgeTabs />, document.getElementById('age-tabs'));
+
+if ( !books ) {
+  React.render(<Error />, document.getElementById("content"));
+} else {
+  React.render(<Hero />, document.getElementById('hero'));
+  React.render(<Footer />, document.getElementById('footer-container'));
+  React.render(<AgeTabs />, document.getElementById('age-tabs'));
+}
 
 import Books from 'components/Books/Books.jsx';
 import Sidebar from 'components/Sidebar/Sidebar.jsx';

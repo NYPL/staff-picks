@@ -10,7 +10,7 @@ const API = {
     return data;
   },
   getBooks() {
-    const books = staffPicks;
+    const books = '';
     console.log(books);
     return books;
   },

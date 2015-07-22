@@ -1,17 +1,16 @@
 import React from 'react';
 import Radium from 'radium';
 
-class 404Error extends React.Component {
+class Error extends React.Component {
 
 	// Constructor used in ES6
   constructor(props) {
     super(props);
     this.state = { 
-
     };
   }
 
-  render() {
+  render () {
   	return (
       <div>
         <h3>We&#39;re sorry...</h3>
@@ -26,4 +25,4 @@ const styles = {
 
 };
 
-export default Radium(404Error);
+export default Radium(Error);
