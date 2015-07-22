@@ -8,13 +8,11 @@ import BookIntro from 'components/Hero//BookIntro/BookIntro.jsx';
 import HeroImage from 'components/Hero/HeroImage/HeroImage.jsx';
 import BookStore from '../../stores/BookStore.js';
 import API from '../../utils/ApiService.js';
-<<<<<<< HEAD
-=======
+
 
 var featuredBooks = API.getFeaturedPicks();
 
 console.log(featuredBooks);
->>>>>>> 6fabfd738fa9ef9225dd5c0b45e2fabb399b6ced
 
 export default class Hero extends React.Component {
 
@@ -104,8 +102,6 @@ export default class Hero extends React.Component {
     );
   }
 }
-
-let heroIntros = API.getHero();
 
 const styles = {
   Hero: {
