@@ -6,18 +6,19 @@ import _ from 'underscore';
 let _bookDisplay =  'grid',
     _age = 'Adult',
     _gridDisplay = true,
-    _listDisplay = false;
+    _listDisplay = false,
+    _filters = [];
 
 // Simple reference to a repetitive non-changing string
 const CHANGE_EVENT = 'change';
 
 /* Setters are assigned in non-global scope */
 // Sets the boolean value of the Subscribe Form Visibility
-function setBookDisplay (bookDisplay) {
+function setBookDisplay(bookDisplay) {
   _bookDisplay = bookDisplay;
 }
 
-function setActiveDisplay (type) {
+function setActiveDisplay(type) {
   if (type === 'grid') {
     _gridDisplay = true;
     _listDisplay = false;
@@ -27,8 +28,15 @@ function setActiveDisplay (type) {
   }
 }
 
-function setAgeDisplay (age) {
+function setAgeDisplay(age) {
   _age = age;
+}
+
+function setFilters(filter) {
+  console.log(filter);
+  var test = _.findWhere(_filters, filter);
+  console.log(test);
+  _filters.push(filter);
 }
 
 const BookStore = _.extend({}, EventEmitter.prototype, {
@@ -45,6 +53,9 @@ const BookStore = _.extend({}, EventEmitter.prototype, {
   // Gets age from the tabs
   getAge () {
     return _age;
+  },
+  getFilters () {
+    return _filters;
   },
   // Emits change event to all registered event listeners
   emitChange () {
@@ -71,6 +82,11 @@ BookStore.dispatchToken = AppDispatcher.register((action) => {
 
     case BookConstants.AGE_TYPE:
       setAgeDisplay(action.age);
+      BookStore.emitChange();
+    break;
+
+    case BookConstants.FILTER:
+      setFilters(action.filter);
       BookStore.emitChange();
     break;
     
