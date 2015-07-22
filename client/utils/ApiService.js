@@ -21,6 +21,7 @@ const API = {
   getFeaturedPicks() {
     const featuredPickList = pickList['staff-picks-list'];
     const featuredBooks = featuredPickList[0].relationships.features.data;
+
     let booksRaw = [], books = {};
 
     _.each(featuredBooks, function (book) {
@@ -31,7 +32,6 @@ const API = {
       var age = book['staff-pick-age']['attributes']['age'];
       books[age] = book;
     });
-
     return books;
   }
 };

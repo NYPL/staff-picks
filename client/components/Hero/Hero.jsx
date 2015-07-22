@@ -39,46 +39,51 @@ export default class Hero extends React.Component {
   }
 
   render() {
-    var BookIntros = function (age) {   
-      switch (age) { 
-        case 'Adult':
-          return (
-          <BookIntro bookTitle={bookIntros.adult.bookTitle} 
-          quote={bookIntros.adult.quote} /> );
-        break;
+    var BookIntros = function (age) {
+      return (
+        <BookIntro bookTitle={featuredBooks.Adult['staff-pick-item'].attributes.title}
+          quote={featuredBooks.Adult.attributes.text} /> );
 
-        case 'YA':
-          return (
-          <BookIntro bookTitle={bookIntros.youngAdult.bookTitle} 
-          quote={bookIntros.youngAdult.quote} /> );
-        break;
+      // switch (age) { 
+      //   case 'Adult':
+      //     return (
+      //     <BookIntro bookTitle={bookIntros.adult.bookTitle} 
+      //     quote={bookIntros.adult.quote} /> );
+      //   break;
 
-        case 'Children':
-          return (
-          <BookIntro bookTitle={bookIntros.child.bookTitle} 
-          quote={bookIntros.child.quote} /> );
-        break;
+      //   case 'YA':
+      //     return (
+      //     <BookIntro bookTitle={bookIntros.youngAdult.bookTitle} 
+      //     quote={bookIntros.youngAdult.quote} /> );
+      //   break;
 
-        default:
-      }
+      //   case 'Children':
+      //     return (
+      //     <BookIntro bookTitle={bookIntros.child.bookTitle} 
+      //     quote={bookIntros.child.quote} /> );
+      //   break;
+
+      //   default:
+      // }
     }(this.state.age);
 
     var HeroImages = function (age) {
-      switch (age) {
-        case 'Adult':
-        return (<HeroImage src={src.HeroImageLink.adult} />);
-        break;
+      
+      // switch (age) {
+      //   case 'Adult':
+      //   return (<HeroImage src={src.HeroImageLink.adult} />);
+      //   break;
 
-        case 'YA':
-        return (<HeroImage src={src.HeroImageLink.youngAdult} />);
-        break;
+      //   case 'YA':
+      //   return (<HeroImage src={src.HeroImageLink.youngAdult} />);
+      //   break;
 
-        case 'Children':
-        return (<HeroImage src={src.HeroImageLink.child} />);
-        break;
+      //   case 'Children':
+      //   return (<HeroImage src={src.HeroImageLink.child} />);
+      //   break;
 
-        default:
-      }
+      //   default:
+      // }
     }(this.state.age);
     
     return (
