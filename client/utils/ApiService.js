@@ -19,7 +19,7 @@ const API = {
     return filterList;
   },
   getHero () {
-    const bookIntros = {
+    const heroIntros = {
       adult: {
         bookTitle: 'The Amazing Adventures of Kavalier & Clay',
         quote: '"I loved this book. It\'s a great story with complex, interesting characters in a fascinating setting. The creation of the comic book history is not only fascinating but the fictional elements are so well integrated that without looking it up."'
@@ -32,7 +32,8 @@ const API = {
         bookTitle: 'The Whispering Skull',
         quote: '"Ghost-hunting, murder and mysteries, oh my! This second book in the author\'s Lockwood & Co. series delivers just as much suspenseful, spine-tingling action."'
       }
-    } 
+    }
+    return heroIntros; 
   }
 };
 

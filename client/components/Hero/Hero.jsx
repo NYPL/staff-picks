@@ -7,6 +7,7 @@ import HeroTitle from 'components/Hero/HeroTitle/HeroTitle.jsx';
 import BookIntro from 'components/Hero//BookIntro/BookIntro.jsx';
 import HeroImage from 'components/Hero/HeroImage/HeroImage.jsx';
 import BookStore from '../../stores/BookStore.js';
+import API from '../../utils/ApiService.js';
 
 export default class Hero extends React.Component {
 
@@ -38,20 +39,20 @@ export default class Hero extends React.Component {
       switch (age) { 
         case 'Adult':
           return (
-          <BookIntro bookTitle={bookIntros.adult.bookTitle} 
-          quote={bookIntros.adult.quote} /> );
+          <BookIntro bookTitle={heroIntros.adult.bookTitle} 
+          quote={heroIntros.adult.quote} /> );
         break;
 
         case 'YA':
           return (
-          <BookIntro bookTitle={bookIntros.youngAdult.bookTitle} 
-          quote={bookIntros.youngAdult.quote} /> );
+          <BookIntro bookTitle={heroIntros.youngAdult.bookTitle} 
+          quote={heroIntros.youngAdult.quote} /> );
         break;
 
         case 'Children':
           return (
-          <BookIntro bookTitle={bookIntros.child.bookTitle} 
-          quote={bookIntros.child.quote} /> );
+          <BookIntro bookTitle={heroIntros.child.bookTitle} 
+          quote={heroIntros.child.quote} /> );
         break;
 
         default:
@@ -92,20 +93,7 @@ export default class Hero extends React.Component {
   }
 }
 
-const bookIntros = {
-  // adult: {
-  //   bookTitle: 'The Amazing Adventures of Kavalier & Clay',
-  //   quote: '"I loved this book. It\'s a great story with complex, interesting characters in a fascinating setting. The creation of the comic book history is not only fascinating but the fictional elements are so well integrated that without looking it up."'
-  // },
-  // youngAdult: {
-  //   bookTitle: 'The Six-Gun Tarot',
-  //   quote: '"The wild--and weird--west! The strange town of Golgotha with its even stranger citizens isn\'t the sort of place to visit . . . but makes for great reading!"'
-  // },
-  // child: {
-  //   bookTitle: 'The Whispering Skull',
-  //   quote: '"Ghost-hunting, murder and mysteries, oh my! This second book in the author\'s Lockwood & Co. series delivers just as much suspenseful, spine-tingling action."'
-  // }
-}
+let heroIntros = API.getHero();
 
 const styles = {
   Hero: {
