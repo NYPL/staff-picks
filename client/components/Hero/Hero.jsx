@@ -62,15 +62,15 @@ export default class Hero extends React.Component {
     var HeroImages = function (age) {
       switch (age) {
         case 'Adult':
-        return (<HeroImage src={src.HeroImageLink.adult} />);
+        return ( <HeroImage src={heroIntros.adult.imageLink} /> );
         break;
 
         case 'YA':
-        return (<HeroImage src={src.HeroImageLink.youngAdult} />);
+        return (<HeroImage src={heroIntros.youngAdult.imageLink} /> );
         break;
 
         case 'Children':
-        return (<HeroImage src={src.HeroImageLink.child} />);
+        return (<HeroImage src={heroIntros.child.imageLink} /> );
         break;
 
         default:
@@ -136,14 +136,6 @@ const styles = {
     float: 'left',
     position: 'relative',
     width: '60%'
-  }
-};
-
-const src = {
-  HeroImageLink: {
-    adult: 'https://chicago.bibliocms.com/wp-content/uploads/sites/3/2015/01/kccover.png',
-    youngAdult: 'http://manyatruenerd.com/wp-content/uploads/2013/09/sixgun2.jpeg',
-    child: 'http://ecx.images-amazon.com/images/I/91U6ZmLmu4L.jpg'
   }
 };
 
