@@ -78,6 +78,7 @@ const styles = {
     borderLeftStyle: 'solid',
     borderRightStyle: 'solid',
     borderTopStyle: 'solid',
+    color: '#cc1a16',
     padding: '20px 5% 21px 5%'
   },
   TabElementLinkInactive: {
