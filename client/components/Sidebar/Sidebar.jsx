@@ -15,7 +15,8 @@ class BookDisplayButtons extends React.Component {
     this.state = {
       displayType: BookStore.getBookDisplay(),
       gridActive: BookStore.getActiveGrid(),
-      listActive: BookStore.getActiveList()
+      listActive: BookStore.getActiveList(),
+      filters: BookStore.getFilters()
     };
 
     this._handleClick = this._handleClick.bind(this);
@@ -64,7 +65,8 @@ class BookDisplayButtons extends React.Component {
     this.setState({
       displayType: BookStore.getBookDisplay(),
       gridActive: BookStore.getActiveGrid(),
-      listActive: BookStore.getActiveList()
+      listActive: BookStore.getActiveList(),
+      filters: BookStore.getFilters()
     });
   }
 }
@@ -96,7 +98,7 @@ class BookFilters extends React.Component {
       var _handleClick = _this._handleClick;
       return list.map(function (elem, i) {
         return (
-          <li key={i}><a onClick={_handleClick.bind(_this, elem.attributes.tag)}>
+          <li key={i}><a onClick={_handleClick.bind(_this, elem.id)}>
             {elem.attributes.tag}
           </a></li>
         );
@@ -123,8 +125,7 @@ class BookFilters extends React.Component {
   }
 
   _handleClick(filterType) {
-    console.log(filterType);
-    // BookActions.addBookFilter(filterType);
+    BookActions.toggleBookFilter(filterType);
   }
 }
 

@@ -63,10 +63,14 @@ app.get('/*', function(req, res) {
       api_version: 'v0.1'
     })
     .get(options, function (apiData) {
+      var parsedData, filters;
+
       data = apiData;
 
-      var parsedData = parser.parse(data);
-      var filters = parser.getOfType(apiData.included, 'staff-pick-tag');
+      if (apiData) {
+        parsedData = parser.parse(data);
+        filters = parser.getOfType(apiData.included, 'staff-pick-tag');
+      }
 
       res.render('index', {
         staffPicks: JSON.stringify({'staff-picks': parsedData}),
