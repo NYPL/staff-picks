@@ -63,6 +63,7 @@ var Books = React.createClass({
         books.push(element);
       }
     });
+    console.log(BookStore.getFilters());
 
     this.setState({
       typeDisplay: BookStore.getBookDisplay(),
@@ -74,6 +75,7 @@ var Books = React.createClass({
   mixins: [MasonryMixin('masonryContainer', masonryOptions)],
 
   openModal: function (book) {
+    console.log(book)
     this.setState({
       book: book,
       modalIsOpen: true
