@@ -29,12 +29,12 @@ const data = API.getData();
 const books = API.getBooks();
 
 React.render(<Header data={data} />, document.getElementById("header-container"));
+React.render(<Footer />, document.getElementById('footer-container'));
 
 if ( !books ) {
   React.render(<Error />, document.getElementById("content"));
 } else {
   React.render(<Hero />, document.getElementById('hero'));
-  React.render(<Footer />, document.getElementById('footer-container'));
   React.render(<AgeTabs />, document.getElementById('age-tabs'));
 }
 
