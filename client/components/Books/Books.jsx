@@ -18,7 +18,7 @@ Modal.setAppElement(bookContainer);
 Modal.injectCSS();
 
 let bookData = API.getBooks();
-console.log(bookData);
+// console.log(bookData);
 
 let masonryOptions = {
   isResizable: true,
@@ -32,7 +32,7 @@ let masonryOptions = {
 var Books = React.createClass({
   getInitialState: function () {
     var books = [];
-    bookData['staff-picks'].forEach(function (element) {
+    bookData.forEach(function (element) {
       if (element['staff-pick-age']['attributes']['age'] === BookStore.getAge()) {
         books.push(element);
       }
@@ -58,7 +58,7 @@ var Books = React.createClass({
   onChange: function () {
     var changedAge = BookStore.getAge();
     var books = [];
-    bookData['staff-picks'].forEach(function (element) {
+    bookData.forEach(function (element) {
       if (element['staff-pick-age']['attributes']['age'] === changedAge) {
         books.push(element);
       }

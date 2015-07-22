@@ -7,6 +7,11 @@ import HeroTitle from 'components/Hero/HeroTitle/HeroTitle.jsx';
 import BookIntro from 'components/Hero//BookIntro/BookIntro.jsx';
 import HeroImage from 'components/Hero/HeroImage/HeroImage.jsx';
 import BookStore from '../../stores/BookStore.js';
+import API from '../../utils/ApiService.js';
+
+var featuredBooks = API.getFeaturedPicks();
+
+console.log(featuredBooks);
 
 export default class Hero extends React.Component {
 
