@@ -21,20 +21,15 @@ class AgeTabs extends React.Component {
       );
     });
   	return (
-      <nav style={styles.Nav}>
-        <ul className='tab-ul' 
-          style={styles.TabContainer}>
-          {TabElements}
-        </ul>
-      </nav>
+      <ul className='tab-ul' 
+        style={styles.TabContainer}>
+        {TabElements}
+      </ul>
 		);
   }
 };
 
 const styles = {
-  Nav: {
-    overflow: 'hidden'
-  },
   TabContainer: {
     backgroundColor: '#ffffff',
     borderColor: '#cc1a16',
