@@ -42,48 +42,6 @@ export default class Hero extends React.Component {
   }
 
   render() {
-<<<<<<< HEAD
-    var BookIntros = function (age) {   
-      switch (age) { 
-        case 'Adult':
-          return (
-          <BookIntro bookTitle={heroIntros.adult.bookTitle} 
-          quote={heroIntros.adult.quote} /> );
-        break;
-
-        case 'YA':
-          return (
-          <BookIntro bookTitle={heroIntros.youngAdult.bookTitle} 
-          quote={heroIntros.youngAdult.quote} /> );
-        break;
-
-        case 'Children':
-          return (
-          <BookIntro bookTitle={heroIntros.child.bookTitle} 
-          quote={heroIntros.child.quote} /> );
-        break;
-
-        default:
-      }
-    }(this.state.age);
-
-    var HeroImages = function (age) {
-      switch (age) {
-        case 'Adult':
-        return ( <HeroImage src={heroIntros.adult.imageLink} /> );
-        break;
-
-        case 'YA':
-        return (<HeroImage src={heroIntros.youngAdult.imageLink} /> );
-        break;
-
-        case 'Children':
-        return (<HeroImage src={heroIntros.child.imageLink} /> );
-        break;
-
-        default:
-      }
-=======
     var BookIntros = function (age) {
       return (
         <BookIntro bookTitle={featuredBooks.Adult['staff-pick-item'].attributes.title}
@@ -129,7 +87,6 @@ export default class Hero extends React.Component {
 
       //   default:
       // }
->>>>>>> 6fabfd738fa9ef9225dd5c0b45e2fabb399b6ced
     }(this.state.age);
     
     return (
