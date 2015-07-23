@@ -7,6 +7,7 @@ import API from '../../utils/ApiService.js';
 import CloseButton from 'components/Books/CloseButton.jsx';
 
 import Modal from 'react-modal';
+import _ from 'underscore';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
@@ -18,7 +19,6 @@ Modal.setAppElement(bookContainer);
 Modal.injectCSS();
 
 let bookData = API.getBooks();
-// console.log(bookData);
 
 let masonryOptions = {
   isResizable: true,
@@ -27,20 +27,14 @@ let masonryOptions = {
   itemSelector: '.book-item',
   gutter: 30
 };
+var iso;
 
 // class Books extends React.Component {
 var Books = React.createClass({
   getInitialState: function () {
-    var books = [];
-    bookData.forEach(function (element) {
-      if (element['staff-pick-age']['attributes']['age'] === BookStore.getAge()) {
-        books.push(element);
-      }
-    });
-
     return {
       book: {},
-      books: books,
+      books: bookData,
       modalIsOpen: false,
       typeDisplay: BookStore.getBookDisplay(),
       age: BookStore.getAge()
@@ -48,31 +42,57 @@ var Books = React.createClass({
   },
 
   componentDidMount: function () {
-    BookStore.addChangeListener(this.onChange.bind(this));
+    var grid = document.getElementById('masonryContainer');
+    iso = new Isotope(grid, {
+      itemSelector: '.book-item',
+      masonry: {
+        columnWidth: 175,
+        gutter: 30
+      }
+    });
+    iso.arrange({
+      filter: '.Adult'
+    });
+
+    BookStore.addChangeListener(this.onChange);
   },
 
   componentDidUnmount: function () {
-    BookStore.removeChangeListener(this.onChange.bind(this));
+    BookStore.removeChangeListener(this.onChange);
   },
 
   onChange: function () {
-    var changedAge = BookStore.getAge();
-    var books = [];
-    bookData.forEach(function (element) {
-      if (element['staff-pick-age']['attributes']['age'] === changedAge) {
-        books.push(element);
-      }
-    });
-    console.log(BookStore.getFilters());
+    var age = '.' + BookStore.getAge(),
+      filters = '',
+      selector;
+
+    if (BookStore.getFilters().length) {
+      filters += '.' + BookStore.getFilters().join(', ' + age + '.');
+    }
+    
+    selector = age + filters;
+
+    setTimeout(function () {
+      iso.arrange({
+        filter: selector
+      });
+    }, 100);
 
     this.setState({
       typeDisplay: BookStore.getBookDisplay(),
-      age: BookStore.getAge(),
-      books: books
+      age: BookStore.getAge()
     });
+
+    // var changedAge = BookStore.getAge();
+    // var books = [];
+    // bookData.forEach(function (element) {
+    //   if (element['staff-pick-age']['attributes']['age'] === changedAge) {
+    //     books.push(element);
+    //   }
+    // });
   },
 
-  mixins: [MasonryMixin('masonryContainer', masonryOptions)],
+  // mixins: [MasonryMixin('masonryContainer', masonryOptions)],
 
   openModal: function (book) {
     console.log(book)
@@ -95,11 +115,15 @@ var Books = React.createClass({
 
     var _this = this;
 
-
     var books = this.state.books.map(function (element, i) {
+      var tags = _.map(element['staff-pick-item']['staff-pick-tag'], function (tag) {
+        return tag.id;
+      });
+      var tagClasses = tags.join(' ');
+
       return (
-        <div className={'book-item ' + element['staff-pick-age']['attributes']['age']}
-          onClick={openModal.bind(_this, element)} key={i}>
+        <div className={'book-item ' + element['staff-pick-age']['attributes']['age'] + ' ' + tagClasses}
+          onClick={openModal.bind(_this, element)} key={element.id}>
           <Book book={element} style={styles.bookItem} height={'270px'} width={'175px'} />
         </div>
       );
@@ -138,9 +162,10 @@ var Books = React.createClass({
             <span className='right-icon'></span>
           </a>
         </div>
-        <div ref="masonryContainer" style={{'width':'100%', 'display': gridDisplay}}>
+
+        <div id="masonryContainer" ref="masonryContainer" style={{'width':'100%', 'display': gridDisplay}}>
           <ReactCSSTransitionGroup transitionName='example' transitionAppear={true}>
-            {books}
+          {books}
           </ReactCSSTransitionGroup>
         </div>
         <div style={{'display': listDisplay}}>
@@ -180,7 +205,7 @@ const styles = {
   },
   monthPicker: {
     height: '35px',
-    paddingTop: '6px'
+    paddingTop: '7px'
   },
   month: {
     display: 'inline-block',
@@ -191,7 +216,7 @@ const styles = {
     float: 'right'
   },
   previousMonth: {
-    marginLeft: '25px'
+    marginLeft: '27px'
   }
 };
 

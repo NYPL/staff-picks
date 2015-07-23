@@ -11,8 +11,6 @@ import API from '../../utils/ApiService.js';
 
 var featuredBooks = API.getFeaturedPicks();
 
-console.log(featuredBooks);
-
 export default class Hero extends React.Component {
 
   // Constructor used in ES6
