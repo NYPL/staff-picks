@@ -12,7 +12,7 @@ class Error extends React.Component {
 
   render () {
   	return (
-      <div className='error-404' style={styles.ErrorContainer}>
+      <div className='error-container' style={styles.ErrorContainer}>
         <h1 style={styles.ErrorTitle}>We&#39;re sorry...</h1>
         <p style={styles.ErrorContent}>The page you requested is either unavailable or you need permission to view the content.</p>
         <p style={styles.ErrorContent}>If you can&#39;t find the page you&#39;re looking for, please try our <a href='http://www.nypl.org/ask-nypl' style={styles.ErrorContentLink}>ASK NYPL</a> service.</p>
@@ -23,8 +23,12 @@ class Error extends React.Component {
 
 const styles = {
   ErrorContainer: {
+    '@media (min-width: 767px) and (max-width: 1023px)': { width:'50%', padding: '10rem 0 0 0', margin: '0 10% 20rem 10%' },
+    '@media (min-width: 415px) and (max-width: 766px)': { width:'40%', padding: '10rem 0 0 0', margin: '0 14% 20rem 14%' },
+    '@media (max-width: 414px)': { width:'24%', padding: '10rem 0 0 0', margin: '0 10% 20rem 10%' },
     color: '#36322D',
-    margin: '5rem 0 20rem 0 '
+    margin: '5rem 0 20rem 0',
+    width: '100%'
   },
   ErrorTitle: {
     fontSize: '2.4rem',
