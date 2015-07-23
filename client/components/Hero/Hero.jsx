@@ -9,7 +9,6 @@ import HeroImage from 'components/Hero/HeroImage/HeroImage.jsx';
 import BookStore from '../../stores/BookStore.js';
 import API from '../../utils/ApiService.js';
 
-
 var featuredBooks = API.getFeaturedPicks();
 
 console.log(featuredBooks);
@@ -42,49 +41,15 @@ export default class Hero extends React.Component {
   render() {
     var BookIntros = function (age) {
       return (
-        <BookIntro bookTitle={featuredBooks.Adult['staff-pick-item'].attributes.title}
-          quote={featuredBooks.Adult.attributes.text} /> );
-
-      // switch (age) { 
-      //   case 'Adult':
-      //     return (
-      //     <BookIntro bookTitle={bookIntros.adult.bookTitle} 
-      //     quote={bookIntros.adult.quote} /> );
-      //   break;
-
-      //   case 'YA':
-      //     return (
-      //     <BookIntro bookTitle={bookIntros.youngAdult.bookTitle} 
-      //     quote={bookIntros.youngAdult.quote} /> );
-      //   break;
-
-      //   case 'Children':
-      //     return (
-      //     <BookIntro bookTitle={bookIntros.child.bookTitle} 
-      //     quote={bookIntros.child.quote} /> );
-      //   break;
-
-      //   default:
-      // }
+        <BookIntro bookTitle={featuredBooks[age]['staff-pick-item']['attributes']['title']}
+          quote={featuredBooks[age]['attributes']['text']} /> 
+      );
     }(this.state.age);
 
     var HeroImages = function (age) {
-      
-      // switch (age) {
-      //   case 'Adult':
-      //   return (<HeroImage src={src.HeroImageLink.adult} />);
-      //   break;
-
-      //   case 'YA':
-      //   return (<HeroImage src={src.HeroImageLink.youngAdult} />);
-      //   break;
-
-      //   case 'Children':
-      //   return (<HeroImage src={src.HeroImageLink.child} />);
-      //   break;
-
-      //   default:
-      // }
+      let imageSlug = featuredBooks[age]['staff-pick-item']['attributes']['image-slug']
+      let src = 'https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value='+imageSlug+'&content=M&Return=1&Type=M';
+      return (<HeroImage src={src} />);
     }(this.state.age);
     
     return (
