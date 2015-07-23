@@ -41,49 +41,15 @@ export default class Hero extends React.Component {
   render() {
     var BookIntros = function (age) {
       return (
-        <BookIntro bookTitle={featuredBooks.Adult['staff-pick-item'].attributes.title}
-          quote={featuredBooks.Adult.attributes.text} /> );
-
-      // switch (age) { 
-      //   case 'Adult':
-      //     return (
-      //     <BookIntro bookTitle={bookIntros.adult.bookTitle} 
-      //     quote={bookIntros.adult.quote} /> );
-      //   break;
-
-      //   case 'YA':
-      //     return (
-      //     <BookIntro bookTitle={bookIntros.youngAdult.bookTitle} 
-      //     quote={bookIntros.youngAdult.quote} /> );
-      //   break;
-
-      //   case 'Children':
-      //     return (
-      //     <BookIntro bookTitle={bookIntros.child.bookTitle} 
-      //     quote={bookIntros.child.quote} /> );
-      //   break;
-
-      //   default:
-      // }
+        <BookIntro bookTitle={featuredBooks[age]['staff-pick-item']['attributes']['title']}
+          quote={featuredBooks[age]['attributes']['text']} /> 
+      );
     }(this.state.age);
 
     var HeroImages = function (age) {
-      
-      // switch (age) {
-      //   case 'Adult':
-      //   return (<HeroImage src={src.HeroImageLink.adult} />);
-      //   break;
-
-      //   case 'YA':
-      //   return (<HeroImage src={src.HeroImageLink.youngAdult} />);
-      //   break;
-
-      //   case 'Children':
-      //   return (<HeroImage src={src.HeroImageLink.child} />);
-      //   break;
-
-      //   default:
-      // }
+      let imageSlug = featuredBooks[age]['staff-pick-item']['attributes']['image-slug']
+      let src = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${imageSlug}&content=M&Return=1&Type=M`;
+      return (<HeroImage src={src} />);
     }(this.state.age);
     
     return (
@@ -99,21 +65,6 @@ export default class Hero extends React.Component {
         </div>
       </div>
     );
-  }
-}
-
-const bookIntros = {
-  adult: {
-    bookTitle: 'The Amazing Adventures of Kavalier & Clay',
-    quote: '"I loved this book. It\'s a great story with complex, interesting characters in a fascinating setting. The creation of the comic book history is not only fascinating but the fictional elements are so well integrated that without looking it up."'
-  },
-  youngAdult: {
-    bookTitle: 'The Six-Gun Tarot',
-    quote: '"The wild--and weird--west! The strange town of Golgotha with its even stranger citizens isn\'t the sort of place to visit . . . but makes for great reading!"'
-  },
-  child: {
-    bookTitle: 'The Whispering Skull',
-    quote: '"Ghost-hunting, murder and mysteries, oh my! This second book in the author\'s Lockwood & Co. series delivers just as much suspenseful, spine-tingling action."'
   }
 }
 
@@ -158,14 +109,6 @@ const styles = {
     float: 'left',
     position: 'relative',
     width: '60%'
-  }
-};
-
-const src = {
-  HeroImageLink: {
-    adult: 'https://chicago.bibliocms.com/wp-content/uploads/sites/3/2015/01/kccover.png',
-    youngAdult: 'http://manyatruenerd.com/wp-content/uploads/2013/09/sixgun2.jpeg',
-    child: 'http://ecx.images-amazon.com/images/I/91U6ZmLmu4L.jpg'
   }
 };
 
