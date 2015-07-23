@@ -10,14 +10,14 @@ $dark-lib-gray: #776E64;
 
 /* first for IE 4–8 */
 @font-face {
-    font-family: KievitScWeb-Book;
-    src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitScWeb-Book.eot");
+    font-family: KievitWeb-Book;
+    src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book.eot");
 }
 
 /* then for WOFF-capable browsers */
 @font-face {
-    font-family: KievitScWeb-Book;
-    src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitScWeb-Book.woff") format("woff");
+    font-family: KievitWeb-Book;
+    src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book.woff") format("woff");
 }
 
 /** MIXINS **/
@@ -60,6 +60,9 @@ $dark-lib-gray: #776E64;
     }
   }
 }
+
+@import 'transitions';
+@import 'breakpoint';
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -126,7 +129,7 @@ table {
 }
 
 body {
-    font-family: KievitScWeb-Book, sans-serif;
+    font-family: KievitWeb-Book, sans-serif;
 }
 
 /* Header global rules */
@@ -172,10 +175,10 @@ body {
     width: 100%;
 
     .image-column {
-  margin-right: 20px;
-  img {
-      border-radius: 50%;
-  }
+      margin-right: 20px;
+      img {
+        border-radius: 50%;
+      }
     }
 
     .feature-item {
@@ -205,13 +208,13 @@ ul#nav_menu {
 // }
 
 #content {
-  // padding-left: 236px;
-  // padding-right: $headerPaddingR;
-  // padding-top: $headerHeight;
-  // min-height: 200px;
-  width: 960px;
+  width: 93%;
   margin: 0 auto;
+  @include breakpoint($min, $post-mobile-phone) {
+    width: 960px;
+  }
 }
+
 
 #login-form {
   input {
@@ -304,12 +307,20 @@ span[class*="icon-"] {
     float: left;
     padding: 0;
     margin-right: 30px;
-    width: 140px;
+    width: 100%;
+
+    @include breakpoint($min, $post-mobile-phone) {
+      width: 140px;
+    }
   }
 
   #books {
     float: left;
-    width: 790px;
+    overflow: hidden;
+    width: 100%;
+    @include breakpoint($min, $post-mobile-phone) {
+      width: 790px;
+    }
   }
 
   .list-view {
@@ -328,6 +339,26 @@ span[class*="icon-"] {
         color: $dark-lib-gray;
       }
     }
+  }
+}
+
+// Temporary overrides for the modal window
+body {
+  .ReactModal__Content {
+    min-height: 500px;
+    z-index: 2000;
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    bottom: 60%;
+    border: 1px solid #ccc;
+    background: #fff;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 4px;
+    outline: none;
+    padding: 30px 20px 20px 30px;
+    width: 850px;
   }
 }
 
@@ -356,10 +387,16 @@ span[class*="icon-"] {
     margin-bottom: 20px;
 
     li {
+      display: inline-block;
       border-radius: 15px;
       border: 2px solid $text-gray;
       width: 95px;
-      margin: 0px 0px 10px 30px;
+      margin: 0px 0px 10px 65px;
+
+      @include breakpoint($min, $post-mobile-phone) {
+        display: block;
+        margin-left: 30px;
+      }
 
       a {
         display: inline-block;
@@ -404,6 +441,12 @@ span[class*="icon-"] {
 }
 
 .BookFilters {
+  display: none;
+
+  @include breakpoint($min, $post-mobile-phone) {
+    display: block;
+  }
+
   h2 {
     color: $lib-red;
     font-size: 15px;
@@ -438,8 +481,28 @@ span[class*="icon-"] {
   }
 }
 
-@import 'transitions';
-@import 'breakpoint';
+.book-item {
+  // transition: all 3s linear;
+  // display: block;
+}
+
+.hide {
+  display: none;
+  height: 3770px;
+}
+
+.active {
+  display: block;
+}
+
+.example-appear {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
+}
+
 @import 'header';
 @import 'footer';
-@import 'ageTabs';

@@ -32,7 +32,6 @@ if (env.production) {
   });
 }
 
-
 var parser = require('jsonapi-parserinator');
 var options = {
     endpoint: '/api/nypl/ndo/v0.1/staff-picks',
@@ -63,14 +62,20 @@ app.get('/*', function(req, res) {
       api_version: 'v0.1'
     })
     .get(options, function (apiData) {
+      var parsedData, filters, pickList;
+
       data = apiData;
 
-      var parsedData = parser.parse(data);
-      var filters = parser.getOfType(apiData.included, 'staff-pick-tag');
+      if (apiData) {
+        parsedData = parser.parse(data);
+        filters = parser.getOfType(apiData.included, 'staff-pick-tag');
+        pickList = parser.getOfType(apiData.included, 'staff-pick-list');
+      }
 
       res.render('index', {
         staffPicks: JSON.stringify({'staff-picks': parsedData}),
         filters: JSON.stringify({'filters': filters}),
+        pickList: JSON.stringify({'staff-picks-list': pickList}),
         env: env
       });
     });

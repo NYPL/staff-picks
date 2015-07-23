@@ -16,7 +16,7 @@ class TagList extends React.Component {
     return (
       <div>
         <p>Filed under:</p>
-        <ul style={{'list-style': 'none'}}>
+        <ul style={{'listStyle': 'none'}}>
           {tags}
         </ul>
       </div>
@@ -66,12 +66,12 @@ class BookContent extends React.Component {
         <ul className='borrow'>
           <li style={[ styles.li, bookStyle ]}>
             <a href={bookHREF}>
-              <span className='checkout'></span>Check Out This Book
+              <span className='checkout'></span>Request the book
             </a>
           </li>
           <li style={[ styles.li, ebookStyle ]}>
             <a href={ebookHREF}>
-              <span className='ebook'></span>Read the eBook!
+              <span className='ebook'></span>Borrow the eBook
             </a>
           </li>
         </ul>

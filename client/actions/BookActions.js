@@ -14,6 +14,19 @@ export default {
       actionType: BookConstants.AGE_TYPE,
       age: age
     });
-  }
+  },
 
+  toggleBookFilter(filter) {
+    AppDispatcher.dispatch({
+      actionType: BookConstants.FILTER,
+      filter: filter
+    });
+  },
+
+  clearFilters() {
+    AppDispatcher.dispatch({
+      actionType: BookConstants.FILTER,
+      clear: true
+    });
+  }
 };

@@ -15,7 +15,7 @@ class BookIntro extends React.Component {
         styles.base,
       ]}>
         <p key='BookTitle' style={styles.base, styles.BookTitle}>{this.props.bookTitle}</p>
-        <p key='BookQuote' style={styles.base, styles.BookQuote}>{this.props.quote}</p>
+        <p key='BookQuote' style={styles.base, styles.BookQuote}>&#34;{this.props.quote}&#34;</p>
       </div>
     );
   }
@@ -52,6 +52,7 @@ const styles = {
     '@media (max-width: 767px)': { fontSize: '01.4em' },
     '@media (max-width: 480px)': { },
     fontSize: '1.4em',
+    lineHeight: '1.4em',
     marginTop: '20px'
   }
 };
