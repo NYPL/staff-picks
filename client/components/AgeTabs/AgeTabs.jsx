@@ -21,10 +21,12 @@ class AgeTabs extends React.Component {
       );
     });
   	return (
-      <ul className='tab-ul' 
+      <div className='tab-container' 
         style={styles.TabContainer}>
-        {TabElements}
-      </ul>
+        <ul className='tab-ul' style={styles.TabUl}>
+          {TabElements}
+        </ul>
+      </div>
 		);
   }
 };
@@ -42,10 +44,13 @@ const styles = {
     fontSize: '16px',
     height: 'auto',
     margin: '40px auto 40px',
-    padding: '20px 0 21px 0',
+    padding: '20px 15% 0 15%',
     position: 'relative',
     textAlign: 'center',
     width: '100%'
+  },
+  TabUl: {
+
   }
 };
 
