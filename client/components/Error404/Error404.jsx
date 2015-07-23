@@ -12,21 +12,31 @@ class Error extends React.Component {
 
   render () {
   	return (
-      <div class='error-404'>
+      <div className='error-404' style={styles.ErrorContainer}>
         <h1 style={styles.ErrorTitle}>We&#39;re sorry...</h1>
         <p style={styles.ErrorContent}>The page you requested is either unavailable or you need permission to view the content.</p>
-        <p style={styles.ErrorContent}>If you can&#39;t find the page you&#39;re looking for, please try our <a href='http://www.nypl.org/ask-nypl'>ASK NYPL</a> service.</p>
+        <p style={styles.ErrorContent}>If you can&#39;t find the page you&#39;re looking for, please try our <a href='http://www.nypl.org/ask-nypl' style={styles.ErrorContentLink}>ASK NYPL</a> service.</p>
       </div>
 		);
   }
 }
 
 const styles = {
+  ErrorContainer: {
+    color: '#36322D',
+    margin: '5rem 0 20rem 0 '
+  },
   ErrorTitle: {
-    fontSize: '2.4rem'
+    fontSize: '2.4rem',
+    lineHeight: '1em',
+    margin: '0 0 0.5em 0'
   },
   ErrorContent: {
-    fontSize: '1.4rem'
+    fontSize: '1.4rem',
+    margin: '1em 0 1em 0',
+  },
+  ErrorContentLink: {
+    color: '#36322D'
   }
 };
 
