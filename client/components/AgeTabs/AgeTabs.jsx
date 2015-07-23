@@ -52,7 +52,7 @@ const styles = {
 const data = [
   { name: 'adult', value: 'Adult' },
   { name: 'young adult', value: 'YA' },
-  { name: 'child', value: 'Children' }
+  { name: 'children', value: 'Children' }
 ];
 
 export default Radium(AgeTabs);
