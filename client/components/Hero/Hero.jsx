@@ -48,7 +48,7 @@ export default class Hero extends React.Component {
 
     var HeroImages = function (age) {
       let imageSlug = featuredBooks[age]['staff-pick-item']['attributes']['image-slug']
-      let src = 'https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value='+imageSlug+'&content=M&Return=1&Type=M';
+      let src = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${imageSlug}&content=M&Return=1&Type=M`;
       return (<HeroImage src={src} />);
     }(this.state.age);
     
