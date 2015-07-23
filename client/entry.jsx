@@ -27,7 +27,7 @@ initData();
 const data = API.getData();
 const books = API.getBooks();
 
-// React.render(<Header data={data} />, document.getElementById("header-container"));
+React.render(<Header data={data} />, document.getElementById("header-container"));
 React.render(<Hero />, document.getElementById('hero'));
 React.render(<Footer />, document.getElementById('footer-container'));
 React.render(<AgeTabs />, document.getElementById('age-tabs'));

@@ -34,10 +34,17 @@ function setAgeDisplay(age) {
 }
 
 function setFilters(filter) {
-  console.log(filter);
-  var test = _.findWhere(_filters, filter);
-  console.log(test);
-  _filters.push(filter);
+  var found = _.indexOf(_filters, filter);
+
+  if (found != -1) {
+    _filters.splice(found, 1);
+  } else {
+    _filters.push(filter);
+  }
+}
+
+function clearFilters() {
+  _filters = [];
 }
 
 const BookStore = _.extend({}, EventEmitter.prototype, {
@@ -87,7 +94,11 @@ BookStore.dispatchToken = AppDispatcher.register((action) => {
     break;
 
     case BookConstants.FILTER:
-      setFilters(action.filter);
+      if (action.clear) {
+        clearFilters();
+      } else {
+        setFilters(action.filter);
+      }
       BookStore.emitChange();
     break;
     

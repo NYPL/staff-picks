@@ -75,16 +75,11 @@ class BookFilters extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      filterList: API.getFilters()
-    };
-  }
+    var filterList = API.getFilters(),
+      themeFilters = [],
+      drivenByFilters = [];
 
-  render () {
-    var themeFilters = [];
-    var drivenByFilters = [];
-
-    _.each(this.state.filterList, function (filter) {
+    _.each(filterList, function (filter) {
       if (filter.attributes.tag.indexOf('Driven') !== -1) {
         filter.attributes.tag = (filter.attributes.tag).replace(/\bDriven/ig,'');
         drivenByFilters.push(filter);
@@ -93,6 +88,25 @@ class BookFilters extends React.Component {
       }
     });
 
+    this.state = {
+      drivenByFilters,
+      themeFilters,
+      filters: BookStore.getFilters()
+    };
+
+    this._clearFilters = this._clearFilters.bind(this);
+    this._onChange = this._onChange.bind(this);
+  }
+
+  componentDidMount () {
+    BookStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount () {
+    BookStore.removeChangeListener(this._onChange);
+  }
+
+  render () {
     var _this = this;
     var filterItems = function (list) {
       var _handleClick = _this._handleClick;
@@ -112,16 +126,32 @@ class BookFilters extends React.Component {
         <div className='BookFilters-lists'>
           <span>Driven by...</span>
           <ul>
-            {filterItems(drivenByFilters)}
+            {filterItems(this.state.drivenByFilters)}
           </ul>
           <span>Themes...</span>
           <ul>
-            {filterItems(themeFilters)}
+            {filterItems(this.state.themeFilters)}
           </ul>
-          <div className='clearFilters'>Clear Filters X</div>
+          {this.state.filters.length ? 
+            <div className='clearFilters'>
+              <a href='#' onClick={this._clearFilters}>Clear Filters X</a>
+            </div>
+            : null
+          }
         </div>
       </div>
     );
+  }
+
+  _onChange() {
+    this.setState({
+      filters: BookStore.getFilters()
+    });
+  }
+
+  _clearFilters(e) {
+    e.preventDefault();
+    BookActions.clearFilters();
   }
 
   _handleClick(filterType) {

@@ -54,25 +54,35 @@ var Books = React.createClass({
       filter: '.Adult'
     });
 
-    BookStore.addChangeListener(this.onChange.bind(this));
+    BookStore.addChangeListener(this.onChange);
   },
 
   componentDidUnmount: function () {
-    BookStore.removeChangeListener(this.onChange.bind(this));
+    BookStore.removeChangeListener(this.onChange);
   },
 
   onChange: function () {
-    console.log(BookStore.getFilters());
-    var selector = '.' + BookStore.getAge();
+    var age = '.' + BookStore.getAge(),
+      filters = '',
+      selector;
 
-    iso.arrange({
-      filter: selector
-    });
+    if (BookStore.getFilters().length) {
+      filters += '.' + BookStore.getFilters().join(', ' + age + '.');
+    }
+    
+    selector = age + filters;
+
+    setTimeout(function () {
+      iso.arrange({
+        filter: selector
+      });
+    }, 100);
 
     this.setState({
       typeDisplay: BookStore.getBookDisplay(),
       age: BookStore.getAge()
     });
+
     // var changedAge = BookStore.getAge();
     // var books = [];
     // bookData.forEach(function (element) {
@@ -80,7 +90,6 @@ var Books = React.createClass({
     //     books.push(element);
     //   }
     // });
-
   },
 
   // mixins: [MasonryMixin('masonryContainer', masonryOptions)],
@@ -155,7 +164,9 @@ var Books = React.createClass({
         </div>
 
         <div id="masonryContainer" ref="masonryContainer" style={{'width':'100%', 'display': gridDisplay}}>
+          <ReactCSSTransitionGroup transitionName='example' transitionAppear={true}>
           {books}
+          </ReactCSSTransitionGroup>
         </div>
         <div style={{'display': listDisplay}}>
           <ul className='list-view'>
