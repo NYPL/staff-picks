@@ -23,12 +23,11 @@ class Error extends React.Component {
 
 const styles = {
   ErrorContainer: {
-    '@media (min-width: 767px) and (max-width: 1023px)': { width:'50%', padding: '10rem 0 0 0', margin: '0 10% 20rem 10%' },
-    '@media (min-width: 415px) and (max-width: 766px)': { width:'40%', padding: '10rem 0 0 0', margin: '0 14% 20rem 14%' },
-    '@media (max-width: 414px)': { width:'24%', padding: '10rem 0 0 0', margin: '0 10% 20rem 10%' },
+    '@media (min-width: 767px) and (max-width: 1023px)': { padding: '10rem 0 0 0', margin: '0 10% 20rem 10%' },
+    '@media (min-width: 480px) and (max-width: 766px)': { padding: '10rem 0 0 0', margin: '0 10% 20rem 10%', width: '30%' },
+    '@media (max-width: 479px)': { padding: '10rem 0 0 0', margin: '0 24% 20rem 24%' },
     color: '#36322D',
-    margin: '5rem 0 20rem 0',
-    width: '100%'
+    margin: '5rem 0 20rem 0'
   },
   ErrorTitle: {
     fontSize: '2.4rem',
