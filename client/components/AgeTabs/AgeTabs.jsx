@@ -13,24 +13,23 @@ class AgeTabs extends React.Component {
     var _this = this;
     var TabElements = data.map ( function (element) {
       return (
-        <TabElement key={element.name} id={element.name} className='tab-elements' name={element.name} 
-          value={element.state} />
+        <TabElement 
+          key={element.name} 
+          id={element.name} 
+          name={element.name} 
+          value={element.value} />
       );
     });
   	return (
-      <nav style={styles.Nav}>
-        <ul className='tab-ul' style={styles.TabContainer}>
-          {TabElements}
-        </ul>
-      </nav>
+      <ul className='tab-ul' 
+        style={styles.TabContainer}>
+        {TabElements}
+      </ul>
 		);
   }
 };
 
 const styles = {
-  Nav: {
-    overflow: 'hidden'
-  },
   TabContainer: {
     backgroundColor: '#ffffff',
     borderColor: '#cc1a16',
@@ -42,7 +41,7 @@ const styles = {
     display: 'block',
     fontSize: '16px',
     height: 'auto',
-    margin: '40px auto 5px',
+    margin: '40px auto 40px',
     padding: '20px 0 21px 0',
     position: 'relative',
     textAlign: 'center',
@@ -51,9 +50,9 @@ const styles = {
 };
 
 const data = [
-  { name: 'adult', state: '.Adult' },
-  { name: 'young adult', state: '.YA' },
-  { name: 'child', state: '.Children' }
+  { name: 'adult', value: 'Adult' },
+  { name: 'young adult', value: 'YA' },
+  { name: 'child', value: 'Children' }
 ];
 
 export default Radium(AgeTabs);

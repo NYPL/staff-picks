@@ -26,9 +26,9 @@ HeroImage.defaultProps = {
 const styles = {
   HeroImage: {
     display: 'inline',
-    height: '220%',
-    margin: '-10% 40% 0 0',
-    width: 'auto'
+    height: 'auto',
+    margin: '-20% auto 0 -10%',
+    width: '325px'
   }
 };
 
