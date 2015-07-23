@@ -56,7 +56,7 @@ export default class Hero extends React.Component {
       <div key='Hero' style={styles.Hero}>
         <div key='HeroContainer' className='hero-container' style={styles.HeroContainer}>
           <div key='TextContainer' className='text-container' style={styles.TextContainer}>
-            <HeroTitle title='staff picks' intro='NYPL&#39;s librarians share their all-time favorite reads each month. Explore their book selections by choosing a tag below.' />
+            <HeroTitle title='staff picks' intro='Every month NYPL&#39;s librarians share their favorite reads. Explore their book selections—ranging from new releases to timeless classics—by choosing a tag below.' />
             {BookIntros}
           </div>
           <div key='HeroImageContainer' className='hero-image-container' style={styles.HeroImageContainer}>
