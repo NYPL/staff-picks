@@ -33,6 +33,10 @@ class AgeTabs extends React.Component {
 
 const styles = {
   TabContainer: {
+    '@media (max-width: 1200px)': {  },
+    '@media (min-width: 768px) and (max-width: 979px)': {  },
+    '@media (max-width: 767px)': { padding: '20px 10% 0 10%' },
+    '@media (max-width: 414px)': { fontSize: '1.2em', padding: '0 0 0 0' },
     backgroundColor: '#ffffff',
     borderColor: '#cc1a16',
     borderBottomStyle: 'solid',
@@ -41,9 +45,9 @@ const styles = {
     borderTopStyle: 'none',
     borderWidth: '1px',
     display: 'block',
-    fontSize: '16px',
+    fontSize: '1.4em',
     height: 'auto',
-    margin: '40px auto 40px',
+    margin: '30px auto 40px',
     padding: '20px 15% 0 15%',
     position: 'relative',
     textAlign: 'center',
