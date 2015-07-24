@@ -21,5 +21,12 @@ export default {
       actionType: BookConstants.FILTER,
       filter: filter
     });
+  },
+
+  clearFilters() {
+    AppDispatcher.dispatch({
+      actionType: BookConstants.FILTER,
+      clear: true
+    });
   }
 };

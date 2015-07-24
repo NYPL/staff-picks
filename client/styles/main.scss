@@ -316,6 +316,7 @@ span[class*="icon-"] {
 
   #books {
     float: left;
+    overflow: hidden;
     width: 100%;
     @include breakpoint($min, $post-mobile-phone) {
       width: 790px;
@@ -481,39 +482,17 @@ body {
 }
 
 .book-item {
-  transition: all 3s linear;
-  display: block;
+  // transition: all 3s linear;
+  // display: block;
 }
 
-.activeClass {
-  display: block;
-}
-
-
-.removed {
+.hide {
   display: none;
+  height: 3770px;
 }
 
-.visuallyhidden {
-  opacity: 0;
-}
-
-.example-enter {
-  opacity: 0.01;
-  transition: opacity .5s ease-in;
-}
-
-.example-enter.example-enter-active {
-  opacity: 1;
-}
-
-.example-leave {
-  opacity: 1;
-  transition: opacity .5s ease-in;
-}
-
-.example-leave.example-leave-active {
-  opacity: 0.01;
+.active {
+  display: block;
 }
 
 .example-appear {
