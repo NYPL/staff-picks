@@ -32,10 +32,6 @@ const data = API.getData();
 const books = API.getBooks();
 
 
-import Books from 'components/Books/Books.jsx';
-import Sidebar from 'components/Sidebar/Sidebar.jsx';
-
-
 React.render(<Header data={data} />, document.getElementById("header-container"));
 React.render(<Footer />, document.getElementById('footer-container'));
 
