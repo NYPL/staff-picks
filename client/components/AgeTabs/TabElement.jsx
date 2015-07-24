@@ -41,10 +41,10 @@ class TabElement extends React.Component {
   	return (
   		<li key={`tab-${this.props.name}`} id={this.props.name} 
         className='tab-element' style={[styles.TabElement, 
-          active ? styles.TabElementLinkActive : styles.TabElementLinkInactive]}>
+        active ? styles.TabElementActive : styles.TabElementInactive]}>
           <a 
             onClick={this._handleClick.bind(this, this.props.value)}
-            style={styles.TabElementLink}>
+            style={[styles.TabElementLink, active ? styles.TabElementLinkActive : null]}>
             {this.props.name}
           </a>
   		</li>
@@ -61,6 +61,18 @@ const styles = {
     whiteSpace: 'pre',
     width: '33%'
   },
+  TabElementActive: {
+    borderBottomStyle: 'none',
+    borderColor: '#cc1a16',
+    borderLeftStyle: 'solid',
+    borderRightStyle: 'solid',
+    borderTopStyle: 'solid',
+    borderWidth: '1px',
+    padding: '20px 0 20px 0'
+  },
+  TabElementInactive: {
+    padding: '20px 0 20px 0',
+  },
   TabElementLink: {
     color: '#bfbfbf',
     cursor: 'pointer',
@@ -70,15 +82,7 @@ const styles = {
     }
   },
   TabElementLinkActive: {
-    color: '#cc1a16',
-    padding: '20px 0 21px 0'
-  },
-  TabElementLinkInactive: {
-    borderBottomStyle: 'solid',
-    borderLeftStyle: 'none',
-    borderRightStyle: 'none',
-    borderTopStyle: 'none',
-    padding: '20px 0 20px 0',
+    color: '#cc1a16'
   }
 }
 
