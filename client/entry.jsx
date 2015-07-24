@@ -7,7 +7,7 @@ import Header from 'components/HeaderOld/Header.jsx';
 import Hero from 'components/Hero/Hero.jsx';
 import Footer from 'components/Footer/Footer.jsx';
 import AgeTabs from 'components/AgeTabs/AgeTabs.jsx';
-import Error from 'components/Error404/Error404.jsx';
+import Error404Page from 'components/Error404Page/Error404Page.jsx';
 
 // Utilities
 // import initData from 'headerData/HeaderData.js';
@@ -33,7 +33,7 @@ React.render(<Header data={data} />, document.getElementById("header-container")
 React.render(<Footer />, document.getElementById('footer-container'));
 
 if ( !books ) {
-  React.render(<Error />, document.getElementById("content"));
+  React.render(<Error404Page />, document.getElementById("content"));
 } else {
   React.render(<Hero />, document.getElementById('hero'));
   React.render(<AgeTabs />, document.getElementById('age-tabs'));
