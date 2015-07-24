@@ -8,6 +8,8 @@ import BookActions from '../../actions/BookActions.js';
 
 import API from '../../utils/ApiService.js';
 
+let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
 class BookDisplayButtons extends React.Component {
   constructor(props) {
     super(props);
@@ -75,11 +77,12 @@ class BookFilters extends React.Component {
   constructor(props) {
     super(props);
 
-    var filterList = API.getFilters(),
+    let filterList = API.getFilters(),
       themeFilters = [],
       drivenByFilters = [];
 
     _.each(filterList, function (filter) {
+      filter.active = false;
       if (filter.attributes.tag.indexOf('Driven') !== -1) {
         filter.attributes.tag = (filter.attributes.tag).replace(/\bDriven/ig,'');
         drivenByFilters.push(filter);
@@ -107,14 +110,24 @@ class BookFilters extends React.Component {
   }
 
   render () {
-    var _this = this;
-    var filterItems = function (list) {
-      var _handleClick = _this._handleClick;
+    const _this = this,
+      _handleClick = this._handleClick;
+
+    let filterItems = function (list) {
       return list.map(function (elem, i) {
+        let active = 'hide-filter';
+        if (elem.active) {
+          active = 'show-filter';
+        }
         return (
-          <li key={i}><a onClick={_handleClick.bind(_this, elem.id)}>
-            {elem.attributes.tag}
-          </a></li>
+          <li key={elem.id}>
+            <a onClick={_handleClick.bind(_this, elem)}>
+              {elem.attributes.tag}
+              <ReactCSSTransitionGroup transitionName='minus' transitionAppear={true}>
+                <span className={'minus-icon ' + active}></span>
+              </ReactCSSTransitionGroup>
+            </a>
+          </li>
         );
       });
     }
@@ -133,8 +146,11 @@ class BookFilters extends React.Component {
             {filterItems(this.state.themeFilters)}
           </ul>
           {this.state.filters.length ? 
-            <div className='clearFilters'>
-              <a href='#' onClick={this._clearFilters}>Clear Filters X</a>
+            <div className='clearFilters' style={styles.clearFilters}>
+              <a href='#' onClick={this._clearFilters}>
+                Clear Filters
+                <span className='close-icon'></span>
+              </a>
             </div>
             : null
           }
@@ -144,8 +160,19 @@ class BookFilters extends React.Component {
   }
 
   _onChange() {
+    let updatedFilters = BookStore.getFilters();
+
+    if (!updatedFilters.length) {
+      _.each(this.state.drivenByFilters, function (filter) {
+        filter.active = false;
+      });
+      _.each(this.state.themeFilters, function (filter) {
+        filter.active = false;
+      });
+    }
+
     this.setState({
-      filters: BookStore.getFilters()
+      filters: updatedFilters
     });
   }
 
@@ -154,7 +181,9 @@ class BookFilters extends React.Component {
     BookActions.clearFilters();
   }
 
-  _handleClick(filterType) {
+  _handleClick(filter) {
+    let filterType = filter.id;
+    filter.active = !filter.active;
     BookActions.toggleBookFilter(filterType);
   }
 }
@@ -185,6 +214,10 @@ const styles = {
   active: {
     border: '2px solid #0095c8',
     color: 'red'
+  },
+  clearFilters: {
+    color: '#0095c8;',
+    marginTop: '20px;'
   }
 };
 

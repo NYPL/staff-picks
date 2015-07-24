@@ -310,7 +310,7 @@ span[class*="icon-"] {
     width: 100%;
 
     @include breakpoint($min, $post-mobile-phone) {
-      width: 140px;
+      width: 160px;
     }
   }
 
@@ -319,13 +319,12 @@ span[class*="icon-"] {
     overflow: hidden;
     width: 100%;
     @include breakpoint($min, $post-mobile-phone) {
-      width: 790px;
+      width: 770px;
     }
   }
 
   .list-view {
     li {
-      margin-bottom: 25px;
       color: $lib-blue;
 
       h2 {
@@ -380,6 +379,13 @@ body {
     padding: 5px 15px 10px 10px;
     margin-left: 10px;
   }
+}
+
+.minus-icon {
+  background: url('/client/images/icons/minus.icon.svg') no-repeat;
+  padding: 2px 15px 10px 10px;
+  margin-left: 0px;
+  transition: opacity 0.4s ease-in;
 }
 
 .BookDisplayButtons {
@@ -473,6 +479,7 @@ body {
         padding: 5px 0;
 
         a {
+          cursor: pointer;
           text-decoration: none;
           color: $lib-blue;
         }
@@ -481,27 +488,53 @@ body {
   }
 }
 
-.book-item {
-  // transition: all 3s linear;
-  // display: block;
+.hide-filter {
+  opacity: 0;
+  padding: 0;
+}
+.show-filter {
+  opacity: 1;
+  margin-left: 10px;
 }
 
-.hide {
-  display: none;
-  height: 3770px;
+.minus-enter {
+  opacity: 0.01;
 }
 
-.active {
-  display: block;
+.minus-enter.minus-enter-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
 }
 
-.example-appear {
+.minus-leave {
+  opacity: 1;
+}
+
+.minus-leave.minus-leave-active {
   opacity: 0.01;
   transition: opacity .5s ease-in;
 }
 
-.example-appear.example-appear-active {
+.books-appear, .minus-appear {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.books-appear.books-appear-active,
+.minus-appear.minus-appear-active {
   opacity: 1;
+}
+
+.clearFilters {
+  a {
+    text-decoration: none;
+    color: $lib-blue;
+  }
+}
+.close-icon {
+  background: url('/client/images/icons/gray_x_button.svg') no-repeat;
+  padding: 5px 18px 8px 10px;
+  margin-left: 10px;
 }
 
 @import 'header';

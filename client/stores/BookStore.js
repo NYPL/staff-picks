@@ -2,9 +2,9 @@ import EventEmitter from 'eventemitter3';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import BookConstants from '../constants/BookConstants';
 import _ from 'underscore';
+
 // Boolean flag that initially shows the style as grid and the age tab as adult
 let _bookDisplay =  'grid',
-    // _age = '.Adult',
     _age = 'Adult',
     _gridDisplay = true,
     _listDisplay = false,
