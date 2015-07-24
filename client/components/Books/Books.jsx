@@ -1,6 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
-import MasonryMixin from 'react-masonry-mixin';
+// import MasonryMixin from 'react-masonry-mixin';
 import Book from '../Book/Book.jsx';
 import BookContent from '../BookContent/BookContent.jsx';
 import API from '../../utils/ApiService.js';
@@ -12,22 +12,13 @@ import _ from 'underscore';
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
-let bookContainer = document.getElementById('books');
-let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+let bookContainer = document.getElementById('books'),
+  ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
+  bookData = API.getBooks(),
+  iso;
 
 Modal.setAppElement(bookContainer);
 Modal.injectCSS();
-
-let bookData = API.getBooks();
-
-let masonryOptions = {
-  isResizable: true,
-  isFitWidth: false,
-  columnWidth: 175,
-  itemSelector: '.book-item',
-  gutter: 30
-};
-var iso;
 
 // class Books extends React.Component {
 var Books = React.createClass({
@@ -42,12 +33,14 @@ var Books = React.createClass({
   },
 
   componentDidMount: function () {
-    var grid = document.getElementById('masonryContainer');
+    let grid = document.getElementById('masonryContainer');
     iso = new Isotope(grid, {
       itemSelector: '.book-item',
       masonry: {
         columnWidth: 175,
-        gutter: 30
+        gutter: 23,
+        isResizable: true,
+        isFitWidth: false,
       }
     });
     iso.arrange({
@@ -62,7 +55,7 @@ var Books = React.createClass({
   },
 
   onChange: function () {
-    var age = '.' + BookStore.getAge(),
+    let age = '.' + BookStore.getAge(),
       filters = '',
       selector;
 
@@ -82,17 +75,7 @@ var Books = React.createClass({
       typeDisplay: BookStore.getBookDisplay(),
       age: BookStore.getAge()
     });
-
-    // var changedAge = BookStore.getAge();
-    // var books = [];
-    // bookData.forEach(function (element) {
-    //   if (element['staff-pick-age']['attributes']['age'] === changedAge) {
-    //     books.push(element);
-    //   }
-    // });
   },
-
-  // mixins: [MasonryMixin('masonryContainer', masonryOptions)],
 
   openModal: function (book) {
     console.log(book)
@@ -111,33 +94,34 @@ var Books = React.createClass({
   },
 
   render: function () {
-    var openModal = this.openModal;
+    const openModal = this.openModal,
+      _this = this;
 
-    var _this = this;
+    let books, gridDisplay, listDisplay;
 
-    var books = this.state.books.map(function (element, i) {
-      var tags = _.map(element['staff-pick-item']['staff-pick-tag'], function (tag) {
-        return tag.id;
-      });
-      var tagClasses = tags.join(' ');
+    books = this.state.books.map(function (element, i) {
+      let tags = _.map(element['staff-pick-item']['staff-pick-tag'], function (tag) {
+          return tag.id;
+        }),
+        tagClasses = tags.join(' '),
+        listWidth = _this.state.typeDisplay === 'list';
 
       return (
-        <div className={'book-item ' + element['staff-pick-age']['attributes']['age'] + ' ' + tagClasses}
-          onClick={openModal.bind(_this, element)} key={element.id}>
-          <Book book={element} style={styles.bookItem} height={'270px'} width={'175px'} />
-        </div>
-      );
-    });
-
-    var booksLists = this.state.books.map(function (element, i) {
-      return (
-        <li className='book-item' key={i}>
-          <h2 onClick={openModal.bind(_this, element)}>{element['staff-pick-item']['attributes']['title']}</h2>
-          <p>By: {element['staff-pick-item']['attributes']['author']}</p>
+        <li className={'book-item ' + element['staff-pick-age']['attributes']['age'] + ' ' + tagClasses}
+          onClick={openModal.bind(_this, element)} key={element.id} 
+          style={[
+            listWidth ? styles.listWidth : styles.gridWidth
+            ]}>
+          {_this.state.typeDisplay === 'grid' ?
+            <Book book={element} style={styles.bookItem} height={'270px'} width={'175px'} /> :
+            <div>
+              <h2 onClick={openModal.bind(_this, element)}>{element['staff-pick-item']['attributes']['title']}</h2>
+              <p>By: {element['staff-pick-item']['attributes']['author']}</p>
+            </div>
+          }
         </li>
       );
     });
-    var gridDisplay, listDisplay;
 
     if (this.state.typeDisplay === 'grid') {
       gridDisplay = 'block';
@@ -163,14 +147,11 @@ var Books = React.createClass({
           </a>
         </div>
 
-        <div id="masonryContainer" ref="masonryContainer" style={{'width':'100%', 'display': gridDisplay}}>
-          <ReactCSSTransitionGroup transitionName='example' transitionAppear={true}>
-          {books}
-          </ReactCSSTransitionGroup>
-        </div>
-        <div style={{'display': listDisplay}}>
+        <div id="masonryContainer" ref="masonryContainer">
           <ul className='list-view'>
-            {booksLists}
+            <ReactCSSTransitionGroup transitionName='books' transitionAppear={true}>
+              {books}
+            </ReactCSSTransitionGroup>
           </ul>
         </div>
         <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
@@ -199,6 +180,11 @@ const styles = {
   base: {
 
   },
+  listWidth: {
+    width: '100%',
+    marginBottom: '20px'
+  },
+  gridWidth: {},
   bookItem: {
     marginBottom: '20px',
     maxWidth: '200px'
