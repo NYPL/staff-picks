@@ -443,6 +443,10 @@ body {
         background: url('/client/images/icons/SmallListIconBlue.svg') no-repeat;
       }
     }
+
+    &.list {
+      margin-bottom: 10px;
+    }
   }
 }
 

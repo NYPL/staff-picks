@@ -97,7 +97,7 @@ var Books = React.createClass({
     const openModal = this.openModal,
       _this = this;
 
-    let books, booksLists, gridDisplay, listDisplay;
+    let books, gridDisplay, listDisplay;
 
     books = this.state.books.map(function (element, i) {
       let tags = _.map(element['staff-pick-item']['staff-pick-tag'], function (tag) {
@@ -119,15 +119,6 @@ var Books = React.createClass({
               <p>By: {element['staff-pick-item']['attributes']['author']}</p>
             </div>
           }
-        </li>
-      );
-    });
-
-    booksLists = this.state.books.map(function (element, i) {
-      return (
-        <li className='book-item' key={i}>
-          <h2 onClick={openModal.bind(_this, element)}>{element['staff-pick-item']['attributes']['title']}</h2>
-          <p>By: {element['staff-pick-item']['attributes']['author']}</p>
         </li>
       );
     });
@@ -190,7 +181,8 @@ const styles = {
 
   },
   listWidth: {
-    width: '100%'
+    width: '100%',
+    marginBottom: '20px'
   },
   gridWidth: {},
   bookItem: {
