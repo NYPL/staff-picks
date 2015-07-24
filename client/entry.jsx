@@ -9,6 +9,9 @@ import Footer from 'components/Footer/Footer.jsx';
 import AgeTabs from 'components/AgeTabs/AgeTabs.jsx';
 import Error404Page from 'components/Error404Page/Error404Page.jsx';
 
+import Books from 'components/Books/Books.jsx';
+import Sidebar from 'components/Sidebar/Sidebar.jsx';
+
 // Utilities
 // import initData from 'headerData/HeaderData.js';
 import API from 'utils/ApiService';
@@ -29,6 +32,10 @@ const data = API.getData();
 const books = API.getBooks();
 
 
+import Books from 'components/Books/Books.jsx';
+import Sidebar from 'components/Sidebar/Sidebar.jsx';
+
+
 React.render(<Header data={data} />, document.getElementById("header-container"));
 React.render(<Footer />, document.getElementById('footer-container'));
 
@@ -37,14 +44,9 @@ if ( !books ) {
 } else {
   React.render(<Hero />, document.getElementById('hero'));
   React.render(<AgeTabs />, document.getElementById('age-tabs'));
+  React.render(<Sidebar />, document.getElementById('sidebar'));
+  React.render(<Books />, document.getElementById('books'));
 }
-
-import Books from 'components/Books/Books.jsx';
-import Sidebar from 'components/Sidebar/Sidebar.jsx';
-
-
-React.render(<Sidebar />, document.getElementById('sidebar'));
-React.render(<Books />, document.getElementById('books'));
 
 
 function initData() {
