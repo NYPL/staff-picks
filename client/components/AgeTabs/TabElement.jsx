@@ -54,12 +54,13 @@ class TabElement extends React.Component {
 
 const styles = {
   TabElement: {
-    backgroundColor: '#ffffff',
+    '@media (max-width: 767px)': { width: '33%' },
     display: 'inline-block',
     margin: '0',
+    padding: '20px 0 20px 0',
     textTransform: 'uppercase',
     whiteSpace: 'pre',
-    width: '33%'
+    width: '23%'
   },
   TabElementActive: {
     borderBottomStyle: 'none',
@@ -67,11 +68,15 @@ const styles = {
     borderLeftStyle: 'solid',
     borderRightStyle: 'solid',
     borderTopStyle: 'solid',
-    borderWidth: '1px',
-    padding: '20px 0 20px 0'
+    borderWidth: '1px'
   },
   TabElementInactive: {
-    padding: '20px 0 20px 0',
+    borderBottomStyle: 'solid',
+    borderColor: '#cc1a16',
+    borderLeftStyle: 'none',
+    borderRightStyle: 'none',
+    borderTopStyle: 'none',
+    borderWidth: '1px'
   },
   TabElementLink: {
     color: '#bfbfbf',
