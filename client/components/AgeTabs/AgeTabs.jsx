@@ -35,7 +35,7 @@ class AgeTabs extends React.Component {
 
 const styles = {
   TabContainer: {
-    '@media (max-width: 767px)': { fontSize: '1.2em', padding: '20px 10% 0 10%' },
+    '@media (max-width: 767px)': { fontSize: '1.2em', padding: '20px 0 0 0' },
     backgroundColor: '#ffffff',
     display: 'block',
     fontSize: '1.4em',
