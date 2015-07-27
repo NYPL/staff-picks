@@ -1,6 +1,5 @@
 import React from 'react';
 import Radium from 'radium';
-// import MasonryMixin from 'react-masonry-mixin';
 import Book from '../Book/Book.jsx';
 import BookContent from '../BookContent/BookContent.jsx';
 import API from '../../utils/ApiService.js';
@@ -14,28 +13,33 @@ import BookActions from '../../actions/BookActions.js';
 
 let bookContainer = document.getElementById('books'),
   ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
-  bookData = API.getBooks(),
-  iso;
+  bookData = API.getBooks();
 
 Modal.setAppElement(bookContainer);
 Modal.injectCSS();
 
-// class Books extends React.Component {
-var Books = React.createClass({
-  getInitialState: function () {
-    return {
+class Books extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      iso: null,
       book: {},
       books: bookData,
       modalIsOpen: false,
       typeDisplay: BookStore.getBookDisplay(),
       age: BookStore.getAge(),
       noResults: false
-    }
-  },
+    };
 
-  componentDidMount: function () {
+    this._onChange = this._onChange.bind(this);
+  }
+
+  componentDidMount () {
+    // This needs to be set done once the component is available
     let grid = document.getElementById('masonryContainer');
-    iso = new Isotope(grid, {
+    // this.setState does not work in this case because
+    // iso.arrange also needs to be called.
+    this.state.iso = new Isotope(grid, {
       itemSelector: '.book-item',
       masonry: {
         columnWidth: 175,
@@ -44,19 +48,19 @@ var Books = React.createClass({
         isFitWidth: false,
       }
     });
-    iso.arrange({
+    this.state.iso.arrange({
       filter: '.Adult'
     });
 
-    BookStore.addChangeListener(this.onChange);
-    BookActions.updateNewFilters(iso.getItemElements());
-  },
+    BookStore.addChangeListener(this._onChange);
+    BookActions.updateNewFilters(this.state.iso.getItemElements());
+  }
 
-  componentDidUnmount: function () {
-    BookStore.removeChangeListener(this.onChange);
-  },
+  componentDidUnmount () {
+    BookStore.removeChangeListener(this._onChange);
+  }
 
-  onChange: function () {
+  _onChange () {
     let age = '.' + BookStore.getAge(),
       selector = age,
       _this = this;
@@ -66,58 +70,46 @@ var Books = React.createClass({
     }
 
     setTimeout(function () {
-      iso.arrange({
+      _this.state.iso.arrange({
         filter: selector
       });
     }, 100);
 
-    // Should not be part of the arrageComplete call since it will lag
-    // when removing the 'No Results' message.
-    _this.setState({
-      noResults: false
-    });
-    iso.on('arrangeComplete', function (filteredItems) {
-      console.log('filtering');
+    this.state.iso.on('arrangeComplete', function (filteredItems) {
       if (!filteredItems.length) {
         _this.setState({
           noResults: true
         });
-      } 
-      // Don't like the lag =(
-      // else {
-      //    _this.setState({
-      //     noResults: false
-      //   });
-      // }
+      }
     });
 
     this.setState({
+      noResults: false,
       typeDisplay: BookStore.getBookDisplay(),
       age: BookStore.getAge()
     });
-  },
+  }
 
-  openModal: function (book) {
-    console.log(book)
+  openModal (book) {
     this.setState({
       book: book,
       modalIsOpen: true
     });
-  },
+  }
 
-  closeModal: function (e) {
+  closeModal (e) {
     e.preventDefault();
     this.setState({
       book: {},
       modalIsOpen: false
     });
-  },
+  }
 
-  render: function () {
+  render () {
     const openModal = this.openModal,
       _this = this;
 
-    let books, gridDisplay, listDisplay;
+    let books;
 
     books = this.state.books.map(function (element, i) {
       let tags = _.map(element['staff-pick-item']['staff-pick-tag'], function (tag) {
@@ -142,14 +134,6 @@ var Books = React.createClass({
         </li>
       );
     });
-
-    if (this.state.typeDisplay === 'grid') {
-      gridDisplay = 'block';
-      listDisplay = 'none';
-    } else {
-      gridDisplay = 'none';
-      listDisplay = 'block';
-    }
 
     return (
       <div>
@@ -188,12 +172,12 @@ var Books = React.createClass({
         </Modal>
       </div>
     );
-  },
+  }
 
-  _handleClick: function (e) {
+  _handleClick (e) {
     e.preventDefault();
   }
-});
+}
 
 Books.defaultProps = {
   className: 'Books',
@@ -202,9 +186,7 @@ Books.defaultProps = {
 };
 
 const styles = {
-  base: {
-
-  },
+  base: {},
   listWidth: {
     width: '100%',
     marginBottom: '20px'
