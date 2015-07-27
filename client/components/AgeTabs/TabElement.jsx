@@ -40,53 +40,54 @@ class TabElement extends React.Component {
 
   	return (
   		<li key={`tab-${this.props.name}`} id={this.props.name} 
-        className='tab-element' style={styles.TabElement}>
+        className='tab-element' style={[styles.TabElement, 
+        active ? styles.TabElementActive : styles.TabElementInactive]}>
           <a 
             onClick={this._handleClick.bind(this, this.props.value)}
-            style={[
-              styles.TabElementLink, 
-              active ? styles.TabElementLinkActive : styles.TabElementLinkInactive
-            ]}>
+            style={[styles.TabElementLink, active ? styles.TabElementLinkActive : null]}>
             {this.props.name}
           </a>
   		</li>
 		);
-  }
+  }ß
 };
 
 const styles = {
   TabElement: {
-    display: 'inline',
+    '@media (max-width: 767px)': { width: '33%' },
+    display: 'inline-block',
     margin: '0',
+    padding: '20px 0 20px 0',
     textTransform: 'uppercase',
     whiteSpace: 'pre',
+    width: '23%'
+  },
+  TabElementActive: {
+    borderBottomStyle: 'none',
+    borderColor: '#cc1a16',
+    borderLeftStyle: 'solid',
+    borderRightStyle: 'solid',
+    borderTopStyle: 'solid',
+    borderWidth: '1px'
+  },
+  TabElementInactive: {
+    borderBottomStyle: 'solid',
+    borderColor: '#cc1a16',
+    borderLeftStyle: 'none',
+    borderRightStyle: 'none',
+    borderTopStyle: 'none',
+    borderWidth: '1px'
   },
   TabElementLink: {
-    backgroundColor: '#ffffff',
-    borderColor: '#cc1a16',
-    borderWidth: '1px',
     color: '#bfbfbf',
     cursor: 'pointer',
     textDecoration: 'none',
-    width: 'auto',
     ':hover': {
       color: '#cc1a16'
     }
   },
   TabElementLinkActive: {
-    borderBottomStyle: 'none',
-    borderLeftStyle: 'solid',
-    borderRightStyle: 'solid',
-    borderTopStyle: 'solid',
-    color: '#cc1a16',
-    padding: '20px 5% 21px 5%'
-  },
-  TabElementLinkInactive: {
-    borderBottomStyle: 'solid',
-    borderLeftStyle: 'none',
-    borderRightStyle: 'none',
-    borderTopStyle: 'none',
-    padding: '20px 5%',
+    color: '#cc1a16'
   }
 }
 
