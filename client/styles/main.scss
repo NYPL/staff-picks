@@ -210,7 +210,7 @@ ul#nav_menu {
 #content {
   width: 93%;
   margin: 0 auto;
-  @include breakpoint($min, '414' + $viewport-increment) {
+  @include breakpoint($min, 414 + $viewport-increment) {
     width: 960px;
   }
 }
