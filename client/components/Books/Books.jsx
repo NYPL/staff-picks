@@ -65,9 +65,11 @@ var Books = React.createClass({
       selector += '.' + BookStore.getFilters().join('.');
     }
 
-    iso.arrange({
-      filter: selector
-    });
+    setTimeout(function () {
+      iso.arrange({
+        filter: selector
+      });
+    }, 100);
 
     // Should not be part of the arrageComplete call since it will lag
     // when removing the 'No Results' message.
