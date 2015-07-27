@@ -1,22 +1,28 @@
+// Import React and necessary libraries
 import React from 'react';
 import Radium from 'radium';
 import cx from 'classnames';
 
-// Component import
+// Import components
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
+
+// Create the class
 class TabElement extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
+    // Changed state when TabElement is clicked
     this.state = { 
       age: BookStore.getAge()
     };
+    // Actions of mouse click event assigned to the class
     this._handleClick = this._handleClick.bind(this);
     this._onChange = this._onChange.bind(this);
   }
 
+  // Event listeners
   componentDidMount () {
     BookStore.addChangeListener(this._onChange);
   }
@@ -25,6 +31,7 @@ class TabElement extends React.Component {
     BookStore.removeChangeListener(this._onChange);
   }
 
+  // Actions of click event
   _handleClick (age) {
     BookActions.updateFilterAge(age);
   }
@@ -36,13 +43,13 @@ class TabElement extends React.Component {
   }
 
   render () {
+    // If state equals to the clicked value, then make the TabElement active
     let active = this.state.age === this.props.value;
-
   	return (
   		<li key={`tab-${this.props.name}`} id={this.props.name} 
         className='tab-element' style={[styles.TabElement, 
         active ? styles.TabElementActive : styles.TabElementInactive]}>
-          <a 
+          <a
             onClick={this._handleClick.bind(this, this.props.value)}
             style={[styles.TabElementLink, active ? styles.TabElementLinkActive : null]}>
             {this.props.name}
@@ -52,6 +59,7 @@ class TabElement extends React.Component {
   }ß
 };
 
+// Styles
 const styles = {
   TabElement: {
     '@media (max-width: 767px)': { width: '33%' },
