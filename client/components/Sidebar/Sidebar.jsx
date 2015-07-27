@@ -83,6 +83,7 @@ class BookFilters extends React.Component {
 
     _.each(filterList, function (filter) {
       filter.active = false;
+      filter.show = true;
       if (filter.attributes.tag.indexOf('Driven') !== -1) {
         filter.attributes.tag = (filter.attributes.tag).replace(/\bDriven/ig,'');
         drivenByFilters.push(filter);
@@ -119,15 +120,18 @@ class BookFilters extends React.Component {
         if (elem.active) {
           active = 'show-filter';
         }
+
         return (
-          <li key={elem.id}>
-            <a onClick={_handleClick.bind(_this, elem)}>
-              {elem.attributes.tag}
-              <ReactCSSTransitionGroup transitionName='minus' transitionAppear={true}>
-                <span className={'minus-icon ' + active}></span>
-              </ReactCSSTransitionGroup>
-            </a>
-          </li>
+            <li key={elem.id}>
+             {elem.show ? 
+              <a onClick={_handleClick.bind(_this, elem)}>
+                {elem.attributes.tag}
+                <ReactCSSTransitionGroup transitionName='minus' transitionAppear={true}>
+                  <span className={'minus-icon ' + active}></span>
+                </ReactCSSTransitionGroup>
+              </a>
+              : null }
+            </li>
         );
       });
     }
@@ -160,14 +164,38 @@ class BookFilters extends React.Component {
   }
 
   _onChange() {
-    let updatedFilters = BookStore.getFilters();
+    // console.log(BookStore.getUpdatedFilters());
 
+    var filteredFilters = [];
+    _.each(BookStore.getUpdatedFilters(), function (elem) {
+      _.each(BookStore.getFilters(), function (filter) {
+        if ((elem.className).indexOf(filter) !== -1) {
+          var filters = elem.className.split(' ');
+          filteredFilters = _.union(filteredFilters, filters);
+        }
+      });
+    });
+
+    let updatedFilters = BookStore.getFilters();
     if (!updatedFilters.length) {
       _.each(this.state.drivenByFilters, function (filter) {
         filter.active = false;
       });
       _.each(this.state.themeFilters, function (filter) {
         filter.active = false;
+      });
+    } else {
+      console.log(filteredFilters);
+      _.each(this.state.themeFilters, function (filter) {
+        if (_.indexOf(filteredFilters, filter.id) === -1) {
+          console.log(filter);
+          filter.show = false;
+        }
+      });
+      _.each(this.state.drivenByFilters, function (filter) {
+        if (_.indexOf(filteredFilters, filter.id) === -1) {
+          filter.show = false;
+        }
       });
     }
 

@@ -28,5 +28,12 @@ export default {
       actionType: BookConstants.FILTER,
       clear: true
     });
+  },
+
+  updateNewFilters(filters) {
+    AppDispatcher.dispatch({
+      actionType: BookConstants.UPDATE_FILTERS,
+      newFilters: filters
+    });
   }
 };

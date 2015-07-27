@@ -48,6 +48,7 @@ var Books = React.createClass({
     });
 
     BookStore.addChangeListener(this.onChange);
+    BookActions.updateNewFilters(iso.getItemElements());
   },
 
   componentDidUnmount: function () {
