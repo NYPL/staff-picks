@@ -28,7 +28,8 @@ var Books = React.createClass({
       books: bookData,
       modalIsOpen: false,
       typeDisplay: BookStore.getBookDisplay(),
-      age: BookStore.getAge()
+      age: BookStore.getAge(),
+      noResults: false
     }
   },
 
@@ -57,20 +58,36 @@ var Books = React.createClass({
 
   onChange: function () {
     let age = '.' + BookStore.getAge(),
-      filters = '',
-      selector;
+      selector = age,
+      _this = this;
 
     if (BookStore.getFilters().length) {
-      filters += '.' + BookStore.getFilters().join(', ' + age + '.');
+      selector += '.' + BookStore.getFilters().join('.');
     }
-    
-    selector = age + filters;
 
-    setTimeout(function () {
-      iso.arrange({
-        filter: selector
-      });
-    }, 100);
+    iso.arrange({
+      filter: selector
+    });
+
+    // Should not be part of the arrageComplete call since it will lag
+    // when removing the 'No Results' message.
+    _this.setState({
+      noResults: false
+    });
+    iso.on('arrangeComplete', function (filteredItems) {
+      console.log('filtering');
+      if (!filteredItems.length) {
+        _this.setState({
+          noResults: true
+        });
+      } 
+      // Don't like the lag =(
+      // else {
+      //    _this.setState({
+      //     noResults: false
+      //   });
+      // }
+    });
 
     this.setState({
       typeDisplay: BookStore.getBookDisplay(),
@@ -140,7 +157,7 @@ var Books = React.createClass({
             <span className='left-icon'></span>
           </a>
 
-          <p style={styles.month}> July 2015</p>
+          <p style={styles.month}>July 2015</p>
 
           <a href='#' style={styles.nextMonth} onClick={this._handleClick}>
             Picks for August
@@ -155,6 +172,11 @@ var Books = React.createClass({
             </ReactCSSTransitionGroup>
           </ul>
         </div>
+        <p style={[
+          this.state.noResults ? styles.showNoResults : styles.hideNoResults
+          ]}>
+          No results are available for this age category.
+        </p>
         <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
           <CloseButton onClick={this.closeModal} />
           <div style={{'width':'30%', 'display':'inline-block'}}>
@@ -186,6 +208,13 @@ const styles = {
     marginBottom: '20px'
   },
   gridWidth: {},
+  showNoResults: {
+    display: 'inline-block',
+    fontSize: '14px'
+  },
+  hideNoResults: {
+    display: 'none'
+  },
   bookItem: {
     marginBottom: '20px',
     maxWidth: '200px'

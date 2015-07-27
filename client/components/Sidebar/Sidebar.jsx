@@ -73,6 +73,8 @@ class BookDisplayButtons extends React.Component {
   }
 }
 
+var drivenByFiltersElems, themeFiltersElems;
+
 class BookFilters extends React.Component {
   constructor(props) {
     super(props);
@@ -110,32 +112,33 @@ class BookFilters extends React.Component {
     BookStore.removeChangeListener(this._onChange);
   }
 
-  render () {
+  filterItems (list) {
     const _this = this,
       _handleClick = this._handleClick;
 
-    let filterItems = function (list) {
-      return list.map(function (elem, i) {
-        let active = 'hide-filter';
-        if (elem.active) {
-          active = 'show-filter';
-        }
+    return list.map(function (elem, i) {
+      let active = 'hide-filter';
+      if (elem.active) {
+        active = 'show-filter';
+      }
 
+      if (elem.show) {
         return (
-            <li key={elem.id}>
-             {elem.show ? 
-              <a onClick={_handleClick.bind(_this, elem)}>
-                {elem.attributes.tag}
-                <ReactCSSTransitionGroup transitionName='minus' transitionAppear={true}>
-                  <span className={'minus-icon ' + active}></span>
-                </ReactCSSTransitionGroup>
-              </a>
-              : null }
-            </li>
+          <li key={elem.id}>
+            <a onClick={_handleClick.bind(_this, elem)}>
+              {elem.attributes.tag}
+              <ReactCSSTransitionGroup transitionName='minus' transitionAppear={true}>
+                <span className={'minus-icon ' + active}></span>
+              </ReactCSSTransitionGroup>
+            </a>
+          </li>
         );
-      });
-    }
+      }
+      return null;
+    });
+  }
 
+  render () {
     return (
       <div className='BookFilters'>
         <span className='divider'></span> 
@@ -143,11 +146,11 @@ class BookFilters extends React.Component {
         <div className='BookFilters-lists'>
           <span>Driven by...</span>
           <ul>
-            {filterItems(this.state.drivenByFilters)}
+            {this.filterItems(this.state.drivenByFilters)}
           </ul>
           <span>Themes...</span>
           <ul>
-            {filterItems(this.state.themeFilters)}
+            {this.filterItems(this.state.themeFilters)}
           </ul>
           {this.state.filters.length ? 
             <div className='clearFilters' style={styles.clearFilters}>
@@ -164,43 +167,57 @@ class BookFilters extends React.Component {
   }
 
   _onChange() {
-    // console.log(BookStore.getUpdatedFilters());
+    let filteredFilters = [],
+      activeFilters = BookStore.getFilters(),
+      bookElems = BookStore.getUpdatedFilters();
 
-    var filteredFilters = [];
-    _.each(BookStore.getUpdatedFilters(), function (elem) {
-      _.each(BookStore.getFilters(), function (filter) {
-        if ((elem.className).indexOf(filter) !== -1) {
-          var filters = elem.className.split(' ');
+    if (!activeFilters.length) {
+      _.each(this.state.drivenByFilters, function (filter) {
+        filter.active = false;
+        filter.show = true;
+      });
+      _.each(this.state.themeFilters, function (filter) {
+        filter.active = false;
+        filter.show = true;
+      });
+    } else {
+      _.each(bookElems, function (elem) {
+        let n = activeFilters.length,
+          filters,
+          classes = elem.className;
+
+        _.each(activeFilters, function (filter) {
+          if (classes.indexOf(filter) !== -1) {
+            n -= 1;
+          }
+        });
+
+        if (n === 0) {
+          filters = classes.split(' ');
           filteredFilters = _.union(filteredFilters, filters);
         }
       });
-    });
 
-    let updatedFilters = BookStore.getFilters();
-    if (!updatedFilters.length) {
-      _.each(this.state.drivenByFilters, function (filter) {
-        filter.active = false;
-      });
-      _.each(this.state.themeFilters, function (filter) {
-        filter.active = false;
-      });
-    } else {
-      console.log(filteredFilters);
-      _.each(this.state.themeFilters, function (filter) {
-        if (_.indexOf(filteredFilters, filter.id) === -1) {
-          console.log(filter);
-          filter.show = false;
-        }
-      });
-      _.each(this.state.drivenByFilters, function (filter) {
-        if (_.indexOf(filteredFilters, filter.id) === -1) {
-          filter.show = false;
-        }
-      });
+      if (filteredFilters) {
+        _.each(this.state.themeFilters, function (filter) {
+          if (_.indexOf(filteredFilters, filter.id) === -1) {
+            filter.show = false;
+          } else {
+            filter.show = true;
+          }
+        });
+        _.each(this.state.drivenByFilters, function (filter) {
+          if (_.indexOf(filteredFilters, filter.id) === -1) {
+            filter.show = false;
+          } else {
+            filter.show = true;
+          }
+        });
+      }
     }
 
     this.setState({
-      filters: updatedFilters
+      filters: activeFilters
     });
   }
 
@@ -244,8 +261,8 @@ const styles = {
     color: 'red'
   },
   clearFilters: {
-    color: '#0095c8;',
-    marginTop: '20px;'
+    color: '#0095c8',
+    marginTop: '20px'
   }
 };
 
