@@ -8,7 +8,8 @@ let _bookDisplay =  'grid',
     _age = 'Adult',
     _gridDisplay = true,
     _listDisplay = false,
-    _filters = [];
+    _filters = [],
+    _updatedFilters = [];
 
 // Simple reference to a repetitive non-changing string
 const CHANGE_EVENT = 'change';
@@ -47,6 +48,10 @@ function clearFilters() {
   _filters = [];
 }
 
+function updateNewFilters(updatedFilters) {
+  _updatedFilters = updatedFilters;
+}
+
 const BookStore = _.extend({}, EventEmitter.prototype, {
   // Gets the state of the Subscribe Form Visibility boolean
   getBookDisplay () {
@@ -64,6 +69,9 @@ const BookStore = _.extend({}, EventEmitter.prototype, {
   },
   getFilters () {
     return _filters;
+  },
+  getUpdatedFilters () {
+    return _updatedFilters;
   },
   // Emits change event to all registered event listeners
   emitChange () {
@@ -99,6 +107,11 @@ BookStore.dispatchToken = AppDispatcher.register((action) => {
       } else {
         setFilters(action.filter);
       }
+      BookStore.emitChange();
+    break;
+
+    case BookConstants.UPDATE_FILTERS:
+      updateNewFilters(action.newFilters);
       BookStore.emitChange();
     break;
     

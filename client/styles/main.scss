@@ -492,6 +492,14 @@ body {
   }
 }
 
+.hide {
+  display: none;
+}
+
+.show {
+  display: inline-block;
+}
+
 .hide-filter {
   opacity: 0;
   padding: 0;
