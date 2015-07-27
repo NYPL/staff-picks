@@ -21,31 +21,48 @@ class AgeTabs extends React.Component {
       );
     });
   	return (
-      <ul className='tab-ul' 
+      <div className='tab-container' 
         style={styles.TabContainer}>
-        {TabElements}
-      </ul>
+        <ul style={styles.TabUl}>
+          <li key='li-before' style={styles.TabOutside}></li>
+          {TabElements}
+          <li key='li-after' style={styles.TabOutside}></li>
+        </ul>
+      </div>
 		);
   }
 };
 
 const styles = {
   TabContainer: {
+    '@media (max-width: 767px)': { fontSize: '1.2em', padding: '20px 0 0 0' },
     backgroundColor: '#ffffff',
-    borderColor: '#cc1a16',
+    display: 'block',
+    fontSize: '1.4em',
+    height: 'auto',
+    margin: '30px auto 40px',
+    padding: '20px 0 0 0',
+    position: 'relative',
+    textAlign: 'center',
+    width: '100%'
+  },
+  TabUl: {
+    display: 'block',
+    margin: '0 auto',
+  },
+  TabOutside: {
+    '@media (max-width: 767px)': { width: '0' },
+    display: 'inline-block',
+    textTransform: 'uppercase',
+    width: '15%',
     borderBottomStyle: 'solid',
+    borderColor: '#cc1a16',
     borderLeftStyle: 'none',
     borderRightStyle: 'none',
     borderTopStyle: 'none',
     borderWidth: '1px',
-    display: 'block',
-    fontSize: '16px',
-    height: 'auto',
-    margin: '40px auto 40px',
-    padding: '20px 0 21px 0',
     position: 'relative',
-    textAlign: 'center',
-    width: '100%'
+    top:'23px'
   }
 };
 
