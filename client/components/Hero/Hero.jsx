@@ -46,7 +46,7 @@ export default class Hero extends React.Component {
 
     var HeroImages = function (age) {
       let imageSlug = featuredBooks[age]['staff-pick-item']['attributes']['image-slug']
-      let src = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${imageSlug}&content=M&Return=1&Type=M`;
+      let src = '/client/images/staff_pic_bg.jpg';
       return (<HeroImage src={src} />);
     }(this.state.age);
     
@@ -54,8 +54,8 @@ export default class Hero extends React.Component {
       <div key='Hero' style={styles.Hero}>
         <div key='HeroContainer' className='hero-container' style={styles.HeroContainer}>
           <div key='TextContainer' className='text-container' style={styles.TextContainer}>
-            <HeroTitle title='staff picks' intro='Every month NYPL&#39;s librarians share their favorite reads. Explore their book selections—ranging from new releases to timeless classics—by choosing a tag below.' />
-            {BookIntros}
+            <HeroTitle title='staff picks' des='Every month NYPL&#39;s librarians share their favorite reads.' 
+            intro='Explore their book selections—ranging from new releases to timeless classics—by choosing a tag below.'/>
           </div>
           <div key='HeroImageContainer' className='hero-image-container' style={styles.HeroImageContainer}>
             {HeroImages}
@@ -70,10 +70,10 @@ const styles = {
   Hero: {
     '@media (max-width: 767px)': { width: '100%' },
     height: 'auto',
-    backgroundColor: '#CC1a16',
+    backgroundColor: '#e4382c',
     color: 'white',
     minHeight: '72px',
-    padding: '4% 15%',
+    padding: '0',
   },
   HeroContainer: {
     '@media (max-width: 719px)': { margin: '50px 0 0 0' },
@@ -84,29 +84,28 @@ const styles = {
     position: 'relative',
   },
   HeroImageContainer: {
-    '@media (max-width: 1200px)': {  },
-    '@media (min-width: 768px) and (max-width: 979px)': {  },
+    '@media (max-width: 1200px)': { },
+    '@media (min-width: 768px) and (max-width: 979px)': { display: 'none' },
     '@media (max-width: 767px)': { display: 'none' },
-    '@media (max-width: 480px)': { display: 'none' },
+    '@media (max-width: 414px)': { display: 'none' },
     borderRadius: '50%',
     display: 'block',
-    float: 'right',
-    margin: '20px',
-    height: '275px',
-    width: '275px',
+    margin: '-90px 0 -6px 0',
+    height: '430px',
+    width: '430px',
     overflow: 'hidden',
     position: 'relative'
   },
   TextContainer: {
-    '@media (max-width: 1200px)': { width: '50%' },
+    '@media (max-width: 1200px)': { width: '45%' },
     '@media (min-width: 827px) and (max-width: 979px)': { width: '45%' },
     '@media (min-width: 768px) and (max-width: 826px)': { width: '40%' },
     '@media (min-wdith: 720px) and (max-width: 767px)': { width: '60%' },
     '@media (max-width: 719px)': { width: '60%', left: '10%' },
-
     float: 'left',
+    margin:'70px 0 40px 60px', 
     position: 'relative',
-    width: '60%'
+    width: '45%'
   }
 };
 
