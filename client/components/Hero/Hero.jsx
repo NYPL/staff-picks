@@ -73,7 +73,7 @@ const styles = {
     backgroundColor: '#e4382c',
     color: 'white',
     minHeight: '72px',
-    padding: '0 0 0 0',
+    padding: '0',
   },
   HeroContainer: {
     '@media (max-width: 719px)': { margin: '50px 0 0 0' },
