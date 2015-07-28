@@ -32,6 +32,8 @@ class Books extends React.Component {
     };
 
     this._onChange = this._onChange.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   componentDidMount () {
@@ -91,14 +93,14 @@ class Books extends React.Component {
   }
 
   openModal (book) {
+    console.log(book);
     this.setState({
       book: book,
       modalIsOpen: true
     });
   }
 
-  closeModal (e) {
-    e.preventDefault();
+  closeModal () {
     this.setState({
       book: {},
       modalIsOpen: false
