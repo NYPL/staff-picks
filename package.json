@@ -57,7 +57,7 @@
     "flux": "~2.0.3",
     "jest": "~0.1.40",
     "jest-cli": "0.4.13",
-    "jsonapi-parserinator": "0.2.3",
+    "jsonapi-parserinator": "0.2.4",
     "jsx-loader": "0.13.2",
     "node-libs-browser": "0.5.2",
     "object-assign": "3.0.0",

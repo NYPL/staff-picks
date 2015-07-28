@@ -10,22 +10,23 @@ class CloseButton extends React.Component {
     this._handleClick = this._handleClick.bind(this);
   }
 
-  _handleClick () {
-
+  _handleClick (e) {
+    e.preventDefault();
+    this.props.onClick();
   }
 
   render () {
   	return (
-			<SimpleButton style={styles.CloseButton}
-										id='close-button' 
-										label=''
-										onClick={this.props.onClick} />
+			<SimpleButton style={styles.closeButton}
+				id='close-button' 
+				label=''
+				onClick={this._handleClick} />
 		);
   }
 }
 
 const styles = {
-  CloseButton: {
+  closeButton: {
   	backgroundImage: 'url("/client/images/icons/gray_x_button.svg")',
   	backgroundPosition: 'center',
   	backgroundRepeat: 'no-repeat',

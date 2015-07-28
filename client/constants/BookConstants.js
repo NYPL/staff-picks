@@ -9,5 +9,6 @@ import keyMirror from 'react/lib/keyMirror';
 export default keyMirror({
   DISPLAY_TYPE: null,
   AGE_TYPE: null,
-  FILTER: null
+  FILTER: null,
+  UPDATE_FILTERS: null
 });
