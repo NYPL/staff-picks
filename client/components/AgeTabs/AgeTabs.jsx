@@ -1,8 +1,11 @@
+// Import React and related libraries
 import React from 'react';
 import Radium from 'radium';
 
+// Import components
 import TabElement from 'components/AgeTabs/TabElement.jsx';
 
+// Create the class
 class AgeTabs extends React.Component {
   // Constructor used in ES6
   constructor(props) {
@@ -10,7 +13,7 @@ class AgeTabs extends React.Component {
   }
 
   render () {
-    var _this = this;
+    // Render each TabElement
     var TabElements = data.map ( function (element) {
       return (
         <TabElement 
@@ -33,6 +36,7 @@ class AgeTabs extends React.Component {
   }
 };
 
+// Styles
 const styles = {
   TabContainer: {
     '@media (max-width: 767px)': { fontSize: '1.2em', padding: '20px 0 0 0' },
@@ -66,6 +70,7 @@ const styles = {
   }
 };
 
+// contents and values for each TabElement
 const data = [
   { name: 'adult', value: 'Adult' },
   { name: 'young adult', value: 'YA' },

@@ -27,8 +27,8 @@ const styles = {
   HeroImage: {
     display: 'inline',
     height: 'auto',
-    margin: '-20% auto 0 -10%',
-    width: '325px'
+    margin: '0 0 0 0',
+    width: '430px'
   }
 };
 
