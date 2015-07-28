@@ -17,7 +17,8 @@ class HeroTitle extends React.Component {
         this.props.style
       ]}>
         <h3 key='HeroTitle' style={styles.base, styles.HeroTitle}>{this.props.title}</h3>
-        <p key='HeroDes' style={styles.base, styles.HeroDes}>{this.props.intro}</p>
+        <p key='HeroDes' style={styles.base, styles.HeroDes}>{this.props.des}</p>
+        <p key='HeroIntro'  style={styles.base, styles.HeroIntro}>{this.props.intro}</p>
       </div>
     );
   }
@@ -41,17 +42,28 @@ const styles = {
   },
   HeroTitle: {
     '@media (max-width: 480px)': { marginTop: '24px' },
-    fontSize: '16px',
+    fontFamily: 'KievitBook, sans-serif',
+    fontSize: '12px',
+    fontWeight: 'normal',
     marginTop: '0px',
-    marginBottom: '4px',
+    marginBottom: '20px',
     textTransform: 'uppercase'
   },
-  HeroDes: {
+   HeroDes: {
     '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '1.4em' },
     '@media (max-width: 767px)': { fontSize: '1.4em' },
     '@media (max-width: 480px)': { display: 'none' },
-    fontSize: '1.8em',
-    lineHeight: '1.2em', 
+    fontFamily: 'MiloSlabPro, RobotoSlabLight, serif',
+    fontSize: '36px',
+    lineHeight: '36px',
+    marginBottom: '20px' 
+  },
+  HeroIntro: {
+    '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '1.4em' },
+    '@media (max-width: 767px)': { fontSize: '1.4em' },
+    '@media (max-width: 480px)': { display: 'none' },
+    fontFamily: 'KievitBook, sans-serif',
+    fontSize: '15px' 
   }
 };
 

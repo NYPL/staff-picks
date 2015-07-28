@@ -54,8 +54,8 @@ export default class Hero extends React.Component {
       <div key='Hero' style={styles.Hero}>
         <div key='HeroContainer' className='hero-container' style={styles.HeroContainer}>
           <div key='TextContainer' className='text-container' style={styles.TextContainer}>
-            <HeroTitle title='staff picks' intro='Every month NYPL&#39;s librarians share their favorite reads. Explore their book selections—ranging from new releases to timeless classics—by choosing a tag below.' />
-            {BookIntros}
+            <HeroTitle title='staff picks' des='Every month NYPL&#39;s librarians share their favorite reads.' 
+            intro='Explore their book selections—ranging from new releases to timeless classics—by choosing a tag below.'/>
           </div>
           <div key='HeroImageContainer' className='hero-image-container' style={styles.HeroImageContainer}>
             {HeroImages}
@@ -70,7 +70,7 @@ const styles = {
   Hero: {
     '@media (max-width: 767px)': { width: '100%' },
     height: 'auto',
-    backgroundColor: '#CC1a16',
+    backgroundColor: '#e4382c',
     color: 'white',
     minHeight: '72px',
     padding: '4% 15%',
@@ -78,7 +78,7 @@ const styles = {
   HeroContainer: {
     '@media (max-width: 719px)': { margin: '50px 0 0 0' },
     height: 'auto',
-    margin: '0 auto',
+    margin: '24px auto 0 auto',
     maxWidth: '900px',
     overflow: 'auto',
     position: 'relative',
@@ -103,10 +103,9 @@ const styles = {
     '@media (min-width: 768px) and (max-width: 826px)': { width: '40%' },
     '@media (min-wdith: 720px) and (max-width: 767px)': { width: '60%' },
     '@media (max-width: 719px)': { width: '60%', left: '10%' },
-
     float: 'left',
     position: 'relative',
-    width: '60%'
+    width: '48%'
   }
 };
 
