@@ -11,7 +11,7 @@ import _ from 'underscore';
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
-let bookContainer = document.getElementById('books'),
+let bookContainer = document.getElementById('content'),
   ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
   bookData = API.getBooks();
 

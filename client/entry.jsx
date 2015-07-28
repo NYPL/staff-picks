@@ -31,18 +31,67 @@ initData();
 const data = API.getData();
 const books = API.getBooks();
 
+import Router from 'react-router';
+import Modal from 'react-modal';
+
+let Route = Router.Route;
+let RouteHandler = Router.RouteHandler;
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render () {
+    return (
+      <div>
+        <div id='hero'>
+          <Hero />
+        </div>
+        <div id='age-tabs' className='age-tabs'>
+          <AgeTabs />
+        </div>
+        <div className='main-container'>
+          <div id='sidebar'>
+            <Sidebar />
+          </div>
+          <div id='books'>
+            <Books />
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+let routes = (
+    <Route handler={App}>
+      <Route handler={Modal} path='new' />
+    </Route>
+  );
+
+class AppRouter extends React.Component {
+  render () {
+    return (
+        <div>
+          <RouteHandler />
+        </div>
+      );
+  }
+}
 
 React.render(<Header data={data} />, document.getElementById("header-container"));
 React.render(<Footer />, document.getElementById('footer-container'));
 
-if ( !books ) {
-  React.render(<Error404Page />, document.getElementById("content"));
-} else {
-  React.render(<Hero />, document.getElementById('hero'));
-  React.render(<AgeTabs />, document.getElementById('age-tabs'));
-  React.render(<Sidebar />, document.getElementById('sidebar'));
-  React.render(<Books />, document.getElementById('books'));
-}
+// if ( !books ) {
+//   React.render(<Error404Page />, document.getElementById("content"));
+// } else {
+//   React.render(<App />, document.getElementById('content'));
+// }
+
+Router.run(routes, Router.HashLocation, (Root) => {
+  React.render(<Root />, document.getElementById('content'));
+});
 
 
 function initData() {
