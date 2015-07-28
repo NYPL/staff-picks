@@ -5,23 +5,22 @@ import BookContent from '../BookContent/BookContent.jsx';
 import API from '../../utils/ApiService.js';
 import CloseButton from 'components/Books/CloseButton.jsx';
 
-import Modal from 'react-modal';
 import _ from 'underscore';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
-let bookContainer = document.getElementById('books'),
-  ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
+import Router from 'react-router';
+
+let Navigation = Router.Navigation;
+
+let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
   bookData = API.getBooks();
 
-Modal.setAppElement(bookContainer);
-Modal.injectCSS();
-
-class Books extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+// class Books extends React.Component {
+var Books = React.createClass({
+  getInitialState() {
+    return {
       iso: null,
       book: {},
       books: bookData,
@@ -31,10 +30,11 @@ class Books extends React.Component {
       noResults: false
     };
 
-    this._onChange = this._onChange.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
+    // this._onChange = this._onChange.bind(this);
+    // this.openModal = this.openModal.bind(this);
+  },
+
+  mixins: [Navigation],
 
   componentDidMount () {
     // This needs to be set done once the component is available
@@ -56,11 +56,11 @@ class Books extends React.Component {
 
     BookStore.addChangeListener(this._onChange);
     BookActions.updateNewFilters(this.state.iso.getItemElements());
-  }
+  },
 
   componentDidUnmount () {
     BookStore.removeChangeListener(this._onChange);
-  }
+  },
 
   _onChange () {
     let age = '.' + BookStore.getAge(),
@@ -90,22 +90,11 @@ class Books extends React.Component {
       typeDisplay: BookStore.getBookDisplay(),
       age: BookStore.getAge()
     });
-  }
+  },
 
   openModal (book) {
-    console.log(book);
-    this.setState({
-      book: book,
-      modalIsOpen: true
-    });
-  }
-
-  closeModal () {
-    this.setState({
-      book: {},
-      modalIsOpen: false
-    });
-  }
+    this.transitionTo('modal', {id: book['staff-pick-item']['id']});
+  },
 
   render () {
     const openModal = this.openModal,
@@ -122,14 +111,14 @@ class Books extends React.Component {
 
       return (
         <li className={'book-item ' + element['staff-pick-age']['attributes']['age'] + ' ' + tagClasses}
-          onClick={openModal.bind(_this, element)} key={element.id} 
+          key={element.id} onClick={openModal.bind(_this, element)}
           style={[
             listWidth ? styles.listWidth : styles.gridWidth
             ]}>
           {_this.state.typeDisplay === 'grid' ?
             <Book book={element} style={styles.bookItem} height={'270px'} width={'175px'} /> :
             <div>
-              <h2 onClick={openModal.bind(_this, element)}>{element['staff-pick-item']['attributes']['title']}</h2>
+                <h2>{element['staff-pick-item']['attributes']['title']}</h2>
               <p>By: {element['staff-pick-item']['attributes']['author']}</p>
             </div>
           }
@@ -165,21 +154,14 @@ class Books extends React.Component {
           ]}>
           No results are available for this age category.
         </p>
-        <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-          <CloseButton onClick={this.closeModal} />
-          <div style={{'width':'30%', 'display':'inline-block'}}>
-            <Book book={this.state.book}  />
-          </div>
-          <BookContent book={this.state.book} />
-        </Modal>
       </div>
     );
-  }
+  },
 
   _handleClick (e) {
     e.preventDefault();
   }
-}
+});
 
 Books.defaultProps = {
   className: 'Books',
