@@ -9,6 +9,17 @@ import DonateButton from '../DonateButton/DonateButton.jsx';
 import SubscribeButton from '../SubscribeButton/SubscribeButton.jsx';
 import NavMenu from '../NavMenu/NavMenu.jsx';
 
+// API Mocked Data
+import API from '../../utils/ApiService';
+
+/* Reads from local storage (i.e. Refinery) */
+// If we follow the FLUX architecture
+// data would not be defined, instead we would
+// load the data via Store Actions and update our
+// App Constants. As of now, we are mocking an API
+// call to fetch the data.
+const data = API.getData();
+
 class Header extends React.Component {
 
   // Constructor used in ES6
@@ -16,7 +27,7 @@ class Header extends React.Component {
     super(props);
     // replaces getInitialState()
     this.state = {
-      data: this.props.data
+      data: data
     };
   }
 
