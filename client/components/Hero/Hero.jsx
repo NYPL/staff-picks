@@ -46,7 +46,7 @@ export default class Hero extends React.Component {
 
     var HeroImages = function (age) {
       let imageSlug = featuredBooks[age]['staff-pick-item']['attributes']['image-slug']
-      let src = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${imageSlug}&content=M&Return=1&Type=M`;
+      let src = '/client/images/staff_pic_bg.jpg';
       return (<HeroImage src={src} />);
     }(this.state.age);
     
@@ -73,12 +73,12 @@ const styles = {
     backgroundColor: '#e4382c',
     color: 'white',
     minHeight: '72px',
-    padding: '4% 15%',
+    padding: '0 0 0 0',
   },
   HeroContainer: {
     '@media (max-width: 719px)': { margin: '50px 0 0 0' },
     height: 'auto',
-    margin: '24px auto 0 auto',
+    margin: '0 auto',
     maxWidth: '900px',
     overflow: 'auto',
     position: 'relative',
@@ -90,10 +90,9 @@ const styles = {
     '@media (max-width: 480px)': { display: 'none' },
     borderRadius: '50%',
     display: 'block',
-    float: 'right',
-    margin: '20px',
-    height: '275px',
-    width: '275px',
+    margin: '-90px 0 -6px 0',
+    height: '430px',
+    width: '430px',
     overflow: 'hidden',
     position: 'relative'
   },
@@ -104,6 +103,7 @@ const styles = {
     '@media (min-wdith: 720px) and (max-width: 767px)': { width: '60%' },
     '@media (max-width: 719px)': { width: '60%', left: '10%' },
     float: 'left',
+    margin:'70px 0 40px 0', 
     position: 'relative',
     width: '48%'
   }
