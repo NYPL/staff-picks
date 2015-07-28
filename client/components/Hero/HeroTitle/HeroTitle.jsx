@@ -41,7 +41,7 @@ const styles = {
     width: '100%'
   },
   HeroTitle: {
-    '@media (max-width: 480px)': { marginTop: '24px' },
+    '@media (max-width: 414px)': { marginTop: '24px' },
     fontFamily: 'KievitBook, sans-serif',
     fontSize: '12px',
     fontWeight: 'normal',
@@ -50,18 +50,18 @@ const styles = {
     textTransform: 'uppercase'
   },
    HeroDes: {
-    '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '1.4em' },
-    '@media (max-width: 767px)': { fontSize: '1.4em' },
-    '@media (max-width: 480px)': { display: 'none' },
+    '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '20px', lineHeight: '20px' },
+    '@media (max-width: 767px)': { fontSize: '20px', lineHeight: '20px' },
+    '@media (max-width: 414px)': { display: 'none' },
     fontFamily: 'MiloSlabPro, RobotoSlabLight, serif',
     fontSize: '36px',
     lineHeight: '36px',
     marginBottom: '20px' 
   },
   HeroIntro: {
-    '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '1.4em' },
-    '@media (max-width: 767px)': { fontSize: '1.4em' },
-    '@media (max-width: 480px)': { display: 'none' },
+    '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '14px' },
+    '@media (max-width: 767px)': { fontSize: '14px' },
+    '@media (max-width: 414px)': { display: 'none' },
     fontFamily: 'KievitBook, sans-serif',
     fontSize: '15px' 
   }
