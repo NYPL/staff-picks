@@ -50,8 +50,8 @@ const styles = {
     textTransform: 'uppercase'
   },
    HeroDes: {
-    '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '20px', lineHeight: '20px' },
-    '@media (max-width: 767px)': { fontSize: '20px', lineHeight: '20px' },
+    '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '28px', lineHeight: '28px' },
+    '@media (max-width: 767px)': { fontSize: '20px', lineHeight: '24px' },
     '@media (max-width: 414px)': { display: 'none' },
     fontFamily: 'MiloSlabPro, RobotoSlabLight, serif',
     fontSize: '36px',
