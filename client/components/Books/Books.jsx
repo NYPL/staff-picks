@@ -93,6 +93,7 @@ class Books extends React.Component {
   }
 
   openModal (book) {
+    console.log(book);
     this.setState({
       book: book,
       modalIsOpen: true
