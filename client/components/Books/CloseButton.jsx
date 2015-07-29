@@ -32,26 +32,26 @@ const styles = {
       borderRightStyle: 'none',
       borderTopStyle: 'none',
       borderWidth: '1px',
+      color: 'rgba(191, 191, 191, 1)',
       float: 'left', 
       fontSize: '1.3em',
       height: 'auto',
       margin: '0 0 20px 0',
       padding: '5px 0 30px 40px',
-      width: '100%' ,
-      ':hover': {color: '#bfbfbf'}
+      width: '100%' 
     },
     backgroundImage: 'url("/client/images/icons/gray_x_button.svg")',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    color: '#bfbfbf',
+    color: 'rgba(191, 191, 191, 0)',
     cursor: 'pointer',
     float: 'right',
     fontSize: '24px',
     height: '28px',
     margin: '-16px -6px 0 0',
+    overflow: 'hidden',
     textDecoration: 'none',
-    width: '28px',
-    ':hover': {color: '#000000'}
+    width: '28px'
   }
 };
 
