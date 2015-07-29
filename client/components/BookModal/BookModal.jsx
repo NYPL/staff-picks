@@ -56,14 +56,19 @@ var BookModal = React.createClass({
       <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
         <CloseButton onClick={this.closeModal} />
         <BookTitle book={this.state.book} />
-        <div style={{'width':'30%', 'display':'inline-block'}}>
+        <div style={{'width':'30%', 'display':'inline-block', 'margin':'-90px 0 0 0', 'position': 'absolute', 'top':'140px'}}>
           <Book book={this.state.book}  />
         </div>
         <BookIntro book={this.state.book} />
-        <BookContent book={this.state.book} />
+        <BookContent book={this.state.book} style={styles.ModalBookContent}/>
       </Modal>
     );
   }
 });
+
+const styles={
+  ModalBookContent: {
+  }
+}
 
 export default Radium(BookModal);

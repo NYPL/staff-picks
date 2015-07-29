@@ -66,7 +66,7 @@ BookIntro.defaultProps = {
 const styles={
   BookIntro: {
     fontSize: '10px',
-    margin: '-40% 0 0 35%',
+    margin: '4% 0 0 35%',
     '@media (max-width: 414px)': { 
       margin: '0 0 20px 0'
     }
