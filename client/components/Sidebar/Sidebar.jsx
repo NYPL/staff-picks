@@ -14,6 +14,8 @@ let bookContainer = document.getElementById('sidebar');
 Modal.setAppElement(bookContainer);
 Modal.injectCSS();
 
+import { Link } from 'react-router';
+
 let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 class BookDisplayButtons extends React.Component {
@@ -131,12 +133,12 @@ class BookFilters extends React.Component {
       if (elem.show) {
         return (
           <li key={elem.id}>
-            <a onClick={_handleClick.bind(_this, elem)}>
+            <Link to='/' onClick={_handleClick.bind(_this, elem)} query={{filters: elem.attributes.tag}}>
               {elem.attributes.tag}
               <ReactCSSTransitionGroup transitionName='minus' transitionAppear={true}>
                 <span className={'minus-icon ' + active}></span>
               </ReactCSSTransitionGroup>
-            </a>
+            </Link>
           </li>
         );
       }

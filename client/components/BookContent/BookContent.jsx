@@ -1,6 +1,8 @@
 import React from 'react';
 import Radium from 'radium';
 
+import _ from 'underscore';
+
 class TagList extends React.Component {
   constructor(props) {
     super(props);
@@ -9,7 +11,7 @@ class TagList extends React.Component {
   render () {
     var tags = this.props.tags.map(function (tag) {
       return (
-        <li style={{'display': 'inline-block', 'padding': '10px'}}>{tag.id}</li>
+        <li style={{'display': 'inline-block', 'padding': '10px'}}>{tag}</li>
       );
     });
 
@@ -35,7 +37,12 @@ class BookContent extends React.Component {
   render () {
     const book = this.props.book,
       bookTarget = book['staff-pick-item']['attributes']['catalog-slug'],
-      ebookTarget = book['staff-pick-item']['attributes']['ebook-slug'];
+      ebookTarget = book['staff-pick-item']['attributes']['ebook-slug'],
+      tags = _.chain(book['staff-pick-item']['staff-pick-tag'])
+        .pluck('attributes')
+        .pluck('tag')
+        .flatten()
+        .value();
 
     let bookHREF = `https://nypl.bibliocommons.com/item/show/${bookTarget}`,
       ebookHREF = `https://nypl.bibliocommons.com/item/show/${ebookTarget}`,
@@ -52,15 +59,11 @@ class BookContent extends React.Component {
     }
 
     return (
-      <div ref='BookContent' className={this.props.className}>
-        <h2>{book['staff-pick-item']['attributes']['title']}</h2>
-        <p className='author'>By {book['staff-pick-item']['attributes']['author']}</p>
-        <TagList tags={book['staff-pick-item']['relationships']['tags'].data} />
-
+      <div ref='BookContent' className={this.props.className}>      
         <p className='description'>{book.attributes.text}</p>
-
         <div className='staff-pick'>
-          <span className='staff-pick-icon'></span><span>Staff Pick By: {book.attributes['picker-name']}, {book.attributes['location']}</span>
+          <span className='staff-pick-icon'></span>
+          <span className='staff-pick-text'>Staff Pick By: {book.attributes['picker-name']}, {book.attributes['location']}</span>
         </div>
 
         <ul className='borrow'>
