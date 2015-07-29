@@ -234,13 +234,17 @@ span[class*="icon-"] {
 }
 
 .BookContent {
-  margin-left: 30px;
+  float: right;
+  margin: 0 0 0 4%;
   display: inline-block;
   position: absolute;
   width: 520px;
 
   h2 {
     font-size: 3em;
+    @include breakpoint($max, $post-mobile-phone) {
+      margin: 0 0 0 -28%;
+    }
   }
 
   .author {
@@ -358,6 +362,22 @@ body {
     outline: none;
     padding: 30px 20px 20px 30px;
     width: 850px;
+    @include breakpoint($max, $post-mobile-phone) {
+      border: 0px solid #ccc;
+      border-radius: 0px;
+      height: 100%;
+      left: 0px;
+      padding: 20px 10px 20px 10px;
+      top: 50px;
+      width: 100%;
+    }
+  }
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+  z-index: 200;
+  @include breakpoint($max, $post-mobile-phone) {
+    background-color: rgba(255, 255, 255, 0);
   }
 }
 

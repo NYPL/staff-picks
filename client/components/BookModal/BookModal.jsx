@@ -3,6 +3,7 @@ import React from 'react';
 import CloseButton from 'components/Books/CloseButton.jsx';
 import Book from 'components/Book/Book.jsx';
 import BookContent from 'components/BookContent/BookContent.jsx';
+import BookTitle from 'components/BookContent/BookTitle.jsx';
 import _ from 'underscore';
 import Radium from 'radium';
 import Router from 'react-router';
@@ -53,6 +54,7 @@ var BookModal = React.createClass({
     return (
       <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
         <CloseButton onClick={this.closeModal} />
+        <BookTitle book={this.state.book} />
         <div style={{'width':'30%', 'display':'inline-block'}}>
           <Book book={this.state.book}  />
         </div>
