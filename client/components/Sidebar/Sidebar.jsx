@@ -148,7 +148,7 @@ class BookFilters extends React.Component {
 
   render () {
     return (
-      <div className='BookFilters'>
+      <div className='BookFilters' style={this.props.styles}>
         <span className='divider'></span> 
         <h2>What would you like to read?</h2>
         <div className='BookFilters-lists'>
@@ -275,7 +275,7 @@ class Sidebar extends React.Component {
         <h2 className='mobile-filter-btn'><a href='#' onClick={this.openModal}>Filter By Tags</a></h2>
         <BookFilters />
         <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-          <BookFilters />
+          <BookFilters styles={styles.filterModal}/>
         </Modal>
       </div>
     );
@@ -296,6 +296,9 @@ const styles = {
   clearFilters: {
     color: '#0095c8',
     marginTop: '20px'
+  },
+  filterModal: {
+    display: 'block'
   }
 };
 

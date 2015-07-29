@@ -493,6 +493,13 @@ body {
 }
 
 .mobile-filter-btn {
+  font-size: 18px;
+  margin-left: 135px;
+
+  a {
+    text-decoration: none;
+  }
+
   @include breakpoint($min, $post-mobile-phone) {
     display: none;
   }
