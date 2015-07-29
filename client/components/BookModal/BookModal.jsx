@@ -12,6 +12,9 @@ import Router from 'react-router';
 import Modal from 'react-modal';
 import API from '../../utils/ApiService.js';
 
+import BookStore from '../../stores/BookStore.js';
+import BookActions from '../../actions/BookActions.js';
+
 let Navigation = Router.Navigation;
 
 const books = API.getBooks();
@@ -24,17 +27,23 @@ Modal.injectCSS();
 var BookModal = React.createClass({
   getInitialState() {
     let paramID = this.props.params.id,
-      modalBook = {};
+      modalBook = {},
+      age;
 
     _.each(books, function (book) {
       if (book['staff-pick-item']['id'] === paramID) {
+        console.log(book);
         modalBook = book;
+        age = book['staff-pick-age'].attributes.age;
       }
     });
 
+    BookActions.updateFilterAge(age);
+
     return {
       modalIsOpen: true,
-      book: modalBook
+      book: modalBook,
+      age: age
     };
   },
 
@@ -46,12 +55,13 @@ var BookModal = React.createClass({
     });
   },
 
-  closeModal:function () {
+  closeModal: function () {
     this.setState({
       modalIsOpen: false
     });
     this.transitionTo('/');
   },
+
   render: function() {
     return (
       <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>

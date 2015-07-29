@@ -56,8 +56,8 @@ class App extends React.Component {
 }
 
 let routes = (
-    <Route handler={App}>
-      <Route name='modal' path='/:id' handler={BookModal} />
+    <Route handler={App} ignoreScrollBehavior>
+      <Route name='modal' path='/:id' handler={BookModal} ignoreScrollBehavior />
     </Route>
   );
 
