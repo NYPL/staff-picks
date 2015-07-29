@@ -34,7 +34,10 @@ const styles={
       display: 'inline-block',
 	  margin: '0 0 0 0',
 	  height: '60px',
-	  width: '60px'
+	  width: '60px',
+	  '@media (max-width: 414px)': {
+		margin: '10px 0 0 0'
+	  },
 	},
 	facebook: {
 	  backgroundImage: 'url("/client/images/social/social.fb.init.png")',

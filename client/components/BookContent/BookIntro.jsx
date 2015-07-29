@@ -70,8 +70,9 @@ const styles={
     '@media (max-width: 414px)': { 
       display: 'inline-block',
       float: 'right',
+      margin: '-200px 0 0 35%',
       position: 'absolute',
-      top: '160px'
+      
     }
   },
   Author: {

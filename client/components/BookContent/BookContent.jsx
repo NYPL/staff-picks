@@ -63,7 +63,7 @@ class BookContent extends React.Component {
         <p className='description'>{book.attributes.text}</p>
         <div className='staff-pick'>
           <span className='staff-pick-icon'></span>
-          <span>Staff Pick By: {book.attributes['picker-name']}, {book.attributes['location']}</span>
+          <span className='staff-pick-text'>Staff Pick By: {book.attributes['picker-name']}, {book.attributes['location']}</span>
         </div>
 
         <ul className='borrow'>
