@@ -66,13 +66,14 @@ BookIntro.defaultProps = {
 const styles={
   BookIntro: {
     fontSize: '10px',
-    margin: '-20px 0 0 35%',
+    margin: '0 0 0 33%',
+    position: 'absolute',
+    top: '30%',
     '@media (max-width: 414px)': { 
       display: 'inline-block',
       float: 'right',
       margin: '-200px 0 0 35%',
-      position: 'absolute',
-      
+      position: 'absolute'
     }
   },
   Author: {

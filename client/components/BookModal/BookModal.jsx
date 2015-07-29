@@ -90,13 +90,14 @@ const styles={
     },
     width: '30%', 
     display: 'inline-block', 
-    margin: '-90px 0 0 0', 
-    position: 'absolute', 
-    top: '140px'
+    margin: '-40px 0 0 0', 
+    position: 'relative', 
+    top: '0'
   },
   ShareContainer: {
-    position:'relative', 
-    top:'350px',
+    position:'relative',
+    margin: '20px 0 0 0', 
+    top:'0',
     '@media (max-width: 414px)': {
       top: '0'
     }
