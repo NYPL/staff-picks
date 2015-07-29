@@ -234,8 +234,8 @@ span[class*="icon-"] {
 }
 
 .BookContent {
-  float: right;
-  margin: 0 0 0 4%;
+  
+  margin: 20px 0 0 33%;
   display: inline-block;
   position: absolute;
   width: 520px;
@@ -258,6 +258,8 @@ span[class*="icon-"] {
   .description {
     font-size: 1.5em;
     font-size: 15px;
+    line-height: 20px;
+    width: 90%;
   }
 
   .staff-pick {

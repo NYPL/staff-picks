@@ -59,12 +59,8 @@ class BookContent extends React.Component {
     }
 
     return (
-      <div ref='BookContent' className={this.props.className}>  
-        <p className='author'>By {book['staff-pick-item']['attributes']['author']}</p>
-        <TagList tags={tags} />
-
+      <div ref='BookContent' className={this.props.className}>      
         <p className='description'>{book.attributes.text}</p>
-
         <div className='staff-pick'>
           <span className='staff-pick-icon'></span>
           <span>Staff Pick By: {book.attributes['picker-name']}, {book.attributes['location']}</span>

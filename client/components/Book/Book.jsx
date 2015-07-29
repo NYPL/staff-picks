@@ -51,7 +51,7 @@ Book.defaultProps = {
 
 const styles = {
   base: {
-
+    margin: '-10% 0 0 0'
   }
 };
 

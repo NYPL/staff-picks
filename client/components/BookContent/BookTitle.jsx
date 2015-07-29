@@ -54,7 +54,7 @@ BookTitle.defaultProps = {
 const styles={
   BookTitle: {
     fontSize: '3em',
-    margin: '0 0 0 35%',
+    margin: '20px 0 0 35%',
     '@media (max-width: 414px)': { 
       margin: '0 0 20px 0'
     }
