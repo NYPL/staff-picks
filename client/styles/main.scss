@@ -319,16 +319,20 @@ span[class*="icon-"] {
 
 .main-container {
   overflow: auto;
-  padding: 15px 0;
+  padding: 0;
 
   #sidebar {
     float: left;
     padding: 0;
-    margin-right: 30px;
     width: 100%;
 
     @include breakpoint($min, $post-mobile-phone) {
+      margin-right: 30px;
       width: 160px;
+    }
+
+    .sidebar-content {
+      margin-bottom: 30px;
     }
   }
 
@@ -424,7 +428,11 @@ body {
 
 .BookDisplayButtons {
   .BookDisplayButtons-list {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+
+    @include breakpoint($min, $post-mobile-phone) {
+      margin-bottom: 20px;
+    }
 
     li {
       display: inline-block;
@@ -481,6 +489,19 @@ body {
     &.list {
       margin-bottom: 10px;
     }
+  }
+}
+
+.mobile-filter-btn {
+  font-size: 18px;
+  margin-left: 135px;
+
+  a {
+    text-decoration: none;
+  }
+
+  @include breakpoint($min, $post-mobile-phone) {
+    display: none;
   }
 }
 
