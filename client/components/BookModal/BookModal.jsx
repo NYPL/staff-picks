@@ -5,6 +5,7 @@ import Book from 'components/Book/Book.jsx';
 import BookContent from 'components/BookContent/BookContent.jsx';
 import BookTitle from 'components/BookContent/BookTitle.jsx';
 import BookIntro from 'components/BookContent/BookIntro.jsx';
+import BookShare from 'components/BookContent/BookShare.jsx';
 import _ from 'underscore';
 import Radium from 'radium';
 import Router from 'react-router';
@@ -58,6 +59,9 @@ var BookModal = React.createClass({
         <BookTitle book={this.state.book} />
         <div style={{'width':'30%', 'display':'inline-block', 'margin':'-90px 0 0 0', 'position': 'absolute', 'top':'140px'}}>
           <Book book={this.state.book}  />
+        </div>
+        <div style={{'position':'relative', 'top':'350px'}}>
+          <BookShare book={this.state.book} />
         </div>
         <BookIntro book={this.state.book} />
         <BookContent book={this.state.book} style={styles.ModalBookContent}/>
