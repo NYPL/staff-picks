@@ -3,6 +3,9 @@ import React from 'react';
 import CloseButton from 'components/Books/CloseButton.jsx';
 import Book from 'components/Book/Book.jsx';
 import BookContent from 'components/BookContent/BookContent.jsx';
+import BookTitle from 'components/BookContent/BookTitle.jsx';
+import BookIntro from 'components/BookContent/BookIntro.jsx';
+import BookShare from 'components/BookContent/BookShare.jsx';
 import _ from 'underscore';
 import Radium from 'radium';
 import Router from 'react-router';
@@ -53,13 +56,41 @@ var BookModal = React.createClass({
     return (
       <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
         <CloseButton onClick={this.closeModal} />
-        <div style={{'width':'30%', 'display':'inline-block'}}>
-          <Book book={this.state.book}  />
+        <BookTitle book={this.state.book} />
+        <div key='ImageContainer' style={styles.ImageContainer}>
+          <Book book={this.state.book} height={'auto'} width={'90%'} />
         </div>
-        <BookContent book={this.state.book} />
+        <div key='ShareContainer' style={styles.ShareContainer}>
+          <BookShare book={this.state.book} />
+        </div>
+        <BookIntro book={this.state.book} />
+        <BookContent book={this.state.book} style={styles.ModalBookContent}/>
       </Modal>
     );
   }
 });
+
+const styles={
+  ModalBookContent: {
+  },
+  ImageContainer: {
+    '@media (max-width: 414px)': {
+      position: 'relative',
+      top: '0'
+    },
+    width: '30%', 
+    display: 'inline-block', 
+    margin: '-90px 0 0 0', 
+    position: 'absolute', 
+    top: '140px'
+  },
+  ShareContainer: {
+    position:'relative', 
+    top:'350px',
+    '@media (max-width: 414px)': {
+      top: '0'
+    }
+  }
+}
 
 export default Radium(BookModal);
