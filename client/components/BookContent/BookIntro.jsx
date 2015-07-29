@@ -68,7 +68,10 @@ const styles={
     fontSize: '10px',
     margin: '-20px 0 0 35%',
     '@media (max-width: 414px)': { 
-      margin: '0 0 20px 0'
+      display: 'inline-block',
+      float: 'right',
+      position: 'absolute',
+      top: '160px'
     }
   },
   Author: {
@@ -78,7 +81,10 @@ const styles={
   TagList :{
     color: 'rgb(191, 191, 191)',
     fontSize: '14px',
-    margin: '10px 0 0 0'
+    margin: '10px 0 0 0',
+    '@media (max-width: 414px)': { 
+      fontSize: '18px'
+    }
   }
 };
 

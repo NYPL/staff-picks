@@ -57,10 +57,10 @@ var BookModal = React.createClass({
       <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
         <CloseButton onClick={this.closeModal} />
         <BookTitle book={this.state.book} />
-        <div style={styles.ImageContainer}>
+        <div key='ImageContainer' style={styles.ImageContainer}>
           <Book book={this.state.book} height={'auto'} width={'90%'} />
         </div>
-        <div style={{'position':'relative', 'top':'350px'}}>
+        <div key='ShareContainer' style={styles.ShareContainer}>
           <BookShare book={this.state.book} />
         </div>
         <BookIntro book={this.state.book} />
@@ -75,13 +75,21 @@ const styles={
   },
   ImageContainer: {
     '@media (max-width: 414px)': {
-      top: '220px' 
+      position: 'relative',
+      top: '0'
     },
     width: '30%', 
     display: 'inline-block', 
     margin: '-90px 0 0 0', 
     position: 'absolute', 
     top: '140px'
+  },
+  ShareContainer: {
+    position:'relative', 
+    top:'350px',
+    '@media (max-width: 414px)': {
+      top: '0'
+    }
   }
 }
 

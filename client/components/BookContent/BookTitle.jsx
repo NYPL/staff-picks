@@ -35,7 +35,7 @@ const styles={
     fontSize: '3em',
     margin: '20px 0 0 35%',
     '@media (max-width: 414px)': { 
-      margin: '0 0 20px 0'
+      margin: '0 0 30% 0'
     }
   }
 };
