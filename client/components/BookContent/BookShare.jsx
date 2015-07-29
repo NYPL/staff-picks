@@ -34,7 +34,7 @@ const styles={
     display: 'inline-block',
 	  margin: '-12px 0 0 -5px',
 	  position: 'relative',
-	  height: '60px',
+	  height: '61px',
 	  width: '60px',
 	  ':hover': {
       cursor: 'pointer',
