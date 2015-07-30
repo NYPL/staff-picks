@@ -108,8 +108,6 @@ process.on ('SIGTERM', gracefulShutdown);
 // listen for INT signal e.g. Ctrl-C
 process.on ('SIGINT', gracefulShutdown);
 
-process.on ('SIGKILL', gracefulShutdown);
-
 if (env.production === false) {
   var webpack = require('webpack');
   var WebpackDevServer = require('webpack-dev-server');
