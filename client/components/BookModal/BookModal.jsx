@@ -67,13 +67,15 @@ var BookModal = React.createClass({
       <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
         <CloseButton onClick={this.closeModal} />
         <BookTitle book={this.state.book} />
-        <div key='ImageContainer' style={styles.ImageContainer}>
-          <Book book={this.state.book} height={'auto'} width={'90%'} />
+        <div style={styles.LeftColumn}>
+          <div key='ImageContainer' style={styles.ImageContainer}>
+            <Book book={this.state.book} height={'auto'} width={'237px'} />
+          </div>
+          <div key='ShareContainer' style={styles.ShareContainer}>
+            <BookShare book={this.state.book} />
+          </div>
         </div>
-        <div key='ShareContainer' style={styles.ShareContainer}>
-          <BookShare book={this.state.book} />
-        </div>
-        <BookIntro book={this.state.book} />
+       <BookIntro book={this.state.book} />
         <BookContent book={this.state.book} style={styles.ModalBookContent}/>
       </Modal>
     );
@@ -83,22 +85,30 @@ var BookModal = React.createClass({
 const styles={
   ModalBookContent: {
   },
-  ImageContainer: {
+  LeftColumn: {
+    position: 'absolute',
+    top: '20px',
     '@media (max-width: 414px)': {
+      float: 'left',     
+      margin: '30px 20px 10px 0',
       position: 'relative',
-      top: '0'
-    },
-    width: '30%', 
-    display: 'inline-block', 
-    margin: '-90px 0 0 0', 
-    position: 'absolute', 
-    top: '140px'
+      top:'0'
+    }
+  },
+  ImageContainer: {
+    margin: '36px 0 0 0', 
+    position: 'relative', 
+    '@media (max-width: 414px)': {
+      margin: '0', 
+      position: 'relative'
+    }
   },
   ShareContainer: {
-    position:'relative', 
-    top:'350px',
+    position:'relative',
+    margin: '20px 0 0 0', 
+    top:'0',
     '@media (max-width: 414px)': {
-      top: '0'
+      margin: '6px 0 0 0'
     }
   }
 }
