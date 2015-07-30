@@ -398,6 +398,9 @@ body {
 
 .ReactModal__Body--open{
   position: fixed;
+  @include breakpoint($min, $post-mobile-phone) {
+    position: relative;
+  }
 }
 
 .ReactModalPortal .ReactModal__Overlay {
