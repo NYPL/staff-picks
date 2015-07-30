@@ -32,6 +32,7 @@ BookTitle.defaultProps = {
 
 const styles={
   BookTitle: {
+    fontFamily: 'MiloSlabPro, RobotoSlabLight, serif',
     fontSize: '3em',
     margin: '20px 0 0 35%',
     '@media (max-width: 414px)': { 

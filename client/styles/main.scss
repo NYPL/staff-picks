@@ -393,6 +393,11 @@ body {
   }
 }
 
+.ReactModal__Body--open{
+  overflow: hidden;
+  position: fixed;
+}
+
 .ReactModalPortal .ReactModal__Overlay {
   z-index: 200;
   @include breakpoint($max, $post-mobile-phone) {
