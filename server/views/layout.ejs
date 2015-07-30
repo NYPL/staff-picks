@@ -22,6 +22,13 @@
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.1/isotope.pkgd.min.js"></script>
+
+<% if (env.production) { %>
+  <script async src="<%= env.assets.main.js %>"></script>
+<% } else { %>
+  <script src="http://localhost:3000/client/main.js"></script>
+<% } %>
+
   <script>
     (function ($) {
     'use strict';
@@ -612,10 +619,5 @@
 
   </script>
 
-  <% if (env.production) { %>
-    <script async src="<%= env.assets.main.js %>"></script>
-  <% } else { %>
-    <script src="http://localhost:3000/client/main.js"></script>
-  <% } %>
   </body>
 </html>

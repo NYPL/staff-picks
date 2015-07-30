@@ -40,21 +40,6 @@ var options = {
   host = 'dev.refinery.aws.nypl.org',
   data;
 
-// app.get('/parser', function () {
-
-//   parser
-//     .setHost({
-//       api_root: 'dev.refinery.aws.nypl.org',
-//       api_version: 'v0.1'
-//     })
-//     .get(options, function (apiData) {
-//       data = apiData;
-//       var parsedData = parser.parse(data);
-//       console.log(parsedData);
-//     });
-
-// });
-
 app.get('/*', function(req, res) {
   parser
     .setHost({
@@ -82,9 +67,31 @@ app.get('/*', function(req, res) {
 });
 
 var port = Number(process.env.PORT || 3001);
-app.listen(port, function () {
+var server = app.listen(port, function () {
   console.log('server running at localhost:3001, go refresh and see magic');
 });
+
+// this function is called when you want the server to die gracefully
+// i.e. wait for existing connections
+var gracefulShutdown = function() {
+  console.log("Received kill signal, shutting down gracefully.");
+  server.close(function() {
+    console.log("Closed out remaining connections.");
+    process.exit()
+  });
+  
+  // if after 
+  setTimeout(function() {
+    console.error("Could not close connections in time, forcefully shutting down");
+    process.exit()
+  }, 10*1000);
+}
+
+// listen for TERM signal .e.g. kill 
+process.on ('SIGTERM', gracefulShutdown);
+
+// listen for INT signal e.g. Ctrl-C
+process.on ('SIGINT', gracefulShutdown);
 
 if (env.production === false) {
   var webpack = require('webpack');

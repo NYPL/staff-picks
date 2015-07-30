@@ -80,7 +80,7 @@ const styles = {
     height: 'auto',
     margin: '0 auto',
     maxWidth: '900px',
-    overflow: 'auto',
+    overflow: 'hidden',
     position: 'relative',
   },
   HeroImageContainer: {

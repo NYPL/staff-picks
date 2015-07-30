@@ -26,7 +26,8 @@ class BookDisplayButtons extends React.Component {
       displayType: BookStore.getBookDisplay(),
       gridActive: BookStore.getActiveGrid(),
       listActive: BookStore.getActiveList(),
-      filters: BookStore.getFilters()
+      filters: BookStore.getFilters(),
+      age: BookStore.getAge()
     };
 
     this._handleClick = this._handleClick.bind(this);
@@ -125,24 +126,31 @@ class BookFilters extends React.Component {
       _handleClick = this._handleClick;
 
     return list.map(function (elem, i) {
-      let active = 'hide-filter';
+      let active = 'hide-filter',
+        liElement;
       if (elem.active) {
         active = 'show-filter';
       }
 
       if (elem.show) {
-        return (
-          <li key={elem.id}>
-            <Link to='/' onClick={_handleClick.bind(_this, elem)} query={{filters: elem.attributes.tag}}>
+        liElement = (
+          <li key={elem.id} onClick={_handleClick.bind(_this, elem)}>
+            <a >
               {elem.attributes.tag}
               <ReactCSSTransitionGroup transitionName='minus' transitionAppear={true}>
                 <span className={'minus-icon ' + active}></span>
               </ReactCSSTransitionGroup>
-            </Link>
+            </a>
           </li>
         );
+      } else {
+        liElement = (
+          <li key={elem.id} style={styles.grayedOutFilter}>{elem.attributes.tag}</li>
+        );
       }
-      return null;
+
+      return elem.remove ? liElement : null;
+      // <Link to='/' onClick={_handleClick.bind(_this, elem)} query={{filters: elem.attributes.tag}}>
     });
   }
 
@@ -177,8 +185,42 @@ class BookFilters extends React.Component {
   _onChange() {
     let filteredFilters = [],
       activeFilters = BookStore.getFilters(),
+      age = BookStore.getAge(),
       bookElems = BookStore.getUpdatedFilters();
 
+    let updatedBooksElems = [];
+    _.each(bookElems, function (elem) {
+      if (elem.className.indexOf(age) !== -1) {
+        updatedBooksElems.push(elem);
+      }
+    });
+
+    // Update/reset the filters based on a new age
+    if (this.state.age !== age) {
+      this.setState({age: age});
+      _.each(this.state.drivenByFilters, function (filter) {
+        filter.active = false;
+        filter.show = true;
+        filter.remove = false;
+        _.each(updatedBooksElems, function (elem) {
+          if (elem.className.indexOf(filter.id) !== -1) {
+            filter.remove = true;
+          }
+        });
+      });
+      _.each(this.state.themeFilters, function (filter) {
+        filter.active = false;
+        filter.show = true;
+        filter.remove = false;
+        _.each(updatedBooksElems, function (elem) {
+          if (elem.className.indexOf(filter.id) !== -1) {
+            filter.remove = true;
+          }
+        });
+      });
+    }
+
+    // For clearing the filters and unselecting a filter.
     if (!activeFilters.length) {
       _.each(this.state.drivenByFilters, function (filter) {
         filter.active = false;
@@ -194,31 +236,31 @@ class BookFilters extends React.Component {
           filters,
           classes = elem.className;
 
-        _.each(activeFilters, function (filter) {
-          if (classes.indexOf(filter) !== -1) {
-            n -= 1;
-          }
-        });
+        if (classes.indexOf(age) !== -1) {
+          _.each(activeFilters, function (filter) {
+            if (classes.indexOf(filter) !== -1) {
+              n -= 1;
+            }
+          });
 
-        if (n === 0) {
-          filters = classes.split(' ');
-          filteredFilters = _.union(filteredFilters, filters);
+          if (n === 0) {
+            filters = classes.split(' ');
+            filteredFilters = _.union(filteredFilters, filters);
+          }
         }
       });
 
       if (filteredFilters) {
         _.each(this.state.themeFilters, function (filter) {
+          filter.show = true;
           if (_.indexOf(filteredFilters, filter.id) === -1) {
             filter.show = false;
-          } else {
-            filter.show = true;
           }
         });
         _.each(this.state.drivenByFilters, function (filter) {
+          filter.show = true;
           if (_.indexOf(filteredFilters, filter.id) === -1) {
             filter.show = false;
-          } else {
-            filter.show = true;
           }
         });
       }
@@ -299,6 +341,9 @@ const styles = {
   },
   filterModal: {
     display: 'block'
+  },
+  grayedOutFilter: {
+    color: '#bfbfbf'
   }
 };
 
