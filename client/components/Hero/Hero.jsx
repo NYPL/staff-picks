@@ -4,7 +4,6 @@ import Radium from 'radium';
 
 // Component import
 import HeroTitle from 'components/Hero/HeroTitle/HeroTitle.jsx';
-import BookIntro from 'components/Hero//BookIntro/BookIntro.jsx';
 import HeroImage from 'components/Hero/HeroImage/HeroImage.jsx';
 import BookStore from '../../stores/BookStore.js';
 import API from '../../utils/ApiService.js';
@@ -69,11 +68,11 @@ const styles = {
     '@media (max-width: 1200px)': { width: '45%' },
     '@media (min-width: 827px) and (max-width: 979px)': { width: '45%' },
     '@media (min-width: 768px) and (max-width: 826px)': { width: '40%' },
-    '@media (min-wdith: 720px) and (max-width: 767px)': { width: '60%' },
+    '@media (min-width: 720px) and (max-width: 767px)': { width: '60%' },
     '@media (max-width: 719px)': { width: '60%', left: '10%' },
-    '@media (max-width: 414px)': { margin: '5px 0 0 0' },
+    '@media (min-width: 414px)': { margin:'70px 0 40px 60px' },
     float: 'left',
-    margin:'70px 0 40px 60px', 
+    margin: '0',
     position: 'relative',
     width: '45%'
   }
