@@ -74,7 +74,7 @@ class BookContent extends React.Component {
           </li>
           <li style={[ styles.li, ebookStyle ]}>
             <a href={ebookHREF}>
-              <span className='ebook'></span>Borrow the eBook
+              <span className='ebook'></span>Borrow the ebook
             </a>
           </li>
         </ul>
