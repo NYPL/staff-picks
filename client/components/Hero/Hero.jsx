@@ -100,10 +100,11 @@ const styles = {
     '@media (max-width: 1200px)': { width: '45%' },
     '@media (min-width: 827px) and (max-width: 979px)': { width: '45%' },
     '@media (min-width: 768px) and (max-width: 826px)': { width: '40%' },
-    '@media (min-wdith: 720px) and (max-width: 767px)': { width: '60%' },
+    '@media (min-width: 720px) and (max-width: 767px)': { width: '60%' },
     '@media (max-width: 719px)': { width: '60%', left: '10%' },
+    '@media (min-width: 414px)': { margin:'70px 0 40px 60px' },
     float: 'left',
-    margin:'70px 0 40px 60px', 
+    margin: '0',
     position: 'relative',
     width: '45%'
   }
