@@ -57,7 +57,6 @@ class BookContent extends React.Component {
     }
     if (!bookTarget) {
       bookStyle = styles.unavailable;
-      linkStyle = styles.linkUnavailable;
       bookHREF = '#';
     }
 
@@ -76,7 +75,7 @@ class BookContent extends React.Component {
             </a>
           </li>
           <li style={[ styles.li, ebookStyle ]}>
-            <a href={ebookHREF}>
+            <a href={ebookHREF} style={linkStyle}>
               <span className='ebook'></span>Borrow the ebook
             </a>
           </li>
@@ -113,6 +112,7 @@ const styles = {
     background: '#776E64'
   },
   linkUnavailable:{
+    color: '#bfbfbf',
     pointerEvents: 'none'
   }
 };
