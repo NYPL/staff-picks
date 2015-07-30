@@ -82,21 +82,31 @@ app.get('/*', function(req, res) {
 });
 
 var port = Number(process.env.PORT || 3001);
-app.listen(port, function () {
+var server = app.listen(port, function () {
   console.log('server running at localhost:3001, go refresh and see magic');
 });
 
-process.on('SIGINT', function () {
-  console.log( '\nGracefully shutting down from  SIGINT (Crtl-C)' );
-  app.close();
-  process.exit();
-});
+// this function is called when you want the server to die gracefully
+// i.e. wait for existing connections
+var gracefulShutdown = function() {
+  console.log("Received kill signal, shutting down gracefully.");
+  server.close(function() {
+    console.log("Closed out remaining connections.");
+    process.exit()
+  });
+  
+  // if after 
+  setTimeout(function() {
+    console.error("Could not close connections in time, forcefully shutting down");
+    process.exit()
+  }, 10*1000);
+}
 
-process.on('SIGTERM', function () {
-  console.log("Closing");
-  app.close();
-  process.exit(0);
-});
+// listen for TERM signal .e.g. kill 
+process.on ('SIGTERM', gracefulShutdown);
+
+// listen for INT signal e.g. Ctrl-C
+process.on ('SIGINT', gracefulShutdown);  
 
 if (env.production === false) {
   var webpack = require('webpack');
