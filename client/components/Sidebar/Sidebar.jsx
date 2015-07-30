@@ -26,7 +26,8 @@ class BookDisplayButtons extends React.Component {
       displayType: BookStore.getBookDisplay(),
       gridActive: BookStore.getActiveGrid(),
       listActive: BookStore.getActiveList(),
-      filters: BookStore.getFilters()
+      filters: BookStore.getFilters(),
+      age: BookStore.getAge()
     };
 
     this._handleClick = this._handleClick.bind(this);
@@ -132,17 +133,22 @@ class BookFilters extends React.Component {
 
       if (elem.show) {
         return (
-          <li key={elem.id}>
-            <Link to='/' onClick={_handleClick.bind(_this, elem)} query={{filters: elem.attributes.tag}}>
+          <li key={elem.id} onClick={_handleClick.bind(_this, elem)}>
+            <a >
               {elem.attributes.tag}
               <ReactCSSTransitionGroup transitionName='minus' transitionAppear={true}>
                 <span className={'minus-icon ' + active}></span>
               </ReactCSSTransitionGroup>
-            </Link>
+            </a>
           </li>
         );
+      } else {
+        return (
+          <li key={elem.id} style={styles.grayedOutFilter}>{elem.attributes.tag}</li>
+        );
       }
-      return null;
+
+      // <Link to='/' onClick={_handleClick.bind(_this, elem)} query={{filters: elem.attributes.tag}}>
     });
   }
 
@@ -178,6 +184,19 @@ class BookFilters extends React.Component {
     let filteredFilters = [],
       activeFilters = BookStore.getFilters(),
       bookElems = BookStore.getUpdatedFilters();
+
+    // Reset the filters
+    if (this.state.age !== BookStore.getAge()) {
+      this.setState({age: BookStore.getAge()});
+      _.each(this.state.drivenByFilters, function (filter) {
+        filter.active = false;
+        filter.show = true;
+      });
+      _.each(this.state.themeFilters, function (filter) {
+        filter.active = false;
+        filter.show = true;
+      });
+    }
 
     if (!activeFilters.length) {
       _.each(this.state.drivenByFilters, function (filter) {
@@ -299,6 +318,9 @@ const styles = {
   },
   filterModal: {
     display: 'block'
+  },
+  grayedOutFilter: {
+    color: '#bfbfbf'
   }
 };
 
