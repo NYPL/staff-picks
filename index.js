@@ -86,6 +86,18 @@ app.listen(port, function () {
   console.log('server running at localhost:3001, go refresh and see magic');
 });
 
+process.on('SIGINT', function () {
+  console.log( '\nGracefully shutting down from  SIGINT (Crtl-C)' );
+  app.close();
+  process.exit();
+});
+
+process.on('SIGTERM', function () {
+  console.log("Closing");
+  app.close();
+  process.exit(0);
+});
+
 if (env.production === false) {
   var webpack = require('webpack');
   var WebpackDevServer = require('webpack-dev-server');
