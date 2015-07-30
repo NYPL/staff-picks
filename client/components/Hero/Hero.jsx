@@ -9,47 +9,16 @@ import HeroImage from 'components/Hero/HeroImage/HeroImage.jsx';
 import BookStore from '../../stores/BookStore.js';
 import API from '../../utils/ApiService.js';
 
-var featuredBooks = API.getFeaturedPicks();
-
 export default class Hero extends React.Component {
 
   // Constructor used in ES6
   constructor(props) {
     super(props);
     this.state = { 
-      age: BookStore.getAge(),
     };
-    this._onChange = this._onChange.bind(this);
   }
 
-  componentDidMount () {
-    BookStore.addChangeListener(this._onChange);
-  }
-
-  componentWillUnmount () {
-    BookStore.removeChangeListener(this._onChange);
-  }
-
-  _onChange () {
-    this.setState({
-      age: BookStore.getAge()
-    });
-  }
-
-  render() {
-    var BookIntros = function (age) {
-      return (
-        <BookIntro bookTitle={featuredBooks[age]['staff-pick-item']['attributes']['title']}
-          quote={featuredBooks[age]['attributes']['text']} /> 
-      );
-    }(this.state.age);
-
-    var HeroImages = function (age) {
-      let imageSlug = featuredBooks[age]['staff-pick-item']['attributes']['image-slug']
-      let src = '/client/images/staff_pic_bg.jpg';
-      return (<HeroImage src={src} />);
-    }(this.state.age);
-    
+  render() {    
     return (
       <div key='Hero' style={styles.Hero}>
         <div key='HeroContainer' className='hero-container' style={styles.HeroContainer}>
@@ -58,7 +27,7 @@ export default class Hero extends React.Component {
             intro='Explore their book selections—ranging from new releases to timeless classics—by choosing a tag below.'/>
           </div>
           <div key='HeroImageContainer' className='hero-image-container' style={styles.HeroImageContainer}>
-            {HeroImages}
+            <HeroImage src='/client/images/staff_pic_bg.jpg' />
           </div>
         </div>
       </div>
@@ -102,6 +71,7 @@ const styles = {
     '@media (min-width: 768px) and (max-width: 826px)': { width: '40%' },
     '@media (min-wdith: 720px) and (max-width: 767px)': { width: '60%' },
     '@media (max-width: 719px)': { width: '60%', left: '10%' },
+    '@media (max-width: 414px)': { margin: '5px 0 0 0' },
     float: 'left',
     margin:'70px 0 40px 60px', 
     position: 'relative',
