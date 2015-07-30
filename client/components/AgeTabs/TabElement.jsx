@@ -34,6 +34,7 @@ class TabElement extends React.Component {
   // Actions of click event
   _handleClick (age) {
     BookActions.updateFilterAge(age);
+    BookActions.clearFilters();
   }
   
   _onChange () {
