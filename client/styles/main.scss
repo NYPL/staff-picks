@@ -234,13 +234,14 @@ span[class*="icon-"] {
 }
 
 .BookContent {
-  margin: 20px 0 0 33%;
+  margin: 20px 0 0 35%;
   display: inline-block;
-  position: absolute;
+  position: relative;
   width: 520px;
   @include breakpoint($max, $post-mobile-phone) {
+    clear: both;
     display: block;
-    margin: 20px auto 0 auto;
+    margin: 0 auto;
     width: 100%;
   }
 
@@ -369,9 +370,9 @@ body {
     min-height: 500px;
     z-index: 2000;
     position: absolute;
-    top: 20%;
+    top: 0;
     left: 15%;
-    bottom: 60%;
+    bottom: 0;
     border: 1px solid #ccc;
     background: #fff;
     overflow: auto;
@@ -379,12 +380,15 @@ body {
     border-radius: 4px;
     outline: none;
     padding: 30px 20px 20px 30px;
+    position: relative;
     width: 850px;
+    margin: 190px 0 0 0;
     @include breakpoint($max, $post-mobile-phone) {
       border: 0px solid #ccc;
       border-radius: 0px;
       height: 100%;
       left: 0px;
+      margin: 0;
       padding: 20px 10px 20px 10px;
       top: 50px;
       width: 100%;
@@ -392,16 +396,23 @@ body {
   }
 }
 
+.ReactModal__Body--open{
+  position: fixed;
+  @include breakpoint($min, $post-mobile-phone) {
+    position: relative;
+  }
+}
+
 .ReactModalPortal .ReactModal__Overlay {
   z-index: 200;
   @include breakpoint($max, $post-mobile-phone) {
     background-color: rgba(255, 255, 255, 0);
+    overflow: auto;
   }
 }
 
 .month-picker {
   font-size: 12px;
-
   a {
     color: $dark-lib-gray;
     text-decoration: none;

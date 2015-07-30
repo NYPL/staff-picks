@@ -19,7 +19,7 @@ class CloseButton extends React.Component {
     return (
       <SimpleButton style={styles.CloseButton}
         id='close-button' 
-        label=''
+        label='RETURN TO STAFF PICKS'
         onClick={this._handleClick} />
     );
   }
@@ -42,7 +42,7 @@ const styles = {
       fontSize: '1.3em',
       height: 'auto',
       margin: '0 0 20px 0',
-      padding: '5px 0 30px 40px',
+      padding: '5px 4px 30px 36px',
       width: '100%' 
     },
     backgroundImage: 'url("/client/images/icons/gray_x_button.svg")',
