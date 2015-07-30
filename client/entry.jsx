@@ -28,6 +28,7 @@ import Router from 'react-router';
 import BookModal from 'components/BookModal/BookModal.jsx';
 
 let Route = Router.Route;
+let NotFoundRoute = Router.NotFoundRoute;
 let RouteHandler = Router.RouteHandler;
 
 class App extends React.Component {
@@ -56,8 +57,10 @@ class App extends React.Component {
 }
 
 let routes = (
-    <Route handler={App} ignoreScrollBehavior>
-      <Route name='modal' path='/:id' handler={BookModal} ignoreScrollBehavior />
+    <Route path='/' handler={App} ignoreScrollBehavior>
+      <Route name='modal' path='/:id' handler={BookModal} ignoreScrollBehavior>
+        <NotFoundRoute handler={Error404Page} />
+      </Route>
     </Route>
   );
 

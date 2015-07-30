@@ -40,21 +40,6 @@ var options = {
   host = 'dev.refinery.aws.nypl.org',
   data;
 
-// app.get('/parser', function () {
-
-//   parser
-//     .setHost({
-//       api_root: 'dev.refinery.aws.nypl.org',
-//       api_version: 'v0.1'
-//     })
-//     .get(options, function (apiData) {
-//       data = apiData;
-//       var parsedData = parser.parse(data);
-//       console.log(parsedData);
-//     });
-
-// });
-
 app.get('/*', function(req, res) {
   parser
     .setHost({
