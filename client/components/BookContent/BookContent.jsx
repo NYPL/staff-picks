@@ -47,14 +47,17 @@ class BookContent extends React.Component {
     let bookHREF = `https://nypl.bibliocommons.com/item/show/${bookTarget}`,
       ebookHREF = `https://nypl.bibliocommons.com/item/show/${ebookTarget}`,
       bookStyle = styles.available,
-      ebookStyle = styles.available;
+      ebookStyle = styles.available,
+      linkStyle;
 
     if (!ebookTarget) {
       ebookStyle = styles.unavailable;
+      linkStyle = styles.linkUnavailable;
       ebookHREF = '#';
     }
     if (!bookTarget) {
       bookStyle = styles.unavailable;
+      linkStyle = styles.linkUnavailable;
       bookHREF = '#';
     }
 
@@ -108,6 +111,9 @@ const styles = {
   },
   unavailable: {
     background: '#776E64'
+  },
+  linkUnavailable:{
+    pointerEvents: 'none'
   }
 };
 
