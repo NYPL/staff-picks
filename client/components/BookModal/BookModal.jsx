@@ -87,15 +87,20 @@ const styles={
   },
   LeftColumn: {
     position: 'absolute',
-    top: '20px'
+    top: '20px',
+    '@media (max-width: 414px)': {
+      float: 'left',     
+      margin: '30px 20px 10px 0',
+      position: 'relative',
+      top:'0'
+    }
   },
   ImageContainer: {
-    width: '30%',
     margin: '36px 0 0 0', 
     position: 'relative', 
     '@media (max-width: 414px)': {
-      position: 'relative',
-      top: '0'
+      margin: '0', 
+      position: 'relative'
     }
   },
   ShareContainer: {
@@ -103,7 +108,7 @@ const styles={
     margin: '20px 0 0 0', 
     top:'0',
     '@media (max-width: 414px)': {
-      top: '0'
+      margin: '6px 0 0 0'
     }
   }
 }

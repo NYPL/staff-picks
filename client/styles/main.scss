@@ -239,8 +239,9 @@ span[class*="icon-"] {
   position: relative;
   width: 520px;
   @include breakpoint($max, $post-mobile-phone) {
+    clear: both;
     display: block;
-    margin: 20px auto 0 auto;
+    margin: 0 auto;
     width: 100%;
   }
 

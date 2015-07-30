@@ -41,7 +41,7 @@ const styles={
       zIndex: '99'
 	  },
 	  '@media (max-width: 414px)': {
-			margin: '10px 0 0 -5px',
+			margin: '0 0 0 -5px',
 	  },
 	},
 	facebook: {
