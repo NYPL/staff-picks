@@ -397,7 +397,6 @@ body {
 }
 
 .ReactModal__Body--open{
-  overflow: hidden;
   position: fixed;
 }
 
@@ -405,12 +404,12 @@ body {
   z-index: 200;
   @include breakpoint($max, $post-mobile-phone) {
     background-color: rgba(255, 255, 255, 0);
+    overflow: auto;
   }
 }
 
 .month-picker {
   font-size: 12px;
-
   a {
     color: $dark-lib-gray;
     text-decoration: none;
