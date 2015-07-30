@@ -234,11 +234,10 @@ span[class*="icon-"] {
 }
 
 .BookContent {
-  margin: 0 0 0 33%;
+  margin: 20px 0 0 35%;
   display: inline-block;
-  position: absolute;
+  position: relative;
   width: 520px;
-  top: 50%;
   @include breakpoint($max, $post-mobile-phone) {
     display: block;
     margin: 20px auto 0 auto;
