@@ -370,9 +370,9 @@ body {
     min-height: 500px;
     z-index: 2000;
     position: absolute;
-    top: 20%;
+    top: 0;
     left: 15%;
-    bottom: 60%;
+    bottom: 0;
     border: 1px solid #ccc;
     background: #fff;
     overflow: auto;
@@ -380,12 +380,15 @@ body {
     border-radius: 4px;
     outline: none;
     padding: 30px 20px 20px 30px;
+    position: relative;
     width: 850px;
+    margin: 190px 0 0 0;
     @include breakpoint($max, $post-mobile-phone) {
       border: 0px solid #ccc;
       border-radius: 0px;
       height: 100%;
       left: 0px;
+      margin: 0;
       padding: 20px 10px 20px 10px;
       top: 50px;
       width: 100%;
