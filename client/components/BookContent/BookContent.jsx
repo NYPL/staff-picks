@@ -3,35 +3,10 @@ import Radium from 'radium';
 
 import _ from 'underscore';
 
-class TagList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render () {
-    var tags = this.props.tags.map(function (tag) {
-      return (
-        <li style={{'display': 'inline-block', 'padding': '10px'}}>{tag}</li>
-      );
-    });
-
-    return (
-      <div>
-        <p>Filed under:</p>
-        <ul style={{'listStyle': 'none'}}>
-          {tags}
-        </ul>
-      </div>
-    );
-  }
-};
-
 class BookContent extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
-
-    this._handleClick = this._handleClick.bind(this);
   }
 
   render () {
@@ -47,15 +22,24 @@ class BookContent extends React.Component {
     let bookHREF = `https://nypl.bibliocommons.com/item/show/${bookTarget}`,
       ebookHREF = `https://nypl.bibliocommons.com/item/show/${ebookTarget}`,
       bookStyle = styles.available,
-      ebookStyle = styles.available;
+      ebookStyle = styles.available,
+      bookLinkStyle,
+      ebooklinkStyle,
+      bookIcon,
+      ebookIcon,
+      emptyLink;
 
     if (!ebookTarget) {
       ebookStyle = styles.unavailable;
-      ebookHREF = '#';
+      ebookIcon = 'disabled';
+      ebooklinkStyle = styles.linkUnavailable;
+      ebookHREF = emptyLink;
     }
     if (!bookTarget) {
       bookStyle = styles.unavailable;
-      bookHREF = '#';
+      bookIcon = 'disabled';
+      booklinkStyle = styles.linkUnavailable;
+      bookHREF = emptyLink;
     }
 
     return (
@@ -68,23 +52,18 @@ class BookContent extends React.Component {
 
         <ul className='borrow'>
           <li style={[ styles.li, bookStyle ]}>
-            <a href={bookHREF}>
-              <span className='checkout'></span>Request the book
+            <a href={bookHREF} style={bookLinkStyle}>
+              <span className={`checkout ${bookIcon}`}></span>Request the book
             </a>
           </li>
           <li style={[ styles.li, ebookStyle ]}>
-            <a href={ebookHREF}>
-              <span className='ebook'></span>Borrow the eBook
+            <a href={ebookHREF} style={ebooklinkStyle}>
+              <span className={`ebook ${ebookIcon}`}></span>Borrow the ebook
             </a>
           </li>
         </ul>
-
       </div>
     );
-  }
-
-  _handleClick (e) {
-    e.preventDefault();
   }
 };
 
@@ -95,9 +74,7 @@ BookContent.defaultProps = {
 };
 
 const styles = {
-  base: {
-
-  },
+  base: {},
   li: {
     borderRadius: '5px',
     marginRight: '20px',
@@ -107,7 +84,11 @@ const styles = {
     background: '#0095c8'
   },
   unavailable: {
-    background: '#776E64'
+    background: '#a5a4a4'
+  },
+  linkUnavailable:{
+    color: '#cdcdcd',
+    cursor: 'default'
   }
 };
 
