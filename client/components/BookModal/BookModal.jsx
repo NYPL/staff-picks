@@ -69,10 +69,15 @@ var BookModal = React.createClass({
      let imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
      
      var tags = [
-      {name: 'description', content: this.state.book['staff-pick-item']['attributes']['title']},
-      {itemProp: 'name', content: this.state.book['staff-pick-item']['attributes']['title']},
+      {itemProp: 'name', content: title},
       {itemProp: 'description', content: this.state.book.attributes.text},
-      {itemProp: 'image', content: imageLink}
+      {itemProp: 'image', content: imageLink},
+      {property: "og:title", content: title},
+      {property: "og:type", content: "website"},
+      {property: "og:url", content: window.location.href},
+      {property: "og:image", content: imageLink},
+      {property: "og:description", content: this.state.book.attributes.text},
+      {property: "og:site_name", content: "NYPL Staff Picks"}
     ]
     return (
       <div>
