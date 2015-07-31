@@ -70,9 +70,10 @@ const styles={
     position: 'relative',
     top: '30%',
     '@media (max-width: 414px)': { 
-      margin: '30px 0 0 64%',
+      left: '-60px',
       position: 'relative',
-      top: '0'
+      top: '2px',
+      width:'70%'
     }
   },
   Author: {
