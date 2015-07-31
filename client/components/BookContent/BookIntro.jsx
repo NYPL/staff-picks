@@ -30,14 +30,10 @@ class BookIntro extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
-
-    this._handleClick = this._handleClick.bind(this);
   }
 
   render () {
       const book = this.props.book,
-      bookTarget = book['staff-pick-item']['attributes']['catalog-slug'],
-      ebookTarget = book['staff-pick-item']['attributes']['ebook-slug'],
       tags = _.chain(book['staff-pick-item']['staff-pick-tag'])
         .pluck('attributes')
         .pluck('tag')
@@ -50,10 +46,6 @@ class BookIntro extends React.Component {
         <TagList tags={tags} style={styles.TagList} />
       </div>
     );
-  }
-
-  _handleClick (e) {
-    e.preventDefault();
   }
 };
 

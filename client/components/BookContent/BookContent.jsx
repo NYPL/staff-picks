@@ -3,35 +3,10 @@ import Radium from 'radium';
 
 import _ from 'underscore';
 
-class TagList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render () {
-    var tags = this.props.tags.map(function (tag) {
-      return (
-        <li style={{'display': 'inline-block', 'padding': '10px'}}>{tag}</li>
-      );
-    });
-
-    return (
-      <div>
-        <p>Filed under:</p>
-        <ul style={{'listStyle': 'none'}}>
-          {tags}
-        </ul>
-      </div>
-    );
-  }
-};
-
 class BookContent extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
-
-    this._handleClick = this._handleClick.bind(this);
   }
 
   render () {
@@ -90,11 +65,6 @@ class BookContent extends React.Component {
       </div>
     );
   }
-
-
-  _handleClick (e) {
-    e.preventDefault();
-  }
 };
 
 BookContent.defaultProps = {
@@ -104,9 +74,7 @@ BookContent.defaultProps = {
 };
 
 const styles = {
-  base: {
-
-  },
+  base: {},
   li: {
     borderRadius: '5px',
     marginRight: '20px',
