@@ -555,9 +555,13 @@ body {
   }
 
   .BookFilters-lists {
+    text-align: left;
     font-size: 12px;
-    text-align: right;
     padding-top: 20px;
+
+    @include breakpoint($min, $post-mobile-phone) {
+      text-align: right;
+    }
 
     ul {
       padding: 10px 0;
