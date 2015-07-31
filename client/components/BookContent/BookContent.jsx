@@ -52,19 +52,19 @@ class BookContent extends React.Component {
       ebooklinkStyle,
       bookIcon,
       ebookIcon,
-      emptyVar;
+      emptyLink;
 
     if (!ebookTarget) {
       ebookStyle = styles.unavailable;
       ebookIcon = 'disabled';
       ebooklinkStyle = styles.linkUnavailable;
-      ebookHREF = emptyVar;
+      ebookHREF = emptyLink;
     }
     if (!bookTarget) {
       bookStyle = styles.unavailable;
       bookIcon = 'disabled';
       booklinkStyle = styles.linkUnavailable;
-      bookHREF = emptyVar;
+      bookHREF = emptyLink;
     }
 
     return (
@@ -116,10 +116,10 @@ const styles = {
     background: '#0095c8'
   },
   unavailable: {
-    background: '#776E64'
+    background: '#a5a4a4'
   },
   linkUnavailable:{
-    color: '#bfbfbf',
+    color: '#cdcdcd',
     cursor: 'default'
   }
 };
