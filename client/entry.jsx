@@ -2,6 +2,8 @@
 import 'styles/main.scss';
 import React from 'react/addons';
 
+import DocMeta from 'react-doc-meta';
+
 // NYPL Components
 import Header from 'components/HeaderOld/Header.jsx';
 import Hero from 'components/Hero/Hero.jsx';
@@ -11,6 +13,8 @@ import Error404Page from 'components/Error404Page/Error404Page.jsx';
 
 import Books from 'components/Books/Books.jsx';
 import Sidebar from 'components/Sidebar/Sidebar.jsx';
+
+import MetaTags from 'components/MetaTags/MetaTags.jsx';
 
 // Utilities
 import API from 'utils/ApiService';
@@ -37,8 +41,17 @@ class App extends React.Component {
   }
 
   render () {
+
+ var tags = [
+      {name: "description", content: "lorem ipsum dolor"},
+      {itemProp: "name", content: "The Name or Title Here"},
+      {itemProp: "description", content: "This is the page description"},
+      {itemProp: "image", content: "http://www.example.com/image.jpg"}
+    ]
+
     return (
       <div>
+        <DocMeta tags={tags} />
         <RouteHandler />
         <div id='age-tabs' className='age-tabs'>
           <AgeTabs />

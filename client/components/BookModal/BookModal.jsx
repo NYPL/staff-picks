@@ -1,4 +1,5 @@
 import React from 'react';
+import DocMeta from 'react-doc-meta';
 
 import CloseButton from 'components/Books/CloseButton.jsx';
 import Book from 'components/Book/Book.jsx';
@@ -63,7 +64,15 @@ var BookModal = React.createClass({
   },
 
   render: function() {
+     var tags = [
+      {name: "description", content: "this is modal"},
+      {itemProp: "name", content: "modal"},
+      {itemProp: "description", content: "This is the modal description"},
+      {itemProp: "image", content: "http://www.example.com/image.jpg"}
+    ]
     return (
+      <div>
+      <DocMeta tags={tags} />
       <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
         <CloseButton onClick={this.closeModal} />
         <BookTitle book={this.state.book} />
@@ -78,6 +87,7 @@ var BookModal = React.createClass({
         <BookIntro book={this.state.book} />
         <BookContent book={this.state.book} style={styles.ModalBookContent}/>
       </Modal>
+      </div>
     );
   }
 });
