@@ -15,6 +15,7 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
+    cookie.save('bc_username', 'edwinguzman');
     this.state = {
       data: this.props.data,
       username: this._login(),
@@ -26,6 +27,7 @@ class Header extends React.Component {
     this._handleClick = this._handleClick.bind(this);
     this._login = this._login.bind(this);
     this._removeSSOLogin = this._removeSSOLogin.bind(this);
+    this._handleMobileLogOut = this._handleMobileLogOut.bind(this);
   }
 
   componentDidMount () {
@@ -279,8 +281,14 @@ class Header extends React.Component {
   }
 
   render () {
-    let showDialog = this.state.showDialog;
+    let showDialog = this.state.showDialog,
+      downArrow = null;
     const classes = cx({ show: showDialog, hide: !showDialog });
+
+    if (this.state.logged_in) {
+      downArrow = <img className="logged-in-arrow"
+        src="http://www.nypl.org/sites/all/themes/nypl_new/images/site-icons/down-triangle_15.png" />
+    }
 
     return (
       <div>
@@ -312,12 +320,11 @@ class Header extends React.Component {
               </div>
             </div>
 
-            <SimpleButton
-              id='login'
-              className='login-button'
-              label={this.state.username || 'Sign In'}
-              style={styles.SimpleButton}
-              onClick={this._handleClick} />
+            <a id='login' className='login-button'
+              style={styles.SimpleButton} onClick={this._handleClick}>
+              {this.state.username || 'Sign In'}
+              {downArrow}
+            </a>
 
             <a className='donate-button' href='https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&JServSessionIdr003=dwcz55yj27.app304a&s_src=FRQ14ZZ_SWBN'>
               DONATE
@@ -688,7 +695,9 @@ class Header extends React.Component {
               </li>
 
               <li className="mobile-login">
-                <a href="" onClick={this._handleClick}>Log In</a>
+                <a href="" onClick={this._handleMobileLogOut}>
+                  {this.state.logged_in ? 'Log Out' : 'Log In'}
+                </a>
               </li>
             </ul>
           </div>
@@ -704,6 +713,18 @@ class Header extends React.Component {
 
   _removeSSOLogin() {
     this.setState({showDialog: false});
+  }
+
+  _handleMobileLogOut(e) {
+    e.preventDefault();
+    let current_location = window.location.href,
+      logoutUrl = `https://nypl.bibliocommons.com/user/logout?destination=${current_location}`;
+
+    if (this.state.logged_in) {
+      window.location = logoutUrl;
+    } else {
+      this.setState({showDialog: !this.state.showDialog});
+    }
   }
 
   _login() {
