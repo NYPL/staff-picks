@@ -7,6 +7,8 @@ import SimpleButton from '../Buttons/SimpleButton.jsx';
 import cookie from 'react-cookie';
 import cx from 'classnames';
 
+import SSOformOld from '../SSOform/SSOformOld.jsx';
+
 class Header extends React.Component {
 
   // Constructor used in ES6
@@ -26,9 +28,256 @@ class Header extends React.Component {
     this._login = this._login.bind(this);
   }
 
+  componentDidMount () {
+    $('.nav-open-button').click(function () {
+      $(this).toggleClass('open');
+      $('.search-open-button').removeClass('open');
+      $('#search-block-form-input').removeClass('open-search');
+      $('#search-top').removeClass('open');
+      $('#main-nav').toggleClass('open-navigation');
+      return false;
+    });
+
+    // For mobile devices: opens/closes the search block.  
+    // If the drop down menu is opened, it will close.
+    $('.search-open-button').click(function () {
+      $(this).toggleClass('open');
+      $('.nav-open-button').removeClass('open');
+      $('#main-nav').removeClass('open-navigation');
+      $('#search-block-form-input').toggleClass('open-search');
+      $('#search-top').toggleClass('open');
+      return false;
+    });
+
+    $('.dropDown').hover(
+      function () {
+        $(this).addClass('openDropDown');
+      },
+      function () {
+        $(this).removeClass('openDropDown');
+      }
+    );
+
+    (function ($) {
+
+      var o = {}, methods = {
+        init: function (options) {
+          // Close open pseudo-select when user clicks outside
+          (function (search) {
+            $('html').click(function () {
+              search.each(function () {
+                $(this).find('.pseudo-select')
+                  .removeClass('open');
+                $(this).find('.error').removeClass('error');
+              });
+            });
+          }(this));
+
+          return this.each(function () {
+            var lmnt = $(this),
+              mobile_hidden = lmnt.find('.hidden-xs').eq(0);
+
+            o.term = lmnt.find('#search-block-form-input');
+            o.search_button = lmnt.find('.search-button');
+            o.choices = lmnt.find('.pseudo-select');
+            o.mobile_flag = lmnt.find('.hidden-xs').eq(0);
+            o.prompt = {
+              default_val: o.term.attr("placeholder"),
+              catalog: "Search the catalog",
+              site: "Search NYPL.org"
+            };
+
+            // Don't let clicks get out of the search box
+            lmnt.click(function (e) {
+              e.stopPropagation();
+            });
+
+            // Override default submit, fire search button click event 
+            // instead
+            lmnt.find('form').submit(function () {
+              o.search_button.click();
+              return false;
+            });
+
+            // Open search scope pane when you click into the
+            // search input
+            o.term.focus(function (e) {
+              o.choices.addClass('open');
+
+              // Add google analytics tracking (Category, Action, Label)
+              //ga('send', 'event', 'Header Search', 'Focused', 'Search Box');
+            });
+
+            // If the error class has been set on the input box, remove it
+            // when the user clicks into it
+            o.term.focus(function () {
+              methods.clear_error();
+            });
+
+            // Setup click action on submit button.
+            lmnt.find('.search-button').click(function () {
+              return methods.do_search();
+            });
+
+            // Setup click action on radio butons
+            o.choices.find('li input').click(function () {
+              // Track selected radio button (catalog or nypl.org)
+              //ga('send', 'event', 'Header Search', 'Select', methods.get_choice());
+              methods.set_prompt(this);
+            });
+
+            // Setup click action on list items (will be active when items are
+            // as buttons on narrow screens
+            o.choices.find('li').click(function () {
+              if (methods.is_mobile()) {
+                if (methods.search_term().length === 0) {
+                  methods.set_error();
+                } else {
+                  methods.do_search(methods.get_choice(this));
+                }
+              }
+            });
+          });
+        },
+
+        // Set search box placeholder based on selected item
+        set_prompt: function (lmnt) {
+          var item = $(lmnt).closest('li');
+          if (item.hasClass('search-the-catalog')) {
+            return o.term.attr('placeholder', o.prompt.catalog);
+          }
+
+          if (item.hasClass('search-the-website')) {
+            return o.term.attr('placeholder', o.prompt.site);
+          }
+
+          return o.term.attr('placeholder', o.prompt.default_val);
+        },
+
+        // Get the search term from the input box. Returns '' if the
+        // term is undefined
+        search_term: function () {
+          return $.trim(o.term.val());
+        },
+
+        // Set error state in the search input box
+        set_error: function (err) {
+          if (err === undefined) {
+            err = 'Please enter a search term';
+          }
+          return o.term.addClass('error').attr('placeholder', err);
+        },
+
+        // Clear error state in the search input box
+        clear_error: function () {
+          return o.term.removeClass('error').attr('placeholder', '');
+        },
+
+        // The element referred to by mobile_flag should be hidden by
+        // a media query. Checking whether or not it is visible will tell
+        // us if that mediq query is active
+        is_mobile: function () {
+          return !o.mobile_flag.is(':visible');
+        },
+
+        // Get text of the active search scope selection.
+        // choice: optional element to use
+        get_choice: function (choice) {
+          if (choice === undefined) {
+            choice = o.choices.find('input[type=radio]:checked').parent();
+          }
+          return $.trim($(choice).text()).toLowerCase();
+        },
+
+        // Execute the search
+        do_search: function (scope) {
+          var term = methods.search_term(),
+            target;
+
+          if (scope === undefined) {
+            scope = methods.get_choice();
+          }
+
+          // Don't perform search if no term has been entered
+          if (term.length === 0) {
+            methods.set_error();
+
+            // Add google analytics tracking for Empty Search
+            //ga('send', 'event', 'Header Search', 'Empty Search', '');
+            return false;
+          }
+
+          if (scope === 'nypl.org') {
+            target = 'http://www.nypl.org/search/apachesolr_search/' + term;
+
+            // Add google analytics tracking on submit for NYPL.org
+            //ga('send', 'event', 'Header Search', 'Submit Search', term);
+          } else {
+            // Bibliocommons by default
+            target = 'http://nypl.bibliocommons.com/search?t=smart&q='
+              + term + '&commit=Search&searchOpt=catalogue';
+
+            // Add google analytics tracking on submit for Catalog Search
+            //ga('send', 'event', 'Header Search', 'Submit Catalog Search', term);
+          }
+
+          window.location = target;
+          return false;
+        },
+
+        destroy : function () {}
+      };
+
+      $.fn.nypl_search = function (method) {
+        if (methods[method]) {
+          return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+        }
+
+        if (typeof method === 'object' || !method) {
+          return methods.init.apply(this, arguments);
+        }
+
+        $.error('Method ' +  method + ' does not exist');
+      };
+    }(jQuery));
+
+    var defaultInputText = 'Find books, music, movies and more',
+      defaultInputText2 = 'NYPL events, locations and more',
+      header_search = jQuery('#search-top').nypl_search();
+
+    $('#catalog-redirect-form').submit(function () {
+      var searchTerm = $(this).find('input#catalog-search-form-input').val(),
+        formAction = $(this).attr('action'),
+        catalogRedirect = formAction + '?t=smart&q=' + searchTerm +
+          '&commit=Search&searchOpt=catalogue';
+      window.location = catalogRedirect;
+      return false;
+    });
+
+    var enews_email = $('#header-news_signup input[type=email]'),
+      enews_submit = $('#header-news_signup input[type=submit]');
+    
+    enews_email.focus(function () {
+      $('.newsletter_policy').slideDown();
+    });
+
+    enews_email.blur(function () {
+      $('.newsletter_policy').slideUp();
+    });
+
+    enews_submit.click(function () {
+      if (enews_email.val() === '') {
+        enews_email.focus();
+        return false;
+      }
+    });
+
+
+  }
+
   render () {
     let showDialog = this.state.showDialog;
-    const classes =  cx({ show: showDialog, hide: !showDialog });
+    const classes = cx({ show: showDialog, hide: !showDialog });
 
     return (
       <div>
@@ -71,68 +320,12 @@ class Header extends React.Component {
               DONATE
             </a>
 
-            <div className='sso-login'>
-              {!this.state.logged_in ?
-                <div className='login-form'> 
-                  <form action="/" method="post" id="bc-sso-login-form--2" acceptCharset="UTF-8">
-                    <div>
-                      <div className="form-item form-type-textfield form-item-name">
-                        <label htmlFor="username">Username or bar code: </label>
-                        <input type="text" id="username" name="name" value="" size="60" maxLength="128" className="form-text" autoComplete="off"
-                          style={{'backgroundImage': 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAABmJLR0QA/wD/AP+g' +
-                            'vaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QsPDiIqO1Am6gAAAb1JREFUOMvNkk1rU0EUhp8zd0gCrdKFNgiCFatiIYgUKdW6aikuh' +
-                            'IJF6kJcdFFEXAclzM0XJH9A6EL8BSoqZlEQCl0GEQU/qApdiYouKmgUbu7luGgC+boUuvLdvcPMc86c88J/p2w2e9g5d7btnXNTzrlM3H3TaZxzt1' +
-                            'Kp1KaI3AcEEBFZFZFXvu9XBgFsjw9EZAjIOOeWVDUUkTMAqvppEEB6ve/7GyJyAfioqpGInALWi8XibCwgl8sdMcbsbzabf621Y8aYNRHxWpUjYFF' +
-                            'Vv4vIcBiGPyqVyuuuL1hrbwM3kslkf4Ud0BORnWattfeAld4hmr1uTVrTn1TVg6r6U0RGPc97DJh21V0Bncrn88+BOVV9Y4zp2v/w0RkWzo2w8aDG' +
-                            '52BwDq4Ccy1b7iInJrh2fZbx8QxjQzFBAk4Aoaq+K5VKDztec3H5MmkAIppxSSyXy6UgCE5HUXQT0Pb58UvLTB34Qm1tE4CwEZ9EqtXq++6TUaYn0' +
-                            'xD9YuZ8Gkgwv7LA1t2nbA8C9OsPH16+peGFpA6dZGQfbH/9RiOug379pl57RB1ITCxy58oxXjyrE8StsVOFQkF3w/8DCTuL1wm1OYIAAAAASUVORK' +
-                            '5CYII=)',
-                            'backgroundAttachment': 'scroll',
-                            'backgroundPosition': '100% 50%',
-                            'backgroundRepeat': 'no-repeat'}} />
-                      </div>
-                      <div className="form-item form-type-password form-item-user-pin">
-                        <label htmlFor="pin">PIN: </label>
-                        <input type="password" id="pin" name="user_pin" size="60" maxLength="128" className="form-text" autoComplete="off"
-                          style={{'backgroundImage': 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAABmJLR0QA/wD/AP+g' +
-                            'vaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QsPDiIqO1Am6gAAAb1JREFUOMvNkk1rU0EUhp8zd0gCrdKFNgiCFatiIYgUKdW6aikuh' +
-                            'IJF6kJcdFFEXAclzM0XJH9A6EL8BSoqZlEQCl0GEQU/qApdiYouKmgUbu7luGgC+boUuvLdvcPMc86c88J/p2w2e9g5d7btnXNTzrlM3H3TaZxzt1' +
-                            'Kp1KaI3AcEEBFZFZFXvu9XBgFsjw9EZAjIOOeWVDUUkTMAqvppEEB6ve/7GyJyAfioqpGInALWi8XibCwgl8sdMcbsbzabf621Y8aYNRHxWpUjYFF' +
-                            'Vv4vIcBiGPyqVyuuuL1hrbwM3kslkf4Ud0BORnWattfeAld4hmr1uTVrTn1TVg6r6U0RGPc97DJh21V0Bncrn88+BOVV9Y4zp2v/w0RkWzo2w8aDG' +
-                            '52BwDq4Ccy1b7iInJrh2fZbx8QxjQzFBAk4Aoaq+K5VKDztec3H5MmkAIppxSSyXy6UgCE5HUXQT0Pb58UvLTB34Qm1tE4CwEZ9EqtXq++6TUaYn0' +
-                            'xD9YuZ8Gkgwv7LA1t2nbA8C9OsPH16+peGFpA6dZGQfbH/9RiOug379pl57RB1ITCxy58oxXjyrE8StsVOFQkF3w/8DCTuL1wm1OYIAAAAASUVORK' +
-                            '5CYII=)',
-                            'backgroundAttachment': 'scroll',
-                            'backgroundPosition': '100% 50%',
-                            'backgroundRepeat': 'no-repeat'}} />
-                      </div>
-                      <div className="form-item form-type-checkbox form-item-remember-me">
-                        <input type="checkbox" id="remember_me" name="remember_me" value="1" className="form-checkbox" /> <label className="option" htmlFor="remember_me">Remember me </label>
-                      </div>
-                      <input type="hidden" name="destination" value="http://www.nypl.org/" />
-                      <input type="submit" id="login-form-submit" name="op" value="Log In" className="form-submit" />
-                      <div id="login-form-help" className="login-helptext">
-                        <a href="https://nypl.bibliocommons.com/user/forgot" className="forgotpin-button">Forgot your PIN?</a>
-                        <a href="http://www.nypl.org/help/library-card" className="createacct-button">Need an account?</a>
-                      </div>
-                      <input type="hidden" name="form_build_id" value="form-tydkOKr234PQ09lFW8Ffwo3vUGLb566Rw7rNZ-BfC3E" />
-                      <input type="hidden" name="form_id" value="bc_sso_login_form" />
-                    </div>
-                  </form>
-                </div> :
-
-                <ul className="logged-in-menu">
-                  <li><a href="http://nypl.bibliocommons.com/user/account">Personal Information</a></li>
-                  <li><a href="http://nypl.bibliocommons.com/user/saved_searches">Saved Searches</a></li>
-                  <li><a href="http://nypl.bibliocommons.com/user/preferences">Preferences</a></li>
-                  <li><a href="http://nypl.bibliocommons.com/user/privacy">Privacy</a></li>
-                  <li><a href="http://nypl.bibliocommons.com/user/reminders">Reminders</a></li>
-                  <li><a href="http://nypl.bibliocommons.com/communitycredits">Community Credits</a></li>
-                  <li><a href="http://nypl.bibliocommons.com/carts/order_history">Order History</a></li>
-                  <li><a href="#logout" id="sso-logout">Log out</a></li>
-                </ul>
-              }
-            </div>
+            <SSOformOld 
+              className={classes}
+              show={showDialog}
+              display={showDialog}
+              loggedIn={this.state.logged_in}
+              remember={this.state.remember} />
           </div>
 
           <div id="search-top">
