@@ -30,14 +30,10 @@ class BookIntro extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
-
-    this._handleClick = this._handleClick.bind(this);
   }
 
   render () {
       const book = this.props.book,
-      bookTarget = book['staff-pick-item']['attributes']['catalog-slug'],
-      ebookTarget = book['staff-pick-item']['attributes']['ebook-slug'],
       tags = _.chain(book['staff-pick-item']['staff-pick-tag'])
         .pluck('attributes')
         .pluck('tag')
@@ -51,10 +47,6 @@ class BookIntro extends React.Component {
       </div>
     );
   }
-
-  _handleClick (e) {
-    e.preventDefault();
-  }
 };
 
 BookIntro.defaultProps = {
@@ -66,13 +58,13 @@ BookIntro.defaultProps = {
 const styles={
   BookIntro: {
     fontSize: '10px',
-    margin: '25px 0 0 35%',
+    margin: '26px 0 0 35%',
     position: 'relative',
     top: '30%',
     '@media (max-width: 414px)': { 
-      margin: '30px 0 0 64%',
+      left: '15px',
       position: 'relative',
-      top: '0'
+      top: '2px'
     }
   },
   Author: {
