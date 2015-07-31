@@ -15,7 +15,6 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
-    // cookie.save('username', 'edwinguzman');
     this.state = {
       data: this.props.data,
       username: this._login(),
@@ -26,15 +25,18 @@ class Header extends React.Component {
 
     this._handleClick = this._handleClick.bind(this);
     this._login = this._login.bind(this);
+    this._removeSSOLogin = this._removeSSOLogin.bind(this);
   }
 
   componentDidMount () {
+    let _this = this;
     $('.nav-open-button').click(function () {
       $(this).toggleClass('open');
       $('.search-open-button').removeClass('open');
       $('#search-block-form-input').removeClass('open-search');
       $('#search-top').removeClass('open');
       $('#main-nav').toggleClass('open-navigation');
+      _this._removeSSOLogin();
       return false;
     });
 
@@ -46,6 +48,7 @@ class Header extends React.Component {
       $('#main-nav').removeClass('open-navigation');
       $('#search-block-form-input').toggleClass('open-search');
       $('#search-top').toggleClass('open');
+      _this._removeSSOLogin();
       return false;
     });
 
@@ -287,8 +290,8 @@ class Header extends React.Component {
           </div>
 
           <div className="collapsed-buttons">
-            <div className="button search-open-button icon-search"></div>
-            <div className="button nav-open-button icon-menu2"></div>
+            <div className="button search-open-button icon-search" onClick={this._handleClick}></div>
+            <div className="button nav-open-button icon-menu2" onClick={this._handleClick}></div>
           </div>
 
           <div className='login-donate'>
@@ -685,7 +688,7 @@ class Header extends React.Component {
               </li>
 
               <li className="mobile-login">
-                <a href="">Log In</a>
+                <a href="" onClick={this._handleClick}>Log In</a>
               </li>
             </ul>
           </div>
@@ -699,8 +702,12 @@ class Header extends React.Component {
     this.setState({showDialog: !this.state.showDialog});
   }
 
+  _removeSSOLogin() {
+    this.setState({showDialog: false});
+  }
+
   _login() {
-    return cookie.load('username');
+    return cookie.load('bc_username');
   }
 
   _remember_me() {
