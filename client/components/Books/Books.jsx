@@ -129,14 +129,14 @@ var Books = React.createClass({
     return (
       <div>
         <div className='month-picker' style={styles.monthPicker}>
-          <a href='#' style={styles.previousMonth} onClick={this._handleClick}>
+          <a style={styles.previousMonth} onClick={this._handleClick}>
             Picks for June
             <span className='left-icon'></span>
           </a>
 
           <p style={styles.month}>July 2015</p>
 
-          <a href='#' style={styles.nextMonth} onClick={this._handleClick}>
+          <a style={styles.nextMonth} onClick={this._handleClick}>
             Picks for August
             <span className='right-icon'></span>
           </a>
@@ -194,7 +194,7 @@ const styles = {
   month: {
     display: 'inline-block',
     marginLeft: '44%',
-    color: '#0095c8'
+    color: '#333333'
   },
   nextMonth: {
     float: 'right'

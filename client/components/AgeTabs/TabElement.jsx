@@ -88,7 +88,7 @@ const styles = {
     borderWidth: '1px'
   },
   TabElementLink: {
-    color: '#bfbfbf',
+    color: '#333333',
     cursor: 'pointer',
     textDecoration: 'none',
     ':hover': {
