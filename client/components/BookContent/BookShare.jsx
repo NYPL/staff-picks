@@ -14,7 +14,9 @@ class BookShare extends React.Component {
 
     return (
       <div ref='BookContent' className='BookShare' style={styles.BookShare}>
-        <li key='fb' style={[styles.social, styles.facebook]}></li>
+        <li key='fb' style={[styles.social, styles.facebook]}>
+	        <a href='#'></a>
+        </li>
         <li key='twtr' style={[styles.social,styles.twitter]}></li>
         <li key='tmblr' style={[styles.social,styles.tumblr]}></li>
       </div>
