@@ -84,6 +84,31 @@ class BookDisplayButtons extends React.Component {
 
 var drivenByFiltersElems, themeFiltersElems;
 
+import SimpleButton from 'components/Buttons/SimpleButton.jsx';
+
+class CloseButton extends React.Component {
+  // Constructor used in ES6
+  constructor(props) {
+    super(props);
+    this._handleClick = this._handleClick.bind(this);
+  }
+
+  _handleClick (e) {
+    e.preventDefault();
+    this.props.onClick();
+  }
+
+  render () {
+    return (
+      <SimpleButton style={styles.CloseButton}
+        id='close-button' 
+        label=''
+        onClick={this._handleClick} />
+    );
+  }
+}
+
+
 class BookFilters extends React.Component {
   constructor(props) {
     super(props);
@@ -157,7 +182,8 @@ class BookFilters extends React.Component {
   render () {
     return (
       <div className='BookFilters' style={this.props.styles}>
-        <span className='divider'></span> 
+        <span className='divider'></span>
+        <CloseButton onClick={this.props.mobileCloseBtn} />
         <h2>What would you like to read?</h2>
         <div className='BookFilters-lists'>
           <span>Driven by...</span>
@@ -287,10 +313,21 @@ class Sidebar extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
+
+    this.state = {
+      mobileDisplay: false
+    };
+
+    this._showFilters = this._showFilters.bind(this);
+    this._hideFilters = this._hideFilters.bind(this);
   }
 
   _showFilters() {
+    this.setState({mobileDisplay: true});
+  }
 
+  _hideFilters() {
+    this.setState({mobileDisplay: false});
   }
 
   render () {
@@ -300,7 +337,8 @@ class Sidebar extends React.Component {
         <h2 className='mobile-filter-btn' onClick={this._showFilters} style={styles.mobileFilterBtn}>
           Filter By Tags
         </h2>
-        <BookFilters />
+        <BookFilters styles={this.state.mobileDisplay ? styles.mobileFilters : null}
+          mobile={this.state.mobileDisplay} mobileCloseBtn={this._hideFilters}/>
       </div>
     );
   }
@@ -312,6 +350,16 @@ Sidebar.defaultProps = {
 const styles = {
   base: {
 
+  },
+  mobileFilters: {
+    display: 'block',
+    position: 'absolute',
+    top: '50px',
+    backgroundColor: '#fff',
+    width: '100%',
+    left: '0',
+    zIndex: '1000',
+    padding: '35px 30px'
   },
   mobileFilterBtn: {
     textDecoration: 'none',
@@ -331,6 +379,20 @@ const styles = {
   },
   grayedOutFilter: {
     color: '#bfbfbf'
+  },
+  CloseButton: {
+    background: 'url("/client/images/icons/gray_x_button.svg") no-repeat',
+    position: 'absolute',
+    fontSize: '1.3em',
+    height: 'auto',
+    margin: '0 0 20px 0',
+    padding: '5px 4px 30px 36px',
+    width: '100%',
+    top: '15px',
+    left: '340px',
+    '@media (min-width: 414px)': {
+      display: 'none'
+    }
   }
 };
 
