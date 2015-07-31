@@ -27,12 +27,12 @@ class Book extends React.Component {
           this.props.style
         ]}>
         
-        <a href='#'
-          onClick={this._handleClick}>
+        <a href='#' onClick={this._handleClick}>
           <img
             src={`https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${bookImgSrc}&content=M&Return=1&Type=M`}
             height={this.props.height}
-            width={this.props.width} />
+            width={this.props.width}
+            style={this.props.style} />
         </a>
       </div>
     );

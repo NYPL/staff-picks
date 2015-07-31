@@ -32,7 +32,6 @@ var BookModal = React.createClass({
 
     _.each(books, function (book) {
       if (book['staff-pick-item']['id'] === paramID) {
-        console.log(book);
         modalBook = book;
         age = book['staff-pick-age'].attributes.age;
       }
@@ -69,13 +68,13 @@ var BookModal = React.createClass({
         <BookTitle book={this.state.book} />
         <div style={styles.LeftColumn}>
           <div key='ImageContainer' style={styles.ImageContainer}>
-            <Book book={this.state.book} height={'auto'} width={'237px'} />
+            <Book book={this.state.book} style={styles.BookCover} />
           </div>
           <div key='ShareContainer' style={styles.ShareContainer}>
             <BookShare book={this.state.book} />
           </div>
         </div>
-       <BookIntro book={this.state.book} />
+        <BookIntro book={this.state.book} />
         <BookContent book={this.state.book} style={styles.ModalBookContent}/>
       </Modal>
     );
@@ -90,7 +89,7 @@ const styles={
     top: '20px',
     '@media (max-width: 414px)': {
       float: 'left',     
-      margin: '30px 20px 10px 0',
+      margin: '30px 0 10px 0',
       position: 'relative',
       top:'0'
     }
@@ -109,6 +108,13 @@ const styles={
     top:'0',
     '@media (max-width: 414px)': {
       margin: '6px 0 0 0'
+    }
+  },
+  BookCover: {
+    width: '237px',
+    height: 'auto',
+    '@media (max-width: 414px)': {
+      width: '80%'
     }
   }
 }

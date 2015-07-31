@@ -287,40 +287,20 @@ class Sidebar extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
-
-    this.state = {
-      modalIsOpen: false
-    };
-
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
   }
 
-  openModal (book) {
-    this.setState({
-      book: book,
-      modalIsOpen: true
-    });
-  }
+  _showFilters() {
 
-  closeModal () {
-    this.setState({
-      book: {},
-      modalIsOpen: false
-    });
   }
 
   render () {
     return (
       <div ref='sidebar' className='sidebar-content'>
         <BookDisplayButtons />
-        <h2 className='mobile-filter-btn' onClick={this.openModal} style={styles.mobileFilterBtn}>
+        <h2 className='mobile-filter-btn' onClick={this._showFilters} style={styles.mobileFilterBtn}>
           Filter By Tags
         </h2>
         <BookFilters />
-        <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-          <BookFilters styles={styles.filterModal}/>
-        </Modal>
       </div>
     );
   }

@@ -70,9 +70,9 @@ const styles = {
     '@media (min-width: 768px) and (max-width: 826px)': { width: '40%' },
     '@media (min-width: 720px) and (max-width: 767px)': { width: '60%' },
     '@media (max-width: 719px)': { width: '60%', left: '10%' },
-    '@media (min-width: 414px)': { margin:'70px 0 40px 60px' },
+    '@media (max-width: 414px)': { margin:'4px 0 0 5px' },
     float: 'left',
-    margin: '0',
+    margin: '70px 0 40px 60px',
     position: 'relative',
     width: '45%'
   }
