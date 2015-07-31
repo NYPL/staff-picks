@@ -29,30 +29,32 @@ var Books = React.createClass({
       age: BookStore.getAge(),
       noResults: false
     };
-
-    // this._onChange = this._onChange.bind(this);
-    // this.openModal = this.openModal.bind(this);
   },
 
   mixins: [Navigation],
 
   componentDidMount () {
     // This needs to be set done once the component is available
-    let grid = document.getElementById('masonryContainer');
+    let grid = document.getElementById('masonryContainer'),
+      _this = this;
+
     // this.setState does not work in this case because
     // iso.arrange also needs to be called.
     this.state.iso = new Isotope(grid, {
       itemSelector: '.book-item',
       masonry: {
-        columnWidth: 175,
-        gutter: 23,
+        columnWidth: 250,
         isResizable: true,
-        isFitWidth: false,
+        isFitWidth: true,
+        gutter: 10
       }
     });
-    this.state.iso.arrange({
-      filter: '.Adult'
-    });
+
+    setTimeout(function () {
+      _this.state.iso.arrange({
+        filter: '.Adult'
+      });
+    }, 500);
 
     BookStore.addChangeListener(this._onChange);
     BookActions.updateNewFilters(this.state.iso.getItemElements());
@@ -116,7 +118,7 @@ var Books = React.createClass({
             listWidth ? styles.listWidth : styles.gridWidth
             ]}>
           {_this.state.typeDisplay === 'grid' ?
-            <Book book={element} style={styles.bookItem} height={'270px'} width={'175px'} /> :
+            <Book book={element} style={styles.bookItem} width={'100%'} /> :
             <div>
                 <h2>{element['staff-pick-item']['attributes']['title']}</h2>
               <p>By: {element['staff-pick-item']['attributes']['author']}</p>
@@ -175,7 +177,10 @@ const styles = {
     width: '100%',
     marginBottom: '20px'
   },
-  gridWidth: {},
+  gridWidth: {
+    width: '250px',
+    height: '410px'
+  },
   showNoResults: {
     display: 'inline-block',
     fontSize: '14px'
@@ -184,8 +189,7 @@ const styles = {
     display: 'none'
   },
   bookItem: {
-    marginBottom: '20px',
-    maxWidth: '200px'
+    marginBottom: '20px'
   },
   monthPicker: {
     height: '35px',
