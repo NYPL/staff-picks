@@ -102,6 +102,7 @@ const styles = {
     '@media (min-width: 768px) and (max-width: 826px)': { width: '40%' },
     '@media (min-wdith: 720px) and (max-width: 767px)': { width: '60%' },
     '@media (max-width: 719px)': { width: '60%', left: '10%' },
+    '@media (max-width: 414px)': { margin: '5px 0 0 0' },
     float: 'left',
     margin:'70px 0 40px 60px', 
     position: 'relative',
