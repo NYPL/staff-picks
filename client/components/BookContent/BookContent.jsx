@@ -48,26 +48,24 @@ class BookContent extends React.Component {
       ebookHREF = `https://nypl.bibliocommons.com/item/show/${ebookTarget}`,
       bookStyle = styles.available,
       ebookStyle = styles.available,
-      linkStyle,
-      clickEvent,
+      bookLinkStyle,
+      ebooklinkStyle,
+      bookIcon,
+      ebookIcon,
       emptyVar;
 
     if (!ebookTarget) {
       ebookStyle = styles.unavailable;
-      linkStyle = styles.linkUnavailable;
-      ebookHREF = '';
-      clickEvent = this._handleClick;
+      ebookIcon = 'disabled';
+      ebooklinkStyle = styles.linkUnavailable;
+      ebookHREF = emptyVar;
     }
     if (!bookTarget) {
       bookStyle = styles.unavailable;
-      bookHREF = '#';
+      bookIcon = 'disabled';
+      booklinkStyle = styles.linkUnavailable;
+      bookHREF = emptyVar;
     }
-
-        var eBookElement = (
-      <a href={emptyVar} style={linkStyle} onClick={clickEvent}>
-        <span className='ebook'></span>Borrow the ebook
-      </a>
-    );
 
     return (
       <div ref='BookContent' className={this.props.className}>      
@@ -79,12 +77,14 @@ class BookContent extends React.Component {
 
         <ul className='borrow'>
           <li style={[ styles.li, bookStyle ]}>
-            <a href={bookHREF}>
-              <span className='checkout'></span>Request the book
+            <a href={bookHREF} style={bookLinkStyle}>
+              <span className={`checkout ${bookIcon}`}></span>Request the book
             </a>
           </li>
           <li style={[ styles.li, ebookStyle ]}>
-            {eBookElement}
+            <a href={ebookHREF} style={ebooklinkStyle}>
+              <span className={`ebook ${ebookIcon}`}></span>Borrow the ebook
+            </a>
           </li>
         </ul>
       </div>
