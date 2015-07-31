@@ -1,7 +1,6 @@
 'use strict';
 import 'styles/main.scss';
 import React from 'react/addons';
-
 import DocMeta from 'react-doc-meta';
 
 // NYPL Components
@@ -43,10 +42,10 @@ class App extends React.Component {
   render () {
 
  var tags = [
-      {name: "description", content: "lorem ipsum dolor"},
-      {itemProp: "name", content: "The Name or Title Here"},
-      {itemProp: "description", content: "This is the page description"},
-      {itemProp: "image", content: "http://www.example.com/image.jpg"}
+      {name: 'description', content: 'staff picks'},
+      {itemProp: 'name', content: 'The Name or Title Here'},
+      {itemProp: 'description', content: 'This is the page description'},
+      {itemProp: 'image', content: '/client/images/staff_pic_bg.jpg'}
     ]
 
     return (

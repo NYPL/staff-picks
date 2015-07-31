@@ -64,29 +64,33 @@ var BookModal = React.createClass({
   },
 
   render: function() {
+     let title = this.state.book['staff-pick-item']['attributes']['title'];
+     let imageSrc = this.state.book['staff-pick-item']['attributes']['image-slug'];
+     let imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
+     
      var tags = [
-      {name: "description", content: "this is modal"},
-      {itemProp: "name", content: "modal"},
-      {itemProp: "description", content: "This is the modal description"},
-      {itemProp: "image", content: "http://www.example.com/image.jpg"}
+      {name: 'description', content: this.state.book['staff-pick-item']['attributes']['title']},
+      {itemProp: 'name', content: this.state.book['staff-pick-item']['attributes']['title']},
+      {itemProp: 'description', content: this.state.book.attributes.text},
+      {itemProp: 'image', content: imageLink}
     ]
     return (
       <div>
-      <DocMeta tags={tags} />
-      <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-        <CloseButton onClick={this.closeModal} />
-        <BookTitle book={this.state.book} />
-        <div style={styles.LeftColumn}>
-          <div key='ImageContainer' style={styles.ImageContainer}>
-            <Book book={this.state.book} style={styles.BookCover} />
+        <DocMeta tags={tags} />
+        <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
+          <CloseButton onClick={this.closeModal} />
+          <BookTitle book={this.state.book} />
+          <div style={styles.LeftColumn}>
+            <div key='ImageContainer' style={styles.ImageContainer}>
+              <Book book={this.state.book} style={styles.BookCover} />
+            </div>
+            <div key='ShareContainer' style={styles.ShareContainer}>
+              <BookShare book={this.state.book} />
+            </div>
           </div>
-          <div key='ShareContainer' style={styles.ShareContainer}>
-            <BookShare book={this.state.book} />
-          </div>
-        </div>
-        <BookIntro book={this.state.book} />
-        <BookContent book={this.state.book} style={styles.ModalBookContent}/>
-      </Modal>
+          <BookIntro book={this.state.book} />
+          <BookContent book={this.state.book} style={styles.ModalBookContent}/>
+        </Modal>
       </div>
     );
   }
