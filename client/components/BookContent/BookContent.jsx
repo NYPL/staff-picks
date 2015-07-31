@@ -48,17 +48,26 @@ class BookContent extends React.Component {
       ebookHREF = `https://nypl.bibliocommons.com/item/show/${ebookTarget}`,
       bookStyle = styles.available,
       ebookStyle = styles.available,
-      linkStyle;
+      linkStyle,
+      clickEvent,
+      emptyVar;
 
     if (!ebookTarget) {
       ebookStyle = styles.unavailable;
       linkStyle = styles.linkUnavailable;
-      ebookHREF = '#';
+      ebookHREF = '';
+      clickEvent = this._handleClick;
     }
     if (!bookTarget) {
       bookStyle = styles.unavailable;
       bookHREF = '#';
     }
+
+        var eBookElement = (
+      <a href={emptyVar} style={linkStyle} onClick={clickEvent}>
+        <span className='ebook'></span>Borrow the ebook
+      </a>
+    );
 
     return (
       <div ref='BookContent' className={this.props.className}>      
@@ -75,15 +84,13 @@ class BookContent extends React.Component {
             </a>
           </li>
           <li style={[ styles.li, ebookStyle ]}>
-            <a href={ebookHREF} style={linkStyle}>
-              <span className='ebook'></span>Borrow the ebook
-            </a>
+            {eBookElement}
           </li>
         </ul>
-
       </div>
     );
   }
+
 
   _handleClick (e) {
     e.preventDefault();
@@ -113,7 +120,7 @@ const styles = {
   },
   linkUnavailable:{
     color: '#bfbfbf',
-    pointerEvents: 'none'
+    cursor: 'default'
   }
 };
 
