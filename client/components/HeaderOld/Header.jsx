@@ -7,6 +7,8 @@ import SimpleButton from '../Buttons/SimpleButton.jsx';
 import cookie from 'react-cookie';
 import cx from 'classnames';
 
+import SSOformOld from '../SSOform/SSOformOld.jsx';
+
 class Header extends React.Component {
 
   // Constructor used in ES6
@@ -275,7 +277,7 @@ class Header extends React.Component {
 
   render () {
     let showDialog = this.state.showDialog;
-    const classes =  cx({ show: showDialog, hide: !showDialog });
+    const classes = cx({ show: showDialog, hide: !showDialog });
 
     return (
       <div>
@@ -318,68 +320,12 @@ class Header extends React.Component {
               DONATE
             </a>
 
-            <div className='sso-login'>
-              {!this.state.logged_in ?
-                <div className='login-form'> 
-                  <form action="/" method="post" id="bc-sso-login-form--2" acceptCharset="UTF-8">
-                    <div>
-                      <div className="form-item form-type-textfield form-item-name">
-                        <label htmlFor="username">Username or bar code: </label>
-                        <input type="text" id="username" name="name" value="" size="60" maxLength="128" className="form-text" autoComplete="off"
-                          style={{'backgroundImage': 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAABmJLR0QA/wD/AP+g' +
-                            'vaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QsPDiIqO1Am6gAAAb1JREFUOMvNkk1rU0EUhp8zd0gCrdKFNgiCFatiIYgUKdW6aikuh' +
-                            'IJF6kJcdFFEXAclzM0XJH9A6EL8BSoqZlEQCl0GEQU/qApdiYouKmgUbu7luGgC+boUuvLdvcPMc86c88J/p2w2e9g5d7btnXNTzrlM3H3TaZxzt1' +
-                            'Kp1KaI3AcEEBFZFZFXvu9XBgFsjw9EZAjIOOeWVDUUkTMAqvppEEB6ve/7GyJyAfioqpGInALWi8XibCwgl8sdMcbsbzabf621Y8aYNRHxWpUjYFF' +
-                            'Vv4vIcBiGPyqVyuuuL1hrbwM3kslkf4Ud0BORnWattfeAld4hmr1uTVrTn1TVg6r6U0RGPc97DJh21V0Bncrn88+BOVV9Y4zp2v/w0RkWzo2w8aDG' +
-                            '52BwDq4Ccy1b7iInJrh2fZbx8QxjQzFBAk4Aoaq+K5VKDztec3H5MmkAIppxSSyXy6UgCE5HUXQT0Pb58UvLTB34Qm1tE4CwEZ9EqtXq++6TUaYn0' +
-                            'xD9YuZ8Gkgwv7LA1t2nbA8C9OsPH16+peGFpA6dZGQfbH/9RiOug379pl57RB1ITCxy58oxXjyrE8StsVOFQkF3w/8DCTuL1wm1OYIAAAAASUVORK' +
-                            '5CYII=)',
-                            'backgroundAttachment': 'scroll',
-                            'backgroundPosition': '100% 50%',
-                            'backgroundRepeat': 'no-repeat'}} />
-                      </div>
-                      <div className="form-item form-type-password form-item-user-pin">
-                        <label htmlFor="pin">PIN: </label>
-                        <input type="password" id="pin" name="user_pin" size="60" maxLength="128" className="form-text" autoComplete="off"
-                          style={{'backgroundImage': 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAABmJLR0QA/wD/AP+g' +
-                            'vaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QsPDiIqO1Am6gAAAb1JREFUOMvNkk1rU0EUhp8zd0gCrdKFNgiCFatiIYgUKdW6aikuh' +
-                            'IJF6kJcdFFEXAclzM0XJH9A6EL8BSoqZlEQCl0GEQU/qApdiYouKmgUbu7luGgC+boUuvLdvcPMc86c88J/p2w2e9g5d7btnXNTzrlM3H3TaZxzt1' +
-                            'Kp1KaI3AcEEBFZFZFXvu9XBgFsjw9EZAjIOOeWVDUUkTMAqvppEEB6ve/7GyJyAfioqpGInALWi8XibCwgl8sdMcbsbzabf621Y8aYNRHxWpUjYFF' +
-                            'Vv4vIcBiGPyqVyuuuL1hrbwM3kslkf4Ud0BORnWattfeAld4hmr1uTVrTn1TVg6r6U0RGPc97DJh21V0Bncrn88+BOVV9Y4zp2v/w0RkWzo2w8aDG' +
-                            '52BwDq4Ccy1b7iInJrh2fZbx8QxjQzFBAk4Aoaq+K5VKDztec3H5MmkAIppxSSyXy6UgCE5HUXQT0Pb58UvLTB34Qm1tE4CwEZ9EqtXq++6TUaYn0' +
-                            'xD9YuZ8Gkgwv7LA1t2nbA8C9OsPH16+peGFpA6dZGQfbH/9RiOug379pl57RB1ITCxy58oxXjyrE8StsVOFQkF3w/8DCTuL1wm1OYIAAAAASUVORK' +
-                            '5CYII=)',
-                            'backgroundAttachment': 'scroll',
-                            'backgroundPosition': '100% 50%',
-                            'backgroundRepeat': 'no-repeat'}} />
-                      </div>
-                      <div className="form-item form-type-checkbox form-item-remember-me">
-                        <input type="checkbox" id="remember_me" name="remember_me" value="1" className="form-checkbox" /> <label className="option" htmlFor="remember_me">Remember me </label>
-                      </div>
-                      <input type="hidden" name="destination" value="http://www.nypl.org/" />
-                      <input type="submit" id="login-form-submit" name="op" value="Log In" className="form-submit" />
-                      <div id="login-form-help" className="login-helptext">
-                        <a href="https://nypl.bibliocommons.com/user/forgot" className="forgotpin-button">Forgot your PIN?</a>
-                        <a href="http://www.nypl.org/help/library-card" className="createacct-button">Need an account?</a>
-                      </div>
-                      <input type="hidden" name="form_build_id" value="form-tydkOKr234PQ09lFW8Ffwo3vUGLb566Rw7rNZ-BfC3E" />
-                      <input type="hidden" name="form_id" value="bc_sso_login_form" />
-                    </div>
-                  </form>
-                </div> :
-
-                <ul className="logged-in-menu">
-                  <li><a href="http://nypl.bibliocommons.com/user/account">Personal Information</a></li>
-                  <li><a href="http://nypl.bibliocommons.com/user/saved_searches">Saved Searches</a></li>
-                  <li><a href="http://nypl.bibliocommons.com/user/preferences">Preferences</a></li>
-                  <li><a href="http://nypl.bibliocommons.com/user/privacy">Privacy</a></li>
-                  <li><a href="http://nypl.bibliocommons.com/user/reminders">Reminders</a></li>
-                  <li><a href="http://nypl.bibliocommons.com/communitycredits">Community Credits</a></li>
-                  <li><a href="http://nypl.bibliocommons.com/carts/order_history">Order History</a></li>
-                  <li><a href="#logout" id="sso-logout">Log out</a></li>
-                </ul>
-              }
-            </div>
+            <SSOformOld 
+              className={classes}
+              show={showDialog}
+              display={showDialog}
+              loggedIn={this.state.logged_in}
+              remember={this.state.remember} />
           </div>
 
           <div id="search-top">

@@ -135,7 +135,7 @@ class BookFilters extends React.Component {
       if (elem.show) {
         liElement = (
           <li key={elem.id} onClick={_handleClick.bind(_this, elem)}>
-            <a >
+            <a>
               {elem.attributes.tag}
               <ReactCSSTransitionGroup transitionName='minus' transitionAppear={true}>
                 <span className={'minus-icon ' + active}></span>
@@ -314,7 +314,9 @@ class Sidebar extends React.Component {
     return (
       <div ref='sidebar' className='sidebar-content'>
         <BookDisplayButtons />
-        <h2 className='mobile-filter-btn'><a href='#' onClick={this.openModal}>Filter By Tags</a></h2>
+        <h2 className='mobile-filter-btn' onClick={this.openModal} style={styles.mobileFilterBtn}>
+          Filter By Tags
+        </h2>
         <BookFilters />
         <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
           <BookFilters styles={styles.filterModal}/>
@@ -330,6 +332,11 @@ Sidebar.defaultProps = {
 const styles = {
   base: {
 
+  },
+  mobileFilterBtn: {
+    textDecoration: 'none',
+    color: '#0095c8',
+    cursor: 'pointer'
   },
   active: {
     border: '2px solid #0095c8',
