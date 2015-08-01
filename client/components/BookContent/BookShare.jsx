@@ -10,33 +10,35 @@ class BookShare extends React.Component {
   }
 
   // Actions of click event
-  _handleClick (e) {
-  	e.preventDefault();
-  	FB.ui({
-	    method: 'share',
-	    href: window.location.href,
-	}, function(response){});
-    console.log('clicked');
+  _handleClick (value) {
+  	switch (value) {
+  		case 'fb':
+	  	FB.ui({
+		    method: 'share',
+		    href: window.location.href,
+		}, function(response){});
+		break;
+
+		case 'twtr':
+		console.log('twtr');
+		break;
+		default:
+	}
   }
 
   render () {
     const book = this.props.book;
     return (
       <div ref='BookContent' className='BookShare' style={styles.BookShare}>
-        <li key='fb' onClick={this._handleClick.bind(this)} style={[styles.social, styles.facebook]}>
+        <li key='fb' onClick={this._handleClick.bind(this, 'fb')} style={[styles.social, styles.facebook]}>
         </li>
-        <li key='twtr' style={[styles.social,styles.twitter]}></li>
+        <li key='twtr' onClick={this._handleClick.bind(this, 'twtr')} style={[styles.social,styles.twitter]}>
+			<a href="https://twitter.com/share" label='twitter' style='color: transparent;'></a>
+        </li>
         <li key='tmblr' style={[styles.social,styles.tumblr]}></li>
       </div>
     );
   }
-
-  // _handleClick (e) {
-  //   e.preventDefault();
-
-  
-  // }
-
 };
 
 const styles={

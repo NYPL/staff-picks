@@ -84,7 +84,6 @@ var BookModal = React.createClass({
     return (
       <div>
         <DocMeta tags={tags} />
-
         <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
           <CloseButton onClick={this.closeModal} />
           <BookTitle book={this.state.book} />
