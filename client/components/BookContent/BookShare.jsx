@@ -2,20 +2,28 @@ import React from 'react';
 import Radium from 'radium';
 
 class BookShare extends React.Component {
-	  // Constructor used in ES6
+  // Constructor used in ES6
   constructor(props) {
     super(props);
-
+    // Actions of mouse click event assigned to the class
     this._handleClick = this._handleClick.bind(this);
+  }
+
+  // Actions of click event
+  _handleClick (e) {
+  	e.preventDefault();
+  	FB.ui({
+	    method: 'share',
+	    href: window.location.href,
+	}, function(response){});
+    console.log('clicked');
   }
 
   render () {
     const book = this.props.book;
-
     return (
       <div ref='BookContent' className='BookShare' style={styles.BookShare}>
-        <li key='fb' style={[styles.social, styles.facebook]}>
-	        <a href='#'></a>
+        <li key='fb' onClick={this._handleClick.bind(this)} style={[styles.social, styles.facebook]}>
         </li>
         <li key='twtr' style={[styles.social,styles.twitter]}></li>
         <li key='tmblr' style={[styles.social,styles.tumblr]}></li>
@@ -23,9 +31,12 @@ class BookShare extends React.Component {
     );
   }
 
-  _handleClick (e) {
-    e.preventDefault();
-  }
+  // _handleClick (e) {
+  //   e.preventDefault();
+
+  
+  // }
+
 };
 
 const styles={
