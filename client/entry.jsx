@@ -63,7 +63,7 @@ class App extends React.Component {
     return (
       <div>
         <DocMeta tags={tags} />
-        <RouteHandler />
+        <RouteHandler {...this.props} />
         <div id='age-tabs' className='age-tabs'>
           <AgeTabs />
         </div>
@@ -72,7 +72,7 @@ class App extends React.Component {
             <Sidebar />
           </div>
           <div id='books'>
-            <Books />
+            <Books books={this.props.data} />
           </div>
         </div>
       </div>
@@ -99,6 +99,6 @@ React.render(<Hero />, document.getElementById('hero'));
 // }
 
 Router.run(routes, Router.HistoryLocation, (Root) => {
-  React.render(<Root />, document.getElementById('content'));
+  React.render(<Root data={staffPicks} />, document.getElementById('content'));
 });
 

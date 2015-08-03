@@ -74,7 +74,8 @@ const styles={
 	}
 }
 
-let	shareUrl=window.location.href;
+let shareUrl = global.window ? window.location.href : 'http://nypl-staff-picks.herokuapp.com';
+
 
 const shareLinks={
 	facebook: `http://www.facebook.com/sharer.php?u=${shareUrl}&t=Share%20This%20Book%20on%20Facebook`,

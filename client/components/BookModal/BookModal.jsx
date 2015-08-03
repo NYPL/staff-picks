@@ -18,7 +18,7 @@ import BookActions from '../../actions/BookActions.js';
 
 let Navigation = Router.Navigation;
 
-const books = API.getBooks();
+let books = API.getBooks();
 
 if (global.window) {
   Modal.setAppElement(document.getElementById('content'));
@@ -32,7 +32,12 @@ var BookModal = React.createClass({
       modalBook = {},
       age;
 
-    console.log(this.props);
+console.log(this.props);
+    if (!books.length) {
+      if (this.props.data['staff-picks']) {
+        books = this.props.data['staff-picks'];
+      }
+    }
 
     _.each(books, function (book) {
       if (book['staff-pick-item']['id'] === paramID) {
@@ -73,7 +78,7 @@ var BookModal = React.createClass({
      var tags = [
       {property: "og:title", content: title},
       {property: "og:type", content: "website"},
-      {property: "og:url", content: window.location.href},
+      // {property: "og:url", content: window.location.href},
       {property: "og:image", content: imageLink},
       {property: "og:description", content: this.state.book.attributes.text},
       {property: "og:site_name", content: "NYPL Staff Picks"},

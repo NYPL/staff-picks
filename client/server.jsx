@@ -59,7 +59,7 @@ class App extends React.Component {
     return (
       <div>
         <DocMeta tags={tags} />
-        <RouteHandler />
+        <RouteHandler {...this.props} />
         <div id='age-tabs' className='age-tabs'>
           <AgeTabs />
         </div>

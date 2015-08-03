@@ -6,6 +6,7 @@ var path = require('path');
 var objectAssign = require('object-assign');
 
 var express = require('express');
+var favicon = require('express-favicon');
 var app = express();
 
 var compress = require('compression');
@@ -20,6 +21,8 @@ app.use('/styles', sassMiddleware({
   debug: false,
   outputStyle: 'compressed'
 }));
+
+app.use(favicon(__dirname + '/client/images/favicon.ico'));
 
 app.set('layout');
 app.set('view engine', 'ejs');
@@ -76,6 +79,9 @@ var NotFoundRoute = Router.NotFoundRoute;
 var RouteHandler = Router.RouteHandler;
 var routes = (
     <Route path='/' handler={App} ignoreScrollBehavior>
+      <Route name='modal' path='/:id' handler={BookModal} ignoreScrollBehavior>
+        <NotFoundRoute handler={Error404Page} />
+      </Route>
     </Route>
   );
 
