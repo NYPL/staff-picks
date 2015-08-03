@@ -20,10 +20,12 @@ let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
 // class Books extends React.Component {
 var Books = React.createClass({
   getInitialState() {
+
+    // console.log(this.props.books);
     return {
       iso: null,
       book: {},
-      books: bookData,
+      books: this.props.books['staff-picks'] || bookData,
       modalIsOpen: false,
       typeDisplay: BookStore.getBookDisplay(),
       age: BookStore.getAge(),

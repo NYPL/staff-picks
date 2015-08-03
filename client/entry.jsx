@@ -20,7 +20,7 @@ API.setFilters(filters);
 API.setPickList(pickList);
 
 const books = API.getBooks();
-console.log(books);
+// console.log(books);
 // NYPL Components
 import Header from './components/HeaderOld/Header.jsx';
 import Hero from './components/Hero/Hero.jsx';
@@ -32,11 +32,15 @@ import Books from './components/Books/Books.jsx';
 import Sidebar from './components/Sidebar/Sidebar.jsx';
 
 import MetaTags from './components/MetaTags/MetaTags.jsx';
-
-
-
 import Router from 'react-router';
 import BookModal from './components/BookModal/BookModal.jsx';
+
+// let metaTags = DocMeta.rewind();
+// let tags = metaTags.map((tag, index) => 
+//   <meta data-doc-meta='true' key={index} {...tag} />);
+
+// console.log(tags);
+
 
 let Route = Router.Route;
 let NotFoundRoute = Router.NotFoundRoute;
@@ -49,7 +53,7 @@ class App extends React.Component {
 
   render () {
 
- var tags = [
+    var tags = [
       {name: 'description', content: 'staff picks'},
       {itemProp: 'name', content: 'The Name or Title Here'},
       {itemProp: 'description', content: 'This is the page description'},

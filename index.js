@@ -79,6 +79,11 @@ var routes = (
     </Route>
   );
 
+import Header from './client/components/HeaderOld/Header.jsx';
+import Hero from './client/components/Hero/Hero.jsx';
+import Footer from './client/components/Footer/Footer.jsx';
+
+
 app.use('/', function(req, res) {
   parser
     .setHost({
@@ -110,13 +115,20 @@ app.use('/', function(req, res) {
 
       Router.run(routes, req.path, function (Root, state) {
         // could fetch data like in the previous example
-        var html = React.renderToString(<Root />);
+        var html = React.renderToString(<Root data={{'staff-picks': parsedData}}/>);
+        var header = React.renderToString(<Header />);
+        var hero = React.renderToString(<Hero />);
+        var footer = React.renderToString(<Footer />);
+        
         res.render('index', {
           staffPicks: JSON.stringify({'staff-picks': parsedData}),
           filters: JSON.stringify({'filters': filters}),
           pickList: JSON.stringify({'staff-picks-list': pickList}),
           env: env,
-          markup: html
+          header: header,
+          hero: hero,
+          markup: html,
+          footer: footer
         });
       });
     });

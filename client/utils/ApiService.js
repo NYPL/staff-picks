@@ -9,7 +9,7 @@ var staffPicksServer, filtersServer, pickListServer;
 
 const API = {
   setStaffPick(picks) {
-    console.log(picks);
+    // console.log(picks);
     staffPicksServer = picks;
   },
   setFilters(filters) {
@@ -235,7 +235,7 @@ const API = {
     return data;
   },
   getBooks() {
-    console.log(staffPicksServer);
+    // console.log(staffPicksServer);
     if (staffPicksServer) {
       return staffPicksServer['staff-picks'];
     }

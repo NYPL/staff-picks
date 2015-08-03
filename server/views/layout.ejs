@@ -6,14 +6,20 @@
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic' rel='stylesheet' type='text/css'>
 </head>
   <body>
-    <div id='header-container'></div>
-    <div id='hero'></div>
+    <div id='header-container'>
+      <%- header %>
+    </div>
+    <div id='hero'>
+      <%- hero %>
+    </div>
     
     <div id='content'>
       <%- markup %>
     </div>
 
-    <div id='footer-container'></div>
+    <div id='footer-container'>
+      <%- footer %>
+    </div>
 
   <script type='text/javascript'>
     var filters = <%- filters %>;

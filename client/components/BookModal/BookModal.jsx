@@ -18,9 +18,7 @@ import BookActions from '../../actions/BookActions.js';
 
 let Navigation = Router.Navigation;
 
-// const books = API.getBooks();
-
-console.log(global);
+const books = API.getBooks();
 
 if (global.window) {
   Modal.setAppElement(document.getElementById('content'));
@@ -33,6 +31,8 @@ var BookModal = React.createClass({
     let paramID = this.props.params.id,
       modalBook = {},
       age;
+
+    console.log(this.props);
 
     _.each(books, function (book) {
       if (book['staff-pick-item']['id'] === paramID) {

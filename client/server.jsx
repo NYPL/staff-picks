@@ -48,7 +48,7 @@ class App extends React.Component {
   }
 
   render () {
-
+// console.log(this.props.data);
     var tags = [
       {name: 'description', content: 'staff picks'},
       {itemProp: 'name', content: 'The Name or Title Here'},
@@ -68,7 +68,7 @@ class App extends React.Component {
             <Sidebar />
           </div>
           <div id='books'>
-            <Books />
+            <Books books={this.props.data} />
           </div>
         </div>
       </div>
