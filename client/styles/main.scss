@@ -423,6 +423,7 @@ body {
 
 .ReactModalPortal .ReactModal__Overlay {
   z-index: 200;
+  overflow: auto;
   @include breakpoint($max, $post-mobile-phone) {
     background-color: rgba(255, 255, 255, 0);
     overflow: auto;
