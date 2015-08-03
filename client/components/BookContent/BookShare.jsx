@@ -23,7 +23,9 @@ class BookShare extends React.Component {
         <li key='twtr' style={[styles.social, styles.twitter]}>
 					<a href={shareLinks.twitter} style={styles.shareLink} label='Share on twitter'></a>
         </li>
-        <li key='tmblr' style={[styles.social,styles.tumblr]}></li>
+        <li key='tumblr' style={[styles.social, styles.tumblr]}>
+	        <a href={shareLinks.tumblr} style={styles.shareLink} label='Share on tumblr'></a>
+	      </li>
       </div>
     );
   }
@@ -78,7 +80,8 @@ let	shareUrl=window.location.href;
 
 const shareLinks={
 	facebook: `http://www.facebook.com/sharer.php?u=${shareUrl}&t=Share%20This%20Book%20on%20Facebook`,
-	twitter:`https://twitter.com/intent/tweet?text=Share%20This%20Book%20on%20Twitter&url=${shareUrl}`
+	twitter:`https://twitter.com/intent/tweet?text=Share%20This%20Book%20on%20Twitter&url=${shareUrl}`,
+	tumblr: `https://www.tumblr.com/widgets/share/tool?data-title=NYPL%20Staff%20Picks&data-content=${shareUrl}&data-caption=Every%20month%20NYPL&#39;s%20librarians%20share%20their%20favorite%20reads.`
 }
 
 export default Radium(BookShare);
