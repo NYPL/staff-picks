@@ -109,10 +109,11 @@ var Books = React.createClass({
           return tag.id;
         }),
         tagClasses = tags.join(' '),
-        listWidth = _this.state.typeDisplay === 'list';
+        listWidth = _this.state.typeDisplay === 'list',
+        age = element['staff-pick-age'] ? element['staff-pick-age']['attributes']['age'] : undefined;
 
       return (
-        <li className={'book-item ' + element['staff-pick-age']['attributes']['age'] + ' ' + tagClasses}
+        <li className={'book-item ' + age + ' ' + tagClasses}
           key={element.id} onClick={openModal.bind(_this, element)}
           style={[
             listWidth ? styles.listWidth : styles.gridWidth
