@@ -18,12 +18,8 @@ class BookShare extends React.Component {
 		    href: window.location.href,
 			}, function(response){});
 			break;
-
-			case 'twtr':
-			console.log('twtr');
-			break;
 			default:
-	}
+		}
   }
 
   render () {
@@ -32,10 +28,9 @@ class BookShare extends React.Component {
       <div ref='BookContent' className='BookShare' style={styles.BookShare}>
         <li key='fb' onClick={this._handleClick.bind(this, 'fb')} style={[styles.social, styles.facebook]}>
         </li>
-        <li key='twtr' onClick={this._handleClick.bind(this, 'twtr')} style={[styles.social,styles.twitter]}>
-					
+        <li key='twtr' style={[styles.social, styles.twitter]}>
+					<a href="https://twitter.com/intent/tweet" style={styles.twitterLink} label='Share on twitter'></a>
         </li>
-        <a href="https://twitter.com/intent/tweet" className="twitter-share-button" style='color: transparent;'>share on twitter</a>
         <li key='tmblr' style={[styles.social,styles.tumblr]}></li>
       </div>
     );
@@ -71,6 +66,13 @@ const styles={
 	  ':hover': {
       backgroundImage: 'url("/client/images/social/social.twtr.hover.png")'
 	  }
+	},
+	twitterLink :{
+		color: 'transparent',
+		display: 'inline-block',
+		height: '61px',
+	  width: '60px',
+
 	},
 	tumblr: {
 	  backgroundImage: 'url("/client/images/social/social.tmblr.init.png")',
