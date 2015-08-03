@@ -3,7 +3,7 @@ import Radium from 'radium';
 import Book from '../Book/Book.jsx';
 import BookContent from '../BookContent/BookContent.jsx';
 import API from '../../utils/ApiService.js';
-import CloseButton from 'components/Books/CloseButton.jsx';
+import CloseButton from './CloseButton.jsx';
 
 import _ from 'underscore';
 

@@ -4,7 +4,7 @@
   "description": "Simple production ready boilerplate for React, Webpack (SASS and React hot reloading), tests and coverage.",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
+    "start": "node reactroutes",
     "test": "NODE_ENV=test jest",
     "coverage": "NODE_ENV=test jest --coverage",
     "dist": "NODE_ENV=production webpack -p",

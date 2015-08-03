@@ -1,12 +1,12 @@
 import React from 'react';
 import DocMeta from 'react-doc-meta';
 
-import CloseButton from 'components/Books/CloseButton.jsx';
-import Book from 'components/Book/Book.jsx';
-import BookContent from 'components/BookContent/BookContent.jsx';
-import BookTitle from 'components/BookContent/BookTitle.jsx';
-import BookIntro from 'components/BookContent/BookIntro.jsx';
-import BookShare from 'components/BookContent/BookShare.jsx';
+import CloseButton from '../Books/CloseButton.jsx';
+import Book from '../Book/Book.jsx';
+import BookContent from '../BookContent/BookContent.jsx';
+import BookTitle from '../BookContent/BookTitle.jsx';
+import BookIntro from '../BookContent/BookIntro.jsx';
+import BookShare from '../BookContent/BookShare.jsx';
 import _ from 'underscore';
 import Radium from 'radium';
 import Router from 'react-router';
@@ -18,11 +18,14 @@ import BookActions from '../../actions/BookActions.js';
 
 let Navigation = Router.Navigation;
 
-const books = API.getBooks();
+// const books = API.getBooks();
 
+console.log(global);
 
-Modal.setAppElement(document.getElementById('content'));
-Modal.injectCSS();
+if (global.window) {
+  Modal.setAppElement(document.getElementById('content'));
+  Modal.injectCSS();
+}
 
 // class BookModal extends React.Component {
 var BookModal = React.createClass({

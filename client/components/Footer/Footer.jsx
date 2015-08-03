@@ -3,8 +3,8 @@ import React from 'react';
 import Radium from 'radium';
 
 // Import components
-import SocialMediaList from 'components/Footer/SocialMedia/SocialMediaList.jsx'
-import FooterLinkList from 'components/Footer/FooterLinkLists/FooterLinkList.jsx'
+import SocialMediaList from './SocialMedia/SocialMediaList.jsx'
+import FooterLinkList from './FooterLinkLists/FooterLinkList.jsx'
 
 class Footer extends React.Component {
   // Constructor used in ES6

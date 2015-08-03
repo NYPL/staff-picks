@@ -15,7 +15,6 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
-    cookie.save('bc_username', 'edwinguzman');
     this.state = {
       data: this.props.data,
       username: this._login(),

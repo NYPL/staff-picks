@@ -1,26 +1,9 @@
 'use strict';
-import 'styles/main.scss';
+// import 'styles/main.scss';
 import React from 'react/addons';
+import Radium from 'radium';
 import DocMeta from 'react-doc-meta';
 
-// Utilities
-import API from './utils/ApiService';
-
-/* Reads from local storage (i.e. Refinery) */
-// If we follow the FLUX architecture
-// data would not be defined, instead we would
-// load the data via Store Actions and update our
-// App Constants. As of now, we are mocking an API
-// call to fetch the data.
-// const data = API.getData();
-// const books = API.getBooks();
-
-API.setStaffPick(staffPicks);
-API.setFilters(filters);
-API.setPickList(pickList);
-
-const books = API.getBooks();
-console.log(books);
 // NYPL Components
 import Header from './components/HeaderOld/Header.jsx';
 import Hero from './components/Hero/Hero.jsx';
@@ -33,14 +16,31 @@ import Sidebar from './components/Sidebar/Sidebar.jsx';
 
 import MetaTags from './components/MetaTags/MetaTags.jsx';
 
+// Utilities
+import API from './utils/ApiService';
 
+/* Reads from local storage (i.e. Refinery) */
+// If we follow the FLUX architecture
+// data would not be defined, instead we would
+// load the data via Store Actions and update our
+// App Constants. As of now, we are mocking an API
+// call to fetch the data.
+const data = API.getData();
+const books = API.getBooks();
 
 import Router from 'react-router';
 import BookModal from './components/BookModal/BookModal.jsx';
 
-let Route = Router.Route;
-let NotFoundRoute = Router.NotFoundRoute;
+// let Route = Router.Route;
+// let NotFoundRoute = Router.NotFoundRoute;
 let RouteHandler = Router.RouteHandler;
+// let routes = (
+//     <Route path='/' handler={App} ignoreScrollBehavior>
+//       <Route name='modal' path='/:id' handler={BookModal} ignoreScrollBehavior>
+//         <NotFoundRoute handler={Error404Page} />
+//       </Route>
+//     </Route>
+//   );
 
 class App extends React.Component {
   constructor(props) {
@@ -49,7 +49,7 @@ class App extends React.Component {
 
   render () {
 
- var tags = [
+    var tags = [
       {name: 'description', content: 'staff picks'},
       {itemProp: 'name', content: 'The Name or Title Here'},
       {itemProp: 'description', content: 'This is the page description'},
@@ -76,17 +76,19 @@ class App extends React.Component {
   }
 }
 
-let routes = (
-    <Route path='/' handler={App} ignoreScrollBehavior>
-      <Route name='modal' path='/:id' handler={BookModal} ignoreScrollBehavior>
-        <NotFoundRoute handler={Error404Page} />
-      </Route>
-    </Route>
-  );
+export default Radium(App);
 
-React.render(<Header />, document.getElementById('header-container'));
-React.render(<Footer />, document.getElementById('footer-container'));
-React.render(<Hero />, document.getElementById('hero'));
+// let routes = (
+//     <Route path='/' handler={App} ignoreScrollBehavior>
+//       <Route name='modal' path='/:id' handler={BookModal} ignoreScrollBehavior>
+//         <NotFoundRoute handler={Error404Page} />
+//       </Route>
+//     </Route>
+//   );
+
+// React.render(<Header />, document.getElementById('header-container'));
+// React.render(<Footer />, document.getElementById('footer-container'));
+// React.render(<Hero />, document.getElementById('hero'));
 
 // if ( !books ) {
 //   React.render(<Error404Page />, document.getElementById("content"));
@@ -94,7 +96,7 @@ React.render(<Hero />, document.getElementById('hero'));
 //   React.reander(<App />, document.getElementById('content'));
 // }
 
-Router.run(routes, Router.HistoryLocation, (Root) => {
-  React.render(<Root />, document.getElementById('content'));
-});
+// Router.run(routes, Router.HistoryLocation, (Root) => {
+//   React.render(<Root />, document.getElementById('content'));
+// });
 

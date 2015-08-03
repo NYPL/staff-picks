@@ -3,7 +3,7 @@ import React from 'react';
 import Radium from 'radium';
 
 // Import components
-import TabElement from 'components/AgeTabs/TabElement.jsx';
+import TabElement from './TabElement.jsx';
 
 // Create the class
 class AgeTabs extends React.Component {

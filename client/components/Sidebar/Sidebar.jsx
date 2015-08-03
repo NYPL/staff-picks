@@ -8,12 +8,6 @@ import BookActions from '../../actions/BookActions.js';
 
 import API from '../../utils/ApiService.js';
 
-import Modal from 'react-modal';
-
-let bookContainer = document.getElementById('sidebar');
-Modal.setAppElement(bookContainer);
-Modal.injectCSS();
-
 import { Link } from 'react-router';
 
 let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
@@ -84,7 +78,7 @@ class BookDisplayButtons extends React.Component {
 
 var drivenByFiltersElems, themeFiltersElems;
 
-import SimpleButton from 'components/Buttons/SimpleButton.jsx';
+import SimpleButton from '../Buttons/SimpleButton.jsx';
 
 class CloseButton extends React.Component {
   // Constructor used in ES6
