@@ -343,7 +343,7 @@ class Header extends React.Component {
                 <ul>
                   <li className="search-the-catalog">
                     <label>
-                      <input name="searchtype" type="radio" checked="checked"/>
+                      <input name="searchtype" type="radio" defaultChecked="checked"/>
                       Catalog
                     </label>
                   </li>

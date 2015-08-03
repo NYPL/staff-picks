@@ -24,7 +24,7 @@ class BookContent extends React.Component {
       bookStyle = styles.available,
       ebookStyle = styles.available,
       bookLinkStyle,
-      ebooklinkStyle,
+      ebookLinkStyle,
       bookIcon,
       ebookIcon,
       emptyLink;
@@ -32,13 +32,13 @@ class BookContent extends React.Component {
     if (!ebookTarget) {
       ebookStyle = styles.unavailable;
       ebookIcon = 'disabled';
-      ebooklinkStyle = styles.linkUnavailable;
+      ebookLinkStyle = styles.linkUnavailable;
       ebookHREF = emptyLink;
     }
     if (!bookTarget) {
       bookStyle = styles.unavailable;
       bookIcon = 'disabled';
-      booklinkStyle = styles.linkUnavailable;
+      bookLinkStyle = styles.linkUnavailable;
       bookHREF = emptyLink;
     }
 
@@ -57,7 +57,7 @@ class BookContent extends React.Component {
             </a>
           </li>
           <li style={[ styles.li, ebookStyle ]}>
-            <a href={ebookHREF} style={ebooklinkStyle}>
+            <a href={ebookHREF} style={ebookLinkStyle}>
               <span className={`ebook ${ebookIcon}`}></span>Borrow the ebook
             </a>
           </li>
