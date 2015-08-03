@@ -50,7 +50,6 @@ class App extends React.Component {
 
     return (
       <div>
-        <DocMeta tags={tags} />
         <RouteHandler />
         <div id='age-tabs' className='age-tabs'>
           <AgeTabs />
