@@ -16,13 +16,13 @@ class BookShare extends React.Component {
 	  	FB.ui({
 		    method: 'share',
 		    href: window.location.href,
-		}, function(response){});
-		break;
+			}, function(response){});
+			break;
 
-		case 'twtr':
-		console.log('twtr');
-		break;
-		default:
+			case 'twtr':
+			console.log('twtr');
+			break;
+			default:
 	}
   }
 
@@ -33,8 +33,9 @@ class BookShare extends React.Component {
         <li key='fb' onClick={this._handleClick.bind(this, 'fb')} style={[styles.social, styles.facebook]}>
         </li>
         <li key='twtr' onClick={this._handleClick.bind(this, 'twtr')} style={[styles.social,styles.twitter]}>
-			<a href="https://twitter.com/share" label='twitter' style='color: transparent;'></a>
+					
         </li>
+        <a href="https://twitter.com/intent/tweet" className="twitter-share-button" style='color: transparent;'>share on twitter</a>
         <li key='tmblr' style={[styles.social,styles.tumblr]}></li>
       </div>
     );
