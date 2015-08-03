@@ -18,7 +18,7 @@ class BookShare extends React.Component {
     return (
       <div ref='BookContent' className='BookShare' style={styles.BookShare}>
         <li key='fb' style={[styles.social, styles.facebook]}>
-	        <a href={shareLinks.facebook} target='_blank'style={styles.shareLink} label='Share on facebook'></a>
+	        <a href={shareLinks.facebook} target='_blank' style={styles.shareLink} label='Share on facebook'></a>
         </li>
         <li key='twtr' style={[styles.social, styles.twitter]}>
 					<a href={shareLinks.twitter} style={styles.shareLink} label='Share on twitter'></a>
@@ -77,7 +77,7 @@ const styles={
 let	shareUrl=window.location.href;
 
 const shareLinks={
-	facebook: `http://www.facebook.com/sharer.php?u=${shareUrl}&t=NYPL%27s%20100%20Children%27s%20Books%20for%20Reading%20and%20Sharing%202014`,
+	facebook: `http://www.facebook.com/sharer.php?u=${shareUrl}&t=Share%20This%20Book%20on%20Facebook`,
 	twitter:`https://twitter.com/intent/tweet?text=Share%20This%20Book%20on%20Twitter&url=${shareUrl}`
 }
 
