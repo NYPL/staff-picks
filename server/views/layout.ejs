@@ -69,6 +69,8 @@
     }}(document, "script", "tumblr-js");
   </script>
 
+  <script id="tumblr-js" async src="https://assets.tumblr.com/share-button.js"></script>
+
 <% if (env.production) { %>
   <script async src="<%= env.assets.main.js %>"></script>
 <% } else { %>
