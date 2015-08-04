@@ -1,12 +1,12 @@
 import React from 'react';
 import DocMeta from 'react-doc-meta';
 
-import CloseButton from 'components/Books/CloseButton.jsx';
-import Book from 'components/Book/Book.jsx';
-import BookContent from 'components/BookContent/BookContent.jsx';
-import BookTitle from 'components/BookContent/BookTitle.jsx';
-import BookIntro from 'components/BookContent/BookIntro.jsx';
-import BookShare from 'components/BookContent/BookShare.jsx';
+import CloseButton from '../Books/CloseButton.jsx';
+import Book from '../Book/Book.jsx';
+import BookContent from '../BookContent/BookContent.jsx';
+import BookTitle from '../BookContent/BookTitle.jsx';
+import BookIntro from '../BookContent/BookIntro.jsx';
+import BookShare from '../BookContent/BookShare.jsx';
 import _ from 'underscore';
 import Radium from 'radium';
 import Router from 'react-router';
@@ -18,11 +18,12 @@ import BookActions from '../../actions/BookActions.js';
 
 let Navigation = Router.Navigation;
 
-const books = API.getBooks();
+let books = API.getBooks();
 
-
-Modal.setAppElement(document.getElementById('content'));
-Modal.injectCSS();
+if (global.window) {
+  Modal.setAppElement(document.getElementById('content'));
+  Modal.injectCSS();
+}
 
 // class BookModal extends React.Component {
 var BookModal = React.createClass({
@@ -30,6 +31,12 @@ var BookModal = React.createClass({
     let paramID = this.props.params.id,
       modalBook = {},
       age;
+
+    if (!books.length) {
+      if (this.props.data['staff-picks']) {
+        books = this.props.data['staff-picks'];
+      }
+    }
 
     _.each(books, function (book) {
       if (book['staff-pick-item']['id'] === paramID) {
@@ -63,16 +70,24 @@ var BookModal = React.createClass({
   },
 
   render: function() {
-     let title = this.state.book['staff-pick-item']['attributes']['title'];
-     let imageSrc = this.state.book['staff-pick-item']['attributes']['image-slug'];
-     let imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
-     
-     var tags = [
+    let book = this.state.book,
+      title = '',
+      imageSrc = '/client/images/staff_pic_bg.jpg',
+      description = '',
+      imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
+    
+    if (this.state.book['staff-pick-item']) {
+      title = this.state.book['staff-pick-item']['attributes']['title'];
+      description = this.state.book.attributes.text;
+      imageSrc = this.state.book['staff-pick-item']['attributes']['image-slug'];
+    }
+
+    var tags = [
       {property: "og:title", content: title},
       {property: "og:type", content: "website"},
-      {property: "og:url", content: window.location.href},
+      // {property: "og:url", content: window.location.href},
       {property: "og:image", content: imageLink},
-      {property: "og:description", content: this.state.book.attributes.text},
+      {property: "og:description", content: description},
       {property: "og:site_name", content: "NYPL Staff Picks"},
       {name: "twitter:card", content: "website"},
       {name: "twitter:site", content: "@NYPL"},

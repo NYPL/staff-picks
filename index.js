@@ -6,10 +6,23 @@ var path = require('path');
 var objectAssign = require('object-assign');
 
 var express = require('express');
+var favicon = require('express-favicon');
 var app = express();
 
 var compress = require('compression');
 var layouts = require('express-ejs-layouts');
+
+var React = require('react');
+// var sassMiddleware = require('node-sass-middleware');
+// app.use('/styles', sassMiddleware({
+//   src: __dirname + '/client/styles',
+//   dest: path.join(__dirname, '/client/styles/dist'),
+//   debug: false,
+//   outputStyle: 'compressed'
+// }));
+
+app.use(favicon(__dirname + '/client/images/favicon.ico'));
+// app.use(express.static(__dirname + '/client/styles'));
 
 app.set('layout');
 app.set('view engine', 'ejs');
@@ -21,6 +34,14 @@ app.use(layouts);
 app.use('/client', express.static(path.join(process.cwd(), '/client')));
 
 app.disable('x-powered-by');
+
+// Assign the desired React Component to be rendered as a string
+// This step is necessary in order to render server-side (Isomorphic)
+// var App = React.createFactory(
+//   require(path.join(process.cwd(), '/client/server.jsx'))
+// );
+
+var API = require('./client/utils/ApiService');
 
 var env = {
   production: process.env.NODE_ENV === 'production'
@@ -40,14 +61,44 @@ var options = {
   host = 'dev.refinery.aws.nypl.org',
   data;
 
-app.get('/*', function(req, res) {
+var Router = require('react-router');
+var App = require('./client/server.jsx');
+var BookModal = require('./client/components/BookModal/BookModal.jsx');
+var Error404Page = require('./client/components/Error404Page/Error404Page.jsx');
+
+var AppTest = React.createFactory(
+  require(path.join(process.cwd(), './client/server.jsx'))
+);
+
+// var BookModal = React.createFactory(
+//   require(path.join(process.cwd(), './client/components/BookModal/BookModal.jsx'))
+// );
+
+var Route = Router.Route;
+var NotFoundRoute = Router.NotFoundRoute;
+var RouteHandler = Router.RouteHandler;
+var routes = (
+    <Route path='/' handler={App} ignoreScrollBehavior>
+      <Route name='modal' path='/:id' handler={BookModal} ignoreScrollBehavior>
+        <NotFoundRoute handler={Error404Page} />
+      </Route>
+    </Route>
+  );
+
+import Header from './client/components/HeaderOld/Header.jsx';
+import Hero from './client/components/Hero/Hero.jsx';
+import Footer from './client/components/Footer/Footer.jsx';
+import _ from 'underscore';
+import DocMeta from 'react-doc-meta';
+
+app.use('/', function(req, res) {
   parser
     .setHost({
       api_root: host,
       api_version: 'v0.1'
     })
     .get(options, function (apiData) {
-      var parsedData, filters, pickList;
+      var parsedData, filters, pickList, metaBook;
 
       data = apiData;
 
@@ -55,15 +106,47 @@ app.get('/*', function(req, res) {
         parsedData = parser.parse(data);
         filters = parser.getOfType(apiData.included, 'staff-pick-tag');
         pickList = parser.getOfType(apiData.included, 'staff-pick-list');
+
+
+        API.setStaffPick({'staff-picks': parsedData});
+        API.setFilters({'filters': filters});
+        API.setPickList({'staff-picks-list': pickList});
       }
 
-      res.render('index', {
-        staffPicks: JSON.stringify({'staff-picks': parsedData}),
-        filters: JSON.stringify({'filters': filters}),
-        pickList: JSON.stringify({'staff-picks-list': pickList}),
-        env: env
+      Router.run(routes, req.path, function (Root, state) {
+        _.each(parsedData, function (book) {
+          if (book['staff-pick-item']['id'] === req.path.substr(1)) {
+            metaBook = book;
+          }
+        });
+
+        var html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>);
+        var header = React.renderToString(<Header />);
+        var hero = React.renderToString(<Hero />);
+        var footer = React.renderToString(<Footer />);
+        var metaTags = DocMeta.rewind();
+        var renderedTags = metaTags.map((tag, index) =>
+          React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
+
+        res.render('index', {
+          staffPicks: JSON.stringify({'staff-picks': parsedData}),
+          filters: JSON.stringify({'filters': filters}),
+          pickList: JSON.stringify({'staff-picks-list': pickList}),
+          env: env,
+          metatags: renderedTags,
+          header: header,
+          hero: hero,
+          markup: html,
+          footer: footer
+        });
       });
     });
+
+
+  // Router.run(routes, Router.HistoryLocation, (Root) => {
+  //   React.render(<Root />, document.getElementById('content'));
+  // });
+
 });
 
 var port = Number(process.env.PORT || 3001);

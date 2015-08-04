@@ -8,12 +8,6 @@ import BookActions from '../../actions/BookActions.js';
 
 import API from '../../utils/ApiService.js';
 
-import Modal from 'react-modal';
-
-let bookContainer = document.getElementById('sidebar');
-Modal.setAppElement(bookContainer);
-Modal.injectCSS();
-
 import { Link } from 'react-router';
 
 let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
@@ -82,9 +76,7 @@ class BookDisplayButtons extends React.Component {
   }
 }
 
-var drivenByFiltersElems, themeFiltersElems;
-
-import SimpleButton from 'components/Buttons/SimpleButton.jsx';
+import SimpleButton from '../Buttons/SimpleButton.jsx';
 
 class CloseButton extends React.Component {
   // Constructor used in ES6
@@ -113,13 +105,14 @@ class BookFilters extends React.Component {
   constructor(props) {
     super(props);
 
-    let filterList = API.getFilters(),
+    let filterList = this.props.filters ? this.props.filters['filters'] : API.getFilters(),
       themeFilters = [],
       drivenByFilters = [];
 
     _.each(filterList, function (filter) {
       filter.active = false;
       filter.show = true;
+      filter.remove = true;
       if (filter.attributes.tag.indexOf('Driven') !== -1) {
         filter.attributes.tag = (filter.attributes.tag).replace(/\bDriven/ig,'');
         drivenByFilters.push(filter);
@@ -131,6 +124,7 @@ class BookFilters extends React.Component {
     this.state = {
       drivenByFilters,
       themeFilters,
+      filterList,
       filters: BookStore.getFilters()
     };
 
@@ -337,7 +331,7 @@ class Sidebar extends React.Component {
         <h2 className='mobile-filter-btn' onClick={this._showFilters} style={styles.mobileFilterBtn}>
           Filter By Tags
         </h2>
-        <BookFilters styles={this.state.mobileDisplay ? styles.mobileFilters : null}
+        <BookFilters {...this.props} styles={this.state.mobileDisplay ? styles.mobileFilters : null}
           mobile={this.state.mobileDisplay} mobileCloseBtn={this._hideFilters}/>
       </div>
     );

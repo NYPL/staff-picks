@@ -2,7 +2,7 @@
 import React from 'react';
 import Radium from 'radium';
 
-import FooterLinkListNode from 'components/Footer/FooterLinkLists/FooterLinkListNode.jsx'
+import FooterLinkListNode from './FooterLinkListNode.jsx'
 
 class FooterLinkList extends React.Component {
   // Constructor used in ES6

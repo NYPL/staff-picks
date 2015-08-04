@@ -3,7 +3,7 @@ import Radium from 'radium';
 import Book from '../Book/Book.jsx';
 import BookContent from '../BookContent/BookContent.jsx';
 import API from '../../utils/ApiService.js';
-import CloseButton from 'components/Books/CloseButton.jsx';
+import CloseButton from './CloseButton.jsx';
 
 import _ from 'underscore';
 
@@ -20,10 +20,12 @@ let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
 // class Books extends React.Component {
 var Books = React.createClass({
   getInitialState() {
+
+    // console.log(this.props.books);
     return {
       iso: null,
       book: {},
-      books: bookData,
+      books: this.props.books['staff-picks'] || bookData,
       modalIsOpen: false,
       typeDisplay: BookStore.getBookDisplay(),
       age: BookStore.getAge(),
@@ -50,11 +52,11 @@ var Books = React.createClass({
       }
     });
 
-    setTimeout(function () {
+    // setTimeout(function () {
       _this.state.iso.arrange({
         filter: '.Adult'
       });
-    }, 500);
+    // }, 100);
 
     BookStore.addChangeListener(this._onChange);
     BookActions.updateNewFilters(this.state.iso.getItemElements());
@@ -179,8 +181,7 @@ const styles = {
     marginBottom: '20px'
   },
   gridWidth: {
-    width: '250px',
-    height: '410px'
+    width: '250px'
   },
   showNoResults: {
     display: 'inline-block',
