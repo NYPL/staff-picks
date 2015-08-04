@@ -120,7 +120,7 @@ app.use('/', function(req, res) {
           }
         });
 
-        var html = React.renderToString(<Root data={{'staff-picks': parsedData}}/>);
+        var html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>);
         var header = React.renderToString(<Header />);
         var hero = React.renderToString(<Hero />);
         var footer = React.renderToString(<Footer />);

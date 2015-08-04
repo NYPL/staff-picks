@@ -44,7 +44,7 @@ class App extends React.Component {
       {itemProp: 'name', content: 'The Name or Title Here'},
       {itemProp: 'description', content: 'This is the page description'},
       {itemProp: 'image', content: '/client/images/staff_pic_bg.jpg'}
-    ]
+    ];
 
     return (
       <div>
@@ -55,7 +55,7 @@ class App extends React.Component {
         </div>
         <div className='main-container'>
           <div id='sidebar'>
-            <Sidebar />
+            <Sidebar filters={this.props.filters}/>
           </div>
           <div id='books'>
             <Books books={this.props.data} />

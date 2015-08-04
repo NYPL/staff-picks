@@ -52,11 +52,11 @@ var Books = React.createClass({
       }
     });
 
-    setTimeout(function () {
+    // setTimeout(function () {
       _this.state.iso.arrange({
         filter: '.Adult'
       });
-    }, 1000);
+    // }, 100);
 
     BookStore.addChangeListener(this._onChange);
     BookActions.updateNewFilters(this.state.iso.getItemElements());
