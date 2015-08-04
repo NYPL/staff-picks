@@ -11,16 +11,17 @@ class BookContent extends React.Component {
 
   render () {
     const book = this.props.book,
-      bookTarget = book['staff-pick-item']['attributes']['catalog-slug'],
-      ebookTarget = book['staff-pick-item']['attributes']['ebook-slug'],
-      tags = _.chain(book['staff-pick-item']['staff-pick-tag'])
+      staffPick = book['staff-pick-item'],
+      bookTarget = staffPick['attributes']['catalog-slug'],
+      ebookTarget = staffPick['attributes']['ebook-uri'] ? staffPick['attributes']['ebook-uri']['full-uri'] : undefined,
+      tags = _.chain(staffPick['staff-pick-tag'])
         .pluck('attributes')
         .pluck('tag')
         .flatten()
         .value();
 
     let bookHREF = `https://nypl.bibliocommons.com/item/show/${bookTarget}`,
-      ebookHREF = `https://nypl.bibliocommons.com/item/show/${ebookTarget}`,
+      ebookHREF = ebookTarget,
       bookStyle = styles.available,
       ebookStyle = styles.available,
       bookLinkStyle,

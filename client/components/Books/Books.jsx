@@ -21,7 +21,6 @@ let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
 var Books = React.createClass({
   getInitialState() {
 
-    // console.log(this.props.books);
     return {
       iso: null,
       book: {},
@@ -52,11 +51,13 @@ var Books = React.createClass({
       }
     });
 
-    // setTimeout(function () {
+    $('#masonryContainer').css('opacity', '1');
+
+    setTimeout(function () {
       _this.state.iso.arrange({
         filter: '.Adult'
       });
-    // }, 100);
+    }, 1000);
 
     BookStore.addChangeListener(this._onChange);
     BookActions.updateNewFilters(this.state.iso.getItemElements());
@@ -147,7 +148,7 @@ var Books = React.createClass({
           </a>
         </div>
 
-        <div id="masonryContainer" ref="masonryContainer">
+        <div id="masonryContainer" ref="masonryContainer" style={{opacity: '0'}}>
           <ul className='list-view'>
             <ReactCSSTransitionGroup transitionName='books' transitionAppear={true}>
               {books}
