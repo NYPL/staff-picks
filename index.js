@@ -13,17 +13,16 @@ var compress = require('compression');
 var layouts = require('express-ejs-layouts');
 
 var React = require('react');
-var sassMiddleware = require('node-sass-middleware');
-
-app.use('/styles', sassMiddleware({
-  src: __dirname + '/client/styles',
-  dest: path.join(__dirname, 'styles'),
-  debug: false,
-  outputStyle: 'compressed'
-}));
+// var sassMiddleware = require('node-sass-middleware');
+// app.use('/styles', sassMiddleware({
+//   src: __dirname + '/client/styles',
+//   dest: path.join(__dirname, '/client/styles/dist'),
+//   debug: false,
+//   outputStyle: 'compressed'
+// }));
 
 app.use(favicon(__dirname + '/client/images/favicon.ico'));
-app.use(express.static(__dirname + '/client/styles'));
+// app.use(express.static(__dirname + '/client/styles'));
 
 app.set('layout');
 app.set('view engine', 'ejs');
