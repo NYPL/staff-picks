@@ -88,7 +88,56 @@ var routes = (
 import Header from './client/components/HeaderOld/Header.jsx';
 import Hero from './client/components/Hero/Hero.jsx';
 import Footer from './client/components/Footer/Footer.jsx';
+import _ from 'underscore';
+import DocMeta from 'react-doc-meta';
 
+function metaElems(book) {
+  let title = '',
+    image = '/client/images/staff_pic_bg.jpg',
+    imageSrc,
+    metaArr,
+    description = 'Every month NYPL&#39;s librarians share their favorite reads.';
+
+  if (book) {
+    title = book['staff-pick-item']['attributes']['title'];
+    imageSrc = book['staff-pick-item']['attributes']['image-slug'];
+    image = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
+    description = book['attributes']['text'];
+  }
+
+  // metaArr = [
+  //   {property: 'og:title', content: {`NYPL Staff Picks ${title}`}},
+  //   {property: 'og:type', content: 'website'},
+  //   {property: 'og:url', content: 'http://nypl-staff-picks.herokuapp.com'},
+  //   {property: 'og:image', content: {image}},
+  //   {property: 'og:description', content: {description}},
+  //   {property: 'og:site_name', content: 'NYPL Staff Picks'},
+  //   {name: 'twitter:card', content: 'website'{,
+  //   {name: 'twitter:site', content: '@NYPL'},
+  //   {name: 'twitter:title', content: {`NYPL Staff Picks ${title}`}},
+  //   {name: 'twitter:description', content: {description}},
+  //   {name: 'twitter:creator', content: '@NYPL'},
+  //   {name: 'twitter:image', content: {image},
+  // ]
+
+
+  return (
+    <div>
+    <meta property='og:title' content={`NYPL Staff Picks ${title}`} />
+    <meta property='og:type' content='website' />
+    <meta property='og:url' content='http://nypl-staff-picks.herokuapp.com' />
+    <meta property='og:image' content={image} />
+    <meta property='og:description' content={description}  />
+    <meta property='og:site_name' content='NYPL Staff Picks' />
+    <meta name='twitter:card' content='website' />
+    <meta name='twitter:site' content='@NYPL' />
+    <meta name='twitter:title' content={`NYPL Staff Picks ${title}`} />
+    <meta name='twitter:description' content={description}  />
+    <meta name='twitter:creator' content='@NYPL' />
+    <meta name='twitter:image' content={image}  />
+    </div>
+  );
+}
 
 app.use('/', function(req, res) {
   parser
@@ -97,7 +146,7 @@ app.use('/', function(req, res) {
       api_version: 'v0.1'
     })
     .get(options, function (apiData) {
-      var parsedData, filters, pickList;
+      var parsedData, filters, pickList, metaBook;
 
       data = apiData;
 
@@ -120,17 +169,26 @@ app.use('/', function(req, res) {
       // });
 
       Router.run(routes, req.path, function (Root, state) {
-        // could fetch data like in the previous example
+        _.each(parsedData, function (book) {
+          if (book['staff-pick-item']['id'] === req.path.substr(1)) {
+            metaBook = book;
+          }
+        });
+
         var html = React.renderToString(<Root data={{'staff-picks': parsedData}}/>);
         var header = React.renderToString(<Header />);
         var hero = React.renderToString(<Hero />);
         var footer = React.renderToString(<Footer />);
-        
+        var metaTags = DocMeta.rewind();
+        var renderedTags = metaTags.map((tag, index) =>
+          React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
+
         res.render('index', {
           staffPicks: JSON.stringify({'staff-picks': parsedData}),
           filters: JSON.stringify({'filters': filters}),
           pickList: JSON.stringify({'staff-picks-list': pickList}),
           env: env,
+          metatags: renderedTags,
           header: header,
           hero: hero,
           markup: html,

@@ -32,7 +32,6 @@ var BookModal = React.createClass({
       modalBook = {},
       age;
 
-console.log(this.props);
     if (!books.length) {
       if (this.props.data['staff-picks']) {
         books = this.props.data['staff-picks'];
