@@ -12,7 +12,7 @@ class BookContent extends React.Component {
   render () {
     const book = this.props.book,
       bookTarget = book['staff-pick-item']['attributes']['catalog-slug'],
-      ebookTarget = book['staff-pick-item']['attributes']['ebook-slug'],
+      ebookTarget = book['staff-pick-item']['attributes']['ebook-uri']['full-uri'],
       tags = _.chain(book['staff-pick-item']['staff-pick-tag'])
         .pluck('attributes')
         .pluck('tag')
@@ -20,7 +20,7 @@ class BookContent extends React.Component {
         .value();
 
     let bookHREF = `https://nypl.bibliocommons.com/item/show/${bookTarget}`,
-      ebookHREF = `https://nypl.bibliocommons.com/item/show/${ebookTarget}`,
+      ebookHREF = ebookTarget,
       bookStyle = styles.available,
       ebookStyle = styles.available,
       bookLinkStyle,
