@@ -14,7 +14,8 @@ class BookShare extends React.Component {
 
      this.state = {
       facebook: `http://www.facebook.com/sharer.php?u=${nyplStaffPick}&t=${nyplStaffPick}`,
-      twitter:`https://twitter.com/intent/tweet?text=${nyplStaffPick}&url=${shareUrl}`
+      twitter: `https://twitter.com/intent/tweet?text=${nyplStaffPick}&url=${shareUrl}`,
+      tumblr: `https://www.tumblr.com/widgets/share/tool?data-title=NYPL%20Staff%20Picks&data-content=${shareUrl}&data-caption=Every%20month%20NYPL&#39;s%20librarians%20share%20their%20favorite%20reads.`
     }
   }
 
@@ -31,7 +32,9 @@ class BookShare extends React.Component {
         <li key='twtr' style={[styles.social, styles.twitter]}>
 					<a href={this.state.twitter} style={styles.shareLink} label='Share on twitter'></a>
         </li>
-        <li key='tmblr' style={[styles.social,styles.tumblr]}></li>
+        <li key='tumblr' style={[styles.social, styles.tumblr]}>
+	        <a href={this.state.tumblr} target='_blank' style={styles.shareLink}></a>
+	      </li>
       </div>
     );
   }
@@ -81,5 +84,6 @@ const styles={
 	  }
 	}
 };
+
 
 export default Radium(BookShare);

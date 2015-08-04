@@ -5,37 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic' rel='stylesheet' type='text/css'>
 
-
 </head>
 <body>
 
-<!-- twitter web intents widgets-->
-   <script>
-      window.twttr = (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0],
-          t = window.twttr || {};
-        if (d.getElementById(id)) return t;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://platform.twitter.com/widgets.js";
-        fjs.parentNode.insertBefore(js, fjs);
-       
-        t._e = [];
-        t.ready = function(f) {
-          t._e.push(f);
-        };
+  <div id='header-container'></div>
+  <div id='hero'></div>
+  
+  <div id='content'>
+  </div>
 
-        return t;
-      }(document, "script", "twitter-wjs"));
-   </script>
-
-    <div id='header-container'></div>
-    <div id='hero'></div>
-    
-    <div id='content'>
-    </div>
-
-    <div id='footer-container'></div>
+  <div id='footer-container'></div>
 
   <script type='text/javascript'>
     var filters = <%- filters %>;
@@ -45,6 +24,40 @@
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.1/isotope.pkgd.min.js"></script>
+
+  <!-- twitter web intents widgets-->
+  <script>
+    window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+     
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+
+      return t;
+    }(document, "script", "twitter-wjs"));
+  </script>
+
+<!-- tumblr share button widgets-->
+  <script>
+    !function(d,s,id){
+      var js,ajs=d.getElementsByTagName(s)[0];
+      if(!d.getElementById(id)){
+        js=d.createElement(s);
+        js.id=id;
+        js.src="https://secure.assets.tumblr.com/share-button.js";
+        ajs.parentNode.insertBefore(js,ajs);
+    }}(document, "script", "tumblr-js");
+  </script>
+
+  <script id="tumblr-js" async src="https://assets.tumblr.com/share-button.js"></script>
 
 <% if (env.production) { %>
   <script async src="<%= env.assets.main.js %>"></script>
