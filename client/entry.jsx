@@ -6,21 +6,6 @@ import DocMeta from 'react-doc-meta';
 // Utilities
 import API from './utils/ApiService';
 
-/* Reads from local storage (i.e. Refinery) */
-// If we follow the FLUX architecture
-// data would not be defined, instead we would
-// load the data via Store Actions and update our
-// App Constants. As of now, we are mocking an API
-// call to fetch the data.
-// const data = API.getData();
-// const books = API.getBooks();
-
-API.setStaffPick(staffPicks);
-API.setFilters(filters);
-API.setPickList(pickList);
-
-const books = API.getBooks();
-// console.log(books);
 // NYPL Components
 import Header from './components/HeaderOld/Header.jsx';
 import Hero from './components/Hero/Hero.jsx';
@@ -35,12 +20,20 @@ import MetaTags from './components/MetaTags/MetaTags.jsx';
 import Router from 'react-router';
 import BookModal from './components/BookModal/BookModal.jsx';
 
-// let metaTags = DocMeta.rewind();
-// let tags = metaTags.map((tag, index) => 
-//   <meta data-doc-meta='true' key={index} {...tag} />);
+/* Reads from local storage (i.e. Refinery) */
+// If we follow the FLUX architecture
+// data would not be defined, instead we would
+// load the data via Store Actions and update our
+// App Constants. As of now, we are mocking an API
+// call to fetch the data.
+// const data = API.getData();
+// const books = API.getBooks();
 
-// console.log(tags);
+API.setStaffPick(staffPicks);
+API.setFilters(filters);
+API.setPickList(pickList);
 
+const books = API.getBooks();
 
 let Route = Router.Route;
 let NotFoundRoute = Router.NotFoundRoute;

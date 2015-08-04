@@ -78,4 +78,46 @@ const styles = {
   }
 };
 
+// const styles = {
+//   Hero: {
+//     height: 'auto',
+//     backgroundColor: '#e4382c',
+//     color: 'white',
+//     minHeight: '72px',
+//     padding: '0',
+//     '@media (min-width: 767px)': { width: '100%' }
+//   },
+//   HeroContainer: {
+//     height: 'auto',
+//     margin: '50px 0 0 0',
+//     maxWidth: '900px',
+//     overflow: 'hidden',
+//     position: 'relative',
+//     '@media (min-width: 719px)': { margin: '0 auto' }
+//   },
+//   HeroImageContainer: {
+//     display: 'none',
+//     borderRadius: '50%',
+//     margin: '-90px 0 -6px 0',
+//     height: '400px',
+//     width: '400px',
+//     overflow: 'hidden',
+//     position: 'relative',
+//     '@media (min-width: 767px)': { 
+//       display: 'block'
+//     },
+//   },
+//   TextContainer: {
+//     margin:'4px 0 0 5px',
+//     float: 'left',
+//     position: 'relative',
+//     width: '45%',
+//     '@media (min-width: 415px)': { margin:'70px 0 40px 50px' },
+//     '@media (min-width: 768px) and (max-width: 826px)': { width: '40%' },
+//     '@media (min-width: 827px) and (max-width: 979px)': { width: '45%' },
+//     '@media (min-width: 720px) and (max-width: 767px)': { width: '45%' },
+//     '@media (min-width: 1200px)': { width: '45%' }
+//   }
+// };
+
 export default Radium(Hero);

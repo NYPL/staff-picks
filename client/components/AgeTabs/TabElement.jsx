@@ -63,13 +63,13 @@ class TabElement extends React.Component {
 // Styles
 const styles = {
   TabElement: {
-    '@media (max-width: 767px)': { width: '33%' },
     display: 'inline-block',
     margin: '0',
     padding: '20px 0 20px 0',
     textTransform: 'uppercase',
     whiteSpace: 'pre',
-    width: '23%'
+    width: '33%',
+    '@media (min-width: 767px)': { width: '23%' }
   },
   TabElementActive: {
     borderBottomStyle: 'none',

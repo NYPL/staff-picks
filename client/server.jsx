@@ -14,8 +14,6 @@ import Error404Page from './components/Error404Page/Error404Page.jsx';
 import Books from './components/Books/Books.jsx';
 import Sidebar from './components/Sidebar/Sidebar.jsx';
 
-import MetaTags from './components/MetaTags/MetaTags.jsx';
-
 // Utilities
 import API from './utils/ApiService';
 
