@@ -7,6 +7,15 @@ class BookShare extends React.Component {
     super(props);
     // Actions of mouse click event assigned to the class
     this._handleClick = this._handleClick.bind(this);
+
+
+    let shareUrl = window.location.href,
+      nyplStaffPick = `NYPL Staff Picks - ${this.props.book['staff-pick-item']['attributes']['title']}`;
+
+     this.state = {
+      facebook: `http://www.facebook.com/sharer.php?u=${nyplStaffPick}&t=${nyplStaffPick}`,
+      twitter:`https://twitter.com/intent/tweet?text=${nyplStaffPick}&url=${shareUrl}`
+    }
   }
 
   // Actions of click event
@@ -14,14 +23,13 @@ class BookShare extends React.Component {
   }
 
   render () {
-    const book = this.props.book;
     return (
       <div ref='BookContent' className='BookShare' style={styles.BookShare}>
         <li key='fb' style={[styles.social, styles.facebook]}>
-	        <a href={shareLinks.facebook} target='_blank' style={styles.shareLink} label='Share on facebook'></a>
+	        <a href={this.state.facebook} target='_blank' style={styles.shareLink} label='Share on facebook'></a>
         </li>
         <li key='twtr' style={[styles.social, styles.twitter]}>
-					<a href={shareLinks.twitter} style={styles.shareLink} label='Share on twitter'></a>
+					<a href={this.state.twitter} style={styles.shareLink} label='Share on twitter'></a>
         </li>
         <li key='tmblr' style={[styles.social,styles.tumblr]}></li>
       </div>
@@ -72,14 +80,6 @@ const styles={
       backgroundImage: 'url("/client/images/social/social.tmblr.hover.png")'
 	  }
 	}
-}
-
-let shareUrl = global.window ? window.location.href : 'http://nypl-staff-picks.herokuapp.com';
-
-
-const shareLinks={
-	facebook: `http://www.facebook.com/sharer.php?u=${shareUrl}&t=Share%20This%20Book%20on%20Facebook`,
-	twitter:`https://twitter.com/intent/tweet?text=Share%20This%20Book%20on%20Twitter&url=${shareUrl}`
-}
+};
 
 export default Radium(BookShare);
