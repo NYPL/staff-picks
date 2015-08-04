@@ -31,16 +31,7 @@ const books = API.getBooks();
 import Router from 'react-router';
 import BookModal from './components/BookModal/BookModal.jsx';
 
-// let Route = Router.Route;
-// let NotFoundRoute = Router.NotFoundRoute;
 let RouteHandler = Router.RouteHandler;
-// let routes = (
-//     <Route path='/' handler={App} ignoreScrollBehavior>
-//       <Route name='modal' path='/:id' handler={BookModal} ignoreScrollBehavior>
-//         <NotFoundRoute handler={Error404Page} />
-//       </Route>
-//     </Route>
-//   );
 
 class App extends React.Component {
   constructor(props) {
@@ -48,7 +39,6 @@ class App extends React.Component {
   }
 
   render () {
-// console.log(this.props.data);
     var tags = [
       {name: 'description', content: 'staff picks'},
       {itemProp: 'name', content: 'The Name or Title Here'},
@@ -77,26 +67,3 @@ class App extends React.Component {
 }
 
 export default Radium(App);
-
-// let routes = (
-//     <Route path='/' handler={App} ignoreScrollBehavior>
-//       <Route name='modal' path='/:id' handler={BookModal} ignoreScrollBehavior>
-//         <NotFoundRoute handler={Error404Page} />
-//       </Route>
-//     </Route>
-//   );
-
-// React.render(<Header />, document.getElementById('header-container'));
-// React.render(<Footer />, document.getElementById('footer-container'));
-// React.render(<Hero />, document.getElementById('hero'));
-
-// if ( !books ) {
-//   React.render(<Error404Page />, document.getElementById("content"));
-// } else {
-//   React.reander(<App />, document.getElementById('content'));
-// }
-
-// Router.run(routes, Router.HistoryLocation, (Root) => {
-//   React.render(<Root />, document.getElementById('content'));
-// });
-

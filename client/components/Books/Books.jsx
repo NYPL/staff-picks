@@ -56,7 +56,7 @@ var Books = React.createClass({
       _this.state.iso.arrange({
         filter: '.Adult'
       });
-    }, 500);
+    }, 1000);
 
     BookStore.addChangeListener(this._onChange);
     BookActions.updateNewFilters(this.state.iso.getItemElements());
@@ -181,8 +181,7 @@ const styles = {
     marginBottom: '20px'
   },
   gridWidth: {
-    width: '250px',
-    height: '410px'
+    width: '250px'
   },
   showNoResults: {
     display: 'inline-block',

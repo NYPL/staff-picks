@@ -70,16 +70,24 @@ var BookModal = React.createClass({
   },
 
   render: function() {
-     let title = this.state.book['staff-pick-item']['attributes']['title'];
-     let imageSrc = this.state.book['staff-pick-item']['attributes']['image-slug'];
-     let imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
-     
-     var tags = [
+    let book = this.state.book,
+      title = '',
+      imageSrc = '/client/images/staff_pic_bg.jpg',
+      description = '',
+      imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
+    
+    if (this.state.book['staff-pick-item']) {
+      title = this.state.book['staff-pick-item']['attributes']['title'];
+      description = this.state.book.attributes.text;
+      imageSrc = this.state.book['staff-pick-item']['attributes']['image-slug'];
+    }
+
+    var tags = [
       {property: "og:title", content: title},
       {property: "og:type", content: "website"},
       // {property: "og:url", content: window.location.href},
       {property: "og:image", content: imageLink},
-      {property: "og:description", content: this.state.book.attributes.text},
+      {property: "og:description", content: description},
       {property: "og:site_name", content: "NYPL Staff Picks"},
       {name: "twitter:card", content: "website"},
       {name: "twitter:site", content: "@NYPL"},

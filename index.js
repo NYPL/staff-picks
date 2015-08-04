@@ -23,6 +23,7 @@ app.use('/styles', sassMiddleware({
 }));
 
 app.use(favicon(__dirname + '/client/images/favicon.ico'));
+app.use(express.static(__dirname + '/client/styles'));
 
 app.set('layout');
 app.set('view engine', 'ejs');
@@ -91,54 +92,6 @@ import Footer from './client/components/Footer/Footer.jsx';
 import _ from 'underscore';
 import DocMeta from 'react-doc-meta';
 
-function metaElems(book) {
-  let title = '',
-    image = '/client/images/staff_pic_bg.jpg',
-    imageSrc,
-    metaArr,
-    description = 'Every month NYPL&#39;s librarians share their favorite reads.';
-
-  if (book) {
-    title = book['staff-pick-item']['attributes']['title'];
-    imageSrc = book['staff-pick-item']['attributes']['image-slug'];
-    image = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
-    description = book['attributes']['text'];
-  }
-
-  // metaArr = [
-  //   {property: 'og:title', content: {`NYPL Staff Picks ${title}`}},
-  //   {property: 'og:type', content: 'website'},
-  //   {property: 'og:url', content: 'http://nypl-staff-picks.herokuapp.com'},
-  //   {property: 'og:image', content: {image}},
-  //   {property: 'og:description', content: {description}},
-  //   {property: 'og:site_name', content: 'NYPL Staff Picks'},
-  //   {name: 'twitter:card', content: 'website'{,
-  //   {name: 'twitter:site', content: '@NYPL'},
-  //   {name: 'twitter:title', content: {`NYPL Staff Picks ${title}`}},
-  //   {name: 'twitter:description', content: {description}},
-  //   {name: 'twitter:creator', content: '@NYPL'},
-  //   {name: 'twitter:image', content: {image},
-  // ]
-
-
-  return (
-    <div>
-    <meta property='og:title' content={`NYPL Staff Picks ${title}`} />
-    <meta property='og:type' content='website' />
-    <meta property='og:url' content='http://nypl-staff-picks.herokuapp.com' />
-    <meta property='og:image' content={image} />
-    <meta property='og:description' content={description}  />
-    <meta property='og:site_name' content='NYPL Staff Picks' />
-    <meta name='twitter:card' content='website' />
-    <meta name='twitter:site' content='@NYPL' />
-    <meta name='twitter:title' content={`NYPL Staff Picks ${title}`} />
-    <meta name='twitter:description' content={description}  />
-    <meta name='twitter:creator' content='@NYPL' />
-    <meta name='twitter:image' content={image}  />
-    </div>
-  );
-}
-
 app.use('/', function(req, res) {
   parser
     .setHost({
@@ -160,13 +113,6 @@ app.use('/', function(req, res) {
         API.setFilters({'filters': filters});
         API.setPickList({'staff-picks-list': pickList});
       }
-
-      // res.render('index', {
-      //   staffPicks: JSON.stringify({'staff-picks': parsedData}),
-      //   filters: JSON.stringify({'filters': filters}),
-      //   pickList: JSON.stringify({'staff-picks-list': pickList}),
-      //   env: env
-      // });
 
       Router.run(routes, req.path, function (Root, state) {
         _.each(parsedData, function (book) {
