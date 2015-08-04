@@ -3,8 +3,8 @@ import React from 'react';
 import Radium from 'radium';
 
 // Component import
-import HeroTitle from 'components/Hero/HeroTitle/HeroTitle.jsx';
-import HeroImage from 'components/Hero/HeroImage/HeroImage.jsx';
+import HeroTitle from './HeroTitle/HeroTitle.jsx';
+import HeroImage from './HeroImage/HeroImage.jsx';
 import BookStore from '../../stores/BookStore.js';
 import API from '../../utils/ApiService.js';
 

@@ -3,20 +3,8 @@ import 'styles/main.scss';
 import React from 'react/addons';
 import DocMeta from 'react-doc-meta';
 
-// NYPL Components
-import Header from 'components/HeaderOld/Header.jsx';
-import Hero from 'components/Hero/Hero.jsx';
-import Footer from 'components/Footer/Footer.jsx';
-import AgeTabs from 'components/AgeTabs/AgeTabs.jsx';
-import Error404Page from 'components/Error404Page/Error404Page.jsx';
-
-import Books from 'components/Books/Books.jsx';
-import Sidebar from 'components/Sidebar/Sidebar.jsx';
-
-import MetaTags from 'components/MetaTags/MetaTags.jsx';
-
 // Utilities
-import API from 'utils/ApiService';
+import API from './utils/ApiService';
 
 /* Reads from local storage (i.e. Refinery) */
 // If we follow the FLUX architecture
@@ -24,11 +12,35 @@ import API from 'utils/ApiService';
 // load the data via Store Actions and update our
 // App Constants. As of now, we are mocking an API
 // call to fetch the data.
-const data = API.getData();
-const books = API.getBooks();
+// const data = API.getData();
+// const books = API.getBooks();
 
+API.setStaffPick(staffPicks);
+API.setFilters(filters);
+API.setPickList(pickList);
+
+const books = API.getBooks();
+// console.log(books);
+// NYPL Components
+import Header from './components/HeaderOld/Header.jsx';
+import Hero from './components/Hero/Hero.jsx';
+import Footer from './components/Footer/Footer.jsx';
+import AgeTabs from './components/AgeTabs/AgeTabs.jsx';
+import Error404Page from './components/Error404Page/Error404Page.jsx';
+
+import Books from './components/Books/Books.jsx';
+import Sidebar from './components/Sidebar/Sidebar.jsx';
+
+import MetaTags from './components/MetaTags/MetaTags.jsx';
 import Router from 'react-router';
-import BookModal from 'components/BookModal/BookModal.jsx';
+import BookModal from './components/BookModal/BookModal.jsx';
+
+// let metaTags = DocMeta.rewind();
+// let tags = metaTags.map((tag, index) => 
+//   <meta data-doc-meta='true' key={index} {...tag} />);
+
+// console.log(tags);
+
 
 let Route = Router.Route;
 let NotFoundRoute = Router.NotFoundRoute;
@@ -41,7 +53,7 @@ class App extends React.Component {
 
   render () {
 
- var tags = [
+    var tags = [
       {name: 'description', content: 'staff picks'},
       {itemProp: 'name', content: 'The Name or Title Here'},
       {itemProp: 'description', content: 'This is the page description'},
@@ -51,7 +63,7 @@ class App extends React.Component {
     return (
       <div>
         <DocMeta tags={tags} />
-        <RouteHandler />
+        <RouteHandler {...this.props} />
         <div id='age-tabs' className='age-tabs'>
           <AgeTabs />
         </div>
@@ -60,7 +72,7 @@ class App extends React.Component {
             <Sidebar />
           </div>
           <div id='books'>
-            <Books />
+            <Books books={this.props.data} />
           </div>
         </div>
       </div>
@@ -87,6 +99,6 @@ React.render(<Hero />, document.getElementById('hero'));
 // }
 
 Router.run(routes, Router.HistoryLocation, (Root) => {
-  React.render(<Root />, document.getElementById('content'));
+  React.render(<Root data={staffPicks} />, document.getElementById('content'));
 });
 

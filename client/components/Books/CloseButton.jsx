@@ -1,7 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 
-import SimpleButton from 'components/Buttons/SimpleButton.jsx';
+import SimpleButton from '../Buttons/SimpleButton.jsx';
 
 class CloseButton extends React.Component {
   // Constructor used in ES6
