@@ -104,10 +104,10 @@ let BookModal = React.createClass({
           <CloseButton onClick={this.closeModal} />
           <BookTitle book={this.state.book} />
           <div style={styles.LeftColumn}>
-            <div key='ImageContainer' style={styles.ImageContainer}>
+            <div key='ImageContainer' className='ImageContainer' style={styles.ImageContainer}>
               <Book book={this.state.book} style={styles.BookCover} />
             </div>
-            <div key='ShareContainer' style={styles.ShareContainer}>
+            <div key='ShareContainer' className='ShareContainer' style={styles.ShareContainer}>
               <BookShare book={this.state.book} />
             </div>
           </div>
@@ -137,7 +137,8 @@ const styles={
     position: 'relative', 
     '@media (max-width: 414px)': {
       margin: '0', 
-      position: 'relative'
+      position: 'relative',
+      width: '175px'
     }
   },
   ShareContainer: {
@@ -149,10 +150,10 @@ const styles={
     }
   },
   BookCover: {
-    width: '237px',
+    width: '100%',
     height: 'auto',
-    '@media (max-width: 414px)': {
-      width: '80%'
+    '@media (min-width: 414px)': {
+      width: '237px'
     }
   }
 }

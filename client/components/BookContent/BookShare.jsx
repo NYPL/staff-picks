@@ -12,9 +12,9 @@ class BookShare extends React.Component {
      this.state = {
       facebook: `http://www.facebook.com/sharer.php?u=${nyplStaffPick}&t=${nyplStaffPick}`,
       twitter: `https://twitter.com/intent/tweet?text=${nyplStaffPick}&url=${shareUrl}`,
-      tumblr: `https://www.tumblr.com/widgets/share/tool?data-title=` + 
-       `NYPL%20Staff%20Picks&data-content=${shareUrl}&data-caption=Every` +
-       `%20month%20NYPL&#39;s%20librarians%20share%20their%20favorite%20reads.`
+      tumblr: `https://www.tumblr.com/widgets/share/tool?posttype=link&canonicalUrl=${shareUrl}` +
+      `&title=NYPL%20Staff%20Picks&caption=Every%20month%20NYPL%27s%20librarians%20share%20their%20` +
+      `favorite%20reads.`
     }
   }
 
