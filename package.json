@@ -63,6 +63,7 @@
     "jest-cli": "0.4.13",
     "jsonapi-parserinator": "0.2.5",
     "jsx-loader": "0.13.2",
+    "newrelic": "1.21.1",
     "node-libs-browser": "0.5.2",
     "object-assign": "3.0.0",
     "radium": "~0.13.1",
