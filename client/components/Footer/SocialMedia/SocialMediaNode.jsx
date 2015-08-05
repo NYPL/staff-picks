@@ -7,18 +7,19 @@ class SocialMediaNode extends React.Component {
 	constructor(props) {
     super(props);
   }
+
   render () {
-			return (
-	      <li key='SocialMediaNode' id={this.props.name} >
-		      <a key='SocialMediaLink' className={this.props.className} style={styles.SocialMediaLink} href={this.props.link}>
-			      <span className='replaced-text' style={styles.ReplacedText} >
-							{this.props.name}
-						</span>
-					</a>
-	      </li>
-			);
-	};
-};
+		return (
+      <li key='SocialMediaNode' id={this.props.name}>
+	      <a key='SocialMediaLink' className={this.props.className} style={styles.SocialMediaLink} href={this.props.link}>
+		      <span className='replaced-text' style={styles.ReplacedText} >
+						{this.props.name}
+					</span>
+				</a>
+      </li>
+		);
+	}
+}
 
 const styles = {};
 

@@ -39,8 +39,7 @@ class Sidebar extends React.Component {
   }
 };
 
-Sidebar.defaultProps = {
-};
+Sidebar.defaultProps = {};
 
 const styles = {
   base: {},

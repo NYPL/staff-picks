@@ -8,8 +8,7 @@ import HeroImage from './HeroImage/HeroImage.jsx';
 import BookStore from '../../stores/BookStore.js';
 import API from '../../utils/ApiService.js';
 
-export default class Hero extends React.Component {
-
+class Hero extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
@@ -32,7 +31,7 @@ export default class Hero extends React.Component {
       </div>
     );
   }
-}
+};
 
 const styles = {
   Hero: {

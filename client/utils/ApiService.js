@@ -9,7 +9,6 @@ var staffPicksServer, filtersServer, pickListServer;
 
 const API = {
   setStaffPick(picks) {
-    // console.log(picks);
     staffPicksServer = picks;
   },
   setFilters(filters) {
@@ -235,7 +234,6 @@ const API = {
     return data;
   },
   getBooks() {
-    // console.log(staffPicksServer);
     if (staffPicksServer) {
       return staffPicksServer['staff-picks'];
     }
@@ -260,7 +258,7 @@ const API = {
     });
 
     _.each(booksRaw, function (book) {
-      var age = book['staff-pick-age']['attributes']['age'];
+      let age = book['staff-pick-age']['attributes']['age'];
       books[age] = book;
     });
     return books;

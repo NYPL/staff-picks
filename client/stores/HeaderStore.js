@@ -2,6 +2,7 @@ import EventEmitter from 'eventemitter3';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import HeaderConstants from '../constants/HeaderConstants';
 import _ from 'underscore';
+
 // Boolean flag that initially hides the Subscribe Form
 let _subscribeFormVisible =  false;
 

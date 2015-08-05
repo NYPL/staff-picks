@@ -11,8 +11,8 @@ class HeroImage extends React.Component {
 
   render () {
   	return (
-		<ImageComponent id={this.props.id} className={this.props.className} style={styles.HeroImage} src={this.props.src} />
-	);
+		  <ImageComponent id={this.props.id} className={this.props.className} style={styles.HeroImage} src={this.props.src} />
+    );
   }
 };
 

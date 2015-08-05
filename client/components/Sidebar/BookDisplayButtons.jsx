@@ -59,6 +59,7 @@ class BookDisplayButtons extends React.Component {
   _handleClick (displayType) {
     BookActions.updateBookDisplay(displayType);
   }
+
   _onChange () {
     this.setState({
       displayType: BookStore.getBookDisplay(),
@@ -67,6 +68,6 @@ class BookDisplayButtons extends React.Component {
       filters: BookStore.getFilters()
     });
   }
-}
+};
 
 export default Radium(BookDisplayButtons);

@@ -31,7 +31,7 @@ class CloseButton extends React.Component {
         onClick={this._handleClick} />
     );
   }
-}
+};
 
 
 class BookFilters extends React.Component {
@@ -236,7 +236,7 @@ class BookFilters extends React.Component {
     filter.active = !filter.active;
     BookActions.toggleBookFilter(filterType);
   }
-}
+};
 
 const styles = {
   base: {},

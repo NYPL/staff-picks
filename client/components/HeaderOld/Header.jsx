@@ -275,8 +275,6 @@ class Header extends React.Component {
         return false;
       }
     });
-
-
   }
 
   render () {
