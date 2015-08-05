@@ -115,7 +115,15 @@ app.use('/', function(req, res) {
           header: header,
           hero: hero,
           markup: html,
-          footer: footer
+          footer: footer,
+          analytics: (function (e) {
+            var cfg = require('./analytics.js');
+	    if (e.production) {
+              return cfg.google.production;
+            }
+            return cfg.google.dev;
+          })(env)
+
         });
       });
     });
