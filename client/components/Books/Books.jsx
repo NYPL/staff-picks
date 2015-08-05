@@ -3,7 +3,7 @@ import Radium from 'radium';
 import Book from '../Book/Book.jsx';
 import BookContent from '../BookContent/BookContent.jsx';
 import API from '../../utils/ApiService.js';
-import CloseButton from 'components/Books/CloseButton.jsx';
+import CloseButton from './CloseButton.jsx';
 
 import _ from 'underscore';
 
@@ -23,7 +23,7 @@ var Books = React.createClass({
     return {
       iso: null,
       book: {},
-      books: bookData,
+      books: this.props.books['staff-picks'] || bookData,
       modalIsOpen: false,
       typeDisplay: BookStore.getBookDisplay(),
       age: BookStore.getAge(),
@@ -50,11 +50,13 @@ var Books = React.createClass({
       }
     });
 
+    $('#masonryContainer').css('opacity', '1');
+
     setTimeout(function () {
       _this.state.iso.arrange({
         filter: '.Adult'
       });
-    }, 500);
+    }, 1200);
 
     BookStore.addChangeListener(this._onChange);
     BookActions.updateNewFilters(this.state.iso.getItemElements());
@@ -94,29 +96,40 @@ var Books = React.createClass({
     });
   },
 
-  openModal (book) {
+  _openModal (book) {
     this.transitionTo('modal', {id: book['staff-pick-item']['id']});
   },
 
+  _getTags (elem) {
+    return elem['staff-pick-item']['staff-pick-tag'] || [];
+  },
+
+  _getAge (elem) {
+    if (!elem['staff-pick-age']) {
+      return;
+    }
+    return elem['staff-pick-age']['attributes']['age'];
+  },
+
   render () {
-    const openModal = this.openModal,
+    const openModal = this._openModal,
       _this = this;
 
     let books;
 
     books = this.state.books.map(function (element, i) {
-      let tags = _.map(element['staff-pick-item']['staff-pick-tag'], function (tag) {
+      let tagList = _this._getTags(element),
+        age = _this._getAge(element),
+        tagIDs = _.map(tagList, function (tag) {
           return tag.id;
         }),
-        tagClasses = tags.join(' '),
-        listWidth = _this.state.typeDisplay === 'list';
+        tagClasses = tagIDs.join(' '),
+        listDisplay = _this.state.typeDisplay === 'list';
 
       return (
-        <li className={'book-item ' + element['staff-pick-age']['attributes']['age'] + ' ' + tagClasses}
+        <li className={'book-item ' + age + ' ' + tagClasses}
           key={element.id} onClick={openModal.bind(_this, element)}
-          style={[
-            listWidth ? styles.listWidth : styles.gridWidth
-            ]}>
+          style={[listDisplay ? styles.listWidth : styles.gridWidth]}>
           {_this.state.typeDisplay === 'grid' ?
             <Book book={element} style={styles.bookItem} width={'100%'} /> :
             <div>
@@ -144,7 +157,7 @@ var Books = React.createClass({
           </a>
         </div>
 
-        <div id="masonryContainer" ref="masonryContainer">
+        <div id="masonryContainer" ref="masonryContainer" style={{opacity: '0'}}>
           <ul className='list-view'>
             <ReactCSSTransitionGroup transitionName='books' transitionAppear={true}>
               {books}
@@ -178,8 +191,7 @@ const styles = {
     marginBottom: '20px'
   },
   gridWidth: {
-    width: '250px',
-    height: '410px'
+    width: '250px'
   },
   showNoResults: {
     display: 'inline-block',

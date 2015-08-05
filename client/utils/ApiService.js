@@ -5,7 +5,18 @@
 // it to the component.
 import _ from 'underscore';
 
+var staffPicksServer, filtersServer, pickListServer;
+
 const API = {
+  setStaffPick(picks) {
+    staffPicksServer = picks;
+  },
+  setFilters(filters) {
+    filtersServer = filters;
+  },
+  setPickList(list) {
+    pickListServer = list;
+  },
   getData() {
     const data = [
       {
@@ -223,15 +234,21 @@ const API = {
     return data;
   },
   getBooks() {
+    if (staffPicksServer) {
+      return staffPicksServer['staff-picks'];
+    }
+    let staffPicks = {'staff-picks': []};
     const books = staffPicks['staff-picks'] || [];
     return books;
   },
   getFilters() {
-    const filterList = filters.filters;
+    let filters = {'filters':[]};
+    const filterList = filtersServer.filters;
     return filterList;
   },
   getFeaturedPicks() {
-    const featuredPickList = pickList['staff-picks-list'];
+    let pickList = {'staff-picks-list': []};
+    const featuredPickList = pickListServer['staff-picks-list'];
     const featuredBooks = featuredPickList[0].relationships.features.data;
 
     let booksRaw = [], books = {};
@@ -241,7 +258,7 @@ const API = {
     });
 
     _.each(booksRaw, function (book) {
-      var age = book['staff-pick-age']['attributes']['age'];
+      let age = book['staff-pick-age']['attributes']['age'];
       books[age] = book;
     });
     return books;

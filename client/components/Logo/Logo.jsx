@@ -9,14 +9,12 @@ class Logo extends React.Component {
 
   render () {
     return (
-      <a
-      id={this.props.id}
-      className={this.props.className}
-      href={this.props.target}
-      style={[
-        styles.base,
-        this.props.style //allows for parent-to-child css styling
-      ]}>
+      <a id={this.props.id} className={this.props.className}
+        href={this.props.target}
+        style={[
+          styles.base,
+          this.props.style //allows for parent-to-child css styling
+        ]}>
         <image src={this.props.src} style={styles.image} />
       </a>
     );

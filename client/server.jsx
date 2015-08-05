@@ -1,12 +1,9 @@
 'use strict';
-
-import 'styles/main.scss';
+// import 'styles/main.scss';
 import React from 'react/addons';
+import Radium from 'radium';
 import DocMeta from 'react-doc-meta';
 import Router from 'react-router';
-
-// Utilities
-import API from './utils/ApiService';
 
 // NYPL Components
 import Header from './components/HeaderOld/Header.jsx';
@@ -18,24 +15,19 @@ import Books from './components/Books/Books.jsx';
 import Sidebar from './components/Sidebar/Sidebar.jsx';
 import BookModal from './components/BookModal/BookModal.jsx';
 
+// Utilities
+import API from './utils/ApiService';
+
 /* Reads from local storage (i.e. Refinery) */
 // If we follow the FLUX architecture
 // data would not be defined, instead we would
 // load the data via Store Actions and update our
 // App Constants. As of now, we are mocking an API
 // call to fetch the data.
-// const data = API.getData();
-// const books = API.getBooks();
-
-API.setStaffPick(staffPicks);
-API.setFilters(filters);
-API.setPickList(pickList);
-
+const data = API.getData();
 const books = API.getBooks();
 
-let Route = Router.Route,
-  NotFoundRoute = Router.NotFoundRoute,
-  RouteHandler = Router.RouteHandler;
+let RouteHandler = Router.RouteHandler;
 
 class App extends React.Component {
   constructor(props) {
@@ -59,7 +51,7 @@ class App extends React.Component {
         </div>
         <div className='main-container'>
           <div id='sidebar'>
-            <Sidebar />
+            <Sidebar filters={this.props.filters}/>
           </div>
           <div id='books'>
             <Books books={this.props.data} />
@@ -70,25 +62,4 @@ class App extends React.Component {
   }
 }
 
-let routes = (
-    <Route path='/' handler={App} ignoreScrollBehavior>
-      <Route name='modal' path='/:id' handler={BookModal} ignoreScrollBehavior>
-        <NotFoundRoute handler={Error404Page} />
-      </Route>
-    </Route>
-  );
-
-React.render(<Header />, document.getElementById('header-container'));
-React.render(<Footer />, document.getElementById('footer-container'));
-React.render(<Hero />, document.getElementById('hero'));
-
-// if ( !books ) {
-//   React.render(<Error404Page />, document.getElementById("content"));
-// } else {
-//   React.reander(<App />, document.getElementById('content'));
-// }
-
-Router.run(routes, Router.HistoryLocation, (Root) => {
-  React.render(<Root data={staffPicks} />, document.getElementById('content'));
-});
-
+export default Radium(App);

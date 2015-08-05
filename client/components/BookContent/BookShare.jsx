@@ -5,25 +5,31 @@ class BookShare extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
-    // Actions of mouse click event assigned to the class
-    this._handleClick = this._handleClick.bind(this);
-  }
 
-  // Actions of click event
-  _handleClick (value) {
+    let shareUrl = window.location.href,
+      nyplStaffPick = `NYPL Staff Picks - ${this.props.book['staff-pick-item']['attributes']['title']}`;
+
+     this.state = {
+      facebook: `http://www.facebook.com/sharer.php?u=${nyplStaffPick}&t=${nyplStaffPick}`,
+      twitter: `https://twitter.com/intent/tweet?text=${nyplStaffPick}&url=${shareUrl}`,
+      tumblr: `https://www.tumblr.com/widgets/share/tool?posttype=link&canonicalUrl=${shareUrl}` +
+      `&title=NYPL%20Staff%20Picks&caption=Every%20month%20NYPL%27s%20librarians%20share%20their%20` +
+      `favorite%20reads.`
+    }
   }
 
   render () {
-    const book = this.props.book;
     return (
       <div ref='BookContent' className='BookShare' style={styles.BookShare}>
         <li key='fb' style={[styles.social, styles.facebook]}>
-	        <a href={shareLinks.facebook} target='_blank' style={styles.shareLink} label='Share on facebook'></a>
+	        <a href={this.state.facebook} target='_blank' style={styles.shareLink} label='Share on facebook'></a>
         </li>
         <li key='twtr' style={[styles.social, styles.twitter]}>
-					<a href={shareLinks.twitter} style={styles.shareLink} label='Share on twitter'></a>
+					<a href={this.state.twitter} style={styles.shareLink} label='Share on twitter'></a>
         </li>
-        <li key='tmblr' style={[styles.social,styles.tumblr]}></li>
+        <li key='tumblr' style={[styles.social, styles.tumblr]}>
+	        <a href={this.state.tumblr} target='_blank' style={styles.shareLink}></a>
+	      </li>
       </div>
     );
   }
@@ -72,13 +78,7 @@ const styles={
       backgroundImage: 'url("/client/images/social/social.tmblr.hover.png")'
 	  }
 	}
-}
+};
 
-let	shareUrl=window.location.href;
-
-const shareLinks={
-	facebook: `http://www.facebook.com/sharer.php?u=${shareUrl}&t=Share%20This%20Book%20on%20Facebook`,
-	twitter:`https://twitter.com/intent/tweet?text=Share%20This%20Book%20on%20Twitter&url=${shareUrl}`
-}
 
 export default Radium(BookShare);

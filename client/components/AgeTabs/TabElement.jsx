@@ -57,19 +57,19 @@ class TabElement extends React.Component {
           </a>
   		</li>
 		);
-  }ß
+  }
 };
 
 // Styles
 const styles = {
   TabElement: {
-    '@media (max-width: 767px)': { width: '33%' },
     display: 'inline-block',
     margin: '0',
     padding: '20px 0 20px 0',
     textTransform: 'uppercase',
     whiteSpace: 'pre',
-    width: '23%'
+    width: '23%',
+    '@media (max-width: 767px)': { width: '33%' }
   },
   TabElementActive: {
     borderBottomStyle: 'none',

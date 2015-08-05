@@ -11,16 +11,18 @@ class BookContent extends React.Component {
 
   render () {
     const book = this.props.book,
-      bookTarget = book['staff-pick-item']['attributes']['catalog-slug'],
-      ebookTarget = book['staff-pick-item']['attributes']['ebook-slug'],
-      tags = _.chain(book['staff-pick-item']['staff-pick-tag'])
+      staffPick = book['staff-pick-item'],
+      bookTarget = staffPick['attributes']['catalog-slug'],
+      ebookTarget = staffPick['attributes']['ebook-uri'] ?
+        staffPick['attributes']['ebook-uri']['full-uri'] : undefined,
+      tags = _.chain(staffPick['staff-pick-tag'])
         .pluck('attributes')
         .pluck('tag')
         .flatten()
         .value();
 
     let bookHREF = `https://nypl.bibliocommons.com/item/show/${bookTarget}`,
-      ebookHREF = `https://nypl.bibliocommons.com/item/show/${ebookTarget}`,
+      ebookHREF = ebookTarget,
       bookStyle = styles.available,
       ebookStyle = styles.available,
       bookLinkStyle,
@@ -47,7 +49,9 @@ class BookContent extends React.Component {
         <p className='description'>{book.attributes.text}</p>
         <div className='staff-pick'>
           <span className='staff-pick-icon'></span>
-          <span className='staff-pick-text'>Staff Pick By: {book.attributes['picker-name']}, {book.attributes['location']}</span>
+          <span className='staff-pick-text'>
+            Staff Pick By: {book.attributes['picker-name']}, {book.attributes['location']}
+          </span>
         </div>
 
         <ul className='borrow'>
@@ -69,8 +73,7 @@ class BookContent extends React.Component {
 
 BookContent.defaultProps = {
   className: 'BookContent',
-  lang: 'en',
-  onClick() {}
+  lang: 'en'
 };
 
 const styles = {

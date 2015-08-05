@@ -15,7 +15,6 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
-    cookie.save('bc_username', 'edwinguzman');
     this.state = {
       data: this.props.data,
       username: this._login(),
@@ -276,8 +275,6 @@ class Header extends React.Component {
         return false;
       }
     });
-
-
   }
 
   render () {
@@ -344,7 +341,7 @@ class Header extends React.Component {
                 <ul>
                   <li className="search-the-catalog">
                     <label>
-                      <input name="searchtype" type="radio" checked="checked"/>
+                      <input name="searchtype" type="radio" defaultChecked="checked"/>
                       Catalog
                     </label>
                   </li>

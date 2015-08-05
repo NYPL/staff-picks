@@ -400,7 +400,7 @@ body {
     padding: 30px 20px 20px 30px;
     position: relative;
     width: 850px;
-    margin: 190px 0 0 0;
+    margin: 7% 0;
     @include breakpoint($max, $post-mobile-phone) {
       border: 0px solid #ccc;
       border-radius: 0px;
@@ -428,6 +428,13 @@ body {
     background-color: rgba(255, 255, 255, 0);
     overflow: auto;
   }
+}
+
+.tumblr-share-button {
+  background-image: 'none';
+  display: 'inline-block';
+  height: 61px;
+  width: 60px;
 }
 
 .month-picker {
@@ -469,7 +476,7 @@ body {
       border-radius: 20px;
       border: 2px solid $text-gray;
       width: 95px;
-      margin: 0px 0px 10px 65px;
+      margin: 0px 0px 10px 15%;
 
       @include breakpoint($min, $post-mobile-phone) {
         display: block;

@@ -1,15 +1,14 @@
 import Radium from 'radium';
 import React from 'react/addons';
-import SSOform from '../SSOform/SSOform.jsx';
-import SimpleButton from '../Buttons/SimpleButton.jsx';
 import cookie from 'react-cookie';
 import cx from 'classnames';
+
+import SSOform from '../SSOform/SSOform.jsx';
+import SimpleButton from '../Buttons/SimpleButton.jsx';
 
 class SignInContainer extends React.Component {
   constructor(props) {
     super(props);
-
-    // cookie.save('username', 'edwinguzman');
 
     this.state = {
       username: this._login(),
@@ -58,7 +57,7 @@ class SignInContainer extends React.Component {
   _remember_me() {
     return !!cookie.load('remember_me');
   }
-}
+};
 
 const styles = {
   base: {

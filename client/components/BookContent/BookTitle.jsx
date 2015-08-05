@@ -5,8 +5,6 @@ class BookTitle extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
-
-    this._handleClick = this._handleClick.bind(this);
   }
 
   render () {
@@ -17,10 +15,6 @@ class BookTitle extends React.Component {
         <h2 style={styles.BookTitle}>{book['staff-pick-item']['attributes']['title']}</h2>
       </div>
     );
-  }
-
-  _handleClick (e) {
-    e.preventDefault();
   }
 };
 

@@ -6,11 +6,6 @@ class Book extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      modalIsOpen: false,
-      modal: false
-    };
-
     this._handleClick = this._handleClick.bind(this);
   }
 
@@ -28,11 +23,13 @@ class Book extends React.Component {
         ]}>
         
         <a href='#' onClick={this._handleClick}>
-          <img
-            src={`https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${bookImgSrc}&content=M&Return=1&Type=M`}
+          <img style={this.props.style}
+            alt={book['staff-pick-item']['attributes']['title']}
+            src={`https://contentcafe2.btol.com/ContentCafe/` +
+              `Jacket.aspx?&userID=NYPL49807&password=CC68707&` +
+              `Value=${bookImgSrc}&content=M&Return=1&Type=M`}
             height={this.props.height}
-            width={this.props.width}
-            style={this.props.style} />
+            width={this.props.width} />
         </a>
       </div>
     );
@@ -45,13 +42,11 @@ class Book extends React.Component {
 
 Book.defaultProps = {
   className: 'Book',
-  lang: 'en',
-  onClick() {}
+  lang: 'en'
 };
 
 const styles = {
-  base: {
-  }
+  base: {}
 };
 
 export default Radium(Book);
