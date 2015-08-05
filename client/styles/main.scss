@@ -524,7 +524,17 @@ body {
 
 .mobile-filter-btn {
   font-size: 18px;
-  margin-left: 135px;
+  border-bottom-style: solid;
+  border-color: #0095c8;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-radius: 6px;
+  border-top-style: solid;
+  border-width: 2px;
+  margin: 0 auto;
+  padding: 18px 10px 18px 10px;
+  text-align: center;
+  width: 200px;
 
   a {
     text-decoration: none;
