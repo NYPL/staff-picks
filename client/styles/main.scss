@@ -648,5 +648,10 @@ body {
   margin-left: 10px;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
+
 @import 'header';
 @import 'footer';

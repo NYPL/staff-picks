@@ -1,8 +1,10 @@
+// Import React and other utility libraries
 import React from 'react';
 import Radium from 'radium';
 import cx from 'classnames';
 import _ from 'underscore';
 
+// Import components
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
@@ -10,6 +12,7 @@ import API from '../../utils/ApiService.js';
 
 import Modal from 'react-modal';
 
+// Import Modal CSS
 let bookContainer = document.getElementById('sidebar');
 Modal.setAppElement(bookContainer);
 Modal.injectCSS();
@@ -68,7 +71,7 @@ class BookDisplayButtons extends React.Component {
     );
   }
 
-    /* Utility Methods should be declared below the render method */
+  /* Utility Methods should be declared below the render method */
   _handleClick (displayType) {
     BookActions.updateBookDisplay(displayType);
   }
@@ -324,10 +327,14 @@ class Sidebar extends React.Component {
 
   _showFilters() {
     this.setState({mobileDisplay: true});
+    // Make the whole document not scrollable for mobile version
+    document.body.style.overflow = 'hidden';
   }
 
   _hideFilters() {
     this.setState({mobileDisplay: false});
+    // Make the whole document scrollable again
+    document.body.style.overflow = 'auto';
   }
 
   render () {
@@ -353,7 +360,9 @@ const styles = {
   },
   mobileFilters: {
     display: 'block',
-    position: 'absolute',
+    height: '100%',
+    position: 'fixed',
+    overflow: 'auto',
     top: '50px',
     backgroundColor: '#fff',
     width: '100%',
