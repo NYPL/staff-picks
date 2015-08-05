@@ -22,7 +22,7 @@ class Sidebar extends React.Component {
     this.setState({mobileDisplay: true});
     // Make the whole document not scrollable for mobile version
     document.body.className = 'no-scroll';
-    location.href='#top';
+    window.scrollTo(0, 0);
   }
 
   _hideFilters() {

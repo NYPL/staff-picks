@@ -211,7 +211,7 @@ ul#nav_menu {
   width: 93%;
   margin: 0 auto;
   @include breakpoint($min, 414 + $viewport-increment) {
-    width: 960px;
+    /*width: 960px;*/
   }
 }
 
@@ -347,7 +347,9 @@ span[class*="icon-"] {
 
     @include breakpoint($min, $post-mobile-phone) {
       margin-right: 30px;
-      width: 160px;
+      max-width: 160px;
+      min-width: 60px;
+      width: 30%;
     }
 
     .sidebar-content {
@@ -360,7 +362,10 @@ span[class*="icon-"] {
     overflow: hidden;
     width: 100%;
     @include breakpoint($min, $post-mobile-phone) {
-      width: 770px;
+      max-width: 800px;
+      min-width: 200px;
+      padding-left: 5%;
+      width: 70%;
     }
   }
 
