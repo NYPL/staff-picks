@@ -545,6 +545,27 @@ body {
   }
 }
 
+.mobile-done-button {
+  border-bottom-style: solid;
+  border-color: #0095c8;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-radius: 6px;
+  border-top-style: solid;
+  border-width: 2px;
+  cursor: pointer;
+  display: block;
+  margin: 30px auto;
+  padding: 14px 10px;
+  text-align: center;
+  width: 100px;
+  a {
+    color: #0095c8;
+    font-size: 1.2em;
+    text-decoration: none;
+  }
+}
+
 .BookFilters {
   display: none;
 

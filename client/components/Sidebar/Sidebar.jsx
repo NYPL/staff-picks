@@ -206,6 +206,11 @@ class BookFilters extends React.Component {
             </div>
             : null
           }
+          <h2 className='mobile-done-button'>
+            <a onClick={this.props.mobileCloseBtn}>
+              Done
+            </a>
+          </h2>
         </div>
       </div>
     );
