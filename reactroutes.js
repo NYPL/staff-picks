@@ -7,7 +7,8 @@ let fs = require('fs'),
   favicon = require('express-favicon'),
   app = express(),
   compress = require('compression'),
-  layouts = require('express-ejs-layouts');
+  layouts = require('express-ejs-layouts'),
+  analytics = require('./analytics.js');
 
 import React from 'react';
 import Router from 'react-router';
@@ -116,14 +117,7 @@ app.use('/', function(req, res) {
           hero: hero,
           markup: html,
           footer: footer,
-          analytics: (function (e) {
-            var cfg = require('./analytics.js');
-	    if (e.production) {
-              return cfg.google.production;
-            }
-            return cfg.google.dev;
-          })(env)
-
+          gaCode: analytics.google.code(env.production)
         });
       });
     });
