@@ -47,9 +47,10 @@ class BookFilters extends React.Component {
       filter.show = true;
       filter.remove = true;
       if (filter.attributes.tag.indexOf('Driven') !== -1) {
-        filter.attributes.tag = (filter.attributes.tag).replace(/\bDriven/ig,'');
+        filter.attributes.displayName = (filter.attributes.tag).replace(/\bDriven/ig,'');
         drivenByFilters.push(filter);
       } else {
+        filter.attributes.displayName = filter.attributes.tag;
         themeFilters.push(filter);
       }
     });
@@ -57,12 +58,12 @@ class BookFilters extends React.Component {
     this.state = {
       drivenByFilters,
       themeFilters,
-      filterList,
       filters: BookStore.getFilters()
     };
 
     this._clearFilters = this._clearFilters.bind(this);
     this._onChange = this._onChange.bind(this);
+    this._filterItems = this._filterItems.bind(this);
   }
 
   componentDidMount () {
@@ -73,7 +74,38 @@ class BookFilters extends React.Component {
     BookStore.removeChangeListener(this._onChange);
   }
 
-  filterItems (list) {
+  render () {
+    let styles = this.props.styles || {};
+
+    return (
+      <div className='BookFilters' style={styles}>
+        <span className='divider'></span>
+        <CloseButton onClick={this.props.mobileCloseBtn} />
+        <h2>What would you like to read?</h2>
+        <div className='BookFilters-lists'>
+          <span>Driven by...</span>
+          <ul>
+            {this._filterItems(this.state.drivenByFilters)}
+          </ul>
+          <span>Themes...</span>
+          <ul>
+            {this._filterItems(this.state.themeFilters)}
+          </ul>
+          {this.state.filters.length ? 
+            <div className='clearFilters' style={styles.clearFilters}>
+              <a href='#' onClick={this._clearFilters}>
+                Clear Filters
+                <span className='close-icon'></span>
+              </a>
+            </div>
+            : null
+          }
+        </div>
+      </div>
+    );
+  }
+
+  _filterItems (list) {
     const _this = this,
       _handleClick = this._handleClick;
 
@@ -88,7 +120,7 @@ class BookFilters extends React.Component {
         liElement = (
           <li key={elem.id} onClick={_handleClick.bind(_this, elem)}>
             <a>
-              {elem.attributes.tag}
+              {elem.attributes.displayName}
               <ReactCSSTransitionGroup transitionName='minus' transitionAppear={true}>
                 <span className={'minus-icon ' + active}></span>
               </ReactCSSTransitionGroup>
@@ -97,44 +129,13 @@ class BookFilters extends React.Component {
         );
       } else {
         liElement = (
-          <li key={elem.id} style={styles.grayedOutFilter}>{elem.attributes.tag}</li>
+          <li key={elem.id} style={styles.grayedOutFilter}>{elem.attributes.displayName}</li>
         );
       }
 
       return elem.remove ? liElement : null;
-      // <Link to='/' onClick={_handleClick.bind(_this, elem)} query={{filters: elem.attributes.tag}}>
+      // <Link to='/' onClick={_handleClick.bind(_this, elem)} query={{filters: elem.attributes.displayName}}>
     });
-  }
-
-  render () {
-    let styles = this.props.styles || {};
-
-    return (
-      <div className='BookFilters' style={styles}>
-        <span className='divider'></span>
-        <CloseButton onClick={this.props.mobileCloseBtn} />
-        <h2>What would you like to read?</h2>
-        <div className='BookFilters-lists'>
-          <span>Driven by...</span>
-          <ul>
-            {this.filterItems(this.state.drivenByFilters)}
-          </ul>
-          <span>Themes...</span>
-          <ul>
-            {this.filterItems(this.state.themeFilters)}
-          </ul>
-          {this.state.filters.length ? 
-            <div className='clearFilters' style={styles.clearFilters}>
-              <a href='#' onClick={this._clearFilters}>
-                Clear Filters
-                <span className='close-icon'></span>
-              </a>
-            </div>
-            : null
-          }
-        </div>
-      </div>
-    );
   }
 
   _onChange() {
