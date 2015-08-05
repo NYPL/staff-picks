@@ -328,13 +328,13 @@ class Sidebar extends React.Component {
   _showFilters() {
     this.setState({mobileDisplay: true});
     // Make the whole document not scrollable for mobile version
-    document.body.style.overflow = 'hidden';
+    document.body.className = 'no-scroll';
   }
 
   _hideFilters() {
     this.setState({mobileDisplay: false});
     // Make the whole document scrollable again
-    document.body.style.overflow = 'auto';
+    document.body.className = '';
   }
 
   render () {
