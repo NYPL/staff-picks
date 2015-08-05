@@ -72,54 +72,54 @@ let options = {
 app.use('/*', function(req, res) {
   Router.run(routes, req.path, function (Root, state) {
     let parsedData = [], filters = [], pickList = [], metaBook;
-    // parser
-    //   .setHost({
-    //     api_root: host,
-    //     api_version: 'v0.1'
-    //   })
-    //   .get(options, function (apiData) {
-    //     let parsedData = [], filters = [], pickList = [], metaBook;
+    parser
+      .setHost({
+        api_root: host,
+        api_version: 'v0.1'
+      })
+      .get(options, function (apiData) {
+        let parsedData = [], filters = [], pickList = [], metaBook;
 
-    //     data = apiData;
+        data = apiData;
 
-    //     if (apiData) {
-    //       parsedData = parser.parse(data);
-    //       filters = parser.getOfType(apiData.included, 'staff-pick-tag');
-    //       pickList = parser.getOfType(apiData.included, 'staff-pick-list');
+        if (apiData) {
+          parsedData = parser.parse(data);
+          filters = parser.getOfType(apiData.included, 'staff-pick-tag');
+          pickList = parser.getOfType(apiData.included, 'staff-pick-list');
 
 
-    //       API.setStaffPick({'staff-picks': parsedData});
-    //       API.setFilters({'filters': filters});
-    //       API.setPickList({'staff-picks-list': pickList});
-    //       _.each(parsedData, function (book) {
-    //         if (book['staff-pick-item']['id'] === req.path.substr(1)) {
-    //           metaBook = book;
-    //         }
-    //       });
-    //     }
-    // });
+          API.setStaffPick({'staff-picks': parsedData});
+          API.setFilters({'filters': filters});
+          API.setPickList({'staff-picks-list': pickList});
+          _.each(parsedData, function (book) {
+            if (book['staff-pick-item']['id'] === req.path.substr(1)) {
+              metaBook = book;
+            }
+          });
+        }
 
-    let html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>),
-      header = React.renderToString(<Header />),
-      hero = React.renderToString(<Hero />),
-      footer = React.renderToString(<Footer />),
-      metaTags = DocMeta.rewind(),
-      renderedTags = metaTags.map((tag, index) =>
-        React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
+        let html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>),
+          header = React.renderToString(<Header />),
+          hero = React.renderToString(<Hero />),
+          footer = React.renderToString(<Footer />),
+          metaTags = DocMeta.rewind(),
+          renderedTags = metaTags.map((tag, index) =>
+            React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
 
-    res.render('index', {
-      staffPicks: JSON.stringify({'staff-picks': parsedData}),
-      filters: JSON.stringify({'filters': filters}),
-      pickList: JSON.stringify({'staff-picks-list': pickList}),
-      env: env,
-      metatags: renderedTags,
-      header: header,
-      hero: hero,
-      markup: html,
-      footer: footer
-    });
+        res.render('index', {
+          staffPicks: JSON.stringify({'staff-picks': parsedData}),
+          filters: JSON.stringify({'filters': filters}),
+          pickList: JSON.stringify({'staff-picks-list': pickList}),
+          env: env,
+          metatags: renderedTags,
+          header: header,
+          hero: hero,
+          markup: html,
+          footer: footer
+        });
+      }); /* end parser */
 
-  });
+  }); /* end Router.run */
 });
 
 let port = Number(process.env.PORT || 3001);
