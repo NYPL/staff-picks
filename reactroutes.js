@@ -1,18 +1,23 @@
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
+let fs = require('fs'),
+  path = require('path'),
+  objectAssign = require('object-assign'),
+  express = require('express'),
+  favicon = require('express-favicon'),
+  app = express(),
+  compress = require('compression'),
+  layouts = require('express-ejs-layouts');
 
-var objectAssign = require('object-assign');
+import React from 'react';
+import Router from 'react-router';
+import parser from 'jsonapi-parserinator';
+import Header from './client/components/HeaderOld/Header.jsx';
+import Hero from './client/components/Hero/Hero.jsx';
+import Footer from './client/components/Footer/Footer.jsx';
+import _ from 'underscore';
+import DocMeta from 'react-doc-meta';
 
-var express = require('express');
-var favicon = require('express-favicon');
-var app = express();
-
-var compress = require('compression');
-var layouts = require('express-ejs-layouts');
-
-var React = require('react');
 // var sassMiddleware = require('node-sass-middleware');
 // app.use('/styles', sassMiddleware({
 //   src: __dirname + '/client/styles',
@@ -20,10 +25,8 @@ var React = require('react');
 //   debug: false,
 //   outputStyle: 'compressed'
 // }));
-
 app.use(favicon(__dirname + '/client/images/favicon.ico'));
 // app.use(express.static(__dirname + '/client/styles'));
-
 app.set('layout');
 app.set('view engine', 'ejs');
 app.set('view options', {layout: 'layout'});
@@ -32,20 +35,13 @@ app.set('views', path.join(process.cwd(), '/server/views'));
 app.use(compress());
 app.use(layouts);
 app.use('/client', express.static(path.join(process.cwd(), '/client')));
-
 app.disable('x-powered-by');
 
-// Assign the desired React Component to be rendered as a string
-// This step is necessary in order to render server-side (Isomorphic)
-// var App = React.createFactory(
-//   require(path.join(process.cwd(), '/client/server.jsx'))
-// );
 
-var API = require('./client/utils/ApiService');
-
-var env = {
-  production: process.env.NODE_ENV === 'production'
-};
+let API = require('./client/utils/ApiService'),
+  env = {
+    production: process.env.NODE_ENV === 'production'
+  };
 
 if (env.production) {
   objectAssign(env, {
@@ -53,43 +49,25 @@ if (env.production) {
   });
 }
 
-var parser = require('jsonapi-parserinator');
-var options = {
+let options = {
     endpoint: '/api/nypl/ndo/v0.1/staff-picks',
     includes: ['item.tags', 'list', 'age']
   },
   host = 'dev.refinery.aws.nypl.org',
-  data;
-
-var Router = require('react-router');
-var App = require('./client/server.jsx');
-var BookModal = require('./client/components/BookModal/BookModal.jsx');
-var Error404Page = require('./client/components/Error404Page/Error404Page.jsx');
-
-var AppTest = React.createFactory(
-  require(path.join(process.cwd(), './client/server.jsx'))
-);
-
-// var BookModal = React.createFactory(
-//   require(path.join(process.cwd(), './client/components/BookModal/BookModal.jsx'))
-// );
-
-var Route = Router.Route;
-var NotFoundRoute = Router.NotFoundRoute;
-var RouteHandler = Router.RouteHandler;
-var routes = (
+  App = require('./client/server.jsx'),
+  BookModal = require('./client/components/BookModal/BookModal.jsx'),
+  Error404Page = require('./client/components/Error404Page/Error404Page.jsx'),
+  Route = Router.Route,
+  NotFoundRoute = Router.NotFoundRoute,
+  RouteHandler = Router.RouteHandler,
+  routes = (
     <Route path='/' handler={App} ignoreScrollBehavior>
       <Route name='modal' path='/:id' handler={BookModal} ignoreScrollBehavior>
         <NotFoundRoute handler={Error404Page} />
       </Route>
     </Route>
-  );
-
-import Header from './client/components/HeaderOld/Header.jsx';
-import Hero from './client/components/Hero/Hero.jsx';
-import Footer from './client/components/Footer/Footer.jsx';
-import _ from 'underscore';
-import DocMeta from 'react-doc-meta';
+  ),
+  data;
 
 app.use('/', function(req, res) {
   parser
@@ -98,7 +76,7 @@ app.use('/', function(req, res) {
       api_version: 'v0.1'
     })
     .get(options, function (apiData) {
-      var parsedData, filters, pickList, metaBook;
+      let parsedData, filters, pickList, metaBook;
 
       data = apiData;
 
@@ -120,13 +98,13 @@ app.use('/', function(req, res) {
           }
         });
 
-        var html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>);
-        var header = React.renderToString(<Header />);
-        var hero = React.renderToString(<Hero />);
-        var footer = React.renderToString(<Footer />);
-        var metaTags = DocMeta.rewind();
-        var renderedTags = metaTags.map((tag, index) =>
-          React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
+        let html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>),
+          header = React.renderToString(<Header />),
+          hero = React.renderToString(<Hero />),
+          footer = React.renderToString(<Footer />),
+          metaTags = DocMeta.rewind(),
+          renderedTags = metaTags.map((tag, index) =>
+            React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
 
         res.render('index', {
           staffPicks: JSON.stringify({'staff-picks': parsedData}),
@@ -141,22 +119,16 @@ app.use('/', function(req, res) {
         });
       });
     });
-
-
-  // Router.run(routes, Router.HistoryLocation, (Root) => {
-  //   React.render(<Root />, document.getElementById('content'));
-  // });
-
 });
 
-var port = Number(process.env.PORT || 3001);
-var server = app.listen(port, function () {
+let port = Number(process.env.PORT || 3001);
+let server = app.listen(port, function () {
   console.log('server running at localhost:3001, go refresh and see magic');
 });
 
 // this function is called when you want the server to die gracefully
 // i.e. wait for existing connections
-var gracefulShutdown = function() {
+let gracefulShutdown = function() {
   console.log("Received kill signal, shutting down gracefully.");
   server.close(function() {
     console.log("Closed out remaining connections.");
@@ -177,9 +149,9 @@ process.on ('SIGTERM', gracefulShutdown);
 process.on ('SIGINT', gracefulShutdown);
 
 if (env.production === false) {
-  var webpack = require('webpack');
-  var WebpackDevServer = require('webpack-dev-server');
-  var webpackConfig = require('./webpack.dev.config');
+  let webpack = require('webpack'),
+    WebpackDevServer = require('webpack-dev-server'),
+    webpackConfig = require('./webpack.dev.config');
 
   new WebpackDevServer(webpack(webpackConfig), {
     publicPath: '/client/',

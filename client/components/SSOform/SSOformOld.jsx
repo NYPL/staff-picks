@@ -1,7 +1,8 @@
 import Radium from 'radium';
 import React from 'react';
-import InputField from '../InputField/InputField.jsx';
 import cookie from 'react-cookie';
+
+import InputField from '../InputField/InputField.jsx';
 
 class SSOSignIn extends React.Component {
   constructor(props) {
@@ -13,7 +14,6 @@ class SSOSignIn extends React.Component {
   }
 
   render() {
-
     return (
       <div className='login-form'> 
         <form action="/" method="post" id="bc-sso-login-form--2" acceptCharset="UTF-8" onSubmit={this.submitSSO.bind(this)}>
@@ -97,7 +97,7 @@ class SSOSignIn extends React.Component {
 
     window.location.href = url;
   }
-}
+};
 
 class SSOLoggedInMenu extends React.Component {
   constructor(props) {
@@ -151,7 +151,7 @@ class SSOformOld extends React.Component {
       </div>
     );
   }
-}
+};
 
 const styles = {
   base: {},

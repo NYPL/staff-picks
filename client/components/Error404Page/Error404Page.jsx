@@ -2,7 +2,6 @@ import React from 'react';
 import Radium from 'radium';
 
 class Error404Page extends React.Component {
-
 	// Constructor used in ES6
   constructor(props) {
     super(props);

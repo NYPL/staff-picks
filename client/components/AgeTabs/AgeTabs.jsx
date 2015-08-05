@@ -14,7 +14,7 @@ class AgeTabs extends React.Component {
 
   render () {
     // Render each TabElement
-    var TabElements = data.map ( function (element) {
+    var TabElements = data.map(function (element) {
       return (
         <TabElement 
           key={element.name} 
@@ -23,6 +23,7 @@ class AgeTabs extends React.Component {
           value={element.value} />
       );
     });
+
   	return (
       <div className='tab-container' 
         style={styles.TabContainer}>
@@ -39,23 +40,22 @@ class AgeTabs extends React.Component {
 // Styles
 const styles = {
   TabContainer: {
-    '@media (max-width: 767px)': { fontSize: '1.2em', padding: '20px 0 0 0' },
     backgroundColor: '#ffffff',
     display: 'block',
     fontSize: '1.4em',
     height: 'auto',
     margin: '30px auto 40px',
-    padding: '20px 0 0 0',
+    padding: '21px 0 0 0',
     position: 'relative',
     textAlign: 'center',
-    width: '100%'
+    width: '100%',
+    '@media (max-width: 767px)': { fontSize: '1.2em' }
   },
   TabUl: {
     display: 'block',
     margin: '0 auto',
   },
   TabOutside: {
-    '@media (max-width: 767px)': { width: '0' },
     display: 'inline-block',
     textTransform: 'uppercase',
     width: '15%',
@@ -66,7 +66,8 @@ const styles = {
     borderTopStyle: 'none',
     borderWidth: '1px',
     position: 'relative',
-    top:'23px'
+    top:'23px',
+    '@media (max-width: 767px)': { width: '0' },
   }
 };
 

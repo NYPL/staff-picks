@@ -8,15 +8,15 @@ class FooterLinkListNode extends React.Component {
     super(props);
   }
   render () {
-			return (
-				<li className={this.props.className}>
-		      <a key='NodeUrl' href={this.props.link} >
-						{this.props.name}
-					</a>
-				</li>
-			);
-	};
-};
+		return (
+			<li className={this.props.className}>
+	      <a key='NodeUrl' href={this.props.link} >
+					{this.props.name}
+				</a>
+			</li>
+		);
+	}
+}
 
 const styles = {};
 

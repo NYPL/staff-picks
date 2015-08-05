@@ -13,7 +13,8 @@ class BookContent extends React.Component {
     const book = this.props.book,
       staffPick = book['staff-pick-item'],
       bookTarget = staffPick['attributes']['catalog-slug'],
-      ebookTarget = staffPick['attributes']['ebook-uri'] ? staffPick['attributes']['ebook-uri']['full-uri'] : undefined,
+      ebookTarget = staffPick['attributes']['ebook-uri'] ?
+        staffPick['attributes']['ebook-uri']['full-uri'] : undefined,
       tags = _.chain(staffPick['staff-pick-tag'])
         .pluck('attributes')
         .pluck('tag')
@@ -48,7 +49,9 @@ class BookContent extends React.Component {
         <p className='description'>{book.attributes.text}</p>
         <div className='staff-pick'>
           <span className='staff-pick-icon'></span>
-          <span className='staff-pick-text'>Staff Pick By: {book.attributes['picker-name']}, {book.attributes['location']}</span>
+          <span className='staff-pick-text'>
+            Staff Pick By: {book.attributes['picker-name']}, {book.attributes['location']}
+          </span>
         </div>
 
         <ul className='borrow'>
@@ -70,8 +73,7 @@ class BookContent extends React.Component {
 
 BookContent.defaultProps = {
   className: 'BookContent',
-  lang: 'en',
-  onClick() {}
+  lang: 'en'
 };
 
 const styles = {

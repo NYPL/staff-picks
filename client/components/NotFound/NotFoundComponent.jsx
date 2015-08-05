@@ -1,6 +1,7 @@
 import React from 'react';
+import Radium from 'radium';
 
-export default class NotFoundComponent extends React.Component {
+class NotFoundComponent extends React.Component {
   render() {
     return (
       <section>
@@ -12,4 +13,6 @@ export default class NotFoundComponent extends React.Component {
       </section>
     );
   }
-}
+};
+
+export default Radium(NotFoundComponent);

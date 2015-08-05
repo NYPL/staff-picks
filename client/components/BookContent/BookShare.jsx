@@ -5,9 +5,6 @@ class BookShare extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
-    // Actions of mouse click event assigned to the class
-    this._handleClick = this._handleClick.bind(this);
-
 
     let shareUrl = window.location.href,
       nyplStaffPick = `NYPL Staff Picks - ${this.props.book['staff-pick-item']['attributes']['title']}`;
@@ -15,12 +12,10 @@ class BookShare extends React.Component {
      this.state = {
       facebook: `http://www.facebook.com/sharer.php?u=${nyplStaffPick}&t=${nyplStaffPick}`,
       twitter: `https://twitter.com/intent/tweet?text=${nyplStaffPick}&url=${shareUrl}`,
-      tumblr: `https://www.tumblr.com/widgets/share/tool?data-title=NYPL%20Staff%20Picks&data-content=${shareUrl}&data-caption=Every%20month%20NYPL&#39;s%20librarians%20share%20their%20favorite%20reads.`
+      tumblr: `https://www.tumblr.com/widgets/share/tool?data-title=` + 
+       `NYPL%20Staff%20Picks&data-content=${shareUrl}&data-caption=Every` +
+       `%20month%20NYPL&#39;s%20librarians%20share%20their%20favorite%20reads.`
     }
-  }
-
-  // Actions of click event
-  _handleClick (value) {
   }
 
   render () {

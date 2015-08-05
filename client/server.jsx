@@ -3,6 +3,7 @@
 import React from 'react/addons';
 import Radium from 'radium';
 import DocMeta from 'react-doc-meta';
+import Router from 'react-router';
 
 // NYPL Components
 import Header from './components/HeaderOld/Header.jsx';
@@ -10,11 +11,9 @@ import Hero from './components/Hero/Hero.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import AgeTabs from './components/AgeTabs/AgeTabs.jsx';
 import Error404Page from './components/Error404Page/Error404Page.jsx';
-
 import Books from './components/Books/Books.jsx';
 import Sidebar from './components/Sidebar/Sidebar.jsx';
-
-import MetaTags from './components/MetaTags/MetaTags.jsx';
+import BookModal from './components/BookModal/BookModal.jsx';
 
 // Utilities
 import API from './utils/ApiService';
@@ -28,9 +27,6 @@ import API from './utils/ApiService';
 const data = API.getData();
 const books = API.getBooks();
 
-import Router from 'react-router';
-import BookModal from './components/BookModal/BookModal.jsx';
-
 let RouteHandler = Router.RouteHandler;
 
 class App extends React.Component {
@@ -39,7 +35,7 @@ class App extends React.Component {
   }
 
   render () {
-    var tags = [
+    let tags = [
       {name: 'description', content: 'staff picks'},
       {itemProp: 'name', content: 'The Name or Title Here'},
       {itemProp: 'description', content: 'This is the page description'},

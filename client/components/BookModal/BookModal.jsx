@@ -1,5 +1,9 @@
 import React from 'react';
 import DocMeta from 'react-doc-meta';
+import _ from 'underscore';
+import Radium from 'radium';
+import Router from 'react-router';
+import Modal from 'react-modal';
 
 import CloseButton from '../Books/CloseButton.jsx';
 import Book from '../Book/Book.jsx';
@@ -7,17 +11,13 @@ import BookContent from '../BookContent/BookContent.jsx';
 import BookTitle from '../BookContent/BookTitle.jsx';
 import BookIntro from '../BookContent/BookIntro.jsx';
 import BookShare from '../BookContent/BookShare.jsx';
-import _ from 'underscore';
-import Radium from 'radium';
-import Router from 'react-router';
-import Modal from 'react-modal';
+
 import API from '../../utils/ApiService.js';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
 let Navigation = Router.Navigation;
-
 let books = API.getBooks();
 
 if (global.window) {
@@ -26,7 +26,7 @@ if (global.window) {
 }
 
 // class BookModal extends React.Component {
-var BookModal = React.createClass({
+let BookModal = React.createClass({
   getInitialState() {
     let paramID = this.props.params.id,
       modalBook = {},
@@ -49,8 +49,7 @@ var BookModal = React.createClass({
 
     return {
       modalIsOpen: true,
-      book: modalBook,
-      age: age
+      book: modalBook
     };
   },
 
@@ -74,12 +73,13 @@ var BookModal = React.createClass({
       title = '',
       imageSrc = '/client/images/staff_pic_bg.jpg',
       description = '',
-      imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
+      imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?` +
+       `&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
     
-    if (this.state.book['staff-pick-item']) {
-      title = this.state.book['staff-pick-item']['attributes']['title'];
-      description = this.state.book.attributes.text;
-      imageSrc = this.state.book['staff-pick-item']['attributes']['image-slug'];
+    if (book['staff-pick-item']) {
+      title = book['staff-pick-item']['attributes']['title'];
+      description = book.attributes.text;
+      imageSrc = book['staff-pick-item']['attributes']['image-slug'];
     }
 
     var tags = [

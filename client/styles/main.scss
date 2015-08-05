@@ -476,7 +476,7 @@ body {
       border-radius: 20px;
       border: 2px solid $text-gray;
       width: 95px;
-      margin: 0px 0px 10px 65px;
+      margin: 0px 0px 10px 15%;
 
       @include breakpoint($min, $post-mobile-phone) {
         display: block;
