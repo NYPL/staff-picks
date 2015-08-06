@@ -7,7 +7,8 @@ let fs = require('fs'),
   favicon = require('express-favicon'),
   app = express(),
   compress = require('compression'),
-  layouts = require('express-ejs-layouts');
+  layouts = require('express-ejs-layouts'),
+  analytics = require('./analytics.js');
 
 import React from 'react';
 import Router from 'react-router';
@@ -77,9 +78,12 @@ app.use('/*', function(req, res) {
         api_root: host,
         api_version: 'v0.1'
       })
-      .get(options, function (apiData) {
+      .get(options, function (error, apiData) {
         let parsedData = [], filters = [], pickList = [], metaBook;
 
+        if (error) {
+          console.log(error);
+        }
         data = apiData;
 
         if (apiData) {
@@ -115,7 +119,8 @@ app.use('/*', function(req, res) {
           header: header,
           hero: hero,
           markup: html,
-          footer: footer
+          footer: footer,
+          gaCode: analytics.google.code(env.production)
         });
       }); /* end parser */
 
