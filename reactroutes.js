@@ -8,7 +8,8 @@ let fs = require('fs'),
   app = express(),
   compress = require('compression'),
   layouts = require('express-ejs-layouts'),
-  analytics = require('./analytics.js');
+  analytics = require('./analytics.js'),
+  http = require('http');
 
 import React from 'react';
 import Router from 'react-router';
@@ -73,7 +74,44 @@ let options = {
   data;
 
 app.use('/*', function(req, res) {
+  var endpoint = options.endpoint,
+    opts = {
+      host: host,
+      path: endpoint,
+      method: 'GET',
+    },
+    apiData;
+
+  var req = http.request(opts, function (res) {
+    var responseString = '';
+    res.setEncoding('utf8');
+
+    res.on('data', function (chunk) {
+      responseString += chunk;
+    });
+
+    res.on('end', function () {
+      var result;
+
+      try {
+        result = JSON.parse(responseString);
+      } catch (err) {
+        console.log(err);
+      }
+      // cb(result);
+      console.log(result);
+      // apiData = result;
+    });
+  });
+
+  req.on('error', function (err) {
+    console.log(err);
+  });
+
+  req.end();
+
   Router.run(routes, req.path, function (Root, state) {
+    console.log(apiData);
     let parsedData = [], filters = [], pickList = [], metaBook;
     // parser
     //   .setHost({
