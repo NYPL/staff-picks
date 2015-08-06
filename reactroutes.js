@@ -75,19 +75,19 @@ let options = {
 app.use('/*', function(req, res) {
   Router.run(routes, req.path, function (Root, state) {
     let parsedData = [], filters = [], pickList = [], metaBook;
-    parser
-      .setHost({
-        api_root: host,
-        api_version: 'v0.1'
-      })
-      .get(options, function (apiData) {
-        // if (error) {
-        //   console.log('test');
-        //   console.log(error);
-        // }
-        data = apiData;
-        console.log('getting data');
-      });/* end parser */
+    // parser
+    //   .setHost({
+    //     api_root: host,
+    //     api_version: 'v0.1'
+    //   })
+    //   .get(options, function (apiData) {
+    //     // if (error) {
+    //     //   console.log('test');
+    //     //   console.log(error);
+    //     // }
+    //     data = apiData;
+    //     console.log('getting data');
+    //   });/* end parser */
 
     let html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>),
       header = React.renderToString(<Header />),
