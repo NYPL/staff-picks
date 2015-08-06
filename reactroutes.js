@@ -12,7 +12,8 @@ let fs = require('fs'),
 
 import React from 'react';
 import Router from 'react-router';
-import parser from 'jsonapi-parserinator';
+// import parser from 'jsonapi-parserinator';
+import parser from './parser.js';
 import Header from './client/components/HeaderOld/Header.jsx';
 import Hero from './client/components/Hero/Hero.jsx';
 import Footer from './client/components/Footer/Footer.jsx';
