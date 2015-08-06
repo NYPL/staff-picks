@@ -342,14 +342,22 @@ span[class*="icon-"] {
 
   #sidebar {
     float: left;
+    margin-right: 3%;
+    min-width: 60px;
     padding: 0;
     width: 100%;
 
     @include breakpoint($min, $post-mobile-phone) {
       margin-right: 30px;
-      max-width: 160px;
-      min-width: 60px;
       width: 30%;
+    }
+    @include breakpoint($min, $post-palm) {
+      max-width: 160px;
+      margin-right: 8%;
+    }
+     @include breakpoint($min, $post-tablet) {
+      max-width: 160px;
+      margin-right: 8%;
     }
 
     .sidebar-content {
@@ -369,10 +377,10 @@ span[class*="icon-"] {
       width: 60%;
     }
      @include breakpoint($min, $post-tablet) {
-      width: 70%;
+      width: 68%;
     }
     @include breakpoint($min, $post-desktop) {
-      width: 80%;
+      width: 74%;
     }
 
   }
