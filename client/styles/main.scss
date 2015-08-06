@@ -358,14 +358,23 @@ span[class*="icon-"] {
   }
 
   #books {
+    display: block;
     float: left;
     overflow: hidden;
     width: 100%;
     @include breakpoint($min, $post-mobile-phone) {
-      display: block;
-      min-width: 400px;
+      width: 280px;
+    }
+    @include breakpoint($min, $post-palm) {
+      width: 60%;
+    }
+     @include breakpoint($min, $post-tablet) {
+      width: 70%;
+    }
+    @include breakpoint($min, $post-desktop) {
       width: 80%;
     }
+
   }
 
   .list-view {
