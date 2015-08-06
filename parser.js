@@ -226,7 +226,6 @@ parser = {
     return this;
   },
   get: function get(options, cb) {
-    var deferred = Q.defer();
     var endpoint = options.endpoint,
       included = urlGenerator.createParams(options),
       opts = {
@@ -258,24 +257,21 @@ parser = {
         try {
           result = JSON.parse(responseString);
         } catch (err) {
-          deferred.reject(err);
+          console.log(err);
         }
-
-        deferred.resolve(result);
+        cb(result);
       });
     });
 
     req.on('error', function (err) {
-      deferred.reject(err);
+      console.log(err);
     });
 
     if (data !== null) {
       req.write(data);
     }
-    req.end();
 
-    deferred.promise.nodeify(cb);
-    return deferred.promise;
+    return req.end();
   },
   parse: function parse() {
     var apiData = arguments[0] === undefined ? {} : arguments[0];

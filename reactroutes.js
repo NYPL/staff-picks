@@ -75,31 +75,19 @@ let options = {
 app.use('/*', function(req, res) {
   Router.run(routes, req.path, function (Root, state) {
     let parsedData = [], filters = [], pickList = [], metaBook;
-    // parser
-    //   .setHost({
-    //     api_root: host,
-    //     api_version: 'v0.1'
-    //   })
-    //   .get(options, function (error, apiData) {
-    //     if (error) {
-    //       console.log(error);
-    //     }
-    //     data = apiData;
-
-    //     if (apiData) {
-    //       parsedData = parser.parse(data);
-    //       filters = parser.getOfType(apiData.included, 'staff-pick-tag');
-    //       pickList = parser.getOfType(apiData.included, 'staff-pick-list');
-    //       API.setStaffPick({'staff-picks': parsedData});
-    //       API.setFilters({'filters': filters});
-    //       API.setPickList({'staff-picks-list': pickList});
-    //       // _.each(parsedData, function (book) {
-    //       //   if (book['staff-pick-item']['id'] === req.path.substr(1)) {
-    //       //     metaBook = book;
-    //       //   }
-    //       // });
-    //     }
-    //   }); /* end parser */
+    parser
+      .setHost({
+        api_root: host,
+        api_version: 'v0.1'
+      })
+      .get(options, function (apiData) {
+        // if (error) {
+        //   console.log('test');
+        //   console.log(error);
+        // }
+        data = apiData;
+        console.log('getting data');
+      });/* end parser */
 
     let html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>),
       header = React.renderToString(<Header />),
