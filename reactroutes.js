@@ -79,8 +79,6 @@ app.use('/*', function(req, res) {
         api_version: 'v0.1'
       })
       .get(options, function (error, apiData) {
-        let parsedData = [], filters = [], pickList = [], metaBook;
-
         if (error) {
           console.log(error);
         }
@@ -90,16 +88,14 @@ app.use('/*', function(req, res) {
           parsedData = parser.parse(data);
           filters = parser.getOfType(apiData.included, 'staff-pick-tag');
           pickList = parser.getOfType(apiData.included, 'staff-pick-list');
-
-
           API.setStaffPick({'staff-picks': parsedData});
           API.setFilters({'filters': filters});
           API.setPickList({'staff-picks-list': pickList});
-          _.each(parsedData, function (book) {
-            if (book['staff-pick-item']['id'] === req.path.substr(1)) {
-              metaBook = book;
-            }
-          });
+          // _.each(parsedData, function (book) {
+          //   if (book['staff-pick-item']['id'] === req.path.substr(1)) {
+          //     metaBook = book;
+          //   }
+          // });
         }
 
         let html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>),
