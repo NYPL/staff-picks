@@ -242,8 +242,8 @@ const API = {
     return books;
   },
   getFilters() {
-    let filters = {'filters':[]};
-    const filterList = filtersServer.filters;
+    let clientFilters = {'filters':[]};
+    const filterList = filters['filters'] || clientFilters;
     return filterList;
   },
   getFeaturedPicks() {

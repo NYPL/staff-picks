@@ -13,8 +13,7 @@ let fs = require('fs'),
 
 import React from 'react';
 import Router from 'react-router';
-// import parser from 'jsonapi-parserinator';
-import parser from './parser.js';
+import parser from 'jsonapi-parserinator';
 import Header from './client/components/HeaderOld/Header.jsx';
 import Hero from './client/components/Hero/Hero.jsx';
 import Footer from './client/components/Footer/Footer.jsx';
@@ -73,7 +72,10 @@ let options = {
   ),
   data;
 
+
 /////////
+parser.setChildrenObjects(options);
+
 var endpoint = options.endpoint,
   opts = {
     host: host,
@@ -111,26 +113,14 @@ req.on('error', function (err) {
 req.end();
 /////////
 
-app.use('/*', function(req, res) {
+
+app.get('/*', function(req, res) {
   Router.run(routes, req.path, function (Root, state) {
     let parsedData = [], filters = [], pickList = [], metaBook, data;
 
     data = apiData;
     parsedData = parser.parse(apiData);
     filters = parser.getOfType(data.included, 'staff-pick-tag');
-    // parser
-    //   .setHost({
-    //     api_root: host,
-    //     api_version: 'v0.1'
-    //   })
-    //   .get(options, function (apiData) {
-    //     // if (error) {
-    //     //   console.log('test');
-    //     //   console.log(error);
-    //     // }
-    //     data = apiData;
-    //     console.log('getting data');
-    //   });/* end parser */
 
     let html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>),
       header = React.renderToString(<Header />),
