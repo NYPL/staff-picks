@@ -33,6 +33,7 @@ app.set('layout');
 app.set('view engine', 'ejs');
 app.set('view options', {layout: 'layout'});
 app.set('views', path.join(process.cwd(), '/server/views'));
+app.set('port', process.env.PORT || 3001);
 
 app.use(compress());
 app.use(layouts);
@@ -98,35 +99,34 @@ app.use('/*', function(req, res) {
           //   }
           // });
         }
-
-        let html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>),
-          header = React.renderToString(<Header />),
-          hero = React.renderToString(<Hero />),
-          footer = React.renderToString(<Footer />),
-          metaTags = DocMeta.rewind(),
-          renderedTags = metaTags.map((tag, index) =>
-            React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
-
-        res.render('index', {
-          staffPicks: JSON.stringify({'staff-picks': parsedData}),
-          filters: JSON.stringify({'filters': filters}),
-          pickList: JSON.stringify({'staff-picks-list': pickList}),
-          env: env,
-          metatags: renderedTags,
-          header: header,
-          hero: hero,
-          markup: html,
-          footer: footer,
-          gaCode: analytics.google.code(env.production)
-        });
       }); /* end parser */
+
+    let html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>),
+      header = React.renderToString(<Header />),
+      hero = React.renderToString(<Hero />),
+      footer = React.renderToString(<Footer />),
+      metaTags = DocMeta.rewind(),
+      renderedTags = metaTags.map((tag, index) =>
+        React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
+
+    res.render('index', {
+      staffPicks: JSON.stringify({'staff-picks': parsedData}),
+      filters: JSON.stringify({'filters': filters}),
+      pickList: JSON.stringify({'staff-picks-list': pickList}),
+      env: env,
+      metatags: renderedTags,
+      header: header,
+      hero: hero,
+      markup: html,
+      footer: footer,
+      gaCode: analytics.google.code(env.production)
+    });
 
   }); /* end Router.run */
 });
 
-let port = Number(process.env.PORT || 3001);
-let server = app.listen(port, function () {
-  console.log('server running at localhost:3001, go refresh and see magic');
+let server = app.listen(app.get('port'), function () {
+  console.log('server running at localhost:' + app.get('port') + ', go refresh and see magic');
 });
 
 // this function is called when you want the server to die gracefully
