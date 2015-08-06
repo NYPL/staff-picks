@@ -54,7 +54,7 @@ if (env.production) {
 }
 
 let options = {
-    endpoint: '/api/nypl/ndo/v0.1/staff-picks',
+    endpoint: '/api/nypl/ndo/v0.1/staff-picks?include=item.tags,list,age',
     includes: ['item.tags', 'list', 'age']
   },
   host = 'dev.refinery.aws.nypl.org',
@@ -73,46 +73,51 @@ let options = {
   ),
   data;
 
+/////////
+var endpoint = options.endpoint,
+  opts = {
+    host: host,
+    path: endpoint,
+    method: 'GET',
+  },
+  apiData;
+
+var req = http.request(opts, function (res) {
+  var responseString = '';
+  res.setEncoding('utf8');
+
+  res.on('data', function (chunk) {
+    responseString += chunk;
+  });
+
+  res.on('end', function () {
+    var result;
+
+    try {
+      result = JSON.parse(responseString);
+    } catch (err) {
+      console.log(err);
+    }
+    // cb(result);
+    console.log('from http request');
+    apiData = result;
+  });
+});
+
+req.on('error', function (err) {
+  console.log(err);
+});
+
+req.end();
+/////////
+
 app.use('/*', function(req, res) {
-  var endpoint = options.endpoint,
-    opts = {
-      host: host,
-      path: endpoint,
-      method: 'GET',
-    },
-    apiData;
-
-  var req = http.request(opts, function (res) {
-    var responseString = '';
-    res.setEncoding('utf8');
-
-    res.on('data', function (chunk) {
-      responseString += chunk;
-    });
-
-    res.on('end', function () {
-      var result;
-
-      try {
-        result = JSON.parse(responseString);
-      } catch (err) {
-        console.log(err);
-      }
-      // cb(result);
-      console.log(result);
-      // apiData = result;
-    });
-  });
-
-  req.on('error', function (err) {
-    console.log(err);
-  });
-
-  req.end();
-
   Router.run(routes, req.path, function (Root, state) {
-    console.log(apiData);
-    let parsedData = [], filters = [], pickList = [], metaBook;
+    let parsedData = [], filters = [], pickList = [], metaBook, data;
+
+    data = apiData;
+    parsedData = parser.parse(apiData);
+    filters = parser.getOfType(data.included, 'staff-pick-tag');
     // parser
     //   .setHost({
     //     api_root: host,
