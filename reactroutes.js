@@ -78,9 +78,12 @@ app.use('/*', function(req, res) {
         api_root: host,
         api_version: 'v0.1'
       })
-      .get(options, function (apiData) {
+      .get(options, function (error, apiData) {
         let parsedData = [], filters = [], pickList = [], metaBook;
 
+        if (error) {
+          console.log(error);
+        }
         data = apiData;
 
         if (apiData) {
