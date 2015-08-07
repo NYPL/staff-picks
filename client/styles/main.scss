@@ -224,7 +224,7 @@ ul#nav_menu {
   width: 93%;
   margin: 0 auto;
   font-family: 'KievitWeb';
-  @include breakpoint($min, 414 + $viewport-increment) {
+  @include breakpoint($min, 767) {
     width: 960px;
   }
 }
