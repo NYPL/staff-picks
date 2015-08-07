@@ -40,7 +40,8 @@ const styles = {
   },
   HeroTitle: {
     '@media (max-width: 414px)': { marginTop: '24px' },
-    fontFamily: 'KievitBook, sans-serif',
+    fontFamily: "'KievitWeb-Bold', sans-serif",
+    letterSpacing: '0.09rem',
     fontSize: '12px',
     fontWeight: 'normal',
     marginTop: '0px',
@@ -60,7 +61,7 @@ const styles = {
     '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '14px' },
     '@media (max-width: 767px)': { fontSize: '14px' },
     '@media (max-width: 414px)': { display: 'none' },
-    fontFamily: 'KievitBook, sans-serif',
+    fontFamily: "'KievitWeb-Book', sans-serif",
     fontSize: '15px' 
   }
 };

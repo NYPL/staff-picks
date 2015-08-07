@@ -8,17 +8,23 @@ $lib-blue: #0095c8;
 $text-gray: #bfbfbf;
 $dark-lib-gray: #776E64;
 
-/* first for IE 4–8 */
+
 @font-face {
-    font-family: KievitWeb-Book;
-    src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book.eot");
+  font-family: 'KievitWeb-Book';
+  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book.eot'); /* IE9 Compat Modes */
+  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book.woff') format('woff'); /* Pretty Modern Browsers */
 }
 
-/* then for WOFF-capable browsers */
 @font-face {
-    font-family: KievitWeb-Book;
-    src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book.woff") format("woff");
+  font-family: 'KievitWeb-Bold';
+  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Bold.eot'); /* IE9 Compat Modes */
+  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Bold.woff') format('woff'); /* Pretty Modern Browsers */
 }
+
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
 /** MIXINS **/
 @mixin display-arrow($direction: 'up', $color: #ededed, $size: 10px, $position: 50%) {
@@ -129,7 +135,7 @@ table {
 }
 
 body {
-    font-family: KievitWeb-Book, sans-serif;
+  font-family: 'Roboto Slab', sans-serif;
 }
 
 /* Header global rules */
@@ -571,7 +577,7 @@ body {
     font-size: 1.2em;
     text-decoration: none;
   }
-   @include breakpoint($min, $post-mobile-phone) {
+   @include breakpoint($min, 719px) {
     display: none;
   }
 }
