@@ -66,7 +66,7 @@ const styles = {
     borderTopStyle: 'none',
     borderWidth: '1px',
     position: 'relative',
-    top:'23px',
+    top:'24px',
     '@media (max-width: 767px)': { width: '0' },
   }
 };

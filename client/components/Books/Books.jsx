@@ -216,7 +216,7 @@ const styles = {
     float: 'right'
   },
   previousMonth: {
-    marginLeft: '27px'
+    marginLeft: '30px'
   }
 };
 
