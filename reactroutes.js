@@ -78,12 +78,8 @@ app.use('/*', function(req, res) {
         api_root: host,
         api_version: 'v0.1'
       })
-      .get(options, function (error, apiData) {
-        if (error) {
-          console.log(error);
-        }
+      .get(options, function (apiData) {
         data = apiData;
-
         if (apiData) {
           parsedData = parser.parse(data);
           filters = parser.getOfType(apiData.included, 'staff-pick-tag');
