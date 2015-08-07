@@ -61,7 +61,7 @@
     "image-loaded": "0.0.2",
     "jest": "~0.1.40",
     "jest-cli": "0.4.13",
-    "jsonapi-parserinator": "0.2.9",
+    "jsonapi-parserinator": "0.2.10",
     "jsx-loader": "0.13.2",
     "newrelic": "1.21.1",
     "node-libs-browser": "0.5.2",
