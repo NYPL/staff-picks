@@ -58,7 +58,10 @@ const styles = {
     width: '100%',
     left: '0',
     zIndex: '1000',
-    padding: '35px 30px'
+    padding: '35px 30px',
+    '@media (min-width: 719px)': {
+      display: 'none'
+    }
   },
   mobileFilterBtn: {
     textDecoration: 'none',

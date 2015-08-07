@@ -577,7 +577,7 @@ body {
     font-size: 1.2em;
     text-decoration: none;
   }
-   @include breakpoint($min, $post-mobile-phone) {
+   @include breakpoint($min, 719px) {
     display: none;
   }
 }
