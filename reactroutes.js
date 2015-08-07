@@ -37,7 +37,8 @@ app.set('port', process.env.PORT || 3001);
 
 app.use(compress());
 app.use(layouts);
-app.use('/client', express.static(path.join(process.cwd(), '/client')));
+// app.use('/client', express.static(path.join(process.cwd(), '/client')));
+app.use(express.static(__dirname + '/client'));
 app.disable('x-powered-by');
 
 
@@ -53,7 +54,7 @@ if (env.production) {
 }
 
 let options = {
-    endpoint: '/api/nypl/ndo/v0.1/staff-picks?include=item.tags,list,age',
+    endpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?page%5Blimit%5D=1&include=previous-list,next-list,picks.item.tags',
     includes: ['item.tags', 'list', 'age']
   },
   host = 'dev.refinery.aws.nypl.org',
@@ -119,7 +120,9 @@ app.get('/*', function(req, res) {
     let parsedData = [], filters = [], pickList = [], metaBook, data;
 
     data = apiData;
-    parsedData = parser.parse(apiData);
+    console.log(apiData);
+    // parsedData = parser.parse(apiData);
+    console.log(parsedData);
     filters = parser.getOfType(data.included, 'staff-pick-tag');
 
     let html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>),
@@ -131,7 +134,7 @@ app.get('/*', function(req, res) {
         React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
 
     res.render('index', {
-      staffPicks: JSON.stringify({'staff-picks': parsedData}),
+      staffPicks: JSON.stringify({'staff-picks': apiData}),
       filters: JSON.stringify({'filters': filters}),
       pickList: JSON.stringify({'staff-picks-list': pickList}),
       env: env,
