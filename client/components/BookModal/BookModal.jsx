@@ -83,18 +83,18 @@ let BookModal = React.createClass({
     }
 
     var tags = [
-      {property: "og:title", content: title},
-      {property: "og:type", content: "website"},
-      // {property: "og:url", content: window.location.href},
-      {property: "og:image", content: imageLink},
-      {property: "og:description", content: description},
-      {property: "og:site_name", content: "NYPL Staff Picks"},
-      {name: "twitter:card", content: "website"},
-      {name: "twitter:site", content: "@NYPL"},
-      {name: "twitter:title", content: "Page Title"},
-      {name: "twitter:description", content: "Page description less than 200 characters"},
-      {name: "twitter:creator", content: "@NYPL"},
-      {name: "twitter:image", content: "http://www.example.com/image.html"}
+      {property: "og:title", content: 'Staff Picks | The New York Public Library'},
+      {property: "og:type", content: 'website'},
+      {property: "og:image", content: '/client/images/staff_pic_bg.jpg'},
+      {property: "og:description", content: 'Every month NYPL\'s librarians share their favorite reads.'},
+      {property: "og:site_name", content: 'Staff Picks | The New York Public Library'},
+      {property: "og:url", content: 'http://nypl.org/staff-picks'},
+      {name: "twitter:card", content: 'summary_large_image'},
+      {name: "twitter:site", content: '@nypl'},
+      {name: "twitter:title", content: 'Staff Picks | The New York Public Library'},
+      {name: "twitter:description", content: 'Every month NYPL\'s librarians share their favorite reads.'},
+      {name: "twitter:creator", content: '@nypl'},
+      {name: "twitter:image", content: '/client/images/staff_pic_bg.jpg'}
     ];
 
     return (
