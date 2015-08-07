@@ -70,9 +70,10 @@ let BookModal = React.createClass({
 
   render: function() {
     let book = this.state.book,
-      title = '',
+      title = 'Staff Picks | The New York Public Library',
       imageSrc = '/client/images/staff_pic_bg.jpg',
-      description = '',
+      description = 'Every month NYPL\'s librarians share their favorite reads.',
+      bookId,
       imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?` +
        `&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
     
@@ -80,21 +81,22 @@ let BookModal = React.createClass({
       title = book['staff-pick-item']['attributes']['title'];
       description = book.attributes.text;
       imageSrc = book['staff-pick-item']['attributes']['image-slug'];
+      bookId= book['staff-pick-item']['id'];
     }
 
     var tags = [
       {property: "og:title", content: title},
-      {property: "og:type", content: "website"},
-      // {property: "og:url", content: window.location.href},
+      {property: "og:type", content: 'website'},
       {property: "og:image", content: imageLink},
       {property: "og:description", content: description},
-      {property: "og:site_name", content: "NYPL Staff Picks"},
-      {name: "twitter:card", content: "website"},
-      {name: "twitter:site", content: "@NYPL"},
-      {name: "twitter:title", content: "Page Title"},
-      {name: "twitter:description", content: "Page description less than 200 characters"},
-      {name: "twitter:creator", content: "@NYPL"},
-      {name: "twitter:image", content: "http://www.example.com/image.html"}
+      {property: "og:site_name", content: 'Staff Picks | The New York Public Library'},
+      {property: "og:url", content: `http://nypl.org/staff-picks/${bookId}`},
+      {name: "twitter:card", content: 'summary_large_image'},
+      {name: "twitter:site", content: '@nypl'},
+      {name: "twitter:title", content: title},
+      {name: "twitter:description", content: description},
+      {name: "twitter:creator", content: '@nypl'},
+      {name: "twitter:image", content: imageSrc}
     ];
 
     return (
