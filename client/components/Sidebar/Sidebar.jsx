@@ -1,3 +1,4 @@
+// Import React and other utility libraries
 import React from 'react';
 import Radium from 'radium';
 
@@ -19,10 +20,14 @@ class Sidebar extends React.Component {
 
   _showFilters() {
     this.setState({mobileDisplay: true});
+    // Make the whole document not scrollable for mobile version
+    document.body.className = 'no-scroll';
   }
 
   _hideFilters() {
     this.setState({mobileDisplay: false});
+    // Make the whole document scrollable again
+    document.body.className = '';
   }
 
   render () {
@@ -45,13 +50,18 @@ const styles = {
   base: {},
   mobileFilters: {
     display: 'block',
-    position: 'absolute',
+    height: '100%',
+    position: 'fixed',
+    overflow: 'auto',
     top: '50px',
     backgroundColor: '#fff',
     width: '100%',
     left: '0',
     zIndex: '1000',
-    padding: '35px 30px'
+    padding: '35px 30px',
+    '@media (min-width: 719px)': {
+      display: 'none'
+    }
   },
   mobileFilterBtn: {
     textDecoration: 'none',

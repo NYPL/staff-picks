@@ -100,6 +100,11 @@ class BookFilters extends React.Component {
             </div>
             : null
           }
+            <h2 className='mobile-done-button'>
+              <a onClick={this.props.mobileCloseBtn}>
+                Done
+              </a>
+            </h2>
         </div>
       </div>
     );
@@ -255,10 +260,9 @@ const styles = {
     height: 'auto',
     margin: '0 0 20px 0',
     padding: '5px 4px 30px 36px',
-    width: '100%',
-    top: '15px',
-    left: '340px',
-    '@media (min-width: 414px)': {
+    top: '3%',
+    left: '90%',
+    '@media (min-width: 719px)': {
       display: 'none'
     }
   }
