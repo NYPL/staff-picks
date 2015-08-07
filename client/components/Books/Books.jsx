@@ -205,18 +205,22 @@ const styles = {
   },
   monthPicker: {
     height: '35px',
-    paddingTop: '7px'
+    marginLeft: '-23px',
+    paddingTop: '7px',
+    textAlign: 'center'
   },
   month: {
     display: 'inline-block',
-    marginLeft: '44%',
-    color: '#333333'
+    color: '#333333',
+    marginLeft: '25px',
+    '@media (min-width: 600px)': { marginLeft: '0' }
   },
   nextMonth: {
     float: 'right'
   },
   previousMonth: {
-    marginLeft: '30px'
+    float: 'left',
+    width: '100px'
   }
 };
 

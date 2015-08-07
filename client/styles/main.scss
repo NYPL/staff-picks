@@ -224,7 +224,7 @@ ul#nav_menu {
   width: 93%;
   margin: 0 auto;
   font-family: 'KievitWeb';
-  @include breakpoint($min, 414 + $viewport-increment) {
+  @include breakpoint($min, 767) {
     width: 960px;
   }
 }
@@ -356,12 +356,20 @@ span[class*="icon-"] {
 
   #sidebar {
     float: left;
+    margin-right: 3%;
+    min-width: 60px;
     padding: 0;
     width: 100%;
 
     @include breakpoint($min, $post-mobile-phone) {
-      margin-right: 30px;
-      width: 160px;
+      margin-right: 20px;
+      width: 30%;
+    }
+    @include breakpoint($min, $post-palm) {
+      max-width: 160px;
+    }
+    @include breakpoint($min, $post-tablet) {
+      max-width: 160px;
     }
 
     .sidebar-content {
@@ -370,12 +378,23 @@ span[class*="icon-"] {
   }
 
   #books {
+    display: block;
     float: left;
     overflow: hidden;
     width: 100%;
     @include breakpoint($min, $post-mobile-phone) {
-      width: 770px;
+      width: 280px;
     }
+    @include breakpoint($min, $post-palm) {
+      width: 60%;
+    }
+     @include breakpoint($min, $post-tablet) {
+      width: 68%;
+    }
+    @include breakpoint($min, $post-desktop) {
+      width: 81%;
+    }
+
   }
 
   .list-view {
