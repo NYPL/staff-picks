@@ -8,7 +8,8 @@ let fs = require('fs'),
   app = express(),
   compress = require('compression'),
   layouts = require('express-ejs-layouts'),
-  analytics = require('./analytics.js');
+  analytics = require('./analytics.js'),
+  http = require('http');
 
 import React from 'react';
 import Router from 'react-router';
@@ -32,6 +33,7 @@ app.set('layout');
 app.set('view engine', 'ejs');
 app.set('view options', {layout: 'layout'});
 app.set('views', path.join(process.cwd(), '/server/views'));
+app.set('port', process.env.PORT || 3001);
 
 app.use(compress());
 app.use(layouts);
@@ -51,7 +53,7 @@ if (env.production) {
 }
 
 let options = {
-    endpoint: '/api/nypl/ndo/v0.1/staff-picks',
+    endpoint: '/api/nypl/ndo/v0.1/staff-picks?include=item.tags,list,age',
     includes: ['item.tags', 'list', 'age']
   },
   host = 'dev.refinery.aws.nypl.org',
@@ -70,58 +72,82 @@ let options = {
   ),
   data;
 
-app.use('/*', function(req, res) {
+
+/////////
+parser.setChildrenObjects(options);
+
+var endpoint = options.endpoint,
+  opts = {
+    host: host,
+    path: endpoint,
+    method: 'GET',
+  },
+  apiData;
+
+var req = http.request(opts, function (res) {
+  var responseString = '';
+  res.setEncoding('utf8');
+
+  res.on('data', function (chunk) {
+    responseString += chunk;
+  });
+
+  res.on('end', function () {
+    var result;
+
+    try {
+      result = JSON.parse(responseString);
+    } catch (err) {
+      console.log(err);
+    }
+    // cb(result);
+    console.log('from http request');
+    apiData = result;
+  });
+});
+
+req.on('error', function (err) {
+  console.log(err);
+});
+
+req.end();
+/////////
+
+
+app.get('/*', function(req, res) {
   Router.run(routes, req.path, function (Root, state) {
-    let parsedData = [], filters = [], pickList = [], metaBook;
-    parser
-      .setHost({
-        api_root: host,
-        api_version: 'v0.1'
-      })
-      .get(options, function (apiData) {
-        data = apiData;
-        if (apiData) {
-          parsedData = parser.parse(data);
-          filters = parser.getOfType(apiData.included, 'staff-pick-tag');
-          pickList = parser.getOfType(apiData.included, 'staff-pick-list');
-          API.setStaffPick({'staff-picks': parsedData});
-          API.setFilters({'filters': filters});
-          API.setPickList({'staff-picks-list': pickList});
-          // _.each(parsedData, function (book) {
-          //   if (book['staff-pick-item']['id'] === req.path.substr(1)) {
-          //     metaBook = book;
-          //   }
-          // });
-        }
+    let parsedData = [], filters = [], pickList = [], metaBook, data;
 
-        let html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>),
-          header = React.renderToString(<Header />),
-          hero = React.renderToString(<Hero />),
-          footer = React.renderToString(<Footer />),
-          metaTags = DocMeta.rewind(),
-          renderedTags = metaTags.map((tag, index) =>
-            React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
+    data = apiData;
+    parsedData = parser.parse(apiData);
+    filters = parser.getOfType(data.included, 'staff-pick-tag');
 
-        res.render('index', {
-          staffPicks: JSON.stringify({'staff-picks': parsedData}),
-          filters: JSON.stringify({'filters': filters}),
-          pickList: JSON.stringify({'staff-picks-list': pickList}),
-          env: env,
-          metatags: renderedTags,
-          header: header,
-          hero: hero,
-          markup: html,
-          footer: footer,
-          gaCode: analytics.google.code(env.production)
-        });
-      }); /* end parser */
+    let html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>),
+      header = React.renderToString(<Header />),
+      hero = React.renderToString(<Hero />),
+      footer = React.renderToString(<Footer />),
+      metaTags = DocMeta.rewind(),
+      renderedTags = metaTags.map((tag, index) =>
+        React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
+
+    res.render('index', {
+      staffPicks: JSON.stringify({'staff-picks': parsedData}),
+      filters: JSON.stringify({'filters': filters}),
+      pickList: JSON.stringify({'staff-picks-list': pickList}),
+      env: env,
+      metatags: renderedTags,
+      header: header,
+      hero: hero,
+      markup: html,
+      footer: footer,
+      gaCode: analytics.google.code(env.production)
+    });
 
   }); /* end Router.run */
 });
 
-let port = Number(process.env.PORT || 3001);
-let server = app.listen(port, function () {
-  console.log('server running at localhost:3001, go refresh and see magic');
+let server = app.listen(app.get('port'), function () {
+  console.log('server running at localhost:' + app.get('port') + ', go refresh and see magic');
 });
 
 // this function is called when you want the server to die gracefully
