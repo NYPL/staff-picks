@@ -48,11 +48,11 @@ class TabElement extends React.Component {
     let active = this.state.age === this.props.value;
   	return (
   		<li key={`tab-${this.props.name}`} id={this.props.name} 
-        className='tab-element' style={[styles.TabElement, 
-        active ? styles.TabElementActive : styles.TabElementInactive]}>
-          <a
+        className='tab-container__ul__element' style={ 
+        active ? styles.TabElementActive : styles.TabElementInactive}>
+          <a className='tab-container__ul__element__link'
             onClick={this._handleClick.bind(this, this.props.value)}
-            style={[styles.TabElementLink, active ? styles.TabElementLinkActive : null]}>
+            style={[active ? styles.TabElementLinkActive : null]}>
             {this.props.name}
           </a>
   		</li>
@@ -63,13 +63,6 @@ class TabElement extends React.Component {
 // Styles
 const styles = {
   TabElement: {
-    display: 'inline-block',
-    margin: '0',
-    padding: '20px 0 20px 0',
-    textTransform: 'uppercase',
-    whiteSpace: 'pre',
-    width: '23%',
-    '@media (max-width: 767px)': { width: '33%' }
   },
   TabElementActive: {
     borderBottomStyle: 'none',
@@ -86,14 +79,6 @@ const styles = {
     borderRightStyle: 'none',
     borderTopStyle: 'none',
     borderWidth: '1px'
-  },
-  TabElementLink: {
-    color: '#333333',
-    cursor: 'pointer',
-    textDecoration: 'none',
-    ':hover': {
-      color: '#cc1a16'
-    }
   },
   TabElementLinkActive: {
     color: '#cc1a16'
