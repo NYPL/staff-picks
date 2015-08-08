@@ -131,7 +131,7 @@ var Books = React.createClass({
           key={element.id} onClick={openModal.bind(_this, element)}
           style={[listDisplay ? styles.listWidth : styles.gridWidth]}>
           {_this.state.typeDisplay === 'grid' ?
-            <Book book={element} style={styles.bookItem} width={'100%'} /> :
+            <Book book={element} className='book' /> :
             <div>
                 <h2>{element['staff-pick-item']['attributes']['title']}</h2>
               <p>By: {element['staff-pick-item']['attributes']['author']}</p>
@@ -199,9 +199,6 @@ const styles = {
   },
   hideNoResults: {
     display: 'none'
-  },
-  bookItem: {
-    marginBottom: '20px'
   },
   monthPicker: {
     height: '35px',
