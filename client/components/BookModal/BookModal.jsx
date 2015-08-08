@@ -103,7 +103,7 @@ let BookModal = React.createClass({
       <div>
         <DocMeta tags={tags} />
         <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-          <CloseButton onClick={this.closeModal} />
+          <CloseButton className='book-modal__close-btn' onClick={this.closeModal} />
           <BookTitle book={this.state.book} />
           <div style={styles.LeftColumn}>
             <div key='ImageContainer' className='ImageContainer' style={styles.ImageContainer}>
