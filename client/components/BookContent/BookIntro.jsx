@@ -34,7 +34,7 @@ class BookIntro extends React.Component {
 
   render () {
       const book = this.props.book,
-      tags = _.chain(book['staff-pick-item']['staff-pick-tag'])
+      tags = _.chain(book['item']['staff-pick-tag'])
         .pluck('attributes')
         .pluck('tag')
         .flatten()
@@ -42,7 +42,7 @@ class BookIntro extends React.Component {
 
     return (
       <div style={styles.BookIntro}>
-        <p className='author' style={styles.Author}>By {book['staff-pick-item']['attributes']['author']}</p>
+        <p className='author' style={styles.Author}>By {book['item']['attributes']['author']}</p>
         <TagList tags={tags} style={styles.TagList} />
       </div>
     );

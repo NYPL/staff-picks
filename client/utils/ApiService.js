@@ -235,13 +235,18 @@ const API = {
   },
   getBooks() {
     if (staffPicksServer) {
-      return staffPicksServer['staff-picks'];
+      return staffPicksServer['picks'];
     }
     let staffPicks = {'staff-picks': []};
     const books = staffPicks['staff-picks'] || [];
     return books;
   },
   getFilters() {
+    // if (filtersServer) {
+    //   return filtersServer;
+    // }
+    // const filterList = {'filters': []} || [];
+    // return filterList;
     let clientFilters = {'filters':[]};
     const filterList = filters['filters'] || clientFilters;
     return filterList;
@@ -258,7 +263,7 @@ const API = {
     });
 
     _.each(booksRaw, function (book) {
-      let age = book['staff-pick-age']['attributes']['age'];
+      let age = book['age']['attributes']['age'];
       books[age] = book;
     });
     return books;

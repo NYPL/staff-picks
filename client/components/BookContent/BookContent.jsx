@@ -11,7 +11,7 @@ class BookContent extends React.Component {
 
   render () {
     const book = this.props.book,
-      staffPick = book['staff-pick-item'],
+      staffPick = book['item'],
       bookTarget = staffPick['attributes']['catalog-slug'],
       ebookTarget = staffPick['attributes']['ebook-uri'] ?
         staffPick['attributes']['ebook-uri']['full-uri'] : undefined,

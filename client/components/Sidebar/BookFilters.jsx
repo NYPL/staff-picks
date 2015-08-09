@@ -38,7 +38,7 @@ class BookFilters extends React.Component {
   constructor(props) {
     super(props);
 
-    let filterList = this.props.filters ? this.props.filters['filters'] : API.getFilters(),
+    let filterList = this.props.filters ? this.props.filters['filters'] : API.getFilters()['filters'],
       themeFilters = [],
       drivenByFilters = [];
 
@@ -58,7 +58,8 @@ class BookFilters extends React.Component {
     this.state = {
       drivenByFilters,
       themeFilters,
-      filters: BookStore.getFilters()
+      filters: BookStore.getFilters(),
+      age: BookStore.getAge()
     };
 
     this._clearFilters = this._clearFilters.bind(this);

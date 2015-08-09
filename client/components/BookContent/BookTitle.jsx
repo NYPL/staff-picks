@@ -12,7 +12,7 @@ class BookTitle extends React.Component {
 
     return (
       <div ref='BookContent' className={this.props.className}>
-        <h2 style={styles.BookTitle}>{book['staff-pick-item']['attributes']['title']}</h2>
+        <h2 style={styles.BookTitle}>{book['item']['attributes']['title']}</h2>
       </div>
     );
   }

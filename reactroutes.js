@@ -29,6 +29,7 @@ import DocMeta from 'react-doc-meta';
 // }));
 app.use(favicon(__dirname + '/client/images/favicon.ico'));
 // app.use(express.static(__dirname + '/client/styles'));
+app.use('/client', express.static(path.join(process.cwd(), '/client')));
 app.set('layout');
 app.set('view engine', 'ejs');
 app.set('view options', {layout: 'layout'});
@@ -37,8 +38,6 @@ app.set('port', process.env.PORT || 3001);
 
 app.use(compress());
 app.use(layouts);
-// app.use('/client', express.static(path.join(process.cwd(), '/client')));
-app.use(express.static(__dirname + '/client'));
 app.disable('x-powered-by');
 
 
@@ -54,8 +53,8 @@ if (env.production) {
 }
 
 let options = {
-    endpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?page%5Blimit%5D=1&include=previous-list,next-list,picks.item.tags',
-    includes: ['item.tags', 'list', 'age']
+    endpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age',
+    includes: ['previous-list', 'next-list', 'item.tags', 'picks.age']
   },
   host = 'dev.refinery.aws.nypl.org',
   App = require('./client/server.jsx'),
@@ -120,12 +119,10 @@ app.get('/*', function(req, res) {
     let parsedData = [], filters = [], pickList = [], metaBook, data;
 
     data = apiData;
-    console.log(apiData);
-    // parsedData = parser.parse(apiData);
-    console.log(parsedData);
+    parsedData = parser.parse(apiData);
     filters = parser.getOfType(data.included, 'staff-pick-tag');
 
-    let html = React.renderToString(<Root data={{'staff-picks': parsedData}} filters={{'filters': filters}}/>),
+    let html = React.renderToString(<Root data={{'staff-picks': parsedData[0]['picks']}} filters={{'filters': filters}}/>),
       header = React.renderToString(<Header />),
       hero = React.renderToString(<Hero />),
       footer = React.renderToString(<Footer />),
@@ -134,7 +131,7 @@ app.get('/*', function(req, res) {
         React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
 
     res.render('index', {
-      staffPicks: JSON.stringify({'staff-picks': apiData}),
+      staffPicks: JSON.stringify({'staff-picks': parsedData[0]['picks']}),
       filters: JSON.stringify({'filters': filters}),
       pickList: JSON.stringify({'staff-picks-list': pickList}),
       env: env,

@@ -14,16 +14,18 @@ import Router from 'react-router';
 
 let Navigation = Router.Navigation;
 
-let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
-  bookData = API.getBooks();
+let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+let bookData = API.getBooks();
 
 // class Books extends React.Component {
 var Books = React.createClass({
   getInitialState() {
+    let books = this.props.books ? this.props.books['staff-picks'] : bookData['staff-picks'];
+
     return {
       iso: null,
       book: {},
-      books: this.props.books['staff-picks'] || bookData,
+      books: books,
       modalIsOpen: false,
       typeDisplay: BookStore.getBookDisplay(),
       age: BookStore.getAge(),
@@ -97,18 +99,18 @@ var Books = React.createClass({
   },
 
   _openModal (book) {
-    this.transitionTo('modal', {id: book['staff-pick-item']['id']});
+    this.transitionTo('modal', {id: book['item']['id']});
   },
 
   _getTags (elem) {
-    return elem['staff-pick-item']['staff-pick-tag'] || [];
+    return elem['item']['staff-pick-tag'] || [];
   },
 
   _getAge (elem) {
-    if (!elem['staff-pick-age']) {
+    if (!elem['age']) {
       return;
     }
-    return elem['staff-pick-age']['attributes']['age'];
+    return elem['age']['attributes']['age'];
   },
 
   render () {
@@ -133,8 +135,8 @@ var Books = React.createClass({
           {_this.state.typeDisplay === 'grid' ?
             <Book book={element} style={styles.bookItem} width={'100%'} /> :
             <div>
-                <h2>{element['staff-pick-item']['attributes']['title']}</h2>
-              <p>By: {element['staff-pick-item']['attributes']['author']}</p>
+                <h2>{element['item']['attributes']['title']}</h2>
+              <p>By: {element['item']['attributes']['author']}</p>
             </div>
           }
         </li>
