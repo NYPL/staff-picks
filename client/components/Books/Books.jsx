@@ -16,15 +16,18 @@ let Navigation = Router.Navigation;
 
 let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 let bookData = API.getBooks();
+let currentList = API.getCurrentList();
 
 // class Books extends React.Component {
 var Books = React.createClass({
   getInitialState() {
     let books = this.props.books ? this.props.books['staff-picks'] : bookData['staff-picks'];
 
+    let currentList = this.props.currentList || currentList;
     return {
       iso: null,
       book: {},
+      currentList,
       books: books,
       modalIsOpen: false,
       typeDisplay: BookStore.getBookDisplay(),
@@ -143,17 +146,31 @@ var Books = React.createClass({
       );
     });
 
+    let months, list, date, thisMonth, thisyear,
+      nextHref, previousHref;
+    if (this.state.currentList) {
+      months = ['January', 'February', 'March', 'April', 'May',
+        'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      list = this.state.currentList;
+      date = new Date(list.currentList['list-date']);
+      thisMonth = months[date.getMonth() + 1];
+      thisyear = date.getFullYear();
+
+      previousHref = !_.isEmpty(list.previousList) ? list.previousList.links.self : undefined;
+      nextHref = !_.isEmpty(list.nextList) ? list.nextList.links.self : undefined;
+    }
+
     return (
       <div>
         <div className='month-picker' style={styles.monthPicker}>
-          <a style={styles.previousMonth} onClick={this._handleClick}>
+          <a style={styles.previousMonth} onClick={this._handleClick.bind(this, previousHref)}>
             Picks for June
             <span className='left-icon'></span>
           </a>
 
-          <p style={styles.month}>July 2015</p>
+          <p style={styles.month}>{thisMonth} {thisyear}</p>
 
-          <a style={styles.nextMonth} onClick={this._handleClick}>
+          <a style={styles.nextMonth} onClick={this._handleClick.bind(this, nextHref)}>
             Picks for August
             <span className='right-icon'></span>
           </a>
@@ -175,8 +192,12 @@ var Books = React.createClass({
     );
   },
 
-  _handleClick (e) {
-    e.preventDefault();
+  _handleClick (API) {
+    if (API) {
+      $.get(API, function (data) {
+        console.log(data);
+      });
+    }
   }
 });
 

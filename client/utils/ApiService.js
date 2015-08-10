@@ -5,7 +5,7 @@
 // it to the component.
 import _ from 'underscore';
 
-var staffPicksServer, filtersServer, pickListServer;
+var staffPicksServer, filtersServer, pickListServer, currentListServer;
 
 const API = {
   setStaffPick(picks) {
@@ -13,6 +13,9 @@ const API = {
   },
   setFilters(filters) {
     filtersServer = filters;
+  },
+  setCurrentList(list) {
+    currentListServer = list;
   },
   setPickList(list) {
     pickListServer = list;
@@ -250,6 +253,11 @@ const API = {
     let clientFilters = {'filters':[]};
     const filterList = filters['filters'] || clientFilters;
     return filterList;
+  },
+  getCurrentList() {
+    let clientList = {'currentList':[]};
+    const list =  clientList;
+    return list;
   },
   getFeaturedPicks() {
     let pickList = {'staff-picks-list': []};

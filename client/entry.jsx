@@ -61,7 +61,7 @@ class App extends React.Component {
             <Sidebar filters={this.props.filters} />
           </div>
           <div id='books'>
-            <Books books={this.props.data} />
+            <Books books={this.props.data} currentList={this.props.currentList}/>
           </div>
         </div>
       </div>
@@ -88,6 +88,8 @@ React.render(<Hero />, document.getElementById('hero'));
 // }
 
 Router.run(routes, Router.HistoryLocation, (Root) => {
-  React.render(<Root data={staffPicks} filters={{'filters': filters['filters']}}/>, document.getElementById('content'));
+  React.render(<Root data={staffPicks} filters={{'filters': filters['filters']}}
+    currentList={currentList} />,
+    document.getElementById('content'));
 });
 

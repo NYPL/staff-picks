@@ -54,6 +54,7 @@ if (env.production) {
 
 let options = {
     endpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age',
+    // endpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-2015-06-01?include=previous-list,next-list,picks.item.tags,picks.age',
     includes: ['previous-list', 'next-list', 'item.tags', 'picks.age']
   },
   host = 'dev.refinery.aws.nypl.org',
@@ -116,13 +117,33 @@ req.end();
 
 app.get('/*', function(req, res) {
   Router.run(routes, req.path, function (Root, state) {
-    let parsedData = [], filters = [], pickList = [], metaBook, data;
+    let parsedData = [], filters = [], pickList = [], metaBook, data, currentData;
 
     data = apiData;
     parsedData = parser.parse(apiData);
     filters = parser.getOfType(data.included, 'staff-pick-tag');
 
-    let html = React.renderToString(<Root data={{'staff-picks': parsedData[0]['picks']}} filters={{'filters': filters}}/>),
+    if (Array.isArray(parsedData)) {
+      currentData = parsedData[0];
+    } else {
+      currentData = parsedData;
+    }
+
+    let previousList = currentData['previous-list'] ? currentData['previous-list'] : {};
+    let nextList = currentData['next-list'] ? currentData['next-list'] : {};
+    let currentList = {
+      previousList,
+      nextList,
+      currentList: currentData['attributes']
+    };
+
+
+    let html = React.renderToString(
+        <Root
+          data={{'staff-picks': currentData['picks']}}
+          filters={{'filters': filters}}
+          currentList={currentList} />
+      ),
       header = React.renderToString(<Header />),
       hero = React.renderToString(<Hero />),
       footer = React.renderToString(<Footer />),
@@ -131,9 +152,10 @@ app.get('/*', function(req, res) {
         React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
 
     res.render('index', {
-      staffPicks: JSON.stringify({'staff-picks': parsedData[0]['picks']}),
+      staffPicks: JSON.stringify({'staff-picks': currentData['picks']}),
       filters: JSON.stringify({'filters': filters}),
       pickList: JSON.stringify({'staff-picks-list': pickList}),
+      currentList: JSON.stringify(currentList),
       env: env,
       metatags: renderedTags,
       header: header,
