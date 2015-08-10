@@ -34,3 +34,41 @@
         width: 28px;
     }
 }
+
+.book-modal__left-column {
+    float: left;     
+    margin: 30px 0 10px 0;
+    position: relative;
+    top: 0;
+    @include breakpoint($min, $post-mobile-phone) {
+        float: none;
+        margin: 0;
+        position: absolute;
+        top: 20px;
+    }
+}
+
+.book-modal__image-container {
+    margin: 0;
+    position: relative;
+    width: 175px;
+    @include breakpoint($min, $post-mobile-phone) {
+    margin: 36px 0 0 0; 
+    }
+}
+
+.book-modal__image-container__cover {
+    a { 
+        cursor: default; 
+    }
+}
+
+
+.book-modal__share-container {
+   margin: 6px 0 0 0;
+   position: relative;
+   top: 0;
+   @include breakpoint($min, $post-mobile-phone) {
+        margin: 20px 0 0 0; 
+   }
+}
