@@ -11,8 +11,8 @@ class Book extends React.Component {
 
   render () {
     const book = this.props.book,
-      bookImgSrc = book['staff-pick-item']['attributes']['image-slug'],
-      bookTarget = book['staff-pick-item']['attributes']['catalog-slug'],
+      bookImgSrc = book['item']['attributes']['image-slug'],
+      bookTarget = book['item']['attributes']['catalog-slug'],
       href = `https://nypl.bibliocommons.com/item/show/${bookTarget}`;
 
     return (
@@ -24,7 +24,7 @@ class Book extends React.Component {
         
         <a href='#' onClick={this._handleClick}>
           <img style={this.props.style}
-            alt={book['staff-pick-item']['attributes']['title']}
+            alt={book['item']['attributes']['title']}
             src={`https://contentcafe2.btol.com/ContentCafe/` +
               `Jacket.aspx?&userID=NYPL49807&password=CC68707&` +
               `Value=${bookImgSrc}&content=M&Return=1&Type=M`}

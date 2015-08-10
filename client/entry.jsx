@@ -29,7 +29,6 @@ import BookModal from './components/BookModal/BookModal.jsx';
 
 API.setStaffPick(staffPicks);
 API.setFilters(filters);
-API.setPickList(pickList);
 
 const books = API.getBooks();
 
@@ -59,10 +58,10 @@ class App extends React.Component {
         </div>
         <div className='main-container'>
           <div id='sidebar'>
-            <Sidebar />
+            <Sidebar filters={this.props.filters} />
           </div>
           <div id='books'>
-            <Books books={this.props.data} />
+            <Books books={this.props.data} currentList={this.props.currentList}/>
           </div>
         </div>
       </div>
@@ -89,6 +88,8 @@ React.render(<Hero />, document.getElementById('hero'));
 // }
 
 Router.run(routes, Router.HistoryLocation, (Root) => {
-  React.render(<Root data={staffPicks} />, document.getElementById('content'));
+  React.render(<Root data={staffPicks} filters={{'filters': filters['filters']}}
+    currentList={currentList} />,
+    document.getElementById('content'));
 });
 

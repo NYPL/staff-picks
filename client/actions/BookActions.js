@@ -1,39 +1,26 @@
-import AppDispatcher from '../dispatcher/AppDispatcher';
-import BookConstants from '../constants/BookConstants';
+// ACTIONS
+import alt from '../alt.js';
 
-export default {
+class StaffPicks {
   updateBookDisplay(displayType) {
-    AppDispatcher.dispatch({
-      actionType: BookConstants.DISPLAY_TYPE,
-      displayType: displayType
-    });
-  },
+    this.dispatch(displayType);
+  }
 
   updateFilterAge(age) {
-		AppDispatcher.dispatch({
-      actionType: BookConstants.AGE_TYPE,
-      age: age
-    });
-  },
+    this.dispatch(age);
+  }
 
   toggleBookFilter(filter) {
-    AppDispatcher.dispatch({
-      actionType: BookConstants.FILTER,
-      filter: filter
-    });
-  },
+    this.dispatch(filter);
+  }
 
   clearFilters() {
-    AppDispatcher.dispatch({
-      actionType: BookConstants.FILTER,
-      clear: true
-    });
-  },
+    this.dispatch(true);
+  }
 
   updateNewFilters(filters) {
-    AppDispatcher.dispatch({
-      actionType: BookConstants.UPDATE_FILTERS,
-      newFilters: filters
-    });
+    this.dispatch(filters);
   }
 };
+
+export default alt.createActions(StaffPicks);

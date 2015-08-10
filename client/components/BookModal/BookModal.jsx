@@ -39,9 +39,9 @@ let BookModal = React.createClass({
     }
 
     _.each(books, function (book) {
-      if (book['staff-pick-item']['id'] === paramID) {
+      if (book['item']['id'] === paramID) {
         modalBook = book;
-        age = book['staff-pick-age'] ? book['staff-pick-age'].attributes.age : 'adult';
+        age = book['age'] ? book['age'].attributes.age : 'adult';
       }
     });
 
@@ -62,10 +62,13 @@ let BookModal = React.createClass({
   },
 
   closeModal: function () {
+    console.log('test');
     this.setState({
       modalIsOpen: false
     });
-    this.transitionTo('/');
+    setTimeout(() => {
+      this.transitionTo('/');
+    }, 200);
   },
 
   render: function() {
