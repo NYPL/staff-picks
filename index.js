@@ -1,4 +1,4 @@
-// require('newrelic');
+require('newrelic');
 
 /*** IMPORTANT ***/
 // Babel/Register allows us to import ES6 and JSX React Components in Node.
