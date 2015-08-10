@@ -8,6 +8,12 @@ $lib-blue: #0095c8;
 $text-gray: #bfbfbf;
 $dark-lib-gray: #776E64;
 
+@font-face {
+  font-family: 'MiloWeb';
+  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/milo-web/milo-slab-pro-regular/MiloSlabWebPro.eot'); /* IE9 Compat Modes */
+  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/milo-web/milo-slab-pro-regular/MiloSlabWebPro.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/milo-web/milo-slab-pro-regular/MiloSlabWebPro.woff') format('woff'); /* Pretty Modern Browsers */
+}
 
 @font-face {
   font-family: 'KievitWeb-Book';
@@ -142,7 +148,7 @@ table {
 }
 
 body {
-  font-family: 'Roboto Slab', sans-serif;
+  font-family: 'MiloWeb', 'Roboto Slab', sans-serif;
 }
 
 /* Header global rules */
