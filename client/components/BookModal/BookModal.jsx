@@ -62,10 +62,13 @@ let BookModal = React.createClass({
   },
 
   closeModal: function () {
+    console.log('test');
     this.setState({
       modalIsOpen: false
     });
-    this.transitionTo('/');
+    setTimeout(() => {
+      this.transitionTo('/');
+    }, 200);
   },
 
   render: function() {
@@ -152,6 +155,7 @@ const styles={
     }
   },
   BookCover: {
+    cursor: 'default',
     width: '100%',
     height: 'auto',
     '@media (min-width: 414px)': {

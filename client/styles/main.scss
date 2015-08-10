@@ -224,7 +224,7 @@ ul#nav_menu {
   width: 93%;
   margin: 0 auto;
   font-family: 'KievitWeb';
-  @include breakpoint($min, 767px) {
+  @include breakpoint($min, 1024px) {
     width: 960px;
   }
 }
@@ -418,12 +418,9 @@ span[class*="icon-"] {
 // Temporary overrides for the modal window
 body {
   .ReactModal__Content {
-    min-height: 520px;
+    min-height: 510px;
     z-index: 2000;
     position: absolute;
-    top: 0;
-    left: 15%;
-    bottom: 0;
     border: 1px solid #ccc;
     background: #fff;
     overflow: auto;
@@ -431,9 +428,9 @@ body {
     border-radius: 4px;
     outline: none;
     padding: 30px 20px 20px 30px;
-    position: relative;
+    // position: relative;
     width: 850px;
-    margin: 7% 0;
+    margin: 7% auto;
     @include breakpoint($max, $post-mobile-phone) {
       border: 0px solid #ccc;
       border-radius: 0px;
