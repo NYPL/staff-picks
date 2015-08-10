@@ -24,8 +24,8 @@ import API from './utils/ApiService';
 // load the data via Store Actions and update our
 // App Constants. As of now, we are mocking an API
 // call to fetch the data.
-const data = API.getData();
-const books = API.getBooks();
+// const data = API.getData();
+// const books = API.getBooks();
 
 let RouteHandler = Router.RouteHandler;
 
@@ -62,7 +62,7 @@ class App extends React.Component {
             <Sidebar filters={this.props.filters}/>
           </div>
           <div id='books'>
-            <Books books={this.props.data} />
+            <Books books={this.props.data} currentList={this.props.currentList}/>
           </div>
         </div>
       </div>

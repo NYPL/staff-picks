@@ -1,123 +1,89 @@
-import EventEmitter from 'eventemitter3';
-import AppDispatcher from '../dispatcher/AppDispatcher';
-import BookConstants from '../constants/BookConstants';
+import BookActions from '../actions/BookActions';
 import _ from 'underscore';
+import alt from '../alt.js';
 
-// Boolean flag that initially shows the style as grid and the age tab as adult
-let _bookDisplay =  'grid',
-    _age = 'Adult',
-    _gridDisplay = true,
-    _listDisplay = false,
-    _filters = [],
-    _updatedFilters = [];
+class BookStore {
+  constructor() {
+    this._bookDisplay =  'grid',
+    this._age = 'Adult',
+    this._gridDisplay = true,
+    this._listDisplay = false,
+    this._allFilters = [],
+    this._filters = [],
+    this._updatedFilters = [];
 
-// Simple reference to a repetitive non-changing string
-const CHANGE_EVENT = 'change';
+    this.bindListeners({
+      setBookDisplay: BookActions.UPDATE_BOOK_DISPLAY,
+      setAgeDisplay: BookActions.UPDATE_FILTER_AGE,
+      setFilters: BookActions.TOGGLE_BOOK_FILTER,
+      clearFilters: BookActions.CLEAR_FILTERS,
+      updateNewFilters: BookActions.UPDATE_NEW_FILTERS
+    });
 
-/* Setters are assigned in non-global scope */
-// Sets the boolean value of the Subscribe Form Visibility
-function setBookDisplay(bookDisplay) {
-  _bookDisplay = bookDisplay;
-}
-
-function setActiveDisplay(type) {
-  if (type === 'grid') {
-    _gridDisplay = true;
-    _listDisplay = false;
-  } else {
-    _gridDisplay = false;
-    _listDisplay = true;
+    this.exportPublicMethods({
+      getBookDisplay: this.getBookDisplay,
+      getActiveList: this.getActiveList,
+      getActiveGrid: this.getActiveGrid,
+      getAge: this.getAge,
+      getFilters: this.getFilters,
+      getUpdatedFilters: this.getUpdatedFilters,
+      setBookDisplay: this.setBookDisplay
+    });
   }
-}
-
-function setAgeDisplay(age) {
-  _age = age;
-}
-
-function setFilters(filter) {
-  var found = _.indexOf(_filters, filter);
-
-  if (found != -1) {
-    _filters.splice(found, 1);
-  } else {
-    _filters.push(filter);
-  }
-}
-
-function clearFilters() {
-  _filters = [];
-}
-
-function updateNewFilters(updatedFilters) {
-  _updatedFilters = updatedFilters;
-}
-
-const BookStore = _.extend({}, EventEmitter.prototype, {
-  // Gets the state of the Subscribe Form Visibility boolean
   getBookDisplay () {
-    return _bookDisplay;
-  },
+    return this._bookDisplay;
+  }
   getActiveList() {
-    return _listDisplay
-  },
+    return this._listDisplay
+  }
   getActiveGrid() {
-    return _gridDisplay;
-  },
+    return this._gridDisplay;
+  }
   // Gets age from the tabs
   getAge () {
-    return _age;
-  },
+    return this._age;
+  }
   getFilters () {
-    return _filters;
-  },
+    return this._filters;
+  }
   getUpdatedFilters () {
-    return _updatedFilters;
-  },
-  // Emits change event to all registered event listeners
-  emitChange () {
-    return this.emit(CHANGE_EVENT);
-  },
-  // Register a new change event listener
-  addChangeListener (callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-  removeChangeListener (callback) {
-    this.removeListener(CHANGE_EVENT, callback);
+    return this._updatedFilters;
   }
-});
-
-BookStore.dispatchToken = AppDispatcher.register((action) => {
-
-  switch (action.actionType) {
-    // Respond to DISPLAY_TYPE action
-    case BookConstants.DISPLAY_TYPE:
-      setActiveDisplay(action.displayType);
-      setBookDisplay(action.displayType);
-      BookStore.emitChange();
-    break;
-
-    case BookConstants.AGE_TYPE:
-      setAgeDisplay(action.age);
-      BookStore.emitChange();
-    break;
-
-    case BookConstants.FILTER:
-      if (action.clear) {
-        clearFilters();
-      } else {
-        setFilters(action.filter);
-      }
-      BookStore.emitChange();
-    break;
-
-    case BookConstants.UPDATE_FILTERS:
-      updateNewFilters(action.newFilters);
-      BookStore.emitChange();
-    break;
-    
-    default:
-    // Do nothing
+  setBookDisplay(bookDisplay) {
+    this._bookDisplay = bookDisplay;
   }
-});
 
-export default BookStore;
+  setActiveDisplay(type) {
+    if (type === 'grid') {
+      this._gridDisplay = true;
+      this._listDisplay = false;
+    } else {
+      this._gridDisplay = false;
+      this._listDisplay = true;
+    }
+  }
+
+  setAgeDisplay(age) {
+    this._age = age;
+  }
+
+  setFilters(filter) {
+    var found = _.indexOf(this._filters, filter);
+
+    if (found != -1) {
+      this._filters.splice(found, 1);
+    } else {
+      this._filters.push(filter);
+    }
+  }
+
+  clearFilters() {
+    this._filters = [];
+  }
+
+  updateNewFilters(updatedFilters) {
+    this._updatedFilters = updatedFilters;
+  }
+}
+
+export default alt.createStore(BookStore, 'BookStore');

@@ -4,6 +4,7 @@ import Book from '../Book/Book.jsx';
 import BookContent from '../BookContent/BookContent.jsx';
 import API from '../../utils/ApiService.js';
 import CloseButton from './CloseButton.jsx';
+import parser from 'jsonapi-parserinator';
 
 import _ from 'underscore';
 
@@ -14,21 +15,24 @@ import Router from 'react-router';
 
 let Navigation = Router.Navigation;
 
-let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
-  bookData = API.getBooks();
+let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+let bookData = API.getBooks();
+let currentList = API.getCurrentList();
 
 // class Books extends React.Component {
 var Books = React.createClass({
   getInitialState() {
-    return {
+    let books = this.props.books ? this.props.books['staff-picks'] : bookData['staff-picks'];
+
+    let currentList = this.props.currentList || currentList;
+    return _.extend({
       iso: null,
       book: {},
-      books: this.props.books['staff-picks'] || bookData,
+      currentList,
+      books: books,
       modalIsOpen: false,
-      typeDisplay: BookStore.getBookDisplay(),
-      age: BookStore.getAge(),
       noResults: false
-    };
+    }, BookStore.getState());
   },
 
   mixins: [Navigation],
@@ -52,36 +56,38 @@ var Books = React.createClass({
 
     $('#masonryContainer').css('opacity', '1');
 
-    setTimeout(function () {
+    setTimeout(() => {
       _this.state.iso.arrange({
         filter: '.Adult'
       });
     }, 1200);
 
-    BookStore.addChangeListener(this._onChange);
+    BookStore.listen(this._onChange);
     BookActions.updateNewFilters(this.state.iso.getItemElements());
   },
 
   componentDidUnmount () {
-    BookStore.removeChangeListener(this._onChange);
+    BookStore.unlisten(this._onChange);
   },
 
   _onChange () {
-    let age = '.' + BookStore.getAge(),
+    let storeState = BookStore.getState(),
+      age = '.' + storeState._age,
+      filters = storeState._filters,
       selector = age,
       _this = this;
 
-    if (BookStore.getFilters().length) {
-      selector += '.' + BookStore.getFilters().join('.');
+    if (filters.length) {
+      selector += '.' + filters.join('.');
     }
 
-    setTimeout(function () {
+    setTimeout(() => {
       _this.state.iso.arrange({
         filter: selector
       });
     }, 100);
 
-    this.state.iso.on('arrangeComplete', function (filteredItems) {
+    this.state.iso.on('arrangeComplete', filteredItems => {
       if (!filteredItems.length) {
         _this.setState({
           noResults: true
@@ -89,26 +95,24 @@ var Books = React.createClass({
       }
     });
 
-    this.setState({
+    this.setState(_.extend({
       noResults: false,
-      typeDisplay: BookStore.getBookDisplay(),
-      age: BookStore.getAge()
-    });
+    }, BookStore.getState()));
   },
 
   _openModal (book) {
-    this.transitionTo('modal', {id: book['staff-pick-item']['id']});
+    this.transitionTo('modal', {id: book['item']['id']});
   },
 
   _getTags (elem) {
-    return elem['staff-pick-item']['staff-pick-tag'] || [];
+    return elem['item']['staff-pick-tag'] || [];
   },
 
   _getAge (elem) {
-    if (!elem['staff-pick-age']) {
+    if (!elem['age']) {
       return;
     }
-    return elem['staff-pick-age']['attributes']['age'];
+    return elem['age']['attributes']['age'];
   },
 
   render () {
@@ -117,41 +121,55 @@ var Books = React.createClass({
 
     let books;
 
-    books = this.state.books.map(function (element, i) {
+    books = this.state.books.map((element, i) => {
       let tagList = _this._getTags(element),
         age = _this._getAge(element),
-        tagIDs = _.map(tagList, function (tag) {
+        tagIDs = _.map(tagList, tag => {
           return tag.id;
         }),
         tagClasses = tagIDs.join(' '),
-        listDisplay = _this.state.typeDisplay === 'list';
+        listDisplay = _this.state._bookDisplay === 'list';
 
       return (
         <li className={'book-item ' + age + ' ' + tagClasses}
           key={element.id} onClick={openModal.bind(_this, element)}
           style={[listDisplay ? styles.listWidth : styles.gridWidth]}>
-          {_this.state.typeDisplay === 'grid' ?
+          {_this.state._bookDisplay === 'grid' ?
             <Book book={element} className='book' /> :
             <div>
-                <h2>{element['staff-pick-item']['attributes']['title']}</h2>
-              <p>By: {element['staff-pick-item']['attributes']['author']}</p>
+                <h2>{element['item']['attributes']['title']}</h2>
+              <p>By: {element['item']['attributes']['author']}</p>
             </div>
           }
         </li>
       );
     });
 
+    let months, list, date, thisMonth, thisyear,
+      nextHref, previousHref;
+    if (this.state.currentList) {
+      months = ['January', 'February', 'March', 'April', 'May',
+        'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      list = this.state.currentList;
+      date = new Date(list.currentList['list-date']);
+      thisMonth = months[date.getMonth() + 1];
+      thisyear = date.getFullYear();
+
+      previousHref = !_.isEmpty(list.previousList) ? list.previousList.links.self : undefined;
+      nextHref = !_.isEmpty(list.nextList) ? list.nextList.links.self : undefined;
+    }
+
     return (
       <div>
         <div className='month-picker' style={styles.monthPicker}>
-          <a style={styles.previousMonth} onClick={this._handleClick}>
+          <a style={styles.previousMonth} onClick={this._handleClick.bind(this, previousHref)}>
             Picks for June
             <span className='left-icon'></span>
           </a>
 
-          <p style={styles.month}>July 2015</p>
+          <p style={styles.month}>{thisMonth} {thisyear}</p>
 
-          <a style={styles.nextMonth} onClick={this._handleClick}>
+          <a style={styles.nextMonth} onClick={this._handleClick.bind(this, nextHref)}>
             Picks for August
             <span className='right-icon'></span>
           </a>
@@ -173,8 +191,18 @@ var Books = React.createClass({
     );
   },
 
-  _handleClick (e) {
-    e.preventDefault();
+  _handleClick (API) {
+    if (API) {
+      $.ajax({
+        type: 'GET',
+        dataType: 'jsonp',
+        url: API + '?include=previous-list,next-list,picks.item.tags,picks.age',
+        success: function (data) {
+          console.log(parser.parse(data));
+
+        }
+      });
+    }
   }
 });
 

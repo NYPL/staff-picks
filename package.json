@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/srn/react-webpack-boilerplate",
   "dependencies": {
+    "alt": "0.17.1",
     "assets-webpack-plugin": "2.2.0",
     "autoprefixer-loader": "2.0.0",
     "babel": "5.6.14",
@@ -61,7 +62,7 @@
     "image-loaded": "0.0.2",
     "jest": "~0.1.40",
     "jest-cli": "0.4.13",
-    "jsonapi-parserinator": "0.2.10",
+    "jsonapi-parserinator": "0.3.2",
     "jsx-loader": "0.13.2",
     "newrelic": "1.21.1",
     "node-libs-browser": "0.5.2",
