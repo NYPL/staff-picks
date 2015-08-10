@@ -17,3 +17,91 @@
 		margin: 0 auto;
 	}
 }
+
+.hero__container__text-container {
+  float: left;
+  margin: 4px 0 0 17px; 
+  position: relative;
+  @include breakpoint($min, $post-palm) {
+    margin: 14px 0 40px 60px;  
+    width: 45%;
+  }
+  @include breakpoint($min, $post-laptop) {
+    margin: 70px 0 40px 60px;  
+    width: 40%;
+  }
+  @include breakpoint($min, $post-desktop) {
+    margin: 70px 0 40px 60px;  
+    width: 45%;
+  }
+}
+
+.hero__container__text-container__title {
+  box-sizing: border-box;
+  color: white;
+  position: relative;
+  width: 100%;
+  h3 {
+    font-family: 'KievitWeb-Bold', sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: 0.09rem;
+    margin: 24px 0 20px 0;
+    text-transform: uppercase;
+    @include breakpoint($min, $post-tablet) {
+      margin: 0;
+    }
+  }
+}
+
+.hero__container__text-container__title__des {
+  display: none;
+  font-family: MiloSlabPro, RobotoSlabLight, serif;
+  font-size: 36px;
+  line-height: 36px;
+  margin: 0 0 20px 0;
+  @include breakpoint($min, $post-palm) {
+    display: block;
+    font-size: 20px; 
+    line-height: 24px;
+  } 
+  @include breakpoint($min, $post-laptop) {
+    display: block;
+    font-size: 28px; 
+    line-height: 28px;
+  }
+}
+
+.hero__container__text-container__title__intro {
+  display: none;
+  font-family: 'KievitWeb-Book', sans-serif;
+  font-size: 15px;
+  @include breakpoint($min, $post-palm) {
+    display: block;
+    font-size: 14px;
+  }
+}
+
+.hero__container__image-container {
+  border-radius: 50%;
+  display: none;
+  margin: -90px 0 -6px 0;
+  overflow: hidden;
+  position: relative;
+  @include breakpoint($min, $post-tablet) {
+    display: block;
+    height: 300px;
+    width: 300px;
+  }
+  @include breakpoint($min, $post-laptop) {
+    display: block;
+    height: 380px;
+    width: 380px;
+  }
+  @include breakpoint($min, $post-desktop) {
+    display: block;
+    height: 380px;
+    width: 380px;
+  }
+
+}

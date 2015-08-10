@@ -20,11 +20,11 @@ class Hero extends React.Component {
     return (
       <div key='Hero' className='hero'>
         <div key='HeroContainer' className='hero__container'>
-          <div key='TextContainer' className='text-container' style={styles.TextContainer}>
-            <HeroTitle title='staff picks' des='Every month NYPL&#39;s librarians share their favorite reads.' 
+          <div key='TextContainer' className='hero__container__text-container'>
+            <HeroTitle className='hero__container__text-container__title' title='staff picks' des='Every month NYPL&#39;s librarians share their favorite reads.' 
             intro='Explore their book selections—ranging from new releases to timeless classics—by choosing a tag below.'/>
           </div>
-          <div key='HeroImageContainer' className='hero-image-container' style={styles.HeroImageContainer}>
+          <div key='HeroImageContainer' className='hero__container__image-container'>
             <HeroImage src='/client/images/staff_pic_bg.jpg' />
           </div>
         </div>

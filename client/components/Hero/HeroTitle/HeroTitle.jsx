@@ -11,12 +11,11 @@ class HeroTitle extends React.Component {
     return (
       <div id={this.props.id} className={this.props.className}
         style={[
-          styles.base,
           this.props.style
         ]}>
-        <h3 key='HeroTitle' style={styles.base, styles.HeroTitle}>{this.props.title}</h3>
-        <p key='HeroDes' style={styles.base, styles.HeroDes}>{this.props.des}</p>
-        <p key='HeroIntro'  style={styles.base, styles.HeroIntro}>{this.props.intro}</p>
+        <h3 key='HeroTitle'>{this.props.title}</h3>
+        <p key='HeroDes' className='hero__container__text-container__title__des'>{this.props.des}</p>
+        <p key='HeroIntro' className='hero__container__text-container__title__intro'>{this.props.intro}</p>
       </div>
     );
   }
@@ -24,7 +23,7 @@ class HeroTitle extends React.Component {
 
 HeroTitle.defaultProps = {
   id: 'HeroTitle',
-  className: 'HeroTitle',
+  className: '',
   label: '',
   lang: 'en',
 };
