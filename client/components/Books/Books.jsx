@@ -25,16 +25,14 @@ var Books = React.createClass({
     let books = this.props.books ? this.props.books['staff-picks'] : bookData['staff-picks'];
 
     let currentList = this.props.currentList || currentList;
-    return {
+    return _.extend({
       iso: null,
       book: {},
       currentList,
       books: books,
       modalIsOpen: false,
-      typeDisplay: BookStore.getBookDisplay(),
-      age: BookStore.getAge(),
       noResults: false
-    };
+    }, BookStore.getState());
   },
 
   mixins: [Navigation],
@@ -58,36 +56,38 @@ var Books = React.createClass({
 
     $('#masonryContainer').css('opacity', '1');
 
-    setTimeout(function () {
+    setTimeout(() => {
       _this.state.iso.arrange({
         filter: '.Adult'
       });
     }, 1200);
 
-    BookStore.addChangeListener(this._onChange);
+    BookStore.listen(this._onChange);
     BookActions.updateNewFilters(this.state.iso.getItemElements());
   },
 
   componentDidUnmount () {
-    BookStore.removeChangeListener(this._onChange);
+    BookStore.unlisten(this._onChange);
   },
 
   _onChange () {
-    let age = '.' + BookStore.getAge(),
+    let storeState = BookStore.getState(),
+      age = '.' + storeState._age,
+      filters = storeState._filters,
       selector = age,
       _this = this;
 
-    if (BookStore.getFilters().length) {
-      selector += '.' + BookStore.getFilters().join('.');
+    if (filters.length) {
+      selector += '.' + filters.join('.');
     }
 
-    setTimeout(function () {
+    setTimeout(() => {
       _this.state.iso.arrange({
         filter: selector
       });
     }, 100);
 
-    this.state.iso.on('arrangeComplete', function (filteredItems) {
+    this.state.iso.on('arrangeComplete', filteredItems => {
       if (!filteredItems.length) {
         _this.setState({
           noResults: true
@@ -95,11 +95,9 @@ var Books = React.createClass({
       }
     });
 
-    this.setState({
+    this.setState(_.extend({
       noResults: false,
-      typeDisplay: BookStore.getBookDisplay(),
-      age: BookStore.getAge()
-    });
+    }, BookStore.getState()));
   },
 
   _openModal (book) {
@@ -123,20 +121,20 @@ var Books = React.createClass({
 
     let books;
 
-    books = this.state.books.map(function (element, i) {
+    books = this.state.books.map((element, i) => {
       let tagList = _this._getTags(element),
         age = _this._getAge(element),
-        tagIDs = _.map(tagList, function (tag) {
+        tagIDs = _.map(tagList, tag => {
           return tag.id;
         }),
         tagClasses = tagIDs.join(' '),
-        listDisplay = _this.state.typeDisplay === 'list';
+        listDisplay = _this.state._bookDisplay === 'list';
 
       return (
         <li className={'book-item ' + age + ' ' + tagClasses}
           key={element.id} onClick={openModal.bind(_this, element)}
           style={[listDisplay ? styles.listWidth : styles.gridWidth]}>
-          {_this.state.typeDisplay === 'grid' ?
+          {_this.state._bookDisplay === 'grid' ?
             <Book book={element} style={styles.bookItem} width={'100%'} /> :
             <div>
                 <h2>{element['item']['attributes']['title']}</h2>

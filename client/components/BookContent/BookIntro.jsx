@@ -9,7 +9,7 @@ class TagList extends React.Component {
   }
 
   render () {
-    var tags = this.props.tags.map(function (tag) {
+    var tags = this.props.tags.map(tag => {
       return (
         <li style={{'display': 'inline-block', 'margin': '10px 10px 0 0'}}>{tag}</li>
       );

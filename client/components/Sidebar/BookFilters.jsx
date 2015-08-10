@@ -42,7 +42,7 @@ class BookFilters extends React.Component {
       themeFilters = [],
       drivenByFilters = [];
 
-    _.each(filterList, function (filter) {
+    _.each(filterList, filter => {
       filter.active = false;
       filter.show = true;
       filter.remove = true;
@@ -55,12 +55,10 @@ class BookFilters extends React.Component {
       }
     });
 
-    this.state = {
+    this.state = _.extend({
       drivenByFilters,
-      themeFilters,
-      filters: BookStore.getFilters(),
-      age: BookStore.getAge()
-    };
+      themeFilters
+    }, BookStore.getState());
 
     this._clearFilters = this._clearFilters.bind(this);
     this._onChange = this._onChange.bind(this);
@@ -68,15 +66,16 @@ class BookFilters extends React.Component {
   }
 
   componentDidMount () {
-    BookStore.addChangeListener(this._onChange);
+    BookStore.listen(this._onChange);
   }
 
   componentWillUnmount () {
-    BookStore.removeChangeListener(this._onChange);
+    BookStore.unlisten(this._onChange);
   }
 
   render () {
     let styles = this.props.styles || {};
+    let storeState = BookStore.getState();
 
     return (
       <div className='BookFilters' style={styles}>
@@ -92,7 +91,7 @@ class BookFilters extends React.Component {
           <ul>
             {this._filterItems(this.state.themeFilters)}
           </ul>
-          {this.state.filters.length ? 
+          {storeState._filters.length ? 
             <div className='clearFilters' style={styles.clearFilters}>
               <a href='#' onClick={this._clearFilters}>
                 Clear Filters
@@ -115,7 +114,7 @@ class BookFilters extends React.Component {
     const _this = this,
       _handleClick = this._handleClick;
 
-    return list.map(function (elem, i) {
+    return list.map((elem, i) => {
       let active = 'hide-filter',
         liElement;
       if (elem.active) {
@@ -146,35 +145,36 @@ class BookFilters extends React.Component {
 
   _onChange() {
     let filteredFilters = [],
-      activeFilters = BookStore.getFilters(),
-      age = BookStore.getAge(),
-      bookElems = BookStore.getUpdatedFilters();
+      storeState = BookStore.getState(),
+      activeFilters = storeState._filters,
+      age = storeState._age,
+      bookElems = storeState._updatedFilters;
 
     let updatedBooksElems = [];
-    _.each(bookElems, function (elem) {
+    _.each(bookElems, elem => {
       if (elem.className.indexOf(age) !== -1) {
         updatedBooksElems.push(elem);
       }
     });
 
     // Update/reset the filters based on a new age
-    if (this.state.age !== age) {
-      this.setState({age: age});
-      _.each(this.state.drivenByFilters, function (filter) {
+    if (this.state._age !== age) {
+      this.setState({_age: age});
+      _.each(this.state.drivenByFilters, filter => {
         filter.active = false;
         filter.show = true;
         filter.remove = false;
-        _.each(updatedBooksElems, function (elem) {
+        _.each(updatedBooksElems, elem => {
           if (elem.className.indexOf(filter.id) !== -1) {
             filter.remove = true;
           }
         });
       });
-      _.each(this.state.themeFilters, function (filter) {
+      _.each(this.state.themeFilters, filter => {
         filter.active = false;
         filter.show = true;
         filter.remove = false;
-        _.each(updatedBooksElems, function (elem) {
+        _.each(updatedBooksElems, elem => {
           if (elem.className.indexOf(filter.id) !== -1) {
             filter.remove = true;
           }
@@ -183,23 +183,23 @@ class BookFilters extends React.Component {
     }
 
     // For clearing the filters and unselecting a filter.
-    if (!activeFilters.length) {
-      _.each(this.state.drivenByFilters, function (filter) {
+    if (!storeState._filters.length) {
+      _.each(this.state.drivenByFilters, filter => {
         filter.active = false;
         filter.show = true;
       });
-      _.each(this.state.themeFilters, function (filter) {
+      _.each(this.state.themeFilters, filter => {
         filter.active = false;
         filter.show = true;
       });
     } else {
-      _.each(bookElems, function (elem) {
-        let n = activeFilters.length,
+      _.each(bookElems, elem => {
+        let n = storeState._filters.length,
           filters,
           classes = elem.className;
 
         if (classes.indexOf(age) !== -1) {
-          _.each(activeFilters, function (filter) {
+          _.each(storeState._filters, filter => {
             if (classes.indexOf(filter) !== -1) {
               n -= 1;
             }
@@ -213,13 +213,13 @@ class BookFilters extends React.Component {
       });
 
       if (filteredFilters) {
-        _.each(this.state.themeFilters, function (filter) {
+        _.each(this.state.themeFilters, filter => {
           filter.show = true;
           if (_.indexOf(filteredFilters, filter.id) === -1) {
             filter.show = false;
           }
         });
-        _.each(this.state.drivenByFilters, function (filter) {
+        _.each(this.state.drivenByFilters, filter => {
           filter.show = true;
           if (_.indexOf(filteredFilters, filter.id) === -1) {
             filter.show = false;
