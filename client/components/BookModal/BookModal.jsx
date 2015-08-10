@@ -62,7 +62,6 @@ let BookModal = React.createClass({
   },
 
   closeModal: function () {
-    console.log('test');
     this.setState({
       modalIsOpen: false
     });
@@ -80,11 +79,11 @@ let BookModal = React.createClass({
       imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?` +
        `&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
     
-    if (book['staff-pick-item']) {
-      title = book['staff-pick-item']['attributes']['title'];
+    if (book['item']) {
+      title = book['item']['attributes']['title'];
       description = book.attributes.text;
-      imageSrc = book['staff-pick-item']['attributes']['image-slug'];
-      bookId= book['staff-pick-item']['id'];
+      imageSrc = book['item']['attributes']['image-slug'];
+      bookId= book['item']['id'];
     }
 
     var tags = [
@@ -93,7 +92,7 @@ let BookModal = React.createClass({
       {property: "og:image", content: imageLink},
       {property: "og:description", content: description},
       {property: "og:site_name", content: 'Staff Picks | The New York Public Library'},
-      {property: "og:url", content: `http://nypl.org/staff-picks/${bookId}`},
+      {property: "og:url", content: `http://nypl.org/recommendations/staff-picks/${bookId}`},
       {name: "twitter:card", content: 'summary_large_image'},
       {name: "twitter:site", content: '@nypl'},
       {name: "twitter:title", content: title},
