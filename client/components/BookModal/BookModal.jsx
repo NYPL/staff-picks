@@ -106,17 +106,17 @@ let BookModal = React.createClass({
         <DocMeta tags={tags} />
         <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
           <CloseButton className='book-modal__close-btn' onClick={this.closeModal} />
-          <BookTitle book={this.state.book} />
-          <div style={styles.LeftColumn}>
-            <div key='ImageContainer' className='ImageContainer' style={styles.ImageContainer}>
-              <Book book={this.state.book} style={styles.BookCover} />
+          <BookTitle className='book-modal__book-title' book={this.state.book} />
+          <div className='book-modal__left-column'>
+            <div key='ImageContainer' className='book-modal__left-column__image-container'>
+              <Book book={this.state.book} className='book-modal__left-column__image-container__cover' style={styles.BookCover}/>
             </div>
-            <div key='ShareContainer' className='ShareContainer' style={styles.ShareContainer}>
-              <BookShare book={this.state.book} />
+            <div key='ShareContainer' className='book-modal__left-column__share-container'>
+              <BookShare className='book-modal__left-column__share-container__share-items' book={this.state.book} />
             </div>
           </div>
-          <BookIntro book={this.state.book} />
-          <BookContent book={this.state.book} style={styles.ModalBookContent}/>
+          <BookIntro className='book-modal__book-intro' book={this.state.book} />
+          <BookContent book={this.state.book} />
         </Modal>
       </div>
     );
@@ -124,37 +124,7 @@ let BookModal = React.createClass({
 });
 
 const styles={
-  ModalBookContent: {
-  },
-  LeftColumn: {
-    position: 'absolute',
-    top: '20px',
-    '@media (max-width: 414px)': {
-      float: 'left',     
-      margin: '30px 0 10px 0',
-      position: 'relative',
-      top:'0'
-    }
-  },
-  ImageContainer: {
-    margin: '36px 0 0 0', 
-    position: 'relative', 
-    '@media (max-width: 414px)': {
-      margin: '0', 
-      position: 'relative',
-      width: '175px'
-    }
-  },
-  ShareContainer: {
-    position:'relative',
-    margin: '20px 0 0 0', 
-    top:'0',
-    '@media (max-width: 414px)': {
-      margin: '6px 0 0 0'
-    }
-  },
   BookCover: {
-    cursor: 'default',
     width: '100%',
     height: 'auto',
     '@media (min-width: 414px)': {
