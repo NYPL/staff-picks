@@ -25,12 +25,11 @@ class AgeTabs extends React.Component {
     });
 
   	return (
-      <div className='tab-container' 
-        style={styles.TabContainer}>
-        <ul style={styles.TabUl}>
-          <li key='li-before' style={styles.TabOutside}></li>
+      <div className='tab-container'>
+        <ul className='tab-container__ul'>
+           <li key='li-before'  className='tab-container__outsider'></li>
           {TabElements}
-          <li key='li-after' style={styles.TabOutside}></li>
+           <li key='li-after'  className='tab-container__outsider'></li>
         </ul>
       </div>
 		);
@@ -39,36 +38,6 @@ class AgeTabs extends React.Component {
 
 // Styles
 const styles = {
-  TabContainer: {
-    backgroundColor: '#ffffff',
-    display: 'block',
-    fontSize: '1.4em',
-    height: 'auto',
-    margin: '30px auto 40px',
-    padding: '21px 0 0 0',
-    position: 'relative',
-    textAlign: 'center',
-    width: '100%',
-    '@media (max-width: 767px)': { fontSize: '1.2em' }
-  },
-  TabUl: {
-    display: 'block',
-    margin: '0 auto',
-  },
-  TabOutside: {
-    display: 'inline-block',
-    textTransform: 'uppercase',
-    width: '15%',
-    borderBottomStyle: 'solid',
-    borderColor: '#cc1a16',
-    borderLeftStyle: 'none',
-    borderRightStyle: 'none',
-    borderTopStyle: 'none',
-    borderWidth: '1px',
-    position: 'relative',
-    top:'23px',
-    '@media (max-width: 767px)': { width: '0' },
-  }
 };
 
 // contents and values for each TabElement

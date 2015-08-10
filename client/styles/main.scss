@@ -23,6 +23,13 @@ $dark-lib-gray: #776E64;
        url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Bold.woff') format('woff'); /* Pretty Modern Browsers */
 }
 
+@font-face {
+  font-family: 'KievitWeb';
+  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb.eot'); /* IE9 Compat Modes */
+  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb.woff') format('woff'); /* Pretty Modern Browsers */
+}
+
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
@@ -216,7 +223,8 @@ ul#nav_menu {
 #content {
   width: 93%;
   margin: 0 auto;
-  @include breakpoint($min, 414 + $viewport-increment) {
+  font-family: 'KievitWeb';
+  @include breakpoint($min, 767px) {
     width: 960px;
   }
 }
@@ -348,12 +356,20 @@ span[class*="icon-"] {
 
   #sidebar {
     float: left;
+    margin-right: 3%;
+    min-width: 60px;
     padding: 0;
     width: 100%;
 
     @include breakpoint($min, $post-mobile-phone) {
-      margin-right: 30px;
-      width: 160px;
+      margin-right: 20px;
+      width: 30%;
+    }
+    @include breakpoint($min, $post-palm) {
+      max-width: 160px;
+    }
+    @include breakpoint($min, $post-tablet) {
+      max-width: 160px;
     }
 
     .sidebar-content {
@@ -362,12 +378,23 @@ span[class*="icon-"] {
   }
 
   #books {
+    display: block;
     float: left;
     overflow: hidden;
     width: 100%;
     @include breakpoint($min, $post-mobile-phone) {
-      width: 770px;
+      width: 280px;
     }
+    @include breakpoint($min, $post-palm) {
+      width: 60%;
+    }
+     @include breakpoint($min, $post-tablet) {
+      width: 68%;
+    }
+    @include breakpoint($min, $post-desktop) {
+      width: 81%;
+    }
+
   }
 
   .list-view {
@@ -452,8 +479,8 @@ body {
 
   .left-icon {
     background: url('/client/images/icons/left_arrow_gray.svg') no-repeat;
-    padding: 5px 15px 5px 10px;
-    margin-left: -100px;
+    padding: 5px 15px 7px 10px;
+    margin-left: -95px;
   }
   .right-icon {
     background: url('/client/images/icons/right_arrow_gray.svg') no-repeat;
@@ -692,3 +719,6 @@ body {
 
 @import 'header';
 @import 'footer';
+@import 'age-tabs';
+@import 'book';
+@import 'book-modal';

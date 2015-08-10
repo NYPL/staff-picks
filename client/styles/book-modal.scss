@@ -1,0 +1,36 @@
+.book-modal__close-btn {
+    background-image: url('/client/images/icons/left_arrow_gray.svg');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    border-bottom-style: solid;
+    border-color: #cc1a16;
+    border-left-style: none;
+    border-right-style: none;
+    border-top-style: none;
+    border-width: 1px;
+    color: rgba(191, 191, 191, 1);
+    cursor: pointer;
+    float: left; 
+    font-size: 1.3em;
+    height: auto;
+    margin: 0 0 20px 0;
+    overflow: hidden;
+    padding: 5px 4px 30px 36px;
+    text-decoration: none;
+    width: 100%;
+    @include breakpoint($min, $post-mobile-phone) {
+        background-image: url('/client/images/icons/gray_x_button.svg');
+        background-position: center;
+        border-bottom-style: none;
+        border-color: #cc1a16;
+        border-left-style: none;
+        border-right-style: none;
+        border-top-style: none;
+        color: rgba(191, 191, 191, 0);
+        float: right;
+        font-size: 24px;
+        height: 28px;
+        margin: -16px -6px 0 0;
+        width: 28px;
+    }
+}

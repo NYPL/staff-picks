@@ -14,9 +14,8 @@ class TabElement extends React.Component {
   constructor(props) {
     super(props);
     // Changed state when TabElement is clicked
-    this.state = { 
-      age: BookStore.getAge()
-    };
+    this.state = BookStore.getState();
+
     // Actions of mouse click event assigned to the class
     this._handleClick = this._handleClick.bind(this);
     this._onChange = this._onChange.bind(this);
@@ -24,11 +23,11 @@ class TabElement extends React.Component {
 
   // Event listeners
   componentDidMount () {
-    BookStore.addChangeListener(this._onChange);
+    BookStore.listen(this._onChange);
   }
 
   componentWillUnmount () {
-    BookStore.removeChangeListener(this._onChange);
+    BookStore.unlisten(this._onChange);
   }
 
   // Actions of click event
@@ -38,21 +37,19 @@ class TabElement extends React.Component {
   }
   
   _onChange () {
-    this.setState({
-      age: BookStore.getAge()
-    });
+    this.setState(BookStore.getState());
   }
 
   render () {
     // If state equals to the clicked value, then make the TabElement active
-    let active = this.state.age === this.props.value;
+    let active = this.state._age === this.props.value;
   	return (
   		<li key={`tab-${this.props.name}`} id={this.props.name} 
-        className='tab-element' style={[styles.TabElement, 
-        active ? styles.TabElementActive : styles.TabElementInactive]}>
-          <a
+        className='tab-container__ul__element' style={ 
+        active ? styles.TabElementActive : styles.TabElementInactive}>
+          <a className='tab-container__ul__element__link'
             onClick={this._handleClick.bind(this, this.props.value)}
-            style={[styles.TabElementLink, active ? styles.TabElementLinkActive : null]}>
+            style={[active ? styles.TabElementLinkActive : null]}>
             {this.props.name}
           </a>
   		</li>
@@ -63,13 +60,6 @@ class TabElement extends React.Component {
 // Styles
 const styles = {
   TabElement: {
-    display: 'inline-block',
-    margin: '0',
-    padding: '20px 0 20px 0',
-    textTransform: 'uppercase',
-    whiteSpace: 'pre',
-    width: '23%',
-    '@media (max-width: 767px)': { width: '33%' }
   },
   TabElementActive: {
     borderBottomStyle: 'none',
@@ -86,14 +76,6 @@ const styles = {
     borderRightStyle: 'none',
     borderTopStyle: 'none',
     borderWidth: '1px'
-  },
-  TabElementLink: {
-    color: '#333333',
-    cursor: 'pointer',
-    textDecoration: 'none',
-    ':hover': {
-      color: '#cc1a16'
-    }
   },
   TabElementLinkActive: {
     color: '#cc1a16'

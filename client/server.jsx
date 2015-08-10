@@ -24,8 +24,8 @@ import API from './utils/ApiService';
 // load the data via Store Actions and update our
 // App Constants. As of now, we are mocking an API
 // call to fetch the data.
-const data = API.getData();
-const books = API.getBooks();
+// const data = API.getData();
+// const books = API.getBooks();
 
 let RouteHandler = Router.RouteHandler;
 
@@ -36,10 +36,18 @@ class App extends React.Component {
 
   render () {
     let tags = [
-      {name: 'description', content: 'staff picks'},
-      {itemProp: 'name', content: 'The Name or Title Here'},
-      {itemProp: 'description', content: 'This is the page description'},
-      {itemProp: 'image', content: '/client/images/staff_pic_bg.jpg'}
+      {property: "og:title", content: 'Staff Picks | The New York Public Library'},
+      {property: "og:type", content: 'website'},
+      {property: "og:image", content: '/client/images/staff_pic_bg.jpg'},
+      {property: "og:description", content: 'Every month NYPL\'s librarians share their favorite reads.'},
+      {property: "og:site_name", content: 'Staff Picks | The New York Public Library'},
+      {property: "og:url", content: 'http://nypl.org/staff-picks'},
+      {name: "twitter:card", content: 'summary_large_image'},
+      {name: "twitter:site", content: '@nypl'},
+      {name: "twitter:title", content: 'Staff Picks | The New York Public Library'},
+      {name: "twitter:description", content: 'Every month NYPL\'s librarians share their favorite reads.'},
+      {name: "twitter:creator", content: '@nypl'},
+      {name: "twitter:image", content: '/client/images/staff_pic_bg.jpg'}
     ];
 
     return (
@@ -54,7 +62,7 @@ class App extends React.Component {
             <Sidebar filters={this.props.filters}/>
           </div>
           <div id='books'>
-            <Books books={this.props.data} />
+            <Books books={this.props.data} currentList={this.props.currentList}/>
           </div>
         </div>
       </div>
