@@ -119,7 +119,8 @@ var Books = React.createClass({
     const openModal = this._openModal,
       _this = this;
 
-    let books;
+    let books, months, list, date, thisMonth, thisyear,
+      nextHref, previousHref, previousLink, nextLink;
 
     books = this.state.books.map((element, i) => {
       let tagList = _this._getTags(element),
@@ -145,8 +146,6 @@ var Books = React.createClass({
       );
     });
 
-    let months, list, date, thisMonth, thisyear,
-      nextHref, previousHref;
     if (this.state.currentList) {
       months = ['January', 'February', 'March', 'April', 'May',
         'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -159,20 +158,21 @@ var Books = React.createClass({
       nextHref = !_.isEmpty(list.nextList) ? list.nextList.links.self : undefined;
     }
 
+    previousLink = (
+      <a style={styles.previousMonth} onClick={this._handleClick.bind(this, previousHref)}>
+        Picks for June<span className='left-icon'></span>
+      </a>
+    );
+    nextLink = (
+      <a style={styles.nextMonth} onClick={this._handleClick.bind(this, nextHref)}>
+        Picks for August<span className='right-icon'></span>
+      </a>
+    );
+
     return (
       <div>
         <div className='month-picker' style={styles.monthPicker}>
-          <a style={styles.previousMonth} onClick={this._handleClick.bind(this, previousHref)}>
-            Picks for June
-            <span className='left-icon'></span>
-          </a>
-
           <p style={styles.month}>{thisMonth} {thisyear}</p>
-
-          <a style={styles.nextMonth} onClick={this._handleClick.bind(this, nextHref)}>
-            Picks for August
-            <span className='right-icon'></span>
-          </a>
         </div>
 
         <div id="masonryContainer" ref="masonryContainer" style={{opacity: '0'}}>
