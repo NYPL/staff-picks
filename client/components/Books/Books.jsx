@@ -4,6 +4,7 @@ import Book from '../Book/Book.jsx';
 import BookContent from '../BookContent/BookContent.jsx';
 import API from '../../utils/ApiService.js';
 import CloseButton from './CloseButton.jsx';
+import parser from 'jsonapi-parserinator';
 
 import _ from 'underscore';
 
@@ -194,8 +195,14 @@ var Books = React.createClass({
 
   _handleClick (API) {
     if (API) {
-      $.get(API, function (data) {
-        console.log(data);
+      $.ajax({
+        type: 'GET',
+        dataType: 'jsonp',
+        url: API + '?include=previous-list,next-list,picks.item.tags,picks.age',
+        success: function (data) {
+          console.log(parser.parse(data));
+
+        }
       });
     }
   }
