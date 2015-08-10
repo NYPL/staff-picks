@@ -109,11 +109,11 @@ let BookModal = React.createClass({
           <CloseButton className='book-modal__close-btn' onClick={this.closeModal} />
           <BookTitle className='book-modal__book-title' book={this.state.book} />
           <div className='book-modal__left-column'>
-            <div key='ImageContainer' className='book-modal__image-container'>
-              <Book book={this.state.book} className='book-modal__image-container__cover' style={styles.BookCover}/>
+            <div key='ImageContainer' className='book-modal__left-column__image-container'>
+              <Book book={this.state.book} className='book-modal__left-column__image-container__cover' style={styles.BookCover}/>
             </div>
-            <div key='ShareContainer' className='book-modal__share-container'>
-              <BookShare book={this.state.book} />
+            <div key='ShareContainer' className='book-modal__left-column__share-container'>
+              <BookShare className='book-modal__left-column__share-container__share-items' book={this.state.book} />
             </div>
           </div>
           <BookIntro className='book-modal__book-intro' book={this.state.book} />

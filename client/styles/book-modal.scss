@@ -94,7 +94,7 @@
     }
 }
 
-.book-modal__image-container {
+.book-modal__left-column__image-container {
     margin: 0;
     position: relative;
     width: 175px;
@@ -103,18 +103,22 @@
     }
 }
 
-.book-modal__image-container__cover {
+.book-modal__left-column__image-container__cover {
     a { 
         cursor: default; 
     }
 }
 
 
-.book-modal__share-container {
+.book-modal__left-column__share-container {
    margin: 6px 0 0 0;
    position: relative;
    top: 0;
    @include breakpoint($min, $post-mobile-phone) {
         margin: 20px 0 0 0; 
    }
+}
+
+.book-modal__left-column__share-container__share-items {
+    
 }

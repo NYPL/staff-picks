@@ -56,13 +56,7 @@ BookIntro.defaultProps = {
 };
 
 const styles={
-  BookIntro: {
-  },
-  Author: {
 
-  },
-  TagList :{
-  }
 };
 
 export default Radium(BookIntro);
