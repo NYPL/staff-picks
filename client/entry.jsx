@@ -34,6 +34,7 @@ const books = API.getBooks();
 
 let Route = Router.Route,
   NotFoundRoute = Router.NotFoundRoute,
+  DefaultRoute = Router.DefaultRoute,
   RouteHandler = Router.RouteHandler;
 
 class App extends React.Component {
