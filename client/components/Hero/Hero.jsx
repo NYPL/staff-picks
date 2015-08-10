@@ -18,8 +18,8 @@ class Hero extends React.Component {
 
   render() {    
     return (
-      <div key='Hero' style={styles.Hero}>
-        <div key='HeroContainer' className='hero-container' style={styles.HeroContainer}>
+      <div key='Hero' className='hero'>
+        <div key='HeroContainer' className='hero__container'>
           <div key='TextContainer' className='text-container' style={styles.TextContainer}>
             <HeroTitle title='staff picks' des='Every month NYPL&#39;s librarians share their favorite reads.' 
             intro='Explore their book selections—ranging from new releases to timeless classics—by choosing a tag below.'/>

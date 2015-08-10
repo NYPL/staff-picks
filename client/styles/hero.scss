@@ -1,0 +1,19 @@
+.hero {
+  background-color: #e4382c;
+  color: white;
+  height: auto;
+  min-height: 72px;
+  padding: 0;
+  width: 100%;
+}
+
+.hero__container {
+  height: auto;
+  margin: 50px 0 0 0; 
+  max-width: 900px;
+  overflow: hidden;
+  position: relative;
+  @include breakpoint($min, $post-tablet) { 
+		margin: 0 auto;
+	}
+}
