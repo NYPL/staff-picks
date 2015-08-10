@@ -20,7 +20,7 @@ class BookShare extends React.Component {
 
   render () {
     return (
-      <div ref='BookContent' className='BookShare' style={styles.BookShare}>
+      <div ref='BookContent' className={this.props.className} style={styles.BookShare}>
         <li key='fb' style={[styles.social, styles.facebook]}>
 	        <a href={this.state.facebook} target='_blank' style={styles.shareLink} label='Share on facebook'></a>
         </li>
@@ -36,9 +36,6 @@ class BookShare extends React.Component {
 };
 
 const styles={
-	BookShare: {
-		margin: '0 0 0 4px'
-	},
 	social: {
     display: 'inline-block',
 	  margin: '-12px 0 0 -5px',
@@ -70,7 +67,6 @@ const styles={
 		display: 'inline-block',
 		height: '61px',
 	  width: '60px',
-
 	},
 	tumblr: {
 	  backgroundImage: 'url("/client/images/social/social.tmblr.init.png")',
