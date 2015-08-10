@@ -11,14 +11,14 @@ class TagList extends React.Component {
   render () {
     var tags = this.props.tags.map(function (tag) {
       return (
-        <li style={{'display': 'inline-block', 'margin': '10px 10px 0 0'}}>{tag}</li>
+        <li>{tag}</li>
       );
     });
 
     return (
-      <div style={this.props.style}>
+      <div className={this.props.className} style={this.props.style}>
         <p>Filed under:</p>
-        <ul style={{'listStyle': 'none'}}>
+        <ul>
           {tags}
         </ul>
       </div>
@@ -41,9 +41,9 @@ class BookIntro extends React.Component {
         .value();
 
     return (
-      <div style={styles.BookIntro}>
-        <p className='author' style={styles.Author}>By {book['staff-pick-item']['attributes']['author']}</p>
-        <TagList tags={tags} style={styles.TagList} />
+      <div className='book-modal__book-intro__div'>
+        <p className='book-modal__book-intro__div__author'>By {book['staff-pick-item']['attributes']['author']}</p>
+        <TagList className='book-modal__book-intro__div__tags' tags={tags} />
       </div>
     );
   }
@@ -57,27 +57,11 @@ BookIntro.defaultProps = {
 
 const styles={
   BookIntro: {
-    fontSize: '10px',
-    margin: '26px 0 0 35%',
-    position: 'relative',
-    top: '30%',
-    '@media (max-width: 414px)': { 
-      left: '15px',
-      position: 'relative',
-      top: '2px'
-    }
   },
   Author: {
-    fontSize: '16px',
-    fontWeight: 'bold'
+
   },
   TagList :{
-    color: 'rgb(191, 191, 191)',
-    fontSize: '14px',
-    margin: '10px 0 0 0',
-    '@media (max-width: 414px)': { 
-      fontSize: '18px'
-    }
   }
 };
 

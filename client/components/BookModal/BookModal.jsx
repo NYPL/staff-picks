@@ -104,7 +104,7 @@ let BookModal = React.createClass({
         <DocMeta tags={tags} />
         <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
           <CloseButton className='book-modal__close-btn' onClick={this.closeModal} />
-          <BookTitle book={this.state.book} />
+          <BookTitle className='book-modal__book-title' book={this.state.book} />
           <div className='book-modal__left-column'>
             <div key='ImageContainer' className='book-modal__image-container'>
               <Book book={this.state.book} className='book-modal__image-container__cover' style={styles.BookCover}/>
@@ -113,7 +113,7 @@ let BookModal = React.createClass({
               <BookShare book={this.state.book} />
             </div>
           </div>
-          <BookIntro book={this.state.book} />
+          <BookIntro className='book-modal__book-intro' book={this.state.book} />
           <BookContent book={this.state.book} style={styles.ModalBookContent}/>
         </Modal>
       </div>

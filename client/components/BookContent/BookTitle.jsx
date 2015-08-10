@@ -12,7 +12,7 @@ class BookTitle extends React.Component {
 
     return (
       <div ref='BookContent' className={this.props.className}>
-        <h2 style={styles.BookTitle}>{book['staff-pick-item']['attributes']['title']}</h2>
+        <h2>{book['staff-pick-item']['attributes']['title']}</h2>
       </div>
     );
   }
@@ -25,14 +25,6 @@ BookTitle.defaultProps = {
 };
 
 const styles={
-  BookTitle: {
-    fontFamily: 'MiloSlabPro, RobotoSlabLight, serif',
-    fontSize: '3em',
-    margin: '20px 0 0 35%',
-    '@media (max-width: 414px)': { 
-      margin: '0'
-    }
-  }
 };
 
 export default Radium(BookTitle);

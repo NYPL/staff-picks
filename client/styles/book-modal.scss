@@ -35,6 +35,52 @@
     }
 }
 
+.book-modal__book-title {
+    h2 {
+        font-family: MiloSlabPro, RobotoSlabLight, serif;
+        font-size: 3em;
+        margin: 0;
+        @include breakpoint($min, $post-mobile-phone) { 
+          margin: 20px 0 0 35%;
+        }
+    }
+}
+
+.book-modal__book-intro__div {
+    font-size: 10px;
+    left: 15px;
+    margin: 26px 0 0 35%;
+    position: relative;
+    top: 2px;
+    @include breakpoint($min, $post-mobile-phone) {
+        left: 0;
+        top: 30%;
+    }
+}
+
+.book-modal__book-intro__div__author {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.book-modal__book-intro__div__tags {
+    color: rgb(191, 191, 191);
+    font-size: 16px;
+    margin: 10px 0 0 0;
+    @include breakpoint($min, $post-mobile-phone) {
+      font-size: 14px;
+    }
+
+    ul {
+        list-style: none;
+
+        li {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+    }
+}
+
 .book-modal__left-column {
     float: left;     
     margin: 30px 0 10px 0;
