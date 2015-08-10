@@ -424,9 +424,10 @@ span[class*="icon-"] {
 // Temporary overrides for the modal window
 body {
   .ReactModal__Content {
-    min-height: 510px;
+    min-height: 525px;
     z-index: 2000;
     position: absolute;
+    bottom: 500px;
     border: 1px solid #ccc;
     background: #fff;
     overflow: auto;
@@ -434,9 +435,8 @@ body {
     border-radius: 4px;
     outline: none;
     padding: 30px 20px 20px 30px;
-    // position: relative;
     width: 850px;
-    margin: 7% auto;
+    margin: 4% auto;
     @include breakpoint($max, $post-mobile-phone) {
       border: 0px solid #ccc;
       border-radius: 0px;
