@@ -117,7 +117,7 @@ let BookModal = React.createClass({
             </div>
           </div>
           <BookIntro className='book-modal__book-intro' book={this.state.book} />
-          <BookContent book={this.state.book} style={styles.ModalBookContent}/>
+          <BookContent book={this.state.book} />
         </Modal>
       </div>
     );

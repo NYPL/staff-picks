@@ -70,10 +70,8 @@
     @include breakpoint($min, $post-mobile-phone) {
       font-size: 14px;
     }
-
     ul {
         list-style: none;
-
         li {
             display: inline-block;
             margin: 10px 10px 0 0;
@@ -120,5 +118,5 @@
 }
 
 .book-modal__left-column__share-container__share-items {
-    
+    margin: 0 0 0 4px;
 }

@@ -42,7 +42,7 @@ class BookIntro extends React.Component {
 
     return (
       <div className='book-modal__book-intro__div'>
-        <p className='book-modal__book-intro__div__author'>By {book['staff-pick-item']['attributes']['author']}</p>
+        <p className='book-modal__book-intro__div__author'>By {book['item']['attributes']['author']}</p>
         <TagList className='book-modal__book-intro__div__tags' tags={tags} />
       </div>
     );
