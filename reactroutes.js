@@ -30,6 +30,7 @@ import DocMeta from 'react-doc-meta';
 app.use(favicon(__dirname + '/client/images/favicon.ico'));
 // app.use(express.static(__dirname + '/client/styles'));
 app.use('/client', express.static(path.join(process.cwd(), '/client')));
+app.use('*/client', express.static(path.join(process.cwd(), '/client')));
 app.set('layout');
 app.set('view engine', 'ejs');
 app.set('view options', {layout: 'layout'});
@@ -66,7 +67,8 @@ let options = {
   RouteHandler = Router.RouteHandler,
   routes = (
     <Route path='/' handler={App} ignoreScrollBehavior>
-      <Route name='modal' path='/:id' handler={BookModal} ignoreScrollBehavior>
+      <Route name='month' path='/:month?' ignoreScrollBehavior/>
+      <Route name='modal' path='/:month/:id' handler={BookModal} ignoreScrollBehavior>
         <NotFoundRoute handler={Error404Page} />
       </Route>
     </Route>
@@ -116,6 +118,12 @@ req.end();
 
 
 app.get('/*', function(req, res) {
+  let monthPath = (req.path).substring(1,11),
+    endpoint = '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age';
+  if (monthPath) {
+    let endpoint = `/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${monthPath}?include=previous-list,next-list,picks.item,picks.age`;
+  }
+
   Router.run(routes, req.path, function (Root, state) {
     let parsedData = [], filters = [], pickList = [], metaBook, data, currentData;
 

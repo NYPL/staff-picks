@@ -101,7 +101,11 @@ var Books = React.createClass({
   },
 
   _openModal (book) {
-    this.transitionTo('modal', {id: book['item']['id']});
+    this.transitionTo('modal',
+      {
+        month: this.state.currentList.currentList['list-date'],
+        id: book['item']['id']
+      });
   },
 
   _getTags (elem) {

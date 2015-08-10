@@ -41,7 +41,7 @@ class App extends React.Component {
       {property: "og:image", content: '/client/images/staff_pic_bg.jpg'},
       {property: "og:description", content: 'Every month NYPL\'s librarians share their favorite reads.'},
       {property: "og:site_name", content: 'Staff Picks | The New York Public Library'},
-      {property: "og:url", content: 'http://nypl.org/staff-picks'},
+      {property: "og:url", content: 'http://nypl.org/recommendations/staff-picks'},
       {name: "twitter:card", content: 'summary_large_image'},
       {name: "twitter:site", content: '@nypl'},
       {name: "twitter:title", content: 'Staff Picks | The New York Public Library'},
