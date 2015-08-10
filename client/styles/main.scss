@@ -479,7 +479,7 @@ body {
 
   .left-icon {
     background: url('/client/images/icons/left_arrow_gray.svg') no-repeat;
-    padding: 5px 15px 5px 10px;
+    padding: 5px 15px 7px 10px;
     margin-left: -95px;
   }
   .right-icon {
@@ -719,3 +719,6 @@ body {
 
 @import 'header';
 @import 'footer';
+@import 'age-tabs';
+@import 'book';
+@import 'book-modal';

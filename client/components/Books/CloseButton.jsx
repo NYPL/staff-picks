@@ -17,7 +17,7 @@ class CloseButton extends React.Component {
 
   render () {
     return (
-      <SimpleButton style={styles.CloseButton}
+      <SimpleButton className={this.props.className}
         id='close-button' 
         label='RETURN TO STAFF PICKS'
         onClick={this._handleClick} />
