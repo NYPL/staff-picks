@@ -155,6 +155,7 @@ const styles={
     }
   },
   BookCover: {
+    cursor: 'default',
     width: '100%',
     height: 'auto',
     '@media (min-width: 414px)': {
