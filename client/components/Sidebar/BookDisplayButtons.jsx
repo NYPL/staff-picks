@@ -4,34 +4,41 @@ import cx from 'classnames';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
+import _ from 'underscore';
 
 class BookDisplayButtons extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      displayType: BookStore.getBookDisplay(),
-      gridActive: BookStore.getActiveGrid(),
-      listActive: BookStore.getActiveList(),
+    this.state = _.extend({
       filters: BookStore.getFilters(),
       age: BookStore.getAge()
-    };
+    }, BookStore.getState());
 
     this._handleClick = this._handleClick.bind(this);
     this._onChange = this._onChange.bind(this);
   }
 
   componentDidMount () {
-    BookStore.addChangeListener(this._onChange);
+    BookStore.listen(this._onChange);
   }
 
   componentWillUnmount () {
-    BookStore.removeChangeListener(this._onChange);
+    BookStore.unlisten(this._onChange);
   }
 
   render () {
-    let gridActive = this.state.gridActive;
-    let listActive = !this.state.gridActive;
+    let gridActive = true,
+      listActive = false;
+
+    if (this.state._bookDisplay === 'grid') {
+      gridActive = true;
+      listActive = false;
+    } else {
+      gridActive = false;
+      listActive = true;
+    }
+
     const gridActiveButton = cx({ gridActive: gridActive, active: gridActive });
     const listActiveButton = cx({ listActive: listActive, active: listActive });
 
@@ -56,17 +63,14 @@ class BookDisplayButtons extends React.Component {
   }
 
     /* Utility Methods should be declared below the render method */
-  _handleClick (displayType) {
-    BookActions.updateBookDisplay(displayType);
+  _handleClick (_bookDisplay) {
+    BookActions.updateBookDisplay(_bookDisplay);
   }
 
   _onChange () {
-    this.setState({
-      displayType: BookStore.getBookDisplay(),
-      gridActive: BookStore.getActiveGrid(),
-      listActive: BookStore.getActiveList(),
+    this.setState(_.extend({
       filters: BookStore.getFilters()
-    });
+    }, BookStore.getState()));
   }
 };
 
