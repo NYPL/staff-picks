@@ -62,7 +62,6 @@ let BookModal = React.createClass({
   },
 
   closeModal: function () {
-    console.log('test');
     this.setState({
       modalIsOpen: false
     });
@@ -80,11 +79,11 @@ let BookModal = React.createClass({
       imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?` +
        `&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
     
-    if (book['staff-pick-item']) {
-      title = book['staff-pick-item']['attributes']['title'];
+    if (book['item']) {
+      title = book['item']['attributes']['title'];
       description = book.attributes.text;
-      imageSrc = book['staff-pick-item']['attributes']['image-slug'];
-      bookId= book['staff-pick-item']['id'];
+      imageSrc = book['item']['attributes']['image-slug'];
+      bookId= book['item']['id'];
     }
 
     var tags = [
@@ -93,7 +92,7 @@ let BookModal = React.createClass({
       {property: "og:image", content: imageLink},
       {property: "og:description", content: description},
       {property: "og:site_name", content: 'Staff Picks | The New York Public Library'},
-      {property: "og:url", content: `http://nypl.org/staff-picks/${bookId}`},
+      {property: "og:url", content: `http://nypl.org/recommendations/staff-picks/${bookId}`},
       {name: "twitter:card", content: 'summary_large_image'},
       {name: "twitter:site", content: '@nypl'},
       {name: "twitter:title", content: title},
@@ -107,17 +106,17 @@ let BookModal = React.createClass({
         <DocMeta tags={tags} />
         <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
           <CloseButton className='book-modal__close-btn' onClick={this.closeModal} />
-          <BookTitle book={this.state.book} />
-          <div style={styles.LeftColumn}>
-            <div key='ImageContainer' className='ImageContainer' style={styles.ImageContainer}>
-              <Book book={this.state.book} style={styles.BookCover} />
+          <BookTitle className='book-modal__book-title' book={this.state.book} />
+          <div className='book-modal__left-column'>
+            <div key='ImageContainer' className='book-modal__left-column__image-container'>
+              <Book book={this.state.book} className='book-modal__left-column__image-container__cover' style={styles.BookCover}/>
             </div>
-            <div key='ShareContainer' className='ShareContainer' style={styles.ShareContainer}>
-              <BookShare book={this.state.book} />
+            <div key='ShareContainer' className='book-modal__left-column__share-container'>
+              <BookShare className='book-modal__left-column__share-container__share-items' book={this.state.book} />
             </div>
           </div>
-          <BookIntro book={this.state.book} />
-          <BookContent book={this.state.book} style={styles.ModalBookContent}/>
+          <BookIntro className='book-modal__book-intro' book={this.state.book} />
+          <BookContent book={this.state.book} />
         </Modal>
       </div>
     );
@@ -125,37 +124,7 @@ let BookModal = React.createClass({
 });
 
 const styles={
-  ModalBookContent: {
-  },
-  LeftColumn: {
-    position: 'absolute',
-    top: '20px',
-    '@media (max-width: 414px)': {
-      float: 'left',     
-      margin: '30px 0 10px 0',
-      position: 'relative',
-      top:'0'
-    }
-  },
-  ImageContainer: {
-    margin: '36px 0 0 0', 
-    position: 'relative', 
-    '@media (max-width: 414px)': {
-      margin: '0', 
-      position: 'relative',
-      width: '175px'
-    }
-  },
-  ShareContainer: {
-    position:'relative',
-    margin: '20px 0 0 0', 
-    top:'0',
-    '@media (max-width: 414px)': {
-      margin: '6px 0 0 0'
-    }
-  },
   BookCover: {
-    cursor: 'default',
     width: '100%',
     height: 'auto',
     '@media (min-width: 414px)': {

@@ -59,8 +59,6 @@ class TabElement extends React.Component {
 
 // Styles
 const styles = {
-  TabElement: {
-  },
   TabElementActive: {
     borderBottomStyle: 'none',
     borderColor: '#cc1a16',
