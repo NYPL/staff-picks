@@ -27,10 +27,10 @@
     width: 40%;
   }
   @include breakpoint($min, 720px) {
-    margin: 30px 40px 40px 70px;
+    margin: 70px 40px 40px 70px;
   }
   @include breakpoint($min, $post-laptop) {
-    margin: 50px 40px 40px 60px;  
+    margin: 100px 40px 40px 60px;  
     width: 45%;
   }
 }
