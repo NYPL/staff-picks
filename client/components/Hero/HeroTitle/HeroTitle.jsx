@@ -15,8 +15,6 @@ class HeroTitle extends React.Component {
           this.props.style
         ]}>
         <h3 key='HeroTitle' style={styles.base, styles.HeroTitle}>{this.props.title}</h3>
-        <p key='HeroDes' style={styles.base, styles.HeroDes}>{this.props.des}</p>
-        <p key='HeroIntro'  style={styles.base, styles.HeroIntro}>{this.props.intro}</p>
       </div>
     );
   }
