@@ -9,7 +9,9 @@ let fs = require('fs'),
   compress = require('compression'),
   layouts = require('express-ejs-layouts'),
   analytics = require('./analytics.js'),
-  http = require('http');
+  http = require('http'),
+  forwarded = require('forwarded-for');
+
 
 import React from 'react';
 import Router from 'react-router';
@@ -122,6 +124,8 @@ req.end();
 
 
 app.get('/*', function(req, res) {
+  let address = forwarded(req, req.headers);
+
   let monthPath = (req.path).substring(1,11),
     endpoint = '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age';
   if (monthPath) {
@@ -164,6 +168,7 @@ app.get('/*', function(req, res) {
         React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
 
     res.render('index', {
+      address: JSON.stringify(address),
       staffPicks: JSON.stringify({'staff-picks': currentData['picks']}),
       filters: JSON.stringify({'filters': filters}),
       pickList: JSON.stringify({'staff-picks-list': pickList}),
