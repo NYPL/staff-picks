@@ -122,7 +122,11 @@ req.end();
 
 
 app.get('/*', function(req, res) {
-  let address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;;
+  let address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+  if (!_.isEmpty(address)) {
+    // app.use('*/client', express.static(path.join(process.cwd(), '/recommendations/staff-picks/client')));
+  }
 
   let monthPath = (req.path).substring(1,11),
     endpoint = '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age';
