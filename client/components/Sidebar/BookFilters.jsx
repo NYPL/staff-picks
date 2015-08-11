@@ -255,7 +255,7 @@ const styles = {
     color: '#bfbfbf'
   },
   CloseButton: {
-    background: 'url("/client/images/icons/gray_x_button.svg") no-repeat',
+    background: 'url("/recommendations/staff-picks/client/images/icons/gray_x_button.svg") no-repeat',
     position: 'absolute',
     fontSize: '1.3em',
     height: 'auto',
