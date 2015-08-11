@@ -23,8 +23,8 @@
   margin: 4px 0 0 17px; 
   position: relative;
   @include breakpoint($min, $post-palm) {
-    margin: 14px 0 40px 60px;  
-    width: 40%;
+    margin: 21px 0 40px 60px;  
+    width: 46%;
   }
   @include breakpoint($min, $post-laptop) {
     margin: 50px 0 40px 60px;  
@@ -42,13 +42,13 @@
     font-size: 12px;
     font-weight: normal;
     letter-spacing: 0.09rem;
-    margin: 24px 0 20px 0;
+    margin: 24px 0 10px 0;
     text-transform: uppercase;
     @include breakpoint($min, $post-palm) {
-      margin: 40px 0 20px 0;
+      margin: 40px 0 10px 0;
     }
     @include breakpoint($min, 720px) {
-      margin: 70px 0 20px 130px;
+      margin: 0 0 10px 0;
     }
     @include breakpoint($min, $post-laptop) {
       margin: 0 0 20px 0;
@@ -61,56 +61,63 @@
   font-family: MiloSlabPro, RobotoSlabLight, serif;
   font-size: 36px;
   line-height: 36px;
-  margin: 0 0 10px 0;
+  margin: 0 0 5px 0;
   text-align: left;
   @include breakpoint($min, 720px) {
-    display: none;
+    display: block;
     font-size: 20px; 
     line-height: 24px;
+    margin: 0 0 5px 0;
   } 
   @include breakpoint($min, $post-laptop) {
     display: block;
     font-size: 28px; 
     line-height: 28px;
+    margin: 0 0 10px 0;
   }
 }
 
 .hero__container__text-container__title__intro {
   display: none;
   font-family: 'KievitWeb-Book', sans-serif;
-  font-size: 15px;
+  font-size: 12px;
+  line-height: 14px;
   text-align: left;
   @include breakpoint($min, 720px) {
-    display: none;
-    font-size: 14px;
+    display: block;
+    font-size: 12px;
+    line-height: 14px;
   }
    @include breakpoint($min, $post-laptop) {
     display: block;
     font-size: 14px;
+    line-height: 18px;
   }
 }
 
 .hero__container__image-container {
   border-radius: 50%;
   display: none;
-  margin: -80px 0 -6px 0;
+  margin: -68px 0 -6px 0;
   overflow: hidden;
   position: relative;
   @include breakpoint($min, 720px) {
     display: inline-block;
     height: 300px;
+    margin: -38px 0 -6px 0;
     width: 300px;
   }
   @include breakpoint($min, $post-laptop) {
     display: inline-block;
     height: 380px;
+    margin: -68px 0 -6px 0;
     width: 380px;
   }
 }
 
 .hero__container__image-container__image {
   background-image: url('/client/images/shelftalker.png');
-  background-position: 0px -163px;
+  background-position: 0px -142px;
   background-size: 109%;
   background-repeat: no-repeat;
   display: inline;
@@ -121,6 +128,7 @@
     width: 300px;
   }
   @include breakpoint($min, $post-laptop) {
+    background-position: 0px -163px;
     height: 380px;
     width: 380px;
   }
