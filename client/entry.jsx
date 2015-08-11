@@ -86,9 +86,9 @@ if (rpRoute === '/recommendations/staff-picks/') {
 }
 
 let routes = (
-    <Route name='home' path={childrenRoute + '/'} handler={App} ignoreScrollBehavior>
-      <Route name='month' path={childrenRoute + '/:month?/?'} ignoreScrollBehavior/>
-      <Route name='modal' path={childrenRoute +'/:month/:id?/?'} handler={BookModal} ignoreScrollBehavior>
+    <Route name='home' path='/recommendations/staff-picks/' handler={App} ignoreScrollBehavior>
+      <Route name='month' path='/recommendations/staff-picks/:month?/?' ignoreScrollBehavior/>
+      <Route name='modal' path='/recommendations/staff-picks/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
         <NotFoundRoute handler={Error404Page} />
       </Route>
     </Route>
