@@ -293,7 +293,7 @@ span[class*="icon-"] {
     margin: 25px 0;
 
     .staff-pick-icon {
-      background: url('/client/images/icons/icon.thumbsup.svg') no-repeat;
+      background: url('client/images/icons/icon.thumbsup.svg') no-repeat;
       padding: 11px 20px 10px 10px;
       margin-right: 10px;
     }
@@ -325,11 +325,11 @@ span[class*="icon-"] {
       }
 
       .checkout {
-        background: url('/client/images/icons/icon.book.svg') no-repeat;
+        background: url('client/images/icons/icon.book.svg') no-repeat;
         padding: 5px 20px 10px 10px;
         margin-right: 10px;
         &.disabled {
-          background: url('/client/images/icons/icon.book.disabled.svg') no-repeat;
+          background: url('client/images/icons/icon.book.disabled.svg') no-repeat;
           background-position: -1px -1px;
           background-size: 112%;
           background-position: -2px -1px;
@@ -339,13 +339,13 @@ span[class*="icon-"] {
         }
       }
       .ebook {
-        background: url('/client/images/icons/icon.eReader.svg') no-repeat;
+        background: url('client/images/icons/icon.eReader.svg') no-repeat;
         background-position: 4px 4px;
         background-size: 77%;
         padding: 11px 20px 10px 10px;
         margin-right: 10px;
         &.disabled {
-          background: url('/client/images/icons/icon.eReader.disabled.svg') no-repeat;
+          background: url('client/images/icons/icon.eReader.disabled.svg') no-repeat;
           background-position: 4px 4px;
           background-size: 77%;
           padding: 11px 20px 10px 10px;
@@ -481,19 +481,19 @@ body {
   }
 
   .left-icon {
-    background: url('/client/images/icons/left_arrow_gray.svg') no-repeat;
+    background: url('client/images/icons/left_arrow_gray.svg') no-repeat;
     padding: 5px 15px 7px 10px;
     margin-left: -95px;
   }
   .right-icon {
-    background: url('/client/images/icons/right_arrow_gray.svg') no-repeat;
+    background: url('client/images/icons/right_arrow_gray.svg') no-repeat;
     padding: 5px 15px 10px 10px;
     margin-left: 10px;
   }
 }
 
 .minus-icon {
-  background: url('/client/images/icons/minus.icon.svg') no-repeat;
+  background: url('client/images/icons/minus.icon.svg') no-repeat;
   padding: 2px 15px 10px 10px;
   margin-left: 0px;
   transition: opacity 0.4s ease-in;
@@ -532,11 +532,11 @@ body {
       }
 
       .BookDisplayButtons-list-icon {
-        background: url('/client/images/icons/SmallListIconGray.svg') no-repeat;
+        background: url('client/images/icons/SmallListIconGray.svg') no-repeat;
       }
 
       .BookDisplayButtons-grid-icon {
-        background: url('/client/images/icons/SmallBookGray.svg') no-repeat;
+        background: url('client/images/icons/SmallBookGray.svg') no-repeat;
       }
     }
 
@@ -550,12 +550,12 @@ body {
 
     .gridActive {
       .BookDisplayButtons-grid-icon {
-        background: url('/client/images/icons/SmallBookBlue.svg') no-repeat;
+        background: url('client/images/icons/SmallBookBlue.svg') no-repeat;
       }
     }
     .listActive {
       .BookDisplayButtons-list-icon {
-        background: url('/client/images/icons/SmallListIconBlue.svg') no-repeat;
+        background: url('client/images/icons/SmallListIconBlue.svg') no-repeat;
       }
     }
 
@@ -710,7 +710,7 @@ body {
   }
 }
 .close-icon {
-  background: url('/client/images/icons/gray_x_button.svg') no-repeat;
+  background: url('client/images/icons/gray_x_button.svg') no-repeat;
   padding: 5px 18px 8px 10px;
   margin-left: 10px;
 }

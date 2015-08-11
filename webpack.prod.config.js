@@ -13,7 +13,7 @@ config.devtool = '#source-map';
 config.output = {
   path: './client/dist',
   pathInfo: true,
-  publicPath: '*/client/dist/',
+  publicPath: 'client/dist/',
   filename: 'bundle.[hash].min.js'
 };
 
