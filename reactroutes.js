@@ -119,6 +119,11 @@ app.get('/*', function(req, res) {
   if (monthPath) {
     let endpoint = `/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${monthPath}?include=previous-list,next-list,picks.item,picks.age`;
   }
+  let path = req.path;
+
+  if (req.path === '/recommendations/staff-picks') {
+    path = '/';
+  }
 
   routes = (
     <Route path='/' handler={App} ignoreScrollBehavior>
@@ -129,7 +134,7 @@ app.get('/*', function(req, res) {
     </Route>
   )
 
-  Router.run(routes, req.path, function (Root, state) {
+  Router.run(routes, path, function (Root, state) {
     let parsedData = [], filters = [], pickList = [], metaBook, data, currentData;
 
     data = apiData;
