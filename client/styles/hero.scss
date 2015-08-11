@@ -1,0 +1,114 @@
+.hero {
+  background-color: #e4382c;
+  color: white;
+  height: auto;
+  min-height: 72px;
+  padding: 0;
+  width: 100%;
+}
+
+.hero__container {
+  height: auto;
+  margin: 50px 0 0 0; 
+  max-width: 900px;
+  overflow: hidden;
+  position: relative;
+  @include breakpoint($min, $post-tablet) { 
+		margin: 0 auto;
+	}
+}
+
+.hero__container__text-container {
+  float: left;
+  margin: 4px 0 0 17px; 
+  position: relative;
+  @include breakpoint($min, $post-palm) {
+    margin: 14px 0 40px 60px;  
+    width: 40%;
+  }
+  @include breakpoint($min, $post-laptop) {
+    margin: 70px 0 40px 60px;  
+    width: 40%;
+  }
+}
+
+.hero__container__text-container__title {
+  box-sizing: border-box;
+  color: white;
+  position: relative;
+  width: 100%;
+  h3 {
+    font-family: 'KievitWeb-Bold', sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: 0.09rem;
+    margin: 24px 0 20px 0;
+    text-transform: uppercase;
+    @include breakpoint($min, $post-palm) {
+      margin: 40px 0 20px 0;
+    }
+    @include breakpoint($min, $post-tablet) {
+      margin: 70px 0 20px 130px;
+    }
+  }
+}
+
+.hero__container__text-container__title__des {
+  display: none;
+  font-family: MiloSlabPro, RobotoSlabLight, serif;
+  font-size: 36px;
+  line-height: 36px;
+  margin: 0 0 20px 0;
+  @include breakpoint($min, $post-palm) {
+    font-size: 20px; 
+    line-height: 24px;
+  } 
+  @include breakpoint($min, $post-laptop) {
+    font-size: 28px; 
+    line-height: 28px;
+  }
+}
+
+.hero__container__text-container__title__intro {
+  display: none;
+  font-family: 'KievitWeb-Book', sans-serif;
+  font-size: 15px;
+  @include breakpoint($min, $post-palm) {
+    font-size: 14px;
+  }
+}
+
+.hero__container__image-container {
+  border-radius: 50%;
+  display: none;
+  margin: -90px 0 -6px 0;
+  overflow: hidden;
+  position: relative;
+  @include breakpoint($min, $post-tablet) {
+    display: block;
+    height: 300px;
+    width: 300px;
+  }
+  @include breakpoint($min, $post-laptop) {
+    display: block;
+    height: 380px;
+    width: 380px;
+  }
+}
+
+.hero__container__image-container__image {
+  background-image: url('/client/images/staff_pic_bg.jpg');
+  background-position: -56px -6px;
+  background-size: 134%;
+  display: inline;
+  height: auto;
+  width: 430px;
+  @include breakpoint($min, $post-tablet) {
+    height: 300px;
+    width: 300px;
+  }
+  @include breakpoint($min, $post-laptop) {
+    height: 380px;
+    width: 380px;
+  }
+}

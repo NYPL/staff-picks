@@ -263,7 +263,7 @@ const styles = {
     padding: '5px 4px 30px 36px',
     top: '3%',
     left: '90%',
-    '@media (min-width: 719px)': {
+    '@media (min-width: 480px)': {
       display: 'none'
     }
   }
