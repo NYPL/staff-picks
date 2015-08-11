@@ -81,12 +81,12 @@ class App extends React.Component {
 let rpRoute = Router.HistoryLocation.getCurrentPath(),
   childrenRoute = '';
 console.log(rpRoute);
-if (rpRoute === '/recommendations/staff-picks') {
+if (rpRoute === '/recommendations/staff-picks/') {
   childrenRoute = '/recommendations/staff-picks';
 }
 
 let routes = (
-    <Route name='home' path='/' handler={App} ignoreScrollBehavior>
+    <Route name='home' path={childrenRoute + '/'} handler={App} ignoreScrollBehavior>
       <Route name='month' path={childrenRoute + '/:month?/?'} ignoreScrollBehavior/>
       <Route name='modal' path={childrenRoute +'/:month/:id?/?'} handler={BookModal} ignoreScrollBehavior>
         <NotFoundRoute handler={Error404Page} />
@@ -105,7 +105,6 @@ React.render(<Hero />, document.getElementById('hero'));
 // }
 
 Router.run(routes, Router.HistoryLocation, (Root) => {
-  console.log(Router.HistoryLocation.getCurrentPath());
   React.render(<Root data={staffPicks} filters={{'filters': filters['filters']}}
     currentList={currentList} />,
     document.getElementById('content'));
