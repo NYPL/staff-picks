@@ -25,8 +25,9 @@ class CloseButton extends React.Component {
 
   render () {
     return (
-      <SimpleButton style={styles.CloseButton}
-        id='close-button' 
+      <SimpleButton
+        id='close-button'
+        className={this.props.className} 
         label=''
         onClick={this._handleClick} />
     );
@@ -80,7 +81,7 @@ class BookFilters extends React.Component {
     return (
       <div className='BookFilters' style={styles}>
         <span className='divider'></span>
-        <CloseButton onClick={this.props.mobileCloseBtn} />
+        <CloseButton className='BookFilters__close-btn' onClick={this.props.mobileCloseBtn} />
         <h2>What would you like to read?</h2>
         <div className='BookFilters-lists'>
           <span>Driven by...</span>
@@ -253,19 +254,6 @@ const styles = {
   },
   grayedOutFilter: {
     color: '#bfbfbf'
-  },
-  CloseButton: {
-    background: 'url("/client/images/icons/gray_x_button.svg") no-repeat',
-    position: 'absolute',
-    fontSize: '1.3em',
-    height: 'auto',
-    margin: '0 0 20px 0',
-    padding: '5px 4px 30px 36px',
-    top: '3%',
-    left: '90%',
-    '@media (min-width: 480px)': {
-      display: 'none'
-    }
   }
 };
 
