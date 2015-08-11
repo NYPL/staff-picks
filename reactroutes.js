@@ -124,7 +124,7 @@ req.end();
 
 
 app.get('/*', function(req, res) {
-  let address = forwarded(req, req.headers);
+  let address = req.headers['x-forwarded-for'] || {};
 
   let monthPath = (req.path).substring(1,11),
     endpoint = '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age';
