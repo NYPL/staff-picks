@@ -32,8 +32,7 @@ import DocMeta from 'react-doc-meta';
 app.use(favicon(__dirname + '/client/images/favicon.ico'));
 // app.use(express.static(__dirname + '/client/styles'));
 
-app.use('/recommendations/staff-picks/client', express.static(path.join(process.cwd(), '/recommendations/staff-picks/client')));
-app.use('/client', express.static(path.join(process.cwd(), '/recommendations/staff-picks/client')));
+app.use('client', express.static(path.join(process.cwd(), '/recommendations/staff-picks/client')));
 app.use('*/client', express.static(path.join(process.cwd(), '/recommendations/staff-picks/client')));
 
 app.set('layout');
