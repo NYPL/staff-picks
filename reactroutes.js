@@ -20,15 +20,6 @@ import Footer from './client/components/Footer/Footer.jsx';
 import _ from 'underscore';
 import DocMeta from 'react-doc-meta';
 
-// var sassMiddleware = require('node-sass-middleware');
-// app.use('/styles', sassMiddleware({
-//   src: __dirname + '/client/styles',
-//   dest: path.join(__dirname, '/client/styles/dist'),
-//   debug: false,
-//   outputStyle: 'compressed'
-// }));
-app.use(favicon(__dirname + '/client/images/favicon.ico'));
-// app.use(express.static(__dirname + '/client/styles'));
 app.use('/client', express.static(path.join(process.cwd(), '/client')));
 app.use('*/client', express.static(path.join(process.cwd(), '/client')));
 app.set('layout');
