@@ -122,6 +122,7 @@ app.get('/*', function(req, res) {
   let path = req.path;
 
   if (req.path === '/recommendations/staff-picks') {
+    res.redirect('/');
     path = '/';
   }
 
@@ -170,7 +171,7 @@ app.get('/*', function(req, res) {
         React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
 
     res.render('index', {
-      path: path,
+      path: req.path,
       staffPicks: JSON.stringify({'staff-picks': currentData['picks']}),
       filters: JSON.stringify({'filters': filters}),
       pickList: JSON.stringify({'staff-picks-list': pickList}),
