@@ -21,48 +21,7 @@ class HeroTitle extends React.Component {
   }
 };
 
-HeroTitle.defaultProps = {
-  id: 'HeroTitle',
-  className: '',
-  label: '',
-  lang: 'en',
-};
-
 const styles = {
-  base: {
-    boxSizing: 'border-box',
-    color: 'white',
-    marginTop: '0px',
-    marginBottom: '0px',
-    position: 'relative',
-    width: '100%'
-  },
-  HeroTitle: {
-    '@media (max-width: 414px)': { marginTop: '24px' },
-    fontFamily: "'KievitWeb-Bold', sans-serif",
-    letterSpacing: '0.09rem',
-    fontSize: '12px',
-    fontWeight: 'normal',
-    marginTop: '0px',
-    marginBottom: '20px',
-    textTransform: 'uppercase'
-  },
-   HeroDes: {
-    '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '28px', lineHeight: '28px' },
-    '@media (max-width: 767px)': { fontSize: '20px', lineHeight: '24px' },
-    '@media (max-width: 414px)': { display: 'none' },
-    fontFamily: 'MiloSlabPro, RobotoSlabLight, serif',
-    fontSize: '36px',
-    lineHeight: '36px',
-    marginBottom: '20px' 
-  },
-  HeroIntro: {
-    '@media (min-width: 768px) and (max-width: 979px)': { fontSize: '14px' },
-    '@media (max-width: 767px)': { fontSize: '14px' },
-    '@media (max-width: 414px)': { display: 'none' },
-    fontFamily: "'KievitWeb-Book', sans-serif",
-    fontSize: '15px' 
-  }
 };
 
 export default Radium(HeroTitle);

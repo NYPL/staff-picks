@@ -48,7 +48,7 @@
       margin: 40px 0 20px 0;
     }
     @include breakpoint($min, $post-tablet) {
-      margin: 80px 0 20px 130px;
+      margin: 70px 0 20px 130px;
     }
   }
 }
@@ -94,10 +94,21 @@
     height: 380px;
     width: 380px;
   }
-  @include breakpoint($min, $post-desktop) {
-    display: block;
+}
+
+.hero__container__image-container__image {
+  background-image: url('/client/images/staff_pic_bg.jpg');
+  background-position: -56px -6px;
+  background-size: 134%;
+  display: inline;
+  height: auto;
+  width: 430px;
+  @include breakpoint($min, $post-tablet) {
+    height: 300px;
+    width: 300px;
+  }
+  @include breakpoint($min, $post-laptop) {
     height: 380px;
     width: 380px;
   }
-
 }
