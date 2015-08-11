@@ -116,9 +116,9 @@
 }
 
 .hero__container__image-container__image {
-  background-image: url('/client/images/shelftalker.png');
-  background-position: 0px -142px;
-  background-size: 109%;
+  background-image: url('/client/images/shelftalker.3.png');
+  background-position: 18px 44px;
+  background-size: 95%;
   background-repeat: no-repeat;
   display: inline;
   height: auto;
@@ -128,7 +128,7 @@
     width: 300px;
   }
   @include breakpoint($min, $post-laptop) {
-    background-position: 0px -163px;
+    background-position: 18px 44px;
     height: 380px;
     width: 380px;
   }
