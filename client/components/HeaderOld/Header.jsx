@@ -319,7 +319,7 @@ class Header extends React.Component {
 
             <a id='login' className='login-button'
               style={styles.SimpleButton} onClick={this._handleClick}>
-              {this.state.username || 'Sign In'}
+              {this.state.username || 'LOG IN'}
               {downArrow}
             </a>
 
@@ -520,10 +520,10 @@ class Header extends React.Component {
                       <h5>Collections</h5>
                       <ul>
                         <li>
-                          <a href="/research-divisions">Research Divisions</a>
+                          <a href="http://nypl.org/research-divisions">Research Divisions</a>
                         </li>
                         <li>
-                          <a href="/profiles">Staff Profiles</a>
+                          <a href="http://nypl.org/staff-profiles">Staff Profiles</a>
                         </li>
                         <li>
                           <a href="http://archives.nypl.org">Manuscripts and Archives</a>
@@ -618,23 +618,23 @@ class Header extends React.Component {
               </li>
 
               <li className="dropDown">
-                <a href="/locations">Locations</a>
+                <a href="http://nypl.org/locations">Locations</a>
                 <div className="dropDown_Content">
                   <ul>
                     <li>
-                      <a href="/locations">All Locations</a>
+                      <a href="http://nypl.org/locations">All Locations</a>
                     </li>
                     <li>
-                      <a href="/locations/schwarzman">Schwarzman Building</a>
+                      <a href="http://nypl.org/locations/schwarzman">Schwarzman Building</a>
                     </li>
                     <li>
-                      <a href="/locations/lpa">Library for the Performing Arts</a>
+                      <a href="http://nypl.org/locations/lpa">Library for the Performing Arts</a>
                     </li>
                     <li>
-                      <a href="/locations/schomburg">Schomburg Center</a>
+                      <a href="http://nypl.org/locations/schomburg">Schomburg Center</a>
                     </li>
                     <li>
-                      <a href="/locations/sibl">Science, Industry and Business Library</a>
+                      <a href="http://nypl.org/locations/sibl">Science, Industry and Business Library</a>
                     </li>
                   </ul>
                 </div>
