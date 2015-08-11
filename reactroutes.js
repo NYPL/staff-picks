@@ -126,7 +126,7 @@ app.get('/*', function(req, res) {
   }
 
   routes = (
-    <Route path='/' handler={App} ignoreScrollBehavior>
+    <Route name='home' path='/' handler={App} ignoreScrollBehavior>
       <Route name='month' path='/:month?/?' ignoreScrollBehavior/>
       <Route name='modal' path='/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
         <NotFoundRoute handler={Error404Page} />
@@ -170,7 +170,7 @@ app.get('/*', function(req, res) {
         React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
 
     res.render('index', {
-      path: req.path,
+      path: path,
       staffPicks: JSON.stringify({'staff-picks': currentData['picks']}),
       filters: JSON.stringify({'filters': filters}),
       pickList: JSON.stringify({'staff-picks-list': pickList}),
