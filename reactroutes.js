@@ -29,8 +29,11 @@ import DocMeta from 'react-doc-meta';
 // }));
 app.use(favicon(__dirname + '/client/images/favicon.ico'));
 // app.use(express.static(__dirname + '/client/styles'));
+
+app.use('client', express.static(path.join(process.cwd(), '/client')));
 app.use('/client', express.static(path.join(process.cwd(), '/client')));
 app.use('*/client', express.static(path.join(process.cwd(), '/client')));
+
 app.set('layout');
 app.set('view engine', 'ejs');
 app.set('view options', {layout: 'layout'});
@@ -67,8 +70,7 @@ let options = {
   DefaultRoute = Router.DefaultRoute,
   RouteHandler = Router.RouteHandler,
   routes = (
-    <Route path='/' handler={App} ignoreScrollBehavior>
-      <DefaultRoute handler={App} />
+    <Route path='/?' handler={App} ignoreScrollBehavior>
       <Route name='month' path='/:month?/?' ignoreScrollBehavior/>
       <Route name='modal' path='/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
         <NotFoundRoute handler={Error404Page} />
