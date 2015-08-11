@@ -27,7 +27,7 @@ class CloseButton extends React.Component {
     return (
       <SimpleButton
         id='close-button'
-        className={this.props.className} 
+        className='BookFilters__close-btn'
         label=''
         onClick={this._handleClick} />
     );
@@ -81,7 +81,7 @@ class BookFilters extends React.Component {
     return (
       <div className='BookFilters' style={styles}>
         <span className='divider'></span>
-        <CloseButton className='BookFilters__close-btn' onClick={this.props.mobileCloseBtn} />
+        <CloseButton onClick={this.props.mobileCloseBtn} />
         <h2>What would you like to read?</h2>
         <div className='BookFilters-lists'>
           <span>Driven by...</span>
