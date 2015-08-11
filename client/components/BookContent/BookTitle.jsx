@@ -9,10 +9,11 @@ class BookTitle extends React.Component {
 
   render () {
     const book = this.props.book;
+    let title = (book && book['item']) ? book['item']['attributes']['title'] : "Book Title";
 
     return (
       <div ref='BookContent' className={this.props.className}>
-        <h2>{book['item']['attributes']['title']}</h2>
+        <h2>{title}</h2>
       </div>
     );
   }

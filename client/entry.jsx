@@ -90,7 +90,7 @@ React.render(<Hero />, document.getElementById('hero'));
 // }
 
 Router.run(routes, Router.HistoryLocation, (Root) => {
-  console.log(Router.HistoryLocation);
+  console.log(Router.HistoryLocation.getCurrentPath());
   React.render(<Root data={staffPicks} filters={{'filters': filters['filters']}}
     currentList={currentList} />,
     document.getElementById('content'));
