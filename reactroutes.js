@@ -70,9 +70,9 @@ let options = {
   DefaultRoute = Router.DefaultRoute,
   RouteHandler = Router.RouteHandler,
   routes = (
-    <Route path='/?' handler={App} ignoreScrollBehavior>
-      <Route name='month' path='/:month?/?' ignoreScrollBehavior/>
-      <Route name='modal' path='/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
+    <Route path='/recommendations/staff-picks/?' handler={App} ignoreScrollBehavior>
+      <Route name='month' path='/recommendations/staff-picks/:month?/?' ignoreScrollBehavior/>
+      <Route name='modal' path='/recommendations/staff-picks/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
         <NotFoundRoute handler={Error404Page} />
       </Route>
     </Route>
