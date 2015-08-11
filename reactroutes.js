@@ -27,10 +27,9 @@ import DocMeta from 'react-doc-meta';
 //   debug: false,
 //   outputStyle: 'compressed'
 // }));
-app.use(favicon('/recommendations/staff-picks/client/images/favicon.ico'));
+app.use(favicon(__dirname + '/client/images/favicon.ico'));
 // app.use(express.static(__dirname + '/client/styles'));
 
-console.log(process.cwd());
 app.use('/recommendations/staff-picks/client', express.static(path.join(process.cwd(), '/client')));
 // app.use('/client', express.static(path.join(process.cwd(), '/client')));
 // app.use('*/client', express.static(path.join(process.cwd(), '/client')));
