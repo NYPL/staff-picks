@@ -30,7 +30,7 @@ class SignInContainer extends React.Component {
         {this.state.logged_in}
         <SimpleButton
           id='SignInButton'
-          label={this.state.username || 'Sign In'}
+          label={this.state.username || 'LOG IN'}
           style={styles.SimpleButton}
           onClick={this._handleClick}
           target='http://nypl.org' />

@@ -319,7 +319,7 @@ class Header extends React.Component {
 
             <a id='login' className='login-button'
               style={styles.SimpleButton} onClick={this._handleClick}>
-              {this.state.username || 'Sign In'}
+              {this.state.username || 'LOG IN'}
               {downArrow}
             </a>
 
