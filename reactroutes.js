@@ -170,7 +170,7 @@ app.get('/*', function(req, res) {
         React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
 
     res.render('index', {
-      address: JSON.stringify(address),
+      path: req.path,
       staffPicks: JSON.stringify({'staff-picks': currentData['picks']}),
       filters: JSON.stringify({'filters': filters}),
       pickList: JSON.stringify({'staff-picks-list': pickList}),
