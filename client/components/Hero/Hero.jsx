@@ -24,9 +24,6 @@ class Hero extends React.Component {
             <HeroTitle title='staff picks' des='Every month NYPL&#39;s librarians share their favorite reads.' 
             intro='Explore their book selections—ranging from new releases to timeless classics—by choosing a tag below.'/>
           </div>
-          <div key='HeroImageContainer' className='hero-image-container' style={styles.HeroImageContainer}>
-            <HeroImage src='/client/images/staff_pic_bg.jpg' />
-          </div>
         </div>
       </div>
     );
