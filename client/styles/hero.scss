@@ -85,12 +85,12 @@
   overflow: hidden;
   position: relative;
   @include breakpoint($min, 720px) {
-    display: block;
+    display: inline-block;
     height: 300px;
     width: 300px;
   }
   @include breakpoint($min, $post-laptop) {
-    display: block;
+    display: inline-block;
     height: 380px;
     width: 380px;
   }
