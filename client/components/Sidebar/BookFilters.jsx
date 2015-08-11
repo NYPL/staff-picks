@@ -25,8 +25,9 @@ class CloseButton extends React.Component {
 
   render () {
     return (
-      <SimpleButton style={styles.CloseButton}
-        id='close-button' 
+      <SimpleButton
+        id='close-button'
+        className='BookFilters__close-btn'
         label=''
         onClick={this._handleClick} />
     );
@@ -253,19 +254,6 @@ const styles = {
   },
   grayedOutFilter: {
     color: '#bfbfbf'
-  },
-  CloseButton: {
-    background: 'url("/client/images/icons/gray_x_button.svg") no-repeat',
-    position: 'absolute',
-    fontSize: '1.3em',
-    height: 'auto',
-    margin: '0 0 20px 0',
-    padding: '5px 4px 30px 36px',
-    top: '3%',
-    left: '90%',
-    '@media (min-width: 480px)': {
-      display: 'none'
-    }
   }
 };
 

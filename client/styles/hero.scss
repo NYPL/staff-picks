@@ -13,7 +13,7 @@
   max-width: 900px;
   overflow: hidden;
   position: relative;
-  @include breakpoint($min, $post-tablet) { 
+  @include breakpoint($min, 720px) { 
 		margin: 0 auto;
 	}
 }
@@ -27,8 +27,8 @@
     width: 40%;
   }
   @include breakpoint($min, $post-laptop) {
-    margin: 70px 0 40px 60px;  
-    width: 40%;
+    margin: 50px 0 40px 60px;  
+    width: 50%;
   }
 }
 
@@ -47,8 +47,11 @@
     @include breakpoint($min, $post-palm) {
       margin: 40px 0 20px 0;
     }
-    @include breakpoint($min, $post-tablet) {
+    @include breakpoint($min, 720px) {
       margin: 70px 0 20px 130px;
+    }
+    @include breakpoint($min, $post-laptop) {
+      margin: 0 0 20px 0;
     }
   }
 }
@@ -58,12 +61,15 @@
   font-family: MiloSlabPro, RobotoSlabLight, serif;
   font-size: 36px;
   line-height: 36px;
-  margin: 0 0 20px 0;
-  @include breakpoint($min, $post-palm) {
+  margin: 0 0 10px 0;
+  text-align: left;
+  @include breakpoint($min, 720px) {
+    display: none;
     font-size: 20px; 
     line-height: 24px;
   } 
   @include breakpoint($min, $post-laptop) {
+    display: block;
     font-size: 28px; 
     line-height: 28px;
   }
@@ -73,7 +79,13 @@
   display: none;
   font-family: 'KievitWeb-Book', sans-serif;
   font-size: 15px;
-  @include breakpoint($min, $post-palm) {
+  text-align: left;
+  @include breakpoint($min, 720px) {
+    display: none;
+    font-size: 14px;
+  }
+   @include breakpoint($min, $post-laptop) {
+    display: block;
     font-size: 14px;
   }
 }
@@ -81,16 +93,16 @@
 .hero__container__image-container {
   border-radius: 50%;
   display: none;
-  margin: -90px 0 -6px 0;
+  margin: -80px 0 -6px 0;
   overflow: hidden;
   position: relative;
-  @include breakpoint($min, $post-tablet) {
-    display: block;
+  @include breakpoint($min, 720px) {
+    display: inline-block;
     height: 300px;
     width: 300px;
   }
   @include breakpoint($min, $post-laptop) {
-    display: block;
+    display: inline-block;
     height: 380px;
     width: 380px;
   }
@@ -104,7 +116,7 @@
   display: inline;
   height: auto;
   width: 430px;
-  @include breakpoint($min, $post-tablet) {
+  @include breakpoint($min, 720px) {
     height: 300px;
     width: 300px;
   }
