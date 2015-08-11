@@ -13,7 +13,7 @@
   max-width: 900px;
   overflow: hidden;
   position: relative;
-  @include breakpoint($min, $post-tablet) { 
+  @include breakpoint($min, 720px) { 
 		margin: 0 auto;
 	}
 }
@@ -47,7 +47,7 @@
     @include breakpoint($min, $post-palm) {
       margin: 40px 0 20px 0;
     }
-    @include breakpoint($min, $post-tablet) {
+    @include breakpoint($min, 720px) {
       margin: 70px 0 20px 130px;
     }
   }
@@ -84,7 +84,7 @@
   margin: -90px 0 -6px 0;
   overflow: hidden;
   position: relative;
-  @include breakpoint($min, $post-tablet) {
+  @include breakpoint($min, 720px) {
     display: block;
     height: 300px;
     width: 300px;
@@ -103,7 +103,7 @@
   display: inline;
   height: auto;
   width: 430px;
-  @include breakpoint($min, $post-tablet) {
+  @include breakpoint($min, 720px) {
     height: 300px;
     width: 300px;
   }
