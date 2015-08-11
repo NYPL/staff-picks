@@ -79,16 +79,16 @@ class App extends React.Component {
 }
 
 let rpRoute = Router.HistoryLocation.getCurrentPath(),
-  childrenRoute = rpRoute;
-
-if (rpRoute === '/') {
   childrenRoute = '';
+console.log(rpRoute);
+if (rpRoute === '/recommendations/staff-picks') {
+  childrenRoute = '/recommendations/staff-picks';
 }
 
 let routes = (
     <Route name='home' path='/' handler={App} ignoreScrollBehavior>
-      <Route name='month' path='/:month?/?' ignoreScrollBehavior/>
-      <Route name='modal' path='/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
+      <Route name='month' path={childrenRoute + '/:month?/?'} ignoreScrollBehavior/>
+      <Route name='modal' path={childrenRoute +'/:month/:id?/?'} handler={BookModal} ignoreScrollBehavior>
         <NotFoundRoute handler={Error404Page} />
       </Route>
     </Route>
