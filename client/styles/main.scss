@@ -607,7 +607,7 @@ body {
     font-size: 1.2em;
     text-decoration: none;
   }
-   @include breakpoint($min, 719px) {
+   @include breakpoint($min, 480px) {
     display: none;
   }
 }
@@ -711,7 +711,8 @@ body {
 }
 .close-icon {
   background: url('/client/images/icons/gray_x_button.svg') no-repeat;
-  padding: 5px 18px 8px 10px;
+  background-position: 0 0;
+  padding: 12px 18px 12px 10px;
   margin-left: 10px;
 }
 
