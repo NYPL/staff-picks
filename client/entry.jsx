@@ -70,12 +70,17 @@ class App extends React.Component {
   }
 }
 
-let rpRoute = Router.HistoryLocation.getCurrentPath();
+let rpRoute = Router.HistoryLocation.getCurrentPath(),
+  childrenRoute = rpRoute;
+
+if (rpRoute === '/') {
+  childrenRoute = '';
+}
 
 let routes = (
-    <Route path={rpRoute} handler={App} ignoreScrollBehavior>
-      <Route name='month' path={rpRoute + '/:month?/?'} ignoreScrollBehavior/>
-      <Route name='modal' path={rpRoute + '/:month/:id?/?'} handler={BookModal} ignoreScrollBehavior>
+    <Route name='home' path={rpRoute} handler={App} ignoreScrollBehavior>
+      <Route name='month' path={childrenRoute + '/:month?/?'} ignoreScrollBehavior/>
+      <Route name='modal' path={childrenRoute + '/:month/:id?/?'} handler={BookModal} ignoreScrollBehavior>
         <NotFoundRoute handler={Error404Page} />
       </Route>
     </Route>

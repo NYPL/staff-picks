@@ -61,7 +61,7 @@ let options = {
     // endpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-2015-06-01?include=previous-list,next-list,picks.item.tags,picks.age',
     includes: ['previous-list', 'next-list', 'item.tags', 'picks.age']
   },
-  host = 'dev.refinery.aws.nypl.org',
+  host = 'refinery.aws.nypl.org',
   App = require('./client/server.jsx'),
   BookModal = require('./client/components/BookModal/BookModal.jsx'),
   Error404Page = require('./client/components/Error404Page/Error404Page.jsx'),
