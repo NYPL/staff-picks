@@ -76,8 +76,7 @@ let BookModal = React.createClass({
       imageSrc = '/client/images/staff_pic_bg.jpg',
       description = 'Every month NYPL\'s librarians share their favorite reads.',
       bookId,
-      imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?` +
-       `&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
+      imageLink;
     
     if (book['item']) {
       title = book['item']['attributes']['title'];
@@ -85,6 +84,9 @@ let BookModal = React.createClass({
       imageSrc = book['item']['attributes']['image-slug'];
       bookId= book['item']['id'];
     }
+
+    imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?` +
+       `&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
 
     var tags = [
       {property: "og:title", content: title},
@@ -98,7 +100,7 @@ let BookModal = React.createClass({
       {name: "twitter:title", content: title},
       {name: "twitter:description", content: description},
       {name: "twitter:creator", content: '@nypl'},
-      {name: "twitter:image", content: imageSrc}
+      {name: "twitter:image", content: imageLink}
     ];
 
     return (
