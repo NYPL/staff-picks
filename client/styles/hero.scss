@@ -30,8 +30,8 @@
     margin: 70px 40px 40px 70px;
   }
   @include breakpoint($min, $post-laptop) {
-    margin: 100px 40px 40px 60px;  
-    width: 45%;
+    margin: 120px 40px 56px 60px;  
+    width: 40%;
   }
 }
 
@@ -54,7 +54,7 @@
       margin: 0 0 20px 0;
     }
     @include breakpoint($min, $post-laptop) {
-      margin: 0 0 20px 0;
+      margin: 0 0 48px 0;
     }
   }
 }
@@ -74,9 +74,9 @@
   } 
   @include breakpoint($min, $post-laptop) {
     display: block;
-    font-size: 28px; 
-    line-height: 28px;
-    margin: 0 0 10px 0;
+    font-size: 36px; 
+    line-height: 36px;
+    margin: 0 0 30px 0;
   }
 }
 
@@ -93,7 +93,7 @@
   }
    @include breakpoint($min, $post-laptop) {
     display: block;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 18px;
   }
 }
@@ -112,9 +112,9 @@
   }
   @include breakpoint($min, $post-laptop) {
     display: inline-block;
-    height: 380px;
-    margin: -60px 0 -10px 0;
-    width: 380px;
+    height: 430px;
+    margin: -24px 0 -20px 0;
+    width: 430px;
   }
 }
 
@@ -129,7 +129,7 @@
     width: 301px;
   }
   @include breakpoint($min, $post-laptop) {
-    height: 382px;
-    width: 382px;
+    height: 431px;
+    width: 431px;
   }
 }
