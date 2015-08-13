@@ -155,7 +155,7 @@ var Books = React.createClass({
         'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       list = this.state.currentList;
       date = new Date(list.currentList['list-date']);
-      thisMonth = months[date.getMonth() + 1];
+      thisMonth = months[date.getMonth()];
       thisyear = date.getFullYear();
 
       previousHref = !_.isEmpty(list.previousList) ? list.previousList.links.self : undefined;
