@@ -44,10 +44,18 @@ class App extends React.Component {
 
   render () {
     let tags = [
-      {name: 'description', content: 'staff picks'},
-      {itemProp: 'name', content: 'The Name or Title Here'},
-      {itemProp: 'description', content: 'This is the page description'},
-      {itemProp: 'image', content: '/client/images/staff_pic_bg.jpg'}
+      {property: "og:title", content: 'Staff Picks | The New York Public Library'},
+      {property: "og:type", content: 'website'},
+      {property: "og:image", content: '/recommendations/staff-picks/client/images/shelftalker.4.2.png'},
+      {property: "og:description", content: 'Every month NYPL\'s librarians share their favorite reads.'},
+      {property: "og:site_name", content: 'Staff Picks | The New York Public Library'},
+      {property: "og:url", content: 'http://nypl.org/recommendations/staff-picks/'},
+      {name: "twitter:card", content: 'summary_large_image'},
+      {name: "twitter:site", content: '@nypl'},
+      {name: "twitter:title", content: 'Staff Picks | The New York Public Library'},
+      {name: "twitter:description", content: 'Every month NYPL\'s librarians share their favorite reads.'},
+      {name: "twitter:creator", content: '@nypl'},
+      {name: "twitter:image", content: '/recommendations/staff-picks/client/images/shelftalker.4.2.png.jpg'}
     ];
 
     return (
@@ -70,10 +78,17 @@ class App extends React.Component {
   }
 }
 
+let rpRoute = Router.HistoryLocation.getCurrentPath(),
+  childrenRoute = '';
+console.log(rpRoute);
+if (rpRoute === '/recommendations/staff-picks/') {
+  childrenRoute = '/recommendations/staff-picks';
+}
+
 let routes = (
-    <Route path='/?' handler={App} ignoreScrollBehavior>
-      <Route name='month' path='/:month?/?' ignoreScrollBehavior/>
-      <Route name='modal' path='/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
+    <Route name='home' path='/recommendations/staff-picks/' handler={App} ignoreScrollBehavior>
+      <Route name='month' path='/recommendations/staff-picks/:month?/?' ignoreScrollBehavior/>
+      <Route name='modal' path='/recommendations/staff-picks/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
         <NotFoundRoute handler={Error404Page} />
       </Route>
     </Route>
