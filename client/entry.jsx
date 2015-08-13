@@ -44,9 +44,9 @@ class App extends React.Component {
 
   render () {
     let tags = [
-      {name: 'description', content: 'staff picks'},
-      {itemProp: 'name', content: 'The Name or Title Here'},
-      {itemProp: 'description', content: 'This is the page description'},
+      {name: 'description', content: 'Every month, NYPL\'s book experts share 100 titles they love.'},
+      {itemProp: 'name', content: 'Staff Picks | The New York Public Library'},
+      {itemProp: 'description', content: 'Every month, NYPL\'s book experts share 100 titles they love.'},
       {itemProp: 'image', content: '/client/images/staff_pic_bg.jpg'}
     ];
 
