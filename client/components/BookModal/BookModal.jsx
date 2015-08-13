@@ -75,7 +75,7 @@ let BookModal = React.createClass({
     let book = this.state.book,
       title = 'Staff Picks | The New York Public Library',
       imageSrc = '/client/images/staff_pic_bg.jpg',
-      description = 'Every month NYPL\'s librarians share their favorite reads.',
+      description = 'Every month, NYPL\'s book experts share 100 titles they love.',
       bookId,
       imageLink;
     
