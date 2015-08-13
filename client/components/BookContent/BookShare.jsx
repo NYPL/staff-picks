@@ -7,11 +7,12 @@ class BookShare extends React.Component {
     super(props);
 
     let shareUrl = window.location.href,
-      nyplStaffPick = `Staff Picks %7C The New York Public Library - ${this.props.book['item']['attributes']['title']}`;
+        via = 'NYPL',
+        nyplStaffPick = `Staff Picks %7C The New York Public Library - ${this.props.book['item']['attributes']['title']}`;
 
      this.state = {
       facebook: `http://www.facebook.com/sharer.php?u=${nyplStaffPick}&t=${nyplStaffPick}`,
-      twitter: `https://twitter.com/intent/tweet?text=${nyplStaffPick}&url=${shareUrl}`,
+      twitter: `https://twitter.com/intent/tweet?text=${nyplStaffPick}&url=${shareUrl}&via=${via}`,
       tumblr: `https://www.tumblr.com/widgets/share/tool?posttype=link&canonicalUrl=${shareUrl}` +
       `&title=NYPL%20%7C%20Staff%20Picks&caption=Every+month%2C+NYPL%27s+book+experts+share+100+titles+they+love.`
     }
