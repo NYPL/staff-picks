@@ -100,6 +100,10 @@
 }
 
 .hero__container__image-container {
+  background-image: url('/client/images/shelftalker.4.2.png');
+  background-position: -10px 20px;
+  background-size: 104%;
+  background-repeat: no-repeat;
   border-radius: 50%;
   display: none;
   margin: -68px 0 -6px 0;
@@ -115,22 +119,6 @@
     display: inline-block;
     height: 430px;
     margin: -24px 0 -20px 0;
-    width: 430px;
-  }
-}
-
-.hero__container__image-container__image {
-  background-image: url('/client/images/shelftalker.4.2.png');
-  background-position: -10px 20px;
-  background-size: 104%;
-  background-repeat: no-repeat;
-  display: inline;
-  @include breakpoint($min, 720px) {
-    height: 350px;
-    width: 350px;
-  }
-  @include breakpoint($min, $post-laptop) {
-    height: 430px;
     width: 430px;
   }
 }

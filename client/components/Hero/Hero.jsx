@@ -25,7 +25,6 @@ class Hero extends React.Component {
              intro='We&#39;re choosing all kinds of books—for readers old and young and in between, and fans of every genre—and serving them up in this browse tool.' />
           </div>
           <div key='HeroImageContainer' className='hero__container__image-container'>
-            <HeroImage className='hero__container__image-container__image' />
           </div>
         </div>
       </div>
