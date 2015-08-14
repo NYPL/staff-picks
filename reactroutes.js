@@ -21,6 +21,7 @@ import Footer from './client/components/Footer/Footer.jsx';
 import _ from 'underscore';
 import DocMeta from 'react-doc-meta';
 
+// first assign the path
 app.use('*/client', express.static(path.join(process.cwd(), '/client')));
 
 app.set('layout');
@@ -102,7 +103,7 @@ req.on('error', function (err) {
 req.end();
 /////////
 
-
+// after get the path
 app.get('/*', function(req, res) {
   let monthPath = (req.path).substring(1,11),
     endpoint = '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age';
