@@ -28,7 +28,6 @@ if (global.window) {
 // class BookModal extends React.Component {
 let BookModal = React.createClass({
   getInitialState() {
-    console.log(this.props.params.id);
     let paramID = this.props.params.id,
       modalBook = {},
       age;

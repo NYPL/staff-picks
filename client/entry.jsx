@@ -80,7 +80,7 @@ class App extends React.Component {
 
 let rpRoute = Router.HistoryLocation.getCurrentPath(),
   childrenRoute = '';
-console.log(rpRoute);
+// console.log(rpRoute);
 if (rpRoute === '/recommendations/staff-picks/') {
   childrenRoute = '/recommendations/staff-picks';
 }
