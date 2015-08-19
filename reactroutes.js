@@ -112,7 +112,7 @@ app.get('/*', function(req, res) {
   let path = req.path;
 
   if (req.path === '/recommendations/staff-picks') {
-    res.redirect('/recommendations/staff-picks/');
+    return res.redirect('/recommendations/staff-picks/');
     path = '/';
   }
 

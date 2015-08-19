@@ -14,7 +14,7 @@ config.output = {
   path: './client/dist',
   pathInfo: true,
   publicPath: 'client/dist/',
-  filename: 'bundle.[hash].min.js'
+  filename: 'bundle.min.js'
 };
 
 config.plugins = config.plugins.concat([
