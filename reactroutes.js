@@ -11,6 +11,7 @@ let fs = require('fs'),
   analytics = require('./analytics.js'),
   http = require('http');
 
+
 import React from 'react';
 import Router from 'react-router';
 import parser from 'jsonapi-parserinator';
@@ -20,17 +21,8 @@ import Footer from './client/components/Footer/Footer.jsx';
 import _ from 'underscore';
 import DocMeta from 'react-doc-meta';
 
-// var sassMiddleware = require('node-sass-middleware');
-// app.use('/styles', sassMiddleware({
-//   src: __dirname + '/client/styles',
-//   dest: path.join(__dirname, '/client/styles/dist'),
-//   debug: false,
-//   outputStyle: 'compressed'
-// }));
-app.use(favicon(__dirname + '/client/images/favicon.ico'));
-// app.use(express.static(__dirname + '/client/styles'));
-app.use('/client', express.static(path.join(process.cwd(), '/client')));
 app.use('*/client', express.static(path.join(process.cwd(), '/client')));
+
 app.set('layout');
 app.set('view engine', 'ejs');
 app.set('view options', {layout: 'layout'});
@@ -58,7 +50,7 @@ let options = {
     // endpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-2015-06-01?include=previous-list,next-list,picks.item.tags,picks.age',
     includes: ['previous-list', 'next-list', 'item.tags', 'picks.age']
   },
-  host = 'dev.refinery.aws.nypl.org',
+  host = 'refinery.aws.nypl.org',
   App = require('./client/server.jsx'),
   BookModal = require('./client/components/BookModal/BookModal.jsx'),
   Error404Page = require('./client/components/Error404Page/Error404Page.jsx'),
@@ -66,14 +58,7 @@ let options = {
   NotFoundRoute = Router.NotFoundRoute,
   DefaultRoute = Router.DefaultRoute,
   RouteHandler = Router.RouteHandler,
-  routes = (
-    <Route path='/?' handler={App} ignoreScrollBehavior>
-      <Route name='month' path='/:month?/?' ignoreScrollBehavior/>
-      <Route name='modal' path='/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
-        <NotFoundRoute handler={Error404Page} />
-      </Route>
-    </Route>
-  ),
+  routes,
   data;
 
 
@@ -124,8 +109,23 @@ app.get('/*', function(req, res) {
   if (monthPath) {
     let endpoint = `/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${monthPath}?include=previous-list,next-list,picks.item,picks.age`;
   }
+  let path = req.path;
 
-  Router.run(routes, req.path, function (Root, state) {
+  if (req.path === '/recommendations/staff-picks') {
+    return res.redirect('/recommendations/staff-picks/');
+    path = '/';
+  }
+
+  routes = (
+    <Route name='home' path='/' handler={App} ignoreScrollBehavior>
+      <Route name='month' path='/:month?/?' ignoreScrollBehavior/>
+      <Route name='modal' path='/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
+        <NotFoundRoute handler={Error404Page} />
+      </Route>
+    </Route>
+  )
+
+  Router.run(routes, path, function (Root, state) {
     let parsedData = [], filters = [], pickList = [], metaBook, data, currentData;
 
     data = apiData;
@@ -161,6 +161,7 @@ app.get('/*', function(req, res) {
         React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
 
     res.render('index', {
+      path: req.path,
       staffPicks: JSON.stringify({'staff-picks': currentData['picks']}),
       filters: JSON.stringify({'filters': filters}),
       pickList: JSON.stringify({'staff-picks-list': pickList}),

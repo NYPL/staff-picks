@@ -5,6 +5,8 @@ var config = require('./webpack.base.config.js');
 
 var SaveAssetsJson = require('assets-webpack-plugin');
 
+var bundleVersion = 'v1';
+
 config.bail = true;
 config.debug = false;
 config.profile = false;
@@ -13,8 +15,8 @@ config.devtool = '#source-map';
 config.output = {
   path: './client/dist',
   pathInfo: true,
-  publicPath: '/client/dist/',
-  filename: 'bundle.[hash].min.js'
+  publicPath: 'client/dist/',
+  filename: 'bundle.' + bundleVersion + '.min.js'
 };
 
 config.plugins = config.plugins.concat([

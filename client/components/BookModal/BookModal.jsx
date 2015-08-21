@@ -66,7 +66,7 @@ let BookModal = React.createClass({
       modalIsOpen: false
     });
     setTimeout(() => {
-      this.transitionTo('/');
+      this.transitionTo('home');
     }, 200);
   },
 

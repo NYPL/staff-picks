@@ -10,30 +10,30 @@ $dark-lib-gray: #776E64;
 
 @font-face {
   font-family: 'MiloWeb';
-  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/milo-web/milo-slab-pro-regular/MiloSlabWebPro.eot'); /* IE9 Compat Modes */
-  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/milo-web/milo-slab-pro-regular/MiloSlabWebPro.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/milo-web/milo-slab-pro-regular/MiloSlabWebPro.woff') format('woff'); /* Pretty Modern Browsers */
+  src: url('http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/milo-web/milo-slab-pro-regular/MiloSlabWebPro.eot'); /* IE9 Compat Modes */
+  src: url('http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/milo-web/milo-slab-pro-regular/MiloSlabWebPro.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/milo-web/milo-slab-pro-regular/MiloSlabWebPro.woff') format('woff'); /* Pretty Modern Browsers */
 }
 
 @font-face {
   font-family: 'KievitWeb-Book';
-  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book.eot'); /* IE9 Compat Modes */
-  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book.woff') format('woff'); /* Pretty Modern Browsers */
+  src: url('http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book.eot'); /* IE9 Compat Modes */
+  src: url('http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book.woff') format('woff'); /* Pretty Modern Browsers */
 }
 
 @font-face {
   font-family: 'KievitWeb-Bold';
-  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Bold.eot'); /* IE9 Compat Modes */
-  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Bold.woff') format('woff'); /* Pretty Modern Browsers */
+  src: url('http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Bold.eot'); /* IE9 Compat Modes */
+  src: url('http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Bold.woff') format('woff'); /* Pretty Modern Browsers */
 }
 
 @font-face {
   font-family: 'KievitWeb';
-  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb.eot'); /* IE9 Compat Modes */
-  src: url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb.woff') format('woff'); /* Pretty Modern Browsers */
+  src: url('http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb.eot'); /* IE9 Compat Modes */
+  src: url('http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb.woff') format('woff'); /* Pretty Modern Browsers */
 }
 
 
@@ -293,7 +293,7 @@ span[class*="icon-"] {
     margin: 25px 0;
 
     .staff-pick-icon {
-      background: url('/client/images/icons/icon.thumbsup.svg') no-repeat;
+      background: url('/recommendations/staff-picks/client/images/icons/icon.thumbsup.svg') no-repeat;
       padding: 11px 20px 10px 10px;
       margin-right: 10px;
     }
@@ -325,11 +325,11 @@ span[class*="icon-"] {
       }
 
       .checkout {
-        background: url('/client/images/icons/icon.book.svg') no-repeat;
+        background: url('/recommendations/staff-picks/client/images/icons/icon.book.svg') no-repeat;
         padding: 5px 20px 10px 10px;
         margin-right: 10px;
         &.disabled {
-          background: url('/client/images/icons/icon.book.disabled.svg') no-repeat;
+          background: url('/recommendations/staff-picks/client/images/icons/icon.book.disabled.svg') no-repeat;
           background-position: -1px -1px;
           background-size: 112%;
           background-position: -2px -1px;
@@ -339,13 +339,13 @@ span[class*="icon-"] {
         }
       }
       .ebook {
-        background: url('/client/images/icons/icon.eReader.svg') no-repeat;
+        background: url('/recommendations/staff-picks/client/images/icons/icon.eReader.svg') no-repeat;
         background-position: 4px 4px;
         background-size: 77%;
         padding: 11px 20px 10px 10px;
         margin-right: 10px;
         &.disabled {
-          background: url('/client/images/icons/icon.eReader.disabled.svg') no-repeat;
+          background: url('/recommendations/staff-picks/client/images/icons/icon.eReader.disabled.svg') no-repeat;
           background-position: 4px 4px;
           background-size: 77%;
           padding: 11px 20px 10px 10px;
@@ -481,19 +481,19 @@ body {
   }
 
   .left-icon {
-    background: url('/client/images/icons/left_arrow_gray.svg') no-repeat;
+    background: url('/recommendations/staff-picks/client/images/icons/left_arrow_gray.svg') no-repeat;
     padding: 5px 15px 7px 10px;
     margin-left: -95px;
   }
   .right-icon {
-    background: url('/client/images/icons/right_arrow_gray.svg') no-repeat;
+    background: url('/recommendations/staff-picks/client/images/icons/right_arrow_gray.svg') no-repeat;
     padding: 5px 15px 10px 10px;
     margin-left: 10px;
   }
 }
 
 .minus-icon {
-  background: url('/client/images/icons/minus.icon.svg') no-repeat;
+  background: url('/recommendations/staff-picks/client/images/icons/minus.icon.svg') no-repeat;
   padding: 2px 15px 10px 10px;
   margin-left: 0px;
   transition: opacity 0.4s ease-in;
@@ -532,11 +532,11 @@ body {
       }
 
       .BookDisplayButtons-list-icon {
-        background: url('/client/images/icons/SmallListIconGray.svg') no-repeat;
+        background: url('/recommendations/staff-picks/client/images/icons/SmallListIconGray.svg') no-repeat;
       }
 
       .BookDisplayButtons-grid-icon {
-        background: url('/client/images/icons/SmallBookGray.svg') no-repeat;
+        background: url('/recommendations/staff-picks/client/images/icons/SmallBookGray.svg') no-repeat;
       }
     }
 
@@ -550,12 +550,12 @@ body {
 
     .gridActive {
       .BookDisplayButtons-grid-icon {
-        background: url('/client/images/icons/SmallBookBlue.svg') no-repeat;
+        background: url('/recommendations/staff-picks/client/images/icons/SmallBookBlue.svg') no-repeat;
       }
     }
     .listActive {
       .BookDisplayButtons-list-icon {
-        background: url('/client/images/icons/SmallListIconBlue.svg') no-repeat;
+        background: url('/recommendations/staff-picks/client/images/icons/SmallListIconBlue.svg') no-repeat;
       }
     }
 
@@ -724,7 +724,7 @@ body {
   }
 }
 .close-icon {
-  background: url('/client/images/icons/gray_x_button.svg') no-repeat;
+  background: url('/recommendations/staff-picks/client/images/icons/gray_x_button.svg') no-repeat;
   background-position: 0 0;
   padding: 12px 18px 12px 10px;
   margin-left: 10px;

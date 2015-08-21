@@ -20,15 +20,18 @@
 
 .hero__container__text-container {
   float: left;
-  margin: 4px 0 0 17px; 
+  margin: 4px 0 0 22px; 
   position: relative;
   @include breakpoint($min, $post-palm) {
-    margin: 21px 0 40px 60px;  
-    width: 46%;
+    margin: 10px 40px 40px 70px;  
+    width: 40%;
+  }
+  @include breakpoint($min, 720px) {
+    margin: 70px 40px 40px 70px;
   }
   @include breakpoint($min, $post-laptop) {
-    margin: 50px 0 40px 60px;  
-    width: 50%;
+    margin: 100px 40px 40px 60px;  
+    width: 45%;
   }
 }
 
@@ -48,7 +51,7 @@
       margin: 40px 0 10px 0;
     }
     @include breakpoint($min, 720px) {
-      margin: 0 0 10px 0;
+      margin: 0 0 20px 0;
     }
     @include breakpoint($min, $post-laptop) {
       margin: 0 0 20px 0;
@@ -67,7 +70,7 @@
     display: block;
     font-size: 20px; 
     line-height: 24px;
-    margin: 0 0 5px 0;
+    margin: 0 0 20px 0;
   } 
   @include breakpoint($min, $post-laptop) {
     display: block;
@@ -104,32 +107,29 @@
   @include breakpoint($min, 720px) {
     display: inline-block;
     height: 300px;
-    margin: -38px 0 -6px 0;
+    margin: -45px 0 -10px 0;
     width: 300px;
   }
   @include breakpoint($min, $post-laptop) {
     display: inline-block;
     height: 380px;
-    margin: -68px 0 -6px 0;
+    margin: -60px 0 -10px 0;
     width: 380px;
   }
 }
 
 .hero__container__image-container__image {
-  background-image: url('/client/images/shelftalker.3.png');
-  background-position: 18px 44px;
-  background-size: 95%;
+  background-image: url('/recommendations/staff-picks/client/images/shelftalker.4.2.png');
+  background-position: -10px 20px;
+  background-size: 104%;
   background-repeat: no-repeat;
   display: inline;
-  height: auto;
-  width: 430px;
   @include breakpoint($min, 720px) {
-    height: 300px;
-    width: 300px;
+    height: 301px;
+    width: 301px;
   }
   @include breakpoint($min, $post-laptop) {
-    background-position: 18px 44px;
-    height: 380px;
-    width: 380px;
+    height: 382px;
+    width: 382px;
   }
 }
