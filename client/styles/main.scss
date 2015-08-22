@@ -501,22 +501,20 @@ body {
 
 .BookDisplayButtons {
   .BookDisplayButtons-list {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 
     @include breakpoint($min, $post-mobile-phone) {
-      margin-bottom: 20px;
+      margin-bottom: 40px;
     }
 
     li {
-      display: inline-block;
       border-radius: 20px;
       border: 2px solid $text-gray;
+      display: block;
+      margin: 0 auto;
       width: 95px;
-      margin: 0px 0px 10px 15%;
-
       @include breakpoint($min, $post-mobile-phone) {
-        display: block;
-        margin-left: 30px;
+        margin: 0px auto 10px auto;
       }
 
       a {
@@ -563,6 +561,14 @@ body {
       margin-bottom: 10px;
     }
   }
+}
+
+.BookDisplayButtons-list__li-container {
+    display: inline-block;
+    width: 50%;
+    @include breakpoint($min, $post-mobile-phone) {
+      width: 100%;
+    }
 }
 
 .mobile-filter-btn {

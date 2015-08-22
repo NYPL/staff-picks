@@ -47,13 +47,13 @@ class App extends React.Component {
       {property: "og:title", content: 'Staff Picks | The New York Public Library'},
       {property: "og:type", content: 'website'},
       {property: "og:image", content: '/recommendations/staff-picks/client/images/shelftalker.4.2.png'},
-      {property: "og:description", content: 'Every month NYPL\'s librarians share their favorite reads.'},
+      {property: "og:description", content: 'Every month, NYPL\'s book experts share 100 titles they love.'},
       {property: "og:site_name", content: 'Staff Picks | The New York Public Library'},
       {property: "og:url", content: 'http://nypl.org/recommendations/staff-picks/'},
       {name: "twitter:card", content: 'summary_large_image'},
       {name: "twitter:site", content: '@nypl'},
       {name: "twitter:title", content: 'Staff Picks | The New York Public Library'},
-      {name: "twitter:description", content: 'Every month NYPL\'s librarians share their favorite reads.'},
+      {name: "twitter:description", content: 'Every month, NYPL\'s book experts share 100 titles they love.'},
       {name: "twitter:creator", content: '@nypl'},
       {name: "twitter:image", content: '/recommendations/staff-picks/client/images/shelftalker.4.2.png.jpg'}
     ];
