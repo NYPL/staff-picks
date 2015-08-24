@@ -65,10 +65,9 @@
 
 .book-modal__book-intro__div__tags {
     color: rgb(191, 191, 191);
-    font-size: 16px;
+    font-size: 14px;
     margin: 10px 0 0 0;
     @include breakpoint($min, $post-mobile-phone) {
-      font-size: 14px;
     }
     ul {
         list-style: none;
