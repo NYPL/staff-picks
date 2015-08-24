@@ -45,22 +45,18 @@ class BookDisplayButtons extends React.Component {
     return (
       <div className='BookDisplayButtons'>
         <ul className='BookDisplayButtons-list'>
-          <div className='BookDisplayButtons-list__li-container'>
-            <li className={gridActiveButton}>
-              <a onClick={this._handleClick.bind(this, 'grid')}>
-                <span className='BookDisplayButtons-grid-icon icon'></span>
-                COVERS
-              </a>
-            </li>
-          </div>
-          <div className='BookDisplayButtons-list__li-container'>
-            <li className={listActiveButton}>
-              <a onClick={this._handleClick.bind(this, 'list')}>
-                <span className='BookDisplayButtons-list-icon icon'></span>
-                LIST
-              </a>
-            </li>
-          </div>
+          <li className={gridActiveButton}>
+            <a onClick={this._handleClick.bind(this, 'grid')}>
+              <span className='BookDisplayButtons-grid-icon icon'></span>
+              COVERS
+            </a>
+          </li>
+          <li className={listActiveButton}>
+            <a onClick={this._handleClick.bind(this, 'list')}>
+              <span className='BookDisplayButtons-list-icon icon'></span>
+              LIST
+            </a>
+          </li>
         </ul>
       </div>
     );

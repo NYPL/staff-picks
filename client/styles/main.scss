@@ -502,6 +502,7 @@ body {
 .BookDisplayButtons {
   .BookDisplayButtons-list {
     margin-bottom: 30px;
+    text-align: center;
 
     @include breakpoint($min, $post-mobile-phone) {
       margin-bottom: 40px;
@@ -510,10 +511,11 @@ body {
     li {
       border-radius: 20px;
       border: 2px solid $text-gray;
-      display: block;
-      margin: 0 auto;
+      display: inline-block;
+      margin: 0 8%;
       width: 95px;
       @include breakpoint($min, $post-mobile-phone) {
+        display: block;
         margin: 0px auto 10px auto;
       }
 
