@@ -1,122 +1,124 @@
 .book-modal__close-btn {
-    background-image: url('/recommendations/staff-picks/client/images/icons/left_arrow_gray.svg');
-    background-position: 0 0;
-    background-repeat: no-repeat;
-    border-bottom-style: solid;
+  background-image: url('/recommendations/staff-picks/client/images/icons/left_arrow_gray.svg');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  border-bottom-style: solid;
+  border-color: #cc1a16;
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+  border-width: 1px;
+  color: rgba(191, 191, 191, 1);
+  cursor: pointer;
+  float: left; 
+  font-size: 1.3em;
+  height: auto;
+  margin: 0 0 20px 0;
+  overflow: hidden;
+  padding: 5px 4px 30px 36px;
+  text-decoration: none;
+  width: 100%;
+  @include breakpoint($min, $post-mobile-phone) {
+    background-image: url('/recommendations/staff-picks/client/images/icons/gray_x_button.svg');
+    background-position: center;
+    border-bottom-style: none;
     border-color: #cc1a16;
     border-left-style: none;
     border-right-style: none;
     border-top-style: none;
-    border-width: 1px;
-    color: rgba(191, 191, 191, 1);
-    cursor: pointer;
-    float: left; 
-    font-size: 1.3em;
-    height: auto;
-    margin: 0 0 20px 0;
-    overflow: hidden;
-    padding: 5px 4px 30px 36px;
-    text-decoration: none;
-    width: 100%;
-    @include breakpoint($min, $post-mobile-phone) {
-        background-image: url('/recommendations/staff-picks/client/images/icons/gray_x_button.svg');
-        background-position: center;
-        border-bottom-style: none;
-        border-color: #cc1a16;
-        border-left-style: none;
-        border-right-style: none;
-        border-top-style: none;
-        color: rgba(191, 191, 191, 0);
-        float: right;
-        font-size: 24px;
-        height: 28px;
-        margin: -16px -6px 0 0;
-        width: 28px;
-    }
+    color: rgba(191, 191, 191, 0);
+    float: right;
+    font-size: 24px;
+    height: 28px;
+    margin: -16px -6px 0 0;
+    width: 28px;
+  }
 }
 
 .book-modal__book-title {
-    h2 {
-        font-family: MiloSlabPro, RobotoSlabLight, serif;
-        font-size: 3em;
-        margin: 0;
-        @include breakpoint($min, $post-mobile-phone) { 
-          margin: 20px 0 0 35%;
-        }
+  h2 {
+    // font-family: MiloSlabPro, RobotoSlabLight, serif;
+    @include nypl-font('Milo');
+    font-size: 3em;
+    margin: 0;
+    @include breakpoint($min, $post-mobile-phone) { 
+      margin: 20px 0 0 35%;
     }
+  }
 }
 
 .book-modal__book-intro__div {
-    font-size: 10px;
-    left: 15px;
-    margin: 26px 0 0 35%;
-    position: relative;
-    top: 2px;
-    @include breakpoint($min, $post-mobile-phone) {
-        left: 0;
-        top: 0;
-    }
+  font-size: 10px;
+  left: 15px;
+  margin: 26px 0 0 35%;
+  position: relative;
+  top: 2px;
+  @include breakpoint($min, $post-mobile-phone) {
+    left: 0;
+    top: 0;
+  }
 }
 
 .book-modal__book-intro__div__author {
-    font-size: 16px;
-    font-weight: bold;
+  @include nypl-font('KievitWeb-Bold');
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .book-modal__book-intro__div__tags {
-    color: rgb(191, 191, 191);
-    font-size: 16px;
-    margin: 10px 0 0 0;
-    @include breakpoint($min, $post-mobile-phone) {
-      font-size: 14px;
+  @include nypl-font('KievitWeb-Book');
+  color: rgb(191, 191, 191);
+  font-size: 14px;
+  margin: 10px 0 0 0;
+  @include breakpoint($min, $post-mobile-phone) {
+  }
+  ul {
+    list-style: none;
+    li {
+      display: inline-block;
+      margin: 10px 10px 0 0;
     }
-    ul {
-        list-style: none;
-        li {
-            display: inline-block;
-            margin: 10px 10px 0 0;
-        }
-    }
+  }
 }
 
 .book-modal__left-column {
-    float: left;     
-    margin: 30px 0 10px 0;
-    position: relative;
-    top: 0;
-    @include breakpoint($min, $post-mobile-phone) {
-        float: none;
-        margin: 0;
-        position: absolute;
-        top: 20px;
-    }
+  float: left;     
+  margin: 30px 0 10px 0;
+  position: relative;
+  top: 0;
+  @include breakpoint($min, $post-mobile-phone) {
+    float: none;
+    margin: 0;
+    position: absolute;
+    top: 20px;
+  }
 }
 
 .book-modal__left-column__image-container {
-    margin: 0;
-    position: relative;
-    width: 175px;
-    @include breakpoint($min, $post-mobile-phone) {
+  margin: 0;
+  position: relative;
+  width: 175px;
+  @include breakpoint($min, $post-mobile-phone) {
     margin: 36px 0 0 0; 
-    }
+  }
 }
 
 .book-modal__left-column__image-container__cover {
-    a { 
-        cursor: default; 
-    }
+  a { 
+    cursor: default; 
+  }
 }
 
 
 .book-modal__left-column__share-container {
-   margin: 6px 0 0 0;
-   position: relative;
-   top: 0;
-   @include breakpoint($min, $post-mobile-phone) {
-        margin: 20px 0 0 0; 
-   }
+  margin: 6px 0 0 0;
+  position: relative;
+  top: 0;
+  @include breakpoint($min, $post-mobile-phone) {
+    margin: 20px 0 0 0; 
+  }
 }
 
 .book-modal__left-column__share-container__share-items {
-    margin: 0 0 0 4px;
+  margin: 0 0 0 4px;
 }

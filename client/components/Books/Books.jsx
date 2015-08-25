@@ -19,6 +19,8 @@ let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 let bookData = API.getBooks();
 let currentList = API.getCurrentList();
 
+import staffPicksDate from '../../utils/DateService.js';
+
 // class Books extends React.Component {
 var Books = React.createClass({
   getInitialState() {
@@ -37,7 +39,7 @@ var Books = React.createClass({
 
   mixins: [Navigation],
 
-  componentDidMount () {
+  componentDidMount() {
     // This needs to be set done once the component is available
     let grid = document.getElementById('masonryContainer'),
       _this = this;
@@ -66,11 +68,11 @@ var Books = React.createClass({
     BookActions.updateNewFilters(this.state.iso.getItemElements());
   },
 
-  componentDidUnmount () {
+  componentDidUnmount() {
     BookStore.unlisten(this._onChange);
   },
 
-  _onChange () {
+  _onChange() {
     let storeState = BookStore.getState(),
       age = '.' + storeState._age,
       filters = storeState._filters,
@@ -100,19 +102,18 @@ var Books = React.createClass({
     }, BookStore.getState()));
   },
 
-  _openModal (book) {
-    this.transitionTo('modal',
-      {
-        month: this.state.currentList.currentList['list-date'],
-        id: book['item']['id']
-      });
+  _openModal(book) {
+    this.transitionTo('modal', {
+      month: this.state.currentList.currentList['list-date'],
+      id: book['item']['id']
+    });
   },
 
-  _getTags (elem) {
+  _getTags(elem) {
     return elem['item']['staff-pick-tag'] || [];
   },
 
-  _getAge (elem) {
+  _getAge(elem) {
     if (!elem['age']) {
       return;
     }
@@ -154,9 +155,9 @@ var Books = React.createClass({
       months = ['January', 'February', 'March', 'April', 'May',
         'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       list = this.state.currentList;
-      date = new Date(list.currentList['list-date']);
-      thisMonth = months[date.getMonth() + 1];
-      thisyear = date.getFullYear();
+      date = staffPicksDate(list.currentList['list-date']);
+      thisMonth = date.month;
+      thisyear = date.year;
 
       previousHref = !_.isEmpty(list.previousList) ? list.previousList.links.self : undefined;
       nextHref = !_.isEmpty(list.nextList) ? list.nextList.links.self : undefined;
