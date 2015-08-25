@@ -43,6 +43,10 @@ $dark-lib-gray: #776E64;
   @if $font == 'Milo' {
     font-family: MiloSlabPro, RobotoSlabLight, serif;
   }
+  @else if $font == 'KievitWeb-Bold' {
+    font-family: $font, Helvetica, serif;
+    font-weight: bold;
+  }
   @else {
     font-family: $font, Helvetica, serif;
   }
