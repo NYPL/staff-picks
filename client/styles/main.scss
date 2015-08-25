@@ -39,6 +39,16 @@ $dark-lib-gray: #776E64;
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
+@mixin nypl-font($font) {
+  @if $font == 'Milo' {
+    font-family: MiloSlabPro, RobotoSlabLight, serif;
+  }
+  @else {
+    font-family: $font, Helvetica, serif;
+  }
+}
+
+
 /** MIXINS **/
 @mixin display-arrow($direction: 'up', $color: #ededed, $size: 10px, $position: 50%) {
   &:after {
@@ -229,7 +239,7 @@ ul#nav_menu {
 #content {
   width: 93%;
   margin: 0 auto;
-  font-family: 'KievitWeb';
+  @include nypl-font('KievitWeb');
   @include breakpoint($min, 1024px) {
     width: 960px;
   }
@@ -281,6 +291,7 @@ span[class*="icon-"] {
   }
 
   .description {
+    @include nypl-font('KievitWeb-Book');
     font-size: 1.5em;
     font-size: 15px;
     line-height: 20px;
@@ -288,8 +299,9 @@ span[class*="icon-"] {
   }
 
   .staff-pick {
+    @include nypl-font('KievitWeb-Bold');
     font-size: 15px;
-    font-weight: bold;
+    // font-weight: bold;
     margin: 25px 0;
 
     .staff-pick-icon {
@@ -304,6 +316,7 @@ span[class*="icon-"] {
 
   .borrow {
     font-size: 14px;
+    @include nypl-font('KievitWeb-Bold');
     @include breakpoint($max, $post-mobile-phone) {
       position: absolute;
       left: 20%;
