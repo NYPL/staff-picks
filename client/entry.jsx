@@ -49,7 +49,7 @@ class App extends React.Component {
       {property: "og:image", content: '/recommendations/staff-picks/client/images/shelftalker.4.2.png'},
       {property: "og:description", content: 'Every month, NYPL\'s book experts share 100 titles they love.'},
       {property: "og:site_name", content: 'Staff Picks | The New York Public Library'},
-      {property: "og:url", content: 'http://nypl.org/recommendations/staff-picks/'},
+      {property: "og:url", content: 'http://www.nypl.org/recommendations/staff-picks/'},
       {name: "twitter:card", content: 'summary_large_image'},
       {name: "twitter:site", content: '@nypl'},
       {name: "twitter:title", content: 'Staff Picks | The New York Public Library'},
