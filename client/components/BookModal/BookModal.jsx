@@ -94,7 +94,7 @@ let BookModal = React.createClass({
       {property: "og:image", content: imageLink},
       {property: "og:description", content: description},
       {property: "og:site_name", content: 'Staff Picks | The New York Public Library'},
-      {property: "og:url", content: `http://nypl.org/recommendations/staff-picks/${bookId}`},
+      {property: "og:url", content: `http://www.nypl.org/recommendations/staff-picks/${bookId}`},
       {name: "twitter:card", content: 'summary_large_image'},
       {name: "twitter:site", content: '@nypl'},
       {name: "twitter:title", content: title},
