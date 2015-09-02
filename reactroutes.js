@@ -45,13 +45,13 @@ if (env.production) {
     assets: JSON.parse(fs.readFileSync(path.join(process.cwd(), 'assets.json')))
   });
 }
-
+// endpoint: '?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age',
 let options = {
-    endpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age',
+    endpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age',
     // endpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-2015-06-01?include=previous-list,next-list,picks.item.tags,picks.age',
-    includes: ['previous-list', 'next-list', 'item.tags', 'picks.age']
+    includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age']
   },
-  host = 'refinery.aws.nypl.org',
+  host = 'dev.refinery.aws.nypl.org',
   App = require('./client/server.jsx'),
   BookModal = require('./client/components/BookModal/BookModal.jsx'),
   Error404Page = require('./client/components/Error404Page/Error404Page.jsx'),

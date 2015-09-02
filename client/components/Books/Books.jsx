@@ -110,7 +110,7 @@ var Books = React.createClass({
   },
 
   _getTags(elem) {
-    return elem['item']['staff-pick-tag'] || [];
+    return elem['item']['tags'] || [];
   },
 
   _getAge(elem) {
@@ -128,6 +128,7 @@ var Books = React.createClass({
       nextHref, previousHref, previousLink, nextLink;
 
     books = this.state.books.map((element, i) => {
+      console.log(element);
       let tagList = _this._getTags(element),
         age = _this._getAge(element),
         tagIDs = _.map(tagList, tag => {
