@@ -44,6 +44,8 @@ var Books = React.createClass({
     let grid = document.getElementById('masonryContainer'),
       _this = this;
 
+    // BookActions.loadPicks();
+
     // this.setState does not work in this case because
     // iso.arrange also needs to be called.
     this.state.iso = new Isotope(grid, {
@@ -78,7 +80,7 @@ var Books = React.createClass({
       filters = storeState._filters,
       selector = age,
       _this = this;
-
+// console.log(storeState);
     if (filters.length) {
       selector += '.' + filters.join('.');
     }
@@ -128,7 +130,6 @@ var Books = React.createClass({
       nextHref, previousHref, previousLink, nextLink;
 
     books = this.state.books.map((element, i) => {
-      console.log(element);
       let tagList = _this._getTags(element),
         age = _this._getAge(element),
         tagIDs = _.map(tagList, tag => {

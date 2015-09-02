@@ -18,6 +18,9 @@ import Books from './components/Books/Books.jsx';
 import Sidebar from './components/Sidebar/Sidebar.jsx';
 import BookModal from './components/BookModal/BookModal.jsx';
 
+import alt from './alt.js';
+import Iso from 'iso';
+
 /* Reads from local storage (i.e. Refinery) */
 // If we follow the FLUX architecture
 // data would not be defined, instead we would
@@ -104,9 +107,16 @@ React.render(<Hero />, document.getElementById('hero'));
 //   React.reander(<App />, document.getElementById('content'));
 // }
 
-Router.run(routes, Router.HistoryLocation, (Root) => {
-  React.render(<Root data={staffPicks} filters={{'filters': filters['filters']}}
-    currentList={currentList} />,
-    document.getElementById('content'));
-});
+window.onload = () => {
+  Iso.bootstrap((state, meta, container) => {
+    alt.bootstrap(state);
+    console.log(state);
+    Router.run(routes, Router.HistoryLocation, (Root) => {
+      React.render(<Root data={staffPicks} filters={{'filters': filters['filters']}}
+        currentList={currentList} />,
+        document.getElementById('content'));
+    });
+  });
+};
+
 
