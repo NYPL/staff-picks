@@ -110,10 +110,9 @@ React.render(<Hero />, document.getElementById('hero'));
 window.onload = () => {
   Iso.bootstrap((state, meta, container) => {
     alt.bootstrap(state);
-    console.log(state);
+    // console.log(state);
     Router.run(routes, Router.HistoryLocation, (Root) => {
-      React.render(<Root data={staffPicks} filters={{'filters': filters['filters']}}
-        currentList={currentList} />,
+      React.render(<Root />,
         document.getElementById('content'));
     });
   });

@@ -120,6 +120,10 @@ app.use('/', (req, res, next) => {
     .get(options.endpoint)
     .then(data => {
       let parsed = parser.parse(data.data);
+      let filters = parser.getOfType(data.data.included, 'staff-pick-tag');
+
+      // filters = _.chain(filters).pluck('id').flatten().value();
+      // console.log(filters);
       res.locals.data = {
         "BookStore": {
           _picks: parsed[0],
@@ -128,6 +132,7 @@ app.use('/', (req, res, next) => {
           _gridDisplay: true,
           _listDisplay: false,
           _allFilters: [],
+          _initialFilters: filters,
           _filters: [],
           _updatedFilters: []
         }
@@ -181,7 +186,6 @@ app.use(function(req, res) {
     </Route>
   );
 
-
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   let iso = new Iso();
 
@@ -224,9 +228,9 @@ app.use(function(req, res) {
 
     res.render('index', {
       path: req.path,
-      staffPicks: JSON.stringify({'staff-picks': currentData['picks']}),
-      filters: JSON.stringify({'filters': filters}),
-      pickList: JSON.stringify({'staff-picks-list': pickList}),
+      staffPicks: JSON.stringify({'staff-picks': []}),
+      filters: JSON.stringify({'filters': []}),
+      pickList: [JSON.stringify({'staff-picks-list': []})],
       currentList: JSON.stringify(currentList),
       env: env,
       metatags: renderedTags,

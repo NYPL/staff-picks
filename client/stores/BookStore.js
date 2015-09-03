@@ -24,12 +24,13 @@ class BookStore {
     });
 
     this.on('init', () => {
-      this._bookDisplay =  'grid',
-      this._age = 'Adult',
-      this._gridDisplay = true,
-      this._listDisplay = false,
-      this._allFilters = [],
-      this._filters = [],
+      this._bookDisplay =  'grid';
+      this._age = 'Adult';
+      this._gridDisplay = true;
+      this._listDisplay = false;
+      this._allFilters = [];
+      this._filters = [];
+      this._initialFilters = [];
       this._updatedFilters = [];
       this._picks = [];
     });
