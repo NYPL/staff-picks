@@ -21,7 +21,6 @@ import staffPicksDate from '../../utils/DateService.js';
 // class Books extends React.Component {
 var Books = React.createClass({
   getInitialState() {
-    console.log(BookStore.getState());
     return _.extend({
       iso: null,
       book: {},
@@ -50,7 +49,9 @@ var Books = React.createClass({
     });
 
     $('#masonryContainer').css('opacity', '1');
-
+    this.state.iso.arrange({
+      filter: '.Adult'
+    });
     // setTimeout(() => {
       BookActions.updateNewFilters(this.state.iso.getItemElements());
       BookActions.updateFilterAge('Adult');
@@ -74,10 +75,12 @@ var Books = React.createClass({
       selector += '.' + filters.join('.');
     }
     
-    this.state.iso.reloadItems();
-    this.state.iso.arrange({
-      filter: selector
-    });
+    setTimeout(() => {
+      this.state.iso.reloadItems();
+      this.state.iso.arrange({
+        filter: selector
+      });
+    }, 200);
   },
 
 
@@ -93,7 +96,7 @@ var Books = React.createClass({
     }
 
     // setTimeout(() => {
-      console.log(selector);
+      // console.log(selector);
       _this.state.iso.arrange({
         filter: selector
       });
@@ -136,7 +139,7 @@ var Books = React.createClass({
       _this = this;
 
     let books, months, pickDate, date, thisMonth, thisyear,
-      nextHref, previousHref, previousLink, nextLink;
+      nextMonth, previousMonth, previousLink, nextLink;
 
     let currentMonthPicks = this.state._currentMonthPicks;
 
@@ -173,19 +176,38 @@ var Books = React.createClass({
     thisMonth = date.month;
     thisyear = date.year;
 
-    previousHref = !_.isEmpty(currentMonthPicks.previousList) ?
-      currentMonthPicks.previousList['list-date'] : undefined;
-    nextHref = !_.isEmpty(currentMonthPicks.nextList) ?
-      currentMonthPicks.nextList['list-date'] : undefined;
+    let previousMonthDate = currentMonthPicks.previousList['list-date'];
+    let nextMonthDate = currentMonthPicks.nextList['list-date'];
 
-    previousLink = previousHref ? (
-      <a style={styles.previousMonth} onClick={this._handleClick.bind(this, previousHref)}>
-        Picks for June<span className='left-icon'></span>
+    previousMonth = {
+      active: !_.isEmpty(currentMonthPicks.previousList),
+      date: previousMonthDate,
+      month: () => {
+        if (_.isEmpty(currentMonthPicks.previousList)) {
+          return;
+        }
+        return staffPicksDate(previousMonthDate).month;
+      }
+    };
+    nextMonth = {
+      active: !_.isEmpty(currentMonthPicks.nextList),
+      date: nextMonthDate,
+      month: () => {
+        if (_.isEmpty(currentMonthPicks.nextList)) {
+          return;
+        }
+        return staffPicksDate(nextMonthDate).month;
+      }
+    };
+
+    previousLink = previousMonth.active ? (
+      <a style={styles.previousMonth} onClick={this._handleClick.bind(this, previousMonth.date)}>
+        Picks for {previousMonth.month()}<span className='left-icon'></span>
       </a>
     ) : null;
-    nextLink = nextHref ? (
-      <a style={styles.nextMonth} onClick={this._handleClick.bind(this, nextHref)}>
-        Picks for August<span className='right-icon'></span>
+    nextLink = nextMonth.active ? (
+      <a style={styles.nextMonth} onClick={this._handleClick.bind(this, nextMonth.date)}>
+        Picks for {nextMonth.month()}<span className='right-icon'></span>
       </a>
     ) : null;
 
@@ -212,25 +234,14 @@ var Books = React.createClass({
   },
 
   _handleClick (month) {
-    let API = `http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${month}?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&include=previous-list,next-list,picks.item.tags,picks.age`;
-    if (API) {
+    let API = '/api/ajax/picks/' + month;
+    if (month) {
       $.ajax({
         type: 'GET',
-        dataType: 'jsonp',
+        dataType: 'json',
         url: API,
         success: function (data) {
-          parser.setChildrenObjects({includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age']});
-          let selectedMonth = parser.parse(data),
-            currentMonthPicks = {
-              id: selectedMonth.id,
-              picks: selectedMonth.picks,
-              date: selectedMonth.attributes['list-date'],
-              // Update previous/next object to include ID
-              previousList: selectedMonth['previous-list'] ? selectedMonth['previous-list'].attributes : {},
-              nextList: selectedMonth['next-list'] ? selectedMonth['next-list'].attributes : {}
-            };
-
-          BookActions.updatePicks(currentMonthPicks);
+          BookActions.updatePicks(data);
         }
       });
     }

@@ -48,10 +48,9 @@ if (env.production) {
     assets: JSON.parse(fs.readFileSync(path.join(process.cwd(), 'assets.json')))
   });
 }
-// endpoint: '?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age',
+
 let options = {
     endpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age',
-    // endpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-2015-06-01?include=previous-list,next-list,picks.item.tags,picks.age',
     includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age']
   },
   host = 'dev.refinery.aws.nypl.org',
@@ -108,14 +107,15 @@ app.use('/', (req, res, next) => {
           _updatedFilters: [],
           _currentMonthPicks: currentMonthPicks
         }
-      }
+      };
       next();
     });
 });
 
-app.use('/api/picks', (req, res) => {
+app.get('/api/ajax/picks/:month', (req, res) => {
+
   let options = {
-    endpoint: 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age',
+    endpoint: `http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${req.params.month}?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&include=previous-list,next-list,picks.item.tags,picks.age`,
     includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age']
   };
 
@@ -124,24 +124,69 @@ app.use('/api/picks', (req, res) => {
   axios
     .get(options.endpoint)
     .then(data => {
-      let parsed = parser.parse(data.data);
-      res.json(parsed[0]);
+      let returnedData = data.data,
+        selectedMonth = parser.parse(returnedData),
+        currentMonthPicks = {
+          id: selectedMonth.id,
+          picks: selectedMonth.picks,
+          date: selectedMonth.attributes['list-date'],
+          // Update previous/next object to include ID
+          previousList: selectedMonth['previous-list'] ? selectedMonth['previous-list'].attributes : {},
+          nextList: selectedMonth['next-list'] ? selectedMonth['next-list'].attributes : {}
+        };
+
+      res.json(currentMonthPicks);
     });
 });
 
 
-app.get('/api/picks/:month', (req, res, next) => {
-  console.log(req.params.month);
-  next();
+app.get('/recommendations/staff-picks/:month', (req, res, next) => {
+  let options = {
+    endpoint: `http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${req.params.month}?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&include=previous-list,next-list,picks.item.tags,picks.age`,
+    includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age']
+  };
+
+  parser.setChildrenObjects(options);
+
+  axios
+    .get(options.endpoint)
+    .then(data => {
+      let returnedData = data.data,
+        // Filters can be extracted without parsing since they are all in the
+        // included array:
+        filters = parser.getOfType(returnedData.included, 'staff-pick-tag'),
+        // parse the data
+        selectedMonth = parser.parse(returnedData),
+        // Create the Model for a pick but this will eventually be in a separate file
+        currentMonthPicks = {
+          id: selectedMonth.id,
+          picks: selectedMonth.picks,
+          date: selectedMonth.attributes['list-date'],
+          // Update previous/next object to include ID
+          previousList: selectedMonth['previous-list'] ? selectedMonth['previous-list'].attributes : {},
+          nextList: selectedMonth['next-list'] ? selectedMonth['next-list'].attributes : {}
+        };
+
+
+      res.locals.data = {
+        "BookStore": {
+          _bookDisplay:  'grid',
+          _age: 'Adult',
+          _gridDisplay: true,
+          _listDisplay: false,
+          _allFilters: [],
+          _initialFilters: filters,
+          _filters: [],
+          _updatedFilters: [],
+          _currentMonthPicks: currentMonthPicks
+        }
+      };
+      next();
+    });
 });
 
 // after get the path
 app.use(function(req, res) {
-  // let monthPath = (req.path).substring(1,11),
-  //   endpoint = '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age';
-  // if (monthPath) {
-  //   let endpoint = `/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${monthPath}?include=previous-list,next-list,picks.item,picks.age`;
-  // }
   let path = req.path;
 
   if (req.path === '/recommendations/staff-picks') {
