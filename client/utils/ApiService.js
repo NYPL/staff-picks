@@ -259,23 +259,23 @@ const API = {
     const list =  clientList;
     return list;
   },
-  getFeaturedPicks() {
-    let pickList = {'staff-picks-list': []};
-    const featuredPickList = pickListServer['staff-picks-list'];
-    const featuredBooks = featuredPickList[0].relationships.features.data;
+  // getFeaturedPicks() {
+  //   let pickList = {'staff-picks-list': []};
+  //   const featuredPickList = pickListServer['staff-picks-list'];
+  //   const featuredBooks = featuredPickList[0].relationships.features.data;
 
-    let booksRaw = [], books = {};
+  //   let booksRaw = [], books = {};
 
-    _.each(featuredBooks, function (book) {
-      booksRaw.push(_.findWhere(staffPicks['staff-picks'], book));
-    });
+  //   _.each(featuredBooks, function (book) {
+  //     booksRaw.push(_.findWhere(staffPicks['staff-picks'], book));
+  //   });
 
-    _.each(booksRaw, function (book) {
-      let age = book['age']['attributes']['age'];
-      books[age] = book;
-    });
-    return books;
-  }
+  //   _.each(booksRaw, function (book) {
+  //     let age = book['age']['attributes']['age'];
+  //     books[age] = book;
+  //   });
+  //   return books;
+  // }
 };
 
 export default API;

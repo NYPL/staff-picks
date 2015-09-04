@@ -21,6 +21,10 @@ import Footer from './client/components/Footer/Footer.jsx';
 import _ from 'underscore';
 import DocMeta from 'react-doc-meta';
 
+import axios from 'axios';
+import alt from './client/alt.js';
+import Iso from 'iso';
+
 // first assign the path
 app.use('*/client', express.static(path.join(process.cwd(), '/client')));
 
@@ -103,8 +107,64 @@ req.on('error', function (err) {
 req.end();
 /////////
 
+// Will always get the latest pick
+app.use('/', (req, res, next) => {
+  let options = {
+    endpoint: 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age',
+    includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age']
+  };
+
+  parser.setChildrenObjects(options);
+
+  axios
+    .get(options.endpoint)
+    .then(data => {
+      let parsed = parser.parse(data.data);
+      let filters = parser.getOfType(data.data.included, 'staff-pick-tag');
+
+      // filters = _.chain(filters).pluck('id').flatten().value();
+      // console.log(filters);
+      res.locals.data = {
+        "BookStore": {
+          _picks: parsed[0],
+          _bookDisplay:  'grid',
+          _age: 'Adult',
+          _gridDisplay: true,
+          _listDisplay: false,
+          _allFilters: [],
+          _initialFilters: filters,
+          _filters: [],
+          _updatedFilters: []
+        }
+      }
+      next()
+    });
+});
+
+app.use('/api/picks', (req, res) => {
+  let options = {
+    endpoint: 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age',
+    includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age']
+  };
+
+  parser.setChildrenObjects(options);
+
+  axios
+    .get(options.endpoint)
+    .then(data => {
+      let parsed = parser.parse(data.data);
+      res.json(parsed[0]);
+    });
+});
+
+
+app.get('/api/picks/:month', (req, res, next) => {
+  console.log(req.params.month);
+  next();
+});
+
 // after get the path
-app.get('/*', function(req, res) {
+app.use(function(req, res) {
   let monthPath = (req.path).substring(1,11),
     endpoint = '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age';
   if (monthPath) {
@@ -124,7 +184,10 @@ app.get('/*', function(req, res) {
         <NotFoundRoute handler={Error404Page} />
       </Route>
     </Route>
-  )
+  );
+
+  alt.bootstrap(JSON.stringify(res.locals.data || {}));
+  let iso = new Iso();
 
   Router.run(routes, path, function (Root, state) {
     let parsedData = [], filters = [], pickList = [], metaBook, data, currentData;
@@ -161,17 +224,19 @@ app.get('/*', function(req, res) {
       renderedTags = metaTags.map((tag, index) =>
         React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
 
+    iso.add(html, alt.flush());
+
     res.render('index', {
       path: req.path,
-      staffPicks: JSON.stringify({'staff-picks': currentData['picks']}),
-      filters: JSON.stringify({'filters': filters}),
-      pickList: JSON.stringify({'staff-picks-list': pickList}),
+      staffPicks: JSON.stringify({'staff-picks': []}),
+      filters: JSON.stringify({'filters': []}),
+      pickList: [JSON.stringify({'staff-picks-list': []})],
       currentList: JSON.stringify(currentList),
       env: env,
       metatags: renderedTags,
       header: header,
       hero: hero,
-      markup: html,
+      markup: iso.render(),
       footer: footer,
       gaCode: analytics.google.code(env.production)
     });

@@ -24,14 +24,14 @@ import staffPicksDate from '../../utils/DateService.js';
 // class Books extends React.Component {
 var Books = React.createClass({
   getInitialState() {
-    let books = this.props.books ? this.props.books['staff-picks'] : bookData['staff-picks'];
+    // let books = this.props.books ? this.props.books['staff-picks'] : bookData['staff-picks'];
 
     let currentList = this.props.currentList || currentList;
     return _.extend({
       iso: null,
       book: {},
       currentList,
-      books: books,
+      // books: books,
       modalIsOpen: false,
       noResults: false
     }, BookStore.getState());
@@ -43,6 +43,8 @@ var Books = React.createClass({
     // This needs to be set done once the component is available
     let grid = document.getElementById('masonryContainer'),
       _this = this;
+
+    // BookActions.loadPicks();
 
     // this.setState does not work in this case because
     // iso.arrange also needs to be called.
@@ -59,13 +61,15 @@ var Books = React.createClass({
     $('#masonryContainer').css('opacity', '1');
 
     setTimeout(() => {
-      _this.state.iso.arrange({
-        filter: '.Adult'
-      });
+      // _this.state.iso.arrange({
+      //   filter: '.Adult'
+      // });
+      BookActions.updateNewFilters(this.state.iso.getItemElements());
+      BookActions.updateFilterAge('Adult');
     }, 1200);
 
     BookStore.listen(this._onChange);
-    BookActions.updateNewFilters(this.state.iso.getItemElements());
+    // BookActions.updateNewFilters(this.state.iso.getItemElements());
   },
 
   componentDidUnmount() {
@@ -78,7 +82,7 @@ var Books = React.createClass({
       filters = storeState._filters,
       selector = age,
       _this = this;
-
+// console.log(storeState);
     if (filters.length) {
       selector += '.' + filters.join('.');
     }
@@ -127,8 +131,8 @@ var Books = React.createClass({
     let books, months, list, date, thisMonth, thisyear,
       nextHref, previousHref, previousLink, nextLink;
 
-    books = this.state.books.map((element, i) => {
-      console.log(element);
+    let picks = this.state._picks.picks;
+    books = picks.map((element, i) => {
       let tagList = _this._getTags(element),
         age = _this._getAge(element),
         tagIDs = _.map(tagList, tag => {
