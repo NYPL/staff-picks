@@ -21,20 +21,6 @@ import BookModal from './components/BookModal/BookModal.jsx';
 import alt from './alt.js';
 import Iso from 'iso';
 
-/* Reads from local storage (i.e. Refinery) */
-// If we follow the FLUX architecture
-// data would not be defined, instead we would
-// load the data via Store Actions and update our
-// App Constants. As of now, we are mocking an API
-// call to fetch the data.
-// const data = API.getData();
-// const books = API.getBooks();
-
-API.setStaffPick(staffPicks);
-API.setFilters(filters);
-
-const books = API.getBooks();
-
 let Route = Router.Route,
   NotFoundRoute = Router.NotFoundRoute,
   DefaultRoute = Router.DefaultRoute,
@@ -70,10 +56,10 @@ class App extends React.Component {
         </div>
         <div className='main-container'>
           <div id='sidebar'>
-            <Sidebar filters={this.props.filters} />
+            <Sidebar />
           </div>
           <div id='books'>
-            <Books books={this.props.data} currentList={this.props.currentList}/>
+            <Books />
           </div>
         </div>
       </div>
@@ -81,12 +67,6 @@ class App extends React.Component {
   }
 }
 
-let rpRoute = Router.HistoryLocation.getCurrentPath(),
-  childrenRoute = '';
-// console.log(rpRoute);
-if (rpRoute === '/recommendations/staff-picks/') {
-  childrenRoute = '/recommendations/staff-picks';
-}
 
 let routes = (
     <Route name='home' path='/recommendations/staff-picks/' handler={App} ignoreScrollBehavior>
@@ -100,12 +80,6 @@ let routes = (
 React.render(<Header />, document.getElementById('header-container'));
 React.render(<Footer />, document.getElementById('footer-container'));
 React.render(<Hero />, document.getElementById('hero'));
-
-// if ( !books ) {
-//   React.render(<Error404Page />, document.getElementById("content"));
-// } else {
-//   React.reander(<App />, document.getElementById('content'));
-// }
 
 window.onload = () => {
   Iso.bootstrap((state, meta, container) => {

@@ -5,21 +5,7 @@
 // it to the component.
 import _ from 'underscore';
 
-var staffPicksServer, filtersServer, pickListServer, currentListServer;
-
 const API = {
-  setStaffPick(picks) {
-    staffPicksServer = picks;
-  },
-  setFilters(filters) {
-    filtersServer = filters;
-  },
-  setCurrentList(list) {
-    currentListServer = list;
-  },
-  setPickList(list) {
-    pickListServer = list;
-  },
   getData() {
     const data = [
       {
@@ -235,47 +221,7 @@ const API = {
     ];
     // store it in the HeaderStore
     return data;
-  },
-  getBooks() {
-    if (staffPicksServer) {
-      return staffPicksServer['picks'];
-    }
-    let staffPicks = {'staff-picks': []};
-    const books = staffPicks['staff-picks'] || [];
-    return books;
-  },
-  getFilters() {
-    // if (filtersServer) {
-    //   return filtersServer;
-    // }
-    // const filterList = {'filters': []} || [];
-    // return filterList;
-    let clientFilters = {'filters':[]};
-    const filterList = filters['filters'] || clientFilters;
-    return filterList;
-  },
-  getCurrentList() {
-    let clientList = {'currentList':[]};
-    const list =  clientList;
-    return list;
-  },
-  // getFeaturedPicks() {
-  //   let pickList = {'staff-picks-list': []};
-  //   const featuredPickList = pickListServer['staff-picks-list'];
-  //   const featuredBooks = featuredPickList[0].relationships.features.data;
-
-  //   let booksRaw = [], books = {};
-
-  //   _.each(featuredBooks, function (book) {
-  //     booksRaw.push(_.findWhere(staffPicks['staff-picks'], book));
-  //   });
-
-  //   _.each(booksRaw, function (book) {
-  //     let age = book['age']['attributes']['age'];
-  //     books[age] = book;
-  //   });
-  //   return books;
-  // }
+  }
 };
 
 export default API;

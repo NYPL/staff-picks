@@ -33,6 +33,7 @@ class BookStore {
       this._initialFilters = [];
       this._updatedFilters = [];
       this._picks = [];
+      this._currentMonthPicks = {};
     });
   }
 
@@ -58,7 +59,7 @@ class BookStore {
     this._updatedFilters = updatedFilters;
   }
   updatePicks(picks) {
-    this._picks = picks;
+    this._currentMonthPicks = _currentMonthPicks;
   }
 
 

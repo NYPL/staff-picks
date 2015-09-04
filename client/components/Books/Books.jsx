@@ -16,22 +16,15 @@ import Router from 'react-router';
 let Navigation = Router.Navigation;
 
 let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-let bookData = API.getBooks();
-let currentList = API.getCurrentList();
-
 import staffPicksDate from '../../utils/DateService.js';
 
 // class Books extends React.Component {
 var Books = React.createClass({
   getInitialState() {
-    // let books = this.props.books ? this.props.books['staff-picks'] : bookData['staff-picks'];
-
-    let currentList = this.props.currentList || currentList;
+    console.log(BookStore.getState());
     return _.extend({
       iso: null,
       book: {},
-      currentList,
-      // books: books,
       modalIsOpen: false,
       noResults: false
     }, BookStore.getState());
@@ -44,7 +37,7 @@ var Books = React.createClass({
     let grid = document.getElementById('masonryContainer'),
       _this = this;
 
-    // BookActions.loadPicks();
+    console.log(BookStore.getState());
 
     // this.setState does not work in this case because
     // iso.arrange also needs to be called.
@@ -108,7 +101,7 @@ var Books = React.createClass({
 
   _openModal(book) {
     this.transitionTo('modal', {
-      month: this.state.currentList.currentList['list-date'],
+      month: this.state._currentMonthPicks.date,
       id: book['item']['id']
     });
   },
@@ -128,10 +121,10 @@ var Books = React.createClass({
     const openModal = this._openModal,
       _this = this;
 
-    let books, months, list, date, thisMonth, thisyear,
+    let books, months, pickDate, date, thisMonth, thisyear,
       nextHref, previousHref, previousLink, nextLink;
 
-    let picks = this.state._picks.picks;
+    let picks = this.state._currentMonthPicks.picks;
     books = picks.map((element, i) => {
       let tagList = _this._getTags(element),
         age = _this._getAge(element),
@@ -156,17 +149,16 @@ var Books = React.createClass({
       );
     });
 
-    if (this.state.currentList) {
-      months = ['January', 'February', 'March', 'April', 'May',
-        'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-      list = this.state.currentList;
-      date = staffPicksDate(list.currentList['list-date']);
-      thisMonth = date.month;
-      thisyear = date.year;
 
-      previousHref = !_.isEmpty(list.previousList) ? list.previousList.links.self : undefined;
-      nextHref = !_.isEmpty(list.nextList) ? list.nextList.links.self : undefined;
-    }
+    months = ['January', 'February', 'March', 'April', 'May',
+      'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    pickDate = this.state._currentMonthPicks.date;
+    date = staffPicksDate(pickDate);
+    thisMonth = date.month;
+    thisyear = date.year;
+
+    // previousHref = !_.isEmpty(list.previousList) ? list.previousList.links.self : undefined;
+    // nextHref = !_.isEmpty(list.nextList) ? list.nextList.links.self : undefined;
 
     previousLink = (
       <a style={styles.previousMonth} onClick={this._handleClick.bind(this, previousHref)}>

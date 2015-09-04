@@ -39,10 +39,9 @@ app.use(layouts);
 app.disable('x-powered-by');
 
 
-let API = require('./client/utils/ApiService'),
-  env = {
-    production: process.env.NODE_ENV === 'production'
-  };
+let env = {
+  production: process.env.NODE_ENV === 'production'
+};
 
 if (env.production) {
   objectAssign(env, {
@@ -63,49 +62,8 @@ let options = {
   NotFoundRoute = Router.NotFoundRoute,
   DefaultRoute = Router.DefaultRoute,
   RouteHandler = Router.RouteHandler,
-  routes,
-  data;
+  routes;
 
-
-/////////
-parser.setChildrenObjects(options);
-
-var endpoint = options.endpoint,
-  opts = {
-    host: host,
-    path: endpoint,
-    method: 'GET',
-  },
-  apiData;
-
-var req = http.request(opts, function (res) {
-  var responseString = '';
-  res.setEncoding('utf8');
-
-  res.on('data', function (chunk) {
-    responseString += chunk;
-  });
-
-  res.on('end', function () {
-    var result;
-
-    try {
-      result = JSON.parse(responseString);
-    } catch (err) {
-      console.log(err);
-    }
-    // cb(result);
-    console.log('from http request');
-    apiData = result;
-  });
-});
-
-req.on('error', function (err) {
-  console.log(err);
-});
-
-req.end();
-/////////
 
 // Will always get the latest pick
 app.use('/', (req, res, next) => {
@@ -119,14 +77,27 @@ app.use('/', (req, res, next) => {
   axios
     .get(options.endpoint)
     .then(data => {
-      let parsed = parser.parse(data.data);
-      let filters = parser.getOfType(data.data.included, 'staff-pick-tag');
+      let returnedData = data.data,
+        // Filters can be extracted without parsing since they are all in the
+        // included array:
+        filters = parser.getOfType(returnedData.included, 'staff-pick-tag'),
+        // parse the data
+        parsed = parser.parse(returnedData),
+        // Since the endpoint returns a list of monthly picks
+        currentMonth = parsed[0],
+        // Create the Model for a pick but this will eventually be in a separate file
+        currentMonthPicks = {
+          id: currentMonth.id,
+          picks: currentMonth.picks,
+          date: currentMonth.attributes['list-date'],
+          // Update previous/next object to include ID
+          previousList: currentMonth['previous-list'] ? currentMonth['previous-list'].attributes : {},
+          nextList: currentMonth['next-list'] ? currentMonth['next-list'].attributes : {}
+        };
 
-      // filters = _.chain(filters).pluck('id').flatten().value();
-      // console.log(filters);
+
       res.locals.data = {
         "BookStore": {
-          _picks: parsed[0],
           _bookDisplay:  'grid',
           _age: 'Adult',
           _gridDisplay: true,
@@ -134,10 +105,11 @@ app.use('/', (req, res, next) => {
           _allFilters: [],
           _initialFilters: filters,
           _filters: [],
-          _updatedFilters: []
+          _updatedFilters: [],
+          _currentMonthPicks: currentMonthPicks
         }
       }
-      next()
+      next();
     });
 });
 
@@ -165,11 +137,11 @@ app.get('/api/picks/:month', (req, res, next) => {
 
 // after get the path
 app.use(function(req, res) {
-  let monthPath = (req.path).substring(1,11),
-    endpoint = '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age';
-  if (monthPath) {
-    let endpoint = `/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${monthPath}?include=previous-list,next-list,picks.item,picks.age`;
-  }
+  // let monthPath = (req.path).substring(1,11),
+  //   endpoint = '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age';
+  // if (monthPath) {
+  //   let endpoint = `/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${monthPath}?include=previous-list,next-list,picks.item,picks.age`;
+  // }
   let path = req.path;
 
   if (req.path === '/recommendations/staff-picks') {
@@ -192,31 +164,7 @@ app.use(function(req, res) {
   Router.run(routes, path, function (Root, state) {
     let parsedData = [], filters = [], pickList = [], metaBook, data, currentData;
 
-    data = apiData;
-    parsedData = parser.parse(apiData);
-    filters = parser.getOfType(data.included, 'staff-pick-tag');
-
-    if (Array.isArray(parsedData)) {
-      currentData = parsedData[0];
-    } else {
-      currentData = parsedData;
-    }
-
-    let previousList = currentData['previous-list'] ? currentData['previous-list'] : {};
-    let nextList = currentData['next-list'] ? currentData['next-list'] : {};
-    let currentList = {
-      previousList,
-      nextList,
-      currentList: currentData['attributes']
-    };
-
-
-    let html = React.renderToString(
-        <Root
-          data={{'staff-picks': currentData['picks']}}
-          filters={{'filters': filters}}
-          currentList={currentList} />
-      ),
+    let html = React.renderToString(<Root />),
       header = React.renderToString(<Header />),
       hero = React.renderToString(<Hero />),
       footer = React.renderToString(<Footer />),
@@ -228,10 +176,6 @@ app.use(function(req, res) {
 
     res.render('index', {
       path: req.path,
-      staffPicks: JSON.stringify({'staff-picks': []}),
-      filters: JSON.stringify({'filters': []}),
-      pickList: [JSON.stringify({'staff-picks-list': []})],
-      currentList: JSON.stringify(currentList),
       env: env,
       metatags: renderedTags,
       header: header,
