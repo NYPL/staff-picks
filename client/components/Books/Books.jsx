@@ -25,6 +25,7 @@ var Books = React.createClass({
     return _.extend({
       iso: null,
       book: {},
+      books: [],
       modalIsOpen: false,
       noResults: false
     }, BookStore.getState());
@@ -34,10 +35,7 @@ var Books = React.createClass({
 
   componentDidMount() {
     // This needs to be set done once the component is available
-    let grid = document.getElementById('masonryContainer'),
-      _this = this;
-
-    console.log(BookStore.getState());
+    let grid = document.getElementById('masonryContainer');
 
     // this.setState does not work in this case because
     // iso.arrange also needs to be called.
@@ -53,21 +51,35 @@ var Books = React.createClass({
 
     $('#masonryContainer').css('opacity', '1');
 
-    setTimeout(() => {
-      // _this.state.iso.arrange({
-      //   filter: '.Adult'
-      // });
+    // setTimeout(() => {
       BookActions.updateNewFilters(this.state.iso.getItemElements());
       BookActions.updateFilterAge('Adult');
-    }, 1200);
+    // }, 100);
 
     BookStore.listen(this._onChange);
-    // BookActions.updateNewFilters(this.state.iso.getItemElements());
   },
 
   componentDidUnmount() {
     BookStore.unlisten(this._onChange);
   },
+
+  componentDidUpdate() {
+    let storeState = BookStore.getState(),
+      age = '.' + storeState._age,
+      filters = storeState._filters,
+      selector = age,
+      _this = this;
+
+    if (filters.length) {
+      selector += '.' + filters.join('.');
+    }
+    
+    this.state.iso.reloadItems();
+    this.state.iso.arrange({
+      filter: selector
+    });
+  },
+
 
   _onChange() {
     let storeState = BookStore.getState(),
@@ -75,16 +87,17 @@ var Books = React.createClass({
       filters = storeState._filters,
       selector = age,
       _this = this;
-// console.log(storeState);
+
     if (filters.length) {
       selector += '.' + filters.join('.');
     }
 
-    setTimeout(() => {
+    // setTimeout(() => {
+      console.log(selector);
       _this.state.iso.arrange({
         filter: selector
       });
-    }, 100);
+    // }, 100);
 
     this.state.iso.on('arrangeComplete', filteredItems => {
       if (!filteredItems.length) {
@@ -118,13 +131,17 @@ var Books = React.createClass({
   },
 
   render () {
+    console.log('render');
     const openModal = this._openModal,
       _this = this;
 
     let books, months, pickDate, date, thisMonth, thisyear,
       nextHref, previousHref, previousLink, nextLink;
 
-    let picks = this.state._currentMonthPicks.picks;
+    let currentMonthPicks = this.state._currentMonthPicks;
+
+    let picks = currentMonthPicks.picks;
+
     books = picks.map((element, i) => {
       let tagList = _this._getTags(element),
         age = _this._getAge(element),
@@ -149,32 +166,33 @@ var Books = React.createClass({
       );
     });
 
-
     months = ['January', 'February', 'March', 'April', 'May',
       'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    pickDate = this.state._currentMonthPicks.date;
+    pickDate = currentMonthPicks.date;
     date = staffPicksDate(pickDate);
     thisMonth = date.month;
     thisyear = date.year;
 
-    // previousHref = !_.isEmpty(list.previousList) ? list.previousList.links.self : undefined;
-    // nextHref = !_.isEmpty(list.nextList) ? list.nextList.links.self : undefined;
+    previousHref = !_.isEmpty(currentMonthPicks.previousList) ?
+      currentMonthPicks.previousList['list-date'] : undefined;
+    nextHref = !_.isEmpty(currentMonthPicks.nextList) ?
+      currentMonthPicks.nextList['list-date'] : undefined;
 
-    previousLink = (
+    previousLink = previousHref ? (
       <a style={styles.previousMonth} onClick={this._handleClick.bind(this, previousHref)}>
         Picks for June<span className='left-icon'></span>
       </a>
-    );
-    nextLink = (
+    ) : null;
+    nextLink = nextHref ? (
       <a style={styles.nextMonth} onClick={this._handleClick.bind(this, nextHref)}>
         Picks for August<span className='right-icon'></span>
       </a>
-    );
+    ) : null;
 
     return (
       <div>
         <div className='month-picker' style={styles.monthPicker}>
-          <p style={styles.month}>{thisMonth} {thisyear}</p>
+          {previousLink}<p style={styles.month}>{thisMonth} {thisyear}</p>{nextLink}
         </div>
 
         <div id="masonryContainer" ref="masonryContainer" style={{opacity: '0'}}>
@@ -193,15 +211,26 @@ var Books = React.createClass({
     );
   },
 
-  _handleClick (API) {
+  _handleClick (month) {
+    let API = `http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${month}?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&include=previous-list,next-list,picks.item.tags,picks.age`;
     if (API) {
       $.ajax({
         type: 'GET',
         dataType: 'jsonp',
-        url: API + '?include=previous-list,next-list,picks.item.tags,picks.age',
+        url: API,
         success: function (data) {
-          console.log(parser.parse(data));
+          parser.setChildrenObjects({includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age']});
+          let selectedMonth = parser.parse(data),
+            currentMonthPicks = {
+              id: selectedMonth.id,
+              picks: selectedMonth.picks,
+              date: selectedMonth.attributes['list-date'],
+              // Update previous/next object to include ID
+              previousList: selectedMonth['previous-list'] ? selectedMonth['previous-list'].attributes : {},
+              nextList: selectedMonth['next-list'] ? selectedMonth['next-list'].attributes : {}
+            };
 
+          BookActions.updatePicks(currentMonthPicks);
         }
       });
     }

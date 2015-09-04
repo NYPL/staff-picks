@@ -715,20 +715,20 @@ body {
   margin-left: 10px;
 }
 
-.minus-enter {
+.minus-enter, .books-enter {
   opacity: 0.01;
 }
 
-.minus-enter.minus-enter-active {
+.minus-enter.minus-enter-active, .books-enter.books-enter-active {
   opacity: 1;
   transition: opacity .5s ease-in;
 }
 
-.minus-leave {
+.minus-leave, .books-leave {
   opacity: 1;
 }
 
-.minus-leave.minus-leave-active {
+.minus-leave.minus-leave-active, .books-leave.books-leave-active {
   opacity: 0.01;
   transition: opacity .5s ease-in;
 }
