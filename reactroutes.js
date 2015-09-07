@@ -1,16 +1,13 @@
 'use strict';
 
-let fs = require('fs'),
-  path = require('path'),
-  objectAssign = require('object-assign'),
-  express = require('express'),
-  favicon = require('express-favicon'),
-  app = express(),
-  compress = require('compression'),
-  layouts = require('express-ejs-layouts'),
-  analytics = require('./analytics.js'),
-  http = require('http');
-
+import fs from 'fs';
+import path from 'path';
+import objectAssign from 'object-assign';
+import express from 'express';
+import favicon from 'express-favicon';
+import compress from 'compression';
+import analytics from './analytics.js';
+import http from 'http';
 
 import React from 'react';
 import Router from 'react-router';
@@ -25,18 +22,19 @@ import axios from 'axios';
 import alt from './client/alt.js';
 import Iso from 'iso';
 
+
+let app = express();
+
 // first assign the path
 app.use('*/client', express.static(path.join(process.cwd(), '/client')));
 
-app.set('layout');
-app.set('view engine', 'ejs');
-app.set('view options', {layout: 'layout'});
-app.set('views', path.join(process.cwd(), '/server/views'));
-app.set('port', process.env.PORT || 3001);
-
 app.use(compress());
-app.use(layouts);
 app.disable('x-powered-by');
+
+app.set('view engine', 'ejs');
+// app.set('view options', {layout: 'layout'});
+app.set('views', path.resolve(__dirname, 'server/views'));
+app.set('port', process.env.PORT || 3001);
 
 
 let env = {
@@ -49,12 +47,8 @@ if (env.production) {
   });
 }
 
-let options = {
-    endpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age',
-    includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age']
-  },
-  host = 'dev.refinery.aws.nypl.org',
-  App = require('./client/server.jsx'),
+
+let App = require('./client/server.jsx'),
   BookModal = require('./client/components/BookModal/BookModal.jsx'),
   Error404Page = require('./client/components/Error404Page/Error404Page.jsx'),
   Route = Router.Route,
@@ -64,126 +58,9 @@ let options = {
   routes;
 
 
-// Will always get the latest pick
-app.use('/', (req, res, next) => {
-  let options = {
-    endpoint: 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age',
-    includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age']
-  };
+require('./server/ApiRoutes/serverApiRoutes.js')(app);
+require('./server/ApiRoutes/clientApiRoutes.js')(app);
 
-  parser.setChildrenObjects(options);
-
-  axios
-    .get(options.endpoint)
-    .then(data => {
-      let returnedData = data.data,
-        // Filters can be extracted without parsing since they are all in the
-        // included array:
-        filters = parser.getOfType(returnedData.included, 'staff-pick-tag'),
-        // parse the data
-        parsed = parser.parse(returnedData),
-        // Since the endpoint returns a list of monthly picks
-        currentMonth = parsed[0],
-        // Create the Model for a pick but this will eventually be in a separate file
-        currentMonthPicks = {
-          id: currentMonth.id,
-          picks: currentMonth.picks,
-          date: currentMonth.attributes['list-date'],
-          // Update previous/next object to include ID
-          previousList: currentMonth['previous-list'] ? currentMonth['previous-list'].attributes : {},
-          nextList: currentMonth['next-list'] ? currentMonth['next-list'].attributes : {}
-        };
-
-
-      res.locals.data = {
-        "BookStore": {
-          _bookDisplay:  'grid',
-          _age: 'Adult',
-          _gridDisplay: true,
-          _listDisplay: false,
-          _allFilters: [],
-          _initialFilters: filters,
-          _filters: [],
-          _updatedFilters: [],
-          _currentMonthPicks: currentMonthPicks
-        }
-      };
-      next();
-    });
-});
-
-app.get('/api/ajax/picks/:month', (req, res) => {
-
-  let options = {
-    endpoint: `http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${req.params.month}?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&include=previous-list,next-list,picks.item.tags,picks.age`,
-    includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age']
-  };
-
-  parser.setChildrenObjects(options);
-
-  axios
-    .get(options.endpoint)
-    .then(data => {
-      let returnedData = data.data,
-        selectedMonth = parser.parse(returnedData),
-        currentMonthPicks = {
-          id: selectedMonth.id,
-          picks: selectedMonth.picks,
-          date: selectedMonth.attributes['list-date'],
-          // Update previous/next object to include ID
-          previousList: selectedMonth['previous-list'] ? selectedMonth['previous-list'].attributes : {},
-          nextList: selectedMonth['next-list'] ? selectedMonth['next-list'].attributes : {}
-        };
-
-      res.json(currentMonthPicks);
-    });
-});
-
-
-app.get('/recommendations/staff-picks/:month', (req, res, next) => {
-  let options = {
-    endpoint: `http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${req.params.month}?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&include=previous-list,next-list,picks.item.tags,picks.age`,
-    includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age']
-  };
-
-  parser.setChildrenObjects(options);
-
-  axios
-    .get(options.endpoint)
-    .then(data => {
-      let returnedData = data.data,
-        // Filters can be extracted without parsing since they are all in the
-        // included array:
-        filters = parser.getOfType(returnedData.included, 'staff-pick-tag'),
-        // parse the data
-        selectedMonth = parser.parse(returnedData),
-        // Create the Model for a pick but this will eventually be in a separate file
-        currentMonthPicks = {
-          id: selectedMonth.id,
-          picks: selectedMonth.picks,
-          date: selectedMonth.attributes['list-date'],
-          // Update previous/next object to include ID
-          previousList: selectedMonth['previous-list'] ? selectedMonth['previous-list'].attributes : {},
-          nextList: selectedMonth['next-list'] ? selectedMonth['next-list'].attributes : {}
-        };
-
-
-      res.locals.data = {
-        "BookStore": {
-          _bookDisplay:  'grid',
-          _age: 'Adult',
-          _gridDisplay: true,
-          _listDisplay: false,
-          _allFilters: [],
-          _initialFilters: filters,
-          _filters: [],
-          _updatedFilters: [],
-          _currentMonthPicks: currentMonthPicks
-        }
-      };
-      next();
-    });
-});
 
 // after get the path
 app.use(function(req, res) {
@@ -191,7 +68,6 @@ app.use(function(req, res) {
 
   if (req.path === '/recommendations/staff-picks') {
     return res.redirect('/recommendations/staff-picks/');
-    path = '/';
   }
 
   routes = (
@@ -207,8 +83,6 @@ app.use(function(req, res) {
   let iso = new Iso();
 
   Router.run(routes, path, function (Root, state) {
-    let parsedData = [], filters = [], pickList = [], metaBook, data, currentData;
-
     let html = React.renderToString(<Root />),
       header = React.renderToString(<Header />),
       hero = React.renderToString(<Hero />),
@@ -244,25 +118,24 @@ let gracefulShutdown = function() {
   server.close(function() {
     console.log("Closed out remaining connections.");
     process.exit()
-  });
-  
+  }); 
   // if after 
   setTimeout(function() {
     console.error("Could not close connections in time, forcefully shutting down");
     process.exit()
   }, 10*1000);
 }
-
 // listen for TERM signal .e.g. kill 
 process.on ('SIGTERM', gracefulShutdown);
-
 // listen for INT signal e.g. Ctrl-C
 process.on ('SIGINT', gracefulShutdown);
 
+
+// Webpack Dev Server
 if (env.production === false) {
   let webpack = require('webpack'),
     WebpackDevServer = require('webpack-dev-server'),
-    webpackConfig = require('./webpack.dev.config');
+    webpackConfig = require('./server/webpackConfig/webpack.dev.config');
 
   new WebpackDevServer(webpack(webpackConfig), {
     publicPath: '/client/',
@@ -289,3 +162,4 @@ if (env.production === false) {
     console.log('webpack dev server listening on localhost:3000');
   });
 }
+

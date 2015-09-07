@@ -235,6 +235,7 @@ var Books = React.createClass({
 
   _handleClick (month) {
     let API = '/api/ajax/picks/' + month;
+    console.log('ajax call');
     if (month) {
       $.ajax({
         type: 'GET',
