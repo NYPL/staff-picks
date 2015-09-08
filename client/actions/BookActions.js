@@ -4,25 +4,6 @@ import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 
 class StaffPicks {
-  loadPicks() {
-    let options = {
-      endpoint: 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/' +
-        'staff-pick-lists?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&' +
-        'fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-' +
-        'uri&page[limit]=1&include=previous-list,next-list,picks.item.tags,picks.age',
-      includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age']
-    };
-    var self = this;
-
-    parser.setChildrenObjects(options);
-
-    axios
-      .get('/api/picks')
-      .then(res => {
-        self.actions.updatePicks(res.data);
-      });
-  }
-
   updatePicks(picks) {
     this.dispatch(picks);
   }
@@ -45,6 +26,10 @@ class StaffPicks {
 
   updateNewFilters(filters) {
     this.dispatch(filters);
+  }
+
+  isotopesDidUpdate(bool) {
+    this.dispatch(bool);
   }
 };
 

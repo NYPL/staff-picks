@@ -7,21 +7,24 @@ import express from 'express';
 import favicon from 'express-favicon';
 import compress from 'compression';
 import analytics from './analytics.js';
-import http from 'http';
 
 import React from 'react';
 import Router from 'react-router';
+import DocMeta from 'react-doc-meta';
+
 import parser from 'jsonapi-parserinator';
+import _ from 'underscore';
+
 import Header from './client/components/HeaderOld/Header.jsx';
 import Hero from './client/components/Hero/Hero.jsx';
 import Footer from './client/components/Footer/Footer.jsx';
-import _ from 'underscore';
-import DocMeta from 'react-doc-meta';
+import App from './client/server.jsx';
+import BookModal from './client/components/BookModal/BookModal.jsx';
+import Error404Page from './client/components/Error404Page/Error404Page.jsx';
 
 import axios from 'axios';
 import alt from './client/alt.js';
 import Iso from 'iso';
-
 
 let app = express();
 
@@ -47,24 +50,18 @@ if (env.production) {
   });
 }
 
-
-let App = require('./client/server.jsx'),
-  BookModal = require('./client/components/BookModal/BookModal.jsx'),
-  Error404Page = require('./client/components/Error404Page/Error404Page.jsx'),
-  Route = Router.Route,
-  NotFoundRoute = Router.NotFoundRoute,
-  DefaultRoute = Router.DefaultRoute,
-  RouteHandler = Router.RouteHandler,
-  routes;
-
-
+// server and client side API routes
 require('./server/ApiRoutes/serverApiRoutes.js')(app);
 require('./server/ApiRoutes/clientApiRoutes.js')(app);
 
-
 // after get the path
 app.use(function(req, res) {
-  let path = req.path;
+  let Route = Router.Route,
+    NotFoundRoute = Router.NotFoundRoute,
+    DefaultRoute = Router.DefaultRoute,
+    RouteHandler = Router.RouteHandler,
+    routes,
+    iso;
 
   if (req.path === '/recommendations/staff-picks') {
     return res.redirect('/recommendations/staff-picks/');
@@ -80,9 +77,9 @@ app.use(function(req, res) {
   );
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
-  let iso = new Iso();
+  iso = new Iso();
 
-  Router.run(routes, path, function (Root, state) {
+  Router.run(routes, req.path, function (Root, state) {
     let html = React.renderToString(<Root />),
       header = React.renderToString(<Header />),
       hero = React.renderToString(<Hero />),
@@ -103,7 +100,6 @@ app.use(function(req, res) {
       footer: footer,
       gaCode: analytics.google.code(env.production)
     });
-
   }); /* end Router.run */
 });
 
@@ -126,9 +122,9 @@ let gracefulShutdown = function() {
   }, 10*1000);
 }
 // listen for TERM signal .e.g. kill 
-process.on ('SIGTERM', gracefulShutdown);
+process.on('SIGTERM', gracefulShutdown);
 // listen for INT signal e.g. Ctrl-C
-process.on ('SIGINT', gracefulShutdown);
+process.on('SIGINT', gracefulShutdown);
 
 
 // Webpack Dev Server
@@ -139,17 +135,11 @@ if (env.production === false) {
 
   new WebpackDevServer(webpack(webpackConfig), {
     publicPath: '/client/',
-
     contentBase: './client/',
-
     inline: true,
-
     hot: true,
-
     stats: false,
-
     historyApiFallback: true,
-
     headers: {
       'Access-Control-Allow-Origin': 'http://localhost:3001',
       'Access-Control-Allow-Headers': 'X-Requested-With'
@@ -158,7 +148,6 @@ if (env.production === false) {
     if (err) {
       console.log(err);
     }
-
     console.log('webpack dev server listening on localhost:3000');
   });
 }

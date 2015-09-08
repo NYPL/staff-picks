@@ -75,12 +75,15 @@ var Books = React.createClass({
       selector += '.' + filters.join('.');
     }
     
-    setTimeout(() => {
-      this.state.iso.reloadItems();
-      this.state.iso.arrange({
-        filter: selector
-      });
-    }, 200);
+    // if (storeState._isotopesDidUpdate) {
+      setTimeout(() => {
+        this.state.iso.reloadItems();
+        this.state.iso.arrange({
+          filter: selector
+        });
+      }, 200);
+      BookActions.isotopesDidUpdate(false);
+    // }
   },
 
 
@@ -242,6 +245,7 @@ var Books = React.createClass({
         dataType: 'json',
         url: API,
         success: function (data) {
+          BookActions.isotopesDidUpdate(false);
           BookActions.updatePicks(data);
         }
       });

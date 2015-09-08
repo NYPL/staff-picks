@@ -43,7 +43,8 @@ function serverAPI(app) {
             _initialFilters: filters,
             _filters: [],
             _updatedFilters: [],
-            _currentMonthPicks: currentMonthPicks
+            _currentMonthPicks: currentMonthPicks,
+            _isotopesDidUpdate: false
           }
         };
         next();
@@ -88,7 +89,8 @@ function serverAPI(app) {
             _initialFilters: filters,
             _filters: [],
             _updatedFilters: [],
-            _currentMonthPicks: currentMonthPicks
+            _currentMonthPicks: currentMonthPicks,
+            _isotopesDidUpdate: false
           }
         };
         next();

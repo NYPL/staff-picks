@@ -10,7 +10,8 @@ class BookStore {
       toggleBookFilter: BookActions.TOGGLE_BOOK_FILTER,
       clearFilters: BookActions.CLEAR_FILTERS,
       updateNewFilters: BookActions.UPDATE_NEW_FILTERS,
-      updatePicks: BookActions.UPDATE_PICKS
+      updatePicks: BookActions.UPDATE_PICKS,
+      isotopesDidUpdate: BookActions.ISOTOPES_DID_UPDATE
     });
 
     this.exportPublicMethods({
@@ -33,6 +34,7 @@ class BookStore {
       this._initialFilters = [];
       this._updatedFilters = [];
       this._currentMonthPicks = {};
+      this._isotopesDidUpdate = false;
     });
   }
 
@@ -59,6 +61,9 @@ class BookStore {
   }
   updatePicks(picks) {
     this._currentMonthPicks = picks;
+  }
+  isotopesDidUpdate(bool) {
+    this._isotopesDidUpdate = bool;
   }
 
 
