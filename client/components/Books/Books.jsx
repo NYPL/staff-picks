@@ -227,16 +227,15 @@ var Books = React.createClass({
       _this = this;
 
     console.log('ajax call');
-    // this.transitionTo('month', {
-    //   month: date,
-    // });
     if (month) {
       $.ajax({
         type: 'GET',
         dataType: 'json',
         url: API,
         success: function (data) {
-          console.log(data.currentMonthPicks.date);
+          _this.transitionTo('month', {
+            month: data.currentMonthPicks.date,
+          });
           BookActions.clearFilters();
           BookActions.isotopesDidUpdate(true);
           BookActions.updatePicks(data.currentMonthPicks);
