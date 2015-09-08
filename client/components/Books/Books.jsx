@@ -52,10 +52,10 @@ var Books = React.createClass({
     this.state.iso.arrange({
       filter: '.Adult'
     });
-    // setTimeout(() => {
+    setTimeout(() => {
       BookActions.updateNewFilters(this.state.iso.getItemElements());
       BookActions.updateFilterAge('Adult');
-    // }, 100);
+    }, 100);
 
     BookStore.listen(this._onChange);
   },
@@ -63,29 +63,6 @@ var Books = React.createClass({
   componentDidUnmount() {
     BookStore.unlisten(this._onChange);
   },
-
-  componentDidUpdate() {
-    let storeState = BookStore.getState(),
-      age = '.' + storeState._age,
-      filters = storeState._filters,
-      selector = age,
-      _this = this;
-
-    if (filters.length) {
-      selector += '.' + filters.join('.');
-    }
-    
-    // if (storeState._isotopesDidUpdate) {
-      setTimeout(() => {
-        this.state.iso.reloadItems();
-        this.state.iso.arrange({
-          filter: selector
-        });
-      }, 200);
-      BookActions.isotopesDidUpdate(false);
-    // }
-  },
-
 
   _onChange() {
     let storeState = BookStore.getState(),
@@ -99,11 +76,20 @@ var Books = React.createClass({
     }
 
     // setTimeout(() => {
-      // console.log(selector);
       _this.state.iso.arrange({
         filter: selector
       });
-    // }, 100);
+    // }, 200);
+
+    if (storeState._isotopesDidUpdate) {
+      console.log('reloading items');
+      this.state.iso.reloadItems();
+      setTimeout(() => {
+        _this.state.iso.arrange({
+          filter: selector
+        });
+      }, 700);
+    }
 
     this.state.iso.on('arrangeComplete', filteredItems => {
       if (!filteredItems.length) {
@@ -237,16 +223,25 @@ var Books = React.createClass({
   },
 
   _handleClick (month) {
-    let API = '/api/ajax/picks/' + month;
+    let API = '/api/ajax/picks/' + month,
+      _this = this;
+
     console.log('ajax call');
+    // this.transitionTo('month', {
+    //   month: date,
+    // });
     if (month) {
       $.ajax({
         type: 'GET',
         dataType: 'json',
         url: API,
         success: function (data) {
+          console.log(data.currentMonthPicks.date);
+          BookActions.clearFilters();
+          BookActions.isotopesDidUpdate(true);
+          BookActions.updatePicks(data.currentMonthPicks);
+          BookActions.updateInitialFilters(data.filters);
           BookActions.isotopesDidUpdate(false);
-          BookActions.updatePicks(data);
         }
       });
     }

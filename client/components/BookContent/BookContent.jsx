@@ -15,7 +15,7 @@ class BookContent extends React.Component {
       bookTarget = staffPick['attributes']['catalog-slug'],
       ebookTarget = staffPick['attributes']['ebook-uri'] ?
         staffPick['attributes']['ebook-uri']['full-uri'] : undefined,
-      tags = _.chain(staffPick['staff-pick-tag'])
+      tags = _.chain(staffPick['tags'])
         .pluck('attributes')
         .pluck('tag')
         .flatten()

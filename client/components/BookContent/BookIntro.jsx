@@ -34,7 +34,7 @@ class BookIntro extends React.Component {
 
   render () {
       const book = this.props.book,
-      tags = _.chain(book['item']['staff-pick-tag'])
+      tags = _.chain(book['item']['tags'])
         .pluck('attributes')
         .pluck('tag')
         .flatten()

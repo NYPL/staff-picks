@@ -11,7 +11,8 @@ class BookStore {
       clearFilters: BookActions.CLEAR_FILTERS,
       updateNewFilters: BookActions.UPDATE_NEW_FILTERS,
       updatePicks: BookActions.UPDATE_PICKS,
-      isotopesDidUpdate: BookActions.ISOTOPES_DID_UPDATE
+      isotopesDidUpdate: BookActions.ISOTOPES_DID_UPDATE,
+      updateInitialFilters: BookActions.UPDATE_INITIAL_FILTERS
     });
 
     this.exportPublicMethods({
@@ -65,7 +66,9 @@ class BookStore {
   isotopesDidUpdate(bool) {
     this._isotopesDidUpdate = bool;
   }
-
+  updateInitialFilters(filters) {
+    this._initialFilters = filters;
+  }
 
 
   // Maybe not needed?

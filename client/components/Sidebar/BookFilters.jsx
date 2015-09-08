@@ -39,28 +39,7 @@ class BookFilters extends React.Component {
   constructor(props) {
     super(props);
 
-    let store = BookStore.getState();
-    let filterList = store._initialFilters,
-      themeFilters = [],
-      drivenByFilters = [];
-
-    _.each(filterList, filter => {
-      filter.active = false;
-      filter.show = true;
-      filter.remove = true;
-      if (filter.attributes.tag.indexOf('Driven') !== -1) {
-        filter.attributes.displayName = (filter.attributes.tag).replace(/\bDriven/ig,'');
-        drivenByFilters.push(filter);
-      } else {
-        filter.attributes.displayName = filter.attributes.tag;
-        themeFilters.push(filter);
-      }
-    });
-
-    this.state = _.extend({
-      drivenByFilters,
-      themeFilters
-    }, BookStore.getState());
+    this._setFilters();
 
     this._clearFilters = this._clearFilters.bind(this);
     this._onChange = this._onChange.bind(this);
@@ -112,6 +91,31 @@ class BookFilters extends React.Component {
     );
   }
 
+  _setFilters() {
+    let store = BookStore.getState();
+    let filterList = store._initialFilters,
+      themeFilters = [],
+      drivenByFilters = [];
+
+    _.each(filterList, filter => {
+      filter.active = false;
+      filter.show = true;
+      filter.remove = true;
+      if (filter.attributes.tag.indexOf('Driven') !== -1) {
+        filter.attributes.displayName = (filter.attributes.tag).replace(/\bDriven/ig,'');
+        drivenByFilters.push(filter);
+      } else {
+        filter.attributes.displayName = filter.attributes.tag;
+        themeFilters.push(filter);
+      }
+    });
+
+    this.state = _.extend({
+      drivenByFilters,
+      themeFilters
+    }, BookStore.getState());
+  }
+
   _filterItems (list) {
     const _this = this,
       _handleClick = this._handleClick;
@@ -158,6 +162,11 @@ class BookFilters extends React.Component {
         updatedBooksElems.push(elem);
       }
     });
+
+    // update filter list in state
+    if (storeState._isotopesDidUpdate) {
+      this._setFilters();
+    }
 
     // Update/reset the filters based on a new age
     if (this.state._age !== age) {

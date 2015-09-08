@@ -1,7 +1,5 @@
 // ACTIONS
 import alt from '../alt.js';
-import axios from 'axios';
-import parser from 'jsonapi-parserinator';
 
 class StaffPicks {
   updatePicks(picks) {
@@ -30,6 +28,10 @@ class StaffPicks {
 
   isotopesDidUpdate(bool) {
     this.dispatch(bool);
+  }
+
+  updateInitialFilters(filters) {
+    this.dispatch(filters);
   }
 };
 

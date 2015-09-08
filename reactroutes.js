@@ -51,8 +51,11 @@ if (env.production) {
 }
 
 // server and client side API routes
-require('./server/ApiRoutes/serverApiRoutes.js')(app);
-require('./server/ApiRoutes/clientApiRoutes.js')(app);
+// require('./server/ApiRoutes/serverApiRoutes.js')(app);
+// require('./server/ApiRoutes/clientApiRoutes.js')(app);
+let ApiRoutes = require('./server/ApiRoutes/ApiRoutes.js');
+
+app.use('/', ApiRoutes);
 
 // after get the path
 app.use(function(req, res) {
@@ -68,9 +71,9 @@ app.use(function(req, res) {
   }
 
   routes = (
-    <Route name='home' path='/' handler={App} ignoreScrollBehavior>
-      <Route name='month' path='/:month?/?' ignoreScrollBehavior/>
-      <Route name='modal' path='/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
+    <Route name='home' path='/recommendations/staff-picks/' handler={App} ignoreScrollBehavior>
+      <Route name='month' path='/recommendations/staff-picks/:month?/?' ignoreScrollBehavior/>
+      <Route name='modal' path='/recommendations/staff-picks/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
         <NotFoundRoute handler={Error404Page} />
       </Route>
     </Route>
