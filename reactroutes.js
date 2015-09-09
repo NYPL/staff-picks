@@ -134,7 +134,7 @@ process.on('SIGINT', gracefulShutdown);
 if (env.production === false) {
   let webpack = require('webpack'),
     WebpackDevServer = require('webpack-dev-server'),
-    webpackConfig = require('./server/webpackConfig/webpack.dev.config');
+    webpackConfig = require('./webpack.dev.config');
 
   new WebpackDevServer(webpack(webpackConfig), {
     publicPath: '/client/',
