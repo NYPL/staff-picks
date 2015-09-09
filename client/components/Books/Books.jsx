@@ -123,7 +123,6 @@ var Books = React.createClass({
   },
 
   render () {
-    console.log('render');
     const openModal = this._openModal,
       _this = this;
 
@@ -223,9 +222,9 @@ var Books = React.createClass({
   },
 
   _handleClick (month) {
-    let API = '/api/ajax/picks/' + month;
+    let API = '/api/ajax/picks/' + month,
+      state = BookStore.getState();
 
-    console.log('ajax call');
     if (month) {
       $.ajax({
         type: 'GET',

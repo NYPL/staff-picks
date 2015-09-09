@@ -169,7 +169,7 @@ class BookFilters extends React.Component {
     }
 
     // Update/reset the filters based on a new age
-    if (this.state._age !== age) {
+    if (this.state._age !== age || storeState._isotopesDidUpdate) {
       this.setState({_age: age});
       _.each(this.state.drivenByFilters, filter => {
         filter.active = false;
