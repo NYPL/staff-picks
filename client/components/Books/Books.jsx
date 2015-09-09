@@ -223,8 +223,7 @@ var Books = React.createClass({
   },
 
   _handleClick (month) {
-    let API = '/api/ajax/picks/' + month,
-      _this = this;
+    let API = '/api/ajax/picks/' + month;
 
     console.log('ajax call');
     if (month) {
@@ -232,8 +231,8 @@ var Books = React.createClass({
         type: 'GET',
         dataType: 'json',
         url: API,
-        success: function (data) {
-          _this.transitionTo('month', {
+        success: data => {
+          this.transitionTo('month', {
             month: data.currentMonthPicks.date,
           });
           BookActions.clearFilters();

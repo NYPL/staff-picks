@@ -495,12 +495,14 @@ body {
   a {
     color: $dark-lib-gray;
     text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
   }
 
   .left-icon {
     background: url('/recommendations/staff-picks/client/images/icons/left_arrow_gray.svg') no-repeat;
     padding: 5px 15px 7px 10px;
-    margin-left: -95px;
+    margin-left: -105px;
   }
   .right-icon {
     background: url('/recommendations/staff-picks/client/images/icons/right_arrow_gray.svg') no-repeat;
