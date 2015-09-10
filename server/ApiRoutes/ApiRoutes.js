@@ -123,6 +123,14 @@ router
   .get(CurrentMonthData);
 
 router
+  .route('/:month/:id?')
+  .get(SelectMonthData);
+
+router
+  .route('/api/ajax/picks/:month')
+  .get(AjaxData);
+
+router
   .route('/recommendations/staff-picks/')
   .get(CurrentMonthData);
 
