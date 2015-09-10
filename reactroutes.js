@@ -51,8 +51,6 @@ if (env.production) {
 }
 
 // server and client side API routes
-// require('./server/ApiRoutes/serverApiRoutes.js')(app);
-// require('./server/ApiRoutes/clientApiRoutes.js')(app);
 let ApiRoutes = require('./server/ApiRoutes/ApiRoutes.js');
 
 app.use('/', ApiRoutes);

@@ -10,10 +10,7 @@ class BookDisplayButtons extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = _.extend({
-      filters: BookStore.getFilters(),
-      age: BookStore.getAge()
-    }, BookStore.getState());
+    this.state = BookStore.getState();
 
     this._handleClick = this._handleClick.bind(this);
     this._onChange = this._onChange.bind(this);
@@ -62,15 +59,13 @@ class BookDisplayButtons extends React.Component {
     );
   }
 
-    /* Utility Methods should be declared below the render method */
+  /* Utility Methods should be declared below the render method */
   _handleClick (_bookDisplay) {
     BookActions.updateBookDisplay(_bookDisplay);
   }
 
   _onChange () {
-    this.setState(_.extend({
-      filters: BookStore.getFilters()
-    }, BookStore.getState()));
+    this.setState(BookStore.getState());
   }
 };
 
