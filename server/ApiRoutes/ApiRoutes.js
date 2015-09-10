@@ -10,7 +10,7 @@ let options = {
 parser.setChildrenObjects(options);
 
 
-function CurrentMonthData(req, res, next) => {
+function CurrentMonthData(req, res, next) {
   let endpoint = 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&page[size]=1&include=previous-list,next-list,picks.item.tags,picks.age';
 
   axios
@@ -53,7 +53,7 @@ function CurrentMonthData(req, res, next) => {
     }); /* end Axios call */
 }
 
-function SelectMonthData(req, res) => {
+function SelectMonthData(req, res) {
   let endpoint = `http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${req.params.month}?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&include=previous-list,next-list,picks.item.tags,picks.age`;
 
   axios
