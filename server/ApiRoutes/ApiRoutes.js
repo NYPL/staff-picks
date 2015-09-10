@@ -118,6 +118,9 @@ function AjaxData(req, res) {
     }); /* end axios call */
 }
 
+router
+  .route('/')
+  .get(CurrentMonthData);
 
 router
   .route('/recommendations/staff-picks/')
