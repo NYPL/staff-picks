@@ -495,15 +495,24 @@ body {
   a {
     color: $dark-lib-gray;
     text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
   }
 
+  p {
+    position: absolute;
+    left: 42%;
+    @include breakpoint($min, $post-mobile-phone) {
+      left: 52%;
+    }
+  }
   .left-icon {
-    background: url('/recommendations/staff-picks/client/images/icons/left_arrow_gray.svg') no-repeat;
+    background: url('/recommendations/staff-picks/client/images/icons/left_arrow_blue.svg') no-repeat;
     padding: 5px 15px 7px 10px;
-    margin-left: -95px;
+    margin-left: -105px;
   }
   .right-icon {
-    background: url('/recommendations/staff-picks/client/images/icons/right_arrow_gray.svg') no-repeat;
+    background: url('/recommendations/staff-picks/client/images/icons/right_arrow_blue.svg') no-repeat;
     padding: 5px 15px 10px 10px;
     margin-left: 10px;
   }
@@ -715,20 +724,20 @@ body {
   margin-left: 10px;
 }
 
-.minus-enter {
+.minus-enter, .books-enter {
   opacity: 0.01;
 }
 
-.minus-enter.minus-enter-active {
+.minus-enter.minus-enter-active, .books-enter.books-enter-active {
   opacity: 1;
   transition: opacity .5s ease-in;
 }
 
-.minus-leave {
+.minus-leave, .books-leave {
   opacity: 1;
 }
 
-.minus-leave.minus-leave-active {
+.minus-leave.minus-leave-active, .books-leave.books-leave-active {
   opacity: 0.01;
   transition: opacity .5s ease-in;
 }

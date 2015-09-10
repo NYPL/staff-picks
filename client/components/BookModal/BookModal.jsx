@@ -18,7 +18,6 @@ import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
 let Navigation = Router.Navigation;
-let books = API.getBooks();
 
 if (global.window) {
   Modal.setAppElement(document.getElementById('content'));
@@ -31,6 +30,9 @@ let BookModal = React.createClass({
     let paramID = this.props.params.id,
       modalBook = {},
       age;
+
+    let store = BookStore.getState();
+    let books = store._currentMonthPicks.picks;
 
     if (!books.length) {
       if (this.props.data['staff-picks']) {

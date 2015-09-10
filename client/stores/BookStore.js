@@ -4,20 +4,15 @@ import alt from '../alt.js';
 
 class BookStore {
   constructor() {
-    this._bookDisplay =  'grid',
-    this._age = 'Adult',
-    this._gridDisplay = true,
-    this._listDisplay = false,
-    this._allFilters = [],
-    this._filters = [],
-    this._updatedFilters = [];
-
     this.bindListeners({
-      setBookDisplay: BookActions.UPDATE_BOOK_DISPLAY,
-      setAgeDisplay: BookActions.UPDATE_FILTER_AGE,
-      setFilters: BookActions.TOGGLE_BOOK_FILTER,
+      updateBookDisplay: BookActions.UPDATE_BOOK_DISPLAY,
+      updateFilterAge: BookActions.UPDATE_FILTER_AGE,
+      toggleBookFilter: BookActions.TOGGLE_BOOK_FILTER,
       clearFilters: BookActions.CLEAR_FILTERS,
-      updateNewFilters: BookActions.UPDATE_NEW_FILTERS
+      updateNewFilters: BookActions.UPDATE_NEW_FILTERS,
+      updatePicks: BookActions.UPDATE_PICKS,
+      isotopesDidUpdate: BookActions.ISOTOPES_DID_UPDATE,
+      updateInitialFilters: BookActions.UPDATE_INITIAL_FILTERS
     });
 
     this.exportPublicMethods({
@@ -27,9 +22,56 @@ class BookStore {
       getAge: this.getAge,
       getFilters: this.getFilters,
       getUpdatedFilters: this.getUpdatedFilters,
-      setBookDisplay: this.setBookDisplay
+      updateBookDisplay: this.updateBookDisplay
+    });
+
+    this.on('init', () => {
+      this._bookDisplay =  'grid';
+      this._age = 'Adult';
+      this._gridDisplay = true;
+      this._listDisplay = false;
+      this._allFilters = [];
+      this._filters = [];
+      this._initialFilters = [];
+      this._updatedFilters = [];
+      this._currentMonthPicks = {};
+      this._isotopesDidUpdate = false;
     });
   }
+
+  updateBookDisplay(bookDisplay) {
+    this._bookDisplay = bookDisplay;
+  }
+  updateFilterAge(age) {
+    this._age = age;
+  }
+  toggleBookFilter(filter) {
+    var found = _.indexOf(this._filters, filter);
+
+    if (found != -1) {
+      this._filters.splice(found, 1);
+    } else {
+      this._filters.push(filter);
+    }
+  }
+  clearFilters() {
+    this._filters = [];
+  }
+  updateNewFilters(updatedFilters) {
+    this._updatedFilters = updatedFilters;
+  }
+  updatePicks(picks) {
+    this._currentMonthPicks = picks;
+  }
+  isotopesDidUpdate(bool) {
+    this._isotopesDidUpdate = bool;
+  }
+  updateInitialFilters(filters) {
+    this._initialFilters = filters;
+  }
+
+
+  // Maybe not needed?
   getBookDisplay () {
     return this._bookDisplay;
   }
@@ -49,10 +91,6 @@ class BookStore {
   getUpdatedFilters () {
     return this._updatedFilters;
   }
-  setBookDisplay(bookDisplay) {
-    this._bookDisplay = bookDisplay;
-  }
-
   setActiveDisplay(type) {
     if (type === 'grid') {
       this._gridDisplay = true;
@@ -61,28 +99,6 @@ class BookStore {
       this._gridDisplay = false;
       this._listDisplay = true;
     }
-  }
-
-  setAgeDisplay(age) {
-    this._age = age;
-  }
-
-  setFilters(filter) {
-    var found = _.indexOf(this._filters, filter);
-
-    if (found != -1) {
-      this._filters.splice(found, 1);
-    } else {
-      this._filters.push(filter);
-    }
-  }
-
-  clearFilters() {
-    this._filters = [];
-  }
-
-  updateNewFilters(updatedFilters) {
-    this._updatedFilters = updatedFilters;
   }
 }
 
