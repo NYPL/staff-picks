@@ -142,21 +142,5 @@ router
   .route('/recommendations/staff-picks/api/ajax/picks/:month')
   .get(AjaxData);
 
-// router
-//   .route('/')
-//   .get(CurrentMonthData);
-
-// router
-//   .route('/recommendations/staff-picks/:month/:id?')
-//   .get(SelectMonthData);
-
-// router
-//   .route('/:month/:id?')
-//   .get(SelectMonthData);
-
-// router
-//   .route('/api/ajax/picks/:month')
-//   .get(AjaxData);
-
 
 export default router;

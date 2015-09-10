@@ -84,7 +84,7 @@ React.render(<Hero />, document.getElementById('hero'));
 window.onload = () => {
   Iso.bootstrap((state, meta, container) => {
     alt.bootstrap(state);
-    // console.log(state);
+
     Router.run(routes, Router.HistoryLocation, (Root) => {
       React.render(<Root />,
         document.getElementById('content'));

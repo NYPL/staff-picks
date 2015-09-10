@@ -276,8 +276,8 @@ const styles = {
   month: {
     display: 'inline-block',
     color: '#333333',
-    marginLeft: '25px',
-    '@media (min-width: 600px)': { marginLeft: '0' }
+    position: 'absolute',
+    '@media (min-width: 600px)': { left: '52%' }
   },
   nextMonth: {
     float: 'right'

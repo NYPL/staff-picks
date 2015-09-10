@@ -26,7 +26,12 @@ import axios from 'axios';
 import alt from './client/alt.js';
 import Iso from 'iso';
 
-let app = express();
+let app = express(),
+  // server and client side API routes
+  ApiRoutes = require('./server/ApiRoutes/ApiRoutes.js'),
+  env = {
+    production: process.env.NODE_ENV === 'production'
+  };
 
 // first assign the path
 app.use('*/client', express.static(path.join(process.cwd(), '/client')));
@@ -40,18 +45,12 @@ app.set('views', path.resolve(__dirname, 'server/views'));
 app.set('port', process.env.PORT || 3001);
 
 
-let env = {
-  production: process.env.NODE_ENV === 'production'
-};
-
 if (env.production) {
   objectAssign(env, {
     assets: JSON.parse(fs.readFileSync(path.join(process.cwd(), 'assets.json')))
   });
 }
 
-// server and client side API routes
-let ApiRoutes = require('./server/ApiRoutes/ApiRoutes.js');
 
 app.use('/', (req, res, next) => {
   if (req.path === '/recommendations/staff-picks') {
