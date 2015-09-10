@@ -13,6 +13,10 @@ parser.setChildrenObjects(options);
 function CurrentMonthData(req, res, next) {
   let endpoint = 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&page[size]=1&include=previous-list,next-list,picks.item.tags,picks.age';
 
+  if (req.path === '/recommendations/staff-picks') {
+    return res.redirect('/recommendations/staff-picks/');
+  }
+  
   axios
     .get(endpoint)
     .then(data => {
