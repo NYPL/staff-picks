@@ -52,6 +52,7 @@ function CurrentMonthData(req, res, next) {
       next();
     }); /* end Axios call */
 }
+
 function SelectMonthData(req, res, next) {
   let endpoint = `http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${req.params.month}?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&include=previous-list,next-list,picks.item.tags,picks.age`;
 
@@ -92,47 +93,59 @@ function SelectMonthData(req, res, next) {
     }); /* end axios call */
 }
 
-router
-  .route('/')
-  .get(CurrentMonthData);
+function AjaxData(req, res) {
+  let endpoint = `http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${req.params.month}?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&include=previous-list,next-list,picks.item.tags,picks.age`;
+
+  axios
+    .get(endpoint)
+    .then(data => {
+      let returnedData = data.data,
+        selectedMonth = parser.parse(returnedData),
+        filters = parser.getOfType(returnedData.included, 'staff-pick-tag'),
+        currentMonthPicks = {
+          id: selectedMonth.id,
+          picks: selectedMonth.picks,
+          date: selectedMonth.attributes['list-date'],
+          // Update previous/next object to include ID
+          previousList: selectedMonth['previous-list'] ? selectedMonth['previous-list'].attributes : {},
+          nextList: selectedMonth['next-list'] ? selectedMonth['next-list'].attributes : {}
+        };
+
+      res.json({
+        currentMonthPicks: currentMonthPicks,
+        filters: filters
+      });
+    }); /* end axios call */
+}
+
 
 router
   .route('/recommendations/staff-picks/')
   .get(CurrentMonthData);
 
 router
-  .route('/:month/:id?')
-  .get(SelectMonthData);
-
-router
   .route('/recommendations/staff-picks/:month/:id?')
   .get(SelectMonthData);
 
 router
-  .route('/api/ajax/picks/:month')
-  .get((req, res) => {
-    let endpoint = `http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${req.params.month}?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&include=previous-list,next-list,picks.item.tags,picks.age`;
+  .route('/recommendations/staff-picks/api/ajax/picks/:month')
+  .get(AjaxData);
 
-    axios
-      .get(endpoint)
-      .then(data => {
-        let returnedData = data.data,
-          selectedMonth = parser.parse(returnedData),
-          filters = parser.getOfType(returnedData.included, 'staff-pick-tag'),
-          currentMonthPicks = {
-            id: selectedMonth.id,
-            picks: selectedMonth.picks,
-            date: selectedMonth.attributes['list-date'],
-            // Update previous/next object to include ID
-            previousList: selectedMonth['previous-list'] ? selectedMonth['previous-list'].attributes : {},
-            nextList: selectedMonth['next-list'] ? selectedMonth['next-list'].attributes : {}
-          };
+// router
+//   .route('/')
+//   .get(CurrentMonthData);
 
-        res.json({
-          currentMonthPicks: currentMonthPicks,
-          filters: filters
-        });
-      }); /* end axios call */
-  });
+// router
+//   .route('/recommendations/staff-picks/:month/:id?')
+//   .get(SelectMonthData);
+
+// router
+//   .route('/:month/:id?')
+//   .get(SelectMonthData);
+
+// router
+//   .route('/api/ajax/picks/:month')
+//   .get(AjaxData);
+
 
 export default router;

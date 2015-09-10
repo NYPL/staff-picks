@@ -65,13 +65,15 @@ app.use(function(req, res) {
     iso;
 
   if (req.path === '/recommendations/staff-picks') {
+    console.log('redirect');
     return res.redirect('/recommendations/staff-picks/');
   }
 
+  console.log(req.path);
   routes = (
-    <Route name='home' path='/' handler={App} ignoreScrollBehavior>
-      <Route name='month' path='/:month?/?' ignoreScrollBehavior/>
-      <Route name='modal' path='/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
+    <Route name='home' path='/recommendations/staff-picks/' handler={App} ignoreScrollBehavior>
+      <Route name='month' path='/recommendations/staff-picks/:month?/?' ignoreScrollBehavior/>
+      <Route name='modal' path='/recommendations/staff-picks/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
         <NotFoundRoute handler={Error404Page} />
       </Route>
     </Route>
@@ -81,6 +83,7 @@ app.use(function(req, res) {
   iso = new Iso();
 
   Router.run(routes, req.path, function (Root, state) {
+    console.log('run');
     let html = React.renderToString(<Root />),
       header = React.renderToString(<Header />),
       hero = React.renderToString(<Hero />),

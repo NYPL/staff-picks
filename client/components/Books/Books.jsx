@@ -222,7 +222,7 @@ var Books = React.createClass({
   },
 
   _handleClick (month) {
-    let API = '/api/ajax/picks/' + month,
+    let API = '/recommendations/staff-picks/api/ajax/picks/' + month,
       state = BookStore.getState();
 
     if (month) {
