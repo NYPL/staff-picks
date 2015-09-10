@@ -53,6 +53,12 @@ if (env.production) {
 // server and client side API routes
 let ApiRoutes = require('./server/ApiRoutes/ApiRoutes.js');
 
+app.use('/', (req, res, next) => {
+  if (req.path === '/recommendations/staff-picks') {
+    return res.redirect('/recommendations/staff-picks/');
+  }
+  next();
+});
 app.use('/', ApiRoutes);
 
 // after get the path
