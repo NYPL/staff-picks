@@ -80,16 +80,17 @@ var Books = React.createClass({
       _this.state.iso.arrange({
         filter: selector
       });
-    }, 200);
+    }, 350);
 
     if (storeState._isotopesDidUpdate) {
-      console.log('reloading items');
-      this.state.iso.reloadItems();
+      setTimeout(() => {
+        this.state.iso.reloadItems();
+      }, 150);
       setTimeout(() => {
         _this.state.iso.arrange({
           filter: selector
         });
-      }, 700);
+      }, 850);
     }
 
     this.state.iso.on('arrangeComplete', filteredItems => {
@@ -223,8 +224,7 @@ var Books = React.createClass({
   },
 
   _handleClick (month) {
-    let API = '/recommendations/staff-picks/api/ajax/picks/' + month,
-      state = BookStore.getState();
+    let API = '/recommendations/staff-picks/api/ajax/picks/' + month;
 
     if (month) {
       $.ajax({
@@ -232,13 +232,17 @@ var Books = React.createClass({
         dataType: 'json',
         url: API,
         success: data => {
+          let date = data.currentMonthPicks.date,
+            picks = data.currentMonthPicks,
+            filters = data.filters;
+
           this.transitionTo('month', {
-            month: data.currentMonthPicks.date,
+            month: date,
           });
           BookActions.clearFilters();
           BookActions.isotopesDidUpdate(true);
-          BookActions.updatePicks(data.currentMonthPicks);
-          BookActions.updateInitialFilters(data.filters);
+          BookActions.updatePicks(picks);
+          BookActions.updateInitialFilters(filters);
           BookActions.isotopesDidUpdate(false);
         }
       });
