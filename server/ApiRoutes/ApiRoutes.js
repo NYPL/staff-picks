@@ -1,6 +1,7 @@
 import express from 'express';
 import axios from 'axios';
 import parser from 'jsonapi-parserinator';
+import {apiRoot, apiEndpoint, fields, pageSize, includes} from '../appConfig.js';
 
 let router = express.Router();
 let options = {
@@ -11,8 +12,8 @@ parser.setChildrenObjects(options);
 
 
 function CurrentMonthData(req, res, next) {
-  let endpoint = 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&page[size]=1&include=previous-list,next-list,picks.item.tags,picks.age';
-
+  let endpoint = apiRoot + apiEndpoint + '?' + fields + pageSize + includes; 
+console.log(endpoint);
   axios
     .get(endpoint)
     .then(data => {
@@ -54,8 +55,10 @@ function CurrentMonthData(req, res, next) {
 }
 
 function SelectMonthData(req, res, next) {
-  let endpoint = `http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${req.params.month}?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&include=previous-list,next-list,picks.item.tags,picks.age`;
+  let month = req.params.month,
+    endpoint = apiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
 
+  console.log(endpoint);
   axios
     .get(endpoint)
     .then(data => {
@@ -94,7 +97,7 @@ function SelectMonthData(req, res, next) {
 }
 
 function AjaxData(req, res) {
-  let endpoint = `http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${req.params.month}?fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri&include=previous-list,next-list,picks.item.tags,picks.age`;
+  let endpoint = `http://qa.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${req.params.month}`;
 
   axios
     .get(endpoint)
