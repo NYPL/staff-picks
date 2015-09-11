@@ -75,11 +75,12 @@ var Books = React.createClass({
       selector += '.' + filters.join('.');
     }
 
-    // setTimeout(() => {
+    // The setTimeout is for switching between grid/list display.
+    setTimeout(() => {
       _this.state.iso.arrange({
         filter: selector
       });
-    // }, 200);
+    }, 200);
 
     if (storeState._isotopesDidUpdate) {
       console.log('reloading items');
