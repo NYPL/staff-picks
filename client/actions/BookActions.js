@@ -2,6 +2,10 @@
 import alt from '../alt.js';
 
 class StaffPicks {
+  updatePicks(picks) {
+    this.dispatch(picks);
+  }
+
   updateBookDisplay(displayType) {
     this.dispatch(displayType);
   }
@@ -19,6 +23,14 @@ class StaffPicks {
   }
 
   updateNewFilters(filters) {
+    this.dispatch(filters);
+  }
+
+  isotopesDidUpdate(bool) {
+    this.dispatch(bool);
+  }
+
+  updateInitialFilters(filters) {
     this.dispatch(filters);
   }
 };

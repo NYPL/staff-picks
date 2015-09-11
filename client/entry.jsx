@@ -5,9 +5,6 @@ import React from 'react/addons';
 import DocMeta from 'react-doc-meta';
 import Router from 'react-router';
 
-// Utilities
-import API from './utils/ApiService';
-
 // NYPL Components
 import Header from './components/HeaderOld/Header.jsx';
 import Hero from './components/Hero/Hero.jsx';
@@ -18,19 +15,8 @@ import Books from './components/Books/Books.jsx';
 import Sidebar from './components/Sidebar/Sidebar.jsx';
 import BookModal from './components/BookModal/BookModal.jsx';
 
-/* Reads from local storage (i.e. Refinery) */
-// If we follow the FLUX architecture
-// data would not be defined, instead we would
-// load the data via Store Actions and update our
-// App Constants. As of now, we are mocking an API
-// call to fetch the data.
-// const data = API.getData();
-// const books = API.getBooks();
-
-API.setStaffPick(staffPicks);
-API.setFilters(filters);
-
-const books = API.getBooks();
+import alt from './alt.js';
+import Iso from 'iso';
 
 let Route = Router.Route,
   NotFoundRoute = Router.NotFoundRoute,
@@ -67,22 +53,15 @@ class App extends React.Component {
         </div>
         <div className='main-container'>
           <div id='sidebar'>
-            <Sidebar filters={this.props.filters} />
+            <Sidebar />
           </div>
           <div id='books'>
-            <Books books={this.props.data} currentList={this.props.currentList}/>
+            <Books />
           </div>
         </div>
       </div>
     );
   }
-}
-
-let rpRoute = Router.HistoryLocation.getCurrentPath(),
-  childrenRoute = '';
-// console.log(rpRoute);
-if (rpRoute === '/recommendations/staff-picks/') {
-  childrenRoute = '/recommendations/staff-picks';
 }
 
 let routes = (
@@ -98,15 +77,13 @@ React.render(<Header />, document.getElementById('header-container'));
 React.render(<Footer />, document.getElementById('footer-container'));
 React.render(<Hero />, document.getElementById('hero'));
 
-// if ( !books ) {
-//   React.render(<Error404Page />, document.getElementById("content"));
-// } else {
-//   React.reander(<App />, document.getElementById('content'));
-// }
+window.onload = () => {
+  Iso.bootstrap((state, meta, container) => {
+    alt.bootstrap(state);
 
-Router.run(routes, Router.HistoryLocation, (Root) => {
-  React.render(<Root data={staffPicks} filters={{'filters': filters['filters']}}
-    currentList={currentList} />,
-    document.getElementById('content'));
-});
-
+    Router.run(routes, Router.HistoryLocation, (Root) => {
+      React.render(<Root />,
+        document.getElementById('content'));
+    });
+  });
+};

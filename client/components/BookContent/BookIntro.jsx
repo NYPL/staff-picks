@@ -9,7 +9,7 @@ class TagList extends React.Component {
   }
 
   render () {
-    var tags = this.props.tags.map(tag => {
+    let tags = this.props.tags.map(tag => {
       return (
         <li>{tag}</li>
       );
@@ -33,8 +33,8 @@ class BookIntro extends React.Component {
   }
 
   render () {
-      const book = this.props.book,
-      tags = _.chain(book['item']['staff-pick-tag'])
+    const book = this.props.book,
+      tags = _.chain(book['item']['tags'])
         .pluck('attributes')
         .pluck('tag')
         .flatten()

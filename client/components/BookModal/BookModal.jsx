@@ -12,25 +12,24 @@ import BookTitle from '../BookContent/BookTitle.jsx';
 import BookIntro from '../BookContent/BookIntro.jsx';
 import BookShare from '../BookContent/BookShare.jsx';
 
-import API from '../../utils/ApiService.js';
-
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
 let Navigation = Router.Navigation;
-let books = API.getBooks();
 
 if (global.window) {
   Modal.setAppElement(document.getElementById('content'));
   Modal.injectCSS();
 }
 
-// class BookModal extends React.Component {
 let BookModal = React.createClass({
   getInitialState() {
     let paramID = this.props.params.id,
       modalBook = {},
       age;
+
+    let store = BookStore.getState();
+    let books = store._currentMonthPicks.picks;
 
     if (!books.length) {
       if (this.props.data['staff-picks']) {
@@ -38,7 +37,7 @@ let BookModal = React.createClass({
       }
     }
 
-    _.each(books, function (book) {
+    _.each(books, (book) => {
       if (book['item']['id'] === paramID) {
         modalBook = book;
         age = book['age'] ? book['age'].attributes.age : 'adult';
@@ -55,13 +54,13 @@ let BookModal = React.createClass({
 
   mixins: [Navigation],
 
-  openModal: function () {
+  openModal() {
     this.setState({
       modalIsOpen: true
     });
   },
 
-  closeModal: function () {
+  closeModal() {
     this.setState({
       modalIsOpen: false
     });
@@ -70,7 +69,7 @@ let BookModal = React.createClass({
     }, 200);
   },
 
-  render: function() {
+  render() {
     let book = this.state.book,
       title = 'Staff Picks | The New York Public Library',
       imageSrc = '/client/images/staff_pic_bg.jpg',
@@ -88,7 +87,7 @@ let BookModal = React.createClass({
     imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?` +
        `&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
 
-    var tags = [
+    let tags = [
       {property: "og:title", content: title},
       {property: "og:type", content: 'website'},
       {property: "og:image", content: imageLink},

@@ -14,7 +14,7 @@ class AgeTabs extends React.Component {
 
   render () {
     // Render each TabElement
-    var TabElements = data.map(function (element) {
+    var TabElements = data.map((element) => {
       return (
         <TabElement 
           key={element.name} 

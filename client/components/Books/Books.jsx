@@ -1,37 +1,27 @@
 import React from 'react';
+import Router from 'react-router';
 import Radium from 'radium';
+import parser from 'jsonapi-parserinator';
+import _ from 'underscore';
+
 import Book from '../Book/Book.jsx';
 import BookContent from '../BookContent/BookContent.jsx';
-import API from '../../utils/ApiService.js';
 import CloseButton from './CloseButton.jsx';
-import parser from 'jsonapi-parserinator';
-
-import _ from 'underscore';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
-
-import Router from 'react-router';
-
-let Navigation = Router.Navigation;
-
-let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-let bookData = API.getBooks();
-let currentList = API.getCurrentList();
-
 import staffPicksDate from '../../utils/DateService.js';
 
-// class Books extends React.Component {
-var Books = React.createClass({
-  getInitialState() {
-    let books = this.props.books ? this.props.books['staff-picks'] : bookData['staff-picks'];
 
-    let currentList = this.props.currentList || currentList;
+let Navigation = Router.Navigation,
+  ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
+let Books = React.createClass({
+  getInitialState() {
     return _.extend({
       iso: null,
       book: {},
-      currentList,
-      books: books,
+      books: [],
       modalIsOpen: false,
       noResults: false
     }, BookStore.getState());
@@ -41,8 +31,7 @@ var Books = React.createClass({
 
   componentDidMount() {
     // This needs to be set done once the component is available
-    let grid = document.getElementById('masonryContainer'),
-      _this = this;
+    let grid = document.getElementById('masonryContainer');
 
     // this.setState does not work in this case because
     // iso.arrange also needs to be called.
@@ -57,15 +46,15 @@ var Books = React.createClass({
     });
 
     $('#masonryContainer').css('opacity', '1');
-
+    this.state.iso.arrange({
+      filter: '.Adult'
+    });
     setTimeout(() => {
-      _this.state.iso.arrange({
-        filter: '.Adult'
-      });
-    }, 1200);
+      BookActions.updateNewFilters(this.state.iso.getItemElements());
+      BookActions.updateFilterAge('Adult');
+    }, 100);
 
     BookStore.listen(this._onChange);
-    BookActions.updateNewFilters(this.state.iso.getItemElements());
   },
 
   componentDidUnmount() {
@@ -83,11 +72,23 @@ var Books = React.createClass({
       selector += '.' + filters.join('.');
     }
 
+    // The setTimeout is for switching between grid/list display.
     setTimeout(() => {
       _this.state.iso.arrange({
         filter: selector
       });
-    }, 100);
+    }, 250);
+
+    if (storeState._isotopesDidUpdate) {
+      setTimeout(() => {
+        this.state.iso.reloadItems();
+      }, 200);
+      setTimeout(() => {
+        _this.state.iso.arrange({
+          filter: selector
+        });
+      }, 850);
+    }
 
     this.state.iso.on('arrangeComplete', filteredItems => {
       if (!filteredItems.length) {
@@ -104,13 +105,13 @@ var Books = React.createClass({
 
   _openModal(book) {
     this.transitionTo('modal', {
-      month: this.state.currentList.currentList['list-date'],
+      month: this.state._currentMonthPicks.date,
       id: book['item']['id']
     });
   },
 
   _getTags(elem) {
-    return elem['item']['staff-pick-tag'] || [];
+    return elem['item']['tags'] || [];
   },
 
   _getAge(elem) {
@@ -124,10 +125,12 @@ var Books = React.createClass({
     const openModal = this._openModal,
       _this = this;
 
-    let books, months, list, date, thisMonth, thisyear,
-      nextHref, previousHref, previousLink, nextLink;
+    let currentMonthPicks = this.state._currentMonthPicks,
+      picks = currentMonthPicks.picks,
+      books, months, pickDate, date, thisMonth, thisyear,
+      nextMonth, previousMonth, previousLink, nextLink;
 
-    books = this.state.books.map((element, i) => {
+    books = picks.map((element, i) => {
       let tagList = _this._getTags(element),
         age = _this._getAge(element),
         tagIDs = _.map(tagList, tag => {
@@ -151,33 +154,52 @@ var Books = React.createClass({
       );
     });
 
-    if (this.state.currentList) {
-      months = ['January', 'February', 'March', 'April', 'May',
-        'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-      list = this.state.currentList;
-      date = staffPicksDate(list.currentList['list-date']);
-      thisMonth = date.month;
-      thisyear = date.year;
+    months = ['January', 'February', 'March', 'April', 'May',
+      'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    pickDate = currentMonthPicks.date;
+    date = staffPicksDate(pickDate);
+    thisMonth = date.month;
+    thisyear = date.year;
 
-      previousHref = !_.isEmpty(list.previousList) ? list.previousList.links.self : undefined;
-      nextHref = !_.isEmpty(list.nextList) ? list.nextList.links.self : undefined;
-    }
+    let previousMonthDate = currentMonthPicks.previousList['list-date'];
+    let nextMonthDate = currentMonthPicks.nextList['list-date'];
 
-    previousLink = (
-      <a style={styles.previousMonth} onClick={this._handleClick.bind(this, previousHref)}>
-        Picks for June<span className='left-icon'></span>
+    previousMonth = {
+      active: !_.isEmpty(currentMonthPicks.previousList),
+      date: previousMonthDate,
+      month: () => {
+        if (_.isEmpty(currentMonthPicks.previousList)) {
+          return;
+        }
+        return staffPicksDate(previousMonthDate).month;
+      }
+    };
+    nextMonth = {
+      active: !_.isEmpty(currentMonthPicks.nextList),
+      date: nextMonthDate,
+      month: () => {
+        if (_.isEmpty(currentMonthPicks.nextList)) {
+          return;
+        }
+        return staffPicksDate(nextMonthDate).month;
+      }
+    };
+
+    previousLink = previousMonth.active ? (
+      <a style={styles.previousMonth} onClick={this._handleClick.bind(this, previousMonth.date)}>
+        Picks for {previousMonth.month()}<span className='left-icon'></span>
       </a>
-    );
-    nextLink = (
-      <a style={styles.nextMonth} onClick={this._handleClick.bind(this, nextHref)}>
-        Picks for August<span className='right-icon'></span>
+    ) : null;
+    nextLink = nextMonth.active ? (
+      <a style={styles.nextMonth} onClick={this._handleClick.bind(this, nextMonth.date)}>
+        Picks for {nextMonth.month()}<span className='right-icon'></span>
       </a>
-    );
+    ) : null;
 
     return (
       <div>
         <div className='month-picker' style={styles.monthPicker}>
-          <p style={styles.month}>{thisMonth} {thisyear}</p>
+          {previousLink}<p style={styles.month}>{thisMonth} {thisyear}</p>{nextLink}
         </div>
 
         <div id="masonryContainer" ref="masonryContainer" style={{opacity: '0'}}>
@@ -196,15 +218,27 @@ var Books = React.createClass({
     );
   },
 
-  _handleClick (API) {
-    if (API) {
+  _handleClick (month) {
+    let API = '/recommendations/staff-picks/api/ajax/picks/' + month;
+
+    if (month) {
       $.ajax({
         type: 'GET',
-        dataType: 'jsonp',
-        url: API + '?include=previous-list,next-list,picks.item.tags,picks.age',
-        success: function (data) {
-          console.log(parser.parse(data));
+        dataType: 'json',
+        url: API,
+        success: data => {
+          let date = data.currentMonthPicks.date,
+            picks = data.currentMonthPicks,
+            filters = data.filters;
 
+          this.transitionTo('month', {
+            month: date,
+          });
+          BookActions.clearFilters();
+          BookActions.isotopesDidUpdate(true);
+          BookActions.updatePicks(picks);
+          BookActions.updateInitialFilters(filters);
+          BookActions.isotopesDidUpdate(false);
         }
       });
     }
@@ -242,8 +276,8 @@ const styles = {
   month: {
     display: 'inline-block',
     color: '#333333',
-    marginLeft: '25px',
-    '@media (min-width: 600px)': { marginLeft: '0' }
+    position: 'absolute',
+    '@media (min-width: 600px)': { left: '52%' }
   },
   nextMonth: {
     float: 'right'

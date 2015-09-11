@@ -7,7 +7,6 @@ import cx from 'classnames';
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
-
 // Create the class
 class TabElement extends React.Component {
   // Constructor used in ES6
