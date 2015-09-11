@@ -1,25 +1,22 @@
 import React from 'react';
+import Router from 'react-router';
 import Radium from 'radium';
+import parser from 'jsonapi-parserinator';
+import _ from 'underscore';
+
 import Book from '../Book/Book.jsx';
 import BookContent from '../BookContent/BookContent.jsx';
-import API from '../../utils/ApiService.js';
 import CloseButton from './CloseButton.jsx';
-import parser from 'jsonapi-parserinator';
-
-import _ from 'underscore';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
-
-import Router from 'react-router';
-
-let Navigation = Router.Navigation;
-
-let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 import staffPicksDate from '../../utils/DateService.js';
 
-// class Books extends React.Component {
-var Books = React.createClass({
+
+let Navigation = Router.Navigation,
+  ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
+let Books = React.createClass({
   getInitialState() {
     return _.extend({
       iso: null,
@@ -80,12 +77,12 @@ var Books = React.createClass({
       _this.state.iso.arrange({
         filter: selector
       });
-    }, 350);
+    }, 400);
 
     if (storeState._isotopesDidUpdate) {
       setTimeout(() => {
         this.state.iso.reloadItems();
-      }, 150);
+      }, 200);
       setTimeout(() => {
         _this.state.iso.arrange({
           filter: selector
@@ -128,12 +125,10 @@ var Books = React.createClass({
     const openModal = this._openModal,
       _this = this;
 
-    let books, months, pickDate, date, thisMonth, thisyear,
+    let currentMonthPicks = this.state._currentMonthPicks,
+      picks = currentMonthPicks.picks,
+      books, months, pickDate, date, thisMonth, thisyear,
       nextMonth, previousMonth, previousLink, nextLink;
-
-    let currentMonthPicks = this.state._currentMonthPicks;
-
-    let picks = currentMonthPicks.picks;
 
     books = picks.map((element, i) => {
       let tagList = _this._getTags(element),

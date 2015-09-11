@@ -5,8 +5,6 @@ import Radium from 'radium';
 // Component import
 import HeroTitle from './HeroTitle/HeroTitle.jsx';
 import HeroImage from './HeroImage/HeroImage.jsx';
-import BookStore from '../../stores/BookStore.js';
-import API from '../../utils/ApiService.js';
 
 class Hero extends React.Component {
   // Constructor used in ES6

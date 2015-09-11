@@ -14,12 +14,7 @@ class BookContent extends React.Component {
       staffPick = book['item'],
       bookTarget = staffPick['attributes']['catalog-slug'],
       ebookTarget = staffPick['attributes']['ebook-uri'] ?
-        staffPick['attributes']['ebook-uri']['full-uri'] : undefined,
-      tags = _.chain(staffPick['tags'])
-        .pluck('attributes')
-        .pluck('tag')
-        .flatten()
-        .value();
+        staffPick['attributes']['ebook-uri']['full-uri'] : undefined;
 
     let bookHREF = `https://nypl.bibliocommons.com/item/show/${bookTarget}`,
       ebookHREF = ebookTarget,
