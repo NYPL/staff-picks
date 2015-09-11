@@ -5,9 +5,6 @@ import React from 'react/addons';
 import DocMeta from 'react-doc-meta';
 import Router from 'react-router';
 
-// Utilities
-import API from './utils/ApiService';
-
 // NYPL Components
 import Header from './components/HeaderOld/Header.jsx';
 import Hero from './components/Hero/Hero.jsx';
@@ -67,7 +64,6 @@ class App extends React.Component {
   }
 }
 
-
 let routes = (
     <Route name='home' path='/recommendations/staff-picks/' handler={App} ignoreScrollBehavior>
       <Route name='month' path='/recommendations/staff-picks/:month?/?' ignoreScrollBehavior/>
@@ -91,5 +87,3 @@ window.onload = () => {
     });
   });
 };
-
-

@@ -5,7 +5,6 @@ import _ from 'underscore';
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
-import API from '../../utils/ApiService.js';
 import { Link } from 'react-router';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 

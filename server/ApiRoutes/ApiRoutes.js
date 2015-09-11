@@ -13,7 +13,7 @@ parser.setChildrenObjects(options);
 
 function CurrentMonthData(req, res, next) {
   let endpoint = apiRoot + apiEndpoint + '?' + fields + pageSize + includes; 
-console.log(endpoint);
+
   axios
     .get(endpoint)
     .then(data => {
@@ -58,7 +58,6 @@ function SelectMonthData(req, res, next) {
   let month = req.params.month,
     endpoint = apiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
 
-  console.log(endpoint);
   axios
     .get(endpoint)
     .then(data => {
@@ -100,7 +99,6 @@ function AjaxData(req, res) {
   let month = req.params.month,
     endpoint = apiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
 
-  console.log(endpoint);
   axios
     .get(endpoint)
     .then(data => {

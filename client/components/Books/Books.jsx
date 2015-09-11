@@ -77,7 +77,7 @@ let Books = React.createClass({
       _this.state.iso.arrange({
         filter: selector
       });
-    }, 400);
+    }, 250);
 
     if (storeState._isotopesDidUpdate) {
       setTimeout(() => {
