@@ -97,8 +97,10 @@ function SelectMonthData(req, res, next) {
 }
 
 function AjaxData(req, res) {
-  let endpoint = `http://qa.refinery.aws.nypl.org/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists/monthly-${req.params.month}`;
+  let month = req.params.month,
+    endpoint = apiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
 
+  console.log(endpoint);
   axios
     .get(endpoint)
     .then(data => {
