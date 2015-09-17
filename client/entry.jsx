@@ -18,6 +18,8 @@ import BookModal from './components/BookModal/BookModal.jsx';
 import alt from './alt.js';
 import Iso from 'iso';
 
+import ga from 'react-ga';
+
 let Route = Router.Route,
   NotFoundRoute = Router.NotFoundRoute,
   DefaultRoute = Router.DefaultRoute,
@@ -81,7 +83,11 @@ window.onload = () => {
   Iso.bootstrap((state, meta, container) => {
     alt.bootstrap(state);
 
-    Router.run(routes, Router.HistoryLocation, (Root) => {
+    let gaOpts = { debug: true };
+    ga.initialize('UA-1420324-122', gaOpts);
+
+    Router.run(routes, Router.HistoryLocation, (Root, state) => {
+      ga.pageview(state.pathname.substring(0, state.pathname.length - 1));
       React.render(<Root />,
         document.getElementById('content'));
     });

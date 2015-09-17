@@ -8,6 +8,8 @@ import BookActions from '../../actions/BookActions.js';
 import { Link } from 'react-router';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 
+import ga from 'react-ga';
+
 let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 class CloseButton extends React.Component {
@@ -249,6 +251,20 @@ class BookFilters extends React.Component {
   }
 
   _handleClick(filter) {
+    if (!filter.active) {
+      ga.event({
+        category: 'Staff Picks',
+        action: 'Filter',
+        label: `Selected filter: ${filter.id}`
+      });
+    } else {
+      ga.event({
+        category: 'Staff Picks',
+        action: 'Filter',
+        label: `Unselected filter: ${filter.id}`
+      });
+    }
+
     let filterType = filter.id;
     filter.active = !filter.active;
     BookActions.toggleBookFilter(filterType);

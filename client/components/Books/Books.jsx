@@ -12,6 +12,7 @@ import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 import staffPicksDate from '../../utils/DateService.js';
 
+import ga from 'react-ga';
 
 let Navigation = Router.Navigation,
   ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
@@ -230,6 +231,12 @@ let Books = React.createClass({
           let date = data.currentMonthPicks.date,
             picks = data.currentMonthPicks,
             filters = data.filters;
+
+          ga.event({
+            category: 'Staff Picks',
+            action: 'Select new month',
+            label: `Selected month: ${month}`
+          });
 
           this.transitionTo('month', {
             month: date,
