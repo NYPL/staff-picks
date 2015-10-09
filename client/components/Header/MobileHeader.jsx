@@ -3,6 +3,8 @@ import Radium from 'radium';
 import cx from 'classnames';
 import ReactTappable from 'react-tappable';
 
+import gaUtils from '../../utils/gaUtils.js';
+
 // ALT FLUX
 import HeaderStore from '../../stores/HeaderStore.js';
 import HeaderActions from '../../actions/HeaderActions.js';

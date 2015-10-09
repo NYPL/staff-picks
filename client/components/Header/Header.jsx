@@ -5,7 +5,9 @@ import cx from 'classnames';
 
 // ALT Flux
 import HeaderStore from '../../stores/HeaderStore.js';
-import HeaderActions from '../../actions/HeaderActions.js';
+import Actions from '../../actions/HeaderActions.js';
+
+import gaUtils from '../../utils/gaUtils.js';
 
 // NYPL Components
 import Logo from '../Logo/Logo.jsx';

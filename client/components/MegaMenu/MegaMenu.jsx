@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 // ALT Flux Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
-import HeaderActions from '../../actions/HeaderActions.js';
+import Actions from '../../actions/HeaderActions.js';
 
 // Dependent NYPL React Components
 import MegaMenuSubNav from './MegaMenuSubNav.jsx';

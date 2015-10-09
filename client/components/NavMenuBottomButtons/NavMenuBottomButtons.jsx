@@ -1,6 +1,8 @@
 import React from 'react';
 import Radium from 'radium';
 
+import gaUtils from '../../utils/gaUtils.js';
+
 // Dependent NYPL React Component
 import DonateButton from '../DonateButton/DonateButton.jsx';
 

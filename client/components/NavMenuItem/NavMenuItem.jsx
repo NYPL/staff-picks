@@ -6,7 +6,7 @@ import gaUtils from '../../utils/gaUtils.js';
 
 // NYPL Dependent React Components
 import MegaMenu from '../MegaMenu/MegaMenu.jsx';
-import MegaMenuArrow from '../MegaMenu/MegaMenuArrow';
+import MegaMenuArrow from '../MegaMenu/MegaMenuArrow.jsx';
 
 class NavMenuItem extends React.Component {
 

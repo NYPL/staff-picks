@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'underscore';
 
+import gaUtils from '../../utils/gaUtils.js';
+
 import config from '../../../server/appConfig.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.jsx';
 

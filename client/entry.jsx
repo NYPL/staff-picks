@@ -82,8 +82,7 @@ window.onload = () => {
     alt.bootstrap(state);
 
     Router.run(routes, Router.HistoryLocation, (Root) => {
-      React.render(<Root />,
-        document.getElementById('content'));
+      React.render(<Root />, document.getElementById('content'));
     });
   });
 };
