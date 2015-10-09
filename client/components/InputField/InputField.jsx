@@ -11,12 +11,18 @@ class InputField extends React.Component {
   render () {
     return (
       <input
+      id={this.props.id}
       lang={this.props.lang}
       type={this.props.type} 
       name={this.props.name} 
       value={this.props.value}
+      checked={this.props.checked}
+      maxLength={this.props.maxLength}
       placeholder={this.props.placeholder}
-      required={this.props.required || null}
+      className={this.props.className}
+      onClick={this.props.onClick}
+      onChange={this.props.onChange}
+      required={this.props.isRequired || false}
       style={[
         styles.base,
         this.props.style
@@ -33,7 +39,6 @@ InputField.defaultProps = {
 
 const styles = {
   base: {
-
   }
 };
 

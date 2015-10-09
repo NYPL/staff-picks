@@ -6,7 +6,7 @@ import DocMeta from 'react-doc-meta';
 import Router from 'react-router';
 
 // NYPL Components
-import Header from './components/HeaderOld/Header.jsx';
+import Header from './components/Header/Header.jsx';
 import Hero from './components/Hero/Hero.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import AgeTabs from './components/AgeTabs/AgeTabs.jsx';

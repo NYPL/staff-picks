@@ -1,15 +1,26 @@
 import express from 'express';
 import axios from 'axios';
 import parser from 'jsonapi-parserinator';
-import {apiRoot, apiEndpoint, fields, pageSize, includes} from '../appConfig.js';
+import {apiRoot, apiEndpoint, fields, pageSize, includes, api, headerApi} from '../appConfig.js';
 
-let router = express.Router();
-let options = {
-  includes: ['previous-list', 'next-list', 'item.tags', 'picks.age']
-};
+let router = express.Router(),
+  appEnvironment = process.env.APP_ENV || 'production',
+  headerApiRoot = api.root[appEnvironment],
+  options = {
+    includes: ['previous-list', 'next-list', 'item.tags', 'picks.age']
+  },
+  headerOptions = {
+    endpoint: `${headerApiRoot}${headerApi.endpoint}`,
+    includes: headerApi.includes,
+    filters: headerApi.filters
+  };
+
+function getHeaderData() {
+  let completeApiUrl = parser.getCompleteApi(headerOptions);
+  return fetchApiData(completeApiUrl);
+}
 
 parser.setChildrenObjects(options);
-
 
 function CurrentMonthData(req, res, next) {
   let endpoint = apiRoot + apiEndpoint + '?' + fields + pageSize + includes; 
