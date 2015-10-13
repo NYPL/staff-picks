@@ -14,7 +14,7 @@ class FindUsFeature extends React.Component {
     return (
       <div className={this.props.className}>
         <div className={this.props.className + '-Wrapper'}>
-          <div className={this.props.className + '-Tag'}>Information</div>
+          <div className={this.props.className + '-Tag'}>Locations</div>
           <h2 className={this.props.className + '-Title'}>
             Explore NYPL&apos;s 92 locations in the Bronx, Manhattan, and Staten Island.
           </h2>
