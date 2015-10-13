@@ -1,7 +1,7 @@
 // ACTIONS
 import alt from '../alt.js';
 
-class StaffPicks {
+class Actions {
   updatePicks(picks) {
     this.dispatch(picks);
   }
@@ -35,4 +35,4 @@ class StaffPicks {
   }
 };
 
-export default alt.createActions(StaffPicks);
+export default alt.createActions(Actions);

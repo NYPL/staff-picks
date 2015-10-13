@@ -1,5 +1,3 @@
-'use strict';
-
 import fs from 'fs';
 import path from 'path';
 import objectAssign from 'object-assign';
@@ -15,7 +13,7 @@ import DocMeta from 'react-doc-meta';
 import parser from 'jsonapi-parserinator';
 import _ from 'underscore';
 
-import Header from './client/components/HeaderOld/Header.jsx';
+import Header from './client/components/Header/Header.jsx';
 import Hero from './client/components/Hero/Hero.jsx';
 import Footer from './client/components/Footer/Footer.jsx';
 import App from './client/server.jsx';
@@ -26,9 +24,9 @@ import axios from 'axios';
 import alt from './client/alt.js';
 import Iso from 'iso';
 
+import ApiRoutes from './server/ApiRoutes/ApiRoutes.js';
+
 let app = express(),
-  // server and client side API routes
-  ApiRoutes = require('./server/ApiRoutes/ApiRoutes.js'),
   env = {
     production: process.env.NODE_ENV === 'production'
   };
@@ -104,7 +102,8 @@ app.use(function(req, res) {
       hero: hero,
       markup: iso.render(),
       footer: footer,
-      gaCode: analytics.google.code(env.production)
+      gaCode: analytics.google.code(env.production),
+      appEnv: process.env.APP_ENV || 'no APP_ENV',
     });
   }); /* end Router.run */
 });

@@ -1,14 +1,50 @@
-import AppDispatcher from '../dispatcher/AppDispatcher';
-import HeaderConstants from '../constants/HeaderConstants';
+import alt from '../alt.js';
+import axios from 'axios';
 
-export default {
-	// Updates the visibility of the Subscribe Form
-	// Dispatcher will update the App Constants
-	updateSubscribeFormVisible(subscribeFormVisible) {
-    AppDispatcher.handleAction({
-			actionType: HeaderConstants.SUBSCRIBE_FORM_VISIBLE,
-			subscribeFormVisible: subscribeFormVisible
-		});
-	}
+class Actions {
+  // TODO: Clean this method with new API methods
+  fetchHeaderData() {
+    let self = this;
 
-};
+    // Here we will use the client side AJAX request
+    // to fetch data
+    axios
+      .get('https://header.nypl.org/header-data')
+      .then(result => {
+        self.actions.updateHeaderData(result.data);
+      })
+      .catch(error => {
+        console.log('Error on local data fetch', error);
+      });
+  }
+
+  updateHeaderData(data) {
+    this.dispatch(data);
+  }
+
+  failedHeaderData(errorMessage) {
+    this.dispatch(errorMessage);
+  }
+
+  setMobileMenuButtonValue(currentActiveMobileButton) {
+    this.dispatch(currentActiveMobileButton);
+  }
+
+  setLastActiveMenuItem(value) {
+    this.dispatch(value);
+  }
+
+  searchButtonActionValue(actionValue) {
+    this.dispatch(actionValue);
+  }
+
+  updateIsHeaderSticky(value) {
+    this.dispatch(value);
+  }
+
+  toggleSubscribeFormVisible(value) {
+    this.dispatch(value);
+  }
+}
+
+export default alt.createActions(Actions);

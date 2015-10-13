@@ -9,8 +9,9 @@
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic' rel='stylesheet' type='text/css' />
 
   <link rel="shortcut icon" type="image/ico" href="http://ux-static.nypl.org/images/favicon.ico">
-  <!-- From gulp minified CSS -->
+  
   <link rel="stylesheet" type="text/css" href='client/styles/main.css' />
+
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -22,9 +23,11 @@
   </script>
 </head>
 <body>
+
     <div id='header-container'>
       <%- header %>
     </div>
+
     <div id='hero'>
       <%- hero %>
     </div>
@@ -37,28 +40,9 @@
       <%- footer %>
     </div>
 
-  <!-- twitter web intents widgets-->
- <script>
-    window.twttr = (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0],
-        t = window.twttr || {};
-      if (d.getElementById(id)) return t;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://platform.twitter.com/widgets.js";
-      fjs.parentNode.insertBefore(js, fjs);
-     
-      t._e = [];
-      t.ready = function(f) {
-        t._e.push(f);
-      };
-
-      return t;
-    }(document, "script", "twitter-wjs"));
-  </script>
-
   <script type='text/javascript'>
     var path = '<%- path %>';
+    var appEnv = "<%- appEnv %>";
   </script>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -84,7 +68,7 @@
     }(document, "script", "twitter-wjs"));
   </script>
 
-<!-- tumblr share button widgets-->
+  <!-- tumblr share button widgets-->
   <script>
     !function(d,s,id){
       var js,ajs=d.getElementsByTagName(s)[0];
