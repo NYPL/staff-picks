@@ -230,7 +230,6 @@
   @include calculation(width, '100% - 35px');
 
   @include desktop {
-    border: none;
     border-bottom: solid;
     border-bottom-width: 2px;
     border-color: #FFFFFF;

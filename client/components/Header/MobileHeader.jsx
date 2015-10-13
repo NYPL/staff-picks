@@ -7,7 +7,7 @@ import gaUtils from '../../utils/gaUtils.js';
 
 // ALT FLUX
 import HeaderStore from '../../stores/HeaderStore.js';
-import HeaderActions from '../../actions/HeaderActions.js';
+import Actions from '../../actions/HeaderActions.js';
 
 class MobileHeader extends React.Component {
 

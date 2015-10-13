@@ -1,7 +1,7 @@
 import alt from '../alt.js';
 import axios from 'axios';
 
-class HeaderActions {
+class Actions {
   // TODO: Clean this method with new API methods
   fetchHeaderData() {
     let self = this;
@@ -47,4 +47,4 @@ class HeaderActions {
   }
 }
 
-export default alt.createActions(HeaderActions);
+export default alt.createActions(Actions);
