@@ -76,7 +76,9 @@ function ContentModel() {
     content.description = data.attributes.description;
     content.spaceName = data.attributes['space-name'];
 
-    content.location = this.location(data.location);
+    if (data['nypl-location']) {
+      content.location = this.location(data.location);
+    }
   };
 
   this.location = data => {
@@ -120,7 +122,7 @@ function ContentModel() {
             end: data.content.dates.end
           };
           item.location = {
-            fullName: data.content.location.fullName
+            fullName: data.content.location ? data.content.location.fullName : ''
           };
           break;
         default:
