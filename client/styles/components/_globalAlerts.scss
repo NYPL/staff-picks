@@ -1,11 +1,9 @@
 &-GlobalAlerts {
-	position: absolute;
-	top: 60px;
-	z-index: 2;
+	position: relative;
+	border-bottom: 1px solid #908034;
 
 	@include desktop {
-		position: relative;
-		top: inherit;
+		border-bottom: none;
 	}
 
 	&.hide {
@@ -23,6 +21,7 @@
 		}
 	}
 
+	/* NOTE: Temoporarily removed */
 	&-CloseButton {
 		position: absolute;
 		font-size: 24px;
@@ -43,8 +42,7 @@
 		margin: .75em 1.75em .5em 1.2em;
 
 		@include desktop {
-			margin: .5em 0;
-			left: 105px;
+			margin: .5em 0 .5em 105px;
 		}
 
 		&-Item {
@@ -59,7 +57,7 @@
 				text-decoration: underline;
 				color: #333;
 
-				&:visited, {
+				&:visited, &:active {
 					color: #333;
 				}
 			}

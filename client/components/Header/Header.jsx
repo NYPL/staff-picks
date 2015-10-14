@@ -34,15 +34,12 @@ class Header extends React.Component {
     // the proper Data, then fetch.
     this._fetchDataIfNeeded();
 
-    // Assign method for proper scope
-    let handleHeaderScroll = this._handleStickyHeader.bind(this);
+    // Once the component mounts,
+    // enable the sticky header depending on position.
+    this._handleStickyHeader();
 
-    // Allows us to use window only after component has mounted
-    window.addEventListener('scroll',
-      function() {
-        handleHeaderScroll();
-      }
-    );
+    // Listen to the scroll event for the sticky header.
+    window.addEventListener('scroll', this._handleStickyHeader.bind(this));
   }
 
   componentWillUnmount() {
