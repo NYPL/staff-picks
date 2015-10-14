@@ -104,6 +104,7 @@ app.use(function(req, res) {
       footer: footer,
       gaCode: analytics.google.code(env.production),
       appEnv: process.env.APP_ENV || 'no APP_ENV',
+      completeUrl: res.locals.data.completeUrl
     });
   }); /* end Router.run */
 });

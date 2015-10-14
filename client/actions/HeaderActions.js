@@ -1,11 +1,11 @@
 import alt from '../alt.js';
 import axios from 'axios';
 
-class Actions {
+class HeaderActions {
   // TODO: Clean this method with new API methods
   fetchHeaderData() {
     let self = this;
-
+console.log('fetching header data');
     // Here we will use the client side AJAX request
     // to fetch data
     axios
@@ -47,4 +47,4 @@ class Actions {
   }
 }
 
-export default alt.createActions(Actions);
+export default alt.createActions(HeaderActions);

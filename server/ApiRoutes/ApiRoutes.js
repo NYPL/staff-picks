@@ -5,7 +5,7 @@ import {apiRoot, apiEndpoint, fields, pageSize, includes, api, headerApi} from '
 import Model from '../../client/utils/HeaderItemModel.js';
 
 let router = express.Router(),
-  appEnvironment = process.env.APP_ENV || 'qa',
+  appEnvironment = 'qa', //process.env.APP_ENV || 'qa',
   headerApiRoot = api.root[appEnvironment],
   options = {
     includes: ['previous-list', 'next-list', 'item.tags', 'picks.age']
@@ -67,7 +67,7 @@ function CurrentMonthData(req, res, next) {
           headerData: modelData,
           subscribeFormVisible: false
         },
-        completeApiUrl: endpoint
+        completeApiUrl: headerOptions.endpoint
       };
 
       next();
@@ -139,7 +139,7 @@ function SelectMonthData(req, res, next) {
           headerData: modelData,
           subscribeFormVisible: false
         },
-        completeApiUrl: endpoint
+        completeApiUrl: headerOptions.endpoint
       };
       next();
     }))
