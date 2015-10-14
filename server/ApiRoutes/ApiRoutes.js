@@ -5,7 +5,7 @@ import {apiRoot, apiEndpoint, fields, pageSize, includes, api, headerApi} from '
 import Model from '../../client/utils/HeaderItemModel.js';
 
 let router = express.Router(),
-  appEnvironment = 'qa', //process.env.APP_ENV || 'qa',
+  appEnvironment = process.env.APP_ENV || 'production',
   headerApiRoot = api.root[appEnvironment],
   options = {
     includes: ['previous-list', 'next-list', 'item.tags', 'picks.age']
@@ -66,8 +66,7 @@ function CurrentMonthData(req, res, next) {
         HeaderStore: {
           headerData: modelData,
           subscribeFormVisible: false
-        },
-        completeApiUrl: headerOptions.endpoint
+        }
       };
 
       next();
@@ -91,8 +90,7 @@ function CurrentMonthData(req, res, next) {
         HeaderStore: {
           headerData: [],
           subscribeFormVisible: false
-        },
-        completeApiUrl: ''
+        }
       };
       next();
     }); // end Axios call
@@ -138,8 +136,7 @@ function SelectMonthData(req, res, next) {
         HeaderStore: {
           headerData: modelData,
           subscribeFormVisible: false
-        },
-        completeApiUrl: headerOptions.endpoint
+        }
       };
       next();
     }))
@@ -162,8 +159,7 @@ function SelectMonthData(req, res, next) {
         HeaderStore: {
           headerData: [],
           subscribeFormVisible: false
-        },
-        completeApiUrl: ''
+        }
       };
       next();
     }); // end Axios call

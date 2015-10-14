@@ -5,7 +5,7 @@ class HeaderActions {
   // TODO: Clean this method with new API methods
   fetchHeaderData() {
     let self = this;
-console.log('fetching header data');
+
     // Here we will use the client side AJAX request
     // to fetch data
     axios

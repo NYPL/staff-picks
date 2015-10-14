@@ -32,7 +32,7 @@ class Header extends React.Component {
 
     // If the HeaderStore is not populated with
     // the proper Data, then fetch.
-    this._fetchDataIfNeeded();
+    // this._fetchDataIfNeeded();
 
     // Once the component mounts,
     // enable the sticky header depending on position.
