@@ -182,6 +182,11 @@ const config = {
       amount: 'Other'
     }
   ],
+  headerClientEnv: {
+    production: 'https://header.nypl.org',
+    qa: 'https://qa-header.nypl.org',
+    development: 'https://dev-header.nypl.org'
+  }
 };
 
 
