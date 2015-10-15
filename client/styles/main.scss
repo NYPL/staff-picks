@@ -233,7 +233,7 @@ body {
       .Header {
         &-Wrapper{
           border-top: 2px solid #EA212E;
-          z-index: 3;
+          z-index: 999;
           width: 100%;
           position: fixed;
           top: 0;
@@ -742,7 +742,7 @@ body {
 }
 
 .BookFilters__close-btn {
-  background: url("/client/images/icons/gray_x_button.svg") no-repeat;
+  background: url('/recommendations/staff-picks/client/images/icons/gray_x_button.svg') no-repeat;
   position: absolute;
   font-size: 1.3em;
   height: auto;

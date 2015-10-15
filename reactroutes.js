@@ -103,7 +103,7 @@ app.use(function(req, res) {
       markup: iso.render(),
       footer: footer,
       gaCode: analytics.google.code(env.production),
-      appEnv: process.env.APP_ENV || 'no APP_ENV',
+      appEnv: process.env.APP_ENV || 'no APP_ENV'
     });
   }); /* end Router.run */
 });

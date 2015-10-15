@@ -40,7 +40,7 @@ const config = {
       id: '29a4b824-e084-4771-aafc-52b3586c5e49',
       link: {
         en: {
-          text: 'browse',
+          text: '//www.nypl.org/browse',
           type: 'text-single'
         }
       },
@@ -57,7 +57,7 @@ const config = {
       id: '925d1fa9-1138-403c-9990-38861902b02d',
       link: {
         en: {
-          text: 'learn',
+          text: '//www.nypl.org/learn',
           type: 'text-single'
         }
       },
@@ -74,7 +74,7 @@ const config = {
       id: '851ed351-08f5-43f0-9011-9c317f85f0ca',
       link: {
         en: {
-          text: 'attend',
+          text: '//www.nypl.org/attend',
           type: 'text-single'
         }
       },
@@ -91,7 +91,7 @@ const config = {
       id: '4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9',
       link: {
         en: {
-          text: 'research',
+          text: '//www.nypl.org/research',
           type: 'text-single'
         }
       },
@@ -125,7 +125,7 @@ const config = {
       id: '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1',
       link: {
         en: {
-          text: 'give',
+          text: '//www.nypl.org/give',
           type: 'text-single'
         }
       },
@@ -142,7 +142,7 @@ const config = {
       id: '13d95ad5-f117-4415-ba2c-5c0b9618984d',
       link: {
         en: {
-          text: 'get-help',
+          text: '//www.nypl.org/get-help',
           type: 'text-single'
         }
       },
@@ -182,6 +182,11 @@ const config = {
       amount: 'Other'
     }
   ],
+  headerClientEnv: {
+    production: 'https://header.nypl.org',
+    qa: 'https://qa-header.nypl.org',
+    development: 'https://dev-header.nypl.org'
+  }
 };
 
 

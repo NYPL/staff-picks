@@ -76,7 +76,7 @@ class EmailSubscription extends React.Component {
                 ref='emailAddressField'
                 isRequired={true} />
 
-              <div className={`${formClass}-Error error ` + errorClass}>
+              <div className={`${formClass}-Error ` + errorClass}>
                 <span className='nypl-icon-solo-x icon'></span><span>Please enter a valid email address</span>
               </div>
 
