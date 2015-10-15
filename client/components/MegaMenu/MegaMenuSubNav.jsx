@@ -1,15 +1,21 @@
 import React from 'react';
 import _ from 'underscore';
 
-let MegaMenuSubNav = React.createClass({
-  getDefaultProps: function () {
-    return {
-      lang: "en"
-    };
-  },
-  render: function () {
-    let items = _.map(this.props.items, function(m, i) {
-        let target = m.target;
+import gaUtils from '../../utils/gaUtils.js';
+
+import config from '../../../server/appConfig.js';
+import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.jsx';
+
+class MegaMenuSubNav extends React.Component {
+
+  // Constructor used in ES6
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    let items = _.map(this.props.items, (m, i) => {
+        let target = m.link.en.text;
 
         if (typeof target === 'undefined') {
           // In reality target should never be undefined, but
@@ -18,20 +24,35 @@ let MegaMenuSubNav = React.createClass({
         } else if (!/^http/.exec(target)) {
           target = '//nypl.org/' + target;
         }
+        
         return (
           <li key={i}>
-            <a href={target}>{m.label[this.props.lang]}</a>
+            <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Go to...', `${this.props.label[this.props.lang].text}--${m.name[this.props.lang]['text']}`)}>
+              {m.name[this.props.lang]['text']}
+            </a>
           </li>
         );
-    }, this);
+      });
+
+    // Assign widget to the FindUs Menu Item by ID match
+    let socialMediaWidget = (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a') ?
+      <SocialMediaLinksWidget 
+        className={'MegaMenu-SubNav-SocialMediaWidget'}
+        links={config.socialMediaLinks} 
+        displayOnly={['facebook', 'twitter']} /> : null;
 
     return (
-      <div className='sub-nav'>
-        <h2>{this.props.label[this.props.lang]}</h2>
+      <div className='MegaMenu-SubNav'>
+        <h2>{this.props.label[this.props.lang].text}</h2>
         <ul>{items}</ul>
+        {socialMediaWidget}
       </div>
     );
   }
-});
+}
 
-module.exports = MegaMenuSubNav;
+MegaMenuSubNav.defaultProps = {
+  lang: 'en'
+};
+
+export default MegaMenuSubNav;

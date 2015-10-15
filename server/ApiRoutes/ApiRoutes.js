@@ -1,28 +1,42 @@
 import express from 'express';
 import axios from 'axios';
 import parser from 'jsonapi-parserinator';
-import {apiRoot, apiEndpoint, fields, pageSize, includes} from '../appConfig.js';
+import {apiRoot, apiEndpoint, fields, pageSize, includes, api, headerApi} from '../appConfig.js';
+import Model from '../../client/utils/HeaderItemModel.js';
 
-let router = express.Router();
-let options = {
-  includes: ['previous-list', 'next-list', 'item.tags', 'picks.age']
-};
+let router = express.Router(),
+  appEnvironment = 'qa', //process.env.APP_ENV || 'production',
+  headerApiRoot = api.root[appEnvironment],
+  options = {
+    includes: ['previous-list', 'next-list', 'item.tags', 'picks.age']
+  },
+  headerOptions = {
+    endpoint: `${headerApiRoot}${headerApi.endpoint}`,
+    includes: headerApi.includes,
+    filters: headerApi.filters
+  };
 
-parser.setChildrenObjects(options);
+function getHeaderData() {
+  let completeApiUrl = parser.getCompleteApi(headerOptions);
+  return fetchApiData(completeApiUrl);
+}
 
+function fetchApiData(url) {
+  return axios.get(url);
+}
 
 function CurrentMonthData(req, res, next) {
   let endpoint = apiRoot + apiEndpoint + '?' + fields + pageSize + includes; 
 
-  axios
-    .get(endpoint)
-    .then(data => {
-      let returnedData = data.data,
+  axios.all([getHeaderData(), fetchApiData(endpoint)])
+    .then(axios.spread((headerData, staffPicks) => {
+      let returnedData = staffPicks.data,
         // Filters can be extracted without parsing since they are all in the
         // included array:
         filters = parser.getOfType(returnedData.included, 'staff-pick-tag'),
         // parse the data
-        parsed = parser.parse(returnedData),
+        parsed = parser.parse(returnedData, options),
+        HeaderParsed = parser.parse(headerData.data, headerOptions),
         // Since the endpoint returns a list of monthly picks
         currentMonth = parsed[0],
         // Create the Model for a pick but this will eventually be in a separate file
@@ -33,10 +47,11 @@ function CurrentMonthData(req, res, next) {
           // Update previous/next object to include ID
           previousList: currentMonth['previous-list'] ? currentMonth['previous-list'].attributes : {},
           nextList: currentMonth['next-list'] ? currentMonth['next-list'].attributes : {}
-        };
+        },
+        modelData = Model.build(HeaderParsed);
 
       res.locals.data = {
-        'BookStore': {
+        BookStore: {
           _bookDisplay:  'grid',
           _age: 'Adult',
           _gridDisplay: true,
@@ -47,26 +62,52 @@ function CurrentMonthData(req, res, next) {
           _updatedFilters: [],
           _currentMonthPicks: currentMonthPicks,
           _isotopesDidUpdate: false
+        },
+        HeaderStore: {
+          headerData: modelData,
+          subscribeFormVisible: false
         }
       };
 
       next();
-    }); /* end Axios call */
+    }))
+    // console error messages
+    .catch(error => {
+      console.log('Error calling API CurrentMonthData: ' + error);
+      res.locals.data = {
+        BookStore: {
+          _bookDisplay:  'grid',
+          _age: 'Adult',
+          _gridDisplay: true,
+          _listDisplay: false,
+          _allFilters: [],
+          _initialFilters: [],
+          _filters: [],
+          _updatedFilters: [],
+          _currentMonthPicks: {},
+          _isotopesDidUpdate: false
+        },
+        HeaderStore: {
+          headerData: [],
+          subscribeFormVisible: false
+        }
+      };
+      next();
+    }); // end Axios call
 }
 
 function SelectMonthData(req, res, next) {
   let month = req.params.month,
     endpoint = apiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
 
-  axios
-    .get(endpoint)
-    .then(data => {
-      let returnedData = data.data,
+  axios.all([getHeaderData(), fetchApiData(endpoint)])
+    .then(axios.spread((headerData, staffPicks) => {
+      let returnedData = staffPicks.data,
         // Filters can be extracted without parsing since they are all in the
         // included array:
         filters = parser.getOfType(returnedData.included, 'staff-pick-tag'),
         // parse the data
-        selectedMonth = parser.parse(returnedData),
+        selectedMonth = parser.parse(returnedData, options),
         // Create the Model for a pick but this will eventually be in a separate file
         currentMonthPicks = {
           id: selectedMonth.id,
@@ -75,10 +116,12 @@ function SelectMonthData(req, res, next) {
           // Update previous/next object to include ID
           previousList: selectedMonth['previous-list'] ? selectedMonth['previous-list'].attributes : {},
           nextList: selectedMonth['next-list'] ? selectedMonth['next-list'].attributes : {}
-        };
+        },
+        HeaderParsed = parser.parse(headerData.data, headerOptions),
+        modelData = Model.build(HeaderParsed);
 
       res.locals.data = {
-        "BookStore": {
+        BookStore: {
           _bookDisplay:  'grid',
           _age: 'Adult',
           _gridDisplay: true,
@@ -89,10 +132,37 @@ function SelectMonthData(req, res, next) {
           _updatedFilters: [],
           _currentMonthPicks: currentMonthPicks,
           _isotopesDidUpdate: false
+        },
+        HeaderStore: {
+          headerData: modelData,
+          subscribeFormVisible: false
         }
       };
       next();
-    }); /* end axios call */
+    }))
+    // console error messages
+    .catch(error => {
+      console.log('Error calling API SelectMonthData: ' + error);
+      res.locals.data = {
+        BookStore: {
+          _bookDisplay:  'grid',
+          _age: 'Adult',
+          _gridDisplay: true,
+          _listDisplay: false,
+          _allFilters: [],
+          _initialFilters: [],
+          _filters: [],
+          _updatedFilters: [],
+          _currentMonthPicks: {},
+          _isotopesDidUpdate: false
+        },
+        HeaderStore: {
+          headerData: [],
+          subscribeFormVisible: false
+        }
+      };
+      next();
+    }); // end Axios call
 }
 
 function AjaxData(req, res) {
@@ -103,7 +173,7 @@ function AjaxData(req, res) {
     .get(endpoint)
     .then(data => {
       let returnedData = data.data,
-        selectedMonth = parser.parse(returnedData),
+        selectedMonth = parser.parse(returnedData, options),
         filters = parser.getOfType(returnedData.included, 'staff-pick-tag'),
         currentMonthPicks = {
           id: selectedMonth.id,

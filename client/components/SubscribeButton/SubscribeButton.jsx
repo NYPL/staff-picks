@@ -2,10 +2,12 @@ import Radium from 'radium';
 import React from 'react';
 import cx from 'classnames';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
-import EmailSubscribeForm from '../EmailSubscribeForm/EmailSubscribeForm.jsx';
+import EmailSubscription from '../EmailSubscription/EmailSubscription.jsx';
 
-import HeaderStore from '../../stores/HeaderStore';
-import HeaderActions from '../../actions/HeaderActions';
+import Store from '../../stores/HeaderStore.js';
+import Actions from '../../actions/HeaderActions.js';
+
+import gaUtils from '../../utils/gaUtils.js';
 
 class SubscribeButton extends React.Component {
 
@@ -15,64 +17,85 @@ class SubscribeButton extends React.Component {
 
     // Holds the initial state, replaces getInitialState() method
     this.state = {
-      subscribeFormVisible: HeaderStore.getSubscribeFormVisible()
+      subscribeFormVisible: Store._getSubscribeFormVisible()
     };
-
-    // Allows binding methods that reference this
-    this._handleClick = this._handleClick.bind(this);
   }
 
-  componentDidMount () {
-    HeaderStore.addChangeListener(this._onChange.bind(this));
+  componentDidMount() {
+    Store.listen(this._onChange.bind(this));
   }
 
-  componentWillUnmount () {
-    HeaderStore.removeChangeListener(this._onChange.bind(this));
+  componentWillUnmount() {
+    Store.unListen(this._onChange.bind(this));
   }
 
   render () {
     // Assign a variable to hold the reference of state boolean
-    //let showDialog = this.state.showDialog;
     let showDialog = this.state.subscribeFormVisible;
-    // Dynamic class assignment based on boolean flag
-    const classes =  cx({ show: showDialog, hide: !showDialog });
 
-    console.log(this.state);
+    // Dynamic class assignment based on boolean flag
+    const buttonClasses = cx({'active': showDialog}),
+      emailFormClasses = cx({
+        'active animatedFast fadeIn': showDialog
+      }),
+      iconClass = cx({
+        'nypl-icon-solo-x': showDialog,
+        'nypl-icon-wedge-down': !showDialog
+      });
 
     return (
-      <div className='SubscribeButton-Wrapper' ref='SubscribeButton' style={styles.base}>
-        <SimpleButton
-        className={'SubscribeButton'}
-        lang={this.props.lang}
-        label={this.props.label}
-        target={this.props.target}
-        onClick={this._handleClick}
-        style={styles.SimpleButton} />
+      <div className='SubscribeButton-Wrapper'
+        ref='SubscribeButton'
+        style={[
+          styles.base,
+          this.props.style
+        ]}>
 
-        <EmailSubscribeForm
-        className={'EmailSubscribeForm up-arrow ' + classes}
-        lang={this.props.lang}
-        style={styles.EmailSubscribeForm}
-        show={showDialog}
-        display={showDialog} />
+        <a
+          id={'SubscribeButton'}
+          className={`SubscribeButton ${buttonClasses}`}
+          href={this.props.target}
+          onClick={this._handleClick.bind(this)}
+          style={[
+            styles.SimpleButton,
+            this.props.style
+          ]}>
+          {this.props.label}
+          <span className={`${iconClass} icon`} style={styles.SubscribeIcon}></span>
+        </a>
+
+        <div className={`EmailSubscription-Wrapper ${emailFormClasses}`}
+          style={[
+            styles.EmailSubscribeForm
+          ]}>
+          <EmailSubscription
+            list_id='1061'
+            target='https://dev-mailinglistapi.nypl.org' />
+        </div>
       </div>
     );
   }
 
   /* Utility Methods should be declared below the render method */
-  _handleClick (event) {
-    if(this.props.target === '') {
-      event.preventDefault();
-      // Toggle the Constant to show/hide the Subscribe Form
-      if (HeaderStore.getSubscribeFormVisible() === false) {
-        HeaderActions.updateSubscribeFormVisible(true);
-      } else {
-        HeaderActions.updateSubscribeFormVisible(false);
-      }
+
+  // Toggles the visibility of the form. Sends an Action update
+  // to the Header Store that will triggger a global update
+  // to the reference in the Header Constants.
+  _handleClick(e) {
+    e.preventDefault();
+
+    if (this.props.target === '#') {
+      let visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
+      Actions.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
+      
+      gaUtils._trackEvent('Click', `Subscribe - ${visibleState}`);
     }
   }
-  _onChange () {
-    this.setState({subscribeFormVisible: HeaderStore.getSubscribeFormVisible()});
+
+  // Updates the state of the form based off the Header Store.
+  // The central point of access to the value is in the Store.
+  _onChange() {
+    this.setState({subscribeFormVisible: Store._getSubscribeFormVisible()});
   }
 }
 
@@ -82,25 +105,39 @@ class SubscribeButton extends React.Component {
 SubscribeButton.defaultProps = {
   lang: 'en',
   label: 'Subscribe',
-  target: ''
+  target: '#'
 };
 
 const styles = {
   base: {
-    margin: '0px 5px'
+    margin: '0px 15px',
+    position: 'relative',
+    display: 'inline-block'
   },
   SimpleButton: {
-    padding: '1em',
-    display: 'block'
+    display: 'block',
+    padding: '9px 15px 11px 20px'
+  },
+  SubscribeIcon: {
+    fontSize: '15px',
+    verticalAlign: 'text-bottom',
+    marginLeft: '5px',
+    display: 'inline'
   },
   EmailSubscribeForm: {
     position: 'absolute',
-    zIndex: 1,
-    right: '0px',
-    width: '310px',
-    backgroundColor: '#EDEDED',
-    padding: '10px',
-    margin: '5px 0 0 0'
+    zIndex: 1000,
+    right: '0',
+    width: '250px',
+    minHeight: '210px',
+    backgroundColor: '#1DA1D4',
+    padding: '25px 30px'
+  },
+  hide: {
+    display: 'none'
+  },
+  show: {
+    display: 'block'
   }
 };
 

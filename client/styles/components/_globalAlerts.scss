@@ -1,0 +1,75 @@
+&-GlobalAlerts {
+	position: relative;
+	border-bottom: 1px solid #908034;
+
+	@include desktop {
+		border-bottom: none;
+	}
+
+	&.hide {
+		display: none;
+	}
+
+	&-Wrapper {
+		margin: 0;
+
+		@include desktop {
+  		display: block;
+  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+  		margin: 0 auto;
+  		position: relative;
+		}
+	}
+
+	/* NOTE: Temoporarily removed */
+	&-CloseButton {
+		position: absolute;
+		font-size: 24px;
+		right: 17px;
+		top: 15px;
+		color: #908034;
+		display: block;
+		z-index: 1;
+
+		@include desktop {
+			top: -15px;
+			right: 5px;
+		}
+	}
+
+	&-Box {
+		position: relative;
+		margin: .75em 1.75em .5em 1.2em;
+
+		@include desktop {
+			margin: .5em 0 .5em 105px;
+		}
+
+		&-Item {
+			margin: .5em 0;
+
+			p {
+				line-height: 1.2em;
+				font-size: 16px;
+			}
+
+			a {
+				text-decoration: underline;
+				color: #333;
+
+				&:visited, &:active {
+					color: #333;
+				}
+			}
+
+			strong {
+				@include Kievit-Bold;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+			}
+		}
+	}
+}

@@ -9,9 +9,9 @@ class TagList extends React.Component {
   }
 
   render () {
-    let tags = this.props.tags.map(tag => {
+    let tags = this.props.tags.map((tag, i) => {
       return (
-        <li>{tag}</li>
+        <li key={i}>{tag}</li>
       );
     });
 
