@@ -5,7 +5,7 @@ import {apiRoot, apiEndpoint, fields, pageSize, includes, api, headerApi} from '
 import Model from '../../client/utils/HeaderItemModel.js';
 
 let router = express.Router(),
-  appEnvironment = 'qa', //process.env.APP_ENV || 'production',
+  appEnvironment = 'production',
   headerApiRoot = api.root[appEnvironment],
   options = {
     includes: ['previous-list', 'next-list', 'item.tags', 'picks.age']
