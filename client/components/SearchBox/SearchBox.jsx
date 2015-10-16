@@ -8,7 +8,7 @@ import SimpleButton from '../Buttons/SimpleButton.jsx';
 
 // ALT Flux Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
-import HeaderActions from '../../actions/HeaderActions.js';
+import Actions from '../../actions/HeaderActions.js';
 
 class SearchBox extends React.Component {
   // Constructor used in ES6
@@ -170,21 +170,23 @@ class SearchBox extends React.Component {
   _submitSearchRequest(value) {
     // Store the data that the user entered
     let requestParameters = {
-        keywords: encodeURIComponent(this.state.searchKeywords.trim()),
+        keywords: this.state.searchKeywords.trim(),
         // If the value is null, it indicates the function is triggered on desktop version.
         // Then it should get the value for option from state.
         option: value || this.state.searchOption
       },
       // The variable for request URL
       requestUrl,
+      encoreBaseUrl = 'http://browse.nypl.org/iii/encore/search/',
+      catalogBaseUrl = 'http://www.nypl.org/search/apachesolr_search/',
       inputKeywords,
       pulse;
 
     // Decide the search option based on which button the user clicked on mobile version search box
     if (requestParameters.option === 'catalog') {
-      requestUrl = `https://nypl.bibliocommons.com/search?t=smart&q=${requestParameters.keywords}&commit=Search&searchOpt=catalogue`;
+      requestUrl = this._setEncoreUrl(requestParameters.keywords, encoreBaseUrl, 'eng');
     }  else if (requestParameters.option === 'website') {
-      requestUrl = `http://www.nypl.org/search/apachesolr_search/${requestParameters.keywords}`;
+      requestUrl = this._setCatalogUrl(requestParameters.keywords, catalogBaseUrl);
     }
 
     // This portion is for the interactions if the user doesn't enter any input
@@ -253,7 +255,7 @@ class SearchBox extends React.Component {
    */
   _watchHoverIntentEnter() {
     if (this.state.actionValue === 'hoverSearch') {
-      HeaderActions.setLastActiveMenuItem(this.state.actionValue);
+      Actions.setLastActiveMenuItem(this.state.actionValue);
     }
   }
 
@@ -264,7 +266,77 @@ class SearchBox extends React.Component {
    * hovered out.
    */
   _watchHoverIntentLeave() {
-    HeaderActions.setLastActiveMenuItem('');
+    Actions.setLastActiveMenuItem('');
+  }
+
+  /**
+   * _setCatalogUrl(searchString, catalogBaseUrl)
+   * Returns the final URL for the catalog search.
+   */
+  _setCatalogUrl(searchString, catalogBaseUrl) {
+    let catalogUrl = catalogBaseUrl || 'http://www.nypl.org/search/apachesolr_search/';
+
+    if (searchString) {
+      return catalogUrl + encodeURIComponent(searchString);
+    }
+  }
+
+  /**
+   * _encoreEncodeSearchString(string)
+   * base64_encoding_map includes special characters that need to be
+   * encoded using base64 - these chars are "=","/", "\", "?"
+   * character : base64 encoded 
+   */
+  _encoreEncodeSearchString(string) {
+    let base64_enc_map = {
+        '=': 'PQ==',
+        '/': 'Lw==',
+        '\\': 'XA==',
+        '?': 'Pw=='
+      },
+      encodedString = string,
+      charRegExString,
+      base64Regex;
+
+    Object.keys(base64_enc_map).forEach((specialChar) => {
+      charRegExString = specialChar.replace(/([\.\*\+\?\^\=\!\:\$\{\}\(\)\|\[\]\/\\])/g, '\\$1');
+      base64Regex = new RegExp(charRegExString, 'g');
+      encodedString = encodedString.replace(base64Regex, base64_enc_map[specialChar]);
+    });
+
+    return encodedString;
+  }
+
+  /**
+   * _setEncoreUrl(searchInput, baseUrl, language)
+   * Returns the final URL for encore search which,
+   * is first encoded, then concatenated by the
+   * base encore root url. An optional scope and
+   * language may be concatenated as well.
+   */
+  _setEncoreUrl(searchInput, baseUrl, language, scopeString) {
+    let searchTerm = this._encoreEncodeSearchString(searchInput),
+      rootUrl = baseUrl || 'http://browse.nypl.org/iii/encore/search/',
+      defaultLang = (language) ? `?lang=${language}` : '',
+      finalEncoreUrl;
+
+    if (searchTerm) {
+      finalEncoreUrl = this._encoreAddScope(rootUrl, searchTerm, scopeString) + defaultLang;
+    }
+
+    return finalEncoreUrl;
+  }
+
+  /**
+   * _encoreAddScope(baseUrl, searchString, scopeString)
+   * Enchances the encore url with a possible scope.
+   * If no scope is set, adds the required string to
+   * be returned as the final url.
+   */
+  _encoreAddScope(baseUrl, searchString, scopeString) {
+    return scopeString ? 
+      `${baseUrl}C__S${searchString}${scopeString}__Orightresult__U` :
+      `${baseUrl}C__S${searchString}__Orightresult__U`;
   }
 }
 
