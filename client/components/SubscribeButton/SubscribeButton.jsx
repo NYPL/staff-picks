@@ -70,7 +70,7 @@ class SubscribeButton extends React.Component {
           ]}>
           <EmailSubscription
             list_id='1061'
-            target='https://dev-mailinglistapi.nypl.org' />
+            target='https://mailinglistapi.nypl.org' />
         </div>
       </div>
     );
