@@ -79,7 +79,7 @@
   		display: block;
 
 		  &.DonateButtonItem {
-		  	display: none !important;
+		  	display: none;
 
 	  		@include desktop {
 	  			display: inline-block;
