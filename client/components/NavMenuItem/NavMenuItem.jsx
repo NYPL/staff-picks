@@ -4,6 +4,8 @@ import cx from 'classnames';
 // Google Analytics Utility Library
 import gaUtils from '../../utils/gaUtils.js';
 
+import HeaderStore from '../../stores/Store.js';
+
 // NYPL Dependent React Components
 import MegaMenu from '../MegaMenu/MegaMenu.jsx';
 import MegaMenuArrow from '../MegaMenu/MegaMenuArrow.jsx';
@@ -24,13 +26,17 @@ class NavMenuItem extends React.Component {
 
   render() {
 
-    let target = (this.props.target.indexOf('nypl.org') !== -1 || this.props.target === '#') ?
-        this.props.target : `${this.props.root}${this.props.target}`,
+    let linkClass = cx({
+        'active': this.props.index === this.state.activeItem 
+          || HeaderStore._getLastActiveMenuItem() === this.props.navId
+      }),
       megaMenuArrow = (this.props.subNav && this.props.features) ?
         <MegaMenuArrow
           navId={this.props.navId}
           index={this.props.index}
           currentActiveItem={this.state.activeItem} /> : null,
+      target = (this.props.target.indexOf('nypl.org') !== -1 || this.props.target === '#') ?
+        this.props.target : `${this.props.root}${this.props.target}`,
       megaMenu = (this.props.subNav && this.props.features) ?
         <MegaMenu
           label={this.props.label}
@@ -50,8 +56,11 @@ class NavMenuItem extends React.Component {
           onMouseLeave={this._deactivateHover}
           className={'NavMenuItem-Link'}
           id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
-          <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Go to...', `${this.props.label['en'].text}`)}>
-            {this.props.label[this.props.lang].text}
+          <a
+            href={target}
+            className={linkClass}
+            onClick={gaUtils._trackEvent.bind(this, 'Go to...', `${this.props.label['en'].text}`)}>
+              {this.props.label[this.props.lang].text}
           </a>
           {megaMenuArrow}
         </span>
@@ -70,7 +79,7 @@ class NavMenuItem extends React.Component {
     this.hoverTimer = setTimeout(() => {
       this.setState({lastActiveMenuItem: this.props.navId});
       this.setState({activeItem: this.props.index});
-    }, 350);
+    }, 150);
   }
 
   /**

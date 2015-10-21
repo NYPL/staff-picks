@@ -12,10 +12,11 @@ class MegaMenuArrow extends React.Component {
 
   render() {
     // Dynamic class assignment based on activeItem property matching current index.
-    let classes = cx({
-      'active animateMegaMenuArrowEnter fadeIn': this.props.index === this.props.currentActiveItem,
-      'active': HeaderStore._getLastActiveMenuItem() === this.props.navId && this.props.index !== this.props.currentActiveItem
-    });
+    let classes = cx('NavMenuItem-Arrow nypl-icon-arrow-meganav-large',
+      {
+        'active animateMegaMenuArrowEnter fadeIn': this.props.index === this.props.currentActiveItem,
+        'active': HeaderStore._getLastActiveMenuItem() === this.props.navId && this.props.index !== this.props.currentActiveItem
+      });
 
     return (
       <span
