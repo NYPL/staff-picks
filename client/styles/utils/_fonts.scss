@@ -66,33 +66,34 @@ $THIRD_FONT_MILO: 'serif';
 
 /* MILO INCLUDES */
 @mixin Milo-Regular {
-	font-family: 'Milo-Regular', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
+  font-family: 'Milo-Regular', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
 }
 
 @mixin Milo-Regular-Italic {
-	font-family: 'Milo-Regular-Italic', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
+  font-family: 'Milo-Regular-Italic', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
 }
 
 @mixin Milo-Light {
-	font-family: 'Milo-Light', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
+  font-family: 'Milo-Light', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
 }
 
 @mixin Milo-Light-Italic {
-	font-family: 'Milo-Light-Italic', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
+  font-family: 'Milo-Light-Italic', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
 }
 
 @mixin Milo-Medium {
-	font-family: 'Milo-Medium', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
+  font-family: 'Milo-Medium', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
 }
 
 /* NYPL ICON FONT RULES */
 @font-face {
   font-family: 'nypl-moon';
-  src:url('#{$FONT_PATH}/nypl-moon/nypl-moon.eot?yfznoi');
-  src:url('#{$FONT_PATH}/nypl-moon/nypl-moon.eot?#iefixyfznoi') format('embedded-opentype'),
-    url('#{$FONT_PATH}/nypl-moon/nypl-moon.ttf?yfznoi') format('truetype'),
-    url('#{$FONT_PATH}/nypl-moon/nypl-moon.woff?yfznoi') format('woff'),
-    url('#{$FONT_PATH}/nypl-moon/nypl-moon.svg?yfznoi#nypl-moon') format('svg');
+  src:url('#{$FONT_PATH}/nypl-moon/nypl-moon.eot?viik85');
+  src:url('#{$FONT_PATH}/nypl-moon/nypl-moon.eot?viik85#iefix') format('embedded-opentype'),
+    url('#{$FONT_PATH}/nypl-moon/nypl-moon.woff2?viik85') format('woff2'),
+    url('#{$FONT_PATH}/nypl-moon/nypl-moon.ttf?viik85') format('truetype'),
+    url('#{$FONT_PATH}/nypl-moon/nypl-moon.woff?viik85') format('woff'),
+    url('#{$FONT_PATH}/nypl-moon/nypl-moon.svg?viik85#nypl-moon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -111,6 +112,12 @@ $THIRD_FONT_MILO: 'serif';
   -moz-osx-font-smoothing: grayscale;
 }
 
+.nypl-icon-arrow-meganav-large:before {
+  content: "\e801";
+}
+.nypl-icon-arrow-meganav:before {
+  content: "\e800";
+}
 .nypl-icon-card:before {
   content: "\e623";
 }

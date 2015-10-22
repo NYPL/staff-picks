@@ -13,7 +13,7 @@ class Footer extends React.Component {
   }
 
   render () {
-  	let FooterLinkLists = data.FooterLinkLists.map(function (link, i) {
+  	let FooterLinkLists = data.FooterLinkLists.map((link, i) => {
   		return (
 				<FooterLinkList className={link.ulClass} data={link.FooterLinkList} key={i}/>
 			);
@@ -66,15 +66,16 @@ const data = {
 		{
 			FooterLinkList: [
 				{name: 'Governance', link: '/help/about-nypl/leadership/board-trustees', className: 'footer1'},
-				{name: 'Rules & Regulations', link: '/help/about-nypl/legal-notices/rules-and-regulations'},
-				{name: 'Policies', link: '/policies'},
+				{name: 'Privacy Policy', link: '/help/about-nypl/legal-notices/privacy-policy'},
+				{name: 'Other Policies', link: '/policies'},
 				{name: 'Terms & Conditions', link: '/terms-conditions'}
 			],
 			ulClass: ''
 		},
 		{
 			FooterLinkList: [
-				{name: 'Accessibility', link: '/help/community-outreach/services-for-persons-with-disabilities', className: 'footer1'},
+				{name: 'Rules & Regulations', link: '/help/about-nypl/legal-notices/rules-and-regulations', className: 'footer1'},
+        {name: 'Accessibility', link: '/help/community-outreach/services-for-persons-with-disabilities'},
 				{name: 'Language', link: '/language'},
 			],
 			ulClass: 'last'

@@ -3,11 +3,11 @@ import Radium from 'radium';
 import cx from 'classnames';
 import ReactTappable from 'react-tappable';
 
-import gaUtils from '../../utils/gaUtils.js';
-
 // ALT FLUX
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/HeaderActions.js';
+
+import gaUtils from '../../utils/gaUtils.js';
 
 class MobileHeader extends React.Component {
 
@@ -48,10 +48,14 @@ class MobileHeader extends React.Component {
 
     return (
       <div className={this.props.className} style={styles.base}>
-        <span 
-          style={styles.logoIcon}
-          className={`${this.props.className}-Logo nypl-icon-logo-mark`}>
-        </span>
+        <a
+          style={styles.mobileLogo} 
+          href='//www.nypl.org'>
+          <span 
+            style={styles.logoIcon}
+            className={`${this.props.className}-Logo nypl-icon-logo-mark`}>
+          </span>
+        </a>
 
         <a 
           style={styles.locatorIcon} 
@@ -134,6 +138,16 @@ const styles = {
     height: '59px',
     textAlign: 'right',
     borderBottom: '1px solid #979797'
+  },
+  mobileLogo: {
+    color: '#000',
+    textDecoration: 'none',
+    ':hover': {
+      color: '#000'
+    },
+    ':visited': {
+      color: '#000'
+    }
   },
   logoIcon: {
     position: 'absolute',
