@@ -171,7 +171,7 @@ const styles = {
   },
   donateButton: {
     display: 'inline-block',
-    padding: '12px 18px 10px 18px',
+    padding: '11px 18px 9px 18px',
     borderRadius: '4px'
   }
 };
