@@ -5,7 +5,7 @@ var config = require('./webpack.base.config.js');
 
 var SaveAssetsJson = require('assets-webpack-plugin');
 
-var bundleVersion = 'v1.5';
+var bundleVersion = 'v1.5.5';
 
 config.bail = true;
 config.debug = false;
