@@ -56,7 +56,7 @@ class Header extends React.Component {
     let isHeaderSticky = this.state.isSticky,
       headerClass = this.props.className || 'Header',
       headerClasses = cx(headerClass, {'sticky': isHeaderSticky}),
-      showDialog = Store._getMobileMyNyplButtonValue(),
+      showDialog = HeaderStore._getMobileMyNyplButtonValue(),
       mobileMyNyplClasses = cx({'active': showDialog});
 
     return (
