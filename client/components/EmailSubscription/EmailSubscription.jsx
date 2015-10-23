@@ -27,7 +27,7 @@ class EmailSubscription extends React.Component {
     this._validateForm = this._validateForm.bind(this);
   }
 
-  render () {
+  render() {
     let status = this.state.formStatus,
       isLoading = this.state.formProcessing,
       notValidEmail = this.state.notValidEmail,

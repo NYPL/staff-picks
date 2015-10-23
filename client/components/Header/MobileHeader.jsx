@@ -16,7 +16,8 @@ class MobileHeader extends React.Component {
 
     this.state = {
       activeMobileButton: HeaderStore.getState().activeMobileButton,
-      searchButtonAction: HeaderStore.getState().searchButtonAction
+      searchButtonAction: HeaderStore.getState().searchButtonAction,
+      mobileMyNyplButton: HeaderStore.getState().mobileMyNyplButton
     };
 
     this._handleMenuBtnPress = this._handleMenuBtnPress.bind(this);
@@ -33,18 +34,22 @@ class MobileHeader extends React.Component {
   _onChange() {
     this.setState({
       activeMobileButton: HeaderStore.getState().activeMobileButton,
-      searchButtonAction: HeaderStore.getState().searchButtonAction
+      searchButtonAction: HeaderStore.getState().searchButtonAction,
+      mobileMyNyplButton: HeaderStore.getState().mobileMyNyplButton
     });
   }
 
   render () {
     let activeButton = this.state.activeMobileButton,
       searchButtonAction = this.state.searchButtonAction,
+      mobileMyNyplButton = this.state.mobileMyNyplButton,
       locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true',
       mobileSearchClass = (searchButtonAction === 'clickSearch') ?
         'active nypl-icon-solo-x': 'nypl-icon-magnifier-thin',
       mobileMenuClass = (activeButton === 'mobileMenu') ?
-        'active nypl-icon-solo-x': 'nypl-icon-burger-nav';
+        'active nypl-icon-solo-x': 'nypl-icon-burger-nav',
+      mobileMyNyplClass = (mobileMyNyplButton === 'clickMyNypl') ?
+        'active nypl-icon-solo-x': 'nypl-icon-login';
 
     return (
       <div className={this.props.className} style={styles.base}>
@@ -56,6 +61,17 @@ class MobileHeader extends React.Component {
             className={`${this.props.className}-Logo nypl-icon-logo-mark`}>
           </span>
         </a>
+
+        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'clickMyNypl')}>
+          <span
+            style={[
+              styles.myNyplIcon,
+              mobileMyNyplButton === 'clickMyNypl' ? styles.activeMyNyplIcon : ''
+            ]}
+            className={`${this.props.className}-MyNyplButton ${mobileMyNyplClass}`}
+            ref='MobileMyNyplButton'>
+          </span>
+        </ReactTappable>
 
         <a 
           style={styles.locatorIcon} 
@@ -103,6 +119,7 @@ class MobileHeader extends React.Component {
       if (HeaderStore._getSearchButtonActionValue() !== activeButton) {
         Actions.searchButtonActionValue(activeButton);
         Actions.setMobileMenuButtonValue('');
+        Actions.setMobileMyNyplButtonValue('');
       } else {
         Actions.searchButtonActionValue('');
       }
@@ -110,10 +127,22 @@ class MobileHeader extends React.Component {
       if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
         Actions.setMobileMenuButtonValue(activeButton);
         Actions.searchButtonActionValue('');
+        Actions.setMobileMyNyplButtonValue('');
       } else {
         Actions.setMobileMenuButtonValue('');
       }
+    } else if (activeButton === 'clickMyNypl') {
+      if (HeaderStore._getMobileMyNyplButtonValue() !== activeButton) {
+        Actions.toggleMyNyplVisible(true);
+        Actions.setMobileMyNyplButtonValue(activeButton);
+        Actions.searchButtonActionValue('');
+        Actions.setMobileMenuButtonValue('');
+      } else {
+        Actions.setMobileMyNyplButtonValue('');
+        Actions.toggleMyNyplVisible(false);
+      }
     }
+
     gaUtils._trackEvent('Click', `Mobile ${activeButton}`);
   }
 
@@ -155,6 +184,13 @@ const styles = {
     top: 0,
     fontSize: '59px'
   },
+  myNyplIcon: {
+    fontSize: '31px',
+    margin: 0,
+    padding: '14px',
+    display: 'inline-block',
+    color: '#000'
+  },
   locatorIcon: {
     fontSize: '31px',
     margin: 0,
@@ -181,6 +217,10 @@ const styles = {
     backgroundColor: '#29A1D2'
   },
   activeMenuIcon: {
+    color: '#FFF',
+    backgroundColor: '#2B2B2B'
+  },
+  activeMyNyplIcon: {
     color: '#FFF',
     backgroundColor: '#2B2B2B'
   }
