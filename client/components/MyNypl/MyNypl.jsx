@@ -7,6 +7,7 @@ import SimpleButton from '../Buttons/SimpleButton.jsx';
 import Store from '../../stores/HeaderStore.js';
 import Actions from '../../actions/HeaderActions.js';
 
+import gaUtils from '../../utils/gaUtils.js';
 
 class MyNypl extends React.Component {
   constructor(props) {
@@ -22,20 +23,26 @@ class MyNypl extends React.Component {
         <div className={this.props.className + '-Title'}>Select your experience</div>
         <ul className={`${this.props.className}-Login-List`}>
           <li>
-            <a href={this.props.catalogLink} style={styles.loginButtons} className={this.props.className + '-Catalog-Btn'}>
+            <a href={this.props.catalogLink} style={styles.loginButtons}
+              className={this.props.className + '-Catalog-Btn'}
+              onClick={gaUtils._trackEvent.bind(this, 'Log In', 'MyNypl - Catalog')}>
               <span className='nypl-icon-login icon'></span>
               LOG INTO THE CATALOG
             </a>
           </li>
           <li>
-            <a href={this.props.classicLink} style={styles.loginButtons} className={this.props.className + '-Classic-Btn'}>
+            <a href={this.props.classicLink} style={styles.loginButtons}
+              className={this.props.className + '-Classic-Btn'}
+              onClick={gaUtils._trackEvent.bind(this, 'Log In', 'MyNypl - Classic')}>
               <span className='nypl-icon-bldg icon'></span>
               LOG INTO THE CLASSIC CATALOG
             </a>
           </li>
         </ul>
 
-        <a href={this.props.infoLink} className={`${this.props.className}-Catalog-Link`}
+        <a href={this.props.infoLink}
+          className={`${this.props.className}-Catalog-Link`}
+          onClick={gaUtils._trackEvent.bind(this, 'Log In', 'MyNypl - Catalog Info')}
           style={styles.catalogInfo}>
           Catalog Info
         </a>
@@ -43,7 +50,6 @@ class MyNypl extends React.Component {
     );
   }
 }
-
 
 MyNypl.defaultProps = {
   id: 'MyNypl',

@@ -70,6 +70,7 @@ class Header extends React.Component {
           <div className={`${this.props.className}-TopWrapper`} style={styles.wrapper}>
             <Logo className={`${this.props.className}-Logo`} />
             <div className={`${this.props.className}-Buttons`} style={styles.topButtons}>
+              <MyNyplButton label='Log In' />
               <SimpleButton 
                 label='Get a Library Card' 
                 target='//catalog.nypl.org/screens/selfregpick.html' 
