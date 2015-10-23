@@ -141,7 +141,7 @@ const styles = {
     zIndex: 1000,
     left: '0',
     minWidth: '250px',
-    minHeight: '215px',
+    minHeight: '190px',
     backgroundColor: '#1DA1D4',
     padding: '25px 30px',
     boxSizing: 'content-box'

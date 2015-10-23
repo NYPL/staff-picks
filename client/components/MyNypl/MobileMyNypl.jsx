@@ -15,7 +15,6 @@ class MobileMyNypl extends React.Component{
 
     return (
       <div className={this.props.className} style={styles.base}>
-        <p style={styles.selectExp}>Select your experience</p>
         <a href={this.props.catalogLink} className={catalogLinkClass}
           style={styles.links} onClick={gaUtils._trackEvent.bind(this, 'Mobile Log In', 'Catalog')}>
           <span className={`${catalogLinkClass}-Wrapper`} style={[styles.wrapper, styles.catalogLinkWrapper]}>
@@ -65,7 +64,7 @@ const styles = {
     backgroundColor: '#E43534',
     color: '#FFF',
     padding: 0,
-    margin: 0,
+    margin: '60px 0 0 0',
     width: '50%',
     textAlign: 'center',
     textDecoration: 'none'
@@ -74,13 +73,6 @@ const styles = {
     fontSize: '14px',
     textTransform: 'uppercase',
     display: 'inline-block'
-  },
-  selectExp: {
-    fontStyle: 'italic',
-    fontSize: '25px',
-    padding: '25px 20px',
-    margin: '0px',
-    color: '#959595'
   },
   wrapper: {
     width: '100%',

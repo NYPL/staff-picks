@@ -19,8 +19,6 @@ class MyNypl extends React.Component {
   render() {
     return (
       <div id={this.props.id} className={this.props.className}>
-        <div className={this.props.className + '-Eyebrow'}></div>
-        <div className={this.props.className + '-Title'}>Select your experience</div>
         <ul className={`${this.props.className}-Login-List`}>
           <li>
             <a href={this.props.catalogLink} style={styles.loginButtons}
