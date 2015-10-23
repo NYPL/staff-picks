@@ -330,6 +330,12 @@ body {
   */
   @import 'components/_emailSubscribeButton';
 
+  /* MYNYPL LOGIN BUTTON
+   * ---------------------------
+   * - Includes MyNypl Login rules
+  */
+  @import 'components/_myNypl';
+
   /* MAIN NAVIGATION
    * ---------------
    * - Includes MegaMenu's

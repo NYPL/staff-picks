@@ -54,6 +54,10 @@ class Actions {
     this.dispatch(currentActiveMobileButton);
   }
 
+  setMobileMyNyplButtonValue(value) {
+    this.dispatch(value);
+  }
+
   setLastActiveMenuItem(value) {
     this.dispatch(value);
   }
@@ -71,6 +75,10 @@ class Actions {
   }
 
   toggleSubscribeFormVisible(value) {
+    this.dispatch(value);
+  }
+
+  toggleMyNyplVisible(value) {
     this.dispatch(value);
   }
 }
