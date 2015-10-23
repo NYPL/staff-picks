@@ -60,6 +60,13 @@ $dark-lib-gray: #776E64;
   font-size: 62.5%;
 }
 
+.Header .MyNypl-Wrapper .MyNypl .icon {
+  display: inline-block !important;
+
+  &:before {
+    margin-right: 0px !important;
+  }
+}
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
