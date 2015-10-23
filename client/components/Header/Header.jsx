@@ -14,6 +14,8 @@ import Logo from '../Logo/Logo.jsx';
 import DonateButton from '../DonateButton/DonateButton.jsx';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 import SubscribeButton from '../SubscribeButton/SubscribeButton.jsx';
+import MyNyplButton from '../MyNyplButton/MyNyplButton.jsx';
+import MobileMyNypl from '../MyNypl/MobileMyNypl.jsx';
 import NavMenu from '../NavMenu/NavMenu.jsx';
 import MobileHeader from './MobileHeader.jsx';
 import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.jsx';
@@ -52,16 +54,23 @@ class Header extends React.Component {
 
   render () {
     let isHeaderSticky = this.state.isSticky,
-      headerClasses = cx(this.props.className, {'sticky': isHeaderSticky});
+      headerClass = this.props.className || 'Header',
+      headerClasses = cx(headerClass, {'sticky': isHeaderSticky}),
+      showDialog = HeaderStore._getMobileMyNyplButtonValue(),
+      mobileMyNyplClasses = cx({'active': showDialog});
 
     return (
       <header id={this.props.id} className={headerClasses}>
         <GlobalAlerts className={`${this.props.className}-GlobalAlerts`} />
         <div className={`${this.props.className}-Wrapper`}>
           <MobileHeader className={`${this.props.className}-Mobile`} locatorUrl={'//www.nypl.org/locations/map?nearme=true'} />
+          <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
+            <MobileMyNypl />
+          </div>
           <div className={`${this.props.className}-TopWrapper`} style={styles.wrapper}>
             <Logo className={`${this.props.className}-Logo`} />
             <div className={`${this.props.className}-Buttons`} style={styles.topButtons}>
+              <MyNyplButton label='Log In' />
               <SimpleButton 
                 label='Get a Library Card' 
                 target='//catalog.nypl.org/screens/selfregpick.html' 
@@ -173,6 +182,15 @@ const styles = {
     display: 'inline-block',
     padding: '11px 18px 9px 18px',
     borderRadius: '4px'
+  },
+  mobileMyNypl: {
+    position: 'absolute',
+    zIndex: 1000,
+    right: '0',
+    width: '220px',
+    minHeight: '130px',
+    backgroundColor: '#1DA1D4',
+    padding: '25px 30px'
   }
 };
 

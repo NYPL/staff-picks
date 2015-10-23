@@ -65,7 +65,8 @@ function CurrentMonthData(req, res, next) {
         },
         HeaderStore: {
           headerData: modelData,
-          subscribeFormVisible: false
+          subscribeFormVisible: false,
+          myNyplVisible: false
         }
       };
 
@@ -89,7 +90,8 @@ function CurrentMonthData(req, res, next) {
         },
         HeaderStore: {
           headerData: [],
-          subscribeFormVisible: false
+          subscribeFormVisible: false,
+          myNyplVisible: false
         }
       };
       next();
@@ -135,7 +137,8 @@ function SelectMonthData(req, res, next) {
         },
         HeaderStore: {
           headerData: modelData,
-          subscribeFormVisible: false
+          subscribeFormVisible: false,
+          myNyplVisible: false
         }
       };
       next();
@@ -158,7 +161,8 @@ function SelectMonthData(req, res, next) {
         },
         HeaderStore: {
           headerData: [],
-          subscribeFormVisible: false
+          subscribeFormVisible: false,
+          myNyplVisible: false
         }
       };
       next();

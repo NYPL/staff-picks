@@ -1,0 +1,63 @@
+.MyNypl-Wrapper {
+  text-transform: none;
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  .MyNypl {
+    &-Links {
+      color: #fff;
+    }
+
+    &-Eyebrow {
+      border-top: 2px solid #FFF;
+      color: #fff;
+      margin-bottom: 10px;
+      width: 25px;
+    }
+    &-Title {
+      color: #fff;
+      font-size: 20px;
+      @include Kievit-Book;
+      font-weight: normal;
+      line-height: 1.2em;
+    }
+
+    &-Login-List {
+      list-style: none;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    &-Catalog-Btn {
+      min-width: 170px;
+    }
+
+    &-Classic-Btn {
+      min-width: 230px;
+    }
+    
+    .icon {
+      font-size: 25px;
+      color: rgba(255, 255, 255, 0.6);
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  }
+}
+
+.MobileMyNypl-Wrapper {
+  display: none;
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+
+  &.active {
+    display: block;
+    @include desktop {
+      display: none;
+    }
+  }
+}
