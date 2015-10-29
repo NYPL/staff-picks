@@ -165,8 +165,7 @@ const styles = {
   base: {
     position: 'relative',
     height: '59px',
-    textAlign: 'right',
-    borderBottom: '1px solid #979797'
+    textAlign: 'right'
   },
   mobileLogo: {
     color: '#000',

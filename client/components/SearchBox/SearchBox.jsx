@@ -10,6 +10,9 @@ import SimpleButton from '../Buttons/SimpleButton.jsx';
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/HeaderActions.js';
 
+// GA Utility Library
+import gaUtils from '../../utils/gaUtils.js';
+
 class SearchBox extends React.Component {
   // Constructor used in ES6
   constructor(props) {
@@ -179,13 +182,16 @@ class SearchBox extends React.Component {
       requestUrl,
       encoreBaseUrl = 'http://browse.nypl.org/iii/encore/search/',
       catalogBaseUrl = 'http://www.nypl.org/search/apachesolr_search/',
+      gaSearchLabel,
       inputKeywords,
       pulse;
 
     // Decide the search option based on which button the user clicked on mobile version search box
     if (requestParameters.option === 'catalog') {
+      gaSearchLabel = 'Submit Catalog Search';
       requestUrl = this._setEncoreUrl(requestParameters.keywords, encoreBaseUrl, 'eng');
     }  else if (requestParameters.option === 'website') {
+      gaSearchLabel = 'Submit Search';
       requestUrl = this._setCatalogUrl(requestParameters.keywords, catalogBaseUrl);
     }
 
@@ -198,6 +204,9 @@ class SearchBox extends React.Component {
       // Trigger the validation animation
       this._animationTimer(inputKeywords);
     } else {
+      // Fire GA event to track Search
+      gaUtils._trackEvent('Search', gaSearchLabel);
+
       // Go to the search page
       window.location.assign(requestUrl);
     }

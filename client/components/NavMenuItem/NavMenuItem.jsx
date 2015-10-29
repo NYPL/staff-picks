@@ -44,6 +44,7 @@ class NavMenuItem extends React.Component {
           items={this.props.subNav}
           navId={this.props.navId}
           features={this.props.features}
+          topLink={target}
           index={this.props.index}
           lastActiveMenuItem={this.state.lastActiveMenuItem}
           currentActiveItem={this.state.activeItem} /> : null;
