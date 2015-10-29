@@ -3,7 +3,7 @@
 **
 **/
 footer {
-  font-family: 'Roboto Slab';
+  @include Kievit-Regular;
   position: relative;
   clear: both;
   margin-top: 20px;
