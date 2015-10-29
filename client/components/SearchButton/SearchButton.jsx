@@ -55,7 +55,7 @@ class SearchButton extends React.Component {
 
       // Fire GA event to track when the Search Menu is open
       gaUtils._trackEvent('Search', 'Open Menu');
-    }, 350);
+    }, 150);
   }
 
   /**
