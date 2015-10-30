@@ -49,7 +49,7 @@ MobileMyNypl.defaultProps = {
   lang: 'en',
   className: 'MobileMyNypl',
   catalogLink: 'https://browse.nypl.org/iii/encore/myaccount',
-  classicLink: 'http://catalog.nypl.org/patroninfo',
+  classicLink: 'http://catalog.nypl.org/patroninfo/0/top',
   infoLink: 'http://www.nypl.org/online-catalog-changes'
 };
 
