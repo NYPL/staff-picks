@@ -60,7 +60,7 @@ class Header extends React.Component {
       mobileMyNyplClasses = cx({'active': showDialog});
 
     return (
-      <header id={this.props.id} className={headerClasses}>
+      <header id={this.props.id} className={headerClasses} ref='nyplHeader'>
         <GlobalAlerts className={`${this.props.className}-GlobalAlerts`} />
         <div className={`${this.props.className}-Wrapper`}>
           <MobileHeader className={`${this.props.className}-Mobile`} locatorUrl={'//www.nypl.org/locations/map?nearme=true'} />
@@ -124,11 +124,13 @@ class Header extends React.Component {
       windowVerticalDistance = this._getWindowVerticalScroll();
 
     if (windowVerticalDistance > headerHeight) {
+      // Fire GA Event when Header is in Sticky Mode
       gaUtils._trackEvent.bind(this, 'scroll', 'Sticky Header');
-    }
 
-    return (windowVerticalDistance > headerHeight)
-      ? Actions.updateIsHeaderSticky(true) : Actions.updateIsHeaderSticky(false);
+      Actions.updateIsHeaderSticky(true);
+    } else {
+      Actions.updateIsHeaderSticky(false);
+    }
   }
 
   /**
@@ -137,7 +139,7 @@ class Header extends React.Component {
    * element in pixels.
    */
   _getHeaderHeight() {
-    let headerContainer = document.getElementById(this.props.id);
+    let headerContainer = React.findDOMNode(this.refs.nyplHeader);
     return headerContainer.clientHeight;
   }
 
@@ -147,7 +149,9 @@ class Header extends React.Component {
    * scroll position in pixels.
    */
   _getWindowVerticalScroll() {
-    return window.scrollY;
+    return window.scrollY
+      || window.pageYOffset
+      || document.documentElement.scrollTop;
   }
 };
 

@@ -186,6 +186,11 @@ const config = {
     production: 'https://header.nypl.org',
     qa: 'https://qa-header.nypl.org',
     development: 'https://dev-header.nypl.org'
+  },
+  myNyplLinks: {
+    catalog: 'https://browse.nypl.org/iii/encore/myaccount',
+    classic: 'https://catalog.nypl.org/patroninfo/0/top',
+    moreInfo: 'https://www.nypl.org/online-catalog-changes'
   }
 };
 
