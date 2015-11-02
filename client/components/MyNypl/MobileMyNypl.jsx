@@ -2,6 +2,7 @@ import React from 'react';
 import Radium from 'radium';
 
 import gaUtils from '../../utils/gaUtils.js';
+import appConfig from '../../../server/appConfig.js';
 
 class MobileMyNypl extends React.Component{
 
@@ -48,9 +49,9 @@ class MobileMyNypl extends React.Component{
 MobileMyNypl.defaultProps = {
   lang: 'en',
   className: 'MobileMyNypl',
-  catalogLink: 'https://browse.nypl.org/iii/encore/myaccount',
-  classicLink: 'http://catalog.nypl.org/patroninfo/0/top',
-  infoLink: 'http://www.nypl.org/online-catalog-changes'
+  catalogLink: appConfig.myNyplLinks.catalog,
+  classicLink: appConfig.myNyplLinks.classic,
+  infoLink: appConfig.myNyplLinks.moreInfo
 };
 
 const styles = {

@@ -8,6 +8,7 @@ import Store from '../../stores/HeaderStore.js';
 import Actions from '../../actions/HeaderActions.js';
 
 import gaUtils from '../../utils/gaUtils.js';
+import appConfig from '../../../server/appConfig.js';
 
 class MyNypl extends React.Component {
   constructor(props) {
@@ -53,9 +54,9 @@ MyNypl.defaultProps = {
   id: 'MyNypl',
   className: 'MyNypl',
   lang: 'en',
-  catalogLink: 'https://browse.nypl.org/iii/encore/myaccount',
-  classicLink: 'http://catalog.nypl.org/patroninfo/0/top',
-  infoLink: 'http://www.nypl.org/online-catalog-changes'
+  catalogLink: appConfig.myNyplLinks.catalog,
+  classicLink: appConfig.myNyplLinks.classic,
+  infoLink: appConfig.myNyplLinks.moreInfo
 };
 
 const styles = {
