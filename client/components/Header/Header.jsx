@@ -1,24 +1,24 @@
-// Non-NYPL module imports
+// NPM Modules
 import React from 'react';
 import Radium from 'radium';
+import cx from 'classnames';
 
-// NYPL module imports
+// ALT Flux
+import HeaderStore from '../../stores/HeaderStore.js';
+import Actions from '../../actions/HeaderActions.js';
+
+import gaUtils from '../../utils/gaUtils.js';
+
+// NYPL Components
 import Logo from '../Logo/Logo.jsx';
-import SSOContainer from '../SSOContainer/SSOContainer.jsx';
 import DonateButton from '../DonateButton/DonateButton.jsx';
+import SimpleButton from '../Buttons/SimpleButton.jsx';
 import SubscribeButton from '../SubscribeButton/SubscribeButton.jsx';
+import MyNyplButton from '../MyNyplButton/MyNyplButton.jsx';
+import MobileMyNypl from '../MyNypl/MobileMyNypl.jsx';
 import NavMenu from '../NavMenu/NavMenu.jsx';
-
-// API Mocked Data
-import API from '../../utils/ApiService';
-
-/* Reads from local storage (i.e. Refinery) */
-// If we follow the FLUX architecture
-// data would not be defined, instead we would
-// load the data via Store Actions and update our
-// App Constants. As of now, we are mocking an API
-// call to fetch the data.
-const data = API.getData();
+import MobileHeader from './MobileHeader.jsx';
+import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.jsx';
 
 class Header extends React.Component {
 
@@ -26,55 +26,175 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     // replaces getInitialState()
-    this.state = {
-      data: data
-    };
+    this.state = HeaderStore.getState();
+  }
+
+  componentDidMount() {
+    HeaderStore.listen(this._onChange.bind(this));
+
+    // If the HeaderStore is not populated with
+    // the proper Data, then fetch.
+    // this._fetchDataIfNeeded();
+
+    // Once the component mounts,
+    // enable the sticky header depending on position.
+    this._handleStickyHeader();
+
+    // Listen to the scroll event for the sticky header.
+    window.addEventListener('scroll', this._handleStickyHeader.bind(this));
+  }
+
+  componentWillUnmount() {
+    HeaderStore.unlisten(this._onChange.bind(this));
+  }
+
+  _onChange() {
+    this.setState(HeaderStore.getState());
   }
 
   render () {
+    let isHeaderSticky = this.state.isSticky,
+      headerClass = this.props.className || 'Header',
+      headerClasses = cx(headerClass, {'sticky': isHeaderSticky}),
+      showDialog = HeaderStore._getMobileMyNyplButtonValue(),
+      mobileMyNyplClasses = cx({'active': showDialog});
+
     return (
-      <div id='Header' className='Header' style={styles.base}>
-        <Logo className='Header-Logo' style={styles.logo} />
-        <div id='Header-Buttons' style={styles.topButtons}>
-          <SSOContainer />
-          <SubscribeButton label='Subscribe' lang={this.props.lang} />
-          <DonateButton lang={this.props.lang} />
+      <header id={this.props.id} className={headerClasses} ref='nyplHeader'>
+        <GlobalAlerts className={`${this.props.className}-GlobalAlerts`} />
+        <div className={`${this.props.className}-Wrapper`}>
+          <MobileHeader className={`${this.props.className}-Mobile`} locatorUrl={'//www.nypl.org/locations/map?nearme=true'} />
+          <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
+            <MobileMyNypl />
+          </div>
+          <div className={`${this.props.className}-TopWrapper`} style={styles.wrapper}>
+            <Logo className={`${this.props.className}-Logo`} />
+            <div className={`${this.props.className}-Buttons`} style={styles.topButtons}>
+              <MyNyplButton label='Log In' />
+              <SimpleButton 
+                label='Get a Library Card' 
+                target='//catalog.nypl.org/screens/selfregpick.html' 
+                className='LibraryCardButton'
+                id='LibraryCardButton'
+                gaAction='Get a Library Card'
+                gaLabel=''
+                style={styles.libraryCardButton} />
+              <SubscribeButton 
+                label='Get Email Updates'
+                lang={this.props.lang}
+                style={styles.subscribeButton} />
+              <DonateButton
+                lang={this.props.lang}
+                style={styles.donateButton}
+                gaLabel={'Header Button'} />
+            </div>
+          </div>
+          <NavMenu 
+            className={`${this.props.className}-NavMenu`}
+            lang={this.props.lang}
+            items={this.state.headerData}  />
         </div>
-        <NavMenu className='Header-NavMenu' items={this.state.data} lang={this.props.lang} />
-      </div>
+      </header>
     );
+  }
+
+  /**
+   * _fetchDataIfNeeded() 
+   * checks the existence of headerData items,
+   * triggers the Actions.fetchHeaderData()
+   * method to dispatch a client-side event
+   * to obtain data.
+   */
+  _fetchDataIfNeeded() {
+    if (HeaderStore.getState().headerData.length < 1) {
+      Actions.fetchHeaderData();
+    }
+  }
+
+  /**
+   * _handleStickyHeader() 
+   * returns the Actions.updateIsHeaderSticky()
+   * with the proper boolean value to update the 
+   * Store.isSticky value based on the window 
+   * vertical scroll position surpassing the height
+   * of the Header DOM element.
+   */
+  _handleStickyHeader() {
+    let headerHeight = this._getHeaderHeight(),
+      windowVerticalDistance = this._getWindowVerticalScroll();
+
+    if (windowVerticalDistance > headerHeight) {
+      // Fire GA Event when Header is in Sticky Mode
+      gaUtils._trackEvent.bind(this, 'scroll', 'Sticky Header');
+
+      Actions.updateIsHeaderSticky(true);
+    } else {
+      Actions.updateIsHeaderSticky(false);
+    }
+  }
+
+  /**
+   * _getHeaderHeight() 
+   * returns the Height of the Header DOM
+   * element in pixels.
+   */
+  _getHeaderHeight() {
+    let headerContainer = React.findDOMNode(this.refs.nyplHeader);
+    return headerContainer.clientHeight;
+  }
+
+  /**
+   * _getWindowVerticallScroll() 
+   * returns the current window vertical
+   * scroll position in pixels.
+   */
+  _getWindowVerticalScroll() {
+    return window.scrollY
+      || window.pageYOffset
+      || document.documentElement.scrollTop;
   }
 };
 
 Header.defaultProps = {
-  lang: 'en'
+  lang: 'en',
+  className: 'Header',
+  id: 'Header'
 };
 
 const styles = {
-  base: {
-    position: 'fixed',
-    top: 0,
-    width: '100%',
-    height: '175px',
-    backgroundColor: 'white',
-    boxSizing: 'border-box',
-    color: 'black'
-  },
-  logo: {
-    display: 'block',
-    width: '230px',
+  wrapper: {
     position: 'relative',
-    left: '120px'
+    margin: '0 auto'
   },
   topButtons: {
     position: 'absolute',
     top: '20px',
-    right: '70px',
-    fontFamily: 'Helvetica, Arial',
-    fontSize: '10px',
+    right: '2px',
     textTransform: 'uppercase',
-    fontWeight: 'bold',
-    display: 'flex'
+    display: 'block'
+  },
+  libraryCardButton: {
+    display: 'inline-block',
+    color: '#000',
+    margin: 0,
+    padding: 0
+  },
+  subscribeButton: {
+    display: 'inline-block'
+  },
+  donateButton: {
+    display: 'inline-block',
+    padding: '11px 18px 9px 18px',
+    borderRadius: '4px'
+  },
+  mobileMyNypl: {
+    position: 'absolute',
+    zIndex: 1000,
+    right: '0',
+    width: '220px',
+    minHeight: '130px',
+    backgroundColor: '#1DA1D4',
+    padding: '25px 30px'
   }
 };
 

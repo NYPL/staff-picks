@@ -53,7 +53,7 @@ let Books = React.createClass({
     setTimeout(() => {
       BookActions.updateNewFilters(this.state.iso.getItemElements());
       BookActions.updateFilterAge('Adult');
-    }, 100);
+    }, 150);
 
     BookStore.listen(this._onChange);
   },
@@ -78,17 +78,17 @@ let Books = React.createClass({
       _this.state.iso.arrange({
         filter: selector
       });
-    }, 250);
+    }, 300);
 
     if (storeState._isotopesDidUpdate) {
       setTimeout(() => {
         this.state.iso.reloadItems();
-      }, 200);
+      }, 300);
       setTimeout(() => {
         _this.state.iso.arrange({
           filter: selector
         });
-      }, 850);
+      }, 900);
     }
 
     this.state.iso.on('arrangeComplete', filteredItems => {
@@ -188,7 +188,7 @@ let Books = React.createClass({
 
     previousLink = previousMonth.active ? (
       <a style={styles.previousMonth} onClick={this._handleClick.bind(this, previousMonth.date)}>
-        Picks for {previousMonth.month()}<span className='left-icon'></span>
+        <span className='left-icon'></span>Picks for {previousMonth.month()}
       </a>
     ) : null;
     nextLink = nextMonth.active ? (
@@ -290,8 +290,7 @@ const styles = {
     float: 'right'
   },
   previousMonth: {
-    float: 'left',
-    width: '100px'
+    float: 'left'
   }
 };
 

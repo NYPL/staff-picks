@@ -6,7 +6,7 @@ import DocMeta from 'react-doc-meta';
 import Router from 'react-router';
 
 // NYPL Components
-import Header from './components/HeaderOld/Header.jsx';
+import Header from './components/Header/Header.jsx';
 import Hero from './components/Hero/Hero.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import AgeTabs from './components/AgeTabs/AgeTabs.jsx';
@@ -83,13 +83,12 @@ window.onload = () => {
   Iso.bootstrap((state, meta, container) => {
     alt.bootstrap(state);
 
-    let gaOpts = { debug: true };
-    ga.initialize('UA-1420324-122', gaOpts);
+    let gaOpts = { debug: false };
+    ga.initialize('UA-1420324-3', gaOpts);
 
     Router.run(routes, Router.HistoryLocation, (Root, state) => {
       ga.pageview(state.pathname.substring(0, state.pathname.length - 1));
-      React.render(<Root />,
-        document.getElementById('content'));
+      React.render(<Root />, container);
     });
   });
 };

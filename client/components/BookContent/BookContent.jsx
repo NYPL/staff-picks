@@ -16,15 +16,27 @@ class BookContent extends React.Component {
       ebookTarget = staffPick['attributes']['ebook-uri'] ?
         staffPick['attributes']['ebook-uri']['full-uri'] : undefined;
 
-    let bookHREF = `https://nypl.bibliocommons.com/item/show/${bookTarget}`,
-      ebookHREF = ebookTarget,
+    let ebookHREF = ebookTarget,
       bookStyle = styles.available,
       ebookStyle = styles.available,
+      bookHREF = bookTarget,
       bookLinkStyle,
       ebookLinkStyle,
       bookIcon,
+      bookSubstringID,
+      ebookSubstringID,
       ebookIcon,
       emptyLink;
+
+    if (bookTarget && bookTarget.indexOf('browse.nypl.org') === -1) {
+      bookSubstringID = bookTarget.substring(0, 8);
+      bookHREF = `http://browse.nypl.org/iii/encore/record/C__Rb${bookSubstringID}?lang=eng`;
+    }
+
+    if (ebookTarget && ebookTarget.indexOf('browse.nypl.org') === -1) {
+      ebookSubstringID = ebookTarget.substring(41, 49);
+      ebookHREF = `http://browse.nypl.org/iii/encore/record/C__Rb${ebookSubstringID}?lang=eng`;
+    }
 
     if (!ebookTarget) {
       ebookStyle = styles.unavailable;
