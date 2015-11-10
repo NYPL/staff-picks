@@ -83,7 +83,7 @@ window.onload = () => {
   Iso.bootstrap((state, meta, container) => {
     alt.bootstrap(state);
 
-    let gaOpts = { debug: true };
+    let gaOpts = { debug: false };
     ga.initialize('UA-1420324-3', gaOpts);
 
     Router.run(routes, Router.HistoryLocation, (Root, state) => {
