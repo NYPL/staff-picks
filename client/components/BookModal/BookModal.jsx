@@ -15,7 +15,7 @@ import BookShare from '../BookContent/BookShare.jsx';
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 let Navigation = Router.Navigation;
 
@@ -57,7 +57,7 @@ let BookModal = React.createClass({
   mixins: [Navigation],
 
   openModal() {
-    gaUtils._trackGeneralEvent('Staff Picks', 'Modal', 'Open');
+    utils._trackPicks('Modal', 'Open');
 
     this.setState({
       modalIsOpen: true
@@ -65,7 +65,7 @@ let BookModal = React.createClass({
   },
 
   closeModal() {
-    gaUtils._trackGeneralEvent('Staff Picks', 'Modal', 'Closed');
+    utils._trackPicks('Modal', 'Closed');
 
     this.setState({
       modalIsOpen: false

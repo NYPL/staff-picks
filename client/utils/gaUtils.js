@@ -2,21 +2,6 @@ import ga from 'react-ga';
 
 function gaUtils() {
   /**
-   * _trackEvent(gaLabel)
-   * Track a GA click event.
-   *
-   * @param {action} String Action for GA event.
-   * @param {label} String Label for GA event.
-   */
-  this._trackEvent = function _trackEvent(action, label) {
-    ga.event({
-      category: 'Global Header',
-      action: action,
-      label: label
-    });
-  };
-
-  /**
    * _trackGeneralEvent(category)
    * Track a GA event.
    *
@@ -30,6 +15,25 @@ function gaUtils() {
       action: action,
       label: label
     });
+  };
+
+
+  /**
+   * _trackEvent(category)
+   * Track a GA click event, wrapped in a curried function.
+   *
+   * @param {category} String Category for GA event.
+   * @returns {function} Returns a function with the category set.
+   *  Then you pass in the action and the label.
+   */
+  this._trackEvent = category => {
+    return (action, label) => {
+      return ga.event({
+        category: category,
+        action: action,
+        label: label
+      });
+    };
   };
 }
 

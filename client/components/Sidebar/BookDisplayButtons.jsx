@@ -6,7 +6,7 @@ import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
 import _ from 'underscore';
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 class BookDisplayButtons extends React.Component {
   constructor(props) {
@@ -65,7 +65,7 @@ class BookDisplayButtons extends React.Component {
   _handleClick (_bookDisplay) {
     BookActions.updateBookDisplay(_bookDisplay);
 
-    gaUtils._trackGeneralEvent('Staff Picks', 'Display Selected', _bookDisplay);
+    utils._trackPicks('Display Selected', _bookDisplay);
   }
 
   _onChange () {

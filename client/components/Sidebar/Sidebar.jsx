@@ -5,7 +5,7 @@ import Radium from 'radium';
 import BookDisplayButtons from './BookDisplayButtons.jsx';
 import BookFilters from './BookFilters.jsx';
 
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 class Sidebar extends React.Component {
   // Constructor used in ES6
@@ -26,7 +26,7 @@ class Sidebar extends React.Component {
     document.body.className = 'no-scroll';
     window.scrollTo(0, 0);
 
-    gaUtils._trackGeneralEvent('Staff Picks', 'Filters', 'Mobile display filters');
+    utils._trackPicks('Filters', 'Mobile display filters');
   }
 
   _hideFilters() {
@@ -34,7 +34,7 @@ class Sidebar extends React.Component {
     // Make the whole document scrollable again
     document.body.className = '';
 
-    gaUtils._trackGeneralEvent('Staff Picks', 'Filters', 'Mobile close filters');
+    utils._trackPicks('Filters', 'Mobile close filters');
   }
 
   render () {

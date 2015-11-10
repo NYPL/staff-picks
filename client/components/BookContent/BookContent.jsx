@@ -2,7 +2,7 @@ import React from 'react';
 import Radium from 'radium';
 
 import _ from 'underscore';
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 class BookContent extends React.Component {
   // Constructor used in ES6
@@ -64,13 +64,13 @@ class BookContent extends React.Component {
 
         <ul className='borrow'>
           <li style={[ styles.li, bookStyle ]}
-            onClick={gaUtils._trackGeneralEvent.bind(this, 'Staff Picks', 'Modal', 'Request the book')}>
+            onClick={utils._trackPicks.bind(this, 'Modal', 'Request the book')}>
             <a href={bookHREF} style={bookLinkStyle}>
               <span className={`checkout ${bookIcon}`}></span>Request the book
             </a>
           </li>
           <li style={[ styles.li, ebookStyle ]}
-            onClick={gaUtils._trackGeneralEvent.bind(this, 'Staff Picks', 'Modal', 'Borrow the ebook')}>
+            onClick={utils._trackPicks.bind(this, 'Modal', 'Borrow the ebook')}>
             <a href={ebookHREF} style={ebookLinkStyle}>
               <span className={`ebook ${ebookIcon}`}></span>Borrow the ebook
             </a>

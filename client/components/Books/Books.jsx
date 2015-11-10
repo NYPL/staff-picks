@@ -12,7 +12,7 @@ import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 import staffPicksDate from '../../utils/DateService.js';
 
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 let Navigation = Router.Navigation,
   ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
@@ -105,7 +105,7 @@ let Books = React.createClass({
   },
 
   _openModal(book) {
-    gaUtils._trackGeneralEvent('Staff Picks', 'Book', book['item']['attributes']['title']);
+    utils._trackPicks('Book', book['item']['attributes']['title']);
 
     this.transitionTo('modal', {
       month: this.state._currentMonthPicks.date,
@@ -234,11 +234,7 @@ let Books = React.createClass({
             picks = data.currentMonthPicks,
             filters = data.filters;
 
-          gaUtils._trackGeneralEvent(
-            'Staff Picks',
-            'Select Month',
-            `${selection}: ${month.month()}`
-          );
+          utils._trackPicks('Select Month', `${selection}: ${month.month()}`);
 
           this.transitionTo('month', {
             month: date,

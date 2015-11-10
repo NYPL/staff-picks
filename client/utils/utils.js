@@ -2,6 +2,7 @@ import moment from 'moment';
 import _ from 'underscore';
 
 import appConfig from '../../server/appConfig.js';
+import gaUtils from './gaUtils.js';
 
 function Utils() {
   let unionFn = appTags => {
@@ -90,6 +91,26 @@ function Utils() {
 
     return formattedDate;
   };
+
+  /**
+   * _trackHeader(action, label)
+   * Track a GA click event, where action and label come from
+   * the higher level function call from _trackEvent().
+   *
+   * @param {action} String Action for GA event.
+   * @param {label} String Label for GA event.
+   */
+  this._trackHeader = gaUtils._trackEvent('NYPL Header');
+
+  /**
+   * _trackLists(action, label)
+   * Track a GA click event, where action and label come from
+   * the higher level function call from _trackEvent().
+   *
+   * @param {action} String Action for GA event.
+   * @param {label} String Label for GA event.
+   */
+  this._trackPicks = gaUtils._trackEvent('Staff Picks');
 
 }
 

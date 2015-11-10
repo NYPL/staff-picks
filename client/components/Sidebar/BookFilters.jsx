@@ -8,7 +8,7 @@ import BookActions from '../../actions/BookActions.js';
 import { Link } from 'react-router';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
@@ -249,7 +249,7 @@ class BookFilters extends React.Component {
     e.preventDefault();
     BookActions.clearFilters();
 
-    gaUtils._trackGeneralEvent('Staff Picks', 'Filters', 'Clear All Filters');
+    utils._trackPicks('Filters', 'Clear All Filters');
   }
 
   _handleClick(filter) {
@@ -261,7 +261,7 @@ class BookFilters extends React.Component {
       label = `Unselected filter: ${filter.id}`;
     }
 
-    gaUtils._trackGeneralEvent('Staff Picks', 'Filters', label);
+    utils._trackPicks('Filters', label);
 
     let filterType = filter.id;
     filter.active = !filter.active;
