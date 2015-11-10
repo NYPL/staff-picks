@@ -1,4 +1,13 @@
 &-Buttons {
+
+	@include tablet-landscape {
+		right: 0px;
+	}
+
+	@include desktop {
+		right: 20px;	
+	}
+
 	.SubscribeButton,
 	.MyNyplButton {
 		@include Kievit-Bold;

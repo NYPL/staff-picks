@@ -56,7 +56,8 @@
 
   &.active {
     display: block;
-    @include desktop {
+
+    @include tablet-landscape-and-desktop {
       display: none;
     }
   }
