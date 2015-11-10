@@ -4,7 +4,9 @@ import cx from 'classnames';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
+
 import _ from 'underscore';
+import gaUtils from '../../utils/gaUtils.js';
 
 class BookDisplayButtons extends React.Component {
   constructor(props) {
@@ -62,6 +64,8 @@ class BookDisplayButtons extends React.Component {
   /* Utility Methods should be declared below the render method */
   _handleClick (_bookDisplay) {
     BookActions.updateBookDisplay(_bookDisplay);
+
+    gaUtils._trackGeneralEvent('Staff Picks', 'Display Selected', _bookDisplay);
   }
 
   _onChange () {

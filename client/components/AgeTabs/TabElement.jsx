@@ -7,6 +7,8 @@ import cx from 'classnames';
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
+import gaUtils from '../../utils/gaUtils.js';
+
 // Create the class
 class TabElement extends React.Component {
   // Constructor used in ES6
@@ -33,6 +35,8 @@ class TabElement extends React.Component {
   _handleClick (age) {
     BookActions.updateFilterAge(age);
     BookActions.clearFilters();
+
+    gaUtils._trackGeneralEvent('Staff Picks', 'Age Selected', age);
   }
   
   _onChange () {

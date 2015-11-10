@@ -1,6 +1,8 @@
 import React from 'react';
 import Radium from 'radium';
 
+import gaUtils from '../../utils/gaUtils.js';
+
 class BookShare extends React.Component {
   // Constructor used in ES6
   constructor(props) {
@@ -22,13 +24,16 @@ class BookShare extends React.Component {
   render () {
     return (
       <div ref='BookContent' className={this.props.className} style={styles.BookShare}>
-        <li key='fb' style={[styles.social, styles.facebook]}>
+        <li key='fb' style={[styles.social, styles.facebook]}
+          onClick={gaUtils._trackGeneralEvent.bind(this, 'Staff Picks', 'Social Sharing', 'Facebook')}>
 	        <a href={this.state.facebook} target='_blank' style={styles.shareLink} label='Share on facebook'></a>
         </li>
-        <li key='twtr' style={[styles.social, styles.twitter]}>
+        <li key='twtr' style={[styles.social, styles.twitter]}
+          onClick={gaUtils._trackGeneralEvent.bind(this, 'Staff Picks', 'Social Sharing', 'Twitter')}>
 					<a href={this.state.twitter} style={styles.shareLink} label='Share on twitter'></a>
         </li>
-        <li key='tumblr' style={[styles.social, styles.tumblr]}>
+        <li key='tumblr' style={[styles.social, styles.tumblr]}
+          onClick={gaUtils._trackGeneralEvent.bind(this, 'Staff Picks', 'Social Sharing', 'Tumblr')}>
 	        <a href={this.state.tumblr} target='_blank' style={styles.shareLink}></a>
 	      </li>
       </div>

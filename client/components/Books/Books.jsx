@@ -12,7 +12,7 @@ import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 import staffPicksDate from '../../utils/DateService.js';
 
-import ga from 'react-ga';
+import gaUtils from '../../utils/gaUtils.js';
 
 let Navigation = Router.Navigation,
   ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
@@ -105,6 +105,8 @@ let Books = React.createClass({
   },
 
   _openModal(book) {
+    gaUtils._trackGeneralEvent('Staff Picks', 'Book', book['item']['attributes']['title']);
+
     this.transitionTo('modal', {
       month: this.state._currentMonthPicks.date,
       id: book['item']['id']
@@ -187,12 +189,12 @@ let Books = React.createClass({
     };
 
     previousLink = previousMonth.active ? (
-      <a style={styles.previousMonth} onClick={this._handleClick.bind(this, previousMonth.date)}>
+      <a style={styles.previousMonth} onClick={this._handleClick.bind(this, 'Previous', previousMonth)}>
         <span className='left-icon'></span>Picks for {previousMonth.month()}
       </a>
     ) : null;
     nextLink = nextMonth.active ? (
-      <a style={styles.nextMonth} onClick={this._handleClick.bind(this, nextMonth.date)}>
+      <a style={styles.nextMonth} onClick={this._handleClick.bind(this, 'Next', nextMonth)}>
         Picks for {nextMonth.month()}<span className='right-icon'></span>
       </a>
     ) : null;
@@ -219,8 +221,8 @@ let Books = React.createClass({
     );
   },
 
-  _handleClick (month) {
-    let API = '/recommendations/staff-picks/api/ajax/picks/' + month;
+  _handleClick (selection, month) {
+    let API = '/recommendations/staff-picks/api/ajax/picks/' + month.date;
 
     if (month) {
       $.ajax({
@@ -232,11 +234,11 @@ let Books = React.createClass({
             picks = data.currentMonthPicks,
             filters = data.filters;
 
-          ga.event({
-            category: 'Staff Picks',
-            action: 'Select new month',
-            label: `Selected month: ${month}`
-          });
+          gaUtils._trackGeneralEvent(
+            'Staff Picks',
+            'Select Month',
+            `${selection}: ${month.month()}`
+          );
 
           this.transitionTo('month', {
             month: date,
