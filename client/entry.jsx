@@ -87,7 +87,14 @@ window.onload = () => {
     ga.initialize('UA-1420324-3', gaOpts);
 
     Router.run(routes, Router.HistoryLocation, (Root, state) => {
-      ga.pageview(state.pathname.substring(0, state.pathname.length - 1));
+      let lastCharIndex = state.pathname.length - 1,
+        pageview = state.pathname;
+
+      if (state.pathname[lastCharIndex] === '/') {
+        pageview = state.pathname.substring(0, lastCharIndex);
+      }
+
+      ga.pageview(pageview);
       React.render(<Root />, container);
     });
   });
