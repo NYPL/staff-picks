@@ -1,6 +1,8 @@
 import React from 'react';
 import Radium from 'radium';
 
+import utils from '../../utils/utils.js';
+
 class BookShare extends React.Component {
   // Constructor used in ES6
   constructor(props) {
@@ -8,7 +10,8 @@ class BookShare extends React.Component {
 
     let shareUrl = window.location.href,
         via = 'NYPL',
-        nyplStaffPick = `Staff Picks %7C The New York Public Library - ${this.props.book['item']['attributes']['title']}`;
+        bookTitle = this.props.book['item']['attributes']['title'],
+        nyplStaffPick = `Staff Picks %7C The New York Public Library - ${bookTitle}`;
 
      this.state = {
       facebook: `http://www.facebook.com/sharer.php?u=${nyplStaffPick}&t=${nyplStaffPick}`,
@@ -20,15 +23,20 @@ class BookShare extends React.Component {
   }
 
   render () {
+    let bookTitle = this.props.book['item']['attributes']['title'];
+
     return (
       <div ref='BookContent' className={this.props.className} style={styles.BookShare}>
-        <li key='fb' style={[styles.social, styles.facebook]}>
+        <li key='fb' style={[styles.social, styles.facebook]}
+          onClick={utils._trackPicks.bind(this, 'Social Sharing', `Facebook: ${bookTitle}`)}>
 	        <a href={this.state.facebook} target='_blank' style={styles.shareLink} label='Share on facebook'></a>
         </li>
-        <li key='twtr' style={[styles.social, styles.twitter]}>
+        <li key='twtr' style={[styles.social, styles.twitter]}
+          onClick={utils._trackPicks.bind(this, 'Social Sharing', `Twitter: ${bookTitle}`)}>
 					<a href={this.state.twitter} style={styles.shareLink} label='Share on twitter'></a>
         </li>
-        <li key='tumblr' style={[styles.social, styles.tumblr]}>
+        <li key='tumblr' style={[styles.social, styles.tumblr]}
+          onClick={utils._trackPicks.bind(this, 'Social Sharing', `Tumblr: ${bookTitle}`)}>
 	        <a href={this.state.tumblr} target='_blank' style={styles.shareLink}></a>
 	      </li>
       </div>

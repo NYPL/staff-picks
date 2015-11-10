@@ -15,6 +15,8 @@ import BookShare from '../BookContent/BookShare.jsx';
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
+import utils from '../../utils/utils.js';
+
 let Navigation = Router.Navigation;
 
 if (global.window) {
@@ -55,12 +57,16 @@ let BookModal = React.createClass({
   mixins: [Navigation],
 
   openModal() {
+    utils._trackPicks('Modal', 'Open');
+
     this.setState({
       modalIsOpen: true
     });
   },
 
   closeModal() {
+    utils._trackPicks('Modal', 'Closed');
+
     this.setState({
       modalIsOpen: false
     });
