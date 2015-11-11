@@ -15,7 +15,8 @@ class HeaderStore {
       handleSetLastActiveMenuItem: Actions.SET_LAST_ACTIVE_MENU_ITEM,
       handleSetClientAppEnv: Actions.SET_CLIENT_APP_ENV,
       handleToggleSubscribeFormVisible: Actions.TOGGLE_SUBSCRIBE_FORM_VISIBLE,
-      handleToggleMyNyplVisible: Actions.TOGGLE_MY_NYPL_VISIBLE
+      handleToggleMyNyplVisible: Actions.TOGGLE_MY_NYPL_VISIBLE,
+      handleToggleStickyMyNyplVisible: Actions.TOGGLE_STICKY_MY_NYPL_VISIBLE
     });
 
     this.exportPublicMethods({
@@ -26,6 +27,7 @@ class HeaderStore {
       _getLastActiveMenuItem: this._getLastActiveMenuItem,
       _getSubscribeFormVisible: this._getSubscribeFormVisible,
       _getMyNyplVisible: this._getMyNyplVisible,
+      _getStickyMyNyplVisible: this._getStickyMyNyplVisible,
       _getClientAppEnv: this._getClientAppEnv
     });
 
@@ -39,6 +41,7 @@ class HeaderStore {
       mobileMyNyplButton: '',
       subscribeFormVisible: false,
       myNyplVisible: false,
+      stickyLoginVisible: false,
       clientAppEnv: ''
     };
   }
@@ -82,6 +85,16 @@ class HeaderStore {
    */
   _getMyNyplVisible() {
     return this.state.myNyplVisible;
+  }
+
+  /**
+   * _getStickyMyNyplVisible()
+   * returns the current state.stickyLoginVisible
+   * value.
+   * @return {Boolean} true/false
+   */
+  _getStickyMyNyplVisible() {
+    return this.state.stickyLoginVisible;
   }
 
   /**
@@ -162,6 +175,10 @@ class HeaderStore {
 
   handleToggleMyNyplVisible(value) {
     this.setState({myNyplVisible: value});
+  }
+
+  handleToggleStickyMyNyplVisible(value) {
+    this.setState({stickyLoginVisible: value});
   }
 }
 

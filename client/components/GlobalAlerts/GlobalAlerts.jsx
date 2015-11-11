@@ -75,9 +75,18 @@ class GlobalAlerts extends React.Component{
           });
         }
       })
-      .catch(error => {
-        console.warn('Error on Global Alerts fetch.');
-        console.log(error);
+      .catch(response => {
+        console.warn('Error on Axios GET request: ' + config.alertsApiUrl);
+        if (response instanceof Error) {
+          console.log(response.message);
+        } else {
+          // The request was made, but the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(response.data);
+          console.log(response.status);
+          console.log(response.headers);
+          console.log(response.config);
+        }
       });
   }
 

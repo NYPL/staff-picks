@@ -8,6 +8,8 @@ import BookActions from '../../actions/BookActions.js';
 import { Link } from 'react-router';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 
+import utils from '../../utils/utils.js';
+
 let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 class CloseButton extends React.Component {
@@ -246,9 +248,21 @@ class BookFilters extends React.Component {
   _clearFilters(e) {
     e.preventDefault();
     BookActions.clearFilters();
+
+    utils._trackPicks('Filters', 'Clear All Filters');
   }
 
   _handleClick(filter) {
+    let label = '';
+
+    if (!filter.active) {
+      label = `Selected filter: ${filter.id}`;
+    } else {
+      label = `Unselected filter: ${filter.id}`;
+    }
+
+    utils._trackPicks('Filters', label);
+
     let filterType = filter.id;
     filter.active = !filter.active;
     BookActions.toggleBookFilter(filterType);

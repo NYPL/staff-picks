@@ -12,6 +12,7 @@ import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 import staffPicksDate from '../../utils/DateService.js';
 
+import utils from '../../utils/utils.js';
 
 let Navigation = Router.Navigation,
   ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
@@ -104,6 +105,8 @@ let Books = React.createClass({
   },
 
   _openModal(book) {
+    utils._trackPicks('Book', book['item']['attributes']['title']);
+
     this.transitionTo('modal', {
       month: this.state._currentMonthPicks.date,
       id: book['item']['id']
@@ -186,12 +189,12 @@ let Books = React.createClass({
     };
 
     previousLink = previousMonth.active ? (
-      <a style={styles.previousMonth} onClick={this._handleClick.bind(this, previousMonth.date)}>
+      <a style={styles.previousMonth} onClick={this._handleClick.bind(this, 'Previous', previousMonth)}>
         <span className='left-icon'></span>Picks for {previousMonth.month()}
       </a>
     ) : null;
     nextLink = nextMonth.active ? (
-      <a style={styles.nextMonth} onClick={this._handleClick.bind(this, nextMonth.date)}>
+      <a style={styles.nextMonth} onClick={this._handleClick.bind(this, 'Next', nextMonth)}>
         Picks for {nextMonth.month()}<span className='right-icon'></span>
       </a>
     ) : null;
@@ -218,8 +221,8 @@ let Books = React.createClass({
     );
   },
 
-  _handleClick (month) {
-    let API = '/recommendations/staff-picks/api/ajax/picks/' + month;
+  _handleClick (selection, month) {
+    let API = '/recommendations/staff-picks/api/ajax/picks/' + month.date;
 
     if (month) {
       $.ajax({
@@ -230,6 +233,8 @@ let Books = React.createClass({
           let date = data.currentMonthPicks.date,
             picks = data.currentMonthPicks,
             filters = data.filters;
+
+          utils._trackPicks('Select Month', `${selection}: ${month.month()}`);
 
           this.transitionTo('month', {
             month: date,
