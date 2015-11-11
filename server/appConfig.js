@@ -189,7 +189,7 @@ const config = {
   },
   myNyplLinks: {
     catalog: 'https://browse.nypl.org/iii/encore/myaccount',
-    classic: 'https://catalog.nypl.org/patroninfo',
+    classic: 'https://catalog.nypl.org/patroninfo/top',
     moreInfo: 'https://www.nypl.org/online-catalog-changes'
   }
 };
