@@ -14,13 +14,13 @@ import utils from '../../utils/utils.js';
 import MyNypl from '../MyNypl/MyNypl.jsx';
 
 
-class MyNyplButton extends React.Component {
+class StickyMyNyplButton extends React.Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      myNyplVisible: Store._getMyNyplVisible(),
+      myNyplVisible: Store._getStickyMyNyplVisible(),
       target: this.props.target
     };
   }
@@ -66,7 +66,7 @@ class MyNyplButton extends React.Component {
             <span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>
           </a>
 
-          <div className={`MyNypl-Wrapper ${myNyplClasses}`}
+          <div className={`StickyMyNypl-Wrapper ${myNyplClasses}`}
             style={[
               styles.MyNyplWrapper
             ]}>
@@ -88,8 +88,8 @@ class MyNyplButton extends React.Component {
       e.preventDefault();
 
       let visibleState = this.state.myNyplVisible ? 'Closed' : 'Open';
-      Actions.toggleMyNyplVisible(!this.state.myNyplVisible);
-      utils._trackHeader('Log In', `MyNyplButton - ${visibleState}`);
+      Actions.toggleStickyMyNyplVisible(!this.state.myNyplVisible);
+      utils._trackHeader('Log In', `StickyMyNyplButton - ${visibleState}`);
     }
   }
 
@@ -99,11 +99,9 @@ class MyNyplButton extends React.Component {
    * currently visible.
    */
   _handleOnClickOut(e) {
-    if (Store._getMyNyplVisible()) {
-      if (Store._getMobileMyNyplButtonValue() === '') {
-        utils._trackHeader('Log In', 'MyNyplButton - Closed');
-      }
-      Actions.toggleMyNyplVisible(false);
+    if (Store._getStickyMyNyplVisible()) {
+      Actions.toggleStickyMyNyplVisible(false);
+      utils._trackHeader('Log In', 'StickyMyNyplButton - Closed');
     }
   }
 
@@ -112,11 +110,11 @@ class MyNyplButton extends React.Component {
    * Updates the state of the form based off the Header Store.
    */
   _onChange() {
-    this.setState({myNyplVisible: Store._getMyNyplVisible()});
+    this.setState({myNyplVisible: Store._getStickyMyNyplVisible()});
   }
 }
 
-MyNyplButton.defaultProps = {
+StickyMyNyplButton.defaultProps = {
   lang: 'en',
   label: 'Log In',
   target: '#'
@@ -124,13 +122,14 @@ MyNyplButton.defaultProps = {
 
 const styles = {
   base: {
-    margin: '0px 15px',
+    margin: '0px 10px',
     position: 'relative',
     display: 'inline-block'
   },
   SimpleButton: {
     display: 'block',
-    padding: '9px 10px 11px 20px'
+    textTransform: 'uppercase',
+    padding: '14px 13px 16px 20px'
   },
   MyNyplIcon: {
     fontSize: '15px',
@@ -140,12 +139,11 @@ const styles = {
   },
   MyNyplWrapper: {
     position: 'absolute',
-    zIndex: 1000,
-    left: '0',
-    minWidth: '250px',
-    minHeight: '190px',
+    right: '0',
+    minWidth: '218px',
+    minHeight: '185px',
     backgroundColor: '#1DA1D4',
-    padding: '25px 30px',
+    padding: '17px 30px',
     boxSizing: 'content-box'
   },
   hide: {
@@ -156,4 +154,4 @@ const styles = {
   }
 };
 
-export default Radium(MyNyplButton);
+export default Radium(StickyMyNyplButton);

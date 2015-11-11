@@ -13,6 +13,10 @@
 			position: relative;
 			margin: 0 0 0 $RIGHT_NAV_CONTAINER_LEFT_MARGIN;
 			top: 50px;
+
+			@include tablet-landscape {
+				margin: 0 0 0 31px;
+			}
 		}
 
 		&-Tag {

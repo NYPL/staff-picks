@@ -100,7 +100,7 @@ function Utils() {
    * @param {action} String Action for GA event.
    * @param {label} String Label for GA event.
    */
-  this._trackHeader = gaUtils._trackEvent('NYPL Header');
+  this._trackHeader = gaUtils._trackEvent('Global Header');
 
   /**
    * _trackLists(action, label)

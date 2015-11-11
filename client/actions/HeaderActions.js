@@ -81,6 +81,10 @@ class Actions {
   toggleMyNyplVisible(value) {
     this.dispatch(value);
   }
+
+  toggleStickyMyNyplVisible(value) {
+    this.dispatch(value);
+  }
 }
 
 export default alt.createActions(Actions);

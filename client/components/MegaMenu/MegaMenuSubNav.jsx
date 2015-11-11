@@ -2,10 +2,9 @@ import React from 'react';
 import _ from 'underscore';
 import Radium from 'radium';
 
-import gaUtils from '../../utils/gaUtils.js';
-
 import config from '../../../server/appConfig.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.jsx';
+import utils from '../../utils/utils.js';
 
 class MegaMenuSubNav extends React.Component {
 
@@ -15,6 +14,7 @@ class MegaMenuSubNav extends React.Component {
   }
 
   render() {
+
     let items = _.map(this.props.items, (m, i) => {
         let target = m.link.en.text;
 
@@ -28,7 +28,7 @@ class MegaMenuSubNav extends React.Component {
         
         return (
           <li key={i}>
-            <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Go to...', `${this.props.label[this.props.lang].text}--${m.name[this.props.lang]['text']}`)}>
+            <a href={target} onClick={utils._trackHeader.bind(this, 'Go to...', `${this.props.label[this.props.lang].text}--${m.name[this.props.lang]['text']}`)}>
               {m.name[this.props.lang]['text']}
             </a>
           </li>
@@ -44,9 +44,11 @@ class MegaMenuSubNav extends React.Component {
 
     return (
       <div className='MegaMenu-SubNav'>
-        <a style={styles.topLink} href={this.props.topLink}>
-          <h2>{this.props.label[this.props.lang].text}</h2>
-        </a>
+        <h2>
+          <a style={styles.topLink} href={this.props.topLink}>
+            {this.props.label[this.props.lang].text}
+          </a>
+        </h2>
         <ul>{items}</ul>
         {socialMediaWidget}
       </div>
