@@ -4,8 +4,8 @@ import cx from 'classnames';
 import ClickOutHandler from 'react-onclickout';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 
-import Store from '../../stores/Store.js';
-import Actions from '../../actions/Actions.js';
+import Store from '../../stores/HeaderStore.js';
+import Actions from '../../actions/HeaderActions.js';
 
 import axios from 'axios';
 
