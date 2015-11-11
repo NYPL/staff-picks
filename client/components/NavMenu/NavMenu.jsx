@@ -11,6 +11,7 @@ import SearchButton from '../SearchButton/SearchButton.jsx';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.jsx';
 import NavMenuBottomButtons from '../NavMenuBottomButtons/NavMenuBottomButtons.jsx';
 import DonateButton from '../DonateButton/DonateButton.jsx';
+import StickyMyNyplButton from '../MyNyplButton/StickyMyNyplButton.jsx';
 
 class NavMenu extends React.Component {
 
@@ -26,10 +27,15 @@ class NavMenu extends React.Component {
       mobileActiveClass = cx({
         'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'
       }),
-      donateButton = HeaderStore._getIsStickyValue() ?
-        <li className='NavMenuItem DonateButtonItem'>
-          <DonateButton style={styles.donateButton} gaLabel={'Mobile Donate'}/>
-        </li> : null,
+      stickyItemsClass = cx('StickyItems', {
+        'active': HeaderStore._getIsStickyValue()
+      }),
+      stickyNavItems =
+        <div className={stickyItemsClass}>
+          <span className='lineSeparator' style={styles.lineSeparator}></span>
+          <StickyMyNyplButton />
+          <DonateButton style={styles.donateButton} gaLabel={'Collapsed Donate Button'}/>
+        </div>,
       navMenu = navItems.map((item, index) => {
         return (
           <NavMenuItem
@@ -50,9 +56,9 @@ class NavMenu extends React.Component {
           <span className='MobileLogoText nypl-icon-logo-type'></span>
           <ul className={`${this.props.className}-List`} id='NavMenu-List'>
             {navMenu}
-            {donateButton}
           </ul>
           <SearchButton className={`${this.props.className}`} />
+          {stickyNavItems}
           <NavMenuBottomButtons className='MobileBottomButtons' />
         </div>
       </nav>
@@ -68,11 +74,18 @@ NavMenu.defaultProps = {
 const styles = {
   donateButton: {
     padding: '8px 15px',
-    margin: '0px 7px 0px 6px',
     textTransform: 'uppercase',
     borderRadius: '3px',
     fontSize: '12.5px',
     letterSpacing: '.04em'
+  },
+  lineSeparator: {
+    display: 'inline-block',
+    margin: '0 0 -10px 0',
+    width: '2px',
+    height: '30px',
+    opacity: '0.65',
+    backgroundColor: '#837377'
   }
 };
 
