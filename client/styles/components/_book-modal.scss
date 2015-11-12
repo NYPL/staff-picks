@@ -37,8 +37,8 @@
 
 .book-modal__book-title {
   h2 {
-    // font-family: MiloSlabPro, RobotoSlabLight, serif;
-    @include nypl-font('Milo');
+    @include Milo-Regular;
+
     font-size: 3em;
     margin: 0;
     @include breakpoint($min, $post-mobile-phone) { 
@@ -60,13 +60,13 @@
 }
 
 .book-modal__book-intro__div__author {
-  @include nypl-font('KievitWeb-Bold');
+  @include Kievit-Bold;
   font-size: 16px;
   font-weight: bold;
 }
 
 .book-modal__book-intro__div__tags {
-  @include nypl-font('KievitWeb-Book');
+  @include Kievit-Book;
   color: rgb(191, 191, 191);
   font-size: 14px;
   margin: 10px 0 0 0;

@@ -222,7 +222,9 @@ body {
 #content {
   width: 93%;
   margin: 0 auto;
-  @include nypl-font('KievitWeb');
+
+  @include Kievit-Regular;
+
   @include breakpoint($min, 1024px) {
     width: 960px;
   }

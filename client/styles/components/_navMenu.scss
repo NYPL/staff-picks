@@ -21,7 +21,8 @@
 
 		@include tablet-landscape-and-desktop {
 			max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
-			text-align: right;		
+			text-align: right;
+			margin: 0 auto;		
 		}
 
 		/* Controls the display of Mobile View */
@@ -97,10 +98,6 @@
   		display: inline-table;
   		background-color: transparent;
   		padding: 0;
-		}
-
-		@include desktop {
-			margin-right: 10px;
 		}
 
   	/* Top level Link Rules */
