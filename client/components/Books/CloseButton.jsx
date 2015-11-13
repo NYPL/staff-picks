@@ -17,10 +17,11 @@ class CloseButton extends React.Component {
 
   render () {
     return (
-      <SimpleButton className={this.props.className}
-        id='close-button' 
-        label='RETURN TO STAFF PICKS'
-        onClick={this._handleClick} />
+      <a id='close-button' href='#'
+        className={this.props.className}
+        onClick={this._handleClick.bind(this)}>
+        RETURN TO STAFF PICKS
+      </a>
     );
   }
 }
