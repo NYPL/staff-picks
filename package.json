@@ -34,7 +34,6 @@
   },
   "homepage": "https://github.com/srn/react-webpack-boilerplate",
   "dependencies": {
-    "alt": "0.17.1",
     "assets-webpack-plugin": "2.2.0",
     "autoprefixer-loader": "2.0.0",
     "axios": "0.5.4",
@@ -48,6 +47,8 @@
     "compression": "1.5.0",
     "coveralls": "2.11.2",
     "css-loader": "0.14.4",
+    "dgx-alt-center": "git+https://bitbucket.org/NYPL/dgx-alt-center.git#master",
+    "dgx-header-component-test": "git+https://bitbucket.org/NYPL/dgx-header-component-test.git#master",
     "dgx-react-footer": "git+https://bitbucket.org/NYPL/dgx-react-footer.git#master",
     "ejs": "2.3.2",
     "eslint": "0.24.0",
