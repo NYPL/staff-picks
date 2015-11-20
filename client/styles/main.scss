@@ -36,7 +36,7 @@ $dark-lib-gray: #776E64;
        url('http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb.woff') format('woff'); /* Pretty Modern Browsers */
 }
 
-@import '../../node_modules/dgx-header-component-test/dist/styles/main';
+@import '../../node_modules/dgx-header-component-test/dist/main';
 
 // Override:
 .FindUsWidget-FindUsFeature-Link {
