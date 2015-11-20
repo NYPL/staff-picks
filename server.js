@@ -5,6 +5,7 @@ import express from 'express';
 import favicon from 'express-favicon';
 import compress from 'compression';
 import analytics from './analytics.js';
+import colors from 'colors';
 
 import React from 'react';
 import Router from 'react-router';
@@ -26,13 +27,20 @@ import Iso from 'iso';
 
 import ApiRoutes from './server/ApiRoutes/ApiRoutes.js';
 
+// URL configuration
+const ROOT_PATH = __dirname;
+const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
+
 let app = express(),
   env = {
     production: process.env.NODE_ENV === 'production'
   };
 
 // first assign the path
-app.use('*/client', express.static(path.join(process.cwd(), '/client')));
+app.use('*/dist', express.static(DIST_PATH));
+
+// Assign the path for static client files
+app.use('*/client', express.static(path.resolve(ROOT_PATH, 'client')));
 
 app.use(compress());
 app.disable('x-powered-by');
@@ -131,29 +139,55 @@ process.on('SIGTERM', gracefulShutdown);
 // listen for INT signal e.g. Ctrl-C
 process.on('SIGINT', gracefulShutdown);
 
-
-// Webpack Dev Server
+import webpack from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
+import webpackConfig from './webpack.config.js';
+/* Development Environment Configuration
+ * -------------------------------------
+ * - Using Webpack Dev Server
+*/
 if (env.production === false) {
-  let webpack = require('webpack'),
-    WebpackDevServer = require('webpack-dev-server'),
-    webpackConfig = require('./webpack.dev.config');
-
   new WebpackDevServer(webpack(webpackConfig), {
-    publicPath: '/client/',
-    contentBase: './client/',
-    inline: true,
+    publicPath: webpackConfig.output.publicPath,
     hot: true,
+    inline: true,
     stats: false,
     historyApiFallback: true,
     headers: {
       'Access-Control-Allow-Origin': 'http://localhost:3001',
       'Access-Control-Allow-Headers': 'X-Requested-With'
     }
-  }).listen(3000, 'localhost', function (err) {
+  }).listen(3000, 'localhost', (err, result) => {
     if (err) {
-      console.log(err);
+      console.log(colors.red(err));
     }
-    console.log('webpack dev server listening on localhost:3000');
+    console.log(colors.magenta('Webpack Dev Server listening at'), colors.cyan('localhost' + 3000));
   });
 }
+
+
+// Webpack Dev Server
+// if (env.production === false) {
+//   let webpack = require('webpack'),
+//     WebpackDevServer = require('webpack-dev-server'),
+//     webpackConfig = require('./webpack.dev.config');
+
+//   new WebpackDevServer(webpack(webpackConfig), {
+//     publicPath: '/client/',
+//     contentBase: './client/',
+//     inline: true,
+//     hot: true,
+//     stats: false,
+//     historyApiFallback: true,
+//     headers: {
+//       'Access-Control-Allow-Origin': 'http://localhost:3001',
+//       'Access-Control-Allow-Headers': 'X-Requested-With'
+//     }
+//   }).listen(3000, 'localhost', function (err) {
+//     if (err) {
+//       console.log(err);
+//     }
+//     console.log('webpack dev server listening on localhost:3000');
+//   });
+// }
 
