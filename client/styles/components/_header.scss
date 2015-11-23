@@ -21,8 +21,8 @@
   &-Mobile {
     display: block;
     
-    /* Hide MobileHeader on Tablet Landscape, Desktop and larger viewports */
-    @include tablet-landscape-and-desktop {
+    /* Hide MobileHeader on Tablet larger viewports */
+    @include min-screen(769px) {
       display: none;
     }
   }
@@ -35,7 +35,7 @@
    * -------------
   */
   &.sticky {
-    @include tablet-landscape-and-desktop {
+    @include min-screen(769px) {
       .Header {
         &-Wrapper{
           border-top: 2px solid #ED1C24;
@@ -69,7 +69,7 @@
 
           span {
             display: block !important;
-            font-size: 65px;
+            font-size: 63.5px;
             color: #000;
           }
         }
@@ -90,17 +90,15 @@
   &-TopWrapper {
     display: none;
 
-    @include tablet-landscape-and-desktop {
+    @include min-screen(769px) {
       display: block;
       max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
-    }
-
-    @include tablet-landscape {
       margin: 0px 20px;
       min-height: 136px;
     }
 
-    @include desktop {
+
+    @include min-screen(1025px) {
       margin: 0px auto;
       min-height: inherit;
     }
@@ -113,18 +111,15 @@
   */
   &-Logo {
 
-    @include tablet-landscape-and-desktop {
+    @include min-screen(769px) {
       display: block;
       position: relative;
-    }
-
-    @include tablet-landscape {
       width: 158px;
       left: 15px;
       margin: 0;
     }
 
-    @include desktop {
+    @include min-screen(1025px) {
       width: 230px;
       margin: 0 0 0 20px;
       left: inherit;
