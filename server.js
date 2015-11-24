@@ -16,7 +16,7 @@ import DocMeta from 'react-doc-meta';
 import parser from 'jsonapi-parserinator';
 import _ from 'underscore';
 
-import Header from 'dgx-header-component-test';
+import Header from 'dgx-header-component';
 import Hero from './client/components/Hero/Hero.jsx';
 import Footer from './client/components/Footer/Footer.jsx';
 import App from './client/server.jsx';
