@@ -3,7 +3,7 @@ import Radium from 'radium';
 import axios from 'axios';
 import cx from 'classnames';
 
-import config from '../../../server/appConfig.js';
+import config from '../../../appConfig.js';
 import InputField from '../InputField/InputField.jsx';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.jsx';
 import SubscribeMessageBox from './SubscribeMessageBox.jsx';

@@ -2,7 +2,7 @@ import React from 'react';
 import MegaMenuFeatureItem from './MegaMenuFeatureItem.jsx';
 import FindUsWidget from '../FindUsWidget/FindUsWidget.jsx';
 import DonateWidget from '../DonateWidget/DonateWidget.jsx';
-import config from '../../../server/appConfig.js';
+import config from '../../../appConfig.js';
 
 class MegaMenuFeatures extends React.Component {
   // Constructor used in ES6

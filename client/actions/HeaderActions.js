@@ -1,7 +1,7 @@
 import alt from '../alt.js';
 import axios from 'axios';
 
-import appConfig from '../../server/appConfig.js';
+import appConfig from '../../appConfig.js';
 
 class Actions {
 

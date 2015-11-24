@@ -5,7 +5,7 @@ import ReactTappable from 'react-tappable';
 import moment from 'moment';
 import _ from 'underscore';
 import axios from 'axios';
-import config from '../../../server/appConfig.js';
+import config from '../../../appConfig.js';
 
 import AlertsBox from '../AlertsBox/AlertsBox.jsx';
 

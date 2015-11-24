@@ -8,7 +8,7 @@ import Store from '../../stores/HeaderStore.js';
 import Actions from '../../actions/HeaderActions.js';
 
 import utils from '../../utils/utils.js';
-import appConfig from '../../../server/appConfig.js';
+import appConfig from '../../../appConfig.js';
 
 class MyNypl extends React.Component {
   constructor(props) {

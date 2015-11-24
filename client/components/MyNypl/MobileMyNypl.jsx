@@ -2,7 +2,7 @@ import React from 'react';
 import Radium from 'radium';
 
 import utils from '../../utils/utils.js';
-import appConfig from '../../../server/appConfig.js';
+import appConfig from '../../../appConfig.js';
 
 class MobileMyNypl extends React.Component{
 

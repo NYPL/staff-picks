@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'underscore';
 import Radium from 'radium';
 
-import config from '../../../server/appConfig.js';
+import config from '../../../appConfig.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.jsx';
 import utils from '../../utils/utils.js';
 

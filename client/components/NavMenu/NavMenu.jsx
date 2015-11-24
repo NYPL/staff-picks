@@ -1,7 +1,7 @@
 import Radium from 'radium';
 import React from 'react';
 import cx from 'classnames';
-import appConfig from '../../../server/appConfig.js';
+import appConfig from '../../../appConfig.js';
 
 // Header Store
 import HeaderStore from '../../stores/HeaderStore.js';
