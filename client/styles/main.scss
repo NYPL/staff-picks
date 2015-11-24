@@ -36,6 +36,7 @@ $dark-lib-gray: #776E64;
        url('http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb.woff') format('woff'); /* Pretty Modern Browsers */
 }
 
+@import '../../node_modules/dgx-header-component-test/dist/main';
 
 // Override:
 .FindUsWidget-FindUsFeature-Link {
@@ -136,7 +137,6 @@ $dark-lib-gray: #776E64;
 @import 'utils/fonts';
 
 @import 'utils/globals';
-@import 'utils/colors';
 @import 'utils/viewports';
 @import 'utils/mixins';
 @import 'utils/animations';
@@ -212,12 +212,6 @@ body {
   padding: 0;
   // font-family: 'Roboto Slab', sans-serif;
 }
-
-@import 'components/header';
-      
-// #header-container + div {
-//   margin-top: $headerHeight;
-// }
 
 #content {
   width: 93%;

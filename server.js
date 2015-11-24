@@ -13,14 +13,17 @@ import React from 'react';
 import Router from 'react-router';
 import DocMeta from 'react-doc-meta';
 
-import Header from './client/components/Header/Header.jsx';
+import parser from 'jsonapi-parserinator';
+import _ from 'underscore';
+
+import Header from 'dgx-header-component-test';
 import Hero from './client/components/Hero/Hero.jsx';
 import Footer from './client/components/Footer/Footer.jsx';
 import App from './client/server.jsx';
 import BookModal from './client/components/BookModal/BookModal.jsx';
 import Error404Page from './client/components/Error404Page/Error404Page.jsx';
 
-import alt from './client/alt.js';
+import alt from 'dgx-alt-center';
 import Iso from 'iso';
 
 import ApiRoutes from './server/ApiRoutes/ApiRoutes.js';
