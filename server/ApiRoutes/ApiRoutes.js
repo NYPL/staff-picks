@@ -63,7 +63,7 @@ function CurrentMonthData(req, res, next) {
           _currentMonthPicks: currentMonthPicks,
           _isotopesDidUpdate: false
         },
-        Store: {
+        HeaderStore: {
           headerData: modelData,
           subscribeFormVisible: false,
           myNyplVisible: false
@@ -88,7 +88,7 @@ function CurrentMonthData(req, res, next) {
           _currentMonthPicks: {},
           _isotopesDidUpdate: false
         },
-        Store: {
+        HeaderStore: {
           headerData: [],
           subscribeFormVisible: false,
           myNyplVisible: false
@@ -135,7 +135,7 @@ function SelectMonthData(req, res, next) {
           _currentMonthPicks: currentMonthPicks,
           _isotopesDidUpdate: false
         },
-        Store: {
+        HeaderStore: {
           headerData: modelData,
           subscribeFormVisible: false,
           myNyplVisible: false
@@ -159,7 +159,7 @@ function SelectMonthData(req, res, next) {
           _currentMonthPicks: {},
           _isotopesDidUpdate: false
         },
-        Store: {
+        HeaderStore: {
           headerData: [],
           subscribeFormVisible: false,
           myNyplVisible: false
