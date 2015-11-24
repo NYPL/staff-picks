@@ -47,7 +47,7 @@
     "coveralls": "2.11.2",
     "css-loader": "0.14.4",
     "dgx-alt-center": "git+https://bitbucket.org/NYPL/dgx-alt-center.git#master",
-    "dgx-header-component-test": "git+https://bitbucket.org/NYPL/dgx-header-component-test.git#master",
+    "dgx-header-component": "git+https://bitbucket.org/NYPL/dgx-header-component.git#master",
     "dgx-react-footer": "git+https://bitbucket.org/NYPL/dgx-react-footer.git#master",
     "dgx-react-ga": "git+https://bitbucket.org/NYPL/dgx-react-ga.git#master",
     "ejs": "2.3.2",

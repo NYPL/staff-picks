@@ -145,6 +145,6 @@ if (!isProduction) {
     if (err) {
       console.log(colors.red(err));
     }
-    console.log(colors.magenta('Webpack Dev Server listening at'), colors.cyan('localhost' + appConfig.webpackDevServerPort));
+    console.log(colors.magenta('Webpack Dev Server listening at'), colors.cyan('localhost:' + appConfig.webpackDevServerPort));
   });
 }
