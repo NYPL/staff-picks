@@ -213,12 +213,15 @@ body {
   padding: 0;
   // font-family: 'Roboto Slab', sans-serif;
 }
+ 
 
 #content {
+  @include Kievit-Regular;
+}
+
+#app-content {
   width: 93%;
   margin: 0 auto;
-
-  @include Kievit-Regular;
 
   @include breakpoint($min, 1024px) {
     width: 960px;
