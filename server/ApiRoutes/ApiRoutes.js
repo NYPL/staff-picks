@@ -1,7 +1,7 @@
 import express from 'express';
 import axios from 'axios';
 import parser from 'jsonapi-parserinator';
-import {apiRoot, apiEndpoint, fields, pageSize, includes, api, headerApi} from '../appConfig.js';
+import {apiRoot, apiEndpoint, fields, pageSize, includes, api, headerApi} from '../../appConfig.js';
 import Model from '../../client/utils/HeaderItemModel.js';
 
 let router = express.Router(),

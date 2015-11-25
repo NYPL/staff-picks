@@ -1,12 +1,9 @@
-'use strict';
-
-import './styles/main.scss';
 import React from 'react/addons';
 import DocMeta from 'react-doc-meta';
 import Router from 'react-router';
 
 // NYPL Components
-import Header from './components/Header/Header.jsx';
+import Header from 'dgx-header-component';
 import Hero from './components/Hero/Hero.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import AgeTabs from './components/AgeTabs/AgeTabs.jsx';
@@ -15,10 +12,12 @@ import Books from './components/Books/Books.jsx';
 import Sidebar from './components/Sidebar/Sidebar.jsx';
 import BookModal from './components/BookModal/BookModal.jsx';
 
-import alt from './alt.js';
+import alt from 'dgx-alt-center';
 import Iso from 'iso';
 
 import ga from 'react-ga';
+
+import './styles/main.scss';
 
 let Route = Router.Route,
   NotFoundRoute = Router.NotFoundRoute,

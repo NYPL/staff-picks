@@ -10,7 +10,7 @@
 
   <link rel="shortcut icon" type="image/ico" href="http://ux-static.nypl.org/images/favicon.ico">
 
-<% if (env.production) { %>
+<% if (isProduction) { %>
   <!-- Minified Styles -->  
   <link rel="stylesheet" type="text/css" href='dist/styles.css' />
 <% } %>
@@ -68,7 +68,7 @@
 
   <script id="tumblr-js" async src="https://assets.tumblr.com/share-button.js"></script>
 
-<% if (env.production) { %>
+<% if (isProduction) { %>
   <script async src="dist/bundle.js"></script>
 <% } else { %>
   <script src="http://localhost:3000/bundle.js"></script>

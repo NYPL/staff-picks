@@ -1,6 +1,6 @@
 import BookActions from '../actions/BookActions';
 import _ from 'underscore';
-import alt from '../alt.js';
+import alt from 'dgx-alt-center';
 
 class BookStore {
   constructor() {
