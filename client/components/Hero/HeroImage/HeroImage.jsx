@@ -9,15 +9,11 @@ class HeroImage extends React.Component {
 		super(props);
 	}
 
-  render () {
+  render() {
   	return (
 		  <ImageComponent id={this.props.id} className={this.props.className} />
     );
   }
-};
-
-
-const styles = {
 };
 
 export default Radium(HeroImage);

@@ -19,9 +19,7 @@ class Book extends React.Component {
 
     return (
       <div ref='Book' className={this.props.className}
-        style={[
-          this.props.style
-        ]}>
+        style={[this.props.style]}>
         
         <a href='#' onClick={this._handleClick}>
           <img style={this.props.style}

@@ -1,9 +1,10 @@
 import React from 'react';
-import DocMeta from 'react-doc-meta';
-import _ from 'underscore';
 import Radium from 'radium';
 import Router from 'react-router';
 import Modal from 'react-modal';
+
+import DocMeta from 'react-doc-meta';
+import _ from 'underscore';
 
 import CloseButton from '../Books/CloseButton.jsx';
 import Book from '../Book/Book.jsx';
@@ -25,110 +26,114 @@ if (global.window) {
 }
 
 let BookModal = React.createClass({
-  getInitialState() {
-    let paramID = this.props.params.id,
-      modalBook = {},
-      age;
+    getInitialState() {
+      let paramID = this.props.params.id,
+        modalBook = {},
+        store = BookStore.getState(),
+        books = store._currentMonthPicks.picks,
+        age;
 
-    let store = BookStore.getState();
-    let books = store._currentMonthPicks.picks;
-
-    if (!books.length) {
-      if (this.props.data['staff-picks']) {
-        books = this.props.data['staff-picks'];
+      if (!books.length) {
+        if (this.props.data['staff-picks']) {
+          books = this.props.data['staff-picks'];
+        }
       }
-    }
 
-    _.each(books, (book) => {
-      if (book['item']['id'] === paramID) {
-        modalBook = book;
-        age = book['age'] ? book['age'].attributes.age : 'adult';
+      _.each(books, (book) => {
+        if (book['item']['id'] === paramID) {
+          modalBook = book;
+          age = book['age'] ? book['age'].attributes.age : 'adult';
+        }
+      });
+
+      BookActions.updateFilterAge(age);
+
+      return {
+        modalIsOpen: true,
+        book: modalBook
+      };
+    },
+
+    mixins: [Navigation],
+
+    openModal() {
+      utils._trackPicks('Modal', 'Open');
+
+      this.setState({
+        modalIsOpen: true
+      });
+    },
+
+    closeModal() {
+      utils._trackPicks('Modal', 'Closed');
+
+      this.setState({
+        modalIsOpen: false
+      });
+      setTimeout(() => {
+        this.transitionTo('home');
+      }, 200);
+    },
+
+    render() {
+      let book = this.state.book,
+        title = 'Staff Picks | The New York Public Library',
+        imageSrc = '/client/images/staff_pic_bg.jpg',
+        description = 'Every month, NYPL\'s book experts share 100 titles they love.',
+        bookId,
+        imageLink;
+      
+      if (book['item']) {
+        title = book['item']['attributes']['title'];
+        description = book.attributes.text;
+        imageSrc = book['item']['attributes']['image-slug'];
+        bookId= book['item']['id'];
       }
-    });
 
-    BookActions.updateFilterAge(age);
+      imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?` +
+        `&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
 
-    return {
-      modalIsOpen: true,
-      book: modalBook
-    };
-  },
+      let tags = [
+        {property: "og:title", content: title},
+        {property: "og:type", content: 'website'},
+        {property: "og:image", content: imageLink},
+        {property: "og:description", content: description},
+        {property: "og:site_name", content: 'Staff Picks | The New York Public Library'},
+        {property: "og:url", content: `http://www.nypl.org/recommendations/staff-picks/${bookId}`},
+        {name: "twitter:card", content: 'summary_large_image'},
+        {name: "twitter:site", content: '@nypl'},
+        {name: "twitter:title", content: title},
+        {name: "twitter:description", content: description},
+        {name: "twitter:creator", content: '@nypl'},
+        {name: "twitter:image", content: imageLink}
+      ];
 
-  mixins: [Navigation],
-
-  openModal() {
-    utils._trackPicks('Modal', 'Open');
-
-    this.setState({
-      modalIsOpen: true
-    });
-  },
-
-  closeModal() {
-    utils._trackPicks('Modal', 'Closed');
-
-    this.setState({
-      modalIsOpen: false
-    });
-    setTimeout(() => {
-      this.transitionTo('home');
-    }, 200);
-  },
-
-  render() {
-    let book = this.state.book,
-      title = 'Staff Picks | The New York Public Library',
-      imageSrc = '/client/images/staff_pic_bg.jpg',
-      description = 'Every month, NYPL\'s book experts share 100 titles they love.',
-      bookId,
-      imageLink;
-    
-    if (book['item']) {
-      title = book['item']['attributes']['title'];
-      description = book.attributes.text;
-      imageSrc = book['item']['attributes']['image-slug'];
-      bookId= book['item']['id'];
+      return (
+        <div>
+          <DocMeta tags={tags} />
+          <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
+            <CloseButton className='book-modal__close-btn' onClick={this.closeModal} />
+            <BookTitle className='book-modal__book-title' book={this.state.book} />
+            <div className='book-modal__left-column'>
+              <div key='ImageContainer' className='book-modal__left-column__image-container'>
+                <Book
+                  book={this.state.book}
+                  className='book-modal__left-column__image-container__cover'
+                  style={styles.BookCover} />
+              </div>
+              <div key='ShareContainer' className='book-modal__left-column__share-container'>
+                <BookShare
+                  className='book-modal__left-column__share-container__share-items'
+                  book={this.state.book} />
+              </div>
+            </div>
+            <BookIntro className='book-modal__book-intro' book={this.state.book} />
+            <BookContent book={this.state.book} />
+          </Modal>
+        </div>
+      );
     }
-
-    imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?` +
-       `&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
-
-    let tags = [
-      {property: "og:title", content: title},
-      {property: "og:type", content: 'website'},
-      {property: "og:image", content: imageLink},
-      {property: "og:description", content: description},
-      {property: "og:site_name", content: 'Staff Picks | The New York Public Library'},
-      {property: "og:url", content: `http://www.nypl.org/recommendations/staff-picks/${bookId}`},
-      {name: "twitter:card", content: 'summary_large_image'},
-      {name: "twitter:site", content: '@nypl'},
-      {name: "twitter:title", content: title},
-      {name: "twitter:description", content: description},
-      {name: "twitter:creator", content: '@nypl'},
-      {name: "twitter:image", content: imageLink}
-    ];
-
-    return (
-      <div>
-        <DocMeta tags={tags} />
-        <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-          <CloseButton className='book-modal__close-btn' onClick={this.closeModal} />
-          <BookTitle className='book-modal__book-title' book={this.state.book} />
-          <div className='book-modal__left-column'>
-            <div key='ImageContainer' className='book-modal__left-column__image-container'>
-              <Book book={this.state.book} className='book-modal__left-column__image-container__cover' style={styles.BookCover}/>
-            </div>
-            <div key='ShareContainer' className='book-modal__left-column__share-container'>
-              <BookShare className='book-modal__left-column__share-container__share-items' book={this.state.book} />
-            </div>
-          </div>
-          <BookIntro className='book-modal__book-intro' book={this.state.book} />
-          <BookContent book={this.state.book} />
-        </Modal>
-      </div>
-    );
-  }
-});
+  });
 
 const styles={
   BookCover: {
@@ -138,6 +143,6 @@ const styles={
       width: '237px'
     }
   }
-}
+};
 
 export default Radium(BookModal);

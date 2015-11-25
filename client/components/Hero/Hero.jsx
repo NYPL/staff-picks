@@ -30,7 +30,4 @@ class Hero extends React.Component {
   }
 };
 
-const styles = {
-};
-
 export default Radium(Hero);

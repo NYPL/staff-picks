@@ -7,7 +7,7 @@ class BookTitle extends React.Component {
     super(props);
   }
 
-  render () {
+  render() {
     const book = this.props.book;
     let title = (book && book['item']) ? book['item']['attributes']['title'] : "Book Title";
 
@@ -23,9 +23,6 @@ BookTitle.defaultProps = {
   className: 'Booktitle',
   lang: 'en',
   onClick() {}
-};
-
-const styles={
 };
 
 export default Radium(BookTitle);
