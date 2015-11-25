@@ -1,6 +1,6 @@
 'use strict';
 
-import 'styles/main.scss';
+import './styles/main.scss';
 import React from 'react/addons';
 import DocMeta from 'react-doc-meta';
 import Router from 'react-router';
@@ -83,8 +83,11 @@ window.onload = () => {
   Iso.bootstrap((state, meta, container) => {
     alt.bootstrap(state);
 
-    let gaOpts = { debug: false };
-    ga.initialize('UA-1420324-3', gaOpts);
+    if (!window.ga) {
+      console.log('Analytics not available - loading through React.');
+      let gaOpts = { debug: false };
+      ga.initialize('UA-1420324-3', gaOpts);
+    }
 
     Router.run(routes, Router.HistoryLocation, (Root, state) => {
       let lastCharIndex = state.pathname.length - 1,
