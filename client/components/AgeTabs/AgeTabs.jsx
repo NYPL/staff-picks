@@ -12,32 +12,28 @@ class AgeTabs extends React.Component {
     super(props);
   }
 
-  render () {
+  render() {
     // Render each TabElement
-    var TabElements = data.map((element) => {
-      return (
-        <TabElement 
-          key={element.name} 
-          id={element.name} 
-          name={element.name} 
-          value={element.value} />
-      );
-    });
+    let TabElements = data.map((element) => {
+        return (
+          <TabElement
+            key={element.name}
+            id={element.name}
+            name={element.name}
+            value={element.value} />
+        );
+      });
 
   	return (
       <div className='tab-container'>
         <ul className='tab-container__ul'>
-           <li key='li-before'  className='tab-container__outsider'></li>
+          <li key='li-before' className='tab-container__outsider'></li>
           {TabElements}
-           <li key='li-after'  className='tab-container__outsider'></li>
+          <li key='li-after' className='tab-container__outsider'></li>
         </ul>
       </div>
 		);
   }
-};
-
-// Styles
-const styles = {
 };
 
 // contents and values for each TabElement
