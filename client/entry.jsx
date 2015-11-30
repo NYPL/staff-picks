@@ -48,16 +48,20 @@ class App extends React.Component {
     return (
       <div>
         <DocMeta tags={tags} />
-        <RouteHandler {...this.props} />
-        <div id='age-tabs' className='age-tabs'>
-          <AgeTabs />
-        </div>
-        <div className='main-container'>
-          <div id='sidebar'>
-            <Sidebar />
+        <Header />
+        <Hero />
+        <div id="app-content">
+          <RouteHandler {...this.props} />
+          <div id='age-tabs' className='age-tabs'>
+            <AgeTabs />
           </div>
-          <div id='books'>
-            <Books />
+          <div className='main-container'>
+            <div id='sidebar'>
+              <Sidebar />
+            </div>
+            <div id='books'>
+              <Books />
+            </div>
           </div>
         </div>
       </div>
@@ -74,9 +78,7 @@ let routes = (
     </Route>
   );
 
-React.render(<Header />, document.getElementById('header-container'));
 React.render(<Footer />, document.getElementById('footer-container'));
-React.render(<Hero />, document.getElementById('hero'));
 
 window.onload = () => {
   Iso.bootstrap((state, meta, container) => {

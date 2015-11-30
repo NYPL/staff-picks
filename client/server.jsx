@@ -6,6 +6,8 @@ import DocMeta from 'react-doc-meta';
 import Router from 'react-router';
 
 // NYPL Components
+import Header from 'dgx-header-component';
+import Hero from './components/Hero/Hero.jsx';
 import AgeTabs from './components/AgeTabs/AgeTabs.jsx';
 import Error404Page from './components/Error404Page/Error404Page.jsx';
 import Books from './components/Books/Books.jsx';
@@ -37,16 +39,20 @@ class App extends React.Component {
     return (
       <div>
         <DocMeta tags={tags} />
-        <RouteHandler {...this.props} />
-        <div id='age-tabs' className='age-tabs'>
-          <AgeTabs />
-        </div>
-        <div className='main-container'>
-          <div id='sidebar'>
-            <Sidebar filters={this.props.filters}/>
+        <Header />
+        <Hero />
+        <div id="app-content">
+          <RouteHandler {...this.props} />
+          <div id='age-tabs' className='age-tabs'>
+            <AgeTabs />
           </div>
-          <div id='books'>
-            <Books books={this.props.data} currentList={this.props.currentList}/>
+          <div className='main-container'>
+            <div id='sidebar'>
+              <Sidebar filters={this.props.filters}/>
+            </div>
+            <div id='books'>
+              <Books books={this.props.data} currentList={this.props.currentList}/>
+            </div>
           </div>
         </div>
       </div>

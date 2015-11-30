@@ -16,12 +16,10 @@ import DocMeta from 'react-doc-meta';
 import parser from 'jsonapi-parserinator';
 import _ from 'underscore';
 
-import Header from 'dgx-header-component';
-import Hero from './client/components/Hero/Hero.jsx';
-import Footer from './client/components/Footer/Footer.jsx';
 import App from './client/server.jsx';
 import BookModal from './client/components/BookModal/BookModal.jsx';
 import Error404Page from './client/components/Error404Page/Error404Page.jsx';
+import Footer from './client/components/Footer/Footer.jsx';
 
 import alt from 'dgx-alt-center';
 import Iso from 'iso';
@@ -79,8 +77,6 @@ app.use(function(req, res) {
 
   Router.run(routes, req.path, function (Root, state) {
     let html = React.renderToString(<Root />),
-      header = React.renderToString(<Header />),
-      hero = React.renderToString(<Hero />),
       footer = React.renderToString(<Footer />),
       metaTags = DocMeta.rewind(),
       renderedTags = metaTags.map((tag, index) =>
@@ -92,8 +88,6 @@ app.use(function(req, res) {
       path: req.path,
       isProduction: isProduction,
       metatags: renderedTags,
-      header: header,
-      hero: hero,
       markup: iso.render(),
       footer: footer,
       gaCode: analytics.google.code(isProduction),
