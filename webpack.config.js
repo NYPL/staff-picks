@@ -18,7 +18,7 @@ var commonSettings = {
   // This is the path and file of our top level
   // React App that is to be rendered.
   entry: [
-    path.resolve(ROOT_PATH, 'client/entry.jsx')
+    path.resolve(ROOT_PATH, 'src/client/entry.jsx')
   ],
   resolve: {
     extensions: ['', '.js', '.jsx']
@@ -55,7 +55,7 @@ if (ENV === 'development') {
     entry: [
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
-      path.resolve(ROOT_PATH, 'client/entry.jsx')
+      path.resolve(ROOT_PATH, 'src/client/entry.jsx')
     ],
     output: {
       // path: path.join(process.cwd(), '/client'),
@@ -79,7 +79,7 @@ if (ENV === 'development') {
         {
           test: /\.scss?$/,
           loader: 'style!css!sass',
-          include: path.resolve(ROOT_PATH, 'client')
+          include: path.resolve(ROOT_PATH, 'src/client')
         }
       ]
     }
@@ -106,7 +106,7 @@ if (ENV === 'production') {
         },
         {
           test: /\.scss$/,
-          include: path.resolve(ROOT_PATH, 'client'),
+          include: path.resolve(ROOT_PATH, 'src/client'),
           loader: ExtractTextPlugin.extract(
             // activate source maps via loader query
             'css?sourceMap!' +

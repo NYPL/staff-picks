@@ -16,13 +16,13 @@ import DocMeta from 'react-doc-meta';
 import parser from 'jsonapi-parserinator';
 import _ from 'underscore';
 
-import Footer from './client/components/Footer/Footer.jsx';
+import Footer from './src/app/components/Footer/Footer.jsx';
 
 import alt from 'dgx-alt-center';
 import Iso from 'iso';
 
-import routes from './client/routes/routes.jsx';
-import ApiRoutes from './server/ApiRoutes/ApiRoutes.js';
+import routes from './src/app/routes/routes.jsx';
+import ApiRoutes from './src/server/ApiRoutes/ApiRoutes.js';
 
 // URL configuration
 const ROOT_PATH = __dirname;
@@ -35,14 +35,14 @@ let app = express(),
 app.use('*/dist', express.static(DIST_PATH));
 
 // Assign the path for static client files
-app.use('*/client', express.static(path.resolve(ROOT_PATH, 'client')));
+app.use('*/client', express.static(path.resolve(ROOT_PATH, 'src/client')));
 
 app.use(compress());
 app.disable('x-powered-by');
 
 app.set('view engine', 'ejs');
 // app.set('view options', {layout: 'layout'});
-app.set('views', path.resolve(__dirname, 'server/views'));
+app.set('views', path.resolve(__dirname, 'src/server/views'));
 app.set('port', process.env.PORT || appConfig.port);
 
 app.use('/', (req, res, next) => {

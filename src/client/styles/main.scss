@@ -133,12 +133,9 @@ $dark-lib-gray: #776E64;
 
 @import 'utils/transitions';
 @import 'utils/breakpoint';
-
 @import 'utils/fonts';
-
 @import 'utils/globals';
 @import 'utils/viewports';
-@import 'utils/headerViewports';
 @import 'utils/mixins';
 @import 'utils/animations';
 
@@ -417,7 +414,7 @@ span[class*="icon-"] {
   }
 }
 .close-icon {
-  background: url('/recommendations/staff-picks/client/images/icons/gray_x_button.svg') no-repeat;
+  background: url('/recommendations/staff-picks/src/client/images/icons/gray_x_button.svg') no-repeat;
   background-position: 0 0;
   padding: 12px 18px 12px 10px;
   margin-left: 10px;
