@@ -16,7 +16,7 @@ import DocMeta from 'react-doc-meta';
 import parser from 'jsonapi-parserinator';
 import _ from 'underscore';
 
-import App from './client/server.jsx';
+import App from './client/components/Application/Application.jsx';
 import BookModal from './client/components/BookModal/BookModal.jsx';
 import Error404Page from './client/components/Error404Page/Error404Page.jsx';
 import Footer from './client/components/Footer/Footer.jsx';

@@ -1,17 +1,13 @@
-'use strict';
-// import 'styles/main.scss';
 import React from 'react/addons';
-import Radium from 'radium';
 import DocMeta from 'react-doc-meta';
 import Router from 'react-router';
 
 // NYPL Components
 import Header from 'dgx-header-component';
-import Hero from './components/Hero/Hero.jsx';
-import AgeTabs from './components/AgeTabs/AgeTabs.jsx';
-import Error404Page from './components/Error404Page/Error404Page.jsx';
-import Books from './components/Books/Books.jsx';
-import Sidebar from './components/Sidebar/Sidebar.jsx';
+import Hero from '../Hero/Hero.jsx';
+import AgeTabs from '../AgeTabs/AgeTabs.jsx';
+import Books from '../Books/Books.jsx';
+import Sidebar from '../Sidebar/Sidebar.jsx';
 
 let RouteHandler = Router.RouteHandler;
 
@@ -58,6 +54,6 @@ class App extends React.Component {
       </div>
     );
   }
-}
+};
 
-export default Radium(App);
+export default App;
