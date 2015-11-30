@@ -16,14 +16,12 @@ import DocMeta from 'react-doc-meta';
 import parser from 'jsonapi-parserinator';
 import _ from 'underscore';
 
-import App from './client/components/Application/Application.jsx';
-import BookModal from './client/components/BookModal/BookModal.jsx';
-import Error404Page from './client/components/Error404Page/Error404Page.jsx';
 import Footer from './client/components/Footer/Footer.jsx';
 
 import alt from 'dgx-alt-center';
 import Iso from 'iso';
 
+import routes from './client/routes/routes.jsx';
 import ApiRoutes from './server/ApiRoutes/ApiRoutes.js';
 
 // URL configuration
@@ -58,24 +56,12 @@ app.use('/', ApiRoutes);
 
 // after get the path
 app.use(function(req, res) {
-  let Route = Router.Route,
-    NotFoundRoute = Router.NotFoundRoute,
-    routes,
-    iso;
-
-  routes = (
-    <Route name='home' path='/' handler={App} ignoreScrollBehavior>
-      <Route name='month' path='/:month?/?' ignoreScrollBehavior/>
-      <Route name='modal' path='/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
-        <NotFoundRoute handler={Error404Page} />
-      </Route>
-    </Route>
-  );
+  let iso;
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   iso = new Iso();
 
-  Router.run(routes, req.path, function (Root, state) {
+  Router.run(routes.server, req.path, function (Root, state) {
     let html = React.renderToString(<Root />),
       footer = React.renderToString(<Footer />),
       metaTags = DocMeta.rewind(),

@@ -9,24 +9,10 @@ import Footer from './components/Footer/Footer.jsx';
 import alt from 'dgx-alt-center';
 import Iso from 'iso';
 
+import routes from './routes/routes.jsx';
 import ga from 'react-ga';
 
 import './styles/main.scss';
-
-let Route = Router.Route,
-  NotFoundRoute = Router.NotFoundRoute,
-  DefaultRoute = Router.DefaultRoute,
-  RouteHandler = Router.RouteHandler;
-
-let routes = (
-    <Route name='home' path='/recommendations/staff-picks/' handler={App} ignoreScrollBehavior>
-      <Route name='month' path='/recommendations/staff-picks/:month?/?' ignoreScrollBehavior/>
-      <Route name='modal' path='/recommendations/staff-picks/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
-        <NotFoundRoute handler={Error404Page} />
-      </Route>
-    </Route>
-  );
-
 
 window.onload = () => {
   Iso.bootstrap((state, meta, container) => {
@@ -38,7 +24,7 @@ window.onload = () => {
       ga.initialize('UA-1420324-3', gaOpts);
     }
 
-    Router.run(routes, Router.HistoryLocation, (Root, state) => {
+    Router.run(routes.client, Router.HistoryLocation, (Root, state) => {
       let lastCharIndex = state.pathname.length - 1,
         pageview = state.pathname;
 
