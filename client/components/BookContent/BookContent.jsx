@@ -10,10 +10,11 @@ class BookContent extends React.Component {
     super(props);
   }
 
-  render () {
+  render() {
     const book = this.props.book,
       staffPick = book['item'],
-      bookTarget = staffPick['attributes']['catalog-slug'],
+      bookTarget = staffPick['attributes']['catalog-slug'] ?
+        staffPick['attributes']['catalog-slug'] : undefined,
       ebookTarget = staffPick['attributes']['ebook-uri'] ?
         staffPick['attributes']['ebook-uri']['full-uri'] : undefined;
 
@@ -26,8 +27,7 @@ class BookContent extends React.Component {
       bookIcon,
       bookSubstringID,
       ebookSubstringID,
-      ebookIcon,
-      emptyLink;
+      ebookIcon;
 
     if (bookTarget && bookTarget.indexOf('browse.nypl.org') === -1) {
       bookSubstringID = bookTarget.substring(0, 8);
@@ -43,13 +43,11 @@ class BookContent extends React.Component {
       ebookStyle = styles.unavailable;
       ebookIcon = 'disabled';
       ebookLinkStyle = styles.linkUnavailable;
-      ebookHREF = emptyLink;
     }
     if (!bookTarget) {
       bookStyle = styles.unavailable;
       bookIcon = 'disabled';
       bookLinkStyle = styles.linkUnavailable;
-      bookHREF = emptyLink;
     }
 
     return (

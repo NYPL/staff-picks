@@ -24,7 +24,7 @@ class CloseButton extends React.Component {
     this.props.onClick();
   }
 
-  render () {
+  render() {
     return (
       <SimpleButton
         id='close-button'
@@ -47,15 +47,15 @@ class BookFilters extends React.Component {
     this._filterItems = this._filterItems.bind(this);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     BookStore.listen(this._onChange);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     BookStore.unlisten(this._onChange);
   }
 
-  render () {
+  render() {
     let styles = this.props.styles || {};
     let storeState = BookStore.getState();
 
@@ -82,11 +82,11 @@ class BookFilters extends React.Component {
             </div>
             : null
           }
-            <h2 className='mobile-done-button'>
-              <a onClick={this.props.mobileCloseBtn}>
-                Done
-              </a>
-            </h2>
+          <h2 className='mobile-done-button'>
+            <a onClick={this.props.mobileCloseBtn}>
+              Done
+            </a>
+          </h2>
         </div>
       </div>
     );
@@ -146,7 +146,6 @@ class BookFilters extends React.Component {
       }
 
       return elem.remove ? liElement : null;
-      // <Link to='/' onClick={_handleClick.bind(_this, elem)} query={{filters: elem.attributes.displayName}}>
     });
   }
 

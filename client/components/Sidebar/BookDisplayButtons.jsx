@@ -18,15 +18,15 @@ class BookDisplayButtons extends React.Component {
     this._onChange = this._onChange.bind(this);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     BookStore.listen(this._onChange);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     BookStore.unlisten(this._onChange);
   }
 
-  render () {
+  render() {
     let gridActive = true,
       listActive = false;
 
@@ -62,13 +62,13 @@ class BookDisplayButtons extends React.Component {
   }
 
   /* Utility Methods should be declared below the render method */
-  _handleClick (_bookDisplay) {
+  _handleClick(_bookDisplay) {
     BookActions.updateBookDisplay(_bookDisplay);
 
     utils._trackPicks('Display Selected', _bookDisplay);
   }
 
-  _onChange () {
+  _onChange() {
     this.setState(BookStore.getState());
   }
 };

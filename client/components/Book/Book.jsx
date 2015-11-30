@@ -9,25 +9,22 @@ class Book extends React.Component {
     this._handleClick = this._handleClick.bind(this);
   }
 
-  render () {
+  render() {
     const book = this.props.book,
       bookImgSrc = book['item']['attributes']['image-slug'],
       bookTarget = book['item']['attributes']['catalog-slug'],
-      href = `https://nypl.bibliocommons.com/item/show/${bookTarget}`;
+      fullImgSrc = `https://contentcafe2.btol.com/ContentCafe/` +
+              `Jacket.aspx?&userID=NYPL49807&password=CC68707&` +
+              `Value=${bookImgSrc}&content=M&Return=1&Type=M`
 
     return (
       <div ref='Book' className={this.props.className}
-        style={[
-          styles.base,
-          this.props.style
-        ]}>
+        style={[this.props.style]}>
         
         <a href='#' onClick={this._handleClick}>
           <img style={this.props.style}
             alt={book['item']['attributes']['title']}
-            src={`https://contentcafe2.btol.com/ContentCafe/` +
-              `Jacket.aspx?&userID=NYPL49807&password=CC68707&` +
-              `Value=${bookImgSrc}&content=M&Return=1&Type=M`}
+            src={fullImgSrc}
             height={this.props.height}
             width={this.props.width} />
         </a>
@@ -35,7 +32,7 @@ class Book extends React.Component {
     );
   }
 
-  _handleClick (e) {
+  _handleClick(e) {
     e.preventDefault();
   }
 };
@@ -43,10 +40,6 @@ class Book extends React.Component {
 Book.defaultProps = {
   className: 'Book',
   lang: 'en'
-};
-
-const styles = {
-  base: {}
 };
 
 export default Radium(Book);

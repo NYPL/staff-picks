@@ -7,21 +7,20 @@ class HeroTitle extends React.Component {
     super(props);
   }
 
-  render () {
+  render() {
     return (
       <div id={this.props.id} className={this.props.className}
-        style={[
-          this.props.style
-        ]}>
+        style={[this.props.style]}>
         <h3 key='HeroTitle'>{this.props.title}</h3>
-        <p key='HeroDes' className='hero__container__text-container__title__des'>{this.props.des}</p>
-        <p key='HeroIntro' className='hero__container__text-container__title__intro'>{this.props.intro}</p>
+        <p key='HeroDes' className='hero__container__text-container__title__des'>
+          {this.props.des}
+        </p>
+        <p key='HeroIntro' className='hero__container__text-container__title__intro'>
+          {this.props.intro}
+        </p>
       </div>
     );
   }
-};
-
-const styles = {
 };
 
 export default Radium(HeroTitle);

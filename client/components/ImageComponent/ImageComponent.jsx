@@ -7,9 +7,13 @@ class ImageComponent extends React.Component {
 		super(props);
   }
 
-  render () {
+  render() {
     return (
-      <img id={this.props.id} className={this.props.className} style={this.props.style} src={this.props.src} />
+      <img
+        id={this.props.id}
+        className={this.props.className}
+        style={this.props.style}
+        src={this.props.src} />
     );
   }
 };
@@ -19,11 +23,6 @@ ImageComponent.defaultProps = {
   className: 'BasicImageComponent',
   label: '',
   lang: 'en'
-};
-
-const styles = {
-  base: {
-  }
 };
 
 export default Radium(ImageComponent);
