@@ -173,13 +173,13 @@ function AjaxData(req, res) {
     }); /* end axios call */
 }
 
-// router
-//   .route('/')
-//   .get(CurrentMonthData);
+router
+  .route('/')
+  .get(CurrentMonthData);
 
-// router
-//   .route('/:month/:id?')
-//   .get(SelectMonthData);
+router
+  .route('/:month/:id?')
+  .get(SelectMonthData);
 
 router
   .route('/api/ajax/picks/:month')
