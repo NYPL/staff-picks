@@ -1,15 +1,15 @@
 import React from 'react/addons';
 import Router from 'react-router';
 
-import App from './components/Application/Application.jsx';
-import BookModal from './components/BookModal/BookModal.jsx';
-import Error404Page from './components/Error404Page/Error404Page.jsx';
-import Footer from './components/Footer/Footer.jsx';
+import App from '../app/components/Application/Application.jsx';
+import BookModal from '../app/components/BookModal/BookModal.jsx';
+import Error404Page from '../app/components/Error404Page/Error404Page.jsx';
+import Footer from '../app/components/Footer/Footer.jsx';
 
 import alt from 'dgx-alt-center';
 import Iso from 'iso';
 
-import routes from './routes/routes.jsx';
+import routes from '../app/routes/routes.jsx';
 import ga from 'react-ga';
 
 import './styles/main.scss';
