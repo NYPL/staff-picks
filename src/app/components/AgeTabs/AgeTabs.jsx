@@ -14,7 +14,7 @@ class AgeTabs extends React.Component {
 
   render() {
     // Render each TabElement
-    let TabElements = data.map((element) => {
+    let TabElements = data.map(element => {
         return (
           <TabElement
             key={element.name}
@@ -28,7 +28,7 @@ class AgeTabs extends React.Component {
       <div className='tab-container'>
         <ul className='tab-container__ul'>
           <li key='li-before' className='tab-container__outsider'></li>
-          {TabElements}
+            {TabElements}
           <li key='li-after' className='tab-container__outsider'></li>
         </ul>
       </div>

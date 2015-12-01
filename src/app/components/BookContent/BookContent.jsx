@@ -13,8 +13,8 @@ class BookContent extends React.Component {
   render() {
     const book = this.props.book,
       staffPick = book.item,
-      bookTarget = staffPick.catalogSlug ? staffPick.catalogSlug : undefined,
-      ebookTarget = staffPick.ebookUri ? staffPick.ebookUri : undefined;
+      bookTarget = staffPick.catalogSlug,
+      ebookTarget = staffPick.ebookUri;
 
     let ebookHREF = ebookTarget,
       bookStyle = styles.available,
