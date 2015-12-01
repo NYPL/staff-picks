@@ -10,7 +10,7 @@ class BookShare extends React.Component {
 
     let shareUrl = window.location.href,
         via = 'NYPL',
-        bookTitle = this.props.book['item']['attributes']['title'],
+        bookTitle = this.props.book.item.title,
         nyplStaffPick = `Staff Picks %7C The New York Public Library - ${bookTitle}`;
 
      this.state = {
@@ -23,7 +23,7 @@ class BookShare extends React.Component {
   }
 
   render() {
-    let bookTitle = this.props.book['item']['attributes']['title'];
+    let bookTitle = this.props.book.item.title;
 
     return (
       <div ref='BookContent' className={this.props.className} style={styles.BookShare}>

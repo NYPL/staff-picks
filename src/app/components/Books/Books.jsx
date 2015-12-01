@@ -105,23 +105,23 @@ let Navigation = Router.Navigation,
     },
 
     _openModal(book) {
-      utils._trackPicks('Book', book['item']['attributes']['title']);
+      utils._trackPicks('Book', book.item.title);
 
       this.transitionTo('modal', {
         month: this.state._currentMonthPicks.date,
-        id: book['item']['id']
+        id: book.item.id
       });
     },
 
     _getTags(elem) {
-      return elem['item']['tags'] || [];
+      return elem.item.tags || [];
     },
 
     _getAge(elem) {
-      if (!elem['age']) {
+      if (!elem.age) {
         return;
       }
-      return elem['age']['attributes']['age'];
+      return elem.age.age;
     },
 
     render() {
@@ -149,8 +149,8 @@ let Navigation = Router.Navigation,
             {(_this.state._bookDisplay === 'grid') ?
               <Book book={element} className='book' />
               : <div>
-                  <h2>{element['item']['attributes']['title']}</h2>
-                  <p>By: {element['item']['attributes']['author']}</p>
+                  <h2>{element.item.title}</h2>
+                  <p>By: {element.item.author}</p>
                 </div>
             }
           </li>
@@ -164,8 +164,10 @@ let Navigation = Router.Navigation,
       thisMonth = date.month;
       thisyear = date.year;
 
-      let previousMonthDate = currentMonthPicks.previousList['list-date'];
-      let nextMonthDate = currentMonthPicks.nextList['list-date'];
+      let previousMonthDate = currentMonthPicks.previousList ? 
+        currentMonthPicks.previousList.date : {};
+      let nextMonthDate = currentMonthPicks.nextList ? 
+        currentMonthPicks.nextList.date : {};
 
       previousMonth = {
         active: !_.isEmpty(currentMonthPicks.previousList),

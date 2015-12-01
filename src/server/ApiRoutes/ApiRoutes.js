@@ -2,7 +2,8 @@ import express from 'express';
 import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 import {apiRoot, apiEndpoint, fields, pageSize, includes, api, headerApi} from '../../../appConfig.js';
-import Model from '../../app/utils/HeaderItemModel.js';
+import HeaderModel from '../../app/utils/HeaderItemModel.js';
+import PicksListModel from '../../app/utils/PicksListModel.js';
 
 let router = express.Router(),
   appEnvironment = process.env.APP_ENV || 'production',
@@ -39,16 +40,8 @@ function CurrentMonthData(req, res, next) {
         HeaderParsed = parser.parse(headerData.data, headerOptions),
         // Since the endpoint returns a list of monthly picks
         currentMonth = parsed[0],
-        // Create the Model for a pick but this will eventually be in a separate file
-        currentMonthPicks = {
-          id: currentMonth.id,
-          picks: currentMonth.picks,
-          date: currentMonth.attributes['list-date'],
-          // Update previous/next object to include ID
-          previousList: currentMonth['previous-list'] ? currentMonth['previous-list'].attributes : {},
-          nextList: currentMonth['next-list'] ? currentMonth['next-list'].attributes : {}
-        },
-        modelData = Model.build(HeaderParsed);
+        modelData = HeaderModel.build(HeaderParsed),
+        currentMonthPicks = PicksListModel.build(currentMonth);
 
       res.locals.data = {
         BookStore: {
@@ -110,17 +103,9 @@ function SelectMonthData(req, res, next) {
         filters = parser.getOfType(returnedData.included, 'staff-pick-tag'),
         // parse the data
         selectedMonth = parser.parse(returnedData, options),
-        // Create the Model for a pick but this will eventually be in a separate file
-        currentMonthPicks = {
-          id: selectedMonth.id,
-          picks: selectedMonth.picks,
-          date: selectedMonth.attributes['list-date'],
-          // Update previous/next object to include ID
-          previousList: selectedMonth['previous-list'] ? selectedMonth['previous-list'].attributes : {},
-          nextList: selectedMonth['next-list'] ? selectedMonth['next-list'].attributes : {}
-        },
         HeaderParsed = parser.parse(headerData.data, headerOptions),
-        modelData = Model.build(HeaderParsed);
+        modelData = HeaderModel.build(HeaderParsed),
+        currentMonthPicks = PicksListModel.build(selectedMonth);
 
       res.locals.data = {
         BookStore: {
@@ -166,7 +151,7 @@ function SelectMonthData(req, res, next) {
         }
       };
       next();
-    }); // end Axios call
+    }); /* end Axios call */
 }
 
 function AjaxData(req, res) {
@@ -179,14 +164,7 @@ function AjaxData(req, res) {
       let returnedData = data.data,
         selectedMonth = parser.parse(returnedData, options),
         filters = parser.getOfType(returnedData.included, 'staff-pick-tag'),
-        currentMonthPicks = {
-          id: selectedMonth.id,
-          picks: selectedMonth.picks,
-          date: selectedMonth.attributes['list-date'],
-          // Update previous/next object to include ID
-          previousList: selectedMonth['previous-list'] ? selectedMonth['previous-list'].attributes : {},
-          nextList: selectedMonth['next-list'] ? selectedMonth['next-list'].attributes : {}
-        };
+        currentMonthPicks = PicksListModel.build(selectedMonth);
 
       res.json({
         currentMonthPicks: currentMonthPicks,

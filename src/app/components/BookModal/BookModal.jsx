@@ -40,9 +40,9 @@ let BookModal = React.createClass({
       }
 
       _.each(books, (book) => {
-        if (book['item']['id'] === paramID) {
+        if (book.item.id === paramID) {
           modalBook = book;
-          age = book['age'] ? book['age'].attributes.age : 'adult';
+          age = book.age ? book.age.age : 'adult';
         }
       });
 
@@ -83,11 +83,11 @@ let BookModal = React.createClass({
         bookId,
         imageLink;
       
-      if (book['item']) {
-        title = book['item']['attributes']['title'];
-        description = book.attributes.text;
-        imageSrc = book['item']['attributes']['image-slug'];
-        bookId= book['item']['id'];
+      if (book.item) {
+        title = book.item.title;
+        description = book.text;
+        imageSrc = book.item.imageSlug;
+        bookId= book.item.id;
       }
 
       imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?` +
