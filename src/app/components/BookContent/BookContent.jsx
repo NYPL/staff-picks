@@ -12,11 +12,9 @@ class BookContent extends React.Component {
 
   render() {
     const book = this.props.book,
-      staffPick = book['item'],
-      bookTarget = staffPick['attributes']['catalog-slug'] ?
-        staffPick['attributes']['catalog-slug'] : undefined,
-      ebookTarget = staffPick['attributes']['ebook-uri'] ?
-        staffPick['attributes']['ebook-uri']['full-uri'] : undefined;
+      staffPick = book.item,
+      bookTarget = staffPick.catalogSlug ? staffPick.catalogSlug : undefined,
+      ebookTarget = staffPick.ebookUri ? staffPick.ebookUri : undefined;
 
     let ebookHREF = ebookTarget,
       bookStyle = styles.available,
@@ -52,11 +50,11 @@ class BookContent extends React.Component {
 
     return (
       <div ref='BookContent' className={this.props.className}>      
-        <p className='description'>{book.attributes.text}</p>
+        <p className='description'>{book.text}</p>
         <div className='staff-pick'>
           <span className='staff-pick-icon'></span>
           <span className='staff-pick-text'>
-            Staff Pick By: {book.attributes['picker-name']}, {book.attributes['location']}
+            Staff Pick By: {book.picker}, {book.location}
           </span>
         </div>
 

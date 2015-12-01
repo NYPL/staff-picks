@@ -34,12 +34,11 @@ class BookIntro extends React.Component {
 
   render() {
     const book = this.props.book,
-      tags = _.chain(book['item']['tags'])
-        .pluck('attributes')
+      tags = _.chain(book.item.tags)
         .pluck('tag')
         .flatten()
         .value(),
-      author = book['item']['attributes']['author'];
+      author = book.item.author;
 
     return (
       <div className='book-modal__book-intro__div'>
