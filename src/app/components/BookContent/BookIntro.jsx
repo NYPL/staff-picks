@@ -32,12 +32,16 @@ class BookIntro extends React.Component {
     super(props);
   }
 
+  _getTags(tags) {
+    return _.chain(tags)
+      .pluck('tag')
+      .flatten()
+      .value();
+  }
+
   render() {
     const book = this.props.book,
-      tags = _.chain(book.item.tags)
-        .pluck('tag')
-        .flatten()
-        .value(),
+      tags = this._getTags(book.item.tags),
       author = book.item.author;
 
     return (
