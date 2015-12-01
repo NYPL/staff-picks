@@ -26,32 +26,24 @@ class BookDisplayButtons extends React.Component {
   }
 
   render() {
-    let gridActive = true,
-      listActive = false;
+    let gridActive = this.state._bookDisplay === 'grid',
+      listActive = this.state._bookDisplay !== 'grid';
 
-    if (this.state._bookDisplay === 'grid') {
-      gridActive = true;
-      listActive = false;
-    } else {
-      gridActive = false;
-      listActive = true;
-    }
-
-    const gridActiveButton = cx({ gridActive: gridActive, active: gridActive });
-    const listActiveButton = cx({ listActive: listActive, active: listActive });
+    const gridActiveButton = cx({ active: gridActive });
+    const listActiveButton = cx({ active: listActive });
 
     return (
-      <div className='BookDisplayButtons'>
-        <ul className='BookDisplayButtons-list'>
+      <div className={this.props.className}>
+        <ul className={`${this.props.className}-List`}>
           <li className={gridActiveButton}>
             <a onClick={this._handleClick.bind(this, 'grid')}>
-              <span className='BookDisplayButtons-grid-icon icon'></span>
+              <span className={`${this.props.className}-grid-icon icon`}></span>
               COVERS
             </a>
           </li>
           <li className={listActiveButton}>
             <a onClick={this._handleClick.bind(this, 'list')}>
-              <span className='BookDisplayButtons-list-icon icon'></span>
+              <span className={`${this.props.className}-list-icon icon`}></span>
               LIST
             </a>
           </li>
@@ -70,6 +62,11 @@ class BookDisplayButtons extends React.Component {
   _onChange() {
     this.setState(BookStore.getState());
   }
+};
+
+BookDisplayButtons.defaultProps = {
+  className: 'BookDisplayButtons',
+  id: 'BookDisplayButtons'
 };
 
 export default Radium(BookDisplayButtons);
