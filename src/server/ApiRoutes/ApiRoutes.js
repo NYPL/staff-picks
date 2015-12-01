@@ -28,7 +28,7 @@ function fetchApiData(url) {
 
 function CurrentMonthData(req, res, next) {
   let endpoint = apiRoot + apiEndpoint + '?' + fields + pageSize + includes; 
-
+console.log('CurrentMonthData', req.path);
   axios.all([getHeaderData(), fetchApiData(endpoint)])
     .then(axios.spread((headerData, staffPicks) => {
       let returnedData = staffPicks.data,
@@ -94,7 +94,7 @@ function CurrentMonthData(req, res, next) {
 function SelectMonthData(req, res, next) {
   let month = req.params.month,
     endpoint = apiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
-
+console.log('SelectMonthData', req.path);
   axios.all([getHeaderData(), fetchApiData(endpoint)])
     .then(axios.spread((headerData, staffPicks) => {
       let returnedData = staffPicks.data,
@@ -173,13 +173,13 @@ function AjaxData(req, res) {
     }); /* end axios call */
 }
 
-router
-  .route('/')
-  .get(CurrentMonthData);
+// router
+//   .route('/')
+//   .get(CurrentMonthData);
 
-router
-  .route('/:month/:id?')
-  .get(SelectMonthData);
+// router
+//   .route('/:month/:id?')
+//   .get(SelectMonthData);
 
 router
   .route('/api/ajax/picks/:month')

@@ -93,20 +93,16 @@ let BookModal = React.createClass({
       imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?` +
         `&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
 
-      let tags = [
-        {property: "og:title", content: title},
-        {property: "og:type", content: 'website'},
-        {property: "og:image", content: imageLink},
-        {property: "og:description", content: description},
-        {property: "og:site_name", content: 'Staff Picks | The New York Public Library'},
-        {property: "og:url", content: `http://www.nypl.org/recommendations/staff-picks/${bookId}`},
-        {name: "twitter:card", content: 'summary_large_image'},
-        {name: "twitter:site", content: '@nypl'},
-        {name: "twitter:title", content: title},
-        {name: "twitter:description", content: description},
-        {name: "twitter:creator", content: '@nypl'},
-        {name: "twitter:image", content: imageLink}
-      ];
+      let modalTags = [
+          {property: "og:title", content: title},
+          {property: "og:image", content: imageLink},
+          {property: "og:description", content: description},
+          {property: "og:url", content: `http://www.nypl.org/recommendations/staff-picks/${bookId}`},
+          {name: "twitter:title", content: title},
+          {name: "twitter:description", content: description},
+          {name: "twitter:image", content: imageLink}
+        ],
+        tags = utils.metaTagUnion(modalTags);
 
       return (
         <div>
