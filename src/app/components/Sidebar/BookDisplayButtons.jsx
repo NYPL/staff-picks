@@ -5,7 +5,6 @@ import cx from 'classnames';
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
-import _ from 'underscore';
 import utils from '../../utils/utils.js';
 
 class BookDisplayButtons extends React.Component {

@@ -23,7 +23,8 @@ class BookShare extends React.Component {
   }
 
   render() {
-    let bookTitle = this.props.book.item.title;
+    let book = this.props.book,
+      bookTitle = book.item.title;
 
     return (
       <div ref='BookContent' className={this.props.className} style={styles.BookShare}>
@@ -84,6 +85,5 @@ const styles={
 	  }
 	}
 };
-
 
 export default Radium(BookShare);

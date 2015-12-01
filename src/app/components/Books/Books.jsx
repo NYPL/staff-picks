@@ -2,12 +2,10 @@ import React from 'react';
 import Router from 'react-router';
 import Radium from 'radium';
 
-import parser from 'jsonapi-parserinator';
 import _ from 'underscore';
 
 import Book from '../Book/Book.jsx';
-import BookContent from '../BookContent/BookContent.jsx';
-import CloseButton from './CloseButton.jsx';
+import MonthPicker from '../MonthPicker/MonthPicker.jsx';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
@@ -124,88 +122,45 @@ let Navigation = Router.Navigation,
       return elem.age.age;
     },
 
+    // Maybe this can be a small component in itself?
+    _getBookListItem(elem) {
+      return (
+        <div>
+          <h2>{elem.item.title}</h2>
+          <p>By: {elem.item.author}</p>
+        </div>
+      );
+    },
+
     render() {
-      const openModal = this._openModal,
-        _this = this;
+      const openModal = this._openModal;
 
       let currentMonthPicks = this.state._currentMonthPicks,
         picks = currentMonthPicks.picks,
-        books, months, pickDate, date, thisMonth, thisyear,
-        nextMonth, previousMonth, previousLink, nextLink;
+        gridDisplay = this.state._bookDisplay === 'grid',
+        books = picks.map((element, i) => {
+          let tagList = this._getTags(element),
+            age = this._getAge(element),
+            tagIDs = _.map(tagList, tag => {
+              return tag.id;
+            }),
+            tagClasses = tagIDs.join(' '),
+            listDisplay = gridDisplay ? styles.gridWidth : styles.listWidth,
+            listItem = gridDisplay ? <Book book={element} className='book' />
+              : this._getBookListItem(element);
 
-      books = picks.map((element, i) => {
-        let tagList = _this._getTags(element),
-          age = _this._getAge(element),
-          tagIDs = _.map(tagList, tag => {
-            return tag.id;
-          }),
-          tagClasses = tagIDs.join(' '),
-          listDisplay = _this.state._bookDisplay === 'list';
-
-        return (
-          <li className={'book-item ' + age + ' ' + tagClasses}
-            key={element.id} onClick={openModal.bind(_this, element)}
-            style={[listDisplay ? styles.listWidth : styles.gridWidth]}>
-            {(_this.state._bookDisplay === 'grid') ?
-              <Book book={element} className='book' />
-              : <div>
-                  <h2>{element.item.title}</h2>
-                  <p>By: {element.item.author}</p>
-                </div>
-            }
-          </li>
-        );
-      });
-
-      months = ['January', 'February', 'March', 'April', 'May',
-        'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-      pickDate = currentMonthPicks.date;
-      date = staffPicksDate(pickDate);
-      thisMonth = date.month;
-      thisyear = date.year;
-
-      let previousMonthDate = currentMonthPicks.previousList ? 
-        currentMonthPicks.previousList.date : {};
-      let nextMonthDate = currentMonthPicks.nextList ? 
-        currentMonthPicks.nextList.date : {};
-
-      previousMonth = {
-        active: !_.isEmpty(currentMonthPicks.previousList),
-        date: previousMonthDate,
-        month: () => {
-          if (_.isEmpty(currentMonthPicks.previousList)) {
-            return;
-          }
-          return staffPicksDate(previousMonthDate).month;
-        }
-      };
-      nextMonth = {
-        active: !_.isEmpty(currentMonthPicks.nextList),
-        date: nextMonthDate,
-        month: () => {
-          if (_.isEmpty(currentMonthPicks.nextList)) {
-            return;
-          }
-          return staffPicksDate(nextMonthDate).month;
-        }
-      };
-
-      previousLink = previousMonth.active ? (
-        <a style={styles.previousMonth} onClick={this._handleClick.bind(this, 'Previous', previousMonth)}>
-          <span className='left-icon'></span>Picks for {previousMonth.month()}
-        </a>
-      ) : null;
-      nextLink = nextMonth.active ? (
-        <a style={styles.nextMonth} onClick={this._handleClick.bind(this, 'Next', nextMonth)}>
-          Picks for {nextMonth.month()}<span className='right-icon'></span>
-        </a>
-      ) : null;
+          return (
+            <li className={'book-item ' + age + ' ' + tagClasses}
+              key={element.id} onClick={openModal.bind(this, element)}
+              style={listDisplay}>
+              {listItem}
+            </li>
+          );
+        });
 
       return (
         <div>
-          <div className='month-picker' style={styles.monthPicker}>
-            {previousLink}<p style={styles.month}>{thisMonth} {thisyear}</p>{nextLink}
-          </div>
+          <MonthPicker currentMonthPicks={currentMonthPicks} />
 
           <div id="masonryContainer" ref="masonryContainer" style={{opacity: '0'}}>
             <ul className='list-view'>
@@ -221,36 +176,9 @@ let Navigation = Router.Navigation,
           </p>
         </div>
       );
-    },
-
-    _handleClick(selection, month) {
-      let API = '/recommendations/staff-picks/api/ajax/picks/' + month.date;
-
-      if (month) {
-        $.ajax({
-          type: 'GET',
-          dataType: 'json',
-          url: API,
-          success: data => {
-            let date = data.currentMonthPicks.date,
-              picks = data.currentMonthPicks,
-              filters = data.filters;
-
-            utils._trackPicks('Select Month', `${selection}: ${month.month()}`);
-
-            this.transitionTo('month', {
-              month: date,
-            });
-            BookActions.clearFilters();
-            BookActions.isotopesDidUpdate(true);
-            BookActions.updatePicks(picks);
-            BookActions.updateInitialFilters(filters);
-            BookActions.isotopesDidUpdate(false);
-          }
-        });
-      }
     }
   });
+
 
 Books.defaultProps = {
   className: 'Books',
@@ -273,24 +201,6 @@ const styles = {
   },
   hideNoResults: {
     display: 'none'
-  },
-  monthPicker: {
-    height: '35px',
-    marginLeft: '-23px',
-    paddingTop: '7px',
-    textAlign: 'center'
-  },
-  month: {
-    display: 'inline-block',
-    color: '#333333',
-    position: 'absolute',
-    '@media (min-width: 600px)': { left: '52%' }
-  },
-  nextMonth: {
-    float: 'right'
-  },
-  previousMonth: {
-    float: 'left'
   }
 };
 

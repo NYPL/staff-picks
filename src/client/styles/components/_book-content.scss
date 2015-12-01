@@ -3,6 +3,7 @@
   display: inline-block;
   position: relative;
   width: 520px;
+
   @include breakpoint($max, $post-mobile-phone) {
     clear: both;
     display: block;
@@ -38,12 +39,12 @@
     font-size: 15px;
     margin: 25px 0;
 
-    .staff-pick-icon {
+    &-icon {
       background: url('/recommendations/staff-picks/src/client/images/icons/icon.thumbsup.svg') no-repeat;
       padding: 11px 20px 10px 10px;
       margin-right: 10px;
     }
-    .staff-pick-text {
+    &-text {
       line-height: 24px;
     }
   }
@@ -71,6 +72,7 @@
         background: url('/recommendations/staff-picks/src/client/images/icons/icon.book.svg') no-repeat;
         padding: 8px 20px 10px 10px;
         margin-right: 15px;
+
         &.disabled {
           background: url('/recommendations/staff-picks/src/client/images/icons/icon.book.disabled.svg') no-repeat;
           background-position: -1px -1px;
@@ -81,12 +83,14 @@
           margin-right: 10px;
         }
       }
+
       .ebook {
         background: url('/recommendations/staff-picks/src/client/images/icons/icon.eReader.svg') no-repeat;
         background-position: 4px 4px;
         background-size: 77%;
         padding: 12px 20px 10px 10px;
         margin-right: 15px;
+
         &.disabled {
           background: url('/recommendations/staff-picks/src/client/images/icons/icon.eReader.disabled.svg') no-repeat;
           background-position: 4px 4px;

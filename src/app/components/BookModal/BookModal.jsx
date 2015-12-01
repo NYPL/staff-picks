@@ -18,14 +18,13 @@ import BookActions from '../../actions/BookActions.js';
 
 import utils from '../../utils/utils.js';
 
-let Navigation = Router.Navigation;
-
 if (global.window) {
   Modal.setAppElement(document.getElementById('content'));
   Modal.injectCSS();
 }
 
-let BookModal = React.createClass({
+let Navigation = Router.Navigation,
+  BookModal = React.createClass({
     getInitialState() {
       let paramID = this.props.params.id,
         modalBook = {},
@@ -107,29 +106,34 @@ let BookModal = React.createClass({
       return (
         <div>
           <DocMeta tags={tags} />
-          <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-            <CloseButton className='book-modal__close-btn' onClick={this.closeModal} />
-            <BookTitle className='book-modal__book-title' book={this.state.book} />
-            <div className='book-modal__left-column'>
-              <div key='ImageContainer' className='book-modal__left-column__image-container'>
+          <Modal className={this.props.className} isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
+            <CloseButton className={`${this.props.className}__closeBtn`} onClick={this.closeModal} />
+            <BookTitle className={`${this.props.className}__BookTitle`} book={this.state.book} />
+            <div className={`${this.props.className}__left-column`}>
+              <div key='ImageContainer' className={`${this.props.className}__left-column__image`}>
                 <Book
                   book={this.state.book}
-                  className='book-modal__left-column__image-container__cover'
+                  className={`${this.props.className}__left-column__image__cover`}
                   style={styles.BookCover} />
               </div>
-              <div key='ShareContainer' className='book-modal__left-column__share-container'>
+              <div key='ShareContainer' className={`${this.props.className}__left-column__share`}>
                 <BookShare
-                  className='book-modal__left-column__share-container__share-items'
+                  className={`${this.props.className}__left-column__share-items`}
                   book={this.state.book} />
               </div>
             </div>
-            <BookIntro className='book-modal__book-intro' book={this.state.book} />
+            <BookIntro book={this.state.book} />
             <BookContent book={this.state.book} />
           </Modal>
         </div>
       );
     }
   });
+
+BookModal.defaultProps = {
+  className: 'BookModal',
+  id: 'BookModal'
+}
 
 const styles={
   BookCover: {

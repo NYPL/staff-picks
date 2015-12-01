@@ -45,16 +45,16 @@ class BookIntro extends React.Component {
       author = book.item.author;
 
     return (
-      <div className='book-modal__book-intro__div'>
-        <p className='book-modal__book-intro__div__author'>By {author}</p>
-        <TagList className='book-modal__book-intro__div__tags' tags={tags} />
+      <div className={`${this.props.className}`}>
+        <p className={`${this.props.className}__author`}>By {author}</p>
+        <TagList className={`${this.props.className}__tags`} tags={tags} />
       </div>
     );
   }
 };
 
 BookIntro.defaultProps = {
-  className: 'Booktitle',
+  className: 'BookIntro',
   lang: 'en',
   onClick() {}
 };
