@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 import DocMeta from 'react-doc-meta';
 import _ from 'underscore';
 
-import CloseButton from '../Books/CloseButton.jsx';
+import CloseButton from '../Buttons/CloseButton.jsx';
 import Book from '../Book/Book.jsx';
 import BookContent from '../BookContent/BookContent.jsx';
 import BookTitle from '../BookContent/BookTitle.jsx';
@@ -107,7 +107,10 @@ let Navigation = Router.Navigation,
         <div>
           <DocMeta tags={tags} />
           <Modal className={this.props.className} isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-            <CloseButton className={`${this.props.className}__closeBtn`} onClick={this.closeModal} />
+            <CloseButton
+              className={`${this.props.className}__closeBtn`}
+              onClick={this.closeModal}
+              label='RETURN TO STAFF PICKS' />
             <BookTitle className={`${this.props.className}__BookTitle`} book={this.state.book} />
             <div className={`${this.props.className}__left-column`}>
               <div key='ImageContainer' className={`${this.props.className}__left-column__image`}>

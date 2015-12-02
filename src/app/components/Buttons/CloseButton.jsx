@@ -1,8 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
 
-import SimpleButton from '../Buttons/SimpleButton.jsx';
-
 class CloseButton extends React.Component {
   // Constructor used in ES6
   constructor(props) {
@@ -20,11 +18,17 @@ class CloseButton extends React.Component {
       <a id='close-button' href='#'
         className={this.props.className}
         onClick={this._handleClick.bind(this)}>
-        RETURN TO STAFF PICKS
+        {this.props.label}
       </a>
     );
   }
 }
+
+CloseButton.defaultProps = {
+  id: 'CloseButton',
+  className: 'CloseButton',
+  label: ''
+};
 
 // Styles
 const styles = {
