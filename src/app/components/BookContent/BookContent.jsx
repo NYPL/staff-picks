@@ -1,7 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
 
-import _ from 'underscore';
 import utils from '../../utils/utils.js';
 
 class BookContent extends React.Component {

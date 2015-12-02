@@ -12,15 +12,15 @@ class SimpleButton extends React.Component {
   render () {
     return (
       <a
-      ref='SimpleButton'
-      id={this.props.id}
-      className={this.props.className}
-      href={this.props.target}
-      onClick={this._onClick.bind(this)}
-      style={[
-        styles.base,
-        this.props.style
-      ]}>
+        ref='SimpleButton'
+        id={this.props.id}
+        className={this.props.className}
+        href={this.props.target}
+        onClick={this._onClick.bind(this)}
+        style={[
+          styles.base,
+          this.props.style
+        ]}>
         {this.props.label}
       </a>
     );
@@ -42,9 +42,7 @@ SimpleButton.defaultProps = {
 };
 
 const styles = {
-  base: {
-
-  }
+  base: {}
 };
 
 export default Radium(SimpleButton);
