@@ -25,6 +25,17 @@ class BookDisplayButtons extends React.Component {
     BookStore.unlisten(this._onChange);
   }
 
+  // Will eventually need to break this out into its own component.
+  // Need to think about classes, icons, and passed down click functions.
+  _pillButton(label, classprop, clickprop) {
+    return (
+      <a onClick={clickprop}>
+        <span className={classprop}></span>
+        {label}
+      </a>
+    );
+  }
+
   render() {
     let gridActive = this.state._bookDisplay === 'grid',
       listActive = this.state._bookDisplay !== 'grid';
@@ -36,16 +47,10 @@ class BookDisplayButtons extends React.Component {
       <div className={this.props.className}>
         <ul className={`${this.props.className}-List`}>
           <li className={gridActiveButton}>
-            <a onClick={this._handleClick.bind(this, 'grid')}>
-              <span className={`${this.props.className}-grid-icon icon`}></span>
-              COVERS
-            </a>
+            {this._pillButton('COVERS', `${this.props.className}-grid-icon icon`, this._handleClick.bind(this, 'grid'))}
           </li>
           <li className={listActiveButton}>
-            <a onClick={this._handleClick.bind(this, 'list')}>
-              <span className={`${this.props.className}-list-icon icon`}></span>
-              LIST
-            </a>
+            {this._pillButton('LIST', `${this.props.className}-list-icon icon`, this._handleClick.bind(this, 'list'))}
           </li>
         </ul>
       </div>

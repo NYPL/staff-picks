@@ -6,9 +6,6 @@ import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 import CloseButton from '../Buttons/CloseButton.jsx';
 
-import { Link } from 'react-router';
-import SimpleButton from '../Buttons/SimpleButton.jsx';
-
 import utils from '../../utils/utils.js';
 
 let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
@@ -33,16 +30,16 @@ class BookFilters extends React.Component {
   }
 
   render() {
-    let styles = this.props.styles || {};
-    let storeState = BookStore.getState();
+    let styles = this.props.styles || {},
+      storeState = BookStore.getState();
 
     return (
       <div className='BookFilters' style={styles}>
-        <span className='divider'></span>
         <CloseButton
           onClick={this.props.mobileCloseBtn}
           id='close-button'
           className='BookFilters__close-btn'/>
+        <span className='divider'></span>
         <h2>What would you like to read?</h2>
         <div className='BookFilters-lists'>
           <span>Driven by...</span>

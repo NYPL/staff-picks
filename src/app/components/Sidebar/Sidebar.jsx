@@ -2,8 +2,8 @@
 import React from 'react';
 import Radium from 'radium';
 
-import BookDisplayButtons from './BookDisplayButtons.jsx';
-import BookFilters from './BookFilters.jsx';
+import BookDisplayButtons from '../BookDisplayButtons/BookDisplayButtons.jsx';
+import BookFilters from '../BookFilters/BookFilters.jsx';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 
 import utils from '../../utils/utils.js';
@@ -42,6 +42,7 @@ class Sidebar extends React.Component {
     return (
       <div ref='sidebar' className='sidebar-content'>
         <BookDisplayButtons />
+
         <SimpleButton
           gaCategory='Staff Picks' gaAction='Mobile Filter' gaEvent='Filter'
           className='mobile-filter-btn'
@@ -49,8 +50,11 @@ class Sidebar extends React.Component {
           style={styles.mobileFilterBtn}
           label='Filter By Tags' />
 
-        <BookFilters {...this.props} styles={this.state.mobileDisplay ? styles.mobileFilters : null}
-          mobile={this.state.mobileDisplay} mobileCloseBtn={this._hideFilters}/>
+        <BookFilters
+          {...this.props}
+          styles={this.state.mobileDisplay ? styles.mobileFilters : null}
+          mobile={this.state.mobileDisplay}
+          mobileCloseBtn={this._hideFilters} />
       </div>
     );
   }
