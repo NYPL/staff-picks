@@ -178,8 +178,13 @@ router
   .get(CurrentMonthData);
 
 router
+  .route('/annual/childrens')
+  .get(SelectMonthData);
+
+router
   .route('/:month/:id?')
   .get(SelectMonthData);
+
 
 router
   .route('/api/ajax/picks/:month')
@@ -188,6 +193,10 @@ router
 router
   .route('/recommendations/staff-picks/')
   .get(CurrentMonthData);
+
+router
+  .route('/recommendations/staff-picks/annual/childrens')
+  .get(SelectMonthData);
 
 router
   .route('/recommendations/staff-picks/:month/:id?')

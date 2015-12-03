@@ -57,7 +57,7 @@ app.use('/', ApiRoutes);
 // after get the path
 app.use('/', (req, res) => {
   let iso;
-
+console.log(req.path);
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   iso = new Iso();
 

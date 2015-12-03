@@ -12,6 +12,7 @@ import Error404Page from '../components/Error404Page/Error404Page.jsx';
 const routes = {
   client: (
     <Route name='home' path='/recommendations/staff-picks/' handler={App} ignoreScrollBehavior>
+      <Route name='children' path='/recommendations/staff-picks/annual/childrens/' ignoreScrollBehavior />
       <Route name='month' path='/recommendations/staff-picks/:month?/?' ignoreScrollBehavior/>
       <Route name='modal' path='/recommendations/staff-picks/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
         <NotFoundRoute handler={Error404Page} />
@@ -19,9 +20,10 @@ const routes = {
     </Route>
   ),
   server: (
-    <Route name='home' path='/' handler={App} ignoreScrollBehavior>
-      <Route name='month' path='/:month?/?' ignoreScrollBehavior/>
-      <Route name='modal' path='/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
+    <Route name='home' path='/recommendations/staff-picks/' handler={App} ignoreScrollBehavior>
+      <Route name='children' path='/recommendations/staff-picks/annual/childrens/' ignoreScrollBehavior />
+      <Route name='month' path='/recommendations/staff-picks/:month?/?' ignoreScrollBehavior/>
+      <Route name='modal' path='/recommendations/staff-picks/:month/:id?/?' handler={BookModal} ignoreScrollBehavior>
         <NotFoundRoute handler={Error404Page} />
       </Route>
     </Route>
