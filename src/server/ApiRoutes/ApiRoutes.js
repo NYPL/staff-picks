@@ -92,7 +92,7 @@ function CurrentMonthData(req, res, next) {
 }
 
 function selectChildrens(req, res, next) {
-  console.log(req.params.id);
+
   if (req.params.id === 'childrens') {
     // console.log('childrens');
   }
@@ -107,7 +107,7 @@ function selectChildrens(req, res, next) {
 function SelectMonthData(req, res, next) {
   let month = req.params.month,
     endpoint = apiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
-console.log(month);
+
   if (month === 'annual') {
     return selectChildrens(req, res, next);
   }

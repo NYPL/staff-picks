@@ -37,7 +37,7 @@ class App extends React.Component {
         <Hero />
         <div id="app-content">
           <RouteHandler {...this.props} />
-          <div id='age-tabs' className='age-tabs'>
+          <div id='age-tabs-placeholder' className='age-tabs-placeholder'>
             <AgeTabs {...this.props} />
           </div>
           <div className='main-container'>

@@ -69,7 +69,6 @@ let Navigation = Router.Navigation,
       let transitionRoute;
       let params = this.props.params;
 
-      // console.log(params);
 
       this.setState({
         modalIsOpen: false
