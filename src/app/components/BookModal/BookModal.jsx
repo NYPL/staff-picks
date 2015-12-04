@@ -66,11 +66,24 @@ let Navigation = Router.Navigation,
     closeModal() {
       utils._trackPicks('Modal', 'Closed');
 
+      let transitionRoute;
+      let params = this.props.params;
+
+      console.log(params);
+
       this.setState({
         modalIsOpen: false
       });
       setTimeout(() => {
-        this.transitionTo('home');
+        if (!params.type && (params.month === undefined || params.month.length)) {
+          console.log('month params!')
+          return this.transitionTo('home');
+        }
+
+        if (params.type && (params.type === 'childrens' || params.type === 'ya')) {
+          console.log('annual');
+          return this.transitionTo('childrens', {type: params.type});
+        }
       }, 200);
     },
 

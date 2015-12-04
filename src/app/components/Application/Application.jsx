@@ -38,14 +38,14 @@ class App extends React.Component {
         <div id="app-content">
           <RouteHandler {...this.props} />
           <div id='age-tabs' className='age-tabs'>
-            <AgeTabs />
+            <AgeTabs {...this.props} />
           </div>
           <div className='main-container'>
             <div id='sidebar'>
               <Sidebar filters={this.props.filters}/>
             </div>
             <div id='books'>
-              <Books books={this.props.data} currentList={this.props.currentList}/>
+              <Books books={this.props.data} {...this.props} currentList={this.props.currentList}/>
             </div>
           </div>
         </div>

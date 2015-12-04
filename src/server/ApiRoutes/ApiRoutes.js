@@ -91,9 +91,26 @@ function CurrentMonthData(req, res, next) {
     }); // end Axios call
 }
 
+function selectChildrens(req, res, next) {
+  console.log(req.params.id);
+  if (req.params.id === 'childrens') {
+    console.log('childrens');
+  }
+
+  if (req.params.id === 'ya') {
+    console.log('ya');
+  }
+
+  return CurrentMonthData(req, res, next);
+}
+
 function SelectMonthData(req, res, next) {
   let month = req.params.month,
     endpoint = apiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
+console.log(month);
+  if (month === 'annual') {
+    return selectChildrens(req, res, next);
+  }
 
   axios.all([getHeaderData(), fetchApiData(endpoint)])
     .then(axios.spread((headerData, staffPicks) => {
@@ -177,9 +194,9 @@ router
   .route('/')
   .get(CurrentMonthData);
 
-router
-  .route('/annual/childrens')
-  .get(SelectMonthData);
+// router
+//   .route('/annual/childrens')
+//   .get(selectChildrens);
 
 router
   .route('/:month/:id?')
@@ -190,17 +207,17 @@ router
   .route('/api/ajax/picks/:month')
   .get(AjaxData);
 
-router
-  .route('/recommendations/staff-picks/')
-  .get(CurrentMonthData);
+// router
+//   .route('/recommendations/staff-picks/')
+//   .get(CurrentMonthData);
 
-router
-  .route('/recommendations/staff-picks/annual/childrens')
-  .get(SelectMonthData);
+// router
+//   .route('/recommendations/staff-picks/annual/childrens')
+//   .get(SelectMonthData);
 
-router
-  .route('/recommendations/staff-picks/:month/:id?')
-  .get(SelectMonthData);
+// router
+//   .route('/recommendations/staff-picks/:month/:id?')
+//   .get(SelectMonthData);
 
 router
   .route('/recommendations/staff-picks/api/ajax/picks/:month')
