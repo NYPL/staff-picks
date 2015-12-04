@@ -10,16 +10,27 @@ class BookContent extends React.Component {
     super(props);
   }
 
+  // Return the full catalog slug if it already points to Encore,
+  // or get the ID of the book and return a link that points to Encore.
+  _getEncoreLink(catalogSlug, start, end) {
+    let catalogSub;
+    if (catalogSlug && catalogSlug.indexOf('browse.nypl.org') === -1) {
+      catalogSub = catalogSlug.substring(start, end);
+      return `http://browse.nypl.org/iii/encore/record/` +
+        `C__Rb${catalogSub}?lang=eng`;
+    }
+
+    return catalogSlug;
+  }
+
   render() {
     const book = this.props.book,
-      staffPick = book.item,
-      bookTarget = staffPick.catalogSlug ? staffPick.catalogSlug : undefined,
-      ebookTarget = staffPick.ebookUri ? staffPick.ebookUri : undefined;
+      item = book.item;
 
-    let ebookHREF = ebookTarget,
-      bookStyle = styles.available,
+    let bookStyle = styles.available,
       ebookStyle = styles.available,
-      bookHREF = bookTarget,
+      bookHREF,
+      ebookHREF,
       bookLinkStyle,
       ebookLinkStyle,
       bookIcon,
@@ -27,22 +38,15 @@ class BookContent extends React.Component {
       ebookSubstringID,
       ebookIcon;
 
-    if (bookTarget && bookTarget.indexOf('browse.nypl.org') === -1) {
-      bookSubstringID = bookTarget.substring(0, 8);
-      bookHREF = `http://browse.nypl.org/iii/encore/record/C__Rb${bookSubstringID}?lang=eng`;
-    }
+    bookHREF = this._getEncoreLink(item.catalogSlug, 0, 8);
+    ebookHREF = this._getEncoreLink(item.ebookUri, 41, 49);
 
-    if (ebookTarget && ebookTarget.indexOf('browse.nypl.org') === -1) {
-      ebookSubstringID = ebookTarget.substring(41, 49);
-      ebookHREF = `http://browse.nypl.org/iii/encore/record/C__Rb${ebookSubstringID}?lang=eng`;
-    }
-
-    if (!ebookTarget) {
+    if (!ebookHREF) {
       ebookStyle = styles.unavailable;
       ebookIcon = 'disabled';
       ebookLinkStyle = styles.linkUnavailable;
     }
-    if (!bookTarget) {
+    if (!bookHREF) {
       bookStyle = styles.unavailable;
       bookIcon = 'disabled';
       bookLinkStyle = styles.linkUnavailable;

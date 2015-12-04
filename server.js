@@ -13,9 +13,6 @@ import React from 'react';
 import Router from 'react-router';
 import DocMeta from 'react-doc-meta';
 
-import parser from 'jsonapi-parserinator';
-import _ from 'underscore';
-
 import Footer from './src/app/components/Footer/Footer.jsx';
 
 import alt from 'dgx-alt-center';
@@ -27,23 +24,26 @@ import ApiRoutes from './src/server/ApiRoutes/ApiRoutes.js';
 // URL configuration
 const ROOT_PATH = __dirname;
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
+const INDEX_PATH = path.resolve(ROOT_PATH, 'src/client');
+const WEBPACK_DEV_PORT = appConfig.webpackDevServerPort || 3000;
 
 let app = express(),
   isProduction = process.env.NODE_ENV === 'production';
-
-// first assign the path
-app.use('*/dist', express.static(DIST_PATH));
-
-// Assign the path for static client files
-app.use('*/client', express.static(path.resolve(ROOT_PATH, 'src/client')));
 
 app.use(compress());
 app.disable('x-powered-by');
 
 app.set('view engine', 'ejs');
-// app.set('view options', {layout: 'layout'});
-app.set('views', path.resolve(__dirname, 'src/server/views'));
+
+app.set('views', path.resolve(ROOT_PATH, 'src/server/views'));
 app.set('port', process.env.PORT || appConfig.port);
+
+// first assign the path
+app.use('*/dist', express.static(DIST_PATH));
+
+// Assign the path for static client files
+app.use('*/src/client', express.static(INDEX_PATH));
+
 
 app.use('/', (req, res, next) => {
   if (req.path === '/recommendations/staff-picks') {
@@ -55,7 +55,7 @@ app.use('/', (req, res, next) => {
 app.use('/', ApiRoutes);
 
 // after get the path
-app.use(function(req, res) {
+app.use('/', (req, res) => {
   let iso;
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));

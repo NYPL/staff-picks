@@ -5,34 +5,6 @@
   width: 60px;
 }
 
-.month-picker {
-  font-size: 12px;
-  a {
-    color: $dark-lib-gray;
-    text-decoration: none;
-    cursor: pointer;
-    display: inline-block;
-  }
-
-  p {
-    position: absolute;
-    left: 42%;
-    @include breakpoint($min, $post-mobile-phone) {
-      left: 52%;
-    }
-  }
-  .left-icon {
-    background: url('/recommendations/staff-picks/src/client/images/icons/left_arrow_blue.svg') no-repeat;
-    padding: 5px 15px 7px 10px;
-    margin: 0 5px 0 25px;
-  }
-  .right-icon {
-    background: url('/recommendations/staff-picks/src/client/images/icons/right_arrow_blue.svg') no-repeat;
-    padding: 5px 15px 10px 10px;
-    margin-left: 10px;
-  }
-}
-
 .minus-icon {
   background: url('/recommendations/staff-picks/src/client/images/icons/minus.icon.svg') no-repeat;
   padding: 2px 15px 10px 10px;

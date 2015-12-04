@@ -19,7 +19,7 @@ class CloseButton extends React.Component {
     this._handleClick = this._handleClick.bind(this);
   }
 
-  _handleClick (e) {
+  _handleClick(e) {
     e.preventDefault();
     this.props.onClick();
   }

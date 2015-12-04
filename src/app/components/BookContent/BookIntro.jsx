@@ -32,25 +32,29 @@ class BookIntro extends React.Component {
     super(props);
   }
 
+  _getTags(tags) {
+    return _.chain(tags)
+      .pluck('tag')
+      .flatten()
+      .value();
+  }
+
   render() {
     const book = this.props.book,
-      tags = _.chain(book.item.tags)
-        .pluck('tag')
-        .flatten()
-        .value(),
+      tags = this._getTags(book.item.tags),
       author = book.item.author;
 
     return (
-      <div className='book-modal__book-intro__div'>
-        <p className='book-modal__book-intro__div__author'>By {author}</p>
-        <TagList className='book-modal__book-intro__div__tags' tags={tags} />
+      <div className={`${this.props.className}`}>
+        <p className={`${this.props.className}__author`}>By {author}</p>
+        <TagList className={`${this.props.className}__tags`} tags={tags} />
       </div>
     );
   }
 };
 
 BookIntro.defaultProps = {
-  className: 'Booktitle',
+  className: 'BookIntro',
   lang: 'en',
   onClick() {}
 };

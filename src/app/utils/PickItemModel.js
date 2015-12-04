@@ -27,8 +27,10 @@ function PickItemModel() {
     
     item.title = data.attributes.title;
     item.author = data.attributes.author;
-    item.catalogSlug = data.attributes['catalog-slug'];
-    item.imageSlug = data.attributes['image-slug'];
+    item.catalogSlug = data.attributes['catalog-slug'] ?
+      data.attributes['catalog-slug'] : undefined;
+    item.imageSlug = data.attributes['image-slug'] ?
+      data.attributes['image-slug'] : undefined;
     item.ebookUri = data.attributes['ebook-uri'] ? 
       data.attributes['ebook-uri']['full-uri'] : undefined;
     item.tags = this.tags(data.tags);

@@ -14,8 +14,8 @@ class Book extends React.Component {
       bookImgSrc = book.item.imageSlug,
       bookTarget = book.item.catalogSlug,
       fullImgSrc = `https://contentcafe2.btol.com/ContentCafe/` +
-              `Jacket.aspx?&userID=NYPL49807&password=CC68707&` +
-              `Value=${bookImgSrc}&content=M&Return=1&Type=M`
+        `Jacket.aspx?&userID=NYPL49807&password=CC68707&` +
+        `Value=${bookImgSrc}&content=M&Return=1&Type=M`;
 
     return (
       <div ref='Book' className={this.props.className}

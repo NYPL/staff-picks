@@ -45,15 +45,15 @@ class TabElement extends React.Component {
 
   render() {
     // If state equals to the clicked value, then make the TabElement active
-    let active = this.state._age === this.props.value;
+    let active = (this.state._age === this.props.value) ?
+      styles.TabElementActive : styles.TabElementInactive,
+      activeLink = cx({'active': active});
 
   	return (
   		<li key={`tab-${this.props.name}`} id={this.props.name} 
-        className='tab-container__ul__element'
-        style={active ? styles.TabElementActive : styles.TabElementInactive}>
-        <a className='tab-container__ul__element__link'
-          onClick={this._handleClick.bind(this, this.props.value)}
-          style={[active ? styles.TabElementLinkActive : null]}>
+        className='tab-container__ul__element' style={active}>
+        <a className={`tab-container__ul__element__link ${activeLink}`}
+          onClick={this._handleClick.bind(this, this.props.value)}>
           {this.props.name}
         </a>
   		</li>
@@ -78,9 +78,6 @@ const styles = {
     borderRightStyle: 'none',
     borderTopStyle: 'none',
     borderWidth: '1px'
-  },
-  TabElementLinkActive: {
-    color: '#cc1a16'
   }
 }
 

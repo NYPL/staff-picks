@@ -12,7 +12,7 @@ class BookTitle extends React.Component {
     let title = (book && book.item) ? book.item.title : "Book Title";
 
     return (
-      <div ref='BookContent' className={this.props.className}>
+      <div ref='BookTitle' className={this.props.className}>
         <h2>{title}</h2>
       </div>
     );
@@ -20,7 +20,7 @@ class BookTitle extends React.Component {
 };
 
 BookTitle.defaultProps = {
-  className: 'Booktitle',
+  className: 'BookTitle',
   lang: 'en',
   onClick() {}
 };
