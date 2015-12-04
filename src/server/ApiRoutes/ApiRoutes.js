@@ -94,11 +94,11 @@ function CurrentMonthData(req, res, next) {
 function selectChildrens(req, res, next) {
   console.log(req.params.id);
   if (req.params.id === 'childrens') {
-    console.log('childrens');
+    // console.log('childrens');
   }
 
   if (req.params.id === 'ya') {
-    console.log('ya');
+    // console.log('ya');
   }
 
   return CurrentMonthData(req, res, next);
@@ -194,9 +194,9 @@ router
   .route('/')
   .get(CurrentMonthData);
 
-// router
-//   .route('/annual/childrens')
-//   .get(selectChildrens);
+router
+  .route('/annual/*')
+  .get(selectChildrens);
 
 router
   .route('/:month/:id?')

@@ -24,6 +24,11 @@ class AgeTabs extends React.Component {
         );
       });
 
+// console.log(this.props.params);
+    if (this.props.params && this.props.params.type) {
+      return null;
+    }
+
   	return (
       <div className='tab-container'>
         <ul className='tab-container__ul'>

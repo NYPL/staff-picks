@@ -22,7 +22,7 @@ const routes = {
   server: (
     <Route name='home' path='/' handler={App} ignoreScrollBehavior>
       <Route name='annual' path='annual'ignoreScrollBehavior>
-        <Route name ='childrens' path=':type/?' ignoreScrollBehavior>
+        <Route name ='type' path=':type/?' ignoreScrollBehavior>
           <Route name='year' path=':year?/?' ignoreScrollBehavior>
             <Route name='annualModal' path=':id/?' handler={BookModal} ignoreScrollBehavior />
           </Route>

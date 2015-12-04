@@ -69,7 +69,7 @@ let Navigation = Router.Navigation,
       let transitionRoute;
       let params = this.props.params;
 
-      console.log(params);
+      // console.log(params);
 
       this.setState({
         modalIsOpen: false
@@ -82,7 +82,7 @@ let Navigation = Router.Navigation,
 
         if (params.type && (params.type === 'childrens' || params.type === 'ya')) {
           console.log('annual');
-          return this.transitionTo('childrens', {type: params.type});
+          return this.transitionTo('type', {type: params.type});
         }
       }, 200);
     },

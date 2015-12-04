@@ -25,7 +25,7 @@ window.onload = () => {
     }
 
     Router.run(routes.server, Router.HistoryLocation, (Root, state) => {
-      console.log(state.pathname);
+      // console.log(state.pathname);
       // let lastCharIndex = state.pathname.length - 1,
       //   pageview = state.pathname;
 
