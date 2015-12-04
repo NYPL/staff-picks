@@ -207,20 +207,20 @@ router
   .route('/api/ajax/picks/:month')
   .get(AjaxData);
 
-// router
-//   .route('/recommendations/staff-picks/')
-//   .get(CurrentMonthData);
-
-// router
-//   .route('/recommendations/staff-picks/annual/childrens')
-//   .get(SelectMonthData);
-
-// router
-//   .route('/recommendations/staff-picks/:month/:id?')
-//   .get(SelectMonthData);
+router
+  .route('/browse/recommendations/staff-picks/')
+  .get(CurrentMonthData);
 
 router
-  .route('/recommendations/staff-picks/api/ajax/picks/:month')
+  .route('/browse/recommendations/staff-picks/annual/*')
+  .get(SelectMonthData);
+
+router
+  .route('/browse/recommendations/staff-picks/:month/:id?')
+  .get(SelectMonthData);
+
+router
+  .route('/browse/recommendations/staff-picks/api/ajax/picks/:month')
   .get(AjaxData);
 
 

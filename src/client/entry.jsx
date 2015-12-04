@@ -24,8 +24,8 @@ window.onload = () => {
       ga.initialize('UA-1420324-3', gaOpts);
     }
 
-    Router.run(routes.server, Router.HistoryLocation, (Root, state) => {
-      // console.log(state.pathname);
+    Router.run(routes.client, Router.HistoryLocation, (Root, state) => {
+      console.log(state.pathname);
       // let lastCharIndex = state.pathname.length - 1,
       //   pageview = state.pathname;
 

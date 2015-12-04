@@ -9,13 +9,29 @@ import utils from '../../utils/utils.js';
 
 let Navigation = Router.Navigation,
   MonthPicker = React.createClass({
+    getInitialState() {
+      let params = this.props.params,
+        transitionRoute = 'month',
+        type;
+
+      if (params && params.type && (params.type === 'childrens' || params.type === 'ya')) {
+        transitionRoute = 'year';
+        type = params.type;
+      }
+
+      return {
+        transitionRoute,
+        type
+      };
+    },
+
     mixins: [Navigation],
 
     _handleClick(selection, month) {
       let API;
 
       if (month) {
-        API = '/recommendations/staff-picks/api/ajax/picks/' + month.date;
+        API = '/browse/recommendations/staff-picks/api/ajax/picks/' + month.date;
 
         $.ajax({
           type: 'GET',
@@ -28,8 +44,10 @@ let Navigation = Router.Navigation,
 
             utils._trackPicks('Select Month', `${selection}: ${month.month()}`);
 
-            this.transitionTo('month', {
+            this.transitionTo(this.state.transitionRoute, {
               month: date,
+              type: this.state.type,
+              year: date
             });
 
             BookActions.clearFilters();

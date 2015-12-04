@@ -17,12 +17,20 @@ let Navigation = Router.Navigation,
   ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
   Books = React.createClass({
     getInitialState() {
+      let params = this.props.params,
+        transitionRoute = 'modal';
+
+      if (params && params.type && (params.type === 'childrens' || params.type === 'ya')) {
+        transitionRoute = 'annualModal';
+      }
+
       return _.extend({
         iso: null,
         book: {},
         books: [],
         modalIsOpen: false,
-        noResults: false
+        noResults: false,
+        transitionRoute
       }, BookStore.getState());
     },
 
@@ -103,24 +111,11 @@ let Navigation = Router.Navigation,
     },
 
     _openModal(book) {
-      let transitionRoute;
       let params = this.props.params;
 
       utils._trackPicks('Book', book.item.title);
 
-      // console.log(params);
-
-      if (!params.type && (params.month === undefined || params.month.length)) {
-        // console.log('month params!')
-        transitionRoute = 'modal';
-      }
-
-      if (params.type && (params.type === 'childrens' || params.type === 'ya')) {
-        // console.log('annual');
-        transitionRoute = 'annualModal';
-      }
-
-      this.transitionTo(transitionRoute, {
+      this.transitionTo(this.state.transitionRoute, {
         month: this.state._currentMonthPicks.date,
         year: this.state._currentMonthPicks.date,
         id: book.item.id,
@@ -177,7 +172,7 @@ let Navigation = Router.Navigation,
 
       return (
         <div>
-          <MonthPicker currentMonthPicks={currentMonthPicks} />
+          <MonthPicker currentMonthPicks={currentMonthPicks} {...this.props}/>
 
           <div id="masonryContainer" ref="masonryContainer" style={{opacity: '0'}}>
             <ul className='list-view'>

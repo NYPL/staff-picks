@@ -30,6 +30,9 @@ let Navigation = Router.Navigation,
         modalBook = {},
         store = BookStore.getState(),
         books = store._currentMonthPicks.picks,
+        params = this.props.params,
+        annualType,
+        transitionRoute,
         age;
 
       if (!books.length) {
@@ -47,9 +50,21 @@ let Navigation = Router.Navigation,
 
       BookActions.updateFilterAge(age);
 
+
+      if (!params.type && (params.month === undefined || params.month.length)) {
+        transitionRoute = 'home';
+      }
+
+      if (params.type && (params.type === 'childrens' || params.type === 'ya')) {
+        transitionRoute = 'type';
+        annualType = {type: params.type};
+      }
+
       return {
         modalIsOpen: true,
-        book: modalBook
+        book: modalBook,
+        transitionRoute,
+        annualType
       };
     },
 
@@ -74,15 +89,7 @@ let Navigation = Router.Navigation,
         modalIsOpen: false
       });
       setTimeout(() => {
-        if (!params.type && (params.month === undefined || params.month.length)) {
-          console.log('month params!')
-          return this.transitionTo('home');
-        }
-
-        if (params.type && (params.type === 'childrens' || params.type === 'ya')) {
-          console.log('annual');
-          return this.transitionTo('type', {type: params.type});
-        }
+        return this.transitionTo(this.state.transitionRoute, this.state.annualType);
       }, 200);
     },
 
@@ -108,7 +115,7 @@ let Navigation = Router.Navigation,
           {property: "og:title", content: title},
           {property: "og:image", content: imageLink},
           {property: "og:description", content: description},
-          {property: "og:url", content: `http://www.nypl.org/recommendations/staff-picks/${bookId}`},
+          {property: "og:url", content: `http://www.nypl.org/browse/recommendations/staff-picks/${bookId}`},
           {name: "twitter:title", content: title},
           {name: "twitter:description", content: description},
           {name: "twitter:image", content: imageLink}
