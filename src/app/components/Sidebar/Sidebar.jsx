@@ -2,8 +2,9 @@
 import React from 'react';
 import Radium from 'radium';
 
-import BookDisplayButtons from './BookDisplayButtons.jsx';
-import BookFilters from './BookFilters.jsx';
+import BookDisplayButtons from '../BookDisplayButtons/BookDisplayButtons.jsx';
+import BookFilters from '../BookFilters/BookFilters.jsx';
+import SimpleButton from '../Buttons/SimpleButton.jsx';
 
 import utils from '../../utils/utils.js';
 
@@ -41,11 +42,19 @@ class Sidebar extends React.Component {
     return (
       <div ref='sidebar' className='sidebar-content'>
         <BookDisplayButtons />
-        <h2 className='mobile-filter-btn' onClick={this._showFilters} style={styles.mobileFilterBtn}>
-          Filter By Tags
-        </h2>
-        <BookFilters {...this.props} styles={this.state.mobileDisplay ? styles.mobileFilters : null}
-          mobile={this.state.mobileDisplay} mobileCloseBtn={this._hideFilters}/>
+
+        <SimpleButton
+          gaCategory='Staff Picks' gaAction='Mobile Filter' gaEvent='Filter'
+          className='mobile-filter-btn'
+          onClick={this._showFilters}
+          style={styles.mobileFilterBtn}
+          label='Filter By Tags' />
+
+        <BookFilters
+          {...this.props}
+          styles={this.state.mobileDisplay ? styles.mobileFilters : null}
+          mobile={this.state.mobileDisplay}
+          mobileCloseBtn={this._hideFilters} />
       </div>
     );
   }
@@ -72,8 +81,7 @@ const styles = {
   },
   mobileFilterBtn: {
     textDecoration: 'none',
-    color: '#0095c8',
-    cursor: 'pointer'
+    color: '#0095c8'
   },
   active: {
     border: '2px solid #0095c8',

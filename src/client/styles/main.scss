@@ -314,51 +314,7 @@ span[class*="icon-"] {
 
 @import 'components/buttons';
 
-.BookFilters {
-  display: none;
 
-  @include breakpoint($min, $post-mobile-phone) {
-    display: block;
-  }
-
-  h2 {
-    color: $lib-red;
-    font-size: 15px;
-  }
-
-  .divider {
-    width: 40px;
-    height: 2px;
-    margin: 5px 0;
-    background: $lib-red;
-    display: inline-block;
-  }
-
-  .BookFilters-lists {
-    text-align: left;
-    font-size: 12px;
-    padding-top: 20px;
-
-    @include breakpoint($min, $post-mobile-phone) {
-      text-align: right;
-    }
-
-    ul {
-      padding: 10px 0;
-
-      li {
-        font-size: 16px;
-        padding: 5px 0;
-
-        a {
-          cursor: pointer;
-          text-decoration: none;
-          color: $lib-blue;
-        }
-      }
-    }
-  }
-}
 
 .hide {
   display: none;
@@ -433,3 +389,6 @@ span[class*="icon-"] {
 @import 'components/book-modal';
 @import 'components/hero';
 @import 'components/month-picker';
+@import 'components/bookDisplayButtons';
+@import 'components/book-filters';
+

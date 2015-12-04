@@ -4,37 +4,11 @@ import _ from 'underscore';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
-
-import { Link } from 'react-router';
-import SimpleButton from '../Buttons/SimpleButton.jsx';
+import CloseButton from '../Buttons/CloseButton.jsx';
 
 import utils from '../../utils/utils.js';
 
 let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-
-class CloseButton extends React.Component {
-  // Constructor used in ES6
-  constructor(props) {
-    super(props);
-    this._handleClick = this._handleClick.bind(this);
-  }
-
-  _handleClick(e) {
-    e.preventDefault();
-    this.props.onClick();
-  }
-
-  render() {
-    return (
-      <SimpleButton
-        id='close-button'
-        className='BookFilters__close-btn'
-        label=''
-        onClick={this._handleClick} />
-    );
-  }
-};
-
 
 class BookFilters extends React.Component {
   constructor(props) {
@@ -56,13 +30,16 @@ class BookFilters extends React.Component {
   }
 
   render() {
-    let styles = this.props.styles || {};
-    let storeState = BookStore.getState();
+    let styles = this.props.styles || {},
+      storeState = BookStore.getState();
 
     return (
       <div className='BookFilters' style={styles}>
+        <CloseButton
+          onClick={this.props.mobileCloseBtn}
+          id='close-button'
+          className='BookFilters__close-btn'/>
         <span className='divider'></span>
-        <CloseButton onClick={this.props.mobileCloseBtn} />
         <h2>What would you like to read?</h2>
         <div className='BookFilters-lists'>
           <span>Driven by...</span>
