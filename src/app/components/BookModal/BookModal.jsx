@@ -96,7 +96,7 @@ let Navigation = Router.Navigation,
     render() {
       let book = this.state.book,
         title = 'Staff Picks | The New York Public Library',
-        imageSrc = '/client/images/staff_pic_bg.jpg',
+        imageSrc = '/browse/recommendations/staff-picks/src/client/images/staff_pic_bg.jpg',
         description = 'Every month, NYPL\'s book experts share 100 titles they love.',
         bookId,
         imageLink;

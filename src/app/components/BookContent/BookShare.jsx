@@ -61,15 +61,15 @@ const styles={
 	  },
 	},
 	facebook: {
-	  backgroundImage: 'url("src/client/images/social/social.fb.init.png")',
+	  backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/social/social.fb.init.png")',
 	  ':hover': {
-      backgroundImage: 'url("src/client/images/social/social.fb.activeInit.png")'
+      backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/social/social.fb.activeInit.png")'
 	  }
 	},
 	twitter: {
-	  backgroundImage: 'url("src/client/images/social/social.twtr.init.png")',
+	  backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/social/social.twtr.init.png")',
 	  ':hover': {
-      backgroundImage: 'url("src/client/images/social/social.twtr.hover.png")'
+      backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/social/social.twtr.hover.png")'
 	  }
 	},
 	shareLink :{
