@@ -5,7 +5,7 @@ import Radium from 'radium';
 import _ from 'underscore';
 
 import Book from '../Book/Book.jsx';
-import MonthPicker from '../MonthPicker/MonthPicker.jsx';
+import TimeSelector from '../TimeSelector/TimeSelector.jsx';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
@@ -18,13 +18,17 @@ let Navigation = Router.Navigation,
   Books = React.createClass({
     getInitialState() {
       let params = this.props.params,
-        transitionRoute = 'modal';
+        transitionRoute = 'modal',
+        pickType = 'staffpicks';
 
-      if (params && params.type && (params.type === 'childrens' || params.type === 'ya')) {
+      if (params && params.type &&
+          (params.type === 'childrens' || params.type === 'ya')) {
         transitionRoute = 'annualModal';
+        pickType = 'annual';
       }
 
       return _.extend({
+        pickType: pickType,
         iso: null,
         book: {},
         books: [],
@@ -172,7 +176,10 @@ let Navigation = Router.Navigation,
 
       return (
         <div>
-          <MonthPicker currentMonthPicks={currentMonthPicks} {...this.props}/>
+          <TimeSelector
+            pickType={this.state.pickType}
+            currentMonthPicks={currentMonthPicks}
+            {...this.props} />
 
           <div id="masonryContainer" ref="masonryContainer" style={{opacity: '0'}}>
             <ul className='list-view'>
