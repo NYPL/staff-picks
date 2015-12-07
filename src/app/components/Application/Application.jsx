@@ -45,7 +45,7 @@ class App extends React.Component {
               <Sidebar filters={this.props.filters}/>
             </div>
             <div id='books'>
-              <Books books={this.props.data} {...this.props} currentList={this.props.currentList}/>
+              <Books {...this.props} />
             </div>
           </div>
         </div>

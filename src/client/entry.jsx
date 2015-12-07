@@ -25,15 +25,14 @@ window.onload = () => {
     }
 
     Router.run(routes.client, Router.HistoryLocation, (Root, state) => {
-      console.log(state.pathname);
-      // let lastCharIndex = state.pathname.length - 1,
-      //   pageview = state.pathname;
+      let lastCharIndex = state.pathname.length - 1,
+        pageview = state.pathname;
 
-      // if (state.pathname[lastCharIndex] === '/') {
-      //   pageview = state.pathname.substring(0, lastCharIndex);
-      // }
+      if (state.pathname[lastCharIndex] === '/') {
+        pageview = state.pathname.substring(0, lastCharIndex);
+      }
 
-      // ga.pageview(pageview);
+      ga.pageview(pageview);
       React.render(<Root params={state.params}/>, container);
     });
 
