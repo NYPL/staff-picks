@@ -34,7 +34,7 @@ CloseButton.defaultProps = {
 const styles = {
   CloseButton: { 
     '@media (max-width: 414px)': { 
-      backgroundImage: 'url("/client/images/icons/left_arrow_gray.svg")',
+      backgroundImage: 'url("/src/client/images/icons/left_arrow_gray.svg")',
       backgroundPosition: '0 0',
       borderBottomStyle: 'solid',
       borderColor: '#cc1a16',
@@ -50,7 +50,7 @@ const styles = {
       padding: '5px 4px 30px 36px',
       width: '100%' 
     },
-    backgroundImage: 'url("/client/images/icons/gray_x_button.svg")',
+    backgroundImage: 'url("/src/client/images/icons/gray_x_button.svg")',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     color: 'rgba(191, 191, 191, 0)',
