@@ -40,11 +40,11 @@
       }
 
       .BookDisplayButtons-grid-icon {
-        background: url('/recommendations/staff-picks/src/client/images/icons/SmallBookBlue.svg') no-repeat;
+        background: url('src/client/images/icons/SmallBookBlue.svg') no-repeat;
       }
 
       .BookDisplayButtons-list-icon {
-        background: url('/recommendations/staff-picks/src/client/images/icons/SmallListIconBlue.svg') no-repeat;
+        background: url('src/client/images/icons/SmallListIconBlue.svg') no-repeat;
       }
     }
 
@@ -54,10 +54,10 @@
   }
 
   &-grid-icon {
-    background: url('/recommendations/staff-picks/src/client/images/icons/SmallBookGray.svg') no-repeat;
+    background: url('src/client/images/icons/SmallBookGray.svg') no-repeat;
   }
 
   &-list-icon {
-    background: url('/recommendations/staff-picks/src/client/images/icons/SmallListIconGray.svg') no-repeat;
+    background: url('src/client/images/icons/SmallListIconGray.svg') no-repeat;
   }
 }

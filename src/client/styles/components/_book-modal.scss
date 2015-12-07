@@ -1,6 +1,6 @@
 .BookModal {
   &__closeBtn {
-    background-image: url('/recommendations/staff-picks/src/client/images/icons/left_arrow_gray.svg');
+    background-image: url('src/client/images/icons/left_arrow_gray.svg');
     background-position: 0 0;
     background-repeat: no-repeat;
     border-bottom-style: solid;
@@ -20,7 +20,7 @@
     text-decoration: none;
     width: 100%;
     @include breakpoint($min, $post-mobile-phone) {
-      background-image: url('/recommendations/staff-picks/src/client/images/icons/gray_x_button.svg');
+      background-image: url('src/client/images/icons/gray_x_button.svg');
       background-position: center;
       border-bottom-style: none;
       border-color: #cc1a16;

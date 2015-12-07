@@ -6,7 +6,7 @@
 }
 
 .minus-icon {
-  background: url('/recommendations/staff-picks/src/client/images/icons/minus.icon.svg') no-repeat;
+  background: url('src/client/images/icons/minus.icon.svg') no-repeat;
   padding: 2px 15px 10px 10px;
   margin-left: 0px;
   transition: opacity 0.4s ease-in;
@@ -37,7 +37,7 @@
 }
 
 .BookFilters__close-btn {
-  background: url('/recommendations/staff-picks/src/client/images/icons/gray_x_button.svg') no-repeat;
+  background: url('src/client/images/icons/gray_x_button.svg') no-repeat;
   position: absolute;
   font-size: 1.3em;
   height: auto;

@@ -40,7 +40,7 @@
     margin: 25px 0;
 
     &-icon {
-      background: url('/src/client/images/icons/icon.thumbsup.svg') no-repeat;
+      background: url('src/client/images/icons/icon.thumbsup.svg') no-repeat;
       padding: 11px 20px 10px 10px;
       margin-right: 10px;
     }
@@ -69,12 +69,12 @@
       }
 
       .checkout {
-        background: url('/src/client/images/icons/icon.book.svg') no-repeat;
+        background: url('src/client/images/icons/icon.book.svg') no-repeat;
         padding: 8px 20px 10px 10px;
         margin-right: 15px;
 
         &.disabled {
-          background: url('/src/client/images/icons/icon.book.disabled.svg') no-repeat;
+          background: url('src/client/images/icons/icon.book.disabled.svg') no-repeat;
           background-position: -1px -1px;
           background-size: 112%;
           background-position: -2px -1px;
@@ -85,14 +85,14 @@
       }
 
       .ebook {
-        background: url('/browse/recommendations/staff-picks/src/client/images/icons/icon.eReader.svg') no-repeat;
+        background: url('src/client/images/icons/icon.eReader.svg') no-repeat;
         background-position: 4px 4px;
         background-size: 77%;
         padding: 12px 20px 10px 10px;
         margin-right: 15px;
 
         &.disabled {
-          background: url('/browse/recommendations/staff-picks/src/client/images/icons/icon.eReader.disabled.svg') no-repeat;
+          background: url('src/client/images/icons/icon.eReader.disabled.svg') no-repeat;
           background-position: 4px 4px;
           background-size: 77%;
           padding: 11px 20px 10px 10px;
