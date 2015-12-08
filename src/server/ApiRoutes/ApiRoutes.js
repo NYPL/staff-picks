@@ -213,7 +213,7 @@ router
 
 router
   .route('/browse/recommendations/staff-picks/annual/*')
-  .get(SelectMonthData);
+  .get(selectChildrens);
 
 router
   .route('/browse/recommendations/staff-picks/:month/:id?')
