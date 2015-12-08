@@ -19,7 +19,11 @@ class Hero extends React.Component {
   }
 
   _getHeroData(selection) {
-    console.log(selection);
+    let type = 'staffpicks';
+
+    if (selection && selection.length) {
+      type = selection;
+    }
 
     let heroData = {
         staffpicks: {
@@ -45,7 +49,7 @@ class Hero extends React.Component {
         }
       };
 
-    return heroData[selection];
+    return heroData[type];
   }
 
   render() {

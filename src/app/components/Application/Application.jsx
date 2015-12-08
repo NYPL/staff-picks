@@ -19,7 +19,8 @@ class App extends React.Component {
   }
 
   _getType() {
-    let annualType = this.props.params.type || '';
+    let annualType = this.props.params && this.props.params.type ?
+      this.props.params.type : '';
 
     if (this.props.params && !annualType.length) {
       return 'staffpicks';
