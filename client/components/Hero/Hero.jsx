@@ -19,8 +19,14 @@ class Hero extends React.Component {
       <div key='Hero' className='hero'>
         <div key='HeroContainer' className='hero__container'>
           <div key='TextContainer' className='hero__container__text-container'>
-            <HeroTitle className='hero__container__text-container__title' title='staff picks' des='100 books we love. Every month.' 
-             intro='We&#39;re choosing all kinds of books—for readers old and young and in between, and fans of every genre—and serving them up in this browse tool.' />
+            <HeroTitle
+              className='hero__container__text-container__title'
+              title='RECOMMENDATIONS'
+              des='Staff Picks' 
+              intro='True stories, tales of courage, historical romances, 
+                edge-of-your-seat thrillers... There is a huge world of 
+                books out there. Our expert staff members pick out their 
+                favorites to help you find your next one.' />
           </div>
           <div key='HeroImageContainer' className='hero__container__image-container'>
           </div>
