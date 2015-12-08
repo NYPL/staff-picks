@@ -1,10 +1,13 @@
 .Hero {
   background-color: #e4382c;
   color: white;
-  height: auto;
-  min-height: 72px;
+  height: 72px;
   padding: 0;
   width: 100%;
+
+  @include breakpoint($min, $post-laptop) {
+    height: 320px;
+  }
   
   &__container {
     height: auto;
@@ -14,8 +17,8 @@
     position: relative;
     
     @include breakpoint($min, 720px) { 
-  		margin: 0 auto;
-  	}
+      margin: 0 auto;
+    }
   }
 
   &__text {
@@ -44,7 +47,7 @@
       width: 100%;
       h3 {
         @include Kievit-Bold;
-        font-size: 12px;
+        font-size: 15px;
         font-weight: normal;
         letter-spacing: 0.09rem;
         margin: 24px 0 10px 0;
@@ -81,7 +84,7 @@
 
         @include breakpoint($min, $post-laptop) {
           display: block;
-          font-size: 28px; 
+          font-size: 36px; 
           line-height: 28px;
           margin: 0 0 10px 0;
         }
@@ -90,19 +93,16 @@
       &__intro {
         display: none;
         font-family: 'KievitWeb-Book', sans-serif;
-        font-size: 12px;
+        font-size: 16px;
         line-height: 14px;
         text-align: left;
 
         @include breakpoint($min, 720px) {
           display: block;
-          font-size: 12px;
-          line-height: 14px;
         }
 
          @include breakpoint($min, $post-laptop) {
-          display: block;
-          font-size: 14px;
+          font-size: 18px;
           line-height: 18px;
         }
       }
@@ -135,4 +135,3 @@
     }
   }
 }
-

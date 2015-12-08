@@ -18,6 +18,16 @@ class App extends React.Component {
     super(props);
   }
 
+  _getType() {
+    let annualType = this.props.params.type || '';
+
+    if (this.props.params && !annualType.length) {
+      return 'staffpicks';
+    }
+
+    return annualType;
+  }
+
   render () {
     let hompageTags = [
         {property: "og:title", content: 'Staff Picks | The New York Public Library'},
@@ -28,13 +38,14 @@ class App extends React.Component {
         {name: "twitter:description", content: 'Every month NYPL\'s librarians share their favorite reads.'},
         {name: "twitter:image", content: '/recommendations/staff-picks/client/images/shelftalker.4.2.png'}
       ],
-      tags = utils.metaTagUnion(hompageTags);
+      tags = utils.metaTagUnion(hompageTags),
+      staffPicksType = this._getType();
 
     return (
       <div>
         <DocMeta tags={tags} />
         <Header />
-        <Hero />
+        <Hero staffPicksType={staffPicksType} />
         <div id="app-content">
           <RouteHandler {...this.props} />
 
