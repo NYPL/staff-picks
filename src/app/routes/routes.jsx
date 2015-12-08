@@ -13,7 +13,7 @@ import AgeTabs from '../components/AgeTabs/AgeTabs.jsx';
 const routes = {
   client: (
     <Route name='home' path='/browse/recommendations/staff-picks/?' handler={App} ignoreScrollBehavior>
-      <Route name='annual' path='annual'ignoreScrollBehavior>
+      <Route name='annual' path='annual' ignoreScrollBehavior>
         <Route name ='type' path=':type/?' ignoreScrollBehavior>
           <Route name='year' path=':year?/?' ignoreScrollBehavior>
             <Route name='annualModal' path=':id/?' handler={BookModal} ignoreScrollBehavior />
@@ -27,7 +27,7 @@ const routes = {
   ),
   server: (
     <Route name='home' path='/' handler={App} ignoreScrollBehavior>
-      <Route name='annual' path='annual'ignoreScrollBehavior>
+      <Route name='annual' path='annual' ignoreScrollBehavior>
         <Route name ='type' path=':type/?' ignoreScrollBehavior>
           <Route name='year' path=':year?/?' ignoreScrollBehavior>
             <Route name='annualModal' path=':id/?' handler={BookModal} ignoreScrollBehavior />
