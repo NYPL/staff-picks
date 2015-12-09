@@ -63,7 +63,8 @@ class Hero extends React.Component {
       <div key='Hero' className={this.props.className} style={bannerStyle}>
         <div key='HeroContainer' className={`${this.props.className}__container`}>
           <div key='TextContainer' className={`${this.props.className}__text`}>
-            <HeroTitle className={`${this.props.className}__text__HeroTitle`}
+            <HeroTitle
+              className={`${this.props.className}__text__HeroTitle`}
               title={heroData.title}
               des={heroData.description}
               intro={heroData.intro} />
