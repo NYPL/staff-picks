@@ -58,7 +58,7 @@ class Hero extends React.Component {
         <div key='HeroImageContainer' className={`${this.props.className}__image`}></div>
         : null,
       bannerStyle = styles[heroData.type];
-
+console.log(heroData);
     return (
       <div key='Hero' className={this.props.className} style={bannerStyle}>
         <div key='HeroContainer' className={`${this.props.className}__container`}>
