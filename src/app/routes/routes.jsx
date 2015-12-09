@@ -27,16 +27,12 @@ const routes = {
   ),
   server: (
     <Route name='home' path='/' handler={App} ignoreScrollBehavior>
-      <Route name='annual' path='/annual' ignoreScrollBehavior>
-        <Route name ='type' path=':type/?' ignoreScrollBehavior>
-          <Route name='year' path=':year?/?' ignoreScrollBehavior>
-            <Route name='annualModal' path=':id/?' handler={BookModal} ignoreScrollBehavior />
-          </Route>
-        </Route>
-      </Route>
-      <Route name='month' path='/:month?/?' ignoreScrollBehavior>
-        <Route name='modal' path=':id/?' handler={BookModal} ignoreScrollBehavior />
-      </Route>
+      <Route name='annual' path='/annual/:type/?' ignoreScrollBehavior />
+      <Route name='year' path='/annual/:type/:year/?' ignoreScrollBehavior />
+      <Route name='annualModal' path='/annual/:type/:year/:id/?' handler={BookModal} ignoreScrollBehavior />
+
+      <Route name='month' path='/:month?/?' ignoreScrollBehavior />
+      <Route name='modal' path='/:month/:id/?' handler={BookModal} ignoreScrollBehavior />
     </Route>
   )
 };
