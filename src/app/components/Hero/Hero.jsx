@@ -19,13 +19,14 @@ class Hero extends React.Component {
       <div key='Hero' className={this.props.className}>
         <div key='HeroContainer' className={`${this.props.className}__container`}>
           <div key='TextContainer' className={`${this.props.className}__text`}>
-            <HeroTitle className={`${this.props.className}__text__HeroTitle`}
+            <HeroTitle
+              className={`${this.props.className}__text__HeroTitle`}
               title='RECOMMENDATIONS'
               des='Staff Picks' 
-              intro='True stories, tales of courage, historical romances,
-                edge-of-your-seat thrillers... There is a huge world of books
-                out there. Our expert staff members pick out their favorites
-                to help you find your next one.' />
+              intro='True stories, tales of courage, historical romances, 
+                edge-of-your-seat thrillers... There is a huge world of 
+                books out there. Our expert staff members pick out their 
+                favorites to help you find your next one.' />
           </div>
           <div key='HeroImageContainer' className={`${this.props.className}__image`}>
           </div>
