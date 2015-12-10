@@ -57,7 +57,7 @@ class BookContent extends React.Component {
     if (pickType === 'home') {
       picker = (<span className='staff-pick-text'>Staff Pick By: {book.picker}, {book.location}</span>);
     } else {
-      picker = (<span className='staff-pick-text'>Pick by committee: 2015</span>);
+      picker = (<span className='staff-pick-text'>Committee Pick for 2015</span>);
     }
 
     return (
