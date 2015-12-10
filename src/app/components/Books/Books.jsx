@@ -77,7 +77,15 @@ let Navigation = Router.Navigation,
         age = `.${storeState._age}`,
         filters = storeState._filters,
         selector = age,
-        _this = this;
+        _this = this,
+        params = this.props.params;
+
+      // We don't need to filter based on age for c100 or ya100
+      // and it needs to be removed from the Isotopes selector:
+      if (params && params.type &&
+        (params.type === 'childrens' || params.type === 'ya')) {
+        selector = '';
+      }
 
       if (filters.length) {
         selector += `.${filters.join('.')}`;

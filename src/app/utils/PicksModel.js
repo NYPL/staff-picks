@@ -30,7 +30,7 @@ function PicksModel() {
     pick.picker = data.attributes['picker-name'];
 
     pick.item = PickItem.build(data.item);
-    pick.age = this.age(data.age);
+    pick.age = data.age ? this.age(data.age) : {};
 
     return pick;
   };
@@ -44,7 +44,7 @@ function PicksModel() {
 
     age.id = data.id;
     age.type = data.type;
-    age.age = data.attributes.age;
+    age.age = data.attributes ? data.attributes.age : 'Adult';
 
     return age;
   };
