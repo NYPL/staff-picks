@@ -52,8 +52,23 @@ class Hero extends React.Component {
     return heroData[type];
   }
 
+  _getType() {
+    let clientParam = this.props.params ? this.props.params.type : '';
+    let route = this.props.route || clientParam;
+
+    if (route.indexOf('childrens') !== -1) {
+      return 'childrens';
+    }
+
+    if (route.indexOf('ya') !== -1) {
+      return 'ya';
+    }
+
+    return 'staffpicks';
+  }
+
   render() {
-    let heroData = this._getHeroData(this.props.staffPicksType),
+    let heroData = this._getHeroData(this._getType()),
       image = heroData.type === 'staffpicks' ?
         <div key='HeroImageContainer' className={`${this.props.className}__image`}></div>
         : null,

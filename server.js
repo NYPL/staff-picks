@@ -62,7 +62,7 @@ app.use('/', (req, res) => {
   iso = new Iso();
 
   Router.run(routes.server, req.path, function (Root, state) {
-    let html = React.renderToString(<Root />),
+    let html = React.renderToString(<Root route={req.path} />),
       footer = React.renderToString(<Footer />),
       metaTags = DocMeta.rewind(),
       renderedTags = metaTags.map((tag, index) =>
