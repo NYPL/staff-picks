@@ -49,6 +49,15 @@ class App extends React.Component {
             <div id='books'>
               <Books {...this.props} />
             </div>
+
+            <div className='mobile-about'>
+              <span className='mobile-about-divider'></span>
+              <h2 className='mobile-about-link'>
+                <a href='http://nypl.org/browse/recommendations/about/annual-lists'>
+                  About This List
+                </a>
+              </h2>
+            </div>
           </div>
         </div>
       </div>

@@ -55,6 +55,10 @@
     position: relative;
     top: 2px;
 
+    @include breakpoint($min, 414px) {
+      left: 75px;
+    }
+
     @include breakpoint($min, $post-mobile-phone) {
       left: 0;
       top: 0;

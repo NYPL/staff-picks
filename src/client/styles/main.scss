@@ -246,10 +246,14 @@ span[class*="icon-"] {
 
 @import 'components/book-content';
 
+#masonryContainer {
+  margin-top: 12px;
+}
+
 .main-container {
   overflow: auto;
   padding: 0;
-  margin-top: 40px;
+  margin-top: 30px;
 
   #sidebar {
     float: left;
@@ -271,6 +275,33 @@ span[class*="icon-"] {
 
     .sidebar-content {
       margin-bottom: 30px;
+    }
+
+    .about {
+      display: none;
+
+      @include breakpoint($min, $post-mobile-phone) {
+        display: block;
+      }
+
+      &-divider {
+        width: 160px;
+        height: 2px;
+        margin: 5px 0 15px 0;
+        background: $lib-red;
+        display: inline-block;
+      }
+
+      &-link {
+        font-size: 16px;
+        width: 150px;
+        text-align: right;
+
+        a {
+          text-decoration: none;
+          color: #2799C5;
+        }
+      }
     }
   }
 
@@ -307,6 +338,31 @@ span[class*="icon-"] {
         margin: 5px 0;
         font-size: 14px;
         color: $dark-lib-gray;
+      }
+    }
+  }
+
+  .mobile-about {
+    @include breakpoint($min, $post-mobile-phone) {
+      display: none;
+    }
+
+    &-divider {
+      width: 100%;
+      height: 2px;
+      margin: 5px 0 15px 0;
+      background: $lib-red;
+      display: inline-block;
+    }
+
+    &-link {
+      font-size: 16px;
+      width: 150px;
+      margin: 0 auto;
+
+      a {
+        text-decoration: none;
+        color: #2799C5;
       }
     }
   }

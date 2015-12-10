@@ -1,18 +1,15 @@
 .BookDisplayButtons {
   &-List {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     text-align: center;
 
-    @include breakpoint($min, $post-mobile-phone) {
-      margin-bottom: 40px;
-    }
-
     li {
-      border-radius: 20px;
+      border-radius: 23px;
       border: 2px solid $text-gray;
       display: inline-block;
-      margin: 0 8%;
-      width: 95px;
+      margin: 0 3%;
+      width: 125px;
+
       @include breakpoint($min, $post-mobile-phone) {
         display: block;
         margin: 0px auto 10px auto;
@@ -20,10 +17,10 @@
 
       a {
         display: inline-block;
-        font-size: 12px;
+        font-size: 14px;
         cursor: pointer;
-        padding: 10px 30px 10px 11px;
-        width: 90px;
+        padding: 14px 22px 12px 15px;
+        width: 100px;
         color: $text-gray;
       }
 

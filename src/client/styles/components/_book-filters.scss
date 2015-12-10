@@ -7,13 +7,18 @@
 
   h2 {
     color: $lib-red;
-    font-size: 15px;
+    font-size: 18px;
+    line-height: 1.25em;
+
+    @include breakpoint($min, $post-desktop) {
+      text-align: right;
+    }
   }
 
   .divider {
-    width: 40px;
+    width: 160px;
     height: 2px;
-    margin: 5px 0;
+    margin: 5px 0 15px 0;
     background: $lib-red;
     display: inline-block;
   }
@@ -25,6 +30,10 @@
 
     @include breakpoint($min, $post-mobile-phone) {
       text-align: right;
+    }
+
+    > span {
+      font-size: 18px;
     }
 
     ul {
