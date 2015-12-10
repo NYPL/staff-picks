@@ -5,9 +5,14 @@
   padding: 0;
   width: 100%;
 
+  @include breakpoint($min, 720px) {
+    height: 120px;
+  }
+
   @include breakpoint($min, $post-laptop) {
     height: 320px;
   }
+
   
   &__container {
     height: auto;
@@ -22,39 +27,40 @@
   }
 
   &__text {
-    float: left;
-    margin: 4px 0 0 22px; 
-    position: relative;
+    // float: left;
+    // margin: 4px 0 0 22px; 
+    // position: relative;
 
-    @include breakpoint($min, $post-palm) {
-      margin: 10px 40px 40px 70px;  
-      width: 40%;
-    }
+    // @include breakpoint($min, $post-palm) {
+    //   margin: 10px 40px 40px 70px;  
+    //   width: 40%;
+    // }
 
     @include breakpoint($min, 720px) {
       margin: 70px 40px 40px 70px;
     }
 
     @include breakpoint($min, $post-laptop) {
-      margin: 120px 40px 56px 60px;  
+      margin: 88px 8px 56px 106px;  
       width: 45%;
     }
 
     &__HeroTitle {
-      box-sizing: border-box;
-      color: white;
-      position: relative;
-      width: 100%;
+      // box-sizing: border-box;
+      // color: white;
+      // position: relative;
+      // width: 100%;
+
       h3 {
         @include Kievit-Bold;
         font-size: 15px;
         font-weight: normal;
         letter-spacing: 0.09rem;
-        margin: 24px 0 10px 0;
+        margin: 30px 0 0 57px;
         text-transform: uppercase;
 
         @include breakpoint($min, $post-palm) {
-          margin: 40px 0 10px 0;
+          margin-left: 105px;
         }
 
         @include breakpoint($min, 720px) {
@@ -62,7 +68,7 @@
         }
 
         @include breakpoint($min, $post-laptop) {
-          margin: 0 0 20px 0;
+          margin: 0 0 27px 0;
         }
       }
 
@@ -75,7 +81,7 @@
 
         @include Milo-Regular;
 
-        @include breakpoint($min, 720px) {
+        @include breakpoint($min, 992px) {
           display: block;
           font-size: 20px; 
           line-height: 24px;
@@ -84,9 +90,9 @@
 
         @include breakpoint($min, $post-laptop) {
           display: block;
-          font-size: 36px; 
-          line-height: 28px;
-          margin: 0 0 10px 0;
+          font-size: 34px; 
+          line-height: 30px;
+          margin: 0 0 31px 0;
         }
       }
 
@@ -97,13 +103,13 @@
         line-height: 14px;
         text-align: left;
 
-        @include breakpoint($min, 720px) {
+        @include breakpoint($min, 992px) {
           display: block;
         }
 
          @include breakpoint($min, $post-laptop) {
           font-size: 18px;
-          line-height: 18px;
+          line-height: 25px;
         }
       }
     }
