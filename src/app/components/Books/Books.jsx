@@ -17,12 +17,13 @@ let Navigation = Router.Navigation,
   ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
   Books = React.createClass({
     getInitialState() {
-      let params = this.props.params,
+      let clientParams = (this.props.params && this.props.params.type) ?
+          this.props.params.type : '',
         transitionRoute = 'modal',
+        route = this.props.route || clientParams,
         pickType = 'staffpicks';
 
-      if (params && params.type &&
-          (params.type === 'childrens' || params.type === 'ya')) {
+      if ((route.indexOf('childrens') !== -1) || (route.indexOf('ya') !== -1)) {
         transitionRoute = 'annualModal';
         pickType = 'annual';
       }
@@ -63,7 +64,7 @@ let Navigation = Router.Navigation,
       setTimeout(() => {
         BookActions.updateNewFilters(this.state.iso.getItemElements());
         BookActions.updateFilterAge('Adult');
-      }, 150);
+      }, 500);
 
       BookStore.listen(this._onChange);
     },
@@ -77,7 +78,15 @@ let Navigation = Router.Navigation,
         age = `.${storeState._age}`,
         filters = storeState._filters,
         selector = age,
-        _this = this;
+        _this = this,
+        params = this.props.params;
+
+      // We don't need to filter based on age for c100 or ya100
+      // and it needs to be removed from the Isotopes selector:
+      if (params && params.type &&
+        (params.type === 'childrens' || params.type === 'ya')) {
+        selector = '';
+      }
 
       if (filters.length) {
         selector += `.${filters.join('.')}`;
@@ -88,17 +97,17 @@ let Navigation = Router.Navigation,
         _this.state.iso.arrange({
           filter: selector
         });
-      }, 300);
+      }, 700);
 
       if (storeState._isotopesDidUpdate) {
         setTimeout(() => {
           this.state.iso.reloadItems();
-        }, 300);
+        }, 500);
         setTimeout(() => {
           _this.state.iso.arrange({
             filter: selector
           });
-        }, 900);
+        }, 1000);
       }
 
       this.state.iso.on('arrangeComplete', filteredItems => {

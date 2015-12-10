@@ -55,6 +55,15 @@ class Sidebar extends React.Component {
           styles={this.state.mobileDisplay ? styles.mobileFilters : null}
           mobile={this.state.mobileDisplay}
           mobileCloseBtn={this._hideFilters} />
+
+        <div className='about'>
+          <span className='about-divider'></span>
+          <h2 className='about-link'>
+            <a href='http://nypl.org/browse/recommendations/about/annual-lists'>
+              About this list
+            </a>
+          </h2>
+        </div>
       </div>
     );
   }

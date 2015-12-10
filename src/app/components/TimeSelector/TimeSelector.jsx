@@ -11,11 +11,12 @@ let Navigation = Router.Navigation,
   TimeSelector = React.createClass({
     getInitialState() {
       let params = this.props.params,
-        transitionRoute = 'month',
+        transitionRoute = this.props.pickType === 'staffpicks' ?
+          'month' : 'year',
         type;
 
-      if (params && params.type && (params.type === 'childrens' || params.type === 'ya')) {
-        transitionRoute = 'year';
+      if (params && params.type &&
+          (params.type === 'childrens' || params.type === 'ya')) {
         type = params.type;
       }
 
@@ -69,7 +70,13 @@ let Navigation = Router.Navigation,
             if (_.isEmpty(list)) {
               return;
             }
-            return staffPicksDate(date, this.props.pickType).month;
+            return staffPicksDate(date).month;
+          },
+          year: () => {
+            if (_.isEmpty(list)) {
+              return;
+            }
+            return staffPicksDate(date).year;
           }
         };
 
@@ -77,23 +84,27 @@ let Navigation = Router.Navigation,
     },
 
     _previousLink(list) {
-      let previous = this._getMonth(list);
+      let previous = this._getMonth(list),
+        dateDisplay = this.props.pickType === 'staffpicks' ?
+          previous.month() : previous.year();
 
       return (previous.active) ?
         <a style={styles.previousDate}
           onClick={this._handleClick.bind(this, 'Previous', previous)}>
-          <span className='left-icon'></span>Picks for {previous.month()}
+          <span className='left-icon'></span>Picks for {dateDisplay}
         </a>
         : null;
     },
 
     _nextLink(list) {
-      let next = this._getMonth(list);
+      let next = this._getMonth(list),
+        dateDisplay = this.props.pickType === 'staffpicks' ?
+          next.month() : next.year();
 
       return (next.active) ?
         <a style={styles.nextDate}
           onClick={this._handleClick.bind(this, 'Next', next)}>
-          Picks for {next.month()}<span className='right-icon'></span>
+          Picks for {dateDisplay}<span className='right-icon'></span>
         </a>
         : null;
     },
@@ -101,8 +112,9 @@ let Navigation = Router.Navigation,
     render() {
       let currentMonthPicks = this.props.currentMonthPicks,
         pickDate = currentMonthPicks.date,
-        date = staffPicksDate(pickDate, this.props.pickType),
-        pickMonth = date.month,
+        date = staffPicksDate(pickDate),
+        pickMonth = this.props.pickType === 'staffpicks' ?
+          date.month : null,
         pickYear = date.year,
         previousBtn,
         nextBtn;

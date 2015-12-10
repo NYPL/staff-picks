@@ -31,6 +31,7 @@ let Navigation = Router.Navigation,
         store = BookStore.getState(),
         books = store._currentMonthPicks.picks,
         params = this.props.params,
+        returnToText = 'RETURN TO STAFF PICKS',
         annualType,
         transitionRoute,
         age;
@@ -58,13 +59,20 @@ let Navigation = Router.Navigation,
       if (params.type && (params.type === 'childrens' || params.type === 'ya')) {
         transitionRoute = 'type';
         annualType = {type: params.type};
+
+        if (params.type === 'childrens') {
+          returnToText = 'RETURN TO CHILDREN\'S BOOKS';
+        } else {
+          returnToText = 'RETURN TO BOOKS FOR TEENS';
+        }
       }
 
       return {
         modalIsOpen: true,
         book: modalBook,
         transitionRoute,
-        annualType
+        annualType,
+        returnToText
       };
     },
 
@@ -80,10 +88,6 @@ let Navigation = Router.Navigation,
 
     closeModal() {
       utils._trackPicks('Modal', 'Closed');
-
-      let transitionRoute;
-      let params = this.props.params;
-
 
       this.setState({
         modalIsOpen: false
@@ -129,7 +133,7 @@ let Navigation = Router.Navigation,
             <CloseButton
               className={`${this.props.className}__closeBtn`}
               onClick={this.closeModal}
-              label='RETURN TO STAFF PICKS' />
+              label={this.state.returnToText} />
             <BookTitle className={`${this.props.className}__BookTitle`} book={this.state.book} />
             <div className={`${this.props.className}__left-column`}>
               <div key='ImageContainer' className={`${this.props.className}__left-column__image`}>
@@ -140,12 +144,13 @@ let Navigation = Router.Navigation,
               </div>
               <div key='ShareContainer' className={`${this.props.className}__left-column__share`}>
                 <BookShare
+                  shareType={this.state.annualType}
                   className={`${this.props.className}__left-column__share-items`}
                   book={this.state.book} />
               </div>
             </div>
             <BookIntro book={this.state.book} />
-            <BookContent book={this.state.book} />
+            <BookContent book={this.state.book} type={this.state.transitionRoute} />
           </Modal>
         </div>
       );
