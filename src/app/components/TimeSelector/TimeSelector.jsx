@@ -112,7 +112,7 @@ let Navigation = Router.Navigation,
       let currentMonthPicks = this.props.currentMonthPicks,
         pickDate = currentMonthPicks.date,
         date = staffPicksDate(pickDate),
-        pickMonth = this.props.type === 'staffpicks' ?
+        pickMonth = this.props.pickType === 'staffpicks' ?
           date.month : null,
         pickYear = date.year,
         previousBtn,
