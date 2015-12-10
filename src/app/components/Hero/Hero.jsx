@@ -39,13 +39,13 @@ class Hero extends React.Component {
           type: 'childrens',
           title: 'RECOMMENDATIONS',
           description: 'Children\'s Books',
-          intro: 'Explore our annual selections for reading and sharing.'
+          intro: 'Explore our annual selection of 100 notable titles for reading and sharing.'
         },
         ya: {
           type: 'ya',
           title: 'RECOMMENDATIONS',
-          description: 'Young Adult Books',
-          intro: 'Explore our annual selections of the best books for teens.',
+          description: 'Best Books for Teens',
+          intro: 'Explore our annual selection of outstanding young adult titles.',
         }
       };
 
