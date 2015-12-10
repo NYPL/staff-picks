@@ -53,7 +53,6 @@ class BookContent extends React.Component {
       bookLinkStyle = styles.linkUnavailable;
     }
 
-    console.log(this.props);
     if (pickType === 'home') {
       picker = (<span className='staff-pick-text'>Staff Pick By: {book.picker}, {book.location}</span>);
     } else {

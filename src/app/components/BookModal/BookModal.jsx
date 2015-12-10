@@ -144,6 +144,7 @@ let Navigation = Router.Navigation,
               </div>
               <div key='ShareContainer' className={`${this.props.className}__left-column__share`}>
                 <BookShare
+                  shareType={this.state.annualType}
                   className={`${this.props.className}__left-column__share-items`}
                   book={this.state.book} />
               </div>
