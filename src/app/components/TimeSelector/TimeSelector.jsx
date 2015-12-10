@@ -11,11 +11,12 @@ let Navigation = Router.Navigation,
   TimeSelector = React.createClass({
     getInitialState() {
       let params = this.props.params,
-        transitionRoute = 'month',
+        transitionRoute = this.props.pickType === 'staffpicks' ?
+          'month' : 'year',
         type;
 
-      if (params && params.type && (params.type === 'childrens' || params.type === 'ya')) {
-        transitionRoute = 'year';
+      if (params && params.type &&
+          (params.type === 'childrens' || params.type === 'ya')) {
         type = params.type;
       }
 

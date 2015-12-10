@@ -17,12 +17,13 @@ let Navigation = Router.Navigation,
   ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
   Books = React.createClass({
     getInitialState() {
-      let params = this.props.params,
+      let clientParams = (this.props.params && this.props.params.type) ?
+          this.props.params.type : '',
         transitionRoute = 'modal',
+        route = this.props.route || clientParams,
         pickType = 'staffpicks';
 
-      if (params && params.type &&
-          (params.type === 'childrens' || params.type === 'ya')) {
+      if ((route.indexOf('childrens') !== -1) || (route.indexOf('ya') !== -1)) {
         transitionRoute = 'annualModal';
         pickType = 'annual';
       }

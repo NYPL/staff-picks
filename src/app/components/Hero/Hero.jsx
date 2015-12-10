@@ -53,8 +53,9 @@ class Hero extends React.Component {
   }
 
   _getType() {
-    let clientParam = this.props.params ? this.props.params.type : '';
-    let route = this.props.route || clientParam;
+    let clientParam = (this.props.params && this.props.params.type) ?
+        this.props.params.type : '',
+      route = this.props.route || clientParam;
 
     if (route.indexOf('childrens') !== -1) {
       return 'childrens';

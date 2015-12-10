@@ -23,10 +23,10 @@ class App extends React.Component {
         {property: "og:title", content: 'Staff Picks | The New York Public Library'},
         {property: "og:image", content: '/recommendations/staff-picks/client/images/shelftalker.4.2.png'},
         {property: "og:description", content: 'Every month NYPL\'s librarians share their favorite reads.'},
-        {property: "og:url", content: 'http://www.nypl.org/recommendations/staff-picks/'},
+        {property: "og:url", content: 'http://www.nypl.org/browse/recommendations/staff-picks/'},
         {name: "twitter:title", content: 'Staff Picks | The New York Public Library'},
         {name: "twitter:description", content: 'Every month NYPL\'s librarians share their favorite reads.'},
-        {name: "twitter:image", content: '/recommendations/staff-picks/client/images/shelftalker.4.2.png'}
+        {name: "twitter:image", content: '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png'}
       ],
       tags = utils.metaTagUnion(hompageTags);
 
