@@ -5,7 +5,7 @@ import Radium from 'radium';
 import _ from 'underscore';
 
 import Book from '../Book/Book.jsx';
-import MonthPicker from '../MonthPicker/MonthPicker.jsx';
+import TimeSelector from '../TimeSelector/TimeSelector.jsx';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
@@ -17,12 +17,24 @@ let Navigation = Router.Navigation,
   ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
   Books = React.createClass({
     getInitialState() {
+      let params = this.props.params,
+        transitionRoute = 'modal',
+        pickType = 'staffpicks';
+
+      if (params && params.type &&
+          (params.type === 'childrens' || params.type === 'ya')) {
+        transitionRoute = 'annualModal';
+        pickType = 'annual';
+      }
+
       return _.extend({
+        pickType: pickType,
         iso: null,
         book: {},
         books: [],
         modalIsOpen: false,
-        noResults: false
+        noResults: false,
+        transitionRoute
       }, BookStore.getState());
     },
 
@@ -103,11 +115,15 @@ let Navigation = Router.Navigation,
     },
 
     _openModal(book) {
+      let params = this.props.params;
+
       utils._trackPicks('Book', book.item.title);
 
-      this.transitionTo('modal', {
+      this.transitionTo(this.state.transitionRoute, {
         month: this.state._currentMonthPicks.date,
-        id: book.item.id
+        year: this.state._currentMonthPicks.date,
+        id: book.item.id,
+        type: params.type || ''
       });
     },
 
@@ -160,7 +176,10 @@ let Navigation = Router.Navigation,
 
       return (
         <div>
-          <MonthPicker currentMonthPicks={currentMonthPicks} />
+          <TimeSelector
+            pickType={this.state.pickType}
+            currentMonthPicks={currentMonthPicks}
+            {...this.props} />
 
           <div id="masonryContainer" ref="masonryContainer" style={{opacity: '0'}}>
             <ul className='list-view'>

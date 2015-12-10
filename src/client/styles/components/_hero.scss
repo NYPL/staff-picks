@@ -110,7 +110,7 @@
   }
 
   &__image {
-    background-image: url('/recommendations/staff-picks/src/client/images/shelftalker.4.2.png');
+    background-image: url('#{$staffPicksUrl}src/client/images/shelftalker.4.2.png');
     background-position: -10px 20px;
     background-size: 104%;
     background-repeat: no-repeat;

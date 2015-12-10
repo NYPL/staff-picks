@@ -15,12 +15,12 @@
     }
   }
   .left-icon {
-    background: url('/recommendations/staff-picks/src/client/images/icons/left_arrow_blue.svg') no-repeat;
+    background: url('#{$staffPicksUrl}src/client/images/icons/left_arrow_blue.svg') no-repeat;
     padding: 5px 15px 7px 10px;
     margin: 0 5px 0 25px;
   }
   .right-icon {
-    background: url('/recommendations/staff-picks/src/client/images/icons/right_arrow_blue.svg') no-repeat;
+    background: url('#{$staffPicksUrl}src/client/images/icons/right_arrow_blue.svg') no-repeat;
     padding: 5px 15px 10px 10px;
     margin-left: 10px;
   }

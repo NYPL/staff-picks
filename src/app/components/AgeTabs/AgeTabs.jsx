@@ -24,15 +24,19 @@ class AgeTabs extends React.Component {
         );
       });
 
-  	return (
-      <div className='tab-container'>
-        <ul className='tab-container__ul'>
-          <li key='li-before' className='tab-container__outsider'></li>
-            {TabElements}
-          <li key='li-after' className='tab-container__outsider'></li>
-        </ul>
-      </div>
-		);
+    if (this.props.params && !this.props.params.type) {
+      return (
+        <div className='tab-container'>
+          <ul className='tab-container__ul'>
+            <li key='li-before' className='tab-container__outsider'></li>
+              {TabElements}
+            <li key='li-after' className='tab-container__outsider'></li>
+          </ul>
+        </div>
+      );
+    }
+
+  	return null;
   }
 };
 

@@ -37,15 +37,15 @@ class App extends React.Component {
         <Hero />
         <div id="app-content">
           <RouteHandler {...this.props} />
-          <div id='age-tabs' className='age-tabs'>
-            <AgeTabs />
-          </div>
+
+          <AgeTabs {...this.props} />
+          
           <div className='main-container'>
             <div id='sidebar'>
               <Sidebar filters={this.props.filters}/>
             </div>
             <div id='books'>
-              <Books books={this.props.data} currentList={this.props.currentList}/>
+              <Books {...this.props} />
             </div>
           </div>
         </div>

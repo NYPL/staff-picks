@@ -8,14 +8,30 @@ import staffPicksDate from '../../utils/DateService.js';
 import utils from '../../utils/utils.js';
 
 let Navigation = Router.Navigation,
-  MonthPicker = React.createClass({
+  TimeSelector = React.createClass({
+    getInitialState() {
+      let params = this.props.params,
+        transitionRoute = 'month',
+        type;
+
+      if (params && params.type && (params.type === 'childrens' || params.type === 'ya')) {
+        transitionRoute = 'year';
+        type = params.type;
+      }
+
+      return {
+        transitionRoute,
+        type
+      };
+    },
+
     mixins: [Navigation],
 
     _handleClick(selection, month) {
       let API;
 
       if (month) {
-        API = '/recommendations/staff-picks/api/ajax/picks/' + month.date;
+        API = '/browse/recommendations/staff-picks/api/ajax/picks/' + month.date;
 
         $.ajax({
           type: 'GET',
@@ -28,8 +44,10 @@ let Navigation = Router.Navigation,
 
             utils._trackPicks('Select Month', `${selection}: ${month.month()}`);
 
-            this.transitionTo('month', {
+            this.transitionTo(this.state.transitionRoute, {
+              type: this.state.type,
               month: date,
+              year: date
             });
 
             BookActions.clearFilters();
@@ -51,7 +69,7 @@ let Navigation = Router.Navigation,
             if (_.isEmpty(list)) {
               return;
             }
-            return staffPicksDate(date).month;
+            return staffPicksDate(date, this.props.pickType).month;
           }
         };
 
@@ -59,34 +77,31 @@ let Navigation = Router.Navigation,
     },
 
     _previousLink(list) {
-      let previousMonth = this._getMonth(list);
+      let previous = this._getMonth(list);
 
-      return (previousMonth.active) ?
-        <a style={styles.previousMonth}
-          onClick={this._handleClick.bind(this, 'Previous', previousMonth)}>
-          <span className='left-icon'></span>Picks for {previousMonth.month()}
+      return (previous.active) ?
+        <a style={styles.previousDate}
+          onClick={this._handleClick.bind(this, 'Previous', previous)}>
+          <span className='left-icon'></span>Picks for {previous.month()}
         </a>
         : null;
     },
 
     _nextLink(list) {
-      let nextMonth = this._getMonth(list);
+      let next = this._getMonth(list);
 
-      return (nextMonth.active) ?
-        <a style={styles.nextMonth}
-          onClick={this._handleClick.bind(this, 'Next', nextMonth)}>
-          Picks for {nextMonth.month()}<span className='right-icon'></span>
+      return (next.active) ?
+        <a style={styles.nextDate}
+          onClick={this._handleClick.bind(this, 'Next', next)}>
+          Picks for {next.month()}<span className='right-icon'></span>
         </a>
         : null;
     },
 
     render() {
       let currentMonthPicks = this.props.currentMonthPicks,
-        months = ['January', 'February', 'March', 'April',
-        'May', 'June', 'July', 'August', 'September',
-        'October', 'November', 'December'],
         pickDate = currentMonthPicks.date,
-        date = staffPicksDate(pickDate),
+        date = staffPicksDate(pickDate, this.props.pickType),
         pickMonth = date.month,
         pickYear = date.year,
         previousBtn,
@@ -96,9 +111,9 @@ let Navigation = Router.Navigation,
       nextBtn = this._nextLink(currentMonthPicks.nextList);
 
       return (
-        <div className='month-picker' style={styles.monthPicker}>
+        <div className='month-picker' style={styles.timeSelector}>
           {previousBtn}
-          <p style={styles.month}>{pickMonth} {pickYear}</p>
+          <p style={styles.dateDisplay}>{pickMonth} {pickYear}</p>
           {nextBtn}
         </div>
       );
@@ -107,24 +122,24 @@ let Navigation = Router.Navigation,
 
 const styles = {
   base: {},
-  monthPicker: {
+  timeSelector: {
     height: '35px',
     marginLeft: '-23px',
     paddingTop: '7px',
     textAlign: 'center'
   },
-  month: {
+  dateDisplay: {
     display: 'inline-block',
     color: '#333333',
     position: 'absolute',
     '@media (min-width: 600px)': { left: '52%' }
   },
-  nextMonth: {
+  nextDate: {
     float: 'right'
   },
-  previousMonth: {
+  previousDate: {
     float: 'left'
   }
 };
 
-export default MonthPicker;
+export default TimeSelector;
