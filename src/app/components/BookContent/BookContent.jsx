@@ -24,7 +24,8 @@ class BookContent extends React.Component {
 
   render() {
     const book = this.props.book,
-      item = book.item;
+      item = book.item,
+      pickType = this.props.type;
 
     let bookStyle = styles.available,
       ebookStyle = styles.available,
@@ -35,7 +36,8 @@ class BookContent extends React.Component {
       bookIcon,
       bookSubstringID,
       ebookSubstringID,
-      ebookIcon;
+      ebookIcon,
+      picker;
 
     bookHREF = this._getEncoreLink(item.catalogSlug, 0, 8);
     ebookHREF = this._getEncoreLink(item.ebookUri, 41, 49);
@@ -51,14 +53,19 @@ class BookContent extends React.Component {
       bookLinkStyle = styles.linkUnavailable;
     }
 
+    console.log(this.props);
+    if (pickType === 'home') {
+      picker = (<span className='staff-pick-text'>Staff Pick By: {book.picker}, {book.location}</span>);
+    } else {
+      picker = (<span className='staff-pick-text'>Pick by committee: 2015</span>);
+    }
+
     return (
       <div ref='BookContent' className={this.props.className}>      
         <p className='description'>{book.text}</p>
         <div className='staff-pick'>
           <span className='staff-pick-icon'></span>
-          <span className='staff-pick-text'>
-            Staff Pick By: {book.picker}, {book.location}
-          </span>
+          {picker}
         </div>
 
         <ul className='borrow'>

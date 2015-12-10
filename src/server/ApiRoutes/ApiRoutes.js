@@ -27,9 +27,8 @@ function fetchApiData(url) {
 }
 
 function CurrentMonthData(req, res, next) {
-console.log('CurrentMonthData ==============================');
   let endpoint = apiRoot + apiEndpoint + '/monthly-2015-11-01?' + fields + pageSize + includes; 
-console.log(endpoint)
+
   axios.all([getHeaderData(), fetchApiData(endpoint)])
     .then(axios.spread((headerData, staffPicks) => {
       let returnedData = staffPicks.data,
@@ -108,7 +107,7 @@ function AnnualCurrentData(type, req, res, next) {
         currentMonth = parsed[0],
         modelData = HeaderModel.build(HeaderParsed),
         currentMonthPicks = PicksListModel.build(currentMonth);
-console.log(currentMonthPicks);
+
       res.locals.data = {
         BookStore: {
           _bookDisplay:  'grid',
@@ -158,8 +157,6 @@ console.log(currentMonthPicks);
 }
 
 function SelectAnnualData(req, res, next) {
-console.log('SelectAnnualData ==============================');
-console.log(req.params);
   if (req.params.idOrType === 'childrens') {
      return AnnualCurrentData('c100', req, res, next);
   }

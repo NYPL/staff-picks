@@ -81,10 +81,6 @@ let Navigation = Router.Navigation,
     closeModal() {
       utils._trackPicks('Modal', 'Closed');
 
-      let transitionRoute;
-      let params = this.props.params;
-
-
       this.setState({
         modalIsOpen: false
       });
@@ -145,7 +141,7 @@ let Navigation = Router.Navigation,
               </div>
             </div>
             <BookIntro book={this.state.book} />
-            <BookContent book={this.state.book} />
+            <BookContent book={this.state.book} type={this.state.transitionRoute} />
           </Modal>
         </div>
       );
