@@ -19,6 +19,7 @@ class App extends React.Component {
   }
 
   _getType() {
+    console.log(this.props.params);
     let annualType = this.props.params && this.props.params.type ?
       this.props.params.type : '';
 

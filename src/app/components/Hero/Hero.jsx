@@ -37,13 +37,13 @@ class Hero extends React.Component {
         },
         childrens: {
           type: 'childrens',
-          title: 'STAFF PICKS',
+          title: 'RECOMMENDATIONS',
           description: 'Children\'s Books',
           intro: 'Explore our annual selections for reading and sharing.'
         },
         ya: {
           type: 'ya',
-          title: 'STAFF PICKS',
+          title: 'RECOMMENDATIONS',
           description: 'Young Adult Books',
           intro: 'Explore our annual selections of the best books for teens.',
         }
@@ -58,7 +58,7 @@ class Hero extends React.Component {
         <div key='HeroImageContainer' className={`${this.props.className}__image`}></div>
         : null,
       bannerStyle = styles[heroData.type];
-console.log(heroData);
+
     return (
       <div key='Hero' className={this.props.className} style={bannerStyle}>
         <div key='HeroContainer' className={`${this.props.className}__container`}>
@@ -82,11 +82,11 @@ Hero.defaultProps = {
 
 const styles= {
   childrens: {
-    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/desktop.landing.banner.c100.png")',
+    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/desktop.childrens100.FIN.png")',
     backgroundSize: '100%'
   },
   ya: {
-    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/desktop.YA100.png")',
+    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/desktop.banner.YA.FIN.png")',
     backgroundSize: '100%'
   },
   staffpicks: {}
