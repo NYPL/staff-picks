@@ -131,7 +131,8 @@ class BookFilters extends React.Component {
       storeState = BookStore.getState(),
       activeFilters = storeState._filters,
       age = storeState._age,
-      bookElems = storeState._updatedFilters;
+      bookElems = storeState._updatedFilters,
+      params = this.props.params;
 
     let updatedBooksElems = [];
     _.each(bookElems, elem => {
@@ -186,7 +187,8 @@ class BookFilters extends React.Component {
           filters,
           classes = elem.className;
 
-        if (classes.indexOf(age) !== -1) {
+        if (classes.indexOf(age) !== -1 || 
+            (params && params.type && (params.type === 'childrens' || params.type === 'ya'))) {
           _.each(storeState._filters, filter => {
             if (classes.indexOf(filter) !== -1) {
               n -= 1;

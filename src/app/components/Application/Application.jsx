@@ -54,7 +54,7 @@ class App extends React.Component {
           
           <div className='main-container'>
             <div id='sidebar'>
-              <Sidebar filters={this.props.filters}/>
+              <Sidebar filters={this.props.filters} {...this.props} />
             </div>
             <div id='books'>
               <Books {...this.props} />

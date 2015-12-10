@@ -63,7 +63,7 @@ let Navigation = Router.Navigation,
       setTimeout(() => {
         BookActions.updateNewFilters(this.state.iso.getItemElements());
         BookActions.updateFilterAge('Adult');
-      }, 150);
+      }, 500);
 
       BookStore.listen(this._onChange);
     },
@@ -96,17 +96,17 @@ let Navigation = Router.Navigation,
         _this.state.iso.arrange({
           filter: selector
         });
-      }, 300);
+      }, 700);
 
       if (storeState._isotopesDidUpdate) {
         setTimeout(() => {
           this.state.iso.reloadItems();
-        }, 300);
+        }, 500);
         setTimeout(() => {
           _this.state.iso.arrange({
             filter: selector
           });
-        }, 900);
+        }, 1000);
       }
 
       this.state.iso.on('arrangeComplete', filteredItems => {
