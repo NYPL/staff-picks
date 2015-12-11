@@ -197,11 +197,6 @@ let Navigation = Router.Navigation,
               </ReactCSSTransitionGroup>
             </ul>
           </div>
-          <p style={[
-            this.state.noResults ? styles.showNoResults : styles.hideNoResults
-            ]}>
-            No results are available for this age category.
-          </p>
         </div>
       );
     }
