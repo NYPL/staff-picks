@@ -45,7 +45,7 @@ class Hero extends React.Component {
           title: 'RECOMMENDATIONS',
           description: "Children's Books",
           intro: 'Explore our annual selection of 100 notable titles for reading and sharing.',
-          image: '/browse/recommendations/staff-picks/src/client/images/desktop.childrens100.FIN.png',
+          image: '/browse/recommendations/staff-picks/src/client/images/c100.OG.png',
           url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/childrens'
         },
         ya: {
