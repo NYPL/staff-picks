@@ -101,7 +101,10 @@ let Navigation = Router.Navigation,
       let book = this.state.book,
         title = 'Staff Picks | The New York Public Library',
         imageSrc = '/browse/recommendations/staff-picks/src/client/images/staff_pic_bg.jpg',
-        description = 'Every month, NYPL\'s book experts share 100 titles they love.',
+        description = 'True stories, tales of courage, historical romances, ' +
+          'edge-of-your-seat thrillers... There is a huge world of books ' +
+          'out there. Our expert staff members pick out their favorites ' +
+          'to help you find your next one.',
         bookId,
         imageLink;
       

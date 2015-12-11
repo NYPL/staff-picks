@@ -31,7 +31,7 @@ window.onload = () => {
       if (state.path[lastCharIndex] === '/') {
         pageview = state.path.substring(0, lastCharIndex);
       }
-console.log(pageview);
+
       ga.pageview(pageview);
       React.render(<Root params={state.params}/>, container);
     });

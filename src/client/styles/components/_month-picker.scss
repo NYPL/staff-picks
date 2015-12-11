@@ -1,7 +1,11 @@
 .month-picker {
-  font-size: 15px;
+  font-size: 12px;
   height: 40px;
 
+  @include breakpoint($min, 720px) {
+    font-size: 15px;
+  }
+  
   a {
     color: $dark-lib-gray;
     text-decoration: none;
