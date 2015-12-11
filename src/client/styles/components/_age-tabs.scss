@@ -1,0 +1,59 @@
+.tab-container {
+	background-color: #ffffff;
+	display: block;
+	font-size: 1.2em;
+	height: auto;
+	margin: 30px auto 0;
+	padding: 21px 0 0 0;
+	position: relative;
+	text-align: center;
+	width: 100%;
+	@include breakpoint($min, $post-tablet) {
+    font-size: 1.4em;
+  }
+}
+
+.tab-container__ul {
+  display: block;
+  margin: 0 auto;
+}
+
+.tab-container__ul__element {
+  display: inline-block;
+  margin: 0;
+  padding: 20px 0 20px 0;
+  text-transform: uppercase;
+  white-space: pre;
+  width: 33%;
+  @include breakpoint($min, $post-tablet) {
+    width: 23%;
+  }
+}
+
+.tab-container__ul__element__link {
+	color: #333333;
+  cursor: pointer;
+  text-decoration: none;
+
+  &.active,
+  &:hover {
+    color: #cc1a16;
+  }
+}
+
+.tab-container__outsider {
+	display: inline-block;
+  text-transform: uppercase;
+  width: 0;
+  border-bottom-style: solid;
+  border-color: #cc1a16;
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+  border-width: 1px;
+  position: relative;
+  top:24px;
+  @include breakpoint($min, $post-tablet) {
+    width: 15%;
+  }
+}

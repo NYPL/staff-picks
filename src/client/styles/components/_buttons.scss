@@ -1,0 +1,75 @@
+.tumblr-share-button {
+  background-image: 'none';
+  display: 'inline-block';
+  height: 61px;
+  width: 60px;
+}
+
+.minus-icon {
+  background: url('#{$staffPicksUrl}src/client/images/icons/minus.icon.svg') no-repeat;
+  padding: 2px 15px 10px 10px;
+  margin-left: 0px;
+  transition: opacity 0.4s ease-in;
+}
+
+.mobile-filter-btn {
+  display: block;
+  font-size: 18px;
+  border-bottom-style: solid;
+  border-color: #0095c8;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-radius: 6px;
+  border-top-style: solid;
+  border-width: 2px;
+  margin: 0 auto;
+  padding: 18px 10px 18px 10px;
+  text-align: center;
+  width: 200px;
+
+  a {
+    text-decoration: none;
+  }
+
+  @include breakpoint($min, $post-mobile-phone) {
+    display: none;
+  }
+}
+
+.BookFilters__close-btn {
+  background: url('#{$staffPicksUrl}src/client/images/icons/gray_x_button.svg') no-repeat;
+  position: absolute;
+  font-size: 1.3em;
+  height: auto;
+  margin: 0 0 20px 0;
+  padding: 5px 4px 30px 36px;
+  top: 3%;
+  left: 90%;
+  @include breakpoint($min, 480px) {
+    display: none;
+  }
+}
+
+.mobile-done-button {
+  border-bottom-style: solid;
+  border-color: #0095c8;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-radius: 6px;
+  border-top-style: solid;
+  border-width: 2px;
+  cursor: pointer;
+  display: block;
+  margin: 30px auto;
+  padding: 14px 10px;
+  text-align: center;
+  width: 100px;
+  a {
+    color: #0095c8;
+    font-size: 1.2em;
+    text-decoration: none;
+  }
+   @include breakpoint($min, 480px) {
+    display: none;
+  }
+}
