@@ -1,7 +1,7 @@
 const config = {
   port: 3001,
   webpackDevServerPort: 3000,
-  apiRoot: 'https://dev-refinery.nypl.org',
+  apiRoot: 'https://refinery.nypl.org',
   apiEndpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists',
   fields: 'fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&' +
     'fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri',
@@ -168,19 +168,19 @@ const config = {
   },
   donationLinks: [
     {
-      url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=55&s_src=FRQ16ZZ_TNN',
+      url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=55&s_src=FRQ16ZZ_TNN&s_subsrc=55',
       amount: '$55'
     },
     {
-      url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=115&s_src=FRQ16ZZ_TNN',
+      url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=115&s_src=FRQ16ZZ_TNN&s_subsrc=115',
       amount: '$115'
     },
     {
-      url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=250&s_src=FRQ16ZZ_TNN',
+      url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=250&s_src=FRQ16ZZ_TNN&s_subsrc=250',
       amount: '$250'
     },
     {
-      url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=0&s_src=FRQ16ZZ_TNN',
+      url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=0&s_src=FRQ16ZZ_TNN&s_subsrc=other',
       amount: 'Other'
     }
   ],
@@ -196,7 +196,7 @@ const config = {
   },
   metaTags: [
     {property: "og:type", content: 'website'},
-    {property: "og:site_name", content: 'Staff Picks | The New York Public Library'},
+    {property: "og:site_name", content: 'Recommendations | The New York Public Library'},
     {name: "twitter:card", content: 'summary_large_image'},
     {name: "twitter:site", content: '@nypl'},
     {name: "twitter:creator", content: '@nypl'}

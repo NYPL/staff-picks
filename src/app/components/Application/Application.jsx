@@ -32,11 +32,22 @@ class App extends React.Component {
         {name: "twitter:description", content: content},
         {name: "twitter:image", content: '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png'}
       ],
-      tags = utils.metaTagUnion(hompageTags);
+      tags = utils.metaTagUnion(hompageTags),
+      about = null;
+
+    if (this.props.params && this.props.params.type) {
+      about = (<div className='mobile-about'>
+          <span className='mobile-about-divider'></span>
+          <h2 className='mobile-about-link'>
+            <a href='http://nypl.org/browse/recommendations/about/annual-lists'>
+              About this list
+            </a>
+          </h2>
+        </div>);
+    }
 
     return (
       <div>
-        <DocMeta tags={tags} />
         <Header />
 
         <Hero {...this.props} />
@@ -54,14 +65,7 @@ class App extends React.Component {
               <Books {...this.props} />
             </div>
 
-            <div className='mobile-about'>
-              <span className='mobile-about-divider'></span>
-              <h2 className='mobile-about-link'>
-                <a href='http://nypl.org/browse/recommendations/about/annual-lists'>
-                  About this list
-                </a>
-              </h2>
-            </div>
+            {about}
           </div>
         </div>
       </div>
