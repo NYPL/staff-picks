@@ -48,7 +48,6 @@ class App extends React.Component {
 
     return (
       <div>
-        <DocMeta tags={tags} />
         <Header />
 
         <Hero {...this.props} />

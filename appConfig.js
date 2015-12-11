@@ -196,7 +196,7 @@ const config = {
   },
   metaTags: [
     {property: "og:type", content: 'website'},
-    {property: "og:site_name", content: 'Staff Picks | The New York Public Library'},
+    {property: "og:site_name", content: 'Recommendations | The New York Public Library'},
     {name: "twitter:card", content: 'summary_large_image'},
     {name: "twitter:site", content: '@nypl'},
     {name: "twitter:creator", content: '@nypl'}

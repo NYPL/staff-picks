@@ -27,7 +27,7 @@ function fetchApiData(url) {
 }
 
 function CurrentMonthData(req, res, next) {
-  let endpoint = apiRoot + apiEndpoint + '/monthly-2015-11-01?' + fields + pageSize + includes; 
+  let endpoint = apiRoot + apiEndpoint + `?filter[list-type]=monthly&` + fields + pageSize + includes; 
 
   axios.all([getHeaderData(), fetchApiData(endpoint)])
     .then(axios.spread((headerData, staffPicks) => {
@@ -39,7 +39,7 @@ function CurrentMonthData(req, res, next) {
         parsed = parser.parse(returnedData, options),
         HeaderParsed = parser.parse(headerData.data, headerOptions),
         // Since the endpoint returns a list of monthly picks
-        currentMonth = parsed,
+        currentMonth = parsed[0],
         modelData = HeaderModel.build(HeaderParsed),
         currentMonthPicks = PicksListModel.build(currentMonth);
 
