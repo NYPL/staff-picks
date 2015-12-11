@@ -6,4 +6,4 @@
 //Similary, we use Webpack Babel to transpile our ES6 codebase into ES5.
 require('babel/register');
 
-require('./reactroutes.js');
+require('./server.js');

@@ -1,0 +1,152 @@
+.Hero {
+  background-color: #e4382c;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-position: center;
+  color: white;
+  height: 72px;
+  padding: 0;
+  width: 100%;
+
+  @include breakpoint($min, 720px) {
+    height: 120px;
+  }
+
+  @include breakpoint($min, $post-laptop) {
+    height: 320px;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+  }
+
+  
+  &__container {
+    height: auto;
+    margin: 0; 
+    max-width: 900px;
+    overflow: hidden;
+    position: relative;
+    
+    @include breakpoint($min, 720px) { 
+      margin: 0 auto;
+    }
+  }
+
+  &__text {
+    // float: left;
+    // margin: 4px 0 0 22px; 
+    // position: relative;
+
+    // @include breakpoint($min, $post-palm) {
+    //   margin: 10px 40px 40px 70px;  
+    //   width: 40%;
+    // }
+
+    @include breakpoint($min, 720px) {
+      margin: 70px 40px 40px 70px;
+    }
+
+    @include breakpoint($min, $post-laptop) {
+      margin: 88px 8px 56px 106px;  
+      width: 45%;
+    }
+
+    &__HeroTitle {
+      // box-sizing: border-box;
+      // color: white;
+      // position: relative;
+      // width: 100%;
+
+      h3 {
+        @include Kievit-Bold;
+        font-size: 15px;
+        font-weight: normal;
+        letter-spacing: 0.09rem;
+        margin: 30px 0 0 57px;
+        text-transform: uppercase;
+
+        @include breakpoint($min, $post-palm) {
+          margin-left: 105px;
+        }
+
+        @include breakpoint($min, 720px) {
+          margin: 0 0 20px 0;
+        }
+
+        @include breakpoint($min, $post-laptop) {
+          margin: 0 0 27px 0;
+        }
+      }
+
+      &__des {
+        display: none;
+        font-size: 36px;
+        line-height: 36px;
+        margin: 0 0 5px 0;
+        text-align: left;
+
+        @include Milo-Regular;
+
+        @include breakpoint($min, 992px) {
+          display: block;
+          font-size: 20px; 
+          line-height: 24px;
+          margin: 0 0 20px 0;
+        }
+
+        @include breakpoint($min, $post-laptop) {
+          display: block;
+          font-size: 34px; 
+          line-height: 30px;
+          margin: 0 0 31px 0;
+        }
+      }
+
+      &__intro {
+        display: none;
+        font-family: 'KievitWeb-Book', sans-serif;
+        font-size: 16px;
+        line-height: 14px;
+        text-align: left;
+
+        @include breakpoint($min, 992px) {
+          display: block;
+        }
+
+         @include breakpoint($min, $post-laptop) {
+          font-size: 18px;
+          line-height: 25px;
+        }
+      }
+    }
+  }
+
+  &__image {
+    background-image: url('#{$staffPicksUrl}src/client/images/shelftalker.4.2.png');
+    background-position: -10px 20px;
+    background-size: 104%;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    display: none;
+    margin: -68px 0 -6px 0;
+    overflow: hidden;
+    position: relative;
+    display: none;
+
+    @include breakpoint($min, 720px) {
+      // display: inline-block;
+      height: 300px;
+      margin: -45px 0 -10px 0;
+      width: 300px;
+    }
+
+    @include breakpoint($min, $post-laptop) {
+      display: inline-block;
+      height: 380px;
+      margin: -60px 0 -10px 0;
+      width: 380px;
+      position: absolute;
+      left: 520px;
+      top: 0;
+    }
+  }
+}
