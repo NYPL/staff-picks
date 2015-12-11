@@ -98,12 +98,10 @@ Hero.defaultProps = {
 
 const styles= {
   childrens: {
-    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/desktop.childrens100.FIN.png")',
-    backgroundSize: '100%'
+    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/desktop.childrens100.FIN.png")'
   },
   ya: {
-    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/desktop.banner.YA.FIN.png")',
-    backgroundSize: '100%'
+    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/desktop.banner.YA.FIN.png")'
   },
   staffpicks: {}
 };
