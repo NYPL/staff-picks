@@ -97,17 +97,69 @@ let Navigation = Router.Navigation,
       }, 200);
     },
 
+    _getMetaData(selection) {
+      let type = 'staffpicks';
+
+      if (selection && selection.length) {
+        type = selection;
+      }
+
+      let heroData = {
+          staffpicks: {
+            type: 'staffpicks',
+            title: 'RECOMMENDATIONS',
+            description: 'Staff Picks',
+            intro: 'True stories, tales of courage, historical romances, ' +
+              'edge-of-your-seat thrillers... There is a huge world of books ' +
+              'out there. Our expert staff members pick out their favorites ' +
+              'to help you find your next one.',
+            image: '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png',
+            url: 'http://www.nypl.org/browse/recommendations/staff-picks/'
+          },
+          childrens: {
+            type: 'childrens',
+            title: 'RECOMMENDATIONS',
+            description: 'Children\'s Books',
+            intro: 'Explore our annual selection of 100 notable titles for reading and sharing.',
+            image: '/browse/recommendations/staff-picks/src/client/images/desktop.childrens100.FIN.png',
+            url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/childrens'
+          },
+          ya: {
+            type: 'ya',
+            title: 'RECOMMENDATIONS',
+            description: 'Best Books for Teens',
+            intro: 'Explore our annual selection of outstanding young adult titles.',
+            image: '/browse/recommendations/staff-picks/src/client/images/desktop.banner.YA.FIN.png',
+            url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/ya'
+          }
+        };
+
+      return heroData[type];
+    },
+
     render() {
       let book = this.state.book,
-        title = 'Staff Picks | The New York Public Library',
-        imageSrc = '/browse/recommendations/staff-picks/src/client/images/staff_pic_bg.jpg',
+        title = 'Recommendations | The New York Public Library',
+        imageSrc = '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png',
         description = 'True stories, tales of courage, historical romances, ' +
           'edge-of-your-seat thrillers... There is a huge world of books ' +
           'out there. Our expert staff members pick out their favorites ' +
           'to help you find your next one.',
         bookId,
+        metaType,
+        metaTagData,
         imageLink;
+
+      if (!this.state.annualType) {
+        metaType = 'staffpicks';
+      } else {
+        metaType = this.state.annualType.type;
+      }
+
+      metaTagData = this._getMetaData(metaType);
       
+      description = metaTagData.intro;
+
       if (book.item) {
         title = book.item.title;
         description = book.text;
@@ -122,7 +174,7 @@ let Navigation = Router.Navigation,
           {property: "og:title", content: title},
           {property: "og:image", content: imageLink},
           {property: "og:description", content: description},
-          {property: "og:url", content: `http://www.nypl.org/browse/recommendations/staff-picks/${bookId}`},
+          {property: "og:url", content: `${metaTagData.url}/${bookId}`},
           {name: "twitter:title", content: title},
           {name: "twitter:description", content: description},
           {name: "twitter:image", content: imageLink}
