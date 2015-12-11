@@ -1,6 +1,7 @@
 .Hero {
   background-color: #e4382c;
-  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
   background-position: center;
   color: white;
   height: 72px;
@@ -13,7 +14,8 @@
 
   @include breakpoint($min, $post-laptop) {
     height: 320px;
-    background-size: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
   }
 
   
