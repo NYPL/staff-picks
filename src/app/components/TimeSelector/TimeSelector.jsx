@@ -123,7 +123,7 @@ let Navigation = Router.Navigation,
       nextBtn = this._nextLink(currentMonthPicks.nextList);
 
       return (
-        <div className='month-picker' style={styles.timeSelector}>
+        <div className='TimeSelector' style={styles.timeSelector}>
           {previousBtn}
           <p style={styles.dateDisplay}>{pickMonth} {pickYear}</p>
           {nextBtn}

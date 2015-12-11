@@ -60,7 +60,8 @@ function CurrentMonthData(req, res, next) {
           headerData: modelData,
           subscribeFormVisible: false,
           myNyplVisible: false
-        }
+        },
+        endpoint: endpoint
       };
 
       next();
@@ -85,7 +86,8 @@ function CurrentMonthData(req, res, next) {
           headerData: [],
           subscribeFormVisible: false,
           myNyplVisible: false
-        }
+        },
+        endpoint: ''
       };
       next();
     }); // end Axios call
@@ -125,7 +127,8 @@ function AnnualCurrentData(type, req, res, next) {
           headerData: modelData,
           subscribeFormVisible: false,
           myNyplVisible: false
-        }
+        },
+        endpoint: endpoint
       };
 
       next();
@@ -150,7 +153,8 @@ function AnnualCurrentData(type, req, res, next) {
           headerData: [],
           subscribeFormVisible: false,
           myNyplVisible: false
-        }
+        },
+        endpoint: ''
       };
       next();
     }); // end Axios call
@@ -205,7 +209,8 @@ function SelectMonthData(req, res, next) {
           headerData: modelData,
           subscribeFormVisible: false,
           myNyplVisible: false
-        }
+        },
+        endpoint: endpoint
       };
       next();
     }))
@@ -229,7 +234,8 @@ function SelectMonthData(req, res, next) {
           headerData: [],
           subscribeFormVisible: false,
           myNyplVisible: false
-        }
+        },
+        endpoint: ''
       };
       next();
     }); /* end Axios call */
@@ -249,7 +255,8 @@ function AjaxData(req, res) {
 
       res.json({
         currentMonthPicks: currentMonthPicks,
-        filters: filters
+        filters: filters,
+        endpoint: endpoint
       });
     }); /* end axios call */
 }

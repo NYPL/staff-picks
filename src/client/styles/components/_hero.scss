@@ -2,6 +2,7 @@
   background-color: #e4382c;
   -webkit-background-size: cover;
   -moz-background-size: cover;
+  background-size: cover;
   background-position: center;
   color: white;
   height: 72px;
@@ -14,11 +15,8 @@
 
   @include breakpoint($min, $post-laptop) {
     height: 320px;
-    -webkit-background-size: 100%;
-    -moz-background-size: 100%;
   }
 
-  
   &__container {
     height: auto;
     margin: 0; 

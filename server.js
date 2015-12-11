@@ -77,7 +77,8 @@ app.use('/', (req, res) => {
       markup: iso.render(),
       footer: footer,
       gaCode: analytics.google.code(isProduction),
-      appEnv: process.env.APP_ENV || 'no APP_ENV'
+      appEnv: process.env.APP_ENV || 'no APP_ENV',
+      endpoint: res.locals.data.endpoint
     });
   }); /* end Router.run */
 });

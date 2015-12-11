@@ -1,7 +1,7 @@
 const config = {
   port: 3001,
   webpackDevServerPort: 3000,
-  apiRoot: 'https://dev-refinery.nypl.org',
+  apiRoot: 'https://refinery.nypl.org',
   apiEndpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists',
   fields: 'fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&' +
     'fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri',
