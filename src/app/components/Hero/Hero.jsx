@@ -53,7 +53,7 @@ class Hero extends React.Component {
           title: 'RECOMMENDATIONS',
           description: 'Best Books for Teens',
           intro: 'Explore our annual selection of outstanding young adult titles.',
-          image: '/browse/recommendations/staff-picks/src/client/images/desktop.banner.YA.FIN.png',
+          image: '/browse/recommendations/staff-picks/src/client/images/YA.OG.png',
           url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/ya'
         }
       };
