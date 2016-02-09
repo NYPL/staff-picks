@@ -12,6 +12,8 @@ import Iso from 'iso';
 import routes from '../app/routes/routes.jsx';
 import ga from 'react-ga';
 
+import FeatureFlags from 'dgx-feature-flags';
+
 import './styles/main.scss';
 
 window.onload = () => {
@@ -22,6 +24,10 @@ window.onload = () => {
       console.log('Analytics not available - loading through React.');
       let gaOpts = { debug: false };
       ga.initialize('UA-1420324-3', gaOpts);
+    }
+
+    if (!window.dgxFeatureFlags) {
+      window.dgxFeatureFlags = FeatureFlags.utils;
     }
 
     Router.run(routes.client, Router.HistoryLocation, (Root, state) => {
