@@ -174,7 +174,12 @@ function SelectAnnualData(req, res, next) {
 
 function SelectMonthData(req, res, next) {
   let month = req.params.monthOrAnnual,
+    id = req.params.idOrType,
     endpoint = apiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
+
+  if (month === 'browse' && id === 'recommendations') {
+    return next();
+  }
 
   if (month === 'annual') {
     return SelectAnnualData(req, res, next);
@@ -266,11 +271,6 @@ router
   .get(CurrentMonthData);
 
 router
-  .route('/:monthOrAnnual/:idOrType?/:year?/:id?')
-  .get(SelectMonthData);
-
-
-router
   .route('/api/ajax/picks/:month')
   .get(AjaxData);
 
@@ -286,5 +286,8 @@ router
   .route('/browse/recommendations/staff-picks/api/ajax/picks/:month')
   .get(AjaxData);
 
+router
+  .route('/:monthOrAnnual/:idOrType?/:year?/:id?')
+  .get(SelectMonthData);
 
 export default router;
