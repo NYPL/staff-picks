@@ -39,7 +39,7 @@ app.set('views', path.resolve(ROOT_PATH, 'src/server/views'));
 app.set('port', process.env.PORT || appConfig.port);
 
 // first assign the path
-app.use(express.static(DIST_PATH));
+app.use('*/dist', express.static(DIST_PATH));
 
 // Assign the path for static client files
 app.use('*/src/client', express.static(INDEX_PATH));
