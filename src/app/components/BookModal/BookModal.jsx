@@ -36,7 +36,7 @@ let Navigation = Router.Navigation,
         transitionRoute,
         age;
 
-      if (!books.length) {
+      if (!books && !books.length) {
         if (this.props.data['staff-picks']) {
           books = this.props.data['staff-picks'];
         }
