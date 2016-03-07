@@ -265,9 +265,9 @@ router
   .route('/')
   .get(CurrentMonthData);
 
-router
-  .route('/:monthOrAnnual/:idOrType?/:year?/:id?')
-  .get(SelectMonthData);
+// router
+//   .route('/:monthOrAnnual/:idOrType?/:year?/:id?')
+//   .get(SelectMonthData);
 
 
 router

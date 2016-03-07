@@ -39,7 +39,7 @@ app.set('views', path.resolve(ROOT_PATH, 'src/server/views'));
 app.set('port', process.env.PORT || appConfig.port);
 
 // first assign the path
-app.use('*/dist', express.static(DIST_PATH));
+app.use(express.static(DIST_PATH));
 
 // Assign the path for static client files
 app.use('*/src/client', express.static(INDEX_PATH));
@@ -99,7 +99,7 @@ let gracefulShutdown = function() {
   setTimeout(function() {
     console.error("Could not close connections in time, forcefully shutting down");
     process.exit()
-  }, 10*1000);
+  }, 1000);
 }
 // listen for TERM signal .e.g. kill 
 process.on('SIGTERM', gracefulShutdown);
