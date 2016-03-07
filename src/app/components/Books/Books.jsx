@@ -161,7 +161,7 @@ let Navigation = Router.Navigation,
       const openModal = this._openModal;
 
       let currentMonthPicks = this.state._currentMonthPicks,
-        picks = currentMonthPicks.picks,
+        picks = currentMonthPicks.picks || [],
         gridDisplay = this.state._bookDisplay === 'grid',
         books = picks.map((element, i) => {
           let tagList = this._getTags(element),
