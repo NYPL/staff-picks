@@ -62,7 +62,7 @@
     "iso": "4.2.0",
     "jest": "~0.1.40",
     "jest-cli": "0.4.13",
-    "jsonapi-parserinator": "0.4.6",
+    "jsonapi-parserinator": "0.4.7",
     "jsx-loader": "0.13.2",
     "moment": "2.10.6",
     "newrelic": "1.21.1",
