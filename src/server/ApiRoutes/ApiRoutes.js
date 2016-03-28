@@ -27,7 +27,7 @@ function fetchApiData(url) {
 }
 
 function CurrentMonthData(req, res, next) {
-  let endpoint = apiRoot + apiEndpoint + `?filter[list-type]=monthly&` + fields + pageSize + includes; 
+  let endpoint = api.root[appEnvironment] + apiEndpoint + `?filter[list-type]=monthly&` + fields + pageSize + includes; 
 
   axios.all([getHeaderData(), fetchApiData(endpoint)])
     .then(axios.spread((headerData, staffPicks) => {
