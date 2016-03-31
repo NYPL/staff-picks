@@ -44,7 +44,7 @@
     "css-loader": "0.14.4",
     "dgx-alt-center": "git+ssh://bitbucket.org/NYPL/dgx-alt-center.git#master",
     "dgx-feature-flags": "git+ssh://bitbucket.org/NYPL/dgx-feature-flags.git#master",
-    "dgx-header-component": "git+ssh://bitbucket.org/NYPL/dgx-header-component.git#master",
+    "dgx-header-component": "git+ssh://bitbucket.org/NYPL/dgx-header-component.git#reactv0.13",
     "dgx-react-ga": "git+ssh://bitbucket.org/NYPL/dgx-react-ga.git#master",
     "ejs": "2.3.2",
     "eslint": "0.24.0",
