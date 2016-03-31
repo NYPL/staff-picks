@@ -8,18 +8,18 @@ function monthOrSeason(month, year) {
   // data model that allows for arbitrary naming of lists.
   if (year >= 2016) {
     if (month >= 9) {
-      return "Fall";
+      return 'Fall';
     }
 
     if (month >= 6) {
-      return "Summer";
+      return 'Summer';
     }
 
     if (month >= 3) {
-      return "Spring";
+      return 'Spring';
     }
     
-    return "Winter";
+    return 'Winter';
   }
 
   return monthsArr[month];
@@ -38,7 +38,7 @@ function staffPicksDate(date) {
   return {
     month,
     year
-  }
+  };
 };
 
 export default staffPicksDate;
