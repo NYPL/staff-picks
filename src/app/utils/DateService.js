@@ -7,9 +7,19 @@ function monthOrSeason(month, year) {
   // etc.) This implementation should perhaps be replaced with a different
   // data model that allows for arbitrary naming of lists.
   if (year >= 2016) {
-    if (month >= 2) {
+    if (month >= 9) {
+      return "Fall";
+    }
+
+    if (month >= 6) {
+      return "Summer";
+    }
+
+    if (month >= 3) {
       return "Spring";
     }
+    
+    return "Winter";
   }
 
   return monthsArr[month];
