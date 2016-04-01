@@ -32,19 +32,18 @@ function CurrentMonthData(req, res, next) {
 
   axios.all([getHeaderData(), fetchApiData(endpoint)])
     .then(axios.spread((headerData, staffPicks) => {
-      let returnedData = staffPicks.data,
-        // Filters can be extracted without parsing since they are all in the
-        // included array:
-          filters = sortBy(parser.getOfType(returnedData.included, 'staff-pick-tag'), function (item) { return item.id }),
-        // parse the data
-        parsed = parser.parse(returnedData, options),
-        HeaderParsed = parser.parse(headerData.data, headerOptions),
+      let returnedData = staffPicks.data;
+      // Filters can be extracted without parsing since they are all in the
+      // included array:
+      let filters = sortBy(parser.getOfType(returnedData.included, 'staff-pick-tag'), function (item) { return item.id });
+      // parse the data
+      let parsed = parser.parse(returnedData, options);
+      let HeaderParsed = parser.parse(headerData.data, headerOptions);
         // Since the endpoint returns a list of monthly picks
-        currentMonth = parsed[0],
-        modelData = HeaderModel.build(HeaderParsed),
-        currentMonthPicks = PicksListModel.build(currentMonth);
+      let currentMonth = parsed[0];
+      let modelData = HeaderModel.build(HeaderParsed);
+      let currentMonthPicks = PicksListModel.build(currentMonth);
 
-      console.log(filters);
       res.locals.data = {
         BookStore: {
           _bookDisplay:  'grid',
