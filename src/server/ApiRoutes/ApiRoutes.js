@@ -37,7 +37,7 @@ function CurrentMonthData(req, res, next) {
       // included array:
       const filters = _sortBy(
 	parser.getOfType(returnedData.included, 'staff-pick-tag'),
-	function (item) { return item.id });
+	(item) => { return item.id });
       // parse the data
       const parsed = parser.parse(returnedData, options);
       const HeaderParsed = parser.parse(headerData.data, headerOptions);
@@ -106,7 +106,7 @@ function AnnualCurrentData(type, req, res, next) {
       // included array:
       const filters = _sortBy(
 	parser.getOfType(returnedData.included, 'staff-pick-tag'),
-	function (item) { return item.id });
+	(item) => { return item.id });
       // parse the data
       const parsed = parser.parse(returnedData, options);
       const HeaderParsed = parser.parse(headerData.data, headerOptions);
@@ -197,7 +197,7 @@ function SelectMonthData(req, res, next) {
       // included array:
       const filters = _sortBy(
 	parser.getOfType(returnedData.included, 'staff-pick-tag'),
-	function (item) { return item.id });
+	(item) => { return item.id });
       // parse the data
       const selectedMonth = parser.parse(returnedData, options);
       const HeaderParsed = parser.parse(headerData.data, headerOptions);
@@ -264,7 +264,7 @@ function AjaxData(req, res) {
       const selectedMonth = parser.parse(returnedData, options);
       const filters = _sortBy(
 	parser.getOfType(returnedData.included, 'staff-pick-tag'),
-	function (item) { return item.id });
+	(item) => { return item.id });
       const currentMonthPicks = PicksListModel.build(selectedMonth);
 
       res.json({
