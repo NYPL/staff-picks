@@ -4,7 +4,7 @@ import parser from 'jsonapi-parserinator';
 import {apiRoot, apiEndpoint, fields, pageSize, includes, api, headerApi} from '../../../appConfig.js';
 import HeaderModel from '../../app/utils/HeaderItemModel.js';
 import PicksListModel from '../../app/utils/PicksListModel.js';
-import {sortBy} from 'underscore';
+import {sortBy as _sortBy} from 'underscore';
 
 let router = express.Router(),
   appEnvironment = process.env.APP_ENV || 'production',
@@ -35,7 +35,7 @@ function CurrentMonthData(req, res, next) {
       const returnedData = staffPicks.data;
       // Filters can be extracted without parsing since they are all in the
       // included array:
-      const filters = sortBy(
+      const filters = _sortBy(
 	parser.getOfType(returnedData.included, 'staff-pick-tag'),
 	function (item) { return item.id });
       // parse the data
@@ -104,7 +104,7 @@ function AnnualCurrentData(type, req, res, next) {
       const returnedData = staffPicks.data;
       // Filters can be extracted without parsing since they are all in the
       // included array:
-      const filters = sortBy(
+      const filters = _sortBy(
 	parser.getOfType(returnedData.included, 'staff-pick-tag'),
 	function (item) { return item.id });
       // parse the data
@@ -195,7 +195,7 @@ function SelectMonthData(req, res, next) {
       const returnedData = staffPicks.data;
       // Filters can be extracted without parsing since they are all in the
       // included array:
-      const filters = sortBy(
+      const filters = _sortBy(
 	parser.getOfType(returnedData.included, 'staff-pick-tag'),
 	function (item) { return item.id });
       // parse the data
@@ -262,7 +262,7 @@ function AjaxData(req, res) {
     .then(data => {
       const returnedData = data.data;
       const selectedMonth = parser.parse(returnedData, options);
-      const filters = sortBy(
+      const filters = _sortBy(
 	parser.getOfType(returnedData.included, 'staff-pick-tag'),
 	function (item) { return item.id });
       const currentMonthPicks = PicksListModel.build(selectedMonth);
