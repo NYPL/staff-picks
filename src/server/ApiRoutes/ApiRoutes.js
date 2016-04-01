@@ -4,6 +4,7 @@ import parser from 'jsonapi-parserinator';
 import {apiRoot, apiEndpoint, fields, pageSize, includes, api, headerApi} from '../../../appConfig.js';
 import HeaderModel from '../../app/utils/HeaderItemModel.js';
 import PicksListModel from '../../app/utils/PicksListModel.js';
+import {sortBy} from 'underscore';
 
 let router = express.Router(),
   appEnvironment = process.env.APP_ENV || 'production',
@@ -34,7 +35,7 @@ function CurrentMonthData(req, res, next) {
       let returnedData = staffPicks.data,
         // Filters can be extracted without parsing since they are all in the
         // included array:
-        filters = parser.getOfType(returnedData.included, 'staff-pick-tag'),
+          filters = sortBy(parser.getOfType(returnedData.included, 'staff-pick-tag'), function (item) { return item.id }),
         // parse the data
         parsed = parser.parse(returnedData, options),
         HeaderParsed = parser.parse(headerData.data, headerOptions),
@@ -43,6 +44,7 @@ function CurrentMonthData(req, res, next) {
         modelData = HeaderModel.build(HeaderParsed),
         currentMonthPicks = PicksListModel.build(currentMonth);
 
+      console.log(filters);
       res.locals.data = {
         BookStore: {
           _bookDisplay:  'grid',
