@@ -19,7 +19,7 @@ let router = express.Router(),
   };
 
 function getHeaderData() {
-  let completeApiUrl = parser.getCompleteApi(headerOptions);
+  const completeApiUrl = parser.getCompleteApi(headerOptions);
   return fetchApiData(completeApiUrl);
 }
 
@@ -97,21 +97,23 @@ function CurrentMonthData(req, res, next) {
 }
 
 function AnnualCurrentData(type, req, res, next) {
-  let endpoint = apiRoot + apiEndpoint + `?filter[list-type]=${type}&` + fields + pageSize + includes; 
+  const endpoint = apiRoot + apiEndpoint + `?filter[list-type]=${type}&` + fields + pageSize + includes; 
 
   axios.all([getHeaderData(), fetchApiData(endpoint)])
     .then(axios.spread((headerData, staffPicks) => {
-      let returnedData = staffPicks.data,
-        // Filters can be extracted without parsing since they are all in the
-        // included array:
-        filters = parser.getOfType(returnedData.included, 'staff-pick-tag'),
-        // parse the data
-        parsed = parser.parse(returnedData, options),
-        HeaderParsed = parser.parse(headerData.data, headerOptions),
-        // Since the endpoint returns a list of monthly picks
-        currentMonth = parsed[0],
-        modelData = HeaderModel.build(HeaderParsed),
-        currentMonthPicks = PicksListModel.build(currentMonth);
+      const returnedData = staffPicks.data;
+      // Filters can be extracted without parsing since they are all in the
+      // included array:
+      const filters = sortBy(
+	parser.getOfType(returnedData.included, 'staff-pick-tag'),
+	function (item) { return item.id });
+      // parse the data
+      const parsed = parser.parse(returnedData, options);
+      const HeaderParsed = parser.parse(headerData.data, headerOptions);
+      // Since the endpoint returns a list of monthly picks
+      const currentMonth = parsed[0];
+      const modelData = HeaderModel.build(HeaderParsed);
+      const currentMonthPicks = PicksListModel.build(currentMonth);
 
       res.locals.data = {
         BookStore: {
@@ -176,7 +178,7 @@ function SelectAnnualData(req, res, next) {
 }
 
 function SelectMonthData(req, res, next) {
-  let month = req.params.monthOrAnnual,
+  const month = req.params.monthOrAnnual,
     id = req.params.idOrType,
     endpoint = apiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
 
