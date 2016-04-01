@@ -77,7 +77,7 @@ $staffPicksUrl: '/browse/recommendations/staff-picks/';
 
 @mixin nypl-font($font) {
   @if $font == 'Milo' {
-    font-family: MiloSlabPro, RobotoSlabLight, serif;
+    font-family: MiloSlabPro, serif;
   }
   @else if $font == 'KievitWeb-Bold' {
     font-family: $font, Helvetica, serif;
@@ -203,11 +203,10 @@ table {
 }
 
 body {
-  font-family: 'MiloWeb', 'Roboto Slab', sans-serif;
+  font-family: 'MiloWeb', sans-serif;
   background-color: #FFF;
   margin: 0;
   padding: 0;
-  // font-family: 'Roboto Slab', sans-serif;
 }
  
 
