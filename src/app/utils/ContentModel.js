@@ -31,7 +31,7 @@ function ContentModel() {
     content.uri = data.attributes.uri['full-uri'];
 
     if (data.type === 'blog') {
-      this.blog(content, data)
+      this.blog(content, data);
     }
 
     if (data.type === 'event-program' || data.type === 'event-exhibition') {
@@ -109,24 +109,24 @@ function ContentModel() {
       };
 
       switch (data.content.type) {
-        case 'blog':
-          item.author = {
-            fullName: data.content.authors[0].fullName,
-            title: data.content.authors[0].title
-          };
-          break;
-        case 'event-program':
-        case 'event-exhibition':
-          item.eventDates = {
-            start: data.content.dates.start,
-            end: data.content.dates.end
-          };
-          item.location = {
-            fullName: data.content.location ? data.content.location.fullName : ''
-          };
-          break;
-        default:
-          break;
+      case 'blog':
+        item.author = {
+          fullName: data.content.authors[0].fullName,
+          title: data.content.authors[0].title
+        };
+        break;
+      case 'event-program':
+      case 'event-exhibition':
+        item.eventDates = {
+          start: data.content.dates.start,
+          end: data.content.dates.end
+        };
+        item.location = {
+          fullName: data.content.location ? data.content.location.fullName : ''
+        };
+        break;
+      default:
+        break;
       }
     }
 
