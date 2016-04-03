@@ -76,7 +76,7 @@ class BookStore {
     return this._bookDisplay;
   }
   getActiveList() {
-    return this._listDisplay
+    return this._listDisplay;
   }
   getActiveGrid() {
     return this._gridDisplay;
