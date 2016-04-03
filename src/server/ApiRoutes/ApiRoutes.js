@@ -37,7 +37,7 @@ function CurrentMonthData(req, res, next) {
       // included array:
       const filters = _sortBy(
 	parser.getOfType(returnedData.included, 'staff-pick-tag'),
-	(item) => { return item.id });
+        (item) => { return item.id; });
       // parse the data
       const parsed = parser.parse(returnedData, options);
       const HeaderParsed = parser.parse(headerData.data, headerOptions);
@@ -106,7 +106,7 @@ function AnnualCurrentData(type, req, res, next) {
       // included array:
       const filters = _sortBy(
 	parser.getOfType(returnedData.included, 'staff-pick-tag'),
-	(item) => { return item.id });
+        (item) => { return item.id; });
       // parse the data
       const parsed = parser.parse(returnedData, options);
       const HeaderParsed = parser.parse(headerData.data, headerOptions);
@@ -167,7 +167,7 @@ function AnnualCurrentData(type, req, res, next) {
 
 function SelectAnnualData(req, res, next) {
   if (req.params.idOrType === 'childrens') {
-     return AnnualCurrentData('c100', req, res, next);
+    return AnnualCurrentData('c100', req, res, next);
   }
 
   if (req.params.idOrType === 'ya') {
@@ -197,7 +197,7 @@ function SelectMonthData(req, res, next) {
       // included array:
       const filters = _sortBy(
 	parser.getOfType(returnedData.included, 'staff-pick-tag'),
-	(item) => { return item.id });
+        (item) => { return item.id; });
       // parse the data
       const selectedMonth = parser.parse(returnedData, options);
       const HeaderParsed = parser.parse(headerData.data, headerOptions);
@@ -263,8 +263,8 @@ function AjaxData(req, res) {
       const returnedData = data.data;
       const selectedMonth = parser.parse(returnedData, options);
       const filters = _sortBy(
-	parser.getOfType(returnedData.included, 'staff-pick-tag'),
-	(item) => { return item.id });
+        parser.getOfType(returnedData.included, 'staff-pick-tag'),
+	(item) => { return item.id; });
       const currentMonthPicks = PicksListModel.build(selectedMonth);
 
       res.json({
