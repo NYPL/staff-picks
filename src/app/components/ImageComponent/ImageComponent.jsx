@@ -2,9 +2,9 @@ import React from 'react';
 import Radium from 'radium';
 
 class ImageComponent extends React.Component {
-	// Constructor used in ES6
-	constructor(props) {
-		super(props);
+  // Constructor used in ES6
+  constructor(props) {
+    super(props);
   }
 
   render() {
