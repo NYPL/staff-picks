@@ -1,6 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
-import { each as _each, extend as _extend, indexOf as _indexOf, _union as _union } from 'underscore';
+import { each as _each, extend as _extend, indexOf as _indexOf, union as _union } from 'underscore';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
