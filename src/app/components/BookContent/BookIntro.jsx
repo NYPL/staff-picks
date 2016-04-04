@@ -10,10 +10,10 @@ class TagList extends React.Component {
 
   render() {
     let tags = this.props.tags.map((tag, i) => {
-        return (
-          <li key={i}>{tag}</li>
-        );
-      });
+      return (
+        <li key={i}>{tag}</li>
+      );
+    });
 
     return (
       <div className={this.props.className} style={this.props.style}>
