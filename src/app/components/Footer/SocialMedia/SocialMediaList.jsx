@@ -2,11 +2,11 @@
 import React from 'react';
 import Radium from 'radium';
 
-import SocialMediaNode from './SocialMediaNode.jsx'
+import SocialMediaNode from './SocialMediaNode.jsx';
 
 class SocialMediaList extends React.Component {
   // Constructor used in ES6
-	constructor(props) {
+  constructor(props) {
     super(props);
   }
 
