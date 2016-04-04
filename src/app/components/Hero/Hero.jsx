@@ -29,34 +29,34 @@ class Hero extends React.Component {
     }
 
     let heroData = {
-        staffpicks: {
-          type: 'staffpicks',
-          title: 'RECOMMENDATIONS',
-          description: 'Staff Picks',
-          intro: 'True stories, tales of courage, historical romances, ' +
+      staffpicks: {
+        type: 'staffpicks',
+        title: 'RECOMMENDATIONS',
+        description: 'Staff Picks',
+        intro: 'True stories, tales of courage, historical romances, ' +
             'edge-of-your-seat thrillers... There is a huge world of books ' +
             'out there. Our expert staff members pick out their favorites ' +
             'to help you find your next one.',
-          image: '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png',
-          url: 'http://www.nypl.org/browse/recommendations/staff-picks/'
-        },
-        childrens: {
-          type: 'childrens',
-          title: 'RECOMMENDATIONS',
-          description: "Children's Books",
-          intro: 'Explore our annual selection of 100 notable titles for reading and sharing.',
-          image: '/browse/recommendations/staff-picks/src/client/images/c100.OG.png',
-          url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/childrens'
-        },
-        ya: {
-          type: 'ya',
-          title: 'RECOMMENDATIONS',
-          description: 'Best Books for Teens',
-          intro: 'Explore our annual selection of outstanding young adult titles.',
-          image: '/browse/recommendations/staff-picks/src/client/images/YA.OG.png',
-          url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/ya'
-        }
-      };
+        image: '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png',
+        url: 'http://www.nypl.org/browse/recommendations/staff-picks/'
+      },
+      childrens: {
+        type: 'childrens',
+        title: 'RECOMMENDATIONS',
+        description: 'Children\'s Books',
+        intro: 'Explore our annual selection of 100 notable titles for reading and sharing.',
+        image: '/browse/recommendations/staff-picks/src/client/images/c100.OG.png',
+        url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/childrens'
+      },
+      ya: {
+        type: 'ya',
+        title: 'RECOMMENDATIONS',
+        description: 'Best Books for Teens',
+        intro: 'Explore our annual selection of outstanding young adult titles.',
+        image: '/browse/recommendations/staff-picks/src/client/images/YA.OG.png',
+        url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/ya'
+      }
+    };
 
     return heroData[type];
   }
@@ -84,13 +84,13 @@ class Hero extends React.Component {
         : null,
       bannerStyle = styles[heroData.type],
       hompageTags = [
-        {property: "og:title", content: 'Recommendations | The New York Public Library'},
-        {property: "og:image", content: heroData.image},
-        {property: "og:description", content: `${heroData.description} | ${heroData.intro}`},
-        {property: "og:url", content: heroData.url},
-        {name: "twitter:title", content: 'Recommendations | The New York Public Library'},
-        {name: "twitter:description", content: `${heroData.description} | ${heroData.intro}`},
-        {name: "twitter:image", content: heroData.image}
+        {property: 'og:title', content: 'Recommendations | The New York Public Library'},
+        {property: 'og:image', content: heroData.image},
+        {property: 'og:description', content: `${heroData.description} | ${heroData.intro}`},
+        {property: 'og:url', content: heroData.url},
+        {name: 'twitter:title', content: 'Recommendations | The New York Public Library'},
+        {name: 'twitter:description', content: `${heroData.description} | ${heroData.intro}`},
+        {name: 'twitter:image', content: heroData.image}
       ],
       tags = utils.metaTagUnion(hompageTags);
 

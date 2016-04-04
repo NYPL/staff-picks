@@ -6,10 +6,10 @@ import gaUtils from './gaUtils.js';
 
 function Utils() {
   let unionFn = appTags => {
-      return newTags => {
-        return _.union(appTags, newTags);
-      };
+    return newTags => {
+      return _.union(appTags, newTags);
     };
+  };
 
   this.metaTagUnion = unionFn(appConfig.metaTags);
   
@@ -31,27 +31,27 @@ function Utils() {
 
         // String assignment based on type
         switch (type) {
-          case "current":
-            dateString = "Open now. Ends " + months[end.getUTCMonth()] +
-              " " + end.getUTCDate() + ", " + end.getUTCFullYear() + ".";
-            break;
-          case "current-ongoing":
-            dateString = "Open now. Ongoing.";
-            break;
-          case "upcoming":
-            dateString = "Opening soon. " + months[start.getUTCMonth()] +
-              " " + start.getUTCDate() + ", " + start.getUTCFullYear() +
-              " - " + months[end.getUTCMonth()] + " " + end.getUTCDate() +
-              ", " + end.getUTCFullYear() + ".";
-            break;
-          case "upcoming-ongoing":
-            dateString = "Opening soon. " + months[start.getUTCMonth()] +
-            " " + start.getUTCDate() + ", " + start.getUTCFullYear() + ".";
-            break;
-          default:
-            dateString = months[start.getUTCMonth()] + " " + start.getUTCDate() + 
-              ", " + start.getUTCFullYear() + " - " + months[end.getUTCMonth()] + 
-              " " + end.getUTCDate() + ", " + end.getUTCFullYear() + ".";
+        case 'current':
+          dateString = 'Open now. Ends ' + months[end.getUTCMonth()] +
+              ' ' + end.getUTCDate() + ', ' + end.getUTCFullYear() + '.';
+          break;
+        case 'current-ongoing':
+          dateString = 'Open now. Ongoing.';
+          break;
+        case 'upcoming':
+          dateString = 'Opening soon. ' + months[start.getUTCMonth()] +
+              ' ' + start.getUTCDate() + ', ' + start.getUTCFullYear() +
+              ' - ' + months[end.getUTCMonth()] + ' ' + end.getUTCDate() +
+              ', ' + end.getUTCFullYear() + '.';
+          break;
+        case 'upcoming-ongoing':
+          dateString = 'Opening soon. ' + months[start.getUTCMonth()] +
+            ' ' + start.getUTCDate() + ', ' + start.getUTCFullYear() + '.';
+          break;
+        default:
+          dateString = months[start.getUTCMonth()] + ' ' + start.getUTCDate() + 
+              ', ' + start.getUTCFullYear() + ' - ' + months[end.getUTCMonth()] + 
+              ' ' + end.getUTCDate() + ', ' + end.getUTCFullYear() + '.';
         }
         return dateString;
       };
