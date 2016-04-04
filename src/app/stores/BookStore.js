@@ -1,5 +1,5 @@
 import BookActions from '../actions/BookActions';
-import _ from 'underscore';
+import { indexOf as _indexOf } from 'underscore';
 import alt from 'dgx-alt-center';
 
 class BookStore {
@@ -46,7 +46,7 @@ class BookStore {
     this._age = age;
   }
   toggleBookFilter(filter) {
-    var found = _.indexOf(this._filters, filter);
+    var found = _indexOf(this._filters, filter);
 
     if (found != -1) {
       this._filters.splice(found, 1);
