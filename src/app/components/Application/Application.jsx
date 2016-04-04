@@ -24,13 +24,13 @@ class App extends React.Component {
         'out there. Our expert staff members pick out their favorites ' +
         'to help you find your next one.',
       hompageTags = [
-        {property: "og:title", content: 'Staff Picks | The New York Public Library'},
-        {property: "og:image", content: '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png'},
-        {property: "og:description", content: content},
-        {property: "og:url", content: 'http://www.nypl.org/browse/recommendations/staff-picks/'},
-        {name: "twitter:title", content: 'Staff Picks | The New York Public Library'},
-        {name: "twitter:description", content: content},
-        {name: "twitter:image", content: '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png'}
+        {property: 'og:title', content: 'Staff Picks | The New York Public Library'},
+        {property: 'og:image', content: '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png'},
+        {property: 'og:description', content: content},
+        {property: 'og:url', content: 'http://www.nypl.org/browse/recommendations/staff-picks/'},
+        {name: 'twitter:title', content: 'Staff Picks | The New York Public Library'},
+        {name: 'twitter:description', content: content},
+        {name: 'twitter:image', content: '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png'}
       ],
       tags = utils.metaTagUnion(hompageTags),
       about = null;
