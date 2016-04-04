@@ -255,7 +255,7 @@ function SelectMonthData(req, res, next) {
 
 function AjaxData(req, res) {
   let month = req.params.month,
-    endpoint = apiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
+    endpoint = headerApiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
 
   axios
     .get(endpoint)

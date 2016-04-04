@@ -23,7 +23,7 @@ function PicksListModel() {
     if (!data) {
       return picksList;
     }
-    
+
     picksList.id = data.id;
     picksList.type = data.type;
     picksList.date = data.attributes['list-date'];
