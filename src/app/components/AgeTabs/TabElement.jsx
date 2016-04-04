@@ -49,15 +49,15 @@ class TabElement extends React.Component {
       styles.TabElementActive : styles.TabElementInactive,
       activeLink = cx({'active': active});
 
-  	return (
-  		<li key={`tab-${this.props.name}`} id={this.props.name} 
+    return (
+      <li key={`tab-${this.props.name}`} id={this.props.name} 
         className='tab-container__ul__element' style={active}>
         <a className={`tab-container__ul__element__link ${activeLink}`}
-          onClick={this._handleClick.bind(this, this.props.value)}>
-          {this.props.name}
+        onClick={this._handleClick.bind(this, this.props.value)}>
+        {this.props.name}
         </a>
-  		</li>
-		);
+  	</li>
+    );
   }
 };
 
@@ -79,6 +79,6 @@ const styles = {
     borderTopStyle: 'none',
     borderWidth: '1px'
   }
-}
+};
 
 export default Radium(TabElement);
