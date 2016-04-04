@@ -1,7 +1,7 @@
 import React from 'react';
 import Router from 'react-router';
 
-import _ from 'underscore';
+import { isEmpty as _isEmpty } from 'underscore';
 
 import BookActions from '../../actions/BookActions.js';
 import staffPicksDate from '../../utils/DateService.js';
@@ -64,16 +64,16 @@ let Navigation = Router.Navigation,
     _getMonth(list) {
       let date = list ? list.date : {},
         month = {
-          active: !_.isEmpty(list),
+          active: !_isEmpty(list),
           date: date,
           month: () => {
-            if (_.isEmpty(list)) {
+            if (_isEmpty(list)) {
               return;
             }
             return staffPicksDate(date).month;
           },
           year: () => {
-            if (_.isEmpty(list)) {
+            if (_isEmpty(list)) {
               return;
             }
             return staffPicksDate(date).year;
