@@ -1,19 +1,19 @@
 import express from 'express';
 import axios from 'axios';
 import parser from 'jsonapi-parserinator';
-import {apiRoot, apiEndpoint, fields, pageSize, includes, api, headerApi} from '../../../appConfig.js';
+import { apiEndpoint, fields, pageSize, includes, api, headerApi } from '../../../appConfig.js';
 import HeaderModel from '../../app/utils/HeaderItemModel.js';
 import PicksListModel from '../../app/utils/PicksListModel.js';
 import {sortBy as _sortBy} from 'underscore';
 
 let router = express.Router(),
   appEnvironment = process.env.APP_ENV || 'production',
-  headerApiRoot = api.root[appEnvironment],
+  apiRoot = api.root[appEnvironment],
   options = {
     includes: ['previous-list', 'next-list', 'item.tags', 'picks.age']
   },
   headerOptions = {
-    endpoint: `${headerApiRoot}${headerApi.endpoint}`,
+    endpoint: `${apiRoot}${headerApi.endpoint}`,
     includes: headerApi.includes,
     filters: headerApi.filters
   };
@@ -28,7 +28,7 @@ function fetchApiData(url) {
 }
 
 function CurrentMonthData(req, res, next) {
-  const endpoint = api.root[appEnvironment] + apiEndpoint + `?filter[list-type]=monthly&` + fields + pageSize + includes; 
+  const endpoint = apiRoot + apiEndpoint + `?filter[list-type]=monthly&` + fields + pageSize + includes; 
 
   axios.all([getHeaderData(), fetchApiData(endpoint)])
     .then(axios.spread((headerData, staffPicks) => {
@@ -36,7 +36,7 @@ function CurrentMonthData(req, res, next) {
       // Filters can be extracted without parsing since they are all in the
       // included array:
       const filters = _sortBy(
-	parser.getOfType(returnedData.included, 'staff-pick-tag'),
+        parser.getOfType(returnedData.included, 'staff-pick-tag'),
         (item) => { return item.id; });
       // parse the data
       const parsed = parser.parse(returnedData, options);
@@ -105,7 +105,7 @@ function AnnualCurrentData(type, req, res, next) {
       // Filters can be extracted without parsing since they are all in the
       // included array:
       const filters = _sortBy(
-	parser.getOfType(returnedData.included, 'staff-pick-tag'),
+        parser.getOfType(returnedData.included, 'staff-pick-tag'),
         (item) => { return item.id; });
       // parse the data
       const parsed = parser.parse(returnedData, options);
@@ -196,7 +196,7 @@ function SelectMonthData(req, res, next) {
       // Filters can be extracted without parsing since they are all in the
       // included array:
       const filters = _sortBy(
-	parser.getOfType(returnedData.included, 'staff-pick-tag'),
+        parser.getOfType(returnedData.included, 'staff-pick-tag'),
         (item) => { return item.id; });
       // parse the data
       const selectedMonth = parser.parse(returnedData, options);
@@ -255,7 +255,7 @@ function SelectMonthData(req, res, next) {
 
 function AjaxData(req, res) {
   let month = req.params.month,
-    endpoint = headerApiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
+    endpoint = apiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
 
   axios
     .get(endpoint)
@@ -264,7 +264,7 @@ function AjaxData(req, res) {
       const selectedMonth = parser.parse(returnedData, options);
       const filters = _sortBy(
         parser.getOfType(returnedData.included, 'staff-pick-tag'),
-	(item) => { return item.id; });
+        (item) => { return item.id; });
       const currentMonthPicks = PicksListModel.build(selectedMonth);
 
       res.json({
