@@ -4,7 +4,7 @@ import Router from 'react-router';
 import Modal from 'react-modal';
 
 import DocMeta from 'react-doc-meta';
-import _ from 'underscore';
+import { each as _each } from 'underscore';
 
 import CloseButton from '../Buttons/CloseButton.jsx';
 import Book from '../Book/Book.jsx';
@@ -42,7 +42,7 @@ let Navigation = Router.Navigation,
         }
       }
 
-      _.each(books, (book) => {
+      _each(books, (book) => {
         if (book.item.id === paramID) {
           modalBook = book;
           age = book.age ? book.age.age : 'adult';
@@ -105,34 +105,34 @@ let Navigation = Router.Navigation,
       }
 
       let heroData = {
-          staffpicks: {
-            type: 'staffpicks',
-            title: 'RECOMMENDATIONS',
-            description: 'Staff Picks',
-            intro: 'True stories, tales of courage, historical romances, ' +
-              'edge-of-your-seat thrillers... There is a huge world of books ' +
-              'out there. Our expert staff members pick out their favorites ' +
-              'to help you find your next one.',
-            image: '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png',
-            url: 'http://www.nypl.org/browse/recommendations/staff-picks/'
-          },
-          childrens: {
-            type: 'childrens',
-            title: 'RECOMMENDATIONS',
-            description: 'Children\'s Books',
-            intro: 'Explore our annual selection of 100 notable titles for reading and sharing.',
-            image: '/browse/recommendations/staff-picks/src/client/images/desktop.childrens100.FIN.png',
-            url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/childrens'
-          },
-          ya: {
-            type: 'ya',
-            title: 'RECOMMENDATIONS',
-            description: 'Best Books for Teens',
-            intro: 'Explore our annual selection of outstanding young adult titles.',
-            image: '/browse/recommendations/staff-picks/src/client/images/desktop.banner.YA.FIN.png',
-            url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/ya'
-          }
-        };
+        staffpicks: {
+          type: 'staffpicks',
+          title: 'RECOMMENDATIONS',
+          description: 'Staff Picks',
+          intro: 'True stories, tales of courage, historical romances, ' +
+            'edge-of-your-seat thrillers... There is a huge world of books ' +
+            'out there. Our expert staff members pick out their favorites ' +
+            'to help you find your next one.',
+          image: '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png',
+          url: 'http://www.nypl.org/browse/recommendations/staff-picks/'
+        },
+        childrens: {
+          type: 'childrens',
+          title: 'RECOMMENDATIONS',
+          description: 'Children\'s Books',
+          intro: 'Explore our annual selection of 100 notable titles for reading and sharing.',
+          image: '/browse/recommendations/staff-picks/src/client/images/desktop.childrens100.FIN.png',
+          url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/childrens'
+        },
+        ya: {
+          type: 'ya',
+          title: 'RECOMMENDATIONS',
+          description: 'Best Books for Teens',
+          intro: 'Explore our annual selection of outstanding young adult titles.',
+          image: '/browse/recommendations/staff-picks/src/client/images/desktop.banner.YA.FIN.png',
+          url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/ya'
+        }
+      };
 
       return heroData[type];
     },
@@ -171,13 +171,13 @@ let Navigation = Router.Navigation,
         `&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
 
       let modalTags = [
-          {property: "og:title", content: title},
-          {property: "og:image", content: imageLink},
-          {property: "og:description", content: description},
-          {property: "og:url", content: `${metaTagData.url}/${bookId}`},
-          {name: "twitter:title", content: title},
-          {name: "twitter:description", content: description},
-          {name: "twitter:image", content: imageLink}
+        {property: 'og:title', content: title},
+        {property: 'og:image', content: imageLink},
+        {property: 'og:description', content: description},
+        {property: 'og:url', content: `${metaTagData.url}/${bookId}`},
+        {name: 'twitter:title', content: title},
+        {name: 'twitter:description', content: description},
+        {name: 'twitter:image', content: imageLink}
         ],
         tags = utils.metaTagUnion(modalTags);
 
@@ -215,7 +215,7 @@ let Navigation = Router.Navigation,
 BookModal.defaultProps = {
   className: 'BookModal',
   id: 'BookModal'
-}
+};
 
 const styles={
   BookCover: {

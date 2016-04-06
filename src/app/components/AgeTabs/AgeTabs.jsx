@@ -15,14 +15,14 @@ class AgeTabs extends React.Component {
   render() {
     // Render each TabElement
     let TabElements = data.map(element => {
-        return (
-          <TabElement
-            key={element.name}
-            id={element.name}
-            name={element.name}
-            value={element.value} />
-        );
-      });
+      return (
+        <TabElement
+          key={element.name}
+          id={element.name}
+          name={element.name}
+          value={element.value} />
+      );
+    });
 
     if (this.props.params && !this.props.params.type) {
       return (
@@ -36,7 +36,7 @@ class AgeTabs extends React.Component {
       );
     }
 
-  	return null;
+    return null;
   }
 };
 

@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { map as _map } from 'underscore';
 
 function ContentModel() {  
   // Function to get image object.
@@ -31,7 +31,7 @@ function ContentModel() {
     content.uri = data.attributes.uri['full-uri'];
 
     if (data.type === 'blog') {
-      this.blog(content, data)
+      this.blog(content, data);
     }
 
     if (data.type === 'event-program' || data.type === 'event-exhibition') {
@@ -45,7 +45,7 @@ function ContentModel() {
     content.title = data.attributes.title;
     content.body = data.attributes.body;
 
-    content.authors = _.map(data.authors, this.authors);
+    content.authors = _map(data.authors, this.authors);
   };
 
   this.authors = data => {
@@ -109,24 +109,24 @@ function ContentModel() {
       };
 
       switch (data.content.type) {
-        case 'blog':
-          item.author = {
-            fullName: data.content.authors[0].fullName,
-            title: data.content.authors[0].title
-          };
-          break;
-        case 'event-program':
-        case 'event-exhibition':
-          item.eventDates = {
-            start: data.content.dates.start,
-            end: data.content.dates.end
-          };
-          item.location = {
-            fullName: data.content.location ? data.content.location.fullName : ''
-          };
-          break;
-        default:
-          break;
+      case 'blog':
+        item.author = {
+          fullName: data.content.authors[0].fullName,
+          title: data.content.authors[0].title
+        };
+        break;
+      case 'event-program':
+      case 'event-exhibition':
+        item.eventDates = {
+          start: data.content.dates.start,
+          end: data.content.dates.end
+        };
+        item.location = {
+          fullName: data.content.location ? data.content.location.fullName : ''
+        };
+        break;
+      default:
+        break;
       }
     }
 
