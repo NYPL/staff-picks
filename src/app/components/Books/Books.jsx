@@ -97,17 +97,12 @@ let Navigation = Router.Navigation,
         _this.state.iso.arrange({
           filter: selector
         });
-      }, 700);
+      }, 600);
 
       if (storeState._isotopesDidUpdate) {
         setTimeout(() => {
           this.state.iso.reloadItems();
-        }, 500);
-        setTimeout(() => {
-          _this.state.iso.arrange({
-            filter: selector
-          });
-        }, 1000);
+        }, 400);
       }
 
       this.state.iso.on('arrangeComplete', filteredItems => {

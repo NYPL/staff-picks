@@ -22,6 +22,7 @@ class BookFilters extends React.Component {
   }
 
   componentDidMount() {
+    BookActions.updateFilterAge('adult');
     BookStore.listen(this._onChange);
   }
 
@@ -92,8 +93,6 @@ class BookFilters extends React.Component {
       drivenByFilters,
       themeFilters
     }, BookStore.getState());
-
-    BookActions.updateFilterAge('adult');
   }
 
   _filterItems (list) {
