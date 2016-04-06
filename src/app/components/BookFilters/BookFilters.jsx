@@ -92,6 +92,8 @@ class BookFilters extends React.Component {
       drivenByFilters,
       themeFilters
     }, BookStore.getState());
+
+    BookActions.updateFilterAge('adult');
   }
 
   _filterItems (list) {
