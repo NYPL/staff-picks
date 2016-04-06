@@ -1,5 +1,5 @@
 import moment from 'moment';
-import _ from 'underscore';
+import { union as _union } from 'underscore';
 
 import appConfig from '../../../appConfig.js';
 import gaUtils from './gaUtils.js';
@@ -7,7 +7,7 @@ import gaUtils from './gaUtils.js';
 function Utils() {
   let unionFn = appTags => {
     return newTags => {
-      return _.union(appTags, newTags);
+      return _union(appTags, newTags);
     };
   };
 

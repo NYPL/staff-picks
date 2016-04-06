@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { map as _map } from 'underscore';
 
 function ContentModel() {  
   // Function to get image object.
@@ -45,7 +45,7 @@ function ContentModel() {
     content.title = data.attributes.title;
     content.body = data.attributes.body;
 
-    content.authors = _.map(data.authors, this.authors);
+    content.authors = _map(data.authors, this.authors);
   };
 
   this.authors = data => {

@@ -2,7 +2,7 @@ import React from 'react';
 import Router from 'react-router';
 import Radium from 'radium';
 
-import _ from 'underscore';
+import { extend as _extend, map as _map} from 'underscore';
 
 import Book from '../Book/Book.jsx';
 import TimeSelector from '../TimeSelector/TimeSelector.jsx';
@@ -28,7 +28,7 @@ let Navigation = Router.Navigation,
         pickType = 'annual';
       }
 
-      return _.extend({
+      return _extend({
         pickType: pickType,
         iso: null,
         book: {},
@@ -118,7 +118,7 @@ let Navigation = Router.Navigation,
         }
       });
 
-      this.setState(_.extend({
+      this.setState(_extend({
         noResults: false,
       }, BookStore.getState()));
     },
@@ -166,7 +166,7 @@ let Navigation = Router.Navigation,
         books = picks.map((element, i) => {
           let tagList = this._getTags(element),
             age = this._getAge(element),
-            tagIDs = _.map(tagList, tag => {
+            tagIDs = _map(tagList, tag => {
               return tag.id;
             }),
             tagClasses = tagIDs.join(' '),

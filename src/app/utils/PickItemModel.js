@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { isArray as _isArray, isEmpty as _isEmpty, isObject as _isObject, map as _map }  from 'underscore';
 
 function PickItemModel() {
   this.build = data => {
@@ -6,9 +6,9 @@ function PickItemModel() {
       return;
     }
 
-    if (_.isArray(data) && data.length > 0) {
-      return _.map(data, this.pickItem);
-    } else if (_.isObject(data) && !_.isEmpty(data)) {
+    if (_isArray(data) && data.length > 0) {
+      return _map(data, this.pickItem);
+    } else if (_isObject(data) && !_isEmpty(data)) {
       return this.pickItem(data);
     } else {
       return;
@@ -45,7 +45,7 @@ function PickItemModel() {
       return tags;
     }
 
-    tags = _.map(data, this.tag);
+    tags = _map(data, this.tag);
 
     return tags;
   };

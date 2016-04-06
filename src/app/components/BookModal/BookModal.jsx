@@ -4,7 +4,7 @@ import Router from 'react-router';
 import Modal from 'react-modal';
 
 import DocMeta from 'react-doc-meta';
-import _ from 'underscore';
+import { each as _each } from 'underscore';
 
 import CloseButton from '../Buttons/CloseButton.jsx';
 import Book from '../Book/Book.jsx';
@@ -42,7 +42,7 @@ let Navigation = Router.Navigation,
         }
       }
 
-      _.each(books, (book) => {
+      _each(books, (book) => {
         if (book.item.id === paramID) {
           modalBook = book;
           age = book.age ? book.age.age : 'adult';
