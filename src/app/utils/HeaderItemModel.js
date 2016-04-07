@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { isArray as _isArray, isEmpty as _isEmpty, isObject as _isObject, map as _map } from 'underscore';
 import ContentModel from './ContentModel.js';
 
 function Model() {
@@ -9,9 +9,9 @@ function Model() {
       return;
     }
 
-    if (_.isArray(data) && data.length > 0) {
-      return _.map(data, this.headerItemModel);
-    } else if (_.isObject(data) && !_.isEmpty(data)) {
+    if (_isArray(data) && data.length > 0) {
+      return _map(data, this.headerItemModel);
+    } else if (_isObject(data) && !_isEmpty(data)) {
       return this.headerItemModel(data);
     } else {
       return;
@@ -45,11 +45,11 @@ function Model() {
 
   // Map a data set to a function.
   this.mapArrayData = (data, fn) => {
-    if (!data || !_.isArray(data)) {
+    if (!data || !_isArray(data)) {
       return;
     }
 
-    return _.map(data, fn);
+    return _map(data, fn);
   };
 
   // Create the featured slot in the mega menu
@@ -90,7 +90,7 @@ function Model() {
     };
 
     if (data.images) {
-      featuredItem.images = _.map(data.images, ContentModel.image);
+      featuredItem.images = _map(data.images, ContentModel.image);
     }
 
     if (data['related-content']) {

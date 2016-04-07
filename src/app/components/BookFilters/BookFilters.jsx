@@ -1,6 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
-import _ from 'underscore';
+import { each as _each, extend as _extend, indexOf as _indexOf, union as _union } from 'underscore';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
@@ -22,6 +22,7 @@ class BookFilters extends React.Component {
   }
 
   componentDidMount() {
+    BookActions.updateFilterAge('adult');
     BookStore.listen(this._onChange);
   }
 
@@ -75,7 +76,7 @@ class BookFilters extends React.Component {
       themeFilters = [],
       drivenByFilters = [];
 
-    _.each(filterList, filter => {
+    _each(filterList, filter => {
       filter.active = false;
       filter.show = true;
       filter.remove = true;
@@ -88,7 +89,7 @@ class BookFilters extends React.Component {
       }
     });
 
-    this.state = _.extend({
+    this.state = _extend({
       drivenByFilters,
       themeFilters
     }, BookStore.getState());
@@ -135,7 +136,7 @@ class BookFilters extends React.Component {
       params = this.props.params;
 
     let updatedBooksElems = [];
-    _.each(bookElems, elem => {
+    _each(bookElems, elem => {
       if (elem.className.indexOf(age) !== -1) {
         updatedBooksElems.push(elem);
       }
@@ -149,21 +150,21 @@ class BookFilters extends React.Component {
     // Update/reset the filters based on a new age
     if (this.state._age !== age || storeState._isotopesDidUpdate) {
       this.setState({_age: age});
-      _.each(this.state.drivenByFilters, filter => {
+      _each(this.state.drivenByFilters, filter => {
         filter.active = false;
         filter.show = true;
         filter.remove = false;
-        _.each(updatedBooksElems, elem => {
+        _each(updatedBooksElems, elem => {
           if (elem.className.indexOf(filter.id) !== -1) {
             filter.remove = true;
           }
         });
       });
-      _.each(this.state.themeFilters, filter => {
+      _each(this.state.themeFilters, filter => {
         filter.active = false;
         filter.show = true;
         filter.remove = false;
-        _.each(updatedBooksElems, elem => {
+        _each(updatedBooksElems, elem => {
           if (elem.className.indexOf(filter.id) !== -1) {
             filter.remove = true;
           }
@@ -173,23 +174,23 @@ class BookFilters extends React.Component {
 
     // For clearing the filters and unselecting a filter.
     if (!storeState._filters.length) {
-      _.each(this.state.drivenByFilters, filter => {
+      _each(this.state.drivenByFilters, filter => {
         filter.active = false;
         filter.show = true;
       });
-      _.each(this.state.themeFilters, filter => {
+      _each(this.state.themeFilters, filter => {
         filter.active = false;
         filter.show = true;
       });
     } else {
-      _.each(bookElems, elem => {
+      _each(bookElems, elem => {
         let n = storeState._filters.length,
           filters,
           classes = elem.className;
 
         if (classes.indexOf(age) !== -1 || 
             (params && params.type && (params.type === 'childrens' || params.type === 'ya'))) {
-          _.each(storeState._filters, filter => {
+          _each(storeState._filters, filter => {
             if (classes.indexOf(filter) !== -1) {
               n -= 1;
             }
@@ -197,28 +198,28 @@ class BookFilters extends React.Component {
 
           if (n === 0) {
             filters = classes.split(' ');
-            filteredFilters = _.union(filteredFilters, filters);
+            filteredFilters = _union(filteredFilters, filters);
           }
         }
       });
 
       if (filteredFilters) {
-        _.each(this.state.themeFilters, filter => {
+        _each(this.state.themeFilters, filter => {
           filter.show = true;
-          if (_.indexOf(filteredFilters, filter.id) === -1) {
+          if (_indexOf(filteredFilters, filter.id) === -1) {
             filter.show = false;
           }
         });
-        _.each(this.state.drivenByFilters, filter => {
+        _each(this.state.drivenByFilters, filter => {
           filter.show = true;
-          if (_.indexOf(filteredFilters, filter.id) === -1) {
+          if (_indexOf(filteredFilters, filter.id) === -1) {
             filter.show = false;
           }
         });
       }
     }
 
-    this.setState(_.extend({
+    this.setState(_extend({
       filters: activeFilters
     }, BookStore.getState()));
   }

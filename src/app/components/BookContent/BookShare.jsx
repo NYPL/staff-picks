@@ -31,7 +31,7 @@ class BookShare extends React.Component {
       tumblr: `https://www.tumblr.com/widgets/share/tool?posttype=link&canonicalUrl=${shareUrl}` +
         `&title=NYPL%20%7C%20Staff%20Picks&caption=Every+month%2C+NYPL%27s+book+experts+share` +
         `+100+titles+they+love.&show-via=${via}`
-    }
+    };
   }
 
   render() {
@@ -58,44 +58,44 @@ class BookShare extends React.Component {
 };
 
 const styles={
-	social: {
+  social: {
     display: 'inline-block',
-	  margin: '-12px 0 0 -5px',
-	  position: 'relative',
-	  height: '61px',
-	  width: '60px',
-	  ':hover': {
+    margin: '-12px 0 0 -5px',
+    position: 'relative',
+    height: '61px',
+    width: '60px',
+    ':hover': {
       cursor: 'pointer',
       zIndex: '99'
-	  },
-	  '@media (max-width: 414px)': {
-			margin: '0 0 0 -5px',
-	  },
-	},
-	facebook: {
-	  backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/social/social.fb.init.png")',
-	  ':hover': {
+    },
+    '@media (max-width: 414px)': {
+      margin: '0 0 0 -5px',
+    },
+  },
+  facebook: {
+    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/social/social.fb.init.png")',
+    ':hover': {
       backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/social/social.fb.activeInit.png")'
-	  }
-	},
-	twitter: {
-	  backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/social/social.twtr.init.png")',
-	  ':hover': {
+    }
+  },
+  twitter: {
+    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/social/social.twtr.init.png")',
+    ':hover': {
       backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/social/social.twtr.hover.png")'
-	  }
-	},
-	shareLink :{
-		color: 'transparent',
-		display: 'inline-block',
-		height: '61px',
-	  width: '60px',
-	},
-	tumblr: {
-	  backgroundImage: 'url("src/client/images/social/social.tmblr.init.png")',
-	  ':hover': {
+    }
+  },
+  shareLink :{
+    color: 'transparent',
+    display: 'inline-block',
+    height: '61px',
+    width: '60px',
+  },
+  tumblr: {
+    backgroundImage: 'url("src/client/images/social/social.tmblr.init.png")',
+    ':hover': {
       backgroundImage: 'url("src/client/images/social/social.tmblr.hover.png")'
-	  }
-	}
+    }
+  }
 };
 
 export default Radium(BookShare);

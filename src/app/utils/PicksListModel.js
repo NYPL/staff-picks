@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { isArray as _isArray, isEmpty as _isEmpty, isObject as _isObject, map as _map }  from 'underscore';
 import PicksModel from './PicksModel.js';
 
 function PicksListModel() {
@@ -7,9 +7,9 @@ function PicksListModel() {
       return;
     }
 
-    if (_.isArray(data) && data.length > 0) {
-      return _.map(data, this.picksListModel);
-    } else if (_.isObject(data) && !_.isEmpty(data)) {
+    if (_isArray(data) && data.length > 0) {
+      return _map(data, this.picksListModel);
+    } else if (_isObject(data) && !_isEmpty(data)) {
       return this.picksListModel(data);
     } else {
       return;
@@ -23,7 +23,7 @@ function PicksListModel() {
     if (!data) {
       return picksList;
     }
-    
+
     picksList.id = data.id;
     picksList.type = data.type;
     picksList.date = data.attributes['list-date'];

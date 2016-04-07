@@ -1,7 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 
-import _ from 'underscore';
+import { pluck as _pluck, flatten as _flatten } from 'underscore';
 
 class TagList extends React.Component {
   constructor(props) {
@@ -10,10 +10,10 @@ class TagList extends React.Component {
 
   render() {
     let tags = this.props.tags.map((tag, i) => {
-        return (
-          <li key={i}>{tag}</li>
-        );
-      });
+      return (
+        <li key={i}>{tag}</li>
+      );
+    });
 
     return (
       <div className={this.props.className} style={this.props.style}>
@@ -33,10 +33,7 @@ class BookIntro extends React.Component {
   }
 
   _getTags(tags) {
-    return _.chain(tags)
-      .pluck('tag')
-      .flatten()
-      .value();
+    return _flatten(_pluck(tags, 'tag'));
   }
 
   render() {

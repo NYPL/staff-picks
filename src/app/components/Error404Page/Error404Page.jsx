@@ -2,7 +2,7 @@ import React from 'react';
 import Radium from 'radium';
 
 class Error404Page extends React.Component {
-	// Constructor used in ES6
+  // Constructor used in ES6
   constructor(props) {
     super(props);
     this.state = { 
@@ -10,7 +10,7 @@ class Error404Page extends React.Component {
   }
 
   render () {
-  	return (
+    return (
       <div className='error-container' style={styles.ErrorContainer}>
         <h1 style={styles.ErrorTitle}>We&#39;re sorry...</h1>
         <p style={styles.ErrorContent}>
@@ -21,7 +21,7 @@ class Error404Page extends React.Component {
           <a href='http://www.nypl.org/ask-nypl' style={styles.ErrorContentLink}>ASK NYPL</a> service.
         </p>
       </div>
-		);
+    );
   }
 }
 

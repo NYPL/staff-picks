@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { isArray as _isArray, isEmpty as _isEmpty, isObject as _isObject, map as _map }  from 'underscore';
 import PickItem from './PickItemModel.js';
 
 function PicksModel() {
@@ -7,9 +7,9 @@ function PicksModel() {
       return;
     }
 
-    if (_.isArray(data) && data.length > 0) {
-      return _.map(data, this.picksModel);
-    } else if (_.isObject(data) && !_.isEmpty(data)) {
+    if (_isArray(data) && data.length > 0) {
+      return _map(data, this.picksModel);
+    } else if (_isObject(data) && !_isEmpty(data)) {
       return this.pickModel(data);
     } else {
       return;
