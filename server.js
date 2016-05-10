@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs';
 import express from 'express';
 import compress from 'compression';
 import analytics from './analytics.js';
@@ -26,9 +27,11 @@ const ROOT_PATH = __dirname;
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
 const INDEX_PATH = path.resolve(ROOT_PATH, 'src/client');
 const WEBPACK_DEV_PORT = appConfig.webpackDevServerPort || 3000;
-
-let app = express(),
-  isProduction = process.env.NODE_ENV === 'production';
+const app = express();
+const isProduction = process.env.NODE_ENV === 'production';
+// Assign versioned build assets only on production environment
+const buildAssets = (isProduction) ?
+  JSON.parse(fs.readFileSync(path.join(DIST_PATH, 'assets.json'))) : '';
 
 app.use(compress());
 app.disable('x-powered-by');
@@ -78,6 +81,7 @@ app.use('/', (req, res) => {
       footer: footer,
       gaCode: analytics.google.code(isProduction),
       appEnv: process.env.APP_ENV || 'no APP_ENV',
+      assets: buildAssets,
       endpoint: res.locals.data.endpoint
     });
   }); /* end Router.run */
@@ -94,14 +98,14 @@ let gracefulShutdown = function() {
   server.close(function() {
     console.log("Closed out remaining connections.");
     process.exit()
-  }); 
-  // if after 
+  });
+  // if after
   setTimeout(function() {
     console.error("Could not close connections in time, forcefully shutting down");
     process.exit()
   }, 1000);
 }
-// listen for TERM signal .e.g. kill 
+// listen for TERM signal .e.g. kill
 process.on('SIGTERM', gracefulShutdown);
 // listen for INT signal e.g. Ctrl-C
 process.on('SIGINT', gracefulShutdown);
