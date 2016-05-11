@@ -10,7 +10,7 @@
   <link rel="shortcut icon" type="image/ico" href="//d2znry4lg8s0tq.cloudfront.net/images/favicon.ico">
 
 <% if (isProduction) { %>
-  <!-- Minified Styles -->  
+  <!-- Minified Styles -->
   <link rel="stylesheet" type="text/css" href='dist/styles.css' />
 <% } %>
 
@@ -38,7 +38,7 @@
       js.id = id;
       js.src = "https://platform.twitter.com/widgets.js";
       fjs.parentNode.insertBefore(js, fjs);
-     
+
       t._e = [];
       t.ready = function(f) {
         t._e.push(f);
@@ -63,7 +63,7 @@
   <script id="tumblr-js" async src="https://assets.tumblr.com/share-button.js"></script>
 
 <% if (isProduction) { %>
-  <script async src="dist/bundle.js"></script>
+  <script async src="dist/<%= assets.main.js %>"></script>
 <% } else { %>
   <script src="http://localhost:3000/bundle.js"></script>
 <% } %>
