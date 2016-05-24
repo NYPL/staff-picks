@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var merge = require('webpack-merge');
 var cleanBuild = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var SaveAssetsJson = require('assets-webpack-plugin');
 var pkg = require('./package.json');
 
 // References the applications root path
@@ -25,10 +26,7 @@ var commonSettings = {
   },
   output: {
     // Sets the output path to ROOT_PATH/dist
-    path: path.resolve(ROOT_PATH, 'dist'),
-    // Sets the name of the bundled application files
-    // Additionally we can isolate vendor files as well
-    filename: 'bundle.js'
+    path: path.resolve(ROOT_PATH, 'dist')
   },
   plugins: [
     // Cleans the Dist folder after every build.
@@ -46,7 +44,7 @@ var commonSettings = {
  * the common app configuration with the
  * additional development specific settings.
  *
-**/
+ **/
 // Need to configure webpack-dev-server and hot-reload
 // module correctly.
 if (ENV === 'development') {
@@ -61,6 +59,7 @@ if (ENV === 'development') {
       // path: path.join(process.cwd(), '/client'),
       // pathInfo: true,
       publicPath: 'http://localhost:3000/',
+      filename: 'bundle.js'
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
@@ -70,18 +69,15 @@ if (ENV === 'development') {
       extensions: ['', '.js', '.jsx', '.scss']
     },
     module: {
-      loaders: [
-        {
-          test: /\.jsx?$/,
-          exclude: /(node_modules|bower_components)/,
-          loaders: ['react-hot', 'babel']
-        },
-        {
-          test: /\.scss?$/,
-          loader: 'style!css!sass',
-          include: path.resolve(ROOT_PATH, 'src/client')
-        }
-      ]
+      loaders: [{
+        test: /\.jsx?$/,
+        exclude: /(node_modules|bower_components)/,
+        loaders: ['react-hot', 'babel']
+      }, {
+        test: /\.scss?$/,
+        loader: 'style!css!sass',
+        include: path.resolve(ROOT_PATH, 'src/client')
+      }]
     }
   });
 }
@@ -93,34 +89,41 @@ if (ENV === 'development') {
  * the common app configuration with the
  * additional production specific settings.
  *
-**/
+ **/
 if (ENV === 'production') {
   module.exports = merge(commonSettings, {
     devtool: 'source-map',
+    output: {
+      filename: 'bundle.[hash].js',
+    },
     module: {
-      loaders: [
-        {
-          test: /\.jsx?$/,
-          exclude: /(node_modules|bower_components)/,
-          loaders: ['babel']
-        },
-        {
-          test: /\.scss$/,
-          include: path.resolve(ROOT_PATH, 'src/client'),
-          loader: ExtractTextPlugin.extract(
-            // activate source maps via loader query
-            'css?sourceMap!' +
-            'sass?sourceMap'
-          )
-        }
-      ]
+      loaders: [{
+        test: /\.jsx?$/,
+        exclude: /(node_modules|bower_components)/,
+        loaders: ['babel']
+      }, {
+        test: /\.scss$/,
+        include: path.resolve(ROOT_PATH, 'src/client'),
+        loader: ExtractTextPlugin.extract(
+          // activate source maps via loader query
+          'css?sourceMap!' +
+          'sass?sourceMap'
+        )
+      }]
     },
     plugins: [
       // Minification (Utilized in Production)
       new webpack.optimize.UglifyJsPlugin({
+        output: {
+          comments: false
+        },
         compress: {
           warnings: false
         }
+      }),
+      new SaveAssetsJson({
+        path: path.resolve(ROOT_PATH, 'dist'),
+        filename: 'assets.json'
       })
     ]
   });
