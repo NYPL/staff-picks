@@ -1,25 +1,18 @@
+import { seasons } from '../../../appConfig.js';
+import {
+  findKey as _findKey,
+  contains as _contains,
+} from 'underscore';
+
 function monthOrSeason(month, year) {
   const monthsArr = ['January', 'February', 'March', 'April', 'May', 'June',
-		     'July', 'August', 'September', 'October', 'November',
-		     'December'];
+    'July', 'August', 'September', 'October', 'November', 'December'];
 
-  // Unhappy hack. Starting with March 2016 the lists are seasonal ("Spring"
-  // etc.) This implementation should perhaps be replaced with a different
-  // data model that allows for arbitrary naming of lists.
+  // Return the key where the month is found in that key's array.
+  const season = _findKey(seasons, season => _contains(season, monthsArr[month]));
+
   if (year >= 2016) {
-    if (month >= 9) {
-      return 'Fall';
-    }
-
-    if (month >= 6) {
-      return 'Summer';
-    }
-
-    if (month >= 3) {
-      return 'Spring';
-    }
-    
-    return 'Winter';
+    return season;
   }
 
   return monthsArr[month];
