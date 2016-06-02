@@ -11,11 +11,7 @@ function monthOrSeason(month, year) {
   // Return the key where the month is found in that key's array.
   const season = _findKey(seasons, season => _contains(season, monthsArr[month]));
 
-  if (year >= 2016) {
-    return season;
-  }
-
-  return monthsArr[month];
+  return (year >= 2016) ? season : monthsArr[month];
 }
 
 function staffPicksDate(date) {
