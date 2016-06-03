@@ -1,6 +1,11 @@
 import React from 'react';
 import Radium from 'radium';
-import { each as _each, extend as _extend, indexOf as _indexOf, union as _union } from 'underscore';
+import {
+  each as _each,
+  extend as _extend,
+  indexOf as _indexOf,
+  union as _union
+} from 'underscore';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
@@ -22,6 +27,11 @@ class BookFilters extends React.Component {
   }
 
   componentDidMount() {
+    // Only trigger the Action for the /browse/recommendations/staff-picks route.
+    if (this.props.params && !this.props.params.type) {
+      BookActions.updateFilterAge('adult');
+    }
+
     BookStore.listen(this._onChange);
   }
 
