@@ -13,8 +13,7 @@ import staffPicksDate from '../../utils/DateService.js';
 
 import utils from '../../utils/utils.js';
 
-let Navigation = Router.Navigation,
-  ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
+let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
   Books = React.createClass({
     getInitialState() {
       let clientParams = (this.props.params && this.props.params.type) ?
@@ -23,10 +22,12 @@ let Navigation = Router.Navigation,
         route = this.props.route || clientParams,
         pickType = 'staffpicks';
 
+      /* @todo check this later indexOf is breaking */
+      /*
       if ((route.indexOf('childrens') !== -1) || (route.indexOf('ya') !== -1)) {
         transitionRoute = 'annualModal';
         pickType = 'annual';
-      }
+      }*/
 
       return _extend({
         pickType: pickType,
@@ -38,9 +39,7 @@ let Navigation = Router.Navigation,
         transitionRoute
       }, BookStore.getState());
     },
-
-    mixins: [Navigation],
-
+    
     componentDidMount() {
       // This needs to be set done once the component is available
       let grid = document.getElementById('masonryContainer');

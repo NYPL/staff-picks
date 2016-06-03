@@ -1,6 +1,6 @@
 import React from 'react/addons';
 import DocMeta from 'react-doc-meta';
-import Router from 'react-router';
+import { Router, Link } from 'react-router';
 
 // NYPL Components
 import Header from 'dgx-header-component';
@@ -49,14 +49,10 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-
         <Hero {...this.props} />
-        
         <div id="app-content">
-          <RouteHandler {...this.props} />
-
+          {this.props.children}
           <AgeTabs {...this.props} />
-          
           <div className='main-container'>
             <div id='sidebar'>
               <Sidebar filters={this.props.filters} {...this.props} />
@@ -64,7 +60,6 @@ class App extends React.Component {
             <div id='books'>
               <Books {...this.props} />
             </div>
-
             {about}
           </div>
         </div>

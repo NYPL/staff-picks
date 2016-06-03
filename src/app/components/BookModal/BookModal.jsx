@@ -23,8 +23,7 @@ if (global.window) {
   Modal.injectCSS();
 }
 
-let Navigation = Router.Navigation,
-  BookModal = React.createClass({
+let BookModal = React.createClass({
     getInitialState() {
       let paramID = this.props.params.id,
         modalBook = {},
@@ -75,8 +74,6 @@ let Navigation = Router.Navigation,
         returnToText
       };
     },
-
-    mixins: [Navigation],
 
     openModal() {
       utils._trackPicks('Modal', 'Open');
@@ -182,7 +179,7 @@ let Navigation = Router.Navigation,
         tags = utils.metaTagUnion(modalTags);
 
       return (
-        <div>
+        <div> bookmodal crashing
           <DocMeta tags={tags} />
           <Modal className={this.props.className} isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
             <CloseButton

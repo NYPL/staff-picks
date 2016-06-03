@@ -7,8 +7,7 @@ import BookActions from '../../actions/BookActions.js';
 import staffPicksDate from '../../utils/DateService.js';
 import utils from '../../utils/utils.js';
 
-let Navigation = Router.Navigation,
-  TimeSelector = React.createClass({
+let TimeSelector = React.createClass({
     getInitialState() {
       let params = this.props.params,
         transitionRoute = this.props.pickType === 'staffpicks' ?
@@ -25,8 +24,6 @@ let Navigation = Router.Navigation,
         type
       };
     },
-
-    mixins: [Navigation],
 
     _handleClick(selection, month) {
       let API;

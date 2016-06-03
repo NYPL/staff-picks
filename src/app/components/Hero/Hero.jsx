@@ -66,13 +66,15 @@ class Hero extends React.Component {
         this.props.params.type : '',
       route = this.props.route || clientParam;
 
+    /* @todo check this later indexOf is breaking */
+    /*
     if (route.indexOf('childrens') !== -1) {
       return 'childrens';
     }
 
     if (route.indexOf('ya') !== -1) {
       return 'ya';
-    }
+    }*/
 
     return 'staffpicks';
   }
