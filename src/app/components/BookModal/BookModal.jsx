@@ -179,7 +179,7 @@ let BookModal = React.createClass({
         tags = utils.metaTagUnion(modalTags);
 
       return (
-        <div> bookmodal crashing
+        <div>
           <DocMeta tags={tags} />
           <Modal className={this.props.className} isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
             <CloseButton
