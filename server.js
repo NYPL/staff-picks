@@ -66,7 +66,8 @@ app.use('/', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   iso = new Iso();
 
-  const routes = appRoutes.server;
+  const blogAppUrl = (req.url).indexOf('browse/recommendations/staff-picks') !== -1;
+  const routes = blogAppUrl ? appRoutes.client : appRoutes.server;
 
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {

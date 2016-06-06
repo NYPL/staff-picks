@@ -12,26 +12,26 @@ import AgeTabs from '../components/AgeTabs/AgeTabs.jsx';
 // Routes we need
 const routes = {
   client: (
-    <Route name='home' path='/' component={App}>
-      <Route name='annual' path='annual'>
-        <Route name ='type' path=':type/?'>
-          <Route name='year' path=':year/?'>
-            <Route name='annualModal' path=':id/?' component={BookModal} />
+    <Route path='/browse/recommendations/staff-picks' component={App}>
+      <Route path='annual'>
+        <Route path=':type/?'>
+          <Route path=':year/?'>
+            <Route path=':id/?' component={BookModal} />
           </Route>
         </Route>
       </Route>
-      <Route name='month' path=':month/?'>
-        <Route name='modal' path=':id/?' component={BookModal} />
+      <Route path=':month/?'>
+        <Route path=':id/?' component={BookModal} />
       </Route>
     </Route>
   ),
   server: (
-    <Route name='home' path='/' component={App}>
-      <Route name='annual' path='/annual/:type/?' />
-      <Route name='year' path='/annual/:type/:year/?' />
-      <Route name='annualModal' path='/annual/:type/:year/:id/?' component={BookModal} />
-      <Route name='month' path='/:month/?' />
-      <Route name='modal' path='/:month/:id/?' component={BookModal} />
+    <Route path='/browse/recommendations/staff-picks' component={App}>
+      <Route path='/annual/:type/?' />
+      <Route path='/annual/:type/:year/?' />
+      <Route path='/annual/:type/:year/:id/?' component={BookModal} />
+      <Route path='/:month/?' />
+      <Route path='/:month/:id/?' component={BookModal} />
     </Route>
   )
 };
