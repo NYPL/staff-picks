@@ -14,7 +14,7 @@ class BookContent extends React.Component {
   _getEncoreLink(catalogSlug, start, end) {
     let catalogSub;
 
-    if (catalogSlug === 'na') {
+    if (catalogSlug === 'na' || catalogSlug === 'n/a') {
       return;
     }
 
