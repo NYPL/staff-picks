@@ -47,7 +47,7 @@ let TimeSelector = React.createClass({
 
             utils._trackPicks('Select Month', `${selection}: ${month.month()}`);
 
-            this.routeHandler('/browse/recommendations/staff-picks/api/ajax/picks/' + month.date);
+            this.routeHandler('/browse/recommendations/staff-picks/' + month.date);
 
             BookActions.clearFilters();
             BookActions.isotopesDidUpdate(true);
