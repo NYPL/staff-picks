@@ -27,6 +27,7 @@ let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
         route = this.props.route || clientParams,
         pickType = 'staffpicks';
 
+
       /* @todo check this later indexOf is breaking */
       /*
       if ((route.indexOf('childrens') !== -1) || (route.indexOf('ya') !== -1)) {
