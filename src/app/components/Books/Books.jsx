@@ -15,6 +15,11 @@ import utils from '../../utils/utils.js';
 
 let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
   Books = React.createClass({
+
+    routeHandler(url) {
+      this.context.router.push(url);
+    },
+
     getInitialState() {
       let clientParams = (this.props.params && this.props.params.type) ?
           this.props.params.type : '',
@@ -122,12 +127,8 @@ let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
 
       utils._trackPicks('Book', book.item.title);
 
-      this.transitionTo(this.state.transitionRoute, {
-        month: this.state._currentMonthPicks.date,
-        year: this.state._currentMonthPicks.date,
-        id: book.item.id,
-        type: params.type || ''
-      });
+      this.routeHandler('/browse/recommendations/staff-picks/' + 
+        this.state._currentMonthPicks.date + '/' + book.item.id);
     },
 
     _getTags(elem) {
@@ -201,6 +202,12 @@ Books.defaultProps = {
   className: 'Books',
   lang: 'en',
   onClick() {}
+};
+
+Books.contextTypes = {
+  router: function contextType() {
+    return React.PropTypes.func.isRequired;
+  },
 };
 
 const styles = {

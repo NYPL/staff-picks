@@ -24,6 +24,10 @@ if (global.window) {
 }
 
 let BookModal = React.createClass({
+    routeHandler(url) {
+      this.context.router.push(url);
+    },
+
     getInitialState() {
       let paramID = this.props.params.id,
         modalBook = {},
@@ -49,7 +53,6 @@ let BookModal = React.createClass({
       });
 
       BookActions.updateFilterAge(age);
-
 
       if (!params.type && (params.month === undefined || params.month.length)) {
         transitionRoute = 'home';
@@ -90,7 +93,8 @@ let BookModal = React.createClass({
         modalIsOpen: false
       });
       setTimeout(() => {
-        return this.transitionTo(this.state.transitionRoute, this.state.annualType);
+        //return this.transitionTo(this.state.transitionRoute, this.state.annualType);
+        return this.routeHandler('/browse/recommendations/staff-picks/');
       }, 200);
     },
 
@@ -212,6 +216,12 @@ let BookModal = React.createClass({
 BookModal.defaultProps = {
   className: 'BookModal',
   id: 'BookModal'
+};
+
+BookModal.contextTypes = {
+  router: function contextType() {
+    return React.PropTypes.func.isRequired;
+  },
 };
 
 const styles={

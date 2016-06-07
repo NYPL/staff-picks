@@ -8,6 +8,11 @@ import staffPicksDate from '../../utils/DateService.js';
 import utils from '../../utils/utils.js';
 
 let TimeSelector = React.createClass({
+
+    routeHandler(url) {
+      this.context.router.push(url);
+    },
+
     getInitialState() {
       let params = this.props.params,
         transitionRoute = this.props.pickType === 'staffpicks' ?
@@ -42,11 +47,7 @@ let TimeSelector = React.createClass({
 
             utils._trackPicks('Select Month', `${selection}: ${month.month()}`);
 
-            this.transitionTo(this.state.transitionRoute, {
-              type: this.state.type,
-              month: date,
-              year: date
-            });
+            this.routeHandler(API);
 
             BookActions.clearFilters();
             BookActions.isotopesDidUpdate(true);
@@ -128,6 +129,12 @@ let TimeSelector = React.createClass({
       );
     }
   });
+
+TimeSelector.contextTypes = {
+  router: function contextType() {
+    return React.PropTypes.func.isRequired;
+  },
+};
 
 const styles = {
   base: {},
