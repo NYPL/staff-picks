@@ -1,6 +1,6 @@
-import React from 'react/addons';
+import React from 'react';
 import DocMeta from 'react-doc-meta';
-import { Router, Link } from 'react-router';
+import { Router } from 'react-router';
 
 // NYPL Components
 import Header from 'dgx-header-component';

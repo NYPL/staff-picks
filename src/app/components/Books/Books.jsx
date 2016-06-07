@@ -1,6 +1,7 @@
 import React from 'react';
 import Router from 'react-router';
 import Radium from 'radium';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { extend as _extend, map as _map} from 'underscore';
 
@@ -13,8 +14,7 @@ import staffPicksDate from '../../utils/DateService.js';
 
 import utils from '../../utils/utils.js';
 
-let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
-  Books = React.createClass({
+let Books = React.createClass({
 
     routeHandler(url) {
       this.context.router.push(url);
@@ -188,7 +188,13 @@ let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
 
           <div id="masonryContainer" ref="masonryContainer" style={{opacity: '0'}}>
             <ul className='list-view'>
-              <ReactCSSTransitionGroup transitionName='books' transitionAppear={true}>
+              <ReactCSSTransitionGroup 
+                transitionName='books' 
+                transitionAppear={true}
+                transitionEnterTimeout={500}
+                transitionAppearTimeout={500}
+                transitionLeaveTimeout={500}
+                >
                 {books}
               </ReactCSSTransitionGroup>
             </ul>

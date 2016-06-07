@@ -94,7 +94,7 @@ let BookModal = React.createClass({
       });
       setTimeout(() => {
         //return this.transitionTo(this.state.transitionRoute, this.state.annualType);
-        return this.routeHandler('/browse/recommendations/staff-picks/');
+        return this.routeHandler(`/browse/recommendations/staff-picks/${this.props.params.month}`);
       }, 200);
     },
 
