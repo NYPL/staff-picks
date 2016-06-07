@@ -123,13 +123,13 @@ let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
       }, BookStore.getState()));
     },
 
-    _openModal(book) {
+    _openModal(book, date) {
       let params = this.props.params;
 
       utils._trackPicks('Book', book.item.title);
 
       this.routeHandler('/browse/recommendations/staff-picks/' + 
-        this.state._currentMonthPicks.date + '/' + book.item.id);
+        date + '/' + book.item.id);
     },
 
     _getTags(elem) {
@@ -172,7 +172,7 @@ let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
 
           return (
             <li className={'book-item ' + age + ' ' + tagClasses}
-              key={element.id} onClick={openModal.bind(this, element)}
+              key={element.id} onClick={openModal.bind(this, element, currentMonthPicks.date)}
               style={listDisplay}>
               {listItem}
             </li>
