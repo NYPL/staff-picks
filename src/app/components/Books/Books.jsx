@@ -125,8 +125,18 @@ let Books = React.createClass({
 
       utils._trackPicks('Book', book.item.title);
 
-      this.routeHandler('/browse/recommendations/staff-picks/' + 
-        date + '/' + book.item.id);
+      let baseUrl = '/browse/recommendations/staff-picks/';
+      /*special cases for ya and children */
+      if(params.type === 'ya') {
+        baseUrl += 'annual/ya/'; 
+      }
+
+      if(params.type === 'children') {
+        baseUrl += 'annual/children/';
+      }
+
+      this.routeHandler(baseUrl + 
+        date + '/' + book.item.id, params.type);
     },
 
     _getTags(elem) {
