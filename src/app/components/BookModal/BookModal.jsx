@@ -97,14 +97,10 @@ let BookModal = React.createClass({
         let returnUrl = this.props.params.month;
 
         /* special cases for young adults and children */
-        if(this.props.params.type === 'ya') {
-          returnUrl = 'annual/ya';
+        if (this.props.params.type && (this.props.params.type === 'ya' || this.props.params.type === 'childrens')) {
+          returnUrl = `annual/${this.props.params.type}`;
         }
 
-        if(this.props.params.type === 'children') {
-          returnUrl = 'annual/children';
-        }
-        
         return this.routeHandler('/browse/recommendations/staff-picks/' + returnUrl);
       }, 200);
     },
