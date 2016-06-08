@@ -13,6 +13,11 @@ class BookContent extends React.Component {
   // or get the ID of the book and return a link that points to Encore.
   _getEncoreLink(catalogSlug, start, end) {
     let catalogSub;
+
+    if (catalogSlug === 'na' || catalogSlug === 'n/a') {
+      return;
+    }
+
     if (catalogSlug && catalogSlug.indexOf('browse.nypl.org') === -1) {
       catalogSub = catalogSlug.substring(start, end);
       return `http://browse.nypl.org/iii/encore/record/` +

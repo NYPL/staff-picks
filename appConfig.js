@@ -200,7 +200,13 @@ const config = {
     {name: "twitter:card", content: 'summary_large_image'},
     {name: "twitter:site", content: '@nypl'},
     {name: "twitter:creator", content: '@nypl'}
-  ]
+  ],
+  seasons: {
+    Spring: ['March', 'April', 'May'],
+    Summer: ['June', 'July', 'August'],
+    Fall: ['September', 'October', 'November'],
+    Winter: ['December', 'January', 'February'],
+  },
 };
 
 export default config;
