@@ -24,16 +24,13 @@ let Books = React.createClass({
       let clientParams = (this.props.params && this.props.params.type) ?
           this.props.params.type : '',
         transitionRoute = 'modal',
-        route = this.props.route || clientParams,
+        route = this.props.location.pathname || clientParams,
         pickType = 'staffpicks';
 
-
-      /* @todo check this later indexOf is breaking */
-      /*
       if ((route.indexOf('childrens') !== -1) || (route.indexOf('ya') !== -1)) {
         transitionRoute = 'annualModal';
         pickType = 'annual';
-      }*/
+      }
 
       return _extend({
         pickType: pickType,

@@ -64,17 +64,15 @@ class Hero extends React.Component {
   _getType() {
     let clientParam = (this.props.params && this.props.params.type) ?
         this.props.params.type : '',
-      route = this.props.route || clientParam;
+      route = this.props.location.pathname || clientParam;
 
-    /* @todo check this later indexOf is breaking */
-    /*
     if (route.indexOf('childrens') !== -1) {
       return 'childrens';
     }
 
     if (route.indexOf('ya') !== -1) {
       return 'ya';
-    }*/
+    }
 
     return 'staffpicks';
   }
