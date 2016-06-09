@@ -71,7 +71,7 @@ let Books = React.createClass({
       BookStore.listen(this._onChange);
     },
 
-    componentDidUnmount() {
+    componentWillUnmount() {
       BookStore.unlisten(this._onChange);
     },
 
