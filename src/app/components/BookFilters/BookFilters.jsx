@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {
   each as _each,
   extend as _extend,
@@ -12,8 +13,6 @@ import BookActions from '../../actions/BookActions.js';
 import CloseButton from '../Buttons/CloseButton.jsx';
 
 import utils from '../../utils/utils.js';
-
-let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 class BookFilters extends React.Component {
   constructor(props) {
@@ -120,7 +119,13 @@ class BookFilters extends React.Component {
           <li key={elem.id} onClick={_handleClick.bind(_this, elem)}>
             <a>
               {elem.attributes.displayName}
-              <ReactCSSTransitionGroup transitionName='minus' transitionAppear={true}>
+              <ReactCSSTransitionGroup
+                transitionName='minus'
+                transitionAppear={true}
+                transitionEnterTimeout={500}
+                transitionAppearTimeout={500}
+                transitionLeaveTimeout={500}
+                >
                 <span className={'minus-icon ' + active}></span>
               </ReactCSSTransitionGroup>
             </a>

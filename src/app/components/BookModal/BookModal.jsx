@@ -23,8 +23,11 @@ if (global.window) {
   Modal.injectCSS();
 }
 
-let Navigation = Router.Navigation,
-  BookModal = React.createClass({
+let BookModal = React.createClass({
+    routeHandler(url) {
+      this.context.router.push(url);
+    },
+
     getInitialState() {
       let paramID = this.props.params.id,
         modalBook = {},
@@ -51,7 +54,6 @@ let Navigation = Router.Navigation,
 
       BookActions.updateFilterAge(age);
 
-
       if (!params.type && (params.month === undefined || params.month.length)) {
         transitionRoute = 'home';
       }
@@ -76,8 +78,6 @@ let Navigation = Router.Navigation,
       };
     },
 
-    mixins: [Navigation],
-
     openModal() {
       utils._trackPicks('Modal', 'Open');
 
@@ -93,7 +93,15 @@ let Navigation = Router.Navigation,
         modalIsOpen: false
       });
       setTimeout(() => {
-        return this.transitionTo(this.state.transitionRoute, this.state.annualType);
+
+        let returnUrl = this.props.params.month;
+
+        /* special cases for young adults and children */
+        if (this.props.params.type && (this.props.params.type === 'ya' || this.props.params.type === 'childrens')) {
+          returnUrl = `annual/${this.props.params.type}`;
+        }
+
+        return this.routeHandler('/browse/recommendations/staff-picks/' + returnUrl);
       }, 200);
     },
 
@@ -215,6 +223,12 @@ let Navigation = Router.Navigation,
 BookModal.defaultProps = {
   className: 'BookModal',
   id: 'BookModal'
+};
+
+BookModal.contextTypes = {
+  router: function contextType() {
+    return React.PropTypes.func.isRequired;
+  },
 };
 
 const styles={

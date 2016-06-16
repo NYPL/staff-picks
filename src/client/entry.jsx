@@ -1,5 +1,8 @@
-import React from 'react/addons';
-import Router from 'react-router';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Router, useRouterHistory } from 'react-router';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
+import useScroll from 'scroll-behavior/lib/useStandardScroll';
 
 import App from '../app/components/Application/Application.jsx';
 import BookModal from '../app/components/BookModal/BookModal.jsx';
@@ -17,7 +20,7 @@ import FeatureFlags from 'dgx-feature-flags';
 import './styles/main.scss';
 
 window.onload = () => {
-  Iso.bootstrap((state, meta, container) => {
+  Iso.bootstrap((state, container) => {
     alt.bootstrap(state);
 
     if (!window.ga) {
@@ -30,18 +33,11 @@ window.onload = () => {
       window.dgxFeatureFlags = FeatureFlags.utils;
     }
 
-    Router.run(routes.client, Router.HistoryLocation, (Root, state) => {
-      let lastCharIndex = state.path.length - 1,
-        pageview = state.path;
+    const appHistory = useScroll(useRouterHistory(createBrowserHistory))();
 
-      if (state.path[lastCharIndex] === '/') {
-        pageview = state.path.substring(0, lastCharIndex);
-      }
-
-      ga.pageview(pageview);
-      React.render(<Root params={state.params}/>, container);
-    });
-
-    React.render(<Footer />, document.getElementById('footer-container'));
+    ReactDOM.render(
+      <Router history={appHistory}>{routes.client}</Router>,
+      container
+    );
   });
 };

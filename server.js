@@ -11,15 +11,17 @@ import webpackConfig from './webpack.config.js';
 import appConfig from './appConfig.js';
 
 import React from 'react';
-import Router from 'react-router';
 import DocMeta from 'react-doc-meta';
+import { Router, match, RouterContext } from 'react-router';
+import ReactDOMServer from 'react-dom/server';
+import { createMemoryHistory } from 'history';
 
 import Footer from './src/app/components/Footer/Footer.jsx';
 
 import alt from 'dgx-alt-center';
 import Iso from 'iso';
 
-import routes from './src/app/routes/routes.jsx';
+import appRoutes from './src/app/routes/routes.jsx';
 import ApiRoutes from './src/server/ApiRoutes/ApiRoutes.js';
 
 // URL configuration
@@ -64,27 +66,45 @@ app.use('/', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   iso = new Iso();
 
-  Router.run(routes.server, req.path, function (Root, state) {
-    let html = React.renderToString(<Root route={req.path} />),
-      footer = React.renderToString(<Footer />),
-      metaTags = DocMeta.rewind(),
-      renderedTags = metaTags.map((tag, index) =>
-        React.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
+  const blogAppUrl = (req.url).indexOf('browse/recommendations/staff-picks') !== -1;
+  const routes = blogAppUrl ? appRoutes.client : appRoutes.server;
 
-    iso.add(html, alt.flush());
+  match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+    if (error) {
+      res.status(500).send(error.message)
+    } else if (redirectLocation) {
+      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+    } else if (renderProps) {
+      const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
+      var footer = ReactDOMServer.renderToString(<Footer />);
+      var metaTags = DocMeta.rewind();
+      var renderedTags = metaTags.map((tag, index) =>
+        ReactDOMServer.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
+      iso.add(html, alt.flush());
 
-    res.render('index', {
-      path: req.path,
-      isProduction: isProduction,
-      metatags: renderedTags,
-      markup: iso.render(),
-      footer: footer,
-      gaCode: analytics.google.code(isProduction),
-      appEnv: process.env.APP_ENV || 'no APP_ENV',
-      assets: buildAssets,
-      endpoint: res.locals.data.endpoint
-    });
-  }); /* end Router.run */
+      res
+        .status(200)
+        .render('index', {
+          path: req.path,
+          isProduction: isProduction,
+          metatags: renderedTags,
+          markup: iso.render(),
+          footer: footer,
+          gaCode: analytics.google.code(isProduction),
+          appEnv: process.env.APP_ENV || 'no APP_ENV',
+          assets: buildAssets,
+          appTitle: appConfig.appTitle,
+          favicon: appConfig.favIconPath,
+          gaCode: analytics.google.code(isProduction),
+          webpackPort: WEBPACK_DEV_PORT,
+          appEnv: process.env.APP_ENV,
+          endpoint: res.locals.data.endpoint,
+          isProduction
+        });
+    } else {
+      res.status(404).send('Not found')
+    }
+  });
 });
 
 let server = app.listen(app.get('port'), function () {
