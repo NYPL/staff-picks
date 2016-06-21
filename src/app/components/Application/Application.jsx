@@ -4,6 +4,7 @@ import { Router } from 'react-router';
 
 // NYPL Components
 import Header from 'dgx-header-component';
+import Footer from 'dgx-react-footer';
 import Hero from '../Hero/Hero.jsx';
 import AgeTabs from '../AgeTabs/AgeTabs.jsx';
 import Books from '../Books/Books.jsx';
@@ -63,6 +64,7 @@ class App extends React.Component {
             {about}
           </div>
         </div>
+        <Footer id="footer" className="footer" />
       </div>
     );
   }
