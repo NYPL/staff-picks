@@ -1,7 +1,7 @@
 .tab-container {
 	background-color: #ffffff;
 	display: block;
-	font-size: 1.2em;
+	font-size: .75em;
 	height: auto;
 	margin: 30px auto 0;
 	padding: 21px 0 0 0;
@@ -9,7 +9,7 @@
 	text-align: center;
 	width: 100%;
 	@include breakpoint($min, $post-tablet) {
-    font-size: 1.4em;
+    font-size: 1em;
   }
 }
 
@@ -21,7 +21,7 @@
 .tab-container__ul__element {
   display: inline-block;
   margin: 0;
-  padding: 20px 0 20px 0;
+  padding: 20px 0 19px 0;
   text-transform: uppercase;
   white-space: pre;
   width: 33%;
