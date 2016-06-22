@@ -1,10 +1,21 @@
 import express from 'express';
 import axios from 'axios';
 import parser from 'jsonapi-parserinator';
-import { apiEndpoint, fields, pageSize, includes, api, headerApi } from '../../../appConfig.js';
+import { sortBy as _sortBy } from 'underscore';
+
 import HeaderModel from '../../app/utils/HeaderItemModel.js';
 import PicksListModel from '../../app/utils/PicksListModel.js';
-import {sortBy as _sortBy} from 'underscore';
+
+import config from '../../../appConfig.js';
+
+const {
+  apiEndpoint,
+  fields,
+  pageSize,
+  includes,
+  api,
+  headerApi,
+} = config;
 
 let router = express.Router(),
   appEnvironment = process.env.APP_ENV || 'production',
