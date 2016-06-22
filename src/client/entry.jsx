@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, useRouterHistory } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
-import useScroll from 'scroll-behavior/lib/useStandardScroll';
 
 import App from '../app/components/Application/Application.jsx';
 import BookModal from '../app/components/BookModal/BookModal.jsx';
@@ -33,7 +32,7 @@ window.onload = () => {
       window.dgxFeatureFlags = FeatureFlags.utils;
     }
 
-    const appHistory = useScroll(useRouterHistory(createBrowserHistory))();
+    const appHistory = useRouterHistory(createBrowserHistory)();
 
     ReactDOM.render(
       <Router history={appHistory}>{routes.client}</Router>,
