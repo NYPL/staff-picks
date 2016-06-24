@@ -16,8 +16,6 @@ import { Router, match, RouterContext } from 'react-router';
 import ReactDOMServer from 'react-dom/server';
 import { createMemoryHistory } from 'history';
 
-import Footer from './src/app/components/Footer/Footer.jsx';
-
 import alt from 'dgx-alt-center';
 import Iso from 'iso';
 
@@ -76,7 +74,6 @@ app.use('/', (req, res) => {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
       const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
-      var footer = ReactDOMServer.renderToString(<Footer />);
       var metaTags = DocMeta.rewind();
       var renderedTags = metaTags.map((tag, index) =>
         ReactDOMServer.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
@@ -89,7 +86,6 @@ app.use('/', (req, res) => {
           isProduction: isProduction,
           metatags: renderedTags,
           markup: iso.render(),
-          footer: footer,
           gaCode: analytics.google.code(isProduction),
           appEnv: process.env.APP_ENV || 'no APP_ENV',
           assets: buildAssets,
