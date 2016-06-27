@@ -1,8 +1,10 @@
-import { seasons } from '../../../appConfig.js';
+import config from '../../../appConfig.js';
 import {
   findKey as _findKey,
   contains as _contains,
 } from 'underscore';
+
+const { seasons } = config;
 
 function monthOrSeason(month, year) {
   const monthsArr = ['January', 'February', 'March', 'April', 'May', 'June',

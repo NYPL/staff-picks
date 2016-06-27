@@ -148,7 +148,6 @@ const styles = {
     display: 'inline-block',
     color: '#333333',
     position: 'absolute',
-    '@media (min-width: 600px)': { left: '52%' }
   },
   nextDate: {
     float: 'right'
