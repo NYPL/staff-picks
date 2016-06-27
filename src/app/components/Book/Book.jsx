@@ -1,46 +1,39 @@
 import React from 'react';
-import Radium from 'radium';
 
-class Book extends React.Component {
-  // Constructor used in ES6
-  constructor(props) {
-    super(props);
+const Book = (props) => {
+  const handleClick = (e) => e.preventDefault();
 
-    this._handleClick = this._handleClick.bind(this);
-  }
+  const book = props.book;
+  const bookImgSrc = book.item.imageSlug;
+  const fullImgSrc = bookImgSrc !== 'No Image' ?
+    `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807` +
+    `&password=CC68707&Value=${bookImgSrc}&content=M&Return=1&Type=M`
+    : '/browse/recommendations/staff-picks/src/client/images/book-place-holder.png';
 
-  render() {
-    const book = this.props.book,
-      bookImgSrc = book.item.imageSlug,
-      bookTarget = book.item.catalogSlug,
-      fullImgSrc = bookImgSrc !== 'No Image' ? `https://contentcafe2.btol.com/ContentCafe/` +
-        `Jacket.aspx?&userID=NYPL49807&password=CC68707&` +
-        `Value=${bookImgSrc}&content=M&Return=1&Type=M`
-        : '/browse/recommendations/staff-picks/src/client/images/book-place-holder.png';
+  return (
+    <div className={props.className} style={[props.style]}>
+      <a href='#' onClick={handleClick}>
+        <img style={props.style}
+          alt={book.item.title}
+          src={fullImgSrc}
+          height={props.height}
+          width={props.width} />
+      </a>
+    </div>
+  );
+};
 
-    return (
-      <div ref='Book' className={this.props.className}
-        style={[this.props.style]}>
-        
-        <a href='#' onClick={this._handleClick}>
-          <img style={this.props.style}
-            alt={book.item.title}
-            src={fullImgSrc}
-            height={this.props.height}
-            width={this.props.width} />
-        </a>
-      </div>
-    );
-  }
-
-  _handleClick(e) {
-    e.preventDefault();
-  }
+Book.propTypes = {
+  book: React.PropTypes.object,
+  className: React.PropTypes.string,
+  style: React.PropTypes.object,
+  height: React.PropTypes.string,
+  width: React.PropTypes.string,
 };
 
 Book.defaultProps = {
   className: 'Book',
-  lang: 'en'
+  lang: 'en',
 };
 
-export default Radium(Book);
+export default Book;
