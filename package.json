@@ -83,7 +83,6 @@
     "react-tools": "0.13.3",
     "react-addons-css-transition-group": "0.14.8",
     "sass-loader": "1.0.2",
-    "scroll-behavior": "^0.4.0",
     "style-loader": "0.12.3",
     "underscore": "1.8.3",
     "webpack": "1.10.0",
