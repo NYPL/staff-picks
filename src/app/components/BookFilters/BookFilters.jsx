@@ -236,7 +236,7 @@ class BookFilters extends React.Component {
     const storeState = BookStore.getState();
 
     return (
-      <div className="BookFilters">
+      <div className="BookFilters" style={this.props.styles}>
         <CloseButton
           onClick={this.props.mobileCloseBtn}
           id="close-button"
