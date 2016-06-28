@@ -7,8 +7,12 @@ import BookActions from '../../actions/BookActions.js';
 import staffPicksDate from '../../utils/DateService.js';
 import utils from '../../utils/utils.js';
 
-let Navigation = Router.Navigation,
-  TimeSelector = React.createClass({
+let TimeSelector = React.createClass({
+
+    routeHandler(url) {
+      this.context.router.push(url);
+    },
+
     getInitialState() {
       let params = this.props.params,
         transitionRoute = this.props.pickType === 'staffpicks' ?
@@ -25,8 +29,6 @@ let Navigation = Router.Navigation,
         type
       };
     },
-
-    mixins: [Navigation],
 
     _handleClick(selection, month) {
       let API;
@@ -45,11 +47,7 @@ let Navigation = Router.Navigation,
 
             utils._trackPicks('Select Month', `${selection}: ${month.month()}`);
 
-            this.transitionTo(this.state.transitionRoute, {
-              type: this.state.type,
-              month: date,
-              year: date
-            });
+            this.routeHandler('/browse/recommendations/staff-picks/' + month.date);
 
             BookActions.clearFilters();
             BookActions.isotopesDidUpdate(true);
@@ -132,6 +130,12 @@ let Navigation = Router.Navigation,
     }
   });
 
+TimeSelector.contextTypes = {
+  router: function contextType() {
+    return React.PropTypes.func.isRequired;
+  },
+};
+
 const styles = {
   base: {},
   timeSelector: {
@@ -144,7 +148,6 @@ const styles = {
     display: 'inline-block',
     color: '#333333',
     position: 'absolute',
-    '@media (min-width: 600px)': { left: '52%' }
   },
   nextDate: {
     float: 'right'

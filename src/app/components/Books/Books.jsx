@@ -1,6 +1,7 @@
 import React from 'react';
 import Router from 'react-router';
 import Radium from 'radium';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { extend as _extend, map as _map} from 'underscore';
 
@@ -13,14 +14,17 @@ import staffPicksDate from '../../utils/DateService.js';
 
 import utils from '../../utils/utils.js';
 
-let Navigation = Router.Navigation,
-  ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
-  Books = React.createClass({
+let Books = React.createClass({
+
+    routeHandler(url) {
+      this.context.router.push(url);
+    },
+
     getInitialState() {
       let clientParams = (this.props.params && this.props.params.type) ?
           this.props.params.type : '',
         transitionRoute = 'modal',
-        route = this.props.route || clientParams,
+        route = this.props.location.pathname || clientParams,
         pickType = 'staffpicks';
 
       if ((route.indexOf('childrens') !== -1) || (route.indexOf('ya') !== -1)) {
@@ -38,9 +42,7 @@ let Navigation = Router.Navigation,
         transitionRoute
       }, BookStore.getState());
     },
-
-    mixins: [Navigation],
-
+    
     componentDidMount() {
       // This needs to be set done once the component is available
       let grid = document.getElementById('masonryContainer');
@@ -69,7 +71,7 @@ let Navigation = Router.Navigation,
       BookStore.listen(this._onChange);
     },
 
-    componentDidUnmount() {
+    componentWillUnmount() {
       BookStore.unlisten(this._onChange);
     },
 
@@ -118,17 +120,20 @@ let Navigation = Router.Navigation,
       }, BookStore.getState()));
     },
 
-    _openModal(book) {
+    _openModal(book, date) {
       let params = this.props.params;
 
       utils._trackPicks('Book', book.item.title);
 
-      this.transitionTo(this.state.transitionRoute, {
-        month: this.state._currentMonthPicks.date,
-        year: this.state._currentMonthPicks.date,
-        id: book.item.id,
-        type: params.type || ''
-      });
+      let baseUrl = '/browse/recommendations/staff-picks/';
+
+      /* special cases for young adults and children */
+      if (params.type && (params.type === 'ya' || params.type === 'childrens')) {
+        baseUrl += `annual/${this.props.params.type}/`;
+      }
+
+      this.routeHandler(baseUrl + 
+        date + '/' + book.item.id, params.type);
     },
 
     _getTags(elem) {
@@ -171,7 +176,7 @@ let Navigation = Router.Navigation,
 
           return (
             <li className={'book-item ' + age + ' ' + tagClasses}
-              key={element.id} onClick={openModal.bind(this, element)}
+              key={element.id} onClick={openModal.bind(this, element, currentMonthPicks.date)}
               style={listDisplay}>
               {listItem}
             </li>
@@ -185,9 +190,15 @@ let Navigation = Router.Navigation,
             currentMonthPicks={currentMonthPicks}
             {...this.props} />
 
-          <div id="masonryContainer" ref="masonryContainer" style={{opacity: '0'}}>
+          <div id="masonryContainer" ref="masonryContainer">
             <ul className='list-view'>
-              <ReactCSSTransitionGroup transitionName='books' transitionAppear={true}>
+              <ReactCSSTransitionGroup 
+                transitionName='books' 
+                transitionAppear={true}
+                transitionEnterTimeout={500}
+                transitionAppearTimeout={500}
+                transitionLeaveTimeout={500}
+                >
                 {books}
               </ReactCSSTransitionGroup>
             </ul>
@@ -202,6 +213,12 @@ Books.defaultProps = {
   className: 'Books',
   lang: 'en',
   onClick() {}
+};
+
+Books.contextTypes = {
+  router: function contextType() {
+    return React.PropTypes.func.isRequired;
+  },
 };
 
 const styles = {

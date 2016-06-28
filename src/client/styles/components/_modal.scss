@@ -4,7 +4,6 @@ body {
     min-height: 525px;
     z-index: 2000;
     position: absolute;
-    bottom: 500px;
     border: 1px solid #ccc;
     background: #fff;
     overflow: auto;
@@ -13,7 +12,10 @@ body {
     outline: none;
     padding: 30px 20px 20px 30px;
     width: 850px;
-    margin: 4% auto;
+    right: 0;
+    left: 0;
+    top: 130px;
+    margin: auto;
     @include breakpoint($max, $post-mobile-phone) {
       border: 0px solid #ccc;
       border-radius: 0px;
