@@ -190,7 +190,7 @@ let Books = React.createClass({
             currentMonthPicks={currentMonthPicks}
             {...this.props} />
 
-          <div id="masonryContainer" ref="masonryContainer" style={{opacity: '0'}}>
+          <div id="masonryContainer" ref="masonryContainer">
             <ul className='list-view'>
               <ReactCSSTransitionGroup 
                 transitionName='books' 
