@@ -1,13 +1,31 @@
 // Import React and necessary libraries
 import React from 'react';
-import Radium from 'radium';
-import cx from 'classnames';
 
 // Import components
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
 import utils from '../../utils/utils.js';
+
+// Styles
+const styles = {
+  TabElementActive: {
+    borderBottomStyle: 'none',
+    borderColor: '#cc1a16',
+    borderLeftStyle: 'solid',
+    borderRightStyle: 'solid',
+    borderTopStyle: 'solid',
+    borderWidth: '1px',
+  },
+  TabElementInactive: {
+    borderBottomStyle: 'solid',
+    borderColor: '#cc1a16',
+    borderLeftStyle: 'none',
+    borderRightStyle: 'none',
+    borderTopStyle: 'none',
+    borderWidth: '1px',
+  },
+};
 
 // Create the class
 class TabElement extends React.Component {
@@ -18,67 +36,56 @@ class TabElement extends React.Component {
     this.state = BookStore.getState();
 
     // Actions of mouse click event assigned to the class
-    this._handleClick = this._handleClick.bind(this);
-    this._onChange = this._onChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   // Event listeners
   componentDidMount() {
-    BookStore.listen(this._onChange);
+    BookStore.listen(this.onChange);
   }
 
   componentWillUnmount() {
-    BookStore.unlisten(this._onChange);
+    BookStore.unlisten(this.onChange);
+  }
+
+  onChange() {
+    this.setState(BookStore.getState());
   }
 
   // Actions of click event
-  _handleClick(age) {
+  handleClick(age) {
     BookActions.updateFilterAge(age);
     BookActions.clearFilters();
 
     utils._trackPicks('Age Selected', age);
   }
-  
-  _onChange() {
-    this.setState(BookStore.getState());
-  }
 
   render() {
     // If state equals to the clicked value, then make the TabElement active
-    let active = (this.state._age === this.props.value) ?
-      styles.TabElementActive : styles.TabElementInactive,
-      activeLink = cx({'active': active});
+    const active = (this.state._age === this.props.value) ?
+      styles.TabElementActive : styles.TabElementInactive;
 
     return (
-      <li key={`tab-${this.props.name}`} id={this.props.name} 
-        className='tab-container__ul__element' style={active}>
-        <a className={`tab-container__ul__element__link ${activeLink}`}
-        onClick={this._handleClick.bind(this, this.props.value)}>
-        {this.props.name}
+      <li
+        key={`tab-${this.props.name}`}
+        id={this.props.name}
+        className="tab-container__ul__element" style={active}
+      >
+        <a
+          className="tab-container__ul__element__link"
+          onClick={() => this.handleClick(this.props.value)}
+        >
+          {this.props.name}
         </a>
-  	</li>
+      </li>
     );
   }
+}
+
+TabElement.propTypes = {
+  value: React.PropTypes.string,
+  name: React.PropTypes.string,
 };
 
-// Styles
-const styles = {
-  TabElementActive: {
-    borderBottomStyle: 'none',
-    borderColor: '#cc1a16',
-    borderLeftStyle: 'solid',
-    borderRightStyle: 'solid',
-    borderTopStyle: 'solid',
-    borderWidth: '1px'
-  },
-  TabElementInactive: {
-    borderBottomStyle: 'solid',
-    borderColor: '#cc1a16',
-    borderLeftStyle: 'none',
-    borderRightStyle: 'none',
-    borderTopStyle: 'none',
-    borderWidth: '1px'
-  }
-};
-
-export default Radium(TabElement);
+export default TabElement;

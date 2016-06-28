@@ -112,7 +112,16 @@
 
       &__cover {
         a { 
-          cursor: default; 
+          cursor: default;
+        }
+
+        img {
+          width: 100%;
+          height: auto;
+
+          @include breakpoint($min, $post-mobile-phone) {
+            width: 237px;
+          }
         }
       }
     }
