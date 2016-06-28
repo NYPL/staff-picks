@@ -34,11 +34,7 @@
 	color: #333333;
   cursor: pointer;
   text-decoration: none;
-
-  &.active,
-  &:hover {
-    color: #cc1a16;
-  }
+  color: #cc1a16;
 }
 
 .tab-container__outsider {

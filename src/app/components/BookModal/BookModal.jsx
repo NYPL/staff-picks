@@ -205,7 +205,7 @@ class BookModal extends React.Component {
               <Book
                 book={this.state.book}
                 className={`${this.props.className}__left-column__image__cover`}
-                style={styles.BookCover} />
+              />
             </div>
             <div key='ShareContainer' className={`${this.props.className}__left-column__share`}>
               <BookShare
@@ -231,16 +231,6 @@ BookModal.contextTypes = {
   router: function contextType() {
     return React.PropTypes.func.isRequired;
   },
-};
-
-const styles={
-  BookCover: {
-    width: '100%',
-    height: 'auto',
-    '@media (min-width: 414px)': {
-      width: '237px'
-    }
-  }
 };
 
 export default Radium(BookModal);
