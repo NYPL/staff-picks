@@ -99,8 +99,8 @@ class Books extends React.Component {
 
   onChange() {
     const storeState = BookStore.getState();
-    const age = `.${storeState._age}`;
-    const filters = storeState._filters;
+    const age = `.${storeState.age}`;
+    const filters = storeState.filters;
     const params = this.props.params;
     let selector = age;
 
@@ -122,7 +122,7 @@ class Books extends React.Component {
       });
     }, 600);
 
-    if (storeState._isotopesDidUpdate) {
+    if (storeState.isotopesDidUpdate) {
       setTimeout(() => {
         this.state.iso.reloadItems();
       }, 400);
@@ -166,7 +166,7 @@ class Books extends React.Component {
     const params = this.props.params;
     let baseUrl = '/browse/recommendations/staff-picks/';
 
-    utils._trackPicks('Book', book.item.title);
+    utils.trackPicks('Book', book.item.title);
 
     /* special cases for young adults and children */
     if (params.type && (params.type === 'ya' || params.type === 'childrens')) {
@@ -182,8 +182,8 @@ class Books extends React.Component {
 
   render() {
     const openModal = this.openModal;
-    const gridDisplay = this.state._bookDisplay === 'grid';
-    const currentMonthPicks = this.state._currentMonthPicks;
+    const gridDisplay = this.state.bookDisplay === 'grid';
+    const currentMonthPicks = this.state.currentMonthPicks;
     const picks = currentMonthPicks.picks ? currentMonthPicks.picks : [];
     const books = picks.map(element => {
       const tagList = this.getTags(element);

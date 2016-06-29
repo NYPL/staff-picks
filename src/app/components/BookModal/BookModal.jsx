@@ -28,7 +28,7 @@ class BookModal extends React.Component {
     const paramID = this.props.params.id;
     const store = BookStore.getState();
     const params = this.props.params;
-    let books = store._currentMonthPicks.picks;
+    let books = store.currentMonthPicks.picks;
     let modalBook = {};
     let returnToText = 'RETURN TO STAFF PICKS';
     let annualType;
@@ -76,7 +76,7 @@ class BookModal extends React.Component {
   }
 
   openModal() {
-    utils._trackPicks('Modal', 'Open');
+    utils.trackPicks('Modal', 'Open');
 
     this.setState({
       modalIsOpen: true,
@@ -84,7 +84,7 @@ class BookModal extends React.Component {
   }
 
   closeModal() {
-    utils._trackPicks('Modal', 'Closed');
+    utils.trackPicks('Modal', 'Closed');
 
     this.setState({
       modalIsOpen: false,

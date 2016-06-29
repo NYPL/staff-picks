@@ -58,12 +58,12 @@ class TabElement extends React.Component {
     BookActions.updateFilterAge(age);
     BookActions.clearFilters();
 
-    utils._trackPicks('Age Selected', age);
+    utils.trackPicks('Age Selected', age);
   }
 
   render() {
     // If state equals to the clicked value, then make the TabElement active
-    const active = (this.state._age === this.props.value) ?
+    const active = (this.state.age === this.props.value) ?
       styles.TabElementActive : styles.TabElementInactive;
 
     return (

@@ -86,7 +86,7 @@ const BookContent = (props) => {
       <ul className="borrow">
         <li
           style={bookStyle}
-          onClick={() => utils._trackPicks('Modal', 'Request the book')}
+          onClick={() => utils.trackPicks('Modal', 'Request the book')}
         >
           <a href={bookHREF} style={bookLinkStyle}>
             <span className={`checkout ${bookIcon}`}></span>Request the book
@@ -94,7 +94,7 @@ const BookContent = (props) => {
         </li>
         <li
           style={ebookStyle}
-          onClick={() => utils._trackPicks('Modal', 'Borrow the ebook')}
+          onClick={() => utils.trackPicks('Modal', 'Borrow the ebook')}
         >
           <a href={ebookHREF} style={ebookLinkStyle}>
             <span className={`ebook ${ebookIcon}`}></span>Borrow the ebook

@@ -17,29 +17,30 @@ const {
   headerApi,
 } = config;
 
-let router = express.Router(),
-  appEnvironment = process.env.APP_ENV || 'production',
-  apiRoot = api.root[appEnvironment],
-  options = {
-    includes: ['previous-list', 'next-list', 'item.tags', 'picks.age']
-  },
-  headerOptions = {
-    endpoint: `${apiRoot}${headerApi.endpoint}`,
-    includes: headerApi.includes,
-    filters: headerApi.filters
-  };
+const appEnvironment = process.env.APP_ENV || 'production';
+const apiRoot = api.root[appEnvironment];
+const options = {
+  includes: ['previous-list', 'next-list', 'item.tags', 'picks.age'],
+};
+const headerOptions = {
+  endpoint: `${apiRoot}${headerApi.endpoint}`,
+  includes: headerApi.includes,
+  filters: headerApi.filters,
+};
+const router = express.Router();
+
+function fetchApiData(url) {
+  return axios.get(url);
+}
 
 function getHeaderData() {
   const completeApiUrl = parser.getCompleteApi(headerOptions);
   return fetchApiData(completeApiUrl);
 }
 
-function fetchApiData(url) {
-  return axios.get(url);
-}
-
 function CurrentMonthData(req, res, next) {
-  const endpoint = apiRoot + apiEndpoint + `?filter[list-type]=monthly&` + fields + pageSize + includes; 
+  const endpoint = `${apiRoot}${apiEndpoint}?filter[list-type]=monthly&` +
+    `${fields}${pageSize}${includes}`;
 
   axios.all([getHeaderData(), fetchApiData(endpoint)])
     .then(axios.spread((headerData, staffPicks) => {
@@ -59,56 +60,57 @@ function CurrentMonthData(req, res, next) {
 
       res.locals.data = {
         BookStore: {
-          _bookDisplay:  'grid',
-          _age: 'Adult',
-          _gridDisplay: true,
-          _listDisplay: false,
-          _allFilters: [],
-          _initialFilters: filters,
-          _filters: [],
-          _updatedFilters: [],
-          _currentMonthPicks: currentMonthPicks,
-          _isotopesDidUpdate: false
+          bookDisplay: 'grid',
+          age: 'Adult',
+          gridDisplay: true,
+          listDisplay: false,
+          allFilters: [],
+          initialFilters: filters,
+          filters: [],
+          updatedFilters: [],
+          isotopesDidUpdate: false,
+          currentMonthPicks,
         },
         HeaderStore: {
           headerData: modelData,
           subscribeFormVisible: false,
-          myNyplVisible: false
+          myNyplVisible: false,
         },
-        endpoint: endpoint
+        endpoint,
       };
 
       next();
     }))
     // console error messages
     .catch(error => {
-      console.log('Error calling API CurrentMonthData: ' + error);
+      console.log(`Error calling API CurrentMonthData: ${error}`);
       res.locals.data = {
         BookStore: {
-          _bookDisplay:  'grid',
-          _age: 'Adult',
-          _gridDisplay: true,
-          _listDisplay: false,
-          _allFilters: [],
-          _initialFilters: [],
-          _filters: [],
-          _updatedFilters: [],
-          _currentMonthPicks: {},
-          _isotopesDidUpdate: false
+          bookDisplay: 'grid',
+          age: 'Adult',
+          gridDisplay: true,
+          listDisplay: false,
+          allFilters: [],
+          initialFilters: [],
+          filters: [],
+          updatedFilters: [],
+          currentMonthPicks: {},
+          isotopesDidUpdate: false,
         },
         HeaderStore: {
           headerData: [],
           subscribeFormVisible: false,
-          myNyplVisible: false
+          myNyplVisible: false,
         },
-        endpoint: ''
+        endpoint: '',
       };
       next();
     }); // end Axios call
 }
 
 function AnnualCurrentData(type, req, res, next) {
-  const endpoint = apiRoot + apiEndpoint + `?filter[list-type]=${type}&` + fields + pageSize + includes; 
+  const endpoint = `${apiRoot}${apiEndpoint}?filter[list-type]=${type}&` +
+    `${fields}${pageSize}${includes}`;
 
   axios.all([getHeaderData(), fetchApiData(endpoint)])
     .then(axios.spread((headerData, staffPicks) => {
@@ -117,7 +119,8 @@ function AnnualCurrentData(type, req, res, next) {
       // included array:
       const filters = _sortBy(
         parser.getOfType(returnedData.included, 'staff-pick-tag'),
-        (item) => { return item.id; });
+        item => item.id
+      );
       // parse the data
       const parsed = parser.parse(returnedData, options);
       const HeaderParsed = parser.parse(headerData.data, headerOptions);
@@ -128,49 +131,49 @@ function AnnualCurrentData(type, req, res, next) {
 
       res.locals.data = {
         BookStore: {
-          _bookDisplay:  'grid',
-          _age: 'Adult',
-          _gridDisplay: true,
-          _listDisplay: false,
-          _allFilters: [],
-          _initialFilters: filters,
-          _filters: [],
-          _updatedFilters: [],
-          _currentMonthPicks: currentMonthPicks,
-          _isotopesDidUpdate: false
+          bookDisplay: 'grid',
+          age: 'Adult',
+          gridDisplay: true,
+          listDisplay: false,
+          allFilters: [],
+          initialFilters: filters,
+          filters: [],
+          updatedFilters: [],
+          isotopesDidUpdate: false,
+          currentMonthPicks,
         },
         HeaderStore: {
           headerData: modelData,
           subscribeFormVisible: false,
-          myNyplVisible: false
+          myNyplVisible: false,
         },
-        endpoint: endpoint
+        endpoint,
       };
 
       next();
     }))
     // console error messages
     .catch(error => {
-      console.log('Error calling API AnnualCurrentData: ' + error);
+      console.log(`Error calling API AnnualCurrentData: ${error}`);
       res.locals.data = {
         BookStore: {
-          _bookDisplay:  'grid',
-          _age: 'Adult',
-          _gridDisplay: true,
-          _listDisplay: false,
-          _allFilters: [],
-          _initialFilters: [],
-          _filters: [],
-          _updatedFilters: [],
-          _currentMonthPicks: {},
-          _isotopesDidUpdate: false
+          bookDisplay: 'grid',
+          age: 'Adult',
+          gridDisplay: true,
+          listDisplay: false,
+          allFilters: [],
+          initialFilters: [],
+          filters: [],
+          updatedFilters: [],
+          currentMonthPicks: {},
+          isotopesDidUpdate: false,
         },
         HeaderStore: {
           headerData: [],
           subscribeFormVisible: false,
-          myNyplVisible: false
+          myNyplVisible: false,
         },
-        endpoint: ''
+        endpoint: '',
       };
       next();
     }); // end Axios call
@@ -189,9 +192,9 @@ function SelectAnnualData(req, res, next) {
 }
 
 function SelectMonthData(req, res, next) {
-  const month = req.params.monthOrAnnual,
-    id = req.params.idOrType,
-    endpoint = apiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
+  const month = req.params.monthOrAnnual;
+  const id = req.params.idOrType;
+  const endpoint = `${apiRoot}${apiEndpoint}/monthly-${month}?${fields}${includes}`;
 
   if (month === 'browse' && id === 'recommendations') {
     return next();
@@ -208,7 +211,8 @@ function SelectMonthData(req, res, next) {
       // included array:
       const filters = _sortBy(
         parser.getOfType(returnedData.included, 'staff-pick-tag'),
-        (item) => { return item.id; });
+        item => item.id
+      );
       // parse the data
       const selectedMonth = parser.parse(returnedData, options);
       const HeaderParsed = parser.parse(headerData.data, headerOptions);
@@ -217,48 +221,48 @@ function SelectMonthData(req, res, next) {
 
       res.locals.data = {
         BookStore: {
-          _bookDisplay:  'grid',
-          _age: 'Adult',
-          _gridDisplay: true,
-          _listDisplay: false,
-          _allFilters: [],
-          _initialFilters: filters,
-          _filters: [],
-          _updatedFilters: [],
-          _currentMonthPicks: currentMonthPicks,
-          _isotopesDidUpdate: false
+          bookDisplay:  'grid',
+          age: 'Adult',
+          gridDisplay: true,
+          listDisplay: false,
+          allFilters: [],
+          initialFilters: filters,
+          filters: [],
+          updatedFilters: [],
+          isotopesDidUpdate: false,
+          currentMonthPicks,
         },
         HeaderStore: {
           headerData: modelData,
           subscribeFormVisible: false,
-          myNyplVisible: false
+          myNyplVisible: false,
         },
-        endpoint: endpoint
+        endpoint,
       };
       next();
     }))
     // console error messages
     .catch(error => {
-      console.log('Error calling API SelectMonthData: ' + error);
+      console.log(`Error calling API SelectMonthData: ${error}`);
       res.locals.data = {
         BookStore: {
-          _bookDisplay:  'grid',
-          _age: 'Adult',
-          _gridDisplay: true,
-          _listDisplay: false,
-          _allFilters: [],
-          _initialFilters: [],
-          _filters: [],
-          _updatedFilters: [],
-          _currentMonthPicks: {},
-          _isotopesDidUpdate: false
+          bookDisplay:  'grid',
+          age: 'Adult',
+          gridDisplay: true,
+          listDisplay: false,
+          allFilters: [],
+          initialFilters: [],
+          filters: [],
+          updatedFilters: [],
+          currentMonthPicks: {},
+          isotopesDidUpdate: false,
         },
         HeaderStore: {
           headerData: [],
           subscribeFormVisible: false,
-          myNyplVisible: false
+          myNyplVisible: false,
         },
-        endpoint: ''
+        endpoint: '',
       };
       next();
     }); /* end Axios call */
@@ -266,7 +270,7 @@ function SelectMonthData(req, res, next) {
 
 function AjaxData(req, res) {
   let month = req.params.month,
-    endpoint = apiRoot + apiEndpoint + `/monthly-${month}?` + fields + includes;
+    endpoint = `${apiRoot}${apiEndpoint}/monthly-${month}?${fields}${includes}`;
 
   axios
     .get(endpoint)
@@ -275,13 +279,14 @@ function AjaxData(req, res) {
       const selectedMonth = parser.parse(returnedData, options);
       const filters = _sortBy(
         parser.getOfType(returnedData.included, 'staff-pick-tag'),
-        (item) => { return item.id; });
+        item => item.id
+      );
       const currentMonthPicks = PicksListModel.build(selectedMonth);
 
       res.json({
-        currentMonthPicks: currentMonthPicks,
-        filters: filters,
-        endpoint: endpoint
+        currentMonthPicks,
+        filters,
+        endpoint,
       });
     }); /* end axios call */
 }
