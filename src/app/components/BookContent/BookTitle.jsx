@@ -1,28 +1,24 @@
 import React from 'react';
-import Radium from 'radium';
+// import Radium from 'radium';
 
-class BookTitle extends React.Component {
-  // Constructor used in ES6
-  constructor(props) {
-    super(props);
-  }
+const BookTitle = (props) => {
+  const book = props.book;
+  const title = (book && book.item) ? book.item.title : 'Book Title';
 
-  render() {
-    const book = this.props.book;
-    let title = (book && book.item) ? book.item.title : 'Book Title';
+  return (
+    <div className={props.className}>
+      <h2>{title}</h2>
+    </div>
+  );
+};
 
-    return (
-      <div ref='BookTitle' className={this.props.className}>
-        <h2>{title}</h2>
-      </div>
-    );
-  }
+BookTitle.propTypes = {
+  book: React.PropTypes.object,
+  className: React.PropTypes.string,
 };
 
 BookTitle.defaultProps = {
   className: 'BookTitle',
-  lang: 'en',
-  onClick() {}
 };
 
-export default Radium(BookTitle);
+export default BookTitle;

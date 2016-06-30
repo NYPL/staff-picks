@@ -1,6 +1,5 @@
 import React from 'react';
-import Radium from 'radium';
-import Router from 'react-router';
+import radium from 'radium';
 import Modal from 'react-modal';
 
 import DocMeta from 'react-doc-meta';
@@ -14,7 +13,6 @@ import BookIntro from '../BookContent/BookIntro.jsx';
 import BookShare from '../BookContent/BookShare.jsx';
 
 import BookStore from '../../stores/BookStore.js';
-import BookActions from '../../actions/BookActions.js';
 
 import utils from '../../utils/utils.js';
 
@@ -24,21 +22,18 @@ if (global.window) {
 }
 
 class BookModal extends React.Component {
-  routeHandler(url) {
-    this.context.router.push(url);
-  }
   constructor(props) {
     super(props);
 
-    let paramID = this.props.params.id,
-      modalBook = {},
-      store = BookStore.getState(),
-      books = store._currentMonthPicks.picks,
-      params = this.props.params,
-      returnToText = 'RETURN TO STAFF PICKS',
-      annualType,
-      transitionRoute,
-      age;
+    const paramID = this.props.params.id;
+    const store = BookStore.getState();
+    const params = this.props.params;
+    let books = store._currentMonthPicks.picks;
+    let modalBook = {};
+    let returnToText = 'RETURN TO STAFF PICKS';
+    let annualType;
+    let transitionRoute;
+    let age;
 
     if (!books && !books.length) {
       if (this.props.data['staff-picks']) {
@@ -59,7 +54,7 @@ class BookModal extends React.Component {
 
     if (params.type && (params.type === 'childrens' || params.type === 'ya')) {
       transitionRoute = 'type';
-      annualType = {type: params.type};
+      annualType = { type: params.type };
 
       if (params.type === 'childrens') {
         returnToText = 'RETURN TO CHILDREN\'S BOOKS';
@@ -73,18 +68,18 @@ class BookModal extends React.Component {
       book: modalBook,
       transitionRoute,
       annualType,
-      returnToText
+      returnToText,
     };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this._getMetaData = this._getMetaData.bind(this);
+    this.getMetaData = this.getMetaData.bind(this);
   }
 
   openModal() {
     utils._trackPicks('Modal', 'Open');
 
     this.setState({
-      modalIsOpen: true
+      modalIsOpen: true,
     });
   }
 
@@ -92,29 +87,30 @@ class BookModal extends React.Component {
     utils._trackPicks('Modal', 'Closed');
 
     this.setState({
-      modalIsOpen: false
+      modalIsOpen: false,
     });
-    setTimeout(() => {
 
+    setTimeout(() => {
       let returnUrl = this.props.params.month;
 
       /* special cases for young adults and children */
-      if (this.props.params.type && (this.props.params.type === 'ya' || this.props.params.type === 'childrens')) {
+      if (this.props.params.type &&
+        (this.props.params.type === 'ya' || this.props.params.type === 'childrens')) {
         returnUrl = `annual/${this.props.params.type}`;
       }
 
-      return this.routeHandler('/browse/recommendations/staff-picks/' + returnUrl);
+      return this.routeHandler(`/browse/recommendations/staff-picks/${returnUrl}`);
     }, 200);
   }
 
-  _getMetaData(selection) {
+  getMetaData(selection) {
     let type = 'staffpicks';
 
     if (selection && selection.length) {
       type = selection;
     }
 
-    let heroData = {
+    const heroData = {
       staffpicks: {
         type: 'staffpicks',
         title: 'RECOMMENDATIONS',
@@ -124,7 +120,7 @@ class BookModal extends React.Component {
           'out there. Our expert staff members pick out their favorites ' +
           'to help you find your next one.',
         image: '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png',
-        url: 'http://www.nypl.org/browse/recommendations/staff-picks/'
+        url: 'http://www.nypl.org/browse/recommendations/staff-picks/',
       },
       childrens: {
         type: 'childrens',
@@ -132,7 +128,7 @@ class BookModal extends React.Component {
         description: 'Children\'s Books',
         intro: 'Explore our annual selection of 100 notable titles for reading and sharing.',
         image: '/browse/recommendations/staff-picks/src/client/images/desktop.childrens100.FIN.png',
-        url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/childrens'
+        url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/childrens',
       },
       ya: {
         type: 'ya',
@@ -140,25 +136,31 @@ class BookModal extends React.Component {
         description: 'Best Books for Teens',
         intro: 'Explore our annual selection of outstanding young adult titles.',
         image: '/browse/recommendations/staff-picks/src/client/images/desktop.banner.YA.FIN.png',
-        url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/ya'
-      }
+        url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/ya',
+      },
     };
 
     return heroData[type];
   }
 
+  routeHandler(url) {
+    this.context.router.push(url);
+  }
+
   render() {
-    let book = this.state.book,
-      title = 'Recommendations | The New York Public Library',
-      imageSrc = '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png',
-      description = 'True stories, tales of courage, historical romances, ' +
+    const book = this.state.book;
+    let title = 'Recommendations | The New York Public Library';
+    let imageSrc = '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png';
+    let description = 'True stories, tales of courage, historical romances, ' +
         'edge-of-your-seat thrillers... There is a huge world of books ' +
         'out there. Our expert staff members pick out their favorites ' +
-        'to help you find your next one.',
-      bookId,
-      metaType,
-      metaTagData,
-      imageLink;
+        'to help you find your next one.';
+    let bookId;
+    let metaType;
+    let metaTagData;
+    let imageLink;
+    let modalTags;
+    let tags;
 
     if (!this.state.annualType) {
       metaType = 'staffpicks';
@@ -166,52 +168,57 @@ class BookModal extends React.Component {
       metaType = this.state.annualType.type;
     }
 
-    metaTagData = this._getMetaData(metaType);
-    
+    metaTagData = this.getMetaData(metaType);
     description = metaTagData.intro;
 
     if (book.item) {
       title = book.item.title;
       description = book.text;
       imageSrc = book.item.imageSlug;
-      bookId= book.item.id;
+      bookId = book.item.id;
     }
 
-    imageLink = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?` +
+    imageLink = 'https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?' +
       `&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
 
-    let modalTags = [
-      {property: 'og:title', content: title},
-      {property: 'og:image', content: imageLink},
-      {property: 'og:description', content: description},
-      {property: 'og:url', content: `${metaTagData.url}/${bookId}`},
-      {name: 'twitter:title', content: title},
-      {name: 'twitter:description', content: description},
-      {name: 'twitter:image', content: imageLink}
-      ],
-      tags = utils.metaTagUnion(modalTags);
+    modalTags = [
+      { property: 'og:title', content: title },
+      { property: 'og:image', content: imageLink },
+      { property: 'og:description', content: description },
+      { property: 'og:url', content: `${metaTagData.url}/${bookId}` },
+      { name: 'twitter:title', content: title },
+      { name: 'twitter:description', content: description },
+      { name: 'twitter:image', content: imageLink },
+    ];
+    tags = utils.metaTagUnion(modalTags);
 
     return (
       <div>
         <DocMeta tags={tags} />
-        <Modal className={this.props.className} isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
+        <Modal
+          className={this.props.className}
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+        >
           <CloseButton
             className={`${this.props.className}__closeBtn`}
             onClick={this.closeModal}
-            label={this.state.returnToText} />
-          <BookTitle className={`${this.props.className}__BookTitle`} book={this.state.book} />
+            label={this.state.returnToText}
+          />
+          <BookTitle className={`${this.props.className}__BookTitle`} book={book} />
           <div className={`${this.props.className}__left-column`}>
-            <div key='ImageContainer' className={`${this.props.className}__left-column__image`}>
+            <div key="ImageContainer" className={`${this.props.className}__left-column__image`}>
               <Book
                 book={this.state.book}
                 className={`${this.props.className}__left-column__image__cover`}
               />
             </div>
-            <div key='ShareContainer' className={`${this.props.className}__left-column__share`}>
+            <div key="ShareContainer" className={`${this.props.className}__left-column__share`}>
               <BookShare
                 shareType={this.state.annualType}
                 className={`${this.props.className}__left-column__share-items`}
-                book={this.state.book} />
+                book={this.state.book}
+              />
             </div>
           </div>
           <BookIntro book={this.state.book} />
@@ -220,11 +227,17 @@ class BookModal extends React.Component {
       </div>
     );
   }
+}
+
+BookModal.propTypes = {
+  className: React.PropTypes.string,
+  params: React.PropTypes.object,
+  data: React.PropTypes.array,
 };
 
 BookModal.defaultProps = {
   className: 'BookModal',
-  id: 'BookModal'
+  id: 'BookModal',
 };
 
 BookModal.contextTypes = {
@@ -233,4 +246,4 @@ BookModal.contextTypes = {
   },
 };
 
-export default Radium(BookModal);
+export default radium(BookModal);

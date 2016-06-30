@@ -1,59 +1,34 @@
 import React from 'react';
-import Radium from 'radium';
 
-import { pluck as _pluck, flatten as _flatten } from 'underscore';
+import TagList from '../TagList/TagList.jsx';
 
-class TagList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+import {
+  pluck as _pluck,
+  flatten as _flatten,
+} from 'underscore';
 
-  render() {
-    let tags = this.props.tags.map((tag, i) => {
-      return (
-        <li key={i}>{tag}</li>
-      );
-    });
+const BookIntro = (props) => {
+  const getTags = (tags) => _flatten(_pluck(tags, 'tag'));
 
-    return (
-      <div className={this.props.className} style={this.props.style}>
-        <p>Filed under:</p>
-        <ul>
-          {tags}
-        </ul>
-      </div>
-    );
-  }
+  const book = props.book;
+  const tags = getTags(book.item.tags);
+  const author = book.item.author;
+
+  return (
+    <div className={`${props.className}`}>
+      <p className={`${props.className}__author`}>By {author}</p>
+      <TagList className={`${props.className}__tags`} tags={tags} />
+    </div>
+  );
 };
 
-class BookIntro extends React.Component {
-  // Constructor used in ES6
-  constructor(props) {
-    super(props);
-  }
-
-  _getTags(tags) {
-    return _flatten(_pluck(tags, 'tag'));
-  }
-
-  render() {
-    const book = this.props.book,
-      tags = this._getTags(book.item.tags),
-      author = book.item.author;
-
-    return (
-      <div className={`${this.props.className}`}>
-        <p className={`${this.props.className}__author`}>By {author}</p>
-        <TagList className={`${this.props.className}__tags`} tags={tags} />
-      </div>
-    );
-  }
+BookIntro.propTypes = {
+  book: React.PropTypes.object,
+  className: React.PropTypes.string,
 };
 
 BookIntro.defaultProps = {
   className: 'BookIntro',
-  lang: 'en',
-  onClick() {}
 };
 
-export default Radium(BookIntro);
+export default BookIntro;
