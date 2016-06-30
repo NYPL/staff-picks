@@ -30,7 +30,7 @@ class BookDisplayButtons extends React.Component {
   /* Utility Methods should be declared below the render method */
   handleClick(bookDisplay) {
     BookActions.updateBookDisplay(bookDisplay);
-    utils._trackPicks('Display Selected', bookDisplay);
+    utils.trackPicks('Display Selected', bookDisplay);
   }
 
   // Will eventually need to break this out into its own component.
@@ -45,7 +45,7 @@ class BookDisplayButtons extends React.Component {
   }
 
   render() {
-    const gridActive = this.state._bookDisplay === 'grid';
+    const gridActive = this.state.bookDisplay === 'grid';
 
     const gridActiveButton = gridActive ? 'active' : '';
     const listActiveButton = !gridActive ? 'active' : '';

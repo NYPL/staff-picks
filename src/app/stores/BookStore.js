@@ -1,6 +1,7 @@
-import BookActions from '../actions/BookActions';
-import { indexOf as _indexOf } from 'underscore';
 import alt from 'dgx-alt-center';
+import { indexOf as _indexOf } from 'underscore';
+
+import BookActions from '../actions/BookActions';
 
 class BookStore {
   constructor() {
@@ -12,7 +13,7 @@ class BookStore {
       updateNewFilters: BookActions.UPDATE_NEW_FILTERS,
       updatePicks: BookActions.UPDATE_PICKS,
       isotopesDidUpdate: BookActions.ISOTOPES_DID_UPDATE,
-      updateInitialFilters: BookActions.UPDATE_INITIAL_FILTERS
+      updateInitialFilters: BookActions.UPDATE_INITIAL_FILTERS,
     });
 
     this.exportPublicMethods({
@@ -22,82 +23,81 @@ class BookStore {
       getAge: this.getAge,
       getFilters: this.getFilters,
       getUpdatedFilters: this.getUpdatedFilters,
-      updateBookDisplay: this.updateBookDisplay
+      updateBookDisplay: this.updateBookDisplay,
     });
 
     this.on('init', () => {
-      this._bookDisplay =  'grid';
-      this._age = 'Adult';
-      this._gridDisplay = true;
-      this._listDisplay = false;
-      this._allFilters = [];
-      this._filters = [];
-      this._initialFilters = [];
-      this._updatedFilters = [];
-      this._currentMonthPicks = {};
-      this._isotopesDidUpdate = false;
+      this.bookDisplay = 'grid';
+      this.age = 'Adult';
+      this.gridDisplay = true;
+      this.listDisplay = false;
+      this.allFilters = [];
+      this.filters = [];
+      this.initialFilters = [];
+      this.updatedFilters = [];
+      this.currentMonthPicks = {};
+      this.isotopesDidUpdate = false;
     });
   }
 
   updateBookDisplay(bookDisplay) {
-    this._bookDisplay = bookDisplay;
+    this.bookDisplay = bookDisplay;
   }
   updateFilterAge(age) {
-    this._age = age;
+    this.age = age;
   }
   toggleBookFilter(filter) {
-    var found = _indexOf(this._filters, filter);
+    const found = _indexOf(this.filters, filter);
 
-    if (found != -1) {
-      this._filters.splice(found, 1);
+    if (found !== -1) {
+      this.filters.splice(found, 1);
     } else {
-      this._filters.push(filter);
+      this.filters.push(filter);
     }
   }
   clearFilters() {
-    this._filters = [];
+    this.filters = [];
   }
   updateNewFilters(updatedFilters) {
-    this._updatedFilters = updatedFilters;
+    this.updatedFilters = updatedFilters;
   }
   updatePicks(picks) {
-    this._currentMonthPicks = picks;
+    this.currentMonthPicks = picks;
   }
   isotopesDidUpdate(bool) {
-    this._isotopesDidUpdate = bool;
+    this.isotopesDidUpdate = bool;
   }
   updateInitialFilters(filters) {
-    this._initialFilters = filters;
+    this.initialFilters = filters;
   }
-
 
   // Maybe not needed?
-  getBookDisplay () {
-    return this._bookDisplay;
+  getBookDisplay() {
+    return this.bookDisplay;
   }
   getActiveList() {
-    return this._listDisplay;
+    return this.listDisplay;
   }
   getActiveGrid() {
-    return this._gridDisplay;
+    return this.gridDisplay;
   }
   // Gets age from the tabs
-  getAge () {
-    return this._age;
+  getAge() {
+    return this.age;
   }
-  getFilters () {
-    return this._filters;
+  getFilters() {
+    return this.filters;
   }
-  getUpdatedFilters () {
-    return this._updatedFilters;
+  getUpdatedFilters() {
+    return this.updatedFilters;
   }
   setActiveDisplay(type) {
     if (type === 'grid') {
-      this._gridDisplay = true;
-      this._listDisplay = false;
+      this.gridDisplay = true;
+      this.listDisplay = false;
     } else {
-      this._gridDisplay = false;
-      this._listDisplay = true;
+      this.gridDisplay = false;
+      this.listDisplay = true;
     }
   }
 }

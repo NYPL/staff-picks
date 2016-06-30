@@ -1,5 +1,4 @@
 import React from 'react';
-// import Radium from 'radium';
 
 const BookTitle = (props) => {
   const book = props.book;

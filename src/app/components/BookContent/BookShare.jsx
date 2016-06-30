@@ -88,7 +88,7 @@ class BookShare extends React.Component {
         <li
           key="fb"
           style={[styles.social, styles.facebook]}
-          onClick={() => utils._trackPicks('Social Sharing', `Facebook: ${bookTitle}`)}
+          onClick={() => utils.trackPicks('Social Sharing', `Facebook: ${bookTitle}`)}
         >
           <a
             href={this.state.facebook}
@@ -101,14 +101,14 @@ class BookShare extends React.Component {
         <li
           key="twtr"
           style={[styles.social, styles.twitter]}
-          onClick={() => utils._trackPicks('Social Sharing', `Twitter: ${bookTitle}`)}
+          onClick={() => utils.trackPicks('Social Sharing', `Twitter: ${bookTitle}`)}
         >
           <a href={this.state.twitter} style={styles.shareLink} label="Share on twitter"></a>
         </li>
         <li
           key="tumblr"
           style={[styles.social, styles.tumblr]}
-          onClick={() => utils._trackPicks('Social Sharing', `Tumblr: ${bookTitle}`)}
+          onClick={() => utils.trackPicks('Social Sharing', `Tumblr: ${bookTitle}`)}
         >
           <a href={this.state.tumblr} target="_blank" style={styles.shareLink}></a>
         </li>

@@ -1,25 +1,23 @@
 import React from 'react';
-import Radium from 'radium';
 
-class HeroTitle extends React.Component {
-  // Constructor used in ES6
-  constructor(props) {
-    super(props);
-  }
+const HeroTitle = (props) => (
+  <div id={props.id} className={props.className}>
+    <h3 key="HeroTitle">{props.title}</h3>
+    <p key="HeroDes" className={`${props.className}__des`}>
+      {props.des}
+    </p>
+    <p key="HeroIntro" className={`${props.className}__intro`}>
+      {props.intro}
+    </p>
+  </div>
+);
 
-  render() {
-    return (
-      <div id={this.props.id} className={this.props.className}>
-        <h3 key='HeroTitle'>{this.props.title}</h3>
-        <p key='HeroDes' className={`${this.props.className}__des`}>
-          {this.props.des}
-        </p>
-        <p key='HeroIntro' className={`${this.props.className}__intro`}>
-          {this.props.intro}
-        </p>
-      </div>
-    );
-  }
+HeroTitle.propTypes = {
+  id: React.PropTypes.string,
+  className: React.PropTypes.string,
+  des: React.PropTypes.string,
+  intro: React.PropTypes.string,
+  title: React.PropTypes.string,
 };
 
-export default Radium(HeroTitle);
+export default HeroTitle;

@@ -51,10 +51,10 @@ class BookFilters extends React.Component {
 
   onChange() {
     const storeState = BookStore.getState();
-    const activeFilters = storeState._filters;
-    const age = storeState._age;
+    const activeFilters = storeState.filters;
+    const age = storeState.age;
     const params = this.props.params;
-    const bookElems = storeState._updatedFilters;
+    const bookElems = storeState.updatedFilters;
     const updatedBooksElems = [];
     let filteredFilters = [];
 
@@ -65,13 +65,13 @@ class BookFilters extends React.Component {
     });
 
     // update filter list in state
-    if (storeState._isotopesDidUpdate) {
+    if (storeState.isotopesDidUpdate) {
       this.setFilters();
     }
 
     // Update/reset the filters based on a new age
-    if (this.state._age !== age || storeState._isotopesDidUpdate) {
-      this.setState({ _age: age });
+    if (this.state.age !== age || storeState.isotopesDidUpdate) {
+      this.setState({ age: age });
       _each(this.state.drivenByFilters, filter => {
         filter.active = false;
         filter.show = true;
@@ -95,7 +95,7 @@ class BookFilters extends React.Component {
     }
 
     // For clearing the filters and unselecting a filter.
-    if (!storeState._filters.length) {
+    if (!storeState.filters.length) {
       _each(this.state.drivenByFilters, filter => {
         filter.active = false;
         filter.show = true;
@@ -107,12 +107,12 @@ class BookFilters extends React.Component {
     } else {
       _each(bookElems, elem => {
         const classes = elem.className;
-        let n = storeState._filters.length;
+        let n = storeState.filters.length;
         let filters;
 
         if (classes.indexOf(age) !== -1 ||
             (params && params.type && (params.type === 'childrens' || params.type === 'ya'))) {
-          _each(storeState._filters, filter => {
+          _each(storeState.filters, filter => {
             if (classes.indexOf(filter) !== -1) {
               n -= 1;
             }
@@ -148,7 +148,7 @@ class BookFilters extends React.Component {
 
   setFilters() {
     const store = BookStore.getState();
-    const filterList = store._initialFilters;
+    const filterList = store.initialFilters;
     const themeFilters = [];
     const drivenByFilters = [];
 
@@ -213,7 +213,7 @@ class BookFilters extends React.Component {
     e.preventDefault();
     BookActions.clearFilters();
 
-    utils._trackPicks('Filters', 'Clear All Filters');
+    utils.trackPicks('Filters', 'Clear All Filters');
   }
 
   handleClick(filter) {
@@ -226,7 +226,7 @@ class BookFilters extends React.Component {
       label = `Unselected filter: ${filterType}`;
     }
 
-    utils._trackPicks('Filters', label);
+    utils.trackPicks('Filters', label);
 
     filter.active = !filter.active;
     BookActions.toggleBookFilter(filterType);
@@ -253,7 +253,7 @@ class BookFilters extends React.Component {
           <ul>
             {this.filterItems(this.state.themeFilters)}
           </ul>
-          {storeState._filters.length ?
+          {storeState.filters.length ?
             <div className="clearFilters" style={styles.clearFilters}>
               <a href="#" onClick={this.clearFilters}>
                 Clear Filters
