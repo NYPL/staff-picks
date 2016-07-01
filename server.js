@@ -22,6 +22,9 @@ import Iso from 'iso';
 import appRoutes from './src/app/routes/routes.jsx';
 import ApiRoutes from './src/server/ApiRoutes/ApiRoutes.js';
 
+// Feature Flags Module
+import FeatureFlags from 'dgx-feature-flags';
+
 // URL configuration
 const ROOT_PATH = __dirname;
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
@@ -74,10 +77,15 @@ app.use('/', (req, res) => {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
       const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
-      var metaTags = DocMeta.rewind();
-      var renderedTags = metaTags.map((tag, index) =>
-        ReactDOMServer.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
+      const metaTags = DocMeta.rewind();
+      const renderedTags = metaTags.map((tag, index) =>
+        ReactDOMServer.renderToString(<meta data-doc-meta="true" key={index} {...tag} />)
+      );
+
       iso.add(html, alt.flush());
+
+      // Fire off the Feature Flag prior to render
+      FeatureFlags.utils.activateFeature('shop-link');
 
       res
         .status(200)
