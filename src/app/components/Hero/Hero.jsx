@@ -1,34 +1,33 @@
 // Library import
 import React from 'react';
-import Radium from 'radium';
+import radium from 'radium';
 
 // Component import
 import HeroTitle from './HeroTitle/HeroTitle.jsx';
-import HeroImage from './HeroImage/HeroImage.jsx';
-
-import cx from 'classnames';
 
 import DocMeta from 'react-doc-meta';
 import utils from '../../utils/utils';
 
-// import appConfig from '../../../../appConfig.js';
+const styles = {
+  childrens: {
+    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/im' +
+      'ages/desktop.childrens100.FIN.png")',
+  },
+  ya: {
+    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/im' +
+      'ages/desktop.banner.YA.FIN.png")',
+  },
+};
 
 class Hero extends React.Component {
-  // Constructor used in ES6
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
-  _getHeroData(selection) {
+  getHeroData(selection) {
     let type = 'staffpicks';
 
     if (selection && selection.length) {
       type = selection;
     }
 
-    let heroData = {
+    const heroData = {
       staffpicks: {
         type: 'staffpicks',
         title: 'RECOMMENDATIONS',
@@ -38,7 +37,7 @@ class Hero extends React.Component {
             'out there. Our expert staff members pick out their favorites ' +
             'to help you find your next one.',
         image: '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png',
-        url: 'http://www.nypl.org/browse/recommendations/staff-picks/'
+        url: 'http://www.nypl.org/browse/recommendations/staff-picks/',
       },
       childrens: {
         type: 'childrens',
@@ -46,7 +45,7 @@ class Hero extends React.Component {
         description: 'Children\'s Books',
         intro: 'Explore our annual selection of 100 notable titles for reading and sharing.',
         image: '/browse/recommendations/staff-picks/src/client/images/c100.OG.png',
-        url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/childrens'
+        url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/childrens',
       },
       ya: {
         type: 'ya',
@@ -54,17 +53,17 @@ class Hero extends React.Component {
         description: 'Best Books for Teens',
         intro: 'Explore our annual selection of outstanding young adult titles.',
         image: '/browse/recommendations/staff-picks/src/client/images/YA.OG.png',
-        url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/ya'
-      }
+        url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/ya',
+      },
     };
 
     return heroData[type];
   }
 
-  _getType() {
-    let clientParam = (this.props.params && this.props.params.type) ?
-        this.props.params.type : '',
-      route = this.props.location.pathname || clientParam;
+  getType() {
+    const clientParam = (this.props.params && this.props.params.type) ?
+        this.props.params.type : '';
+    const route = this.props.location.pathname || clientParam;
 
     if (route.indexOf('childrens') !== -1) {
       return 'childrens';
@@ -78,52 +77,49 @@ class Hero extends React.Component {
   }
 
   render() {
-    let heroData = this._getHeroData(this._getType()),
-      image = heroData.type === 'staffpicks' ?
-        <div key='HeroImageContainer' className={`${this.props.className}__image`}></div>
-        : null,
-      bannerStyle = styles[heroData.type],
-      hompageTags = [
-        {property: 'og:title', content: 'Recommendations | The New York Public Library'},
-        {property: 'og:image', content: heroData.image},
-        {property: 'og:description', content: `${heroData.description} | ${heroData.intro}`},
-        {property: 'og:url', content: heroData.url},
-        {name: 'twitter:title', content: 'Recommendations | The New York Public Library'},
-        {name: 'twitter:description', content: `${heroData.description} | ${heroData.intro}`},
-        {name: 'twitter:image', content: heroData.image}
-      ],
-      tags = utils.metaTagUnion(hompageTags);
+    const heroData = this.getHeroData(this.getType());
+    const image = heroData.type === 'staffpicks' ?
+      <div key="HeroImageContainer" className={`${this.props.className}__image`}></div>
+      : null;
+    const bannerStyle = styles[heroData.type];
+    const homepageTags = [
+      { property: 'og:title', content: 'Recommendations | The New York Public Library' },
+      { property: 'og:image', content: heroData.image },
+      { property: 'og:description', content: `${heroData.description} | ${heroData.intro}` },
+      { property: 'og:url', content: heroData.url },
+      { name: 'twitter:title', content: 'Recommendations | The New York Public Library' },
+      { name: 'twitter:description', content: `${heroData.description} | ${heroData.intro}` },
+      { name: 'twitter:image', content: heroData.image },
+    ];
+    const tags = utils.metaTagUnion(homepageTags);
 
     return (
-      <div key='Hero' className={this.props.className} style={bannerStyle}>
+      <div key="Hero" className={this.props.className} style={bannerStyle}>
         <DocMeta tags={tags} />
-        <div key='HeroContainer' className={`${this.props.className}__container`}>
-          <div key='TextContainer' className={`${this.props.className}__text`}>
+        <div key="HeroContainer" className={`${this.props.className}__container`}>
+          <div key="TextContainer" className={`${this.props.className}__text`}>
             <HeroTitle
               className={`${this.props.className}__text__HeroTitle`}
               title={heroData.title}
               des={heroData.description}
-              intro={heroData.intro} />
+              intro={heroData.intro}
+            />
           </div>
           {image}
         </div>
       </div>
     );
   }
+}
+
+Hero.propTypes = {
+  params: React.PropTypes.object,
+  location: React.PropTypes.object,
+  className: React.PropTypes.string,
 };
 
 Hero.defaultProps = {
   className: 'Hero',
 };
 
-const styles= {
-  childrens: {
-    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/desktop.childrens100.FIN.png")'
-  },
-  ya: {
-    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/images/desktop.banner.YA.FIN.png")'
-  },
-  staffpicks: {}
-};
-
-export default Radium(Hero);
+export default radium(Hero);

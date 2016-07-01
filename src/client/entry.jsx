@@ -29,6 +29,8 @@ window.onload = () => {
 
     if (!window.dgxFeatureFlags) {
       window.dgxFeatureFlags = FeatureFlags.utils;
+
+      FeatureFlags.utils.activateFeature('shop-link');
     }
 
     const appHistory = useRouterHistory(createBrowserHistory)();

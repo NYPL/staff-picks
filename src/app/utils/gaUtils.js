@@ -1,40 +1,40 @@
 import ga from 'react-ga';
 
-function gaUtils() {
+function GAUtils() {
   /**
-   * _trackGeneralEvent(category)
+   * trackGeneralEvent(category)
    * Track a GA event.
    *
    * @param {category} String Category for GA event.
    * @param {action} String Action for GA event.
    * @param {label} String Label for GA event.
    */
-  this._trackGeneralEvent = (category, action, label) => {
-    return ga.event({
-      category: category,
-      action: action,
-      label: label
-    });
-  };
+  this.trackGeneralEvent = (category, action, label) => (
+    ga.event({
+      category,
+      action,
+      label,
+    })
+  );
 
 
   /**
-   * _trackEvent(category)
+   * trackEvent(category)
    * Track a GA click event, wrapped in a curried function.
    *
    * @param {category} String Category for GA event.
    * @returns {function} Returns a function with the category set.
    *  Then you pass in the action and the label.
    */
-  this._trackEvent = category => {
+  this.trackEvent = category => {
     return (action, label) => {
       return ga.event({
-        category: category,
-        action: action,
-        label: label
+        category,
+        action,
+        label,
       });
     };
   };
 }
 
-export default new gaUtils();
+export default new GAUtils();
