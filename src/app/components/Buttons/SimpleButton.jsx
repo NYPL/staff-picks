@@ -5,7 +5,7 @@ import gaUtils from '../../utils/gaUtils.js';
 
 const SimpleButton = (props) => {
   const onClick = () => {
-    gaUtils._trackGeneralEvent(props.gaCategory, props.gaAction, props.gaLabel);
+    gaUtils.trackGeneralEvent(props.gaCategory, props.gaAction, props.gaLabel);
     props.onClick();
   };
 

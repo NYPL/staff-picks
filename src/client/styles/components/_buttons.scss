@@ -43,8 +43,8 @@
   height: auto;
   margin: 0 0 20px 0;
   padding: 5px 4px 30px 36px;
-  top: 3%;
-  left: 90%;
+  top: 2%;
+  left: 75%;
   @include breakpoint($min, 480px) {
     display: none;
   }
