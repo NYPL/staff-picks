@@ -3,11 +3,13 @@ import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 import { sortBy as _sortBy } from 'underscore';
 
-import HeaderModel from '../../app/utils/HeaderItemModel.js';
+import { navConfig } from 'dgx-header-component';
+import Model from 'dgx-model-data';
 import PicksListModel from '../../app/utils/PicksListModel.js';
 
 import config from '../../../appConfig.js';
 
+const { HeaderItemModel } = Model;
 const {
   apiEndpoint,
   fields,
@@ -55,7 +57,7 @@ function CurrentMonthData(req, res, next) {
       const HeaderParsed = parser.parse(headerData.data, headerOptions);
         // Since the endpoint returns a list of monthly picks
       const currentMonth = parsed[0];
-      const modelData = HeaderModel.build(HeaderParsed);
+      const modelData = HeaderItemModel.build(HeaderParsed);
       const currentMonthPicks = PicksListModel.build(currentMonth);
 
       res.locals.data = {
@@ -72,7 +74,7 @@ function CurrentMonthData(req, res, next) {
           currentMonthPicks,
         },
         HeaderStore: {
-          headerData: modelData,
+          headerData: navConfig.current,
           subscribeFormVisible: false,
           myNyplVisible: false,
         },
@@ -126,7 +128,7 @@ function AnnualCurrentData(type, req, res, next) {
       const HeaderParsed = parser.parse(headerData.data, headerOptions);
       // Since the endpoint returns a list of monthly picks
       const currentMonth = parsed[0];
-      const modelData = HeaderModel.build(HeaderParsed);
+      const modelData = HeaderItemModel.build(HeaderParsed);
       const currentMonthPicks = PicksListModel.build(currentMonth);
 
       res.locals.data = {
@@ -143,7 +145,7 @@ function AnnualCurrentData(type, req, res, next) {
           currentMonthPicks,
         },
         HeaderStore: {
-          headerData: modelData,
+          headerData: navConfig.current,
           subscribeFormVisible: false,
           myNyplVisible: false,
         },
@@ -216,7 +218,7 @@ function SelectMonthData(req, res, next) {
       // parse the data
       const selectedMonth = parser.parse(returnedData, options);
       const HeaderParsed = parser.parse(headerData.data, headerOptions);
-      const modelData = HeaderModel.build(HeaderParsed);
+      const modelData = HeaderItemModel.build(HeaderParsed);
       const currentMonthPicks = PicksListModel.build(selectedMonth);
 
       res.locals.data = {
@@ -233,7 +235,7 @@ function SelectMonthData(req, res, next) {
           currentMonthPicks,
         },
         HeaderStore: {
-          headerData: modelData,
+          headerData: navConfig.current,
           subscribeFormVisible: false,
           myNyplVisible: false,
         },

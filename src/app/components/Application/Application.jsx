@@ -1,7 +1,7 @@
 import React from 'react';
 
 // NYPL Components
-import Header from 'dgx-header-component';
+import { Header } from 'dgx-header-component';
 import Footer from 'dgx-react-footer';
 import Hero from '../Hero/Hero.jsx';
 import AgeTabs from '../AgeTabs/AgeTabs.jsx';
