@@ -182,12 +182,18 @@ function AnnualCurrentData(type, req, res, next) {
 }
 
 function SelectAnnualData(req, res, next) {
-  if (req.params.idOrType === 'childrens') {
+  const idOrType = req.params.idOrType;
+
+  if (idOrType === 'childrens') {
     return AnnualCurrentData('c100', req, res, next);
   }
 
-  if (req.params.idOrType === 'ya') {
+  if (idOrType === 'ya') {
     return AnnualCurrentData('ya100', req, res, next);
+  }
+
+  if (!idOrType !== 'childrens' || idOrType !== 'ya') {
+    return res.redirect('/browse/recommendations/staff-picks/');
   }
 
   return CurrentMonthData(req, res, next);
@@ -204,6 +210,14 @@ function SelectMonthData(req, res, next) {
 
   if (month === 'annual') {
     return SelectAnnualData(req, res, next);
+  }
+
+  if (month === 'api') {
+    return next();
+  }
+
+  if (!month.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)) {
+    return res.redirect('/browse/recommendations/staff-picks/');
   }
 
   axios.all([getHeaderData(), fetchApiData(endpoint)])
