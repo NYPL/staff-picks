@@ -22,7 +22,7 @@ const {
 const appEnvironment = process.env.APP_ENV || 'production';
 const apiRoot = api.root[appEnvironment];
 const options = {
-  includes: ['previous-list', 'next-list', 'item.tags', 'picks.age'],
+  includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age'],
 };
 const headerOptions = {
   endpoint: `${apiRoot}${headerApi.endpoint}`,
