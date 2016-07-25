@@ -16,11 +16,15 @@
   }
 
   .divider {
-    width: 160px;
+    width: 220px;
     height: 2px;
     margin: 5px 0 15px 0;
     background: $lib-red;
     display: inline-block;
+
+    @include breakpoint($min, $post-mobile-phone) {      
+      width: 100%;
+    }
   }
 
   &-lists {
