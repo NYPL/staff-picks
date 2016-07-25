@@ -270,11 +270,8 @@ span[class*="icon-"] {
       width: 33%;
     }
     @include breakpoint($min, $post-palm) {
-      max-width: 160px;
-      margin-right: 20px;
-    }
-    @include breakpoint($min, $post-tablet) {
-      max-width: 160px;
+      max-width: 167px;
+      margin-right: 15px;
     }
 
     .sidebar-content {
