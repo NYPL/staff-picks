@@ -7,6 +7,7 @@ import {
   extend as _extend,
   indexOf as _indexOf,
   union as _union,
+  contains as _contains,
 } from 'underscore';
 
 import BookStore from '../../stores/BookStore.js';
@@ -77,7 +78,9 @@ class BookFilters extends React.Component {
         filter.show = true;
         filter.remove = false;
         _each(updatedBooksElems, elem => {
-          if (elem.className.indexOf(filter.id) !== -1) {
+          const classes = (elem.className.split(' '));
+
+          if (_contains(classes, filter.id)) {
             filter.remove = true;
           }
         });
@@ -87,7 +90,9 @@ class BookFilters extends React.Component {
         filter.show = true;
         filter.remove = false;
         _each(updatedBooksElems, elem => {
-          if (elem.className.indexOf(filter.id) !== -1) {
+          const classes = (elem.className.split(' '));
+
+          if (_contains(classes, filter.id)) {
             filter.remove = true;
           }
         });
