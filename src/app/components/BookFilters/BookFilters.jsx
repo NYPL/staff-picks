@@ -286,10 +286,6 @@ class BookFilters extends React.Component {
         />
         <span className="divider"></span>
         <h2>What would you like to read?</h2>
-        <div className="explanation">
-          Use the filters below to explore our staff favorites.
-          (You can also combine filters.)
-        </div>
         <div className="BookFilters-lists">
           {filterList}
           {store.filters.length ?
