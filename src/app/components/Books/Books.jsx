@@ -1,3 +1,5 @@
+/* global $, Isotope */
+
 import React from 'react';
 import radium from 'radium';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
