@@ -1,5 +1,4 @@
 import React from 'react';
-import radium from 'radium';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {
@@ -8,6 +7,8 @@ import {
   indexOf as _indexOf,
   union as _union,
   contains as _contains,
+  chain as _chain,
+  sortBy as _sortBy,
 } from 'underscore';
 
 import BookStore from '../../stores/BookStore.js';
@@ -15,6 +16,7 @@ import BookActions from '../../actions/BookActions.js';
 import CloseButton from '../Buttons/CloseButton.jsx';
 
 import utils from '../../utils/utils.js';
+import staffPicksDate from '../../utils/DateService.js';
 
 const styles = {
   clearFilters: {
@@ -153,16 +155,25 @@ class BookFilters extends React.Component {
 
   setFilters() {
     const store = BookStore.getState();
-    const filterList = store.initialFilters;
+    const initialFilters = store.initialFilters;
     const themeFilters = [];
     const drivenByFilters = [];
+    const seasonYear = staffPicksDate(store.currentMonthPicks.date);
 
-    _each(filterList, filter => {
+    _each(initialFilters, filter => {
       filter.active = false;
       filter.show = true;
       filter.remove = true;
       if (filter.attributes.tag.indexOf('Driven') !== -1) {
-        filter.attributes.displayName = (filter.attributes.tag).replace(/\bDriven/ig, '');
+        // If it's Summer of newer, then 'Driven' should appear in the display name
+        // but separated with a hypen.
+        if (seasonYear.month !== 'Spring' && seasonYear.year >= 2016) {
+          // The space is needed to update the display name from, for example:
+          // 'Plot Driven' to 'Plot-driven'.
+          filter.attributes.displayName = (filter.attributes.tag).replace(/\b Driven/ig, '-driven');
+        } else {
+          filter.attributes.displayName = (filter.attributes.tag).replace(/\bDriven/ig, '');
+        }
         drivenByFilters.push(filter);
       } else {
         filter.attributes.displayName = filter.attributes.tag;
@@ -238,7 +249,33 @@ class BookFilters extends React.Component {
   }
 
   render() {
-    const storeState = BookStore.getState();
+    const store = BookStore.getState();
+    const seasonYear = staffPicksDate(store.currentMonthPicks.date);
+    let filterList;
+
+    if (seasonYear.month !== 'Spring' && seasonYear.year >= 2016) {
+      // Join the two set of filters and sort alphabetically.
+      let joinedFilters = this.state.drivenByFilters.concat(this.state.themeFilters);
+      joinedFilters = _sortBy(joinedFilters, (f) => f.attributes.displayName);
+      filterList = (
+        <ul>
+          {this.filterItems(joinedFilters)}
+        </ul>
+      );
+    } else {
+      filterList = (
+        <div>
+          <span>Driven by...</span>
+          <ul>
+            {this.filterItems(this.state.drivenByFilters)}
+          </ul>
+          <span>Themes...</span>
+          <ul>
+            {this.filterItems(this.state.themeFilters)}
+          </ul>
+        </div>
+      );
+    }
 
     return (
       <div className="BookFilters" style={this.props.styles}>
@@ -249,16 +286,13 @@ class BookFilters extends React.Component {
         />
         <span className="divider"></span>
         <h2>What would you like to read?</h2>
+        <div className="explanation">
+          Use the filters below to explore our staff favorites.
+          (You can also combine filters.)
+        </div>
         <div className="BookFilters-lists">
-          <span>Driven by...</span>
-          <ul>
-            {this.filterItems(this.state.drivenByFilters)}
-          </ul>
-          <span>Themes...</span>
-          <ul>
-            {this.filterItems(this.state.themeFilters)}
-          </ul>
-          {storeState.filters.length ?
+          {filterList}
+          {store.filters.length ?
             <div className="clearFilters" style={styles.clearFilters}>
               <a href="#" onClick={this.clearFilters}>
                 Clear Filters
@@ -284,4 +318,4 @@ BookFilters.propTypes = {
   mobileCloseBtn: React.PropTypes.func,
 };
 
-export default radium(BookFilters);
+export default BookFilters;

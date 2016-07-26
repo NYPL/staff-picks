@@ -15,6 +15,21 @@
     }
   }
 
+  .explanation {
+    color: $lib-red;
+    font-size: 16px;
+    width: 75%;
+    margin-top: 10px;
+
+    @include breakpoint($min, $post-mobile-phone) {
+      width: 100%;
+    }
+
+    @include breakpoint($min, $post-desktop) {
+      text-align: right;
+    }
+  }
+
   .divider {
     width: 220px;
     height: 2px;
@@ -36,7 +51,7 @@
       text-align: right;
     }
 
-    > span {
+    div > span {
       font-size: 18px;
     }
 
