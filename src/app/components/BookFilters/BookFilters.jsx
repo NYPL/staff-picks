@@ -161,6 +161,10 @@ class BookFilters extends React.Component {
     const seasonYear = staffPicksDate(store.currentMonthPicks.date);
 
     _each(initialFilters, filter => {
+      const displayName = filter.attributes.tag;
+      let updatedDisplayName =
+        `${displayName.charAt(0).toUpperCase()}${displayName.substring(1).toLowerCase()}`;
+
       filter.active = false;
       filter.show = true;
       filter.remove = true;
@@ -170,13 +174,14 @@ class BookFilters extends React.Component {
         if (seasonYear.month !== 'Spring' && seasonYear.year >= 2016) {
           // The space is needed to update the display name from, for example:
           // 'Plot Driven' to 'Plot-driven'.
-          filter.attributes.displayName = (filter.attributes.tag).replace(/\b Driven/ig, '-driven');
+          filter.attributes.displayName = updatedDisplayName.replace(/\b Driven/ig, '-driven');
         } else {
-          filter.attributes.displayName = (filter.attributes.tag).replace(/\bDriven/ig, '');
+          filter.attributes.displayName = updatedDisplayName.replace(/\bDriven/ig, '');
         }
+
         drivenByFilters.push(filter);
       } else {
-        filter.attributes.displayName = filter.attributes.tag;
+        filter.attributes.displayName = updatedDisplayName;
         themeFilters.push(filter);
       }
     });
