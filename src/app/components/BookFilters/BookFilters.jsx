@@ -283,7 +283,7 @@ class BookFilters extends React.Component {
     }
 
     return (
-      <div className="BookFilters" style={this.props.styles}>
+      <div className={`BookFilters ${this.props.active}`} style={this.props.styles}>
         <CloseButton
           onClick={this.props.mobileCloseBtn}
           id="close-button"

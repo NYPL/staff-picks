@@ -1,7 +1,6 @@
 /* global $, Isotope */
 
 import React from 'react';
-import radium from 'radium';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {
@@ -250,4 +249,4 @@ Books.contextTypes = {
   },
 };
 
-export default radium(Books);
+export default Books;

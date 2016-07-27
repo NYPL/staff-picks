@@ -56,10 +56,6 @@
     position: relative;
     top: 2px;
 
-    @include breakpoint($min, 414px) {
-      left: 75px;
-    }
-
     @include breakpoint($min, $post-mobile-phone) {
       left: 0;
       top: 0;
@@ -136,7 +132,60 @@
       }
 
       &-items {
-        margin: 0 0 0 4px;
+        // margin: 0 0 0 4px;
+      }
+    }
+  }
+
+  .modalShareList {
+    li {
+      display: inline-block;
+      margin: -5px 0 0 0;
+      position: relative;
+      height: 61px;
+      width: 60px;
+      
+      &:hover {
+        cursor: pointer;
+        zIndex: 99;
+      }
+
+      @media (max-width: 414px) {
+        margin: 0;
+      }
+
+      &.facebook {
+        background-image: url('/browse/recommendations/staff-picks/src/client/' +
+          'images/social/social.fb.init.png');
+        &:hover {
+          background-image: url('/browse/recommendations/staff-picks/src/client/' +
+            'images/social/social.fb.activeInit.png');
+        }
+      }
+
+      &.twitter {
+        background-image: url('/browse/recommendations/staff-picks/src/client/' +
+          'images/social/social.twtr.init.png');
+        &:hover {
+          background-image: url('/browse/recommendations/staff-picks/src/client/' +
+            'images/social/social.twtr.hover.png');
+        }
+      }
+
+      &.tumblr {
+        background-image: url('/browse/recommendations/staff-picks/src/client/' +
+          'images/social/social.tmblr.init.png');
+        &:hover {
+          background-image: url('/browse/recommendations/staff-picks/src/client/' +
+            'images/social/social.tmblr.hover.png');
+        }
+      }
+
+      a {
+        color: transparent;
+        display: inline-block;
+        height: 61px;
+        width: 60px;
       }
     }
   }
