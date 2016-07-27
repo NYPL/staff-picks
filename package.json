@@ -68,7 +68,6 @@
     "node-libs-browser": "0.5.2",
     "node-sass": "3.4.2",
     "object-assign": "3.0.0",
-    "radium": "~0.13.1",
     "react": "^0.14.8",
     "react-cookie": "~0.2.3",
     "react-doc-meta": "0.2.0",

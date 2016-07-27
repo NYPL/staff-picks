@@ -1,42 +1,9 @@
 import React from 'react';
-import radium from 'radium';
-
-const styles = {
-  ErrorContainer: {
-    '@media (min-width: 767px) and (max-width: 1023px)': {
-      padding: '10rem 0 0 0',
-      margin: '0 10% 20rem 10%',
-    },
-    '@media (min-width: 480px) and (max-width: 766px)': {
-      padding: '10rem 0 0 0',
-      margin: '0 10% 20rem 10%',
-      width: '30%',
-    },
-    '@media (max-width: 479px)': {
-      padding: '10rem 0 0 0',
-      margin: '0 24% 20rem 24%',
-    },
-    color: '#36322D',
-    margin: '5rem 0 20rem 0',
-  },
-  ErrorTitle: {
-    fontSize: '2.4rem',
-    lineHeight: '1em',
-    margin: '0 0 0.5em 0',
-  },
-  ErrorContent: {
-    fontSize: '1.4rem',
-    margin: '1em 0 1em 0',
-  },
-  ErrorContentLink: {
-    color: '#36322D',
-  },
-};
 
 class Error404Page extends React.Component {
   render() {
     return (
-      <div className="error-container" style={styles.ErrorContainer}>
+      <div className="error-container">
         <h1 className="error-title">We&#39;re sorry...</h1>
         <p>
           The page you requested is either unavailable or you need permission to view the content.
@@ -53,4 +20,4 @@ class Error404Page extends React.Component {
   }
 }
 
-export default radium(Error404Page);
+export default Error404Page;
