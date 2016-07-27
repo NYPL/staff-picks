@@ -82,7 +82,6 @@ class Sidebar extends React.Component {
       );
     }
 
-
     return (
       <div ref="sidebar" className="sidebar-content">
         <BookDisplayButtons />
