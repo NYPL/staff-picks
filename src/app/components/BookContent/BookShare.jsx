@@ -3,51 +3,6 @@ import radium from 'radium';
 
 import utils from '../../utils/utils.js';
 
-const styles = {
-  social: {
-    display: 'inline-block',
-    margin: '-12px 0 0 -5px',
-    position: 'relative',
-    height: '61px',
-    width: '60px',
-    ':hover': {
-      cursor: 'pointer',
-      zIndex: '99',
-    },
-    '@media (max-width: 414px)': {
-      margin: '0 0 0 -5px',
-    },
-  },
-  facebook: {
-    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/' +
-      'images/social/social.fb.init.png")',
-    ':hover': {
-      backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/' +
-        'images/social/social.fb.activeInit.png")',
-    },
-  },
-  twitter: {
-    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/' +
-      'images/social/social.twtr.init.png")',
-    ':hover': {
-      backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/' +
-        'images/social/social.twtr.hover.png")',
-    },
-  },
-  shareLink: {
-    color: 'transparent',
-    display: 'inline-block',
-    height: '61px',
-    width: '60px',
-  },
-  tumblr: {
-    backgroundImage: 'url("src/client/images/social/social.tmblr.init.png")',
-    ':hover': {
-      backgroundImage: 'url("src/client/images/social/social.tmblr.hover.png")',
-    },
-  },
-};
-
 class BookShare extends React.Component {
   // Constructor used in ES6
   constructor(props) {
@@ -84,35 +39,29 @@ class BookShare extends React.Component {
     const bookTitle = book.item.title;
 
     return (
-      <div ref="BookContent" className={this.props.className} style={styles.BookShare}>
+      <ul className={`modalShareList ${this.props.className}`}>
         <li
           key="fb"
-          style={[styles.social, styles.facebook]}
+          className="facebook"
           onClick={() => utils.trackPicks('Social Sharing', `Facebook: ${bookTitle}`)}
         >
-          <a
-            href={this.state.facebook}
-            target="_blank"
-            style={styles.shareLink}
-            label="Share on Facebook"
-          >
-          </a>
+          <a href={this.state.facebook} target="_blank" label="Share on Facebook"></a>
         </li>
         <li
           key="twtr"
-          style={[styles.social, styles.twitter]}
+          className="twitter"
           onClick={() => utils.trackPicks('Social Sharing', `Twitter: ${bookTitle}`)}
         >
-          <a href={this.state.twitter} style={styles.shareLink} label="Share on twitter"></a>
+          <a href={this.state.twitter} label="Share on twitter"></a>
         </li>
         <li
           key="tumblr"
-          style={[styles.social, styles.tumblr]}
+          className="tumblr"
           onClick={() => utils.trackPicks('Social Sharing', `Tumblr: ${bookTitle}`)}
         >
-          <a href={this.state.tumblr} target="_blank" style={styles.shareLink}></a>
+          <a href={this.state.tumblr} target="_blank"></a>
         </li>
-      </div>
+      </ul>
     );
   }
 }

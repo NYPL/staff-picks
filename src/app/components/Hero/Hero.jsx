@@ -1,6 +1,5 @@
 // Library import
 import React from 'react';
-import radium from 'radium';
 
 // Component import
 import HeroTitle from './HeroTitle/HeroTitle.jsx';
@@ -122,4 +121,4 @@ Hero.defaultProps = {
   className: 'Hero',
 };
 
-export default radium(Hero);
+export default Hero;

@@ -1,3 +1,5 @@
+/* global $ */
+
 import React from 'react';
 
 import { isEmpty as _isEmpty } from 'underscore';

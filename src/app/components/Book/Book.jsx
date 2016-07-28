@@ -1,5 +1,4 @@
 import React from 'react';
-// import radium from 'radium';
 
 const Book = (props) => {
   const handleClick = (e) => e.preventDefault();

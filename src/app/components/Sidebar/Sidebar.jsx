@@ -1,41 +1,11 @@
 // Import React and other utility libraries
 import React from 'react';
-import radium from 'radium';
 
 import BookDisplayButtons from '../BookDisplayButtons/BookDisplayButtons.jsx';
 import BookFilters from '../BookFilters/BookFilters.jsx';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 
 import utils from '../../utils/utils.js';
-
-const styles = {
-  mobileFilters: {
-    display: 'block',
-    height: '100%',
-    position: 'fixed',
-    overflow: 'auto',
-    top: '50px',
-    backgroundColor: '#fff',
-    width: '100%',
-    left: '0',
-    zIndex: '1000',
-    padding: '35px 30px',
-    '@media (min-width: 719px)': {
-      display: 'none',
-    },
-  },
-  mobileFilterBtn: {
-    textDecoration: 'none',
-    color: '#0095c8',
-  },
-  active: {
-    border: '2px solid #0095c8',
-    color: 'red',
-  },
-  grayedOutFilter: {
-    color: '#bfbfbf',
-  },
-};
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -82,7 +52,6 @@ class Sidebar extends React.Component {
       );
     }
 
-
     return (
       <div ref="sidebar" className="sidebar-content">
         <BookDisplayButtons />
@@ -93,14 +62,12 @@ class Sidebar extends React.Component {
           gaEvent="Filter"
           className="mobile-filter-btn"
           onClick={this.showFilters}
-          style={styles.mobileFilterBtn}
           label="Filter By Tags"
         />
 
         <BookFilters
           {...this.props}
-          styles={this.state.mobileDisplay ? styles.mobileFilters : null}
-          mobile={this.state.mobileDisplay}
+          active={this.state.mobileDisplay ? 'active' : ''}
           mobileCloseBtn={this.hideFilters}
         />
 
@@ -114,4 +81,4 @@ Sidebar.propTypes = {
   params: React.PropTypes.object,
 };
 
-export default radium(Sidebar);
+export default Sidebar;

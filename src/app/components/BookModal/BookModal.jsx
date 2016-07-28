@@ -1,5 +1,4 @@
 import React from 'react';
-import radium from 'radium';
 import Modal from 'react-modal';
 
 import DocMeta from 'react-doc-meta';
@@ -246,4 +245,4 @@ BookModal.contextTypes = {
   },
 };
 
-export default radium(BookModal);
+export default BookModal;
