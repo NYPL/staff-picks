@@ -3,7 +3,7 @@ import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 import { sortBy as _sortBy } from 'underscore';
 
-import Model from 'dgx-model-data';
+// import Model from 'dgx-model-data';
 import PicksListModel from '../../app/utils/PicksListModel.js';
 
 import config from '../../../appConfig.js';
@@ -24,22 +24,18 @@ const options = {
 
 const router = express.Router();
 
-function fetchApiData(url) {
-  return axios.get(url);
-}
-
 function CurrentMonthData(req, res, next) {
   const endpoint = `${apiRoot}${apiEndpoint}?filter[list-type]=monthly&` +
     `${fields}${pageSize}${includes}`;
 
-  axios.all([fetchApiData(endpoint)])
-    .then(axios.spread((staffPicks) => {
+  axios.get(endpoint)
+    .then((staffPicks) => {
       const returnedData = staffPicks.data;
       // Filters can be extracted without parsing since they are all in the
       // included array:
       const filters = _sortBy(
         parser.getOfType(returnedData.included, 'staff-pick-tag'),
-        (item) => { return item.id; });
+        (item) => item.id);
       // parse the data
       const parsed = parser.parse(returnedData, options);
       // Since the endpoint returns a list of monthly picks
@@ -63,7 +59,7 @@ function CurrentMonthData(req, res, next) {
       };
 
       next();
-    }))
+    })
     // console error messages
     .catch(error => {
       console.log(`Error calling API CurrentMonthData: ${error}`);
@@ -90,8 +86,8 @@ function AnnualCurrentData(type, req, res, next) {
   const endpoint = `${apiRoot}${apiEndpoint}?filter[list-type]=${type}&` +
     `${fields}${pageSize}${includes}`;
 
-  axios.all([fetchApiData(endpoint)])
-    .then(axios.spread((staffPicks) => {
+  axios.get(endpoint)
+    .then((staffPicks) => {
       const returnedData = staffPicks.data;
       // Filters can be extracted without parsing since they are all in the
       // included array:
@@ -122,7 +118,7 @@ function AnnualCurrentData(type, req, res, next) {
       };
 
       next();
-    }))
+    })
     // console error messages
     .catch(error => {
       console.log(`Error calling API AnnualCurrentData: ${error}`);
@@ -184,8 +180,8 @@ function SelectMonthData(req, res, next) {
     return res.redirect('/browse/recommendations/staff-picks/');
   }
 
-  axios.all([fetchApiData(endpoint)])
-    .then(axios.spread((staffPicks) => {
+  axios.get(endpoint)
+    .then((staffPicks) => {
       const returnedData = staffPicks.data;
       // Filters can be extracted without parsing since they are all in the
       // included array:
@@ -199,7 +195,7 @@ function SelectMonthData(req, res, next) {
 
       res.locals.data = {
         BookStore: {
-          bookDisplay:  'grid',
+          bookDisplay: 'grid',
           age: 'Adult',
           gridDisplay: true,
           listDisplay: false,
@@ -213,13 +209,13 @@ function SelectMonthData(req, res, next) {
         endpoint,
       };
       next();
-    }))
+    })
     // console error messages
     .catch(error => {
       console.log(`Error calling API SelectMonthData: ${error}`);
       res.locals.data = {
         BookStore: {
-          bookDisplay:  'grid',
+          bookDisplay: 'grid',
           age: 'Adult',
           gridDisplay: true,
           listDisplay: false,
@@ -237,8 +233,8 @@ function SelectMonthData(req, res, next) {
 }
 
 function AjaxData(req, res) {
-  let month = req.params.month,
-    endpoint = `${apiRoot}${apiEndpoint}/monthly-${month}?${fields}${includes}`;
+  const month = req.params.month;
+  const endpoint = `${apiRoot}${apiEndpoint}/monthly-${month}?${fields}${includes}`;
 
   axios
     .get(endpoint)
