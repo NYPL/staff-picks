@@ -22,9 +22,6 @@ import Iso from 'iso';
 import appRoutes from './src/app/routes/routes.jsx';
 import ApiRoutes from './src/server/ApiRoutes/ApiRoutes.js';
 
-// Feature Flags Module
-import FeatureFlags from 'dgx-feature-flags';
-
 // URL configuration
 const ROOT_PATH = __dirname;
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
@@ -83,9 +80,6 @@ app.use('/', (req, res) => {
       );
 
       iso.add(html, alt.flush());
-
-      // Fire off the Feature Flag prior to render
-      FeatureFlags.utils.activateFeature('shop-link');
 
       res
         .status(200)
