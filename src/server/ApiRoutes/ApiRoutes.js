@@ -3,7 +3,6 @@ import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 import { sortBy as _sortBy } from 'underscore';
 
-// import Model from 'dgx-model-data';
 import PicksListModel from '../../app/utils/PicksListModel.js';
 
 import config from '../../../appConfig.js';

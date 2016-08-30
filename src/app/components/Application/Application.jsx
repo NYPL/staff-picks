@@ -27,7 +27,6 @@ const App = (props) => {
     { name: 'twitter:image', content: '/browse/recommendations/staff-picks/src/client/images/' +
       'shelftalker.4.2.png' },
   ];
-  // const tags = utils.metaTagUnion(hompageTags);
   let about = null;
 
   if (props.params && props.params.type) {
