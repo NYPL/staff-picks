@@ -1,5 +1,4 @@
 import React from 'react';
-import radium from 'radium';
 
 import utils from '../../utils/utils.js';
 
@@ -72,4 +71,4 @@ BookShare.propTypes = {
   shareType: React.PropTypes.object,
 };
 
-export default radium(BookShare);
+export default BookShare;

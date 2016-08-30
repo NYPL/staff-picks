@@ -1,7 +1,7 @@
 import React from 'react';
 
 // NYPL Components
-import { Header } from 'dgx-header-component';
+import { Header,navConfig } from 'dgx-header-component';
 import Footer from 'dgx-react-footer';
 import Hero from '../Hero/Hero.jsx';
 import AgeTabs from '../AgeTabs/AgeTabs.jsx';
@@ -45,7 +45,7 @@ const App = (props) => {
 
   return (
     <div>
-      <Header />
+      <Header navData={navConfig.current} />
       <Hero {...props} />
       <div id="app-content">
         {props.children}

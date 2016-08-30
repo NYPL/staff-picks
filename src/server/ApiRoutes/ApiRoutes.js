@@ -3,20 +3,17 @@ import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 import { sortBy as _sortBy } from 'underscore';
 
-import { navConfig } from 'dgx-header-component';
 import Model from 'dgx-model-data';
 import PicksListModel from '../../app/utils/PicksListModel.js';
 
 import config from '../../../appConfig.js';
 
-const { HeaderItemModel } = Model;
 const {
   apiEndpoint,
   fields,
   pageSize,
   includes,
   api,
-  headerApi,
 } = config;
 
 const appEnvironment = process.env.APP_ENV || 'production';
@@ -24,28 +21,19 @@ const apiRoot = api.root[appEnvironment];
 const options = {
   includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age'],
 };
-const headerOptions = {
-  endpoint: `${apiRoot}${headerApi.endpoint}`,
-  includes: headerApi.includes,
-  filters: headerApi.filters,
-};
+
 const router = express.Router();
 
 function fetchApiData(url) {
   return axios.get(url);
 }
 
-function getHeaderData() {
-  const completeApiUrl = parser.getCompleteApi(headerOptions);
-  return fetchApiData(completeApiUrl);
-}
-
 function CurrentMonthData(req, res, next) {
   const endpoint = `${apiRoot}${apiEndpoint}?filter[list-type]=monthly&` +
     `${fields}${pageSize}${includes}`;
 
-  axios.all([getHeaderData(), fetchApiData(endpoint)])
-    .then(axios.spread((headerData, staffPicks) => {
+  axios.all([fetchApiData(endpoint)])
+    .then(axios.spread((staffPicks) => {
       const returnedData = staffPicks.data;
       // Filters can be extracted without parsing since they are all in the
       // included array:
@@ -54,10 +42,8 @@ function CurrentMonthData(req, res, next) {
         (item) => { return item.id; });
       // parse the data
       const parsed = parser.parse(returnedData, options);
-      const HeaderParsed = parser.parse(headerData.data, headerOptions);
-        // Since the endpoint returns a list of monthly picks
+      // Since the endpoint returns a list of monthly picks
       const currentMonth = parsed[0];
-      const modelData = HeaderItemModel.build(HeaderParsed);
       const currentMonthPicks = PicksListModel.build(currentMonth);
 
       res.locals.data = {
@@ -72,11 +58,6 @@ function CurrentMonthData(req, res, next) {
           updatedFilters: [],
           isotopesDidUpdate: false,
           currentMonthPicks,
-        },
-        HeaderStore: {
-          headerData: navConfig.current,
-          subscribeFormVisible: false,
-          myNyplVisible: false,
         },
         endpoint,
       };
@@ -99,11 +80,6 @@ function CurrentMonthData(req, res, next) {
           currentMonthPicks: {},
           isotopesDidUpdate: false,
         },
-        HeaderStore: {
-          headerData: [],
-          subscribeFormVisible: false,
-          myNyplVisible: false,
-        },
         endpoint: '',
       };
       next();
@@ -114,8 +90,8 @@ function AnnualCurrentData(type, req, res, next) {
   const endpoint = `${apiRoot}${apiEndpoint}?filter[list-type]=${type}&` +
     `${fields}${pageSize}${includes}`;
 
-  axios.all([getHeaderData(), fetchApiData(endpoint)])
-    .then(axios.spread((headerData, staffPicks) => {
+  axios.all([fetchApiData(endpoint)])
+    .then(axios.spread((staffPicks) => {
       const returnedData = staffPicks.data;
       // Filters can be extracted without parsing since they are all in the
       // included array:
@@ -125,10 +101,8 @@ function AnnualCurrentData(type, req, res, next) {
       );
       // parse the data
       const parsed = parser.parse(returnedData, options);
-      const HeaderParsed = parser.parse(headerData.data, headerOptions);
       // Since the endpoint returns a list of monthly picks
       const currentMonth = parsed[0];
-      const modelData = HeaderItemModel.build(HeaderParsed);
       const currentMonthPicks = PicksListModel.build(currentMonth);
 
       res.locals.data = {
@@ -143,11 +117,6 @@ function AnnualCurrentData(type, req, res, next) {
           updatedFilters: [],
           isotopesDidUpdate: false,
           currentMonthPicks,
-        },
-        HeaderStore: {
-          headerData: navConfig.current,
-          subscribeFormVisible: false,
-          myNyplVisible: false,
         },
         endpoint,
       };
@@ -169,11 +138,6 @@ function AnnualCurrentData(type, req, res, next) {
           updatedFilters: [],
           currentMonthPicks: {},
           isotopesDidUpdate: false,
-        },
-        HeaderStore: {
-          headerData: [],
-          subscribeFormVisible: false,
-          myNyplVisible: false,
         },
         endpoint: '',
       };
@@ -220,8 +184,8 @@ function SelectMonthData(req, res, next) {
     return res.redirect('/browse/recommendations/staff-picks/');
   }
 
-  axios.all([getHeaderData(), fetchApiData(endpoint)])
-    .then(axios.spread((headerData, staffPicks) => {
+  axios.all([fetchApiData(endpoint)])
+    .then(axios.spread((staffPicks) => {
       const returnedData = staffPicks.data;
       // Filters can be extracted without parsing since they are all in the
       // included array:
@@ -231,8 +195,6 @@ function SelectMonthData(req, res, next) {
       );
       // parse the data
       const selectedMonth = parser.parse(returnedData, options);
-      const HeaderParsed = parser.parse(headerData.data, headerOptions);
-      const modelData = HeaderItemModel.build(HeaderParsed);
       const currentMonthPicks = PicksListModel.build(selectedMonth);
 
       res.locals.data = {
@@ -247,11 +209,6 @@ function SelectMonthData(req, res, next) {
           updatedFilters: [],
           isotopesDidUpdate: false,
           currentMonthPicks,
-        },
-        HeaderStore: {
-          headerData: navConfig.current,
-          subscribeFormVisible: false,
-          myNyplVisible: false,
         },
         endpoint,
       };
@@ -272,11 +229,6 @@ function SelectMonthData(req, res, next) {
           updatedFilters: [],
           currentMonthPicks: {},
           isotopesDidUpdate: false,
-        },
-        HeaderStore: {
-          headerData: [],
-          subscribeFormVisible: false,
-          myNyplVisible: false,
         },
         endpoint: '',
       };
