@@ -152,7 +152,7 @@ function SelectAnnualData(req, res, next) {
   }
 
   if (!idOrType !== 'childrens' || idOrType !== 'ya') {
-    return res.redirect('/browse/recommendations/staff-picks/');
+    return res.redirect('/books-music-dvd/recommendations/staff-picks/');
   }
 
   return CurrentMonthData(req, res, next);
@@ -163,7 +163,7 @@ function SelectMonthData(req, res, next) {
   const id = req.params.idOrType;
   const endpoint = `${apiRoot}${apiEndpoint}/monthly-${month}?${fields}${includes}`;
 
-  if (month === 'browse' && id === 'recommendations') {
+  if (month === 'books-music-dvd' && id === 'recommendations') {
     return next();
   }
 
@@ -176,7 +176,7 @@ function SelectMonthData(req, res, next) {
   }
 
   if (!month.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)) {
-    return res.redirect('/browse/recommendations/staff-picks/');
+    return res.redirect('/books-music-dvd/recommendations/staff-picks/');
   }
 
   axios.get(endpoint)
@@ -263,15 +263,15 @@ router
   .get(AjaxData);
 
 router
-  .route('/browse/recommendations/staff-picks/')
+  .route('/books-music-dvd/recommendations/staff-picks/')
   .get(CurrentMonthData);
 
 router
-  .route('/browse/recommendations/staff-picks/:monthOrAnnual/:idOrType?/:year?/:id?')
+  .route('/books-music-dvd/recommendations/staff-picks/:monthOrAnnual/:idOrType?/:year?/:id?')
   .get(SelectMonthData);
 
 router
-  .route('/browse/recommendations/staff-picks/api/ajax/picks/:month')
+  .route('/books-music-dvd/recommendations/staff-picks/api/ajax/picks/:month')
   .get(AjaxData);
 
 router
