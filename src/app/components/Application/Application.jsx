@@ -1,7 +1,7 @@
 import React from 'react';
 
 // NYPL Components
-import { Header } from 'dgx-header-component';
+import { Header, navConfig } from 'dgx-header-component';
 import Footer from 'dgx-react-footer';
 import Hero from '../Hero/Hero.jsx';
 import AgeTabs from '../AgeTabs/AgeTabs.jsx';
@@ -27,7 +27,6 @@ const App = (props) => {
     { name: 'twitter:image', content: '/browse/recommendations/staff-picks/src/client/images/' +
       'shelftalker.4.2.png' },
   ];
-  const tags = utils.metaTagUnion(hompageTags);
   let about = null;
 
   if (props.params && props.params.type) {
@@ -45,7 +44,7 @@ const App = (props) => {
 
   return (
     <div>
-      <Header />
+      <Header navData={navConfig.current} />
       <Hero {...props} />
       <div id="app-content">
         {props.children}
