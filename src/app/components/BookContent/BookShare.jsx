@@ -1,5 +1,4 @@
 import React from 'react';
-import radium from 'radium';
 
 import utils from '../../utils/utils.js';
 
@@ -26,7 +25,7 @@ class BookShare extends React.Component {
     nyplStaffPick = `${shareText} ${bookTitle}`;
 
     this.state = {
-      facebook: `http://www.facebook.com/sharer.php?u=${nyplStaffPick}&t=${nyplStaffPick}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${window.location}`,
       twitter: `https://twitter.com/intent/tweet?text=${nyplStaffPick}&url=${shareUrl}&via=${via}`,
       tumblr: `https://www.tumblr.com/widgets/share/tool?posttype=link&canonicalUrl=${shareUrl}` +
         '&title=NYPL%20%7C%20Staff%20Picks&caption=Every+month%2C+NYPL%27s+book+experts+share' +
@@ -72,4 +71,4 @@ BookShare.propTypes = {
   shareType: React.PropTypes.object,
 };
 
-export default radium(BookShare);
+export default BookShare;

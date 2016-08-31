@@ -22,9 +22,6 @@ import Iso from 'iso';
 import appRoutes from './src/app/routes/routes.jsx';
 import ApiRoutes from './src/server/ApiRoutes/ApiRoutes.js';
 
-// Feature Flags Module
-import FeatureFlags from 'dgx-feature-flags';
-
 // URL configuration
 const ROOT_PATH = __dirname;
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
@@ -52,8 +49,8 @@ app.use('*/src/client', express.static(INDEX_PATH));
 
 
 app.use('/', (req, res, next) => {
-  if (req.path === '/browse/recommendations/staff-picks') {
-    return res.redirect('/browse/recommendations/staff-picks/');
+  if (req.path === '/books-music-dvds/recommendations/staff-picks') {
+    return res.redirect('/books-music-dvds/recommendations/staff-picks/');
   }
   next();
 });
@@ -67,7 +64,7 @@ app.use('/', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   iso = new Iso();
 
-  const blogAppUrl = (req.url).indexOf('browse/recommendations/staff-picks') !== -1;
+  const blogAppUrl = (req.url).indexOf('books-music-dvds/recommendations/staff-picks') !== -1;
   const routes = blogAppUrl ? appRoutes.client : appRoutes.server;
 
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
@@ -83,9 +80,6 @@ app.use('/', (req, res) => {
       );
 
       iso.add(html, alt.flush());
-
-      // Fire off the Feature Flag prior to render
-      FeatureFlags.utils.activateFeature('shop-link');
 
       res
         .status(200)

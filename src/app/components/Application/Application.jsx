@@ -1,7 +1,7 @@
 import React from 'react';
 
 // NYPL Components
-import { Header } from 'dgx-header-component';
+import { Header, navConfig } from 'dgx-header-component';
 import Footer from 'dgx-react-footer';
 import Hero from '../Hero/Hero.jsx';
 import AgeTabs from '../AgeTabs/AgeTabs.jsx';
@@ -18,16 +18,15 @@ const App = (props) => {
     'to help you find your next one.';
   const hompageTags = [
     { property: 'og:title', content: 'Staff Picks | The New York Public Library' },
-    { property: 'og:image', content: '/browse/recommendations/staff-picks/src/client/images/' +
+    { property: 'og:image', content: '/books-music-dvds/recommendations/staff-picks/src/client/images/' +
       'shelftalker.4.2.png' },
     { property: 'og:description', content },
-    { property: 'og:url', content: 'http://www.nypl.org/browse/recommendations/staff-picks/' },
+    { property: 'og:url', content: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/' },
     { name: 'twitter:title', content: 'Staff Picks | The New York Public Library' },
     { name: 'twitter:description', content },
-    { name: 'twitter:image', content: '/browse/recommendations/staff-picks/src/client/images/' +
+    { name: 'twitter:image', content: '/books-music-dvds/recommendations/staff-picks/src/client/images/' +
       'shelftalker.4.2.png' },
   ];
-  const tags = utils.metaTagUnion(hompageTags);
   let about = null;
 
   if (props.params && props.params.type) {
@@ -35,7 +34,7 @@ const App = (props) => {
       <div className="mobile-about">
         <span className="mobile-about-divider"></span>
         <h2 className="mobile-about-link">
-          <a href="http://nypl.org/browse/recommendations/about/annual-lists">
+          <a href="http://nypl.org/books-music-dvds/recommendations/about/annual-lists">
             About this list
           </a>
         </h2>
@@ -45,7 +44,7 @@ const App = (props) => {
 
   return (
     <div>
-      <Header />
+      <Header navData={navConfig.current} />
       <Hero {...props} />
       <div id="app-content">
         {props.children}

@@ -40,7 +40,7 @@ class BookFilters extends React.Component {
   }
 
   componentDidMount() {
-    // Only trigger the Action for the /browse/recommendations/staff-picks route.
+    // Only trigger the Action for the /books-music-dvds/recommendations/staff-picks route.
     if (this.props.params && !this.props.params.type) {
       BookActions.updateFilterAge('adult');
     }
