@@ -25,9 +25,9 @@ const BookContent = (props) => {
       return;
     }
 
-    if (catalogSlug && catalogSlug.indexOf('browse.nypl.org') === -1) {
+    if (catalogSlug && catalogSlug.indexOf('books-music-dvds.nypl.org') === -1) {
       catalogSub = catalogSlug.substring(start, end);
-      return `http://browse.nypl.org/iii/encore/record/C__Rb${catalogSub}?lang=eng`;
+      return `http://books-music-dvds.nypl.org/iii/encore/record/C__Rb${catalogSub}?lang=eng`;
     }
 
     return catalogSlug;
@@ -86,7 +86,7 @@ const BookContent = (props) => {
       <ul className="borrow">
         <li
           style={bookStyle}
-          onClick={() => utils._trackPicks('Modal', 'Request the book')}
+          onClick={() => utils.trackPicks('Modal', 'Request the book')}
         >
           <a href={bookHREF} style={bookLinkStyle}>
             <span className={`checkout ${bookIcon}`}></span>Request the book
@@ -94,7 +94,7 @@ const BookContent = (props) => {
         </li>
         <li
           style={ebookStyle}
-          onClick={() => utils._trackPicks('Modal', 'Borrow the ebook')}
+          onClick={() => utils.trackPicks('Modal', 'Borrow the ebook')}
         >
           <a href={ebookHREF} style={ebookLinkStyle}>
             <span className={`ebook ${ebookIcon}`}></span>Borrow the ebook

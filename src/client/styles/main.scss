@@ -7,7 +7,7 @@ $lib-red: #cc1a16;
 $lib-blue: #0095c8;
 $text-gray: #bfbfbf;
 $dark-lib-gray: #776E64;
-$staffPicksUrl: '/browse/recommendations/staff-picks/';
+$staffPicksUrl: '/books-music-dvds/recommendations/staff-picks/';
 
 @font-face {
   font-family: 'MiloWeb';
@@ -245,7 +245,12 @@ span[class*="icon-"] {
 
 #masonryContainer {
   margin-top: 12px;
+  margin-left: 15px;
   opacity: 0;
+
+  @include breakpoint($min, $tablet) {      
+    margin-left: 0;
+  }
 }
 
 .main-container {
@@ -261,14 +266,12 @@ span[class*="icon-"] {
     width: 100%;
 
     @include breakpoint($min, $post-mobile-phone) {
-      margin-right: 20px;
-      width: 30%;
+      margin-right: 10px;
+      width: 33%;
     }
     @include breakpoint($min, $post-palm) {
-      max-width: 160px;
-    }
-    @include breakpoint($min, $post-tablet) {
-      max-width: 160px;
+      max-width: 167px;
+      margin-right: 15px;
     }
 
     .sidebar-content {
@@ -308,19 +311,22 @@ span[class*="icon-"] {
     float: left;
     overflow: hidden;
     width: 100%;
+
     @include breakpoint($min, $post-mobile-phone) {
       width: 280px;
     }
+
     @include breakpoint($min, $post-palm) {
       width: 60%;
     }
-     @include breakpoint($min, $post-tablet) {
-      width: 68%;
+
+    @include breakpoint($min, $post-tablet) {
+      width: 73%;
     }
+
     @include breakpoint($min, $post-desktop) {
       width: 81%;
     }
-
   }
 
   .list-view {
@@ -445,4 +451,4 @@ span[class*="icon-"] {
 @import 'components/month-picker';
 @import 'components/bookDisplayButtons';
 @import 'components/book-filters';
-
+@import 'components/error404Page';
