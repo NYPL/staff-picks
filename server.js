@@ -49,8 +49,8 @@ app.use('*/src/client', express.static(INDEX_PATH));
 
 
 app.use('/', (req, res, next) => {
-  if (req.path === '/browse/recommendations/staff-picks') {
-    return res.redirect('/browse/recommendations/staff-picks/');
+  if (req.path === '/books-music-dvds/recommendations/staff-picks') {
+    return res.redirect('/books-music-dvds/recommendations/staff-picks/');
   }
   next();
 });
@@ -64,7 +64,7 @@ app.use('/', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   iso = new Iso();
 
-  const blogAppUrl = (req.url).indexOf('browse/recommendations/staff-picks') !== -1;
+  const blogAppUrl = (req.url).indexOf('books-music-dvds/recommendations/staff-picks') !== -1;
   const routes = blogAppUrl ? appRoutes.client : appRoutes.server;
 
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
