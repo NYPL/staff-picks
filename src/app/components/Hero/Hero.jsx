@@ -9,11 +9,11 @@ import utils from '../../utils/utils';
 
 const styles = {
   childrens: {
-    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/im' +
+    backgroundImage: 'url("/books-music-dvds/recommendations/staff-picks/src/client/im' +
       'ages/desktop.childrens100.FIN.png")',
   },
   ya: {
-    backgroundImage: 'url("/browse/recommendations/staff-picks/src/client/im' +
+    backgroundImage: 'url("/books-music-dvds/recommendations/staff-picks/src/client/im' +
       'ages/desktop.banner.YA.FIN.png")',
   },
 };
@@ -35,24 +35,24 @@ class Hero extends React.Component {
             'edge-of-your-seat thrillers... There is a huge world of books ' +
             'out there. Our expert staff members pick out their favorites ' +
             'to help you find your next one.',
-        image: '/browse/recommendations/staff-picks/src/client/images/shelftalker.4.2.png',
-        url: 'http://www.nypl.org/browse/recommendations/staff-picks/',
+        image: '/books-music-dvds/recommendations/staff-picks/src/client/images/shelftalker.4.2.png',
+        url: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/',
       },
       childrens: {
         type: 'childrens',
         title: 'RECOMMENDATIONS',
         description: 'Children\'s Books',
         intro: 'Explore our annual selection of 100 notable titles for reading and sharing.',
-        image: '/browse/recommendations/staff-picks/src/client/images/c100.OG.png',
-        url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/childrens',
+        image: '/books-music-dvds/recommendations/staff-picks/src/client/images/c100.OG.png',
+        url: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/annual/childrens',
       },
       ya: {
         type: 'ya',
         title: 'RECOMMENDATIONS',
         description: 'Best Books for Teens',
         intro: 'Explore our annual selection of outstanding young adult titles.',
-        image: '/browse/recommendations/staff-picks/src/client/images/YA.OG.png',
-        url: 'http://www.nypl.org/browse/recommendations/staff-picks/annual/ya',
+        image: '/books-music-dvds/recommendations/staff-picks/src/client/images/YA.OG.png',
+        url: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/annual/ya',
       },
     };
 

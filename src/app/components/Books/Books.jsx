@@ -165,7 +165,7 @@ class Books extends React.Component {
 
   openModal(book, date) {
     const params = this.props.params;
-    let baseUrl = '/browse/recommendations/staff-picks/';
+    let baseUrl = '/books-music-dvds/recommendations/staff-picks/';
 
     utils.trackPicks('Book', book.item.title);
 
