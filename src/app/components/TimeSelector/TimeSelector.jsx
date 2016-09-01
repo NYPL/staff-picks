@@ -70,7 +70,7 @@ class TimeSelector extends React.Component {
     let API;
 
     if (month) {
-      API = `/browse/recommendations/staff-picks/api/ajax/picks/${month.date}`;
+      API = `/books-music-dvds/recommendations/staff-picks/api/ajax/picks/${month.date}`;
 
       $.ajax({
         type: 'GET',
@@ -82,7 +82,7 @@ class TimeSelector extends React.Component {
 
           utils.trackPicks('Select Month', `${selection}: ${month.month()}`);
 
-          this.routeHandler(`/browse/recommendations/staff-picks/${month.date}`);
+          this.routeHandler(`/books-music-dvds/recommendations/staff-picks/${month.date}`);
 
           BookActions.clearFilters();
           BookActions.isotopesDidUpdate(true);

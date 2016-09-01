@@ -18,13 +18,13 @@ const App = (props) => {
     'to help you find your next one.';
   const hompageTags = [
     { property: 'og:title', content: 'Staff Picks | The New York Public Library' },
-    { property: 'og:image', content: '/browse/recommendations/staff-picks/src/client/images/' +
+    { property: 'og:image', content: '/books-music-dvds/recommendations/staff-picks/src/client/images/' +
       'shelftalker.4.2.png' },
     { property: 'og:description', content },
-    { property: 'og:url', content: 'http://www.nypl.org/browse/recommendations/staff-picks/' },
+    { property: 'og:url', content: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/' },
     { name: 'twitter:title', content: 'Staff Picks | The New York Public Library' },
     { name: 'twitter:description', content },
-    { name: 'twitter:image', content: '/browse/recommendations/staff-picks/src/client/images/' +
+    { name: 'twitter:image', content: '/books-music-dvds/recommendations/staff-picks/src/client/images/' +
       'shelftalker.4.2.png' },
   ];
   let about = null;
@@ -34,7 +34,7 @@ const App = (props) => {
       <div className="mobile-about">
         <span className="mobile-about-divider"></span>
         <h2 className="mobile-about-link">
-          <a href="http://nypl.org/browse/recommendations/about/annual-lists">
+          <a href="http://nypl.org/books-music-dvds/recommendations/about/annual-lists">
             About this list
           </a>
         </h2>

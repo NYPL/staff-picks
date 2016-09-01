@@ -10,19 +10,19 @@ import BookModal from '../components/BookModal/BookModal.jsx';
 // Routes we need
 const routes = {
   client: (
-    <Route path="/browse/recommendations/staff-picks" component={App}>
-      <Route path="/browse/recommendations/staff-picks/annual">
-        <Route path="/browse/recommendations/staff-picks/annual/:type">
-          <Route path="/browse/recommendations/staff-picks/annual/:type/:year">
+    <Route path="/books-music-dvds/recommendations/staff-picks" component={App}>
+      <Route path="/books-music-dvds/recommendations/staff-picks/annual">
+        <Route path="/books-music-dvds/recommendations/staff-picks/annual/:type">
+          <Route path="/books-music-dvds/recommendations/staff-picks/annual/:type/:year">
             <Route
               component={BookModal}
-              path="/browse/recommendations/staff-picks/annual/:type/:year/:id"
+              path="/books-music-dvds/recommendations/staff-picks/annual/:type/:year/:id"
             />
           </Route>
         </Route>
       </Route>
-      <Route path="/browse/recommendations/staff-picks/:month">
-        <Route path="/browse/recommendations/staff-picks/:month/:id" component={BookModal} />
+      <Route path="/books-music-dvds/recommendations/staff-picks/:month">
+        <Route path="/books-music-dvds/recommendations/staff-picks/:month/:id" component={BookModal} />
       </Route>
     </Route>
   ),

@@ -44,7 +44,7 @@ class Sidebar extends React.Component {
         <div className="about">
           <span className="about-divider"></span>
           <h2 className="about-link">
-            <a href="http://nypl.org/browse/recommendations/about/annual-lists">
+            <a href="http://nypl.org/books-music-dvds/recommendations/about/annual-lists">
               About this list
             </a>
           </h2>
