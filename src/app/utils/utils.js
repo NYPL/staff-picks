@@ -2,7 +2,7 @@ import moment from 'moment';
 import { union as _union } from 'underscore';
 
 import appConfig from '../../../appConfig.js';
-import gaUtils from './gaUtils.js';
+import { gaUtils } from 'dgx-react-ga';
 
 function Utils() {
   const unionFn = appTags => {
@@ -95,8 +95,8 @@ function Utils() {
    * Track a GA click event, where action and label come from
    * the higher level function call from _trackEvent().
    *
-   * @param {action} String Action for GA event.
-   * @param {label} String Label for GA event.
+   * @param {string} action Action for GA event.
+   * @param {string} label Label for GA event.
    */
   this.trackHeader = gaUtils.trackEvent('Global Header');
 
@@ -105,8 +105,8 @@ function Utils() {
    * Track a GA click event, where action and label come from
    * the higher level function call from _trackEvent().
    *
-   * @param {action} String Action for GA event.
-   * @param {label} String Label for GA event.
+   * @param {string} action Action for GA event.
+   * @param {string} label Label for GA event.
    */
   this.trackPicks = gaUtils.trackEvent('Staff Picks');
 }

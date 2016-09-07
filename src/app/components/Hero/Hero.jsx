@@ -35,7 +35,8 @@ class Hero extends React.Component {
             'edge-of-your-seat thrillers... There is a huge world of books ' +
             'out there. Our expert staff members pick out their favorites ' +
             'to help you find your next one.',
-        image: '/books-music-dvds/recommendations/staff-picks/src/client/images/shelftalker.4.2.png',
+        image: '/books-music-dvds/recommendations/staff-picks/src/client/images/' +
+          'shelftalker.4.2.png',
         url: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/',
       },
       childrens: {
