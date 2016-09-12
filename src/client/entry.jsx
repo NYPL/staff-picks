@@ -11,7 +11,7 @@ import alt from 'dgx-alt-center';
 import Iso from 'iso';
 
 import routes from '../app/routes/routes.jsx';
-import ga from 'react-ga';
+import { ga } from 'dgx-react-ga';
 
 import FeatureFlags from 'dgx-feature-flags';
 
