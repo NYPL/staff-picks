@@ -8,8 +8,6 @@ import AgeTabs from '../AgeTabs/AgeTabs.jsx';
 import Books from '../Books/Books.jsx';
 import Sidebar from '../Sidebar/Sidebar.jsx';
 
-import utils from '../../utils/utils';
-
 const App = (props) => {
   // Not being used here. Generated through Hero.jsx.
   const content = 'True stories, tales of courage, historical romances, ' +
@@ -18,14 +16,15 @@ const App = (props) => {
     'to help you find your next one.';
   const hompageTags = [
     { property: 'og:title', content: 'Staff Picks | The New York Public Library' },
-    { property: 'og:image', content: '/books-music-dvds/recommendations/staff-picks/src/client/images/' +
-      'shelftalker.4.2.png' },
+    { property: 'og:image', content: '/books-music-dvds/recommendations/staff-picks/src/client/' +
+      'images/shelftalker.4.2.png' },
     { property: 'og:description', content },
-    { property: 'og:url', content: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/' },
+    { property: 'og:url', content: 'http://www.nypl.org/books-music-dvds/recommendations/' +
+      'staff-picks/' },
     { name: 'twitter:title', content: 'Staff Picks | The New York Public Library' },
     { name: 'twitter:description', content },
-    { name: 'twitter:image', content: '/books-music-dvds/recommendations/staff-picks/src/client/images/' +
-      'shelftalker.4.2.png' },
+    { name: 'twitter:image', content: '/books-music-dvds/recommendations/staff-picks/src/client/' +
+      'images/shelftalker.4.2.png' },
   ];
   let about = null;
 

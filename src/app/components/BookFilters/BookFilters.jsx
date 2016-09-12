@@ -7,7 +7,6 @@ import {
   indexOf as _indexOf,
   union as _union,
   contains as _contains,
-  chain as _chain,
   sortBy as _sortBy,
 } from 'underscore';
 
@@ -317,6 +316,7 @@ BookFilters.propTypes = {
   params: React.PropTypes.object,
   styles: React.PropTypes.object,
   mobileCloseBtn: React.PropTypes.func,
+  active: React.PropTypes.string,
 };
 
 export default BookFilters;

@@ -1,7 +1,6 @@
 import React from 'react';
 
-import gaUtils from '../../utils/gaUtils.js';
-
+import { gaUtils } from 'dgx-react-ga';
 
 const SimpleButton = (props) => {
   const onClick = () => {
