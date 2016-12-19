@@ -75,6 +75,7 @@ app.use('/', (req, res) => {
     } else if (renderProps) {
       const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
       const metaTags = DocMeta.rewind();
+      const safePath = req.path.replace(/'/g, '').replace(/"/g, '')
       const renderedTags = metaTags.map((tag, index) =>
         ReactDOMServer.renderToString(<meta data-doc-meta="true" key={index} {...tag} />)
       );
@@ -84,7 +85,7 @@ app.use('/', (req, res) => {
       res
         .status(200)
         .render('index', {
-          path: req.path,
+          path: safePath,
           isProduction: isProduction,
           metatags: renderedTags,
           markup: iso.render(),

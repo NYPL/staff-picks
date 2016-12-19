@@ -179,6 +179,11 @@ function SelectMonthData(req, res, next) {
     return res.redirect('/books-music-dvds/recommendations/staff-picks/');
   }
 
+  // There are more matches if anything is added after the url slug
+  if (id.match(/[0-9]*[-a-z]+/g).length > 1) {
+    return res.redirect('/books-music-dvds/recommendations/staff-picks/');
+  }
+
   axios.get(endpoint)
     .then((staffPicks) => {
       const returnedData = staffPicks.data;
