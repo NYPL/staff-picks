@@ -1,6 +1,4 @@
 import React from 'react';
-import Radium from 'radium';
-import cx from 'classnames';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
@@ -13,21 +11,31 @@ class BookDisplayButtons extends React.Component {
 
     this.state = BookStore.getState();
 
-    this._handleClick = this._handleClick.bind(this);
-    this._onChange = this._onChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
-    BookStore.listen(this._onChange);
+    BookStore.listen(this.onChange);
   }
 
   componentWillUnmount() {
-    BookStore.unlisten(this._onChange);
+    BookStore.unlisten(this.onChange);
+  }
+
+  onChange() {
+    this.setState(BookStore.getState());
+  }
+
+  /* Utility Methods should be declared below the render method */
+  handleClick(bookDisplay) {
+    BookActions.updateBookDisplay(bookDisplay);
+    utils.trackPicks('Display Selected', bookDisplay);
   }
 
   // Will eventually need to break this out into its own component.
   // Need to think about classes, icons, and passed down click functions.
-  _pillButton(label, classprop, clickprop) {
+  pillButton(label, classprop, clickprop) {
     return (
       <a onClick={clickprop}>
         <span className={classprop}></span>
@@ -37,41 +45,34 @@ class BookDisplayButtons extends React.Component {
   }
 
   render() {
-    let gridActive = this.state._bookDisplay === 'grid',
-      listActive = this.state._bookDisplay !== 'grid';
+    const gridActive = this.state.bookDisplay === 'grid';
 
-    const gridActiveButton = cx({ active: gridActive });
-    const listActiveButton = cx({ active: listActive });
+    const gridActiveButton = gridActive ? 'active' : '';
+    const listActiveButton = !gridActive ? 'active' : '';
 
     return (
       <div className={this.props.className}>
         <ul className={`${this.props.className}-List`}>
           <li className={gridActiveButton}>
-            {this._pillButton('COVERS', `${this.props.className}-grid-icon icon`, this._handleClick.bind(this, 'grid'))}
+            {this.pillButton('COVERS',
+              `${this.props.className}-grid-icon icon`, this.handleClick.bind(this, 'grid'))}
           </li>
           <li className={listActiveButton}>
-            {this._pillButton('LIST', `${this.props.className}-list-icon icon`, this._handleClick.bind(this, 'list'))}
+            {this.pillButton('LIST',
+              `${this.props.className}-list-icon icon`, this.handleClick.bind(this, 'list'))}
           </li>
         </ul>
       </div>
     );
   }
+}
 
-  /* Utility Methods should be declared below the render method */
-  _handleClick(_bookDisplay) {
-    BookActions.updateBookDisplay(_bookDisplay);
-
-    utils._trackPicks('Display Selected', _bookDisplay);
-  }
-
-  _onChange() {
-    this.setState(BookStore.getState());
-  }
+BookDisplayButtons.propTypes = {
+  className: React.PropTypes.string,
 };
 
 BookDisplayButtons.defaultProps = {
   className: 'BookDisplayButtons',
-  id: 'BookDisplayButtons'
 };
 
-export default Radium(BookDisplayButtons);
+export default BookDisplayButtons;

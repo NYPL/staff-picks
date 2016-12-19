@@ -1,4 +1,24 @@
 .BookFilters {
+  // Active for mobile
+  &.active {
+    display: block;
+    height: 100%;
+    position: fixed;
+    overflow: auto;
+    top: 50px;
+    background-color: #fff;
+    width: 100%;
+    left: 0;
+    z-index: 1000;
+    padding: 35px 30px;
+
+    @include breakpoint($min, $post-mobile-phone) {
+      position: relative;
+      padding: 0;
+      height: auto;
+    }
+  }
+
   display: none;
 
   @include breakpoint($min, $post-mobile-phone) {
@@ -16,11 +36,15 @@
   }
 
   .divider {
-    width: 160px;
+    width: 220px;
     height: 2px;
     margin: 5px 0 15px 0;
     background: $lib-red;
     display: inline-block;
+
+    @include breakpoint($min, $post-mobile-phone) {      
+      width: 100%;
+    }
   }
 
   &-lists {
@@ -32,7 +56,7 @@
       text-align: right;
     }
 
-    > span {
+    div > span {
       font-size: 18px;
     }
 

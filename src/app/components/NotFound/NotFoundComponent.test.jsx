@@ -1,3 +1,5 @@
+/* global jest, describe, it, expect */
+
 jest.dontMock('./NotFoundComponent.jsx');
 
 import React from 'react/addons';

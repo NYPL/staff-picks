@@ -49,8 +49,8 @@ app.use('*/src/client', express.static(INDEX_PATH));
 
 
 app.use('/', (req, res, next) => {
-  if (req.path === '/browse/recommendations/staff-picks') {
-    return res.redirect('/browse/recommendations/staff-picks/');
+  if (req.path === '/books-music-dvds/recommendations/staff-picks') {
+    return res.redirect('/books-music-dvds/recommendations/staff-picks/');
   }
   next();
 });
@@ -64,7 +64,7 @@ app.use('/', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   iso = new Iso();
 
-  const blogAppUrl = (req.url).indexOf('browse/recommendations/staff-picks') !== -1;
+  const blogAppUrl = (req.url).indexOf('books-music-dvds/recommendations/staff-picks') !== -1;
   const routes = blogAppUrl ? appRoutes.client : appRoutes.server;
 
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
@@ -74,15 +74,18 @@ app.use('/', (req, res) => {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
       const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
-      var metaTags = DocMeta.rewind();
-      var renderedTags = metaTags.map((tag, index) =>
-        ReactDOMServer.renderToString(<meta data-doc-meta="true" key={index} {...tag} />));
+      const metaTags = DocMeta.rewind();
+      const safePath = req.path.replace(/'/g, '').replace(/"/g, '')
+      const renderedTags = metaTags.map((tag, index) =>
+        ReactDOMServer.renderToString(<meta data-doc-meta="true" key={index} {...tag} />)
+      );
+
       iso.add(html, alt.flush());
 
       res
         .status(200)
         .render('index', {
-          path: req.path,
+          path: safePath,
           isProduction: isProduction,
           metatags: renderedTags,
           markup: iso.render(),

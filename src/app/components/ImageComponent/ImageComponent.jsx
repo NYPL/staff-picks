@@ -1,28 +1,26 @@
 import React from 'react';
-import Radium from 'radium';
 
-class ImageComponent extends React.Component {
-  // Constructor used in ES6
-  constructor(props) {
-    super(props);
-  }
+const ImageComponent = (props) => (
+  <img
+    id={props.id}
+    className={props.className}
+    alt={props.alt}
+    style={props.style}
+    src={props.src}
+  />
+);
 
-  render() {
-    return (
-      <img
-        id={this.props.id}
-        className={this.props.className}
-        style={this.props.style}
-        src={this.props.src} />
-    );
-  }
+ImageComponent.propTypes = {
+  id: React.PropTypes.string,
+  className: React.PropTypes.string,
+  alt: React.PropTypes.string,
+  style: React.PropTypes.object,
+  src: React.PropTypes.string,
 };
 
 ImageComponent.defaultProps = {
-  id: '',
   className: 'BasicImageComponent',
-  label: '',
-  lang: 'en'
+  alt: '',
 };
 
-export default Radium(ImageComponent);
+export default ImageComponent;

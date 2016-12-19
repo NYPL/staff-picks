@@ -20,8 +20,14 @@
   p {
     position: absolute;
     left: 42%;
-    @include breakpoint($min, $post-mobile-phone) {
+    margin-top: 25px;
+
+    @include breakpoint($min, $post-mobile-phone) {      
       left: 52%;
+    }
+
+    @include breakpoint($min, $tablet) {      
+      margin-top: 0;
     }
   }
   .left-icon {

@@ -1,35 +1,36 @@
 import React from 'react';
-import Radium from 'radium';
 
-import gaUtils from '../../utils/gaUtils.js';
+import { gaUtils } from 'dgx-react-ga';
 
-class SimpleButton extends React.Component {
-  // Constructor used in ES6
-  constructor(props) {
-    super(props);
-  }
+const SimpleButton = (props) => {
+  const onClick = () => {
+    gaUtils.trackGeneralEvent(props.gaCategory, props.gaAction, props.gaLabel);
+    props.onClick();
+  };
 
-  render () {
-    return (
-      <a
-        ref='SimpleButton'
-        id={this.props.id}
-        className={this.props.className}
-        href={this.props.target}
-        onClick={this._onClick.bind(this)}
-        style={[
-          styles.base,
-          this.props.style
-        ]}>
-        {this.props.label}
-      </a>
-    );
-  }
+  return (
+    <a
+      id={props.id}
+      className={props.className}
+      href={props.target}
+      onClick={() => onClick()}
+      style={props.style}
+    >
+      {props.label}
+    </a>
+  );
+};
 
-  _onClick() {
-    gaUtils._trackGeneralEvent(this.props.gaCategory, this.props.gaAction, this.props.gaLabel);
-    this.props.onClick();
-  }
+SimpleButton.propTypes = {
+  gaCategory: React.PropTypes.string,
+  gaAction: React.PropTypes.string,
+  gaLabel: React.PropTypes.string,
+  id: React.PropTypes.string,
+  className: React.PropTypes.string,
+  label: React.PropTypes.string,
+  target: React.PropTypes.string,
+  style: React.PropTypes.object,
+  onClick: React.PropTypes.func,
 };
 
 SimpleButton.defaultProps = {
@@ -38,11 +39,6 @@ SimpleButton.defaultProps = {
   label: 'Button',
   lang: 'en',
   target: '#',
-  onClick() {}
 };
 
-const styles = {
-  base: {}
-};
-
-export default Radium(SimpleButton);
+export default SimpleButton;

@@ -1,31 +1,31 @@
-// The button component that doesn't activate any link, only interaction and submission
-// Import React libraries
+// Import React library
 import React from 'react';
 
-class BasicButton extends React.Component {
-  // Constructor used in ES6
-  constructor(props) {
-    super(props);
-  }
+const BasicButton = (props) => (
+  <button
+    ref="BasicButton"
+    id={props.id}
+    className={props.className}
+    name={props.name}
+    onClick={props.onClick}
+    onMouseEnter={props.onMouseEnter}
+    onMouseLeave={props.onMouseLeave}
+    style={props.style}
+  >
+    {props.label}
+  </button>
+);
 
-  render () {
-    return (
-      <button
-        ref='BasicButton'
-        id={this.props.id}
-        className={this.props.className}
-        name={this.props.name}
-        onClick={this.props.onClick}
-        onMouseEnter={this.props.onMouseEnter}
-        onMouseLeave={this.props.onMouseLeave}
-        style={[
-          styles.base,
-          this.props.style
-        ]}>
-        {this.props.label}
-      </button>
-    );
-  }
+BasicButton.propTypes = {
+  id: React.PropTypes.string,
+  className: React.PropTypes.string,
+  name: React.PropTypes.string,
+  label: React.PropTypes.string,
+  lang: React.PropTypes.string,
+  onClick: React.PropTypes.function,
+  onMouseLeave: React.PropTypes.function,
+  onMouseEnter: React.PropTypes.function,
+  style: React.PropTypes.object,
 };
 
 BasicButton.defaultProps = {
@@ -34,11 +34,7 @@ BasicButton.defaultProps = {
   name: 'BasicButton',
   label: 'Basic Button',
   lang: 'en',
-  onClick() {}
-};
-
-const styles = {
-  base: {}
+  onClick() {},
 };
 
 // Export the component

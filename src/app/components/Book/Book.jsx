@@ -1,5 +1,4 @@
 import React from 'react';
-// import radium from 'radium';
 
 const Book = (props) => {
   const handleClick = (e) => e.preventDefault();
@@ -8,7 +7,7 @@ const Book = (props) => {
   const fullImgSrc = bookImgSrc !== 'No Image' ?
     'https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807' +
     `&password=CC68707&Value=${bookImgSrc}&content=M&Return=1&Type=M`
-    : '/browse/recommendations/staff-picks/src/client/images/book-place-holder.png';
+    : '/books-music-dvds/recommendations/staff-picks/src/client/images/book-place-holder.png';
 
   return (
     <div className={props.className}>

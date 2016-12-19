@@ -1,45 +1,43 @@
 import React from 'react';
-import Radium from 'radium';
 
-class InputField extends React.Component {
+const InputField = (props) => (
+  <input
+    id={props.id}
+    lang={props.lang}
+    type={props.type}
+    name={props.name}
+    value={props.value}
+    checked={props.checked}
+    maxLength={props.maxLength}
+    placeholder={props.placeholder}
+    className={props.className}
+    onClick={props.onClick}
+    onChange={props.onChange}
+    required={props.isRequired || false}
+    style={props.style}
+  />
+);
 
-  // Constructor used in ES6
-  constructor(props) {
-    super(props);
-  }
-
-  render () {
-    return (
-      <input
-      id={this.props.id}
-      lang={this.props.lang}
-      type={this.props.type} 
-      name={this.props.name} 
-      value={this.props.value}
-      checked={this.props.checked}
-      maxLength={this.props.maxLength}
-      placeholder={this.props.placeholder}
-      className={this.props.className}
-      onClick={this.props.onClick}
-      onChange={this.props.onChange}
-      required={this.props.isRequired || false}
-      style={[
-        styles.base,
-        this.props.style
-      ]} />
-    );
-  }
+InputField.propTypes = {
+  id: React.PropTypes.string,
+  lang: React.PropTypes.string,
+  type: React.PropTypes.string,
+  name: React.PropTypes.string,
+  value: React.PropTypes.string,
+  checked: React.PropTypes.bool,
+  maxLength: React.PropTypes.string,
+  placeholder: React.PropTypes.string,
+  className: React.PropTypes.string,
+  onClick: React.PropTypes.func,
+  onChange: React.PropTypes.func,
+  isRequired: React.PropTypes.bool,
+  style: React.PropTypes.object,
 };
 
 InputField.defaultProps = {
   type: 'text',
   lang: 'en',
-  name: 'InputField'
+  name: 'InputField',
 };
 
-const styles = {
-  base: {
-  }
-};
-
-export default Radium(InputField);
+export default InputField;
