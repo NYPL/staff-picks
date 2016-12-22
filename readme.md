@@ -7,6 +7,16 @@
 - `npm start`
 - Navigate to http://localhost:3001/books-music-dvds/recommendations/staff-picks/
 
+# To promote code
+
+Feature branches are branched off from the `development` branch and then merged back into the `development` branch. Then it merges up to `master`.
+
+```
+master ---------------- ---------------- ---------------- ----------------master
+development -------------------------------->development /^
+   \ ----------> feature branch -/^
+```
+
 # To create a release
 
 - Go to Bamboo http://bamboo.nypl.org/browse/NA-SWR
