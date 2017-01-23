@@ -44,7 +44,7 @@
     "coveralls": "2.11.2",
     "css-loader": "0.14.4",
     "dgx-alt-center": "git+ssh://bitbucket.org/NYPL/dgx-alt-center.git#master",
-    "dgx-feature-flags": "git+ssh://bitbucket.org/NYPL/dgx-feature-flags.git#master",
+    "dgx-feature-flags": "git+https://git@bitbucket.org/NYPL/dgx-feature-flags.git#master",
     "dgx-react-ga": "git+ssh://bitbucket.org/NYPL/dgx-react-ga.git#master",
     "ejs": "2.3.2",
     "eslint": "0.24.0",

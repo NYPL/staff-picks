@@ -21,6 +21,10 @@ import FeatureFlags from 'dgx-feature-flags';
 import './styles/main.scss';
 
 window.onload = () => {
+  if (!window.dgxFeatureFlags) {
+    window.dgxFeatureFlags = FeatureFlags.utils;
+  }
+
   Iso.bootstrap((state, container) => {
     alt.bootstrap(state);
 
@@ -28,10 +32,6 @@ window.onload = () => {
       console.log('Analytics not available - loading through React.');
       let gaOpts = { debug: false };
       ga.initialize('UA-1420324-3', gaOpts);
-    }
-
-    if (!window.dgxFeatureFlags) {
-      window.dgxFeatureFlags = FeatureFlags.utils;
     }
 
     const appHistory = useRouterHistory(createBrowserHistory)();
