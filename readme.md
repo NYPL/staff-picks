@@ -35,3 +35,9 @@ development -------------------------------->development /^
 - Click Deploy on top right (under Search) and again select environment
 - Select 'Promote existing release to this environment'
 - Select release and start deployment
+
+## Changelog
+
+### v2.1.7
+#### Added
+- Enabled Feature Flags plugin on the client-side and added Optimizely script in the index.ejs file.
