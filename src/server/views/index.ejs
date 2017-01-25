@@ -1,69 +1,73 @@
 <html lang="en">
-<head>
-  <title>NYPL | Recommendations</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <% for (var i=0; i < metatags.length; i++) {%>
-   <%- metatags[i] %>
+  <head>
+    <title>NYPL | Recommendations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <% for (var i=0; i < metatags.length; i++) {%>
+     <%- metatags[i] %>
+    <% } %>
+
+    <link rel="shortcut icon" type="image/ico" href="//d2znry4lg8s0tq.cloudfront.net/images/favicon.ico">
+
+  <% if (isProduction) { %>
+    <!-- Minified Styles -->
+    <link rel="stylesheet" type="text/css" href='dist/styles.css' />
   <% } %>
 
-  <link rel="shortcut icon" type="image/ico" href="//d2znry4lg8s0tq.cloudfront.net/images/favicon.ico">
+  </head>
+  <body>
+    <div id='content'><%- markup %></div>
 
-<% if (isProduction) { %>
-  <!-- Minified Styles -->
-  <link rel="stylesheet" type="text/css" href='dist/styles.css' />
-<% } %>
+    <script type='text/javascript'>
+      var path = '<%= path %>';
+      var appEnv = "<%= appEnv %>";
+    </script>
 
-</head>
-<body>
-  <div id='content'><%- markup %></div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
 
-  <script type='text/javascript'>
-    var path = '<%= path %>';
-    var appEnv = "<%= appEnv %>";
-  </script>
+    <!-- twitter web intents widgets-->
+    <script>
+      window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+          t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
+        t._e = [];
+        t.ready = function(f) {
+          t._e.push(f);
+        };
 
-  <!-- twitter web intents widgets-->
-  <script>
-    window.twttr = (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0],
-        t = window.twttr || {};
-      if (d.getElementById(id)) return t;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://platform.twitter.com/widgets.js";
-      fjs.parentNode.insertBefore(js, fjs);
+        return t;
+      }(document, "script", "twitter-wjs"));
+    </script>
 
-      t._e = [];
-      t.ready = function(f) {
-        t._e.push(f);
-      };
+    <!-- tumblr share button widgets-->
+    <script>
+      !function(d,s,id){
+        var js,ajs=d.getElementsByTagName(s)[0];
+        if(!d.getElementById(id)){
+          js=d.createElement(s);
+          js.id=id;
+          js.src="https://secure.assets.tumblr.com/share-button.js";
+          ajs.parentNode.insertBefore(js,ajs);
+      }}(document, "script", "tumblr-js");
+    </script>
 
-      return t;
-    }(document, "script", "twitter-wjs"));
-  </script>
+    <script id="tumblr-js" async src="https://assets.tumblr.com/share-button.js"></script>
 
-  <!-- tumblr share button widgets-->
-  <script>
-    !function(d,s,id){
-      var js,ajs=d.getElementsByTagName(s)[0];
-      if(!d.getElementById(id)){
-        js=d.createElement(s);
-        js.id=id;
-        js.src="https://secure.assets.tumblr.com/share-button.js";
-        ajs.parentNode.insertBefore(js,ajs);
-    }}(document, "script", "tumblr-js");
-  </script>
+  <% if (isProduction) { %>
+    <script async src="dist/<%= assets.main.js %>"></script>
+  <% } else { %>
+    <script src="http://localhost:3000/bundle.js"></script>
+  <% } %>
 
-  <script id="tumblr-js" async src="https://assets.tumblr.com/share-button.js"></script>
-
-<% if (isProduction) { %>
-  <script async src="dist/<%= assets.main.js %>"></script>
-<% } else { %>
-  <script src="http://localhost:3000/bundle.js"></script>
-<% } %>
+    <!-- Optimizely -->
+    <script src="https://cdn.optimizely.com/js/284748925.js"></script>
+    <!-- Optimizely -->
   </body>
 </html>
