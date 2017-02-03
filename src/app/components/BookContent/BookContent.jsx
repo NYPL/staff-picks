@@ -83,7 +83,7 @@ const BookContent = (props) => {
         {picker}
       </div>
 
-      <ul className="borrow">
+      <ul className="borrow iAmTest">
         <li
           style={bookStyle}
           onClick={() => utils.trackPicks('Modal', 'Request the book')}
