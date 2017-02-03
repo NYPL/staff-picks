@@ -30,6 +30,8 @@ const BookContent = (props) => {
       return `https://browse.nypl.org/iii/encore/record/C__Rb${catalogSub}?lang=eng`;
     }
 
+    catalogSlug = catalogSlug.replace(/^http:\/\//i, 'https://');
+
     return catalogSlug;
   };
 
@@ -83,7 +85,7 @@ const BookContent = (props) => {
         {picker}
       </div>
 
-      <ul className="borrow iAmTest">
+      <ul className="borrow">
         <li
           style={bookStyle}
           onClick={() => utils.trackPicks('Modal', 'Request the book')}
