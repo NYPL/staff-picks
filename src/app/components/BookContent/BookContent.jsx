@@ -30,6 +30,7 @@ const BookContent = (props) => {
       return `https://browse.nypl.org/iii/encore/record/C__Rb${catalogSub}?lang=eng`;
     }
 
+    // Replace existing http links with https protocol
     catalogSlug = catalogSlug.replace(/^http:\/\//i, 'https://');
 
     return catalogSlug;
