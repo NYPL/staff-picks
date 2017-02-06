@@ -27,8 +27,11 @@ const BookContent = (props) => {
 
     if (catalogSlug && catalogSlug.indexOf('browse.nypl.org') === -1) {
       catalogSub = catalogSlug.substring(start, end);
-      return `http://browse.nypl.org/iii/encore/record/C__Rb${catalogSub}?lang=eng`;
+      return `https://browse.nypl.org/iii/encore/record/C__Rb${catalogSub}?lang=eng`;
     }
+
+    // Replace existing http links with https protocol
+    catalogSlug = catalogSlug.replace(/^http:\/\//i, 'https://');
 
     return catalogSlug;
   };
