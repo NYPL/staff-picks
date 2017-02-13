@@ -39,7 +39,7 @@ development -------------------------------->development /^
 ## Changelog
 
 ### v2.1.8
-> Added HTTPS fix and the JavaScript fallback for the log in button in the Header Component.
+> Updated the Header Component to v1.5.1. The update includes HTTPS fix and the JavaScript fallback for the log in button on the Header Component.
 
 ### v2.1.7
 #### Added
