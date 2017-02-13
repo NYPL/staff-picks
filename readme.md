@@ -38,6 +38,9 @@ development -------------------------------->development /^
 
 ## Changelog
 
+### v2.1.8
+> Added HTTPS fix and the JavaScript fallback for the log in button in the Header Component.
+
 ### v2.1.7
 #### Added
 - Enabled Feature Flags plugin on the client-side and added Optimizely script in the index.ejs file.
