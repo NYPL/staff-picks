@@ -38,6 +38,11 @@ development -------------------------------->development /^
 
 ## Changelog
 
+### v2.1.9
+> Updated the Header Component to v1.5.3. The update is to remove console loggings for patron token expiration.
+
+> Updated the Header Component to v1.5.2. The update is to turn off the feature flag of OAuth Login and set it as default.
+
 ### v2.1.8
 > Updated the Header Component to v1.5.1. The update includes HTTPS fix and the JavaScript fallback for the log in button on the Header Component.
 
