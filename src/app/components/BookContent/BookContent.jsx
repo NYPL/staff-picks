@@ -31,7 +31,9 @@ const BookContent = (props) => {
     }
 
     // Replace existing http links with https protocol
-    catalogSlug = catalogSlug.replace(/^http:\/\//i, 'https://');
+    if (catalogSlug) {
+      catalogSlug = catalogSlug.replace(/^http:\/\//i, 'https://');
+    }
 
     return catalogSlug;
   };
