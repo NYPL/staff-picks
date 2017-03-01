@@ -21,17 +21,18 @@ const BookContent = (props) => {
   const getEncoreLink = (catalogSlug, start, end) => {
     let catalogSub;
 
-    if (catalogSlug === 'na' || catalogSlug === 'n/a') {
+    if (!catalogSlug || catalogSlug === 'na' || catalogSlug === 'n/a') {
       return;
-    }
-
-    if (catalogSlug && catalogSlug.indexOf('browse.nypl.org') === -1) {
-      catalogSub = catalogSlug.substring(start, end);
-      return `https://browse.nypl.org/iii/encore/record/C__Rb${catalogSub}?lang=eng`;
     }
 
     // Replace existing http links with https protocol
     catalogSlug = catalogSlug.replace(/^http:\/\//i, 'https://');
+
+    // Create the catalog link based on the catalog slug
+    if (catalogSlug.indexOf('browse.nypl.org') === -1) {
+      catalogSub = catalogSlug.substring(start, end);
+      return `https://browse.nypl.org/iii/encore/record/C__Rb${catalogSub}?lang=eng`;
+    }
 
     return catalogSlug;
   };
