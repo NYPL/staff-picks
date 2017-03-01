@@ -38,6 +38,11 @@ development -------------------------------->development /^
 
 ## Changelog
 
+### v2.1.9
+> Updated the variable check for "id" in ApiRoutes.js to fix the bug that the routes can't deal with dates.
+
+> Updated the variable check for "catalogSlug" in BookContent.jsx.
+
 ### v2.1.8
 > Updated the Header Component to v1.5.1. The update includes HTTPS fix and the JavaScript fallback for the log in button on the Header Component.
 
