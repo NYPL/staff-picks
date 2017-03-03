@@ -38,6 +38,9 @@ development -------------------------------->development /^
 
 ## Changelog
 
+### v2.1.10
+> Updated the Header Component to v1.5.5. The updates include integrating the log in related functions with login server, removing console loggings for patron token expiration, and turning off the feature flag of OAuth Login and set it as default.
+
 ### v2.1.9
 > Updated the variable check for "id" in ApiRoutes.js to fix the bug that the routes can't deal with dates.
 
