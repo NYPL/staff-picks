@@ -254,30 +254,30 @@ class BookFilters extends React.Component {
 
   renderFilterList(date) {
     const isSpring2016 = (date.year === 2016 && date.month === 'Spring');
-    let joinedFilters = this.state.drivenByFilters.concat(this.state.themeFilters);
 
-    // Join the two set of filters and sort alphabetically.
-    joinedFilters = _sortBy(joinedFilters, (f) => f.attributes.displayName);
+    if (date.year >= 2016 && !isSpring2016) {
+      let joinedFilters = this.state.drivenByFilters.concat(this.state.themeFilters);
 
-    if (date.year < 2016 || isSpring2016) {
+      // Join the two set of filters and sort alphabetically.
+      joinedFilters = _sortBy(joinedFilters, (f) => f.attributes.displayName);
       return (
-        <div>
-          <span>Driven by...</span>
-          <ul>
-            {this.filterItems(this.state.drivenByFilters)}
-          </ul>
-          <span>Themes...</span>
-          <ul>
-            {this.filterItems(this.state.themeFilters)}
-          </ul>
-        </div>
+        <ul>
+          {this.filterItems(joinedFilters)}
+        </ul>
       );
     }
 
     return (
-      <ul>
-        {this.filterItems(joinedFilters)}
-      </ul>
+      <div>
+        <span>Driven by...</span>
+        <ul>
+          {this.filterItems(this.state.drivenByFilters)}
+        </ul>
+        <span>Themes...</span>
+        <ul>
+          {this.filterItems(this.state.themeFilters)}
+        </ul>
+      </div>
     );
   }
 
