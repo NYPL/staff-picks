@@ -252,22 +252,15 @@ class BookFilters extends React.Component {
     BookActions.toggleBookFilter(filterType);
   }
 
-  render() {
-    const store = BookStore.getState();
-    const seasonYear = staffPicksDate(store.currentMonthPicks.date);
-    let filterList;
+  renderFilterList(date) {
+    const isSpring2016 = (date.year === 2016 && date.month === 'Spring');
+    let joinedFilters = this.state.drivenByFilters.concat(this.state.themeFilters);
 
-    if (seasonYear.month !== 'Spring' && seasonYear.year >= 2016) {
-      // Join the two set of filters and sort alphabetically.
-      let joinedFilters = this.state.drivenByFilters.concat(this.state.themeFilters);
-      joinedFilters = _sortBy(joinedFilters, (f) => f.attributes.displayName);
-      filterList = (
-        <ul>
-          {this.filterItems(joinedFilters)}
-        </ul>
-      );
-    } else {
-      filterList = (
+    // Join the two set of filters and sort alphabetically.
+    joinedFilters = _sortBy(joinedFilters, (f) => f.attributes.displayName);
+
+    if (date.year < 2016 || isSpring2016) {
+      return (
         <div>
           <span>Driven by...</span>
           <ul>
@@ -282,6 +275,17 @@ class BookFilters extends React.Component {
     }
 
     return (
+      <ul>
+        {this.filterItems(joinedFilters)}
+      </ul>
+    );
+  }
+
+  render() {
+    const store = BookStore.getState();
+    const seasonYear = staffPicksDate(store.currentMonthPicks.date);
+
+    return (
       <div className={`BookFilters ${this.props.active}`} style={this.props.styles}>
         <CloseButton
           onClick={this.props.mobileCloseBtn}
@@ -291,7 +295,7 @@ class BookFilters extends React.Component {
         <span className="divider"></span>
         <h2>What would you like to read?</h2>
         <div className="BookFilters-lists">
-          {filterList}
+          {this.renderFilterList(seasonYear)}
           {store.filters.length ?
             <div className="clearFilters" style={styles.clearFilters}>
               <a href="#" onClick={this.clearFilters}>
