@@ -1,5 +1,6 @@
 // Import React library
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const BasicButton = (props) => (
   <button
@@ -17,15 +18,15 @@ const BasicButton = (props) => (
 );
 
 BasicButton.propTypes = {
-  id: React.PropTypes.string,
-  className: React.PropTypes.string,
-  name: React.PropTypes.string,
-  label: React.PropTypes.string,
-  lang: React.PropTypes.string,
-  onClick: React.PropTypes.function,
-  onMouseLeave: React.PropTypes.function,
-  onMouseEnter: React.PropTypes.function,
-  style: React.PropTypes.object,
+  id: PropTypes.string,
+  className: PropTypes.string,
+  name: PropTypes.string,
+  label: PropTypes.string,
+  lang: PropTypes.string,
+  onClick: PropTypes.function,
+  onMouseLeave: PropTypes.function,
+  onMouseEnter: PropTypes.function,
+  style: PropTypes.object,
 };
 
 BasicButton.defaultProps = {

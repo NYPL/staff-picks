@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import utils from '../../utils/utils.js';
 
@@ -115,9 +116,9 @@ BookContent.defaultProps = {
 };
 
 BookContent.propTypes = {
-  book: React.PropTypes.object,
-  type: React.PropTypes.string,
-  className: React.PropTypes.string,
+  book: PropTypes.object,
+  type: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default BookContent;

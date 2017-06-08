@@ -3,35 +3,35 @@ import alt from 'dgx-alt-center';
 
 class Actions {
   updatePicks(picks) {
-    this.dispatch(picks);
+    return picks;
   }
 
   updateBookDisplay(displayType) {
-    this.dispatch(displayType);
+    return displayType;
   }
 
   updateFilterAge(age) {
-    this.dispatch(age);
+    return age;
   }
 
   toggleBookFilter(filter) {
-    this.dispatch(filter);
+    return filter;
   }
 
   clearFilters() {
-    this.dispatch(true);
+    return true;
   }
 
   updateNewFilters(filters) {
-    this.dispatch(filters);
+    return filters;
   }
 
   isotopesDidUpdate(bool) {
-    this.dispatch(bool);
+    return bool;
   }
 
   updateInitialFilters(filters) {
-    this.dispatch(filters);
+    return filters;
   }
 };
 

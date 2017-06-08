@@ -38,6 +38,9 @@ development -------------------------------->development /^
 
 ## Changelog
 
+### v2.2.0
+> Updated to React 15.
+
 ### v2.1.11
 > Updated the logic in BookFilters.jsx to render one list of tags starting from summer 2016.
 

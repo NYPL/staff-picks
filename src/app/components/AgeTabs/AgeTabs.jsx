@@ -1,5 +1,6 @@
 // Import React and related libraries
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Import components
 import TabElement from './TabElement.jsx';
@@ -40,7 +41,7 @@ class AgeTabs extends React.Component {
 }
 
 AgeTabs.propTypes = {
-  params: React.PropTypes.object,
+  params: PropTypes.object,
 };
 
 export default AgeTabs;

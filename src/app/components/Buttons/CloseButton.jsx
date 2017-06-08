@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const CloseButton = (props) => {
   const handleClick = (e) => {
@@ -19,9 +20,9 @@ const CloseButton = (props) => {
 };
 
 CloseButton.propTypes = {
-  onClick: React.PropTypes.func,
-  className: React.PropTypes.string,
-  label: React.PropTypes.string,
+  onClick: PropTypes.func,
+  className: PropTypes.string,
+  label: PropTypes.string,
 };
 
 CloseButton.defaultProps = {
