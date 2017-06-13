@@ -1,5 +1,6 @@
 // Library import
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Component import
 import HeroTitle from './HeroTitle/HeroTitle.jsx';
@@ -113,9 +114,9 @@ class Hero extends React.Component {
 }
 
 Hero.propTypes = {
-  params: React.PropTypes.object,
-  location: React.PropTypes.object,
-  className: React.PropTypes.string,
+  params: PropTypes.object,
+  location: PropTypes.object,
+  className: PropTypes.string,
 };
 
 Hero.defaultProps = {

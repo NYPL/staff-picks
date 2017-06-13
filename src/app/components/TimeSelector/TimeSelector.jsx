@@ -1,6 +1,6 @@
 /* global $ */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { isEmpty as _isEmpty } from 'underscore';
 
@@ -149,15 +149,13 @@ class TimeSelector extends React.Component {
 }
 
 TimeSelector.propTypes = {
-  params: React.PropTypes.object,
-  pickType: React.PropTypes.string,
-  currentMonthPicks: React.PropTypes.object,
+  params: PropTypes.object,
+  pickType: PropTypes.string,
+  currentMonthPicks: PropTypes.object,
 };
 
 TimeSelector.contextTypes = {
-  router: function contextType() {
-    return React.PropTypes.func.isRequired;
-  },
+  router: PropTypes.object,
 };
 
 export default TimeSelector;

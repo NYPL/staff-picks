@@ -1,6 +1,7 @@
 /* global $, Isotope */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {
@@ -234,8 +235,8 @@ class Books extends React.Component {
 }
 
 Books.propTypes = {
-  location: React.PropTypes.object,
-  params: React.PropTypes.object,
+  location: PropTypes.object,
+  params: PropTypes.object,
 };
 
 Books.defaultProps = {
@@ -244,9 +245,7 @@ Books.defaultProps = {
 };
 
 Books.contextTypes = {
-  router: function contextType() {
-    return React.PropTypes.func.isRequired;
-  },
+  router: PropTypes.object,
 };
 
 export default Books;

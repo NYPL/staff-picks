@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
@@ -68,7 +69,7 @@ class BookDisplayButtons extends React.Component {
 }
 
 BookDisplayButtons.propTypes = {
-  className: React.PropTypes.string,
+  className: PropTypes.string,
 };
 
 BookDisplayButtons.defaultProps = {

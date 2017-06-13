@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Book = (props) => {
   const handleClick = (e) => e.preventDefault();
@@ -24,10 +25,10 @@ const Book = (props) => {
 };
 
 Book.propTypes = {
-  book: React.PropTypes.object,
-  className: React.PropTypes.string,
-  height: React.PropTypes.string,
-  width: React.PropTypes.string,
+  book: PropTypes.object,
+  className: PropTypes.string,
+  height: PropTypes.string,
+  width: PropTypes.string,
 };
 
 Book.defaultProps = {
