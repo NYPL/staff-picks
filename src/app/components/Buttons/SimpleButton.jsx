@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import { gaUtils } from 'dgx-react-ga';
 
 const SimpleButton = (props) => {
@@ -22,15 +22,15 @@ const SimpleButton = (props) => {
 };
 
 SimpleButton.propTypes = {
-  gaCategory: React.PropTypes.string,
-  gaAction: React.PropTypes.string,
-  gaLabel: React.PropTypes.string,
-  id: React.PropTypes.string,
-  className: React.PropTypes.string,
-  label: React.PropTypes.string,
-  target: React.PropTypes.string,
-  style: React.PropTypes.object,
-  onClick: React.PropTypes.func,
+  gaCategory: PropTypes.string,
+  gaAction: PropTypes.string,
+  gaLabel: PropTypes.string,
+  id: PropTypes.string,
+  className: PropTypes.string,
+  label: PropTypes.string,
+  target: PropTypes.string,
+  style: PropTypes.object,
+  onClick: PropTypes.func,
 };
 
 SimpleButton.defaultProps = {

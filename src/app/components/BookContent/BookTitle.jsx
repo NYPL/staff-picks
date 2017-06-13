@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const BookTitle = (props) => {
   const book = props.book;
@@ -12,8 +13,8 @@ const BookTitle = (props) => {
 };
 
 BookTitle.propTypes = {
-  book: React.PropTypes.object,
-  className: React.PropTypes.string,
+  book: PropTypes.object,
+  className: PropTypes.string,
 };
 
 BookTitle.defaultProps = {

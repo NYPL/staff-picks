@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ImageComponent = (props) => (
   <img
@@ -11,11 +12,11 @@ const ImageComponent = (props) => (
 );
 
 ImageComponent.propTypes = {
-  id: React.PropTypes.string,
-  className: React.PropTypes.string,
-  alt: React.PropTypes.string,
-  style: React.PropTypes.object,
-  src: React.PropTypes.string,
+  id: PropTypes.string,
+  className: PropTypes.string,
+  alt: PropTypes.string,
+  style: PropTypes.object,
+  src: PropTypes.string,
 };
 
 ImageComponent.defaultProps = {
