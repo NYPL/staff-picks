@@ -25,7 +25,8 @@ function staffPicksDate(date) {
   }
 
   const d = date.match(/(\d{4})\-(\d{2})\-(\d{2})/);
-  const newDate = new Date(d[1], d[2] - 1, d[3]);
+  const regexMonth = parseInt(d[1], 10) <= 2015 ? d[2] - 1 : d[2];
+  const newDate = new Date(d[1], regexMonth, d[3]);
   const year = newDate.getFullYear();
   const month = monthOrSeason(newDate.getMonth(), year);
 

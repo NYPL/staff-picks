@@ -1,5 +1,8 @@
 ## Changelog
 
+### v2.2.1
+> Fix to time/season display.
+
 ### v2.2.0
 > Updated to React 15.
 
