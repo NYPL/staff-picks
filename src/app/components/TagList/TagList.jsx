@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const TagList = (props) => {
   const tags = props.tags.map((tag, i) => (<li key={i}>{tag}</li>));
@@ -14,9 +15,9 @@ const TagList = (props) => {
 };
 
 TagList.propTypes = {
-  tags: React.PropTypes.array,
-  className: React.PropTypes.string,
-  style: React.PropTypes.object,
+  tags: PropTypes.array,
+  className: PropTypes.string,
+  style: PropTypes.object,
 };
 
 export default TagList;

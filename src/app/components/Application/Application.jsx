@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // NYPL Components
 import { Header, navConfig } from '@nypl/dgx-header-component';
@@ -43,7 +44,10 @@ const App = (props) => {
 
   return (
     <div>
-      <Header navData={navConfig.current} />
+      <Header
+        navData={navConfig.current}
+        skipNav={{ target: 'app-content' }}
+      />
       <Hero {...props} />
       <div id="app-content">
         {props.children}
@@ -64,9 +68,9 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  children: React.PropTypes.object,
-  filters: React.PropTypes.object,
-  params: React.PropTypes.object,
+  children: PropTypes.object,
+  filters: PropTypes.object,
+  params: PropTypes.object,
 };
 
 export default App;

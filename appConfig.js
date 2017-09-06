@@ -12,7 +12,7 @@ const config = {
     root: {
       development: 'https://dev-refinery.nypl.org',
       qa: 'https://qa-refinery.nypl.org',
-      production: 'https://refinery.nypl.org'
+      production: 'https://refinery.nypl.org',
     },
     baseEndpoint: '/api/nypl/ndo/v0.1/book-lists',
     bookListUserEndpoint: '/book-list-users',
@@ -20,17 +20,17 @@ const config = {
     // default setting is loading five items at first
     pageSize: '&page[size]=5',
     pageNumber: '&page[number]=1',
-    includes: ['list-items.item', 'user']
+    includes: ['list-items.item', 'user'],
   },
   headerApi: {
     endpoint: '/api/nypl/ndo/v0.1/site-data/header-items',
     includes: [
       'children',
       'related-container-slots.current-item.square-image',
-     ],
+    ],
     filters: {
-      'relationships': {'parent': 'null'}
-    }
+      relationships: { parent: 'null' },
+    },
   },
   navTopLinks: [
     {
@@ -38,120 +38,120 @@ const config = {
       link: {
         en: {
           text: '//www.nypl.org/browse',
-          type: 'text-single'
-        }
+          type: 'text-single',
+        },
       },
       name: {
         en: {
           text: 'Browse',
-          type: 'text-single'
-        }
+          type: 'text-single',
+        },
       },
       sort: 105,
-      type: 'header-item'
+      type: 'header-item',
     },
     {
       id: '925d1fa9-1138-403c-9990-38861902b02d',
       link: {
         en: {
           text: '//www.nypl.org/learn',
-          type: 'text-single'
-        }
+          type: 'text-single',
+        },
       },
       name: {
         en: {
           text: 'Learn',
-          type: 'text-single'
-        }
+          type: 'text-single',
+        },
       },
       sort: 106,
-      type: 'header-item'
+      type: 'header-item',
     },
     {
       id: '851ed351-08f5-43f0-9011-9c317f85f0ca',
       link: {
         en: {
           text: '//www.nypl.org/attend',
-          type: 'text-single'
-        }
+          type: 'text-single',
+        },
       },
       name: {
         en: {
           text: 'Attend',
-          type: 'text-single'
-        }
+          type: 'text-single',
+        },
       },
       sort: 107,
-      type: 'header-item'
+      type: 'header-item',
     },
     {
       id: '4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9',
       link: {
         en: {
           text: '//www.nypl.org/research',
-          type: 'text-single'
-        }
+          type: 'text-single',
+        },
       },
       name: {
         en: {
           text: 'Research',
-          type: 'text-single'
-        }
+          type: 'text-single',
+        },
       },
       sort: 108,
-      type: 'header-item'
+      type: 'header-item',
     },
     {
       id: 'df621833-4dd1-4223-83e5-6ad7f98ad26a',
       link: {
         en: {
           text: '//www.nypl.org/locations/map',
-          type: 'text-single'
-        }
+          type: 'text-single',
+        },
       },
       name: {
         en: {
           text: 'Find Us',
-          type: 'text-single'
-        }
+          type: 'text-single',
+        },
       },
       sort: 109,
-      type: 'header-item'
+      type: 'header-item',
     },
     {
       id: '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1',
       link: {
         en: {
           text: '//www.nypl.org/give',
-          type: 'text-single'
-        }
+          type: 'text-single',
+        },
       },
       name: {
         en: {
           text: 'Give',
-          type: 'text-single'
-        }
+          type: 'text-single',
+        },
       },
       sort: 110,
-      type: 'header-item'
+      type: 'header-item',
     },
     {
       id: '13d95ad5-f117-4415-ba2c-5c0b9618984d',
       link: {
         en: {
           text: '//www.nypl.org/get-help',
-          type: 'text-single'
-        }
+          type: 'text-single',
+        },
       },
       name: {
         en: {
           text: 'Get Help',
-          type: 'text-single'
-        }
+          type: 'text-single',
+        },
       },
       sort: 111,
-      type: 'header-item'
-    }
+      type: 'header-item',
+    },
   ],
   socialMediaLinks: {
     facebook: 'https://www.facebook.com/nypl',
@@ -159,42 +159,42 @@ const config = {
     instagram: 'https://instagram.com/nypl',
     tumblr: 'http://nypl.tumblr.com/',
     youtube: 'https://www.youtube.com/user/NewYorkPublicLibrary',
-    soundcloud: 'https://soundcloud.com/nypl'
+    soundcloud: 'https://soundcloud.com/nypl',
   },
   donationLinks: [
     {
       url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=55&s_src=FRQ16ZZ_TNN&s_subsrc=55',
-      amount: '$55'
+      amount: '$55',
     },
     {
       url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=115&s_src=FRQ16ZZ_TNN&s_subsrc=115',
-      amount: '$115'
+      amount: '$115',
     },
     {
       url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=250&s_src=FRQ16ZZ_TNN&s_subsrc=250',
-      amount: '$250'
+      amount: '$250',
     },
     {
       url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=0&s_src=FRQ16ZZ_TNN&s_subsrc=other',
-      amount: 'Other'
-    }
+      amount: 'Other',
+    },
   ],
   headerClientEnv: {
     production: 'https://header.nypl.org',
     qa: 'https://qa-header.nypl.org',
-    development: 'https://dev-header.nypl.org'
+    development: 'https://dev-header.nypl.org',
   },
   myNyplLinks: {
     catalog: 'https://browse.nypl.org/iii/encore/myaccount',
     classic: 'https://catalog.nypl.org/patroninfo/top',
-    moreInfo: 'https://www.nypl.org/online-catalog-changes'
+    moreInfo: 'https://www.nypl.org/online-catalog-changes',
   },
   metaTags: [
-    {property: "og:type", content: 'website'},
-    {property: "og:site_name", content: 'Recommendations | The New York Public Library'},
-    {name: "twitter:card", content: 'summary_large_image'},
-    {name: "twitter:site", content: '@nypl'},
-    {name: "twitter:creator", content: '@nypl'}
+    { property: 'og:type', content: 'website' },
+    { property: 'og:site_name', content: 'Recommendations | The New York Public Library' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:site', content: '@nypl' },
+    { name: 'twitter:creator', content: '@nypl' },
   ],
   seasons: {
     Spring: ['March', 'April', 'May'],

@@ -12,9 +12,8 @@ import appConfig from './appConfig.js';
 
 import React from 'react';
 import DocMeta from 'react-doc-meta';
-import { Router, match, RouterContext } from 'react-router';
+import { match, RouterContext } from 'react-router';
 import ReactDOMServer from 'react-dom/server';
-import { createMemoryHistory } from 'history';
 
 import alt from 'dgx-alt-center';
 import Iso from 'iso';
@@ -112,18 +111,18 @@ let server = app.listen(app.get('port'), function () {
 
 // this function is called when you want the server to die gracefully
 // i.e. wait for existing connections
-let gracefulShutdown = function() {
-  console.log("Received kill signal, shutting down gracefully.");
-  server.close(function() {
-    console.log("Closed out remaining connections.");
-    process.exit()
+const gracefulShutdown = () => {
+  console.log('Received kill signal, shutting down gracefully.');
+  server.close(() => {
+    console.log('Closed out remaining connections.');
+    process.exit();
   });
   // if after
-  setTimeout(function() {
-    console.error("Could not close connections in time, forcefully shutting down");
-    process.exit()
+  setTimeout(() => {
+    console.error('Could not close connections in time, forcefully shutting down');
+    process.exit();
   }, 1000);
-}
+};
 // listen for TERM signal .e.g. kill
 process.on('SIGTERM', gracefulShutdown);
 // listen for INT signal e.g. Ctrl-C
@@ -149,6 +148,9 @@ if (!isProduction) {
     if (err) {
       console.log(colors.red(err));
     }
-    console.log(colors.magenta('Webpack Dev Server listening at'), colors.cyan('localhost:' + appConfig.webpackDevServerPort));
+    console.log(
+      colors.magenta('Webpack Dev Server listening at'),
+      colors.cyan(`localhost: ${appConfig.webpackDevServerPort}`)
+    );
   });
 }

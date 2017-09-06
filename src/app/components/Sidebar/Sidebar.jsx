@@ -1,5 +1,6 @@
 // Import React and other utility libraries
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import BookDisplayButtons from '../BookDisplayButtons/BookDisplayButtons.jsx';
 import BookFilters from '../BookFilters/BookFilters.jsx';
@@ -78,7 +79,7 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.propTypes = {
-  params: React.PropTypes.object,
+  params: PropTypes.object,
 };
 
 export default Sidebar;

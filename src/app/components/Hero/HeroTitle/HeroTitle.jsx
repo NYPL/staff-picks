@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const HeroTitle = (props) => (
   <div id={props.id} className={props.className}>
@@ -13,11 +14,11 @@ const HeroTitle = (props) => (
 );
 
 HeroTitle.propTypes = {
-  id: React.PropTypes.string,
-  className: React.PropTypes.string,
-  des: React.PropTypes.string,
-  intro: React.PropTypes.string,
-  title: React.PropTypes.string,
+  id: PropTypes.string,
+  className: PropTypes.string,
+  des: PropTypes.string,
+  intro: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default HeroTitle;

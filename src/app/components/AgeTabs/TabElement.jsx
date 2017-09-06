@@ -1,5 +1,6 @@
 // Import React and necessary libraries
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Import components
 import BookStore from '../../stores/BookStore.js';
@@ -84,8 +85,8 @@ class TabElement extends React.Component {
 }
 
 TabElement.propTypes = {
-  value: React.PropTypes.string,
-  name: React.PropTypes.string,
+  value: PropTypes.string,
+  name: PropTypes.string,
 };
 
 export default TabElement;

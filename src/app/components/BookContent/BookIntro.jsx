@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import TagList from '../TagList/TagList.jsx';
 
@@ -23,8 +24,8 @@ const BookIntro = (props) => {
 };
 
 BookIntro.propTypes = {
-  book: React.PropTypes.object,
-  className: React.PropTypes.string,
+  book: PropTypes.object,
+  className: PropTypes.string,
 };
 
 BookIntro.defaultProps = {
