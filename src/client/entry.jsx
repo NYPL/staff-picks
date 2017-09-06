@@ -1,14 +1,10 @@
 // Polyfill Promise for legacy browsers
-import "babel-polyfill";
+import 'babel-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, useRouterHistory } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
-
-import App from '../app/components/Application/Application.jsx';
-import BookModal from '../app/components/BookModal/BookModal.jsx';
-import Error404Page from '../app/components/Error404Page/Error404Page.jsx';
 
 import alt from 'dgx-alt-center';
 import Iso from 'iso';

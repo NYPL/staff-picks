@@ -132,11 +132,8 @@ class TimeSelector extends React.Component {
     const date = staffPicksDate(pickDate);
     const pickMonth = this.props.pickType === 'staffpicks' ? date.month : null;
     const pickYear = date.year;
-    let previousBtn;
-    let nextBtn;
-
-    previousBtn = this.previousLink(currentMonthPicks.previousList);
-    nextBtn = this.nextLink(currentMonthPicks.nextList);
+    const previousBtn = this.previousLink(currentMonthPicks.previousList);
+    const nextBtn = this.nextLink(currentMonthPicks.nextList);
 
     return (
       <div className="TimeSelector" style={styles.timeSelector}>
