@@ -1,5 +1,8 @@
 ## Changelog
 
+### v2.2.2
+> Updating the Header to version 2.1.0.
+
 ### v2.2.1
 > Fix to time/season display.
 
@@ -22,4 +25,4 @@
 
 ### v2.1.7
 #### Added
-- Enabled Feature Flags plugin on the client-side and added Optimizely script in the index.ejs file.
+> Enabled Feature Flags plugin on the client-side and added Optimizely script in the index.ejs file.
