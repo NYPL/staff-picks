@@ -1,5 +1,8 @@
 ## Changelog
 
+### v2.3.0
+> Adding Feature Flag for displaying the List view by default, through Optimizely.
+
 ### v2.2.2
 > Updating the Header to version 2.1.0.
 
