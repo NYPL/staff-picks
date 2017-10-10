@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import utils from '../../utils/utils.js';
 
@@ -66,9 +67,9 @@ class BookShare extends React.Component {
 }
 
 BookShare.propTypes = {
-  book: React.PropTypes.object,
-  className: React.PropTypes.string,
-  shareType: React.PropTypes.object,
+  book: PropTypes.object,
+  className: PropTypes.string,
+  shareType: PropTypes.object,
 };
 
 export default BookShare;

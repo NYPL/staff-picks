@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {
@@ -317,10 +318,10 @@ class BookFilters extends React.Component {
 }
 
 BookFilters.propTypes = {
-  params: React.PropTypes.object,
-  styles: React.PropTypes.object,
-  mobileCloseBtn: React.PropTypes.func,
-  active: React.PropTypes.string,
+  params: PropTypes.object,
+  styles: PropTypes.object,
+  mobileCloseBtn: PropTypes.func,
+  active: PropTypes.string,
 };
 
 export default BookFilters;

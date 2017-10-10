@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 
 import DocMeta from 'react-doc-meta';
@@ -202,6 +203,7 @@ class BookModal extends React.Component {
           className={this.props.className}
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
+          contentLabel="NYPL Staff Pick Selection"
         >
           <CloseButton
             className={`${this.props.className}__closeBtn`}
@@ -233,9 +235,9 @@ class BookModal extends React.Component {
 }
 
 BookModal.propTypes = {
-  className: React.PropTypes.string,
-  params: React.PropTypes.object,
-  data: React.PropTypes.array,
+  className: PropTypes.string,
+  params: PropTypes.object,
+  data: PropTypes.array,
 };
 
 BookModal.defaultProps = {
@@ -244,9 +246,7 @@ BookModal.defaultProps = {
 };
 
 BookModal.contextTypes = {
-  router: function contextType() {
-    return React.PropTypes.func.isRequired;
-  },
+  router: PropTypes.object,
 };
 
 export default BookModal;
