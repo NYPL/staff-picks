@@ -6,3 +6,4 @@ dist
 assets.json
 .DS_Store
 client/.DS_Store
+.nyc_output

@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/srn/dgx-staff-picks.git"
+    "url": "https://github.com/NYPL/Staff-Picks"
   },
   "keywords": [
     "react",
@@ -30,7 +30,7 @@
   "author": "NYPL Digital Experience",
   "license": "MIT",
   "bugs": {
-    "url": "https://bitbucket.com/issues/"
+    "url": "https://github.com/NYPL/Staff-Picks/issues"
   },
   "dependencies": {
     "@nypl/dgx-header-component": "2.1.1",
@@ -49,9 +49,9 @@
     "colors": "1.1.2",
     "compression": "1.7.0",
     "css-loader": "0.23.1",
-    "dgx-alt-center": "git+ssh://bitbucket.org/NYPL/dgx-alt-center.git#master",
+    "dgx-alt-center": "git+https://bitbucket.org/NYPL/dgx-alt-center.git#master",
     "dgx-feature-flags": "git+https://git@bitbucket.org/NYPL/dgx-feature-flags.git#master",
-    "dgx-react-ga": "git+ssh://bitbucket.org/NYPL/dgx-react-ga.git#master",
+    "dgx-react-ga": "git+https://bitbucket.org/NYPL/dgx-react-ga.git#master",
     "ejs": "2.3.3",
     "enzyme": "2.9.1",
     "eslint": "2.2.0",
