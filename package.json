@@ -66,7 +66,7 @@
     "image-loaded": "0.0.2",
     "iso": "5.1.0",
     "jsonapi-parserinator": "0.5.0",
-    "moment": "2.10.6",
+    "moment": "2.19.1",
     "newrelic": "1.21.1",
     "node-libs-browser": "0.5.2",
     "mocha": "3.0.2",
