@@ -43,7 +43,7 @@ const App = (props) => {
   }
 
   return (
-    <div>
+    <div className="home">
       <Header
         navData={navConfig.current}
         skipNav={{ target: 'app-content' }}
