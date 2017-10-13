@@ -58,23 +58,21 @@ app.use('/', ApiRoutes);
 
 // after get the path
 app.use('/', (req, res) => {
-  let iso;
-
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
-  iso = new Iso();
+  const iso = new Iso();
 
   const blogAppUrl = (req.url).indexOf('books-music-dvds/recommendations/staff-picks') !== -1;
   const routes = blogAppUrl ? appRoutes.client : appRoutes.server;
 
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
-      res.status(500).send(error.message)
+      res.status(500).send(error.message);
     } else if (redirectLocation) {
-      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+      res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
       const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
       const metaTags = DocMeta.rewind();
-      const safePath = req.path.replace(/'/g, '').replace(/"/g, '')
+      const safePath = req.path.replace(/'/g, '').replace(/"/g, '');
       const renderedTags = metaTags.map((tag, index) =>
         ReactDOMServer.renderToString(<meta data-doc-meta="true" key={index} {...tag} />)
       );
@@ -85,7 +83,7 @@ app.use('/', (req, res) => {
         .status(200)
         .render('index', {
           path: safePath,
-          isProduction: isProduction,
+          isProduction,
           metatags: renderedTags,
           markup: iso.render(),
           gaCode: analytics.google.code(isProduction),
@@ -93,11 +91,8 @@ app.use('/', (req, res) => {
           assets: buildAssets,
           appTitle: appConfig.appTitle,
           favicon: appConfig.favIconPath,
-          gaCode: analytics.google.code(isProduction),
           webpackPort: WEBPACK_DEV_PORT,
-          appEnv: process.env.APP_ENV,
           endpoint: res.locals.data.endpoint,
-          isProduction
         });
     } else {
       res.status(404).send('Not found')
@@ -105,8 +100,8 @@ app.use('/', (req, res) => {
   });
 });
 
-let server = app.listen(app.get('port'), function () {
-  console.log('server running at localhost:' + app.get('port') + ', go refresh and see magic');
+const server = app.listen(app.get('port'), () => {
+  console.log(`server running at localhost: ${app.get('port')}, go refresh and see magic`);
 });
 
 // this function is called when you want the server to die gracefully
@@ -142,8 +137,8 @@ if (!isProduction) {
     historyApiFallback: true,
     headers: {
       'Access-Control-Allow-Origin': 'http://localhost:3001',
-      'Access-Control-Allow-Headers': 'X-Requested-With'
-    }
+      'Access-Control-Allow-Headers': 'X-Requested-With',
+    },
   }).listen(appConfig.webpackDevServerPort, 'localhost', (err, result) => {
     if (err) {
       console.log(colors.red(err));
