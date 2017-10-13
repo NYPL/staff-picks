@@ -1,7 +1,10 @@
 ## Changelog
 
+### 2.4.0
+> Adding unit tests, updating a few npm packages, and updating readme.
+
 ### v2.3.1
-> > Updating the Header to version 2.1.1.
+> Updating the Header to version 2.1.1.
 
 ### v2.3.0
 > Adding Feature Flag for displaying the List view by default, through Optimizely.
