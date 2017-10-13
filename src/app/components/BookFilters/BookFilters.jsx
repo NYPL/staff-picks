@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 import {
   each as _each,
@@ -74,7 +74,7 @@ class BookFilters extends React.Component {
 
     // Update/reset the filters based on a new age
     if (this.state.age !== age || storeState.isotopesDidUpdate) {
-      this.setState({ age: age });
+      this.setState({ age });
       _each(this.state.drivenByFilters, filter => {
         filter.active = false;
         filter.show = true;
@@ -208,15 +208,15 @@ class BookFilters extends React.Component {
           <li key={elem.id} onClick={() => handleClick(elem)}>
             <a>
               {elem.attributes.displayName}
-              <ReactCSSTransitionGroup
+              <CSSTransitionGroup
                 transitionName="minus"
-                transitionAppear={true}
+                transitionAppear
                 transitionEnterTimeout={500}
                 transitionAppearTimeout={500}
                 transitionLeaveTimeout={500}
               >
                 <span className={`minus-icon ${active}`}></span>
-              </ReactCSSTransitionGroup>
+              </CSSTransitionGroup>
             </a>
           </li>
         );

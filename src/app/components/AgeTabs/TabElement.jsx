@@ -74,6 +74,7 @@ class TabElement extends React.Component {
         className="tab-container__ul__element" style={active}
       >
         <a
+          href="#"
           className="tab-container__ul__element__link"
           onClick={() => this.handleClick(this.props.value)}
         >

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FeatureFlags from 'dgx-feature-flags';
 
 import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
@@ -12,38 +11,22 @@ class BookDisplayButtons extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = _extend(
-      {},
-      BookStore.getState(),
-      { featureFlag: FeatureFlags.store._isFeatureActive('list-display') }
-    );
+    this.state = _extend({}, BookStore.getState());
 
     this.handleClick = this.handleClick.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.onFFChange = this.onFFChange.bind(this);
   }
 
   componentDidMount() {
     BookStore.listen(this.onChange);
-    FeatureFlags.store.listen(this.onFFChange);
   }
 
   componentWillUnmount() {
     BookStore.unlisten(this.onChange);
-    FeatureFlags.store.unlisten(this.onFFChange);
   }
 
   onChange() {
     this.setState(BookStore.getState());
-  }
-
-  onFFChange() {
-    const featureFlag = FeatureFlags.store._isFeatureActive('list-display');
-
-    if (featureFlag) {
-      this.setState({ featureFlag });
-      BookActions.updateBookDisplay('list');
-    }
   }
 
   /* Utility Methods should be declared below the render method */

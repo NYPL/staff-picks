@@ -1,4 +1,9 @@
-import { isArray as _isArray, isEmpty as _isEmpty, isObject as _isObject, map as _map }  from 'underscore';
+import {
+  isArray as _isArray,
+  isEmpty as _isEmpty,
+  isObject as _isObject,
+  map as _map
+} from 'underscore';
 
 function PickItemModel() {
   this.build = data => {
@@ -16,7 +21,7 @@ function PickItemModel() {
   };
 
   this.pickItem = data => {
-    let item = {};
+    const item = {};
 
     if (!data) {
       return item;
@@ -24,14 +29,14 @@ function PickItemModel() {
 
     item.id = data.id;
     item.type = data.type;
-    
+
     item.title = data.attributes.title;
     item.author = data.attributes.author;
     item.catalogSlug = data.attributes['catalog-slug'] ?
       data.attributes['catalog-slug'] : undefined;
     item.imageSlug = data.attributes['image-slug'] ?
       data.attributes['image-slug'] : undefined;
-    item.ebookUri = data.attributes['ebook-uri'] ? 
+    item.ebookUri = data.attributes['ebook-uri'] ?
       data.attributes['ebook-uri']['full-uri'] : undefined;
     item.tags = this.tags(data.tags);
 
@@ -51,7 +56,7 @@ function PickItemModel() {
   };
 
   this.tag = data => {
-    let tag = {};
+    const tag = {};
 
     if (!data) {
       return tag;

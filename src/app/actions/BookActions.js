@@ -33,6 +33,6 @@ class Actions {
   updateInitialFilters(filters) {
     return filters;
   }
-};
+}
 
 export default alt.createActions(Actions);

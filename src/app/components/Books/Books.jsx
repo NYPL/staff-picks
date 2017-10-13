@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 import {
   extend as _extend,
@@ -218,15 +218,15 @@ class Books extends React.Component {
 
         <div id="masonryContainer" ref="masonryContainer">
           <ul className="list-view">
-            <ReactCSSTransitionGroup
+            <CSSTransitionGroup
               transitionName="books"
-              transitionAppear={true}
+              transitionAppear
               transitionEnterTimeout={500}
               transitionAppearTimeout={500}
               transitionLeaveTimeout={500}
             >
               {books}
-            </ReactCSSTransitionGroup>
+            </CSSTransitionGroup>
           </ul>
         </div>
       </div>

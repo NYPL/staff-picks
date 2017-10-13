@@ -104,6 +104,7 @@ class TimeSelector extends React.Component {
 
     return (previous.active) ?
       <a
+        href="#"
         style={styles.previousDate}
         onClick={() => this.handleClick('Previous', previous)}
       >
@@ -118,6 +119,7 @@ class TimeSelector extends React.Component {
 
     return (next.active) ?
       <a
+        href="#"
         style={styles.nextDate}
         onClick={() => this.handleClick('Next', next)}
       >
