@@ -11,6 +11,7 @@ const {
   pageSize,
   includes,
   api,
+  baseUrl,
 } = config;
 
 const appEnvironment = process.env.APP_ENV || 'production';
@@ -95,7 +96,7 @@ function selectAnnualData(req, res, next) {
     return annualCurrentData('ya100', req, res, next);
   }
 
-  return res.redirect('/books-music-dvds/recommendations/staff-picks/');
+  return res.redirect(baseUrl);
 }
 
 export default {
