@@ -1,13 +1,15 @@
 /* global $ */
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import axios from 'axios';
 import { isEmpty as _isEmpty } from 'underscore';
 
 import BookActions from '../../actions/BookActions.js';
 import staffPicksDate from '../../utils/DateService.js';
 import utils from '../../utils/utils.js';
+import config from '../../../../appConfig.js';
 
+const { baseUrl } = config;
 const styles = {
   timeSelector: {
     height: '35px',
@@ -33,10 +35,10 @@ class TimeSelector extends React.Component {
     super(props);
 
     const params = this.props.params;
-    const transitionRoute = this.props.pickType === 'staffpicks' ? 'month' : 'year';
+    const transitionRoute = this.props.annualList ? 'year' : 'month';
     let type;
 
-    if (params && params.type && (params.type === 'childrens' || params.type === 'ya')) {
+    if (this.props.annualList && (params.type === 'childrens' || params.type === 'ya')) {
       type = params.type;
     }
 
@@ -67,30 +69,30 @@ class TimeSelector extends React.Component {
   }
 
   handleClick(selection, month) {
-    let API;
+    let endpoint;
 
     if (month) {
-      API = `/books-music-dvds/recommendations/staff-picks/api/ajax/picks/${month.date}`;
+      endpoint = `${baseUrl}api/ajax/picks/${month.date}`;
 
-      $.ajax({
-        type: 'GET',
-        dataType: 'json',
-        url: API,
-        success: data => {
-          const picks = data.currentMonthPicks;
-          const filters = data.filters;
+      axios
+        .get(endpoint)
+        .then(data => {
+          const picks = data.data.currentMonthPicks;
+          const filters = data.data.filters;
 
           utils.trackPicks('Select Month', `${selection}: ${month.month()}`);
 
-          this.routeHandler(`/books-music-dvds/recommendations/staff-picks/${month.date}`);
+          this.routeHandler(`${baseUrl}${month.date}`);
 
           BookActions.clearFilters();
           BookActions.isotopesDidUpdate(true);
           BookActions.updatePicks(picks);
           BookActions.updateInitialFilters(filters);
           BookActions.isotopesDidUpdate(false);
-        },
-      });
+        })
+        .catch(error => {
+          console.log(`Error fetching ajax request: ${error}`);
+        });
     }
   }
 
@@ -100,7 +102,7 @@ class TimeSelector extends React.Component {
 
   previousLink(list) {
     const previous = this.getMonth(list);
-    const dateDisplay = this.props.pickType === 'staffpicks' ? previous.month() : previous.year();
+    const dateDisplay = this.props.annualList ? previous.year() : previous.month();
 
     return (previous.active) ?
       <a
@@ -115,7 +117,7 @@ class TimeSelector extends React.Component {
 
   nextLink(list) {
     const next = this.getMonth(list);
-    const dateDisplay = this.props.pickType === 'staffpicks' ? next.month() : next.year();
+    const dateDisplay = this.props.annualList ? next.year() : next.month();
 
     return (next.active) ?
       <a
@@ -132,7 +134,7 @@ class TimeSelector extends React.Component {
     const currentMonthPicks = this.props.currentMonthPicks;
     const pickDate = currentMonthPicks.date;
     const date = staffPicksDate(pickDate);
-    const pickMonth = this.props.pickType === 'staffpicks' ? date.month : null;
+    const pickMonth = this.props.annualList ? null : date.month;
     const pickYear = date.year;
     const previousBtn = this.previousLink(currentMonthPicks.previousList);
     const nextBtn = this.nextLink(currentMonthPicks.nextList);
@@ -149,8 +151,8 @@ class TimeSelector extends React.Component {
 
 TimeSelector.propTypes = {
   params: PropTypes.object,
-  pickType: PropTypes.string,
   currentMonthPicks: PropTypes.object,
+  annualList: PropTypes.bool,
 };
 
 TimeSelector.contextTypes = {

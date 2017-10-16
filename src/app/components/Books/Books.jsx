@@ -16,6 +16,7 @@ import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
 import utils from '../../utils/utils.js';
+import config from '../../../../appConfig.js';
 
 const styles = {
   base: {},
@@ -39,15 +40,11 @@ class Books extends React.Component {
   constructor(props) {
     super(props);
 
-    const clientParams = (this.props.annualList) ?
-      this.props.params.type : '';
-    const route = this.props.location.pathname || clientParams;
+    const clientParams = (this.props.annualList) ? this.props.params.type : '';
     let transitionRoute = 'modal';
-    let pickType = 'staffpicks';
 
-    if ((route.indexOf('childrens') !== -1) || (route.indexOf('ya') !== -1)) {
+    if ((clientParams === 'childrens') || (clientParams === 'ya')) {
       transitionRoute = 'annualModal';
-      pickType = 'annual';
     }
 
     this.state = _extend({
@@ -57,7 +54,6 @@ class Books extends React.Component {
       modalIsOpen: false,
       noResults: false,
       transitionRoute,
-      pickType,
     }, BookStore.getState());
 
     this.onChange = this.onChange.bind(this);
@@ -164,7 +160,7 @@ class Books extends React.Component {
 
   openModal(book, date) {
     const params = this.props.params;
-    let baseUrl = '/books-music-dvds/recommendations/staff-picks/';
+    let baseUrl = config.baseUrl;
 
     utils.trackPicks('Book', book.item.title);
 
@@ -209,8 +205,8 @@ class Books extends React.Component {
     return (
       <div>
         <TimeSelector
-          pickType={this.state.pickType}
           currentMonthPicks={currentMonthPicks}
+          annualList={this.props.annualList}
           {...this.props}
         />
 

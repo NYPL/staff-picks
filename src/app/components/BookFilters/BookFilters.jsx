@@ -40,7 +40,7 @@ class BookFilters extends React.Component {
   }
 
   componentDidMount() {
-    // Only trigger the Action for the /books-music-dvds/recommendations/staff-picks route.
+    // Only trigger the Action for the homepage route.
     if (!this.props.annualList) {
       BookActions.updateFilterAge('adult');
     }
@@ -116,8 +116,7 @@ class BookFilters extends React.Component {
         let n = storeState.filters.length;
         let filters;
 
-        if (classes.indexOf(age) !== -1 ||
-            (this.props.annualList)) {
+        if (classes.indexOf(age) !== -1 || this.props.annualList) {
           _each(storeState.filters, filter => {
             if (classes.indexOf(filter) !== -1) {
               n -= 1;

@@ -15,6 +15,9 @@ import BookShare from '../BookContent/BookShare.jsx';
 import BookStore from '../../stores/BookStore.js';
 
 import utils from '../../utils/utils.js';
+import config from '../../../../appConfig.js';
+
+const { baseUrl } = config;
 
 if (global.window) {
   Modal.setAppElement(document.getElementById('content'));
@@ -99,7 +102,7 @@ class BookModal extends React.Component {
         returnUrl = `annual/${this.props.params.type}`;
       }
 
-      return this.routeHandler(`/books-music-dvds/recommendations/staff-picks/${returnUrl}`);
+      return this.routeHandler(`${baseUrl}${returnUrl}`);
     }, 200);
   }
 
@@ -119,27 +122,24 @@ class BookModal extends React.Component {
           'edge-of-your-seat thrillers... There is a huge world of books ' +
           'out there. Our expert staff members pick out their favorites ' +
           'to help you find your next one.',
-        image: '/books-music-dvds/recommendations/staff-picks/src/client/images/' +
-          'shelftalker.4.2.png',
-        url: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/',
+        image: `${baseUrl}src/client/images/shelftalker.4.2.png`,
+        url: `http://www.nypl.org${baseUrl}`,
       },
       childrens: {
         type: 'childrens',
         title: 'RECOMMENDATIONS',
         description: 'Children\'s Books',
         intro: 'Explore our annual selection of 100 notable titles for reading and sharing.',
-        image: '/books-music-dvds/recommendations/staff-picks/src/client/images/' +
-          'desktop.childrens100.FIN.png',
-        url: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/annual/childrens',
+        image: `${baseUrl}src/client/images/desktop.childrens100.FIN.png`,
+        url: `http://www.nypl.org${baseUrl}annual/childrens`,
       },
       ya: {
         type: 'ya',
         title: 'RECOMMENDATIONS',
         description: 'Best Books for Teens',
         intro: 'Explore our annual selection of outstanding young adult titles.',
-        image: '/books-music-dvds/recommendations/staff-picks/src/client/images/' +
-          'desktop.banner.YA.FIN.png',
-        url: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/annual/ya',
+        image: `${baseUrl}src/client/images/desktop.banner.YA.FIN.png`,
+        url: `http://www.nypl.org${baseUrl}annual/ya`,
       },
     };
 
@@ -153,8 +153,7 @@ class BookModal extends React.Component {
   render() {
     const book = this.state.book;
     let title = 'Recommendations | The New York Public Library';
-    let imageSrc = '/books-music-dvds/recommendations/staff-picks/src/client/images/' +
-      'shelftalker.4.2.png';
+    let imageSrc = `${baseUrl}src/client/images/shelftalker.4.2.png`;
     let description = 'True stories, tales of courage, historical romances, ' +
         'edge-of-your-seat thrillers... There is a huge world of books ' +
         'out there. Our expert staff members pick out their favorites ' +
@@ -212,13 +211,13 @@ class BookModal extends React.Component {
           />
           <BookTitle className={`${this.props.className}__BookTitle`} book={book} />
           <div className={`${this.props.className}__left-column`}>
-            <div key="ImageContainer" className={`${this.props.className}__left-column__image`}>
+            <div className={`${this.props.className}__left-column__image`}>
               <Book
                 book={this.state.book}
                 className={`${this.props.className}__left-column__image__cover`}
               />
             </div>
-            <div key="ShareContainer" className={`${this.props.className}__left-column__share`}>
+            <div className={`${this.props.className}__left-column__share`}>
               <BookShare
                 shareType={this.state.annualType}
                 className={`${this.props.className}__left-column__share-items`}

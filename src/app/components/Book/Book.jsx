@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import config from '../../../../appConfig.js';
+
 const Book = (props) => {
   const handleClick = (e) => e.preventDefault();
   const book = props.book;
@@ -8,7 +10,7 @@ const Book = (props) => {
   const fullImgSrc = bookImgSrc !== 'No Image' ?
     'https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807' +
     `&password=CC68707&Value=${bookImgSrc}&content=M&Return=1&Type=M`
-    : '/books-music-dvds/recommendations/staff-picks/src/client/images/book-place-holder.png';
+    : `${config.baseUrl}src/client/images/book-place-holder.png`;
 
   return (
     <div className={props.className}>

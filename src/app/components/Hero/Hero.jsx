@@ -1,18 +1,18 @@
 // Library import
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import DocMeta from 'react-doc-meta';
-import utils from '../../utils/utils';
 
+import utils from '../../utils/utils';
+import config from '../../../../appConfig.js';
+
+const { baseUrl } = config;
 const styles = {
   childrens: {
-    backgroundImage: 'url("/books-music-dvds/recommendations/staff-picks/src/client/im' +
-      'ages/desktop.childrens100.FIN.png")',
+    backgroundImage: `url("${baseUrl}src/client/images/desktop.childrens100.FIN.png")`,
   },
   ya: {
-    backgroundImage: 'url("/books-music-dvds/recommendations/staff-picks/src/client/im' +
-      'ages/desktop.banner.YA.FIN.png")',
+    backgroundImage: `url("${baseUrl}src/client/images/desktop.banner.YA.FIN.png")`,
   },
 };
 
@@ -33,25 +33,24 @@ class Hero extends React.Component {
             'edge-of-your-seat thrillers... There is a huge world of books ' +
             'out there. Our expert staff members pick out their favorites ' +
             'to help you find your next one.',
-        image: '/books-music-dvds/recommendations/staff-picks/src/client/images/' +
-          'shelftalker.4.2.png',
-        url: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/',
+        image: `${baseUrl}src/client/images/shelftalker.4.2.png`,
+        url: `http://www.nypl.org${baseUrl}`,
       },
       childrens: {
         type: 'childrens',
         title: 'RECOMMENDATIONS',
         description: 'Children\'s Books',
         intro: 'Explore our annual selection of 100 notable titles for reading and sharing.',
-        image: '/books-music-dvds/recommendations/staff-picks/src/client/images/c100.OG.png',
-        url: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/annual/childrens',
+        image: `${baseUrl}src/client/images/c100.OG.png`,
+        url: `http://www.nypl.org${baseUrl}annual/childrens`,
       },
       ya: {
         type: 'ya',
         title: 'RECOMMENDATIONS',
         description: 'Best Books for Teens',
         intro: 'Explore our annual selection of outstanding young adult titles.',
-        image: '/books-music-dvds/recommendations/staff-picks/src/client/images/YA.OG.png',
-        url: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/annual/ya',
+        image: `${baseUrl}src/client/images/YA.OG.png`,
+        url: `http://www.nypl.org${baseUrl}annual/ya`,
       },
     };
 
@@ -59,8 +58,7 @@ class Hero extends React.Component {
   }
 
   getType() {
-    const clientParam = (this.props.params && this.props.params.type) ?
-        this.props.params.type : '';
+    const clientParam = (this.props.annualList) ? this.props.params.type : '';
     const route = this.props.location.pathname || clientParam;
 
     if (route.indexOf('childrens') !== -1) {
@@ -77,7 +75,7 @@ class Hero extends React.Component {
   render() {
     const heroData = this.getHeroData(this.getType());
     const image = heroData.type === 'staffpicks' ?
-      <div key="HeroImageContainer" className={`${this.props.className}__image`}></div>
+      (<div className={`${this.props.className}__image`}></div>)
       : null;
     const bannerStyle = styles[heroData.type];
     const homepageTags = [
@@ -92,10 +90,10 @@ class Hero extends React.Component {
     const tags = utils.metaTagUnion(homepageTags);
 
     return (
-      <div key="Hero" className={this.props.className} style={bannerStyle}>
+      <div className={this.props.className} style={bannerStyle}>
         <DocMeta tags={tags} />
-        <div key="HeroContainer" className={`${this.props.className}__container`}>
-          <div key="TextContainer" className={`${this.props.className}__text`}>
+        <div className={`${this.props.className}__container`}>
+          <div className={`${this.props.className}__text`}>
             <div className={`${this.props.className}__text__HeroTitle`}>
               <h3>{heroData.title}</h3>
               <p className={`${this.props.className}__text__HeroTitle__des`}>
@@ -117,6 +115,7 @@ Hero.propTypes = {
   params: PropTypes.object,
   location: PropTypes.object,
   className: PropTypes.string,
+  annualList: PropTypes.bool,
 };
 
 Hero.defaultProps = {
