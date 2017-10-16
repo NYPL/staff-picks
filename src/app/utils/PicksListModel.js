@@ -1,4 +1,9 @@
-import { isArray as _isArray, isEmpty as _isEmpty, isObject as _isObject, map as _map }  from 'underscore';
+import {
+  isArray as _isArray,
+  isEmpty as _isEmpty,
+  isObject as _isObject,
+  map as _map,
+} from 'underscore';
 import PicksModel from './PicksModel.js';
 
 function PicksListModel() {
@@ -11,14 +16,14 @@ function PicksListModel() {
       return _map(data, this.picksListModel);
     } else if (_isObject(data) && !_isEmpty(data)) {
       return this.picksListModel(data);
-    } else {
-      return;
     }
+
+    return;
   };
 
   // The main modeling function
   this.picksListModel = data => {
-    let picksList = {};
+    const picksList = {};
 
     if (!data) {
       return picksList;
@@ -36,10 +41,10 @@ function PicksListModel() {
   };
 
   this.monthRelationship = data => {
-    let list = {};
+    const list = {};
 
     if (!data) {
-      return;
+      return list;
     }
 
     list.id = data.id;

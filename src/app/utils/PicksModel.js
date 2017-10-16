@@ -1,4 +1,9 @@
-import { isArray as _isArray, isEmpty as _isEmpty, isObject as _isObject, map as _map }  from 'underscore';
+import {
+  isArray as _isArray,
+  isEmpty as _isEmpty,
+  isObject as _isObject,
+  map as _map,
+} from 'underscore';
 import PickItem from './PickItemModel.js';
 
 function PicksModel() {
@@ -17,7 +22,7 @@ function PicksModel() {
   };
 
   this.picksModel = data => {
-    let pick = {};
+    const pick = {};
 
     if (!data) {
       return pick;
@@ -36,8 +41,8 @@ function PicksModel() {
   };
 
   this.age = data => {
-    let age = {};
-    
+    const age = {};
+
     if (!data) {
       return age;
     }
@@ -48,7 +53,6 @@ function PicksModel() {
 
     return age;
   };
-
 }
 
 export default new PicksModel();
