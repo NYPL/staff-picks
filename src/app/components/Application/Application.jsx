@@ -10,27 +10,12 @@ import Books from '../Books/Books.jsx';
 import Sidebar from '../Sidebar/Sidebar.jsx';
 
 const App = (props) => {
-  // Not being used here. Generated through Hero.jsx.
-  const content = 'True stories, tales of courage, historical romances, ' +
-    'edge-of-your-seat thrillers... There is a huge world of books ' +
-    'out there. Our expert staff members pick out their favorites ' +
-    'to help you find your next one.';
-  const hompageTags = [
-    { property: 'og:title', content: 'Staff Picks | The New York Public Library' },
-    { property: 'og:image', content: '/books-music-dvds/recommendations/staff-picks/src/client/' +
-      'images/shelftalker.4.2.png' },
-    { property: 'og:description', content },
-    { property: 'og:url', content: 'http://www.nypl.org/books-music-dvds/recommendations/' +
-      'staff-picks/' },
-    { name: 'twitter:title', content: 'Staff Picks | The New York Public Library' },
-    { name: 'twitter:description', content },
-    { name: 'twitter:image', content: '/books-music-dvds/recommendations/staff-picks/src/client/' +
-      'images/shelftalker.4.2.png' },
-  ];
-  let about = null;
+  const annualList = !!(props.params && props.params.type &&
+    (props.params.type === 'childrens' || props.params.type === 'ya'));
+  let mobileAboutLink = null;
 
-  if (props.params && props.params.type) {
-    about = (
+  if (annualList) {
+    mobileAboutLink = (
       <div className="mobile-about">
         <span className="mobile-about-divider"></span>
         <h2 className="mobile-about-link">
@@ -48,18 +33,21 @@ const App = (props) => {
         navData={navConfig.current}
         skipNav={{ target: 'app-content' }}
       />
-      <Hero {...props} />
+      <Hero {...props} annualList={annualList} />
       <div id="app-content">
         {props.children}
-        <AgeTabs {...props} />
+
+        {!annualList && (<AgeTabs />)}
+
         <div className="main-container">
           <div id="sidebar">
-            <Sidebar filters={props.filters} {...props} />
+            <Sidebar filters={props.filters} {...props} annualList={annualList} />
           </div>
           <div id="books">
-            <Books {...props} />
+            <Books {...props} annualList={annualList} />
           </div>
-          {about}
+
+          {mobileAboutLink}
         </div>
       </div>
       <Footer id="footer" className="footer" />

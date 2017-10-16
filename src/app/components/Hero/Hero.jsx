@@ -2,9 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Component import
-import HeroTitle from './HeroTitle/HeroTitle.jsx';
-
 import DocMeta from 'react-doc-meta';
 import utils from '../../utils/utils';
 
@@ -99,12 +96,15 @@ class Hero extends React.Component {
         <DocMeta tags={tags} />
         <div key="HeroContainer" className={`${this.props.className}__container`}>
           <div key="TextContainer" className={`${this.props.className}__text`}>
-            <HeroTitle
-              className={`${this.props.className}__text__HeroTitle`}
-              title={heroData.title}
-              des={heroData.description}
-              intro={heroData.intro}
-            />
+            <div className={`${this.props.className}__text__HeroTitle`}>
+              <h3>{heroData.title}</h3>
+              <p className={`${this.props.className}__text__HeroTitle__des`}>
+                {heroData.description}
+              </p>
+              <p className={`${this.props.className}__text__HeroTitle__intro`}>
+                {heroData.intro}
+              </p>
+            </div>
           </div>
           {image}
         </div>

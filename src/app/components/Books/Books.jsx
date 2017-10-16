@@ -39,7 +39,7 @@ class Books extends React.Component {
   constructor(props) {
     super(props);
 
-    const clientParams = (this.props.params && this.props.params.type) ?
+    const clientParams = (this.props.annualList) ?
       this.props.params.type : '';
     const route = this.props.location.pathname || clientParams;
     let transitionRoute = 'modal';
@@ -103,13 +103,11 @@ class Books extends React.Component {
     const storeState = BookStore.getState();
     const age = `.${storeState.age}`;
     const filters = storeState.filters;
-    const params = this.props.params;
     let selector = age;
 
     // We don't need to filter based on age for c100 or ya100
     // and it needs to be removed from the Isotopes selector:
-    if (params && params.type &&
-      (params.type === 'childrens' || params.type === 'ya')) {
+    if (this.props.annualList) {
       selector = '';
     }
 
@@ -171,8 +169,8 @@ class Books extends React.Component {
     utils.trackPicks('Book', book.item.title);
 
     /* special cases for young adults and children */
-    if (params.type && (params.type === 'ya' || params.type === 'childrens')) {
-      baseUrl += `annual/${this.props.params.type}/`;
+    if (this.props.annualList) {
+      baseUrl += `annual/${params.type}/`;
     }
 
     this.routeHandler(`${baseUrl}${date}/${book.item.id}`, params.type);
@@ -237,6 +235,7 @@ class Books extends React.Component {
 Books.propTypes = {
   location: PropTypes.object,
   params: PropTypes.object,
+  annualList: PropTypes.bool,
 };
 
 Books.defaultProps = {

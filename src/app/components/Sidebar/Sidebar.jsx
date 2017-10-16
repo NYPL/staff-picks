@@ -40,7 +40,7 @@ class Sidebar extends React.Component {
   render() {
     let about = null;
 
-    if (this.props.params && this.props.params.type) {
+    if (this.props.annualList) {
       about = (
         <div className="about">
           <span className="about-divider"></span>
@@ -70,6 +70,7 @@ class Sidebar extends React.Component {
           {...this.props}
           active={this.state.mobileDisplay ? 'active' : ''}
           mobileCloseBtn={this.hideFilters}
+          annualList={this.props.annualList}
         />
 
         {about}
@@ -80,6 +81,7 @@ class Sidebar extends React.Component {
 
 Sidebar.propTypes = {
   params: PropTypes.object,
+  annualList: PropTypes.bool,
 };
 
 export default Sidebar;
