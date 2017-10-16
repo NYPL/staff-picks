@@ -2,8 +2,10 @@ import express from 'express';
 
 import monthData from './monthData.js';
 import annualData from './annualData.js';
+import config from '../../../appConfig.js';
 
 const router = express.Router();
+const { baseUrl } = config;
 
 /* monthOrAnnual
  * Checks whether the route params dictate either an annual selection or a monthly selection.
@@ -25,12 +27,12 @@ function monthOrAnnual(req, res, next) {
   }
 
   if (!month.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)) {
-    return res.redirect('/books-music-dvds/recommendations/staff-picks/');
+    return res.redirect(baseUrl);
   }
 
   // There are more matches if anything is added after the url slug
   if (id && id.match(/[0-9]*[-a-z]+/g).length > 1) {
-    return res.redirect('/books-music-dvds/recommendations/staff-picks/');
+    return res.redirect(baseUrl);
   }
 
   return monthData.selectMonthData(req, res, next);
@@ -45,15 +47,15 @@ router
   .get(monthData.ajaxMonthData);
 
 router
-  .route('/books-music-dvds/recommendations/staff-picks/')
+  .route(baseUrl)
   .get(monthData.currentMonthData);
 
 router
-  .route('/books-music-dvds/recommendations/staff-picks/:monthOrAnnual/:idOrType?/:year?/:id?')
+  .route(`${baseUrl}:monthOrAnnual/:idOrType?/:year?/:id?`)
   .get(monthOrAnnual);
 
 router
-  .route('/books-music-dvds/recommendations/staff-picks/api/ajax/picks/:month')
+  .route(`${baseUrl}api/ajax/picks/:month`)
   .get(monthData.ajaxMonthData);
 
 router
