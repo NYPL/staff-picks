@@ -2,7 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import BookDisplayButtons from '../BookDisplayButtons/BookDisplayButtons.jsx';
 import BookFilters from '../BookFilters/BookFilters.jsx';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 
@@ -55,8 +54,6 @@ class Sidebar extends React.Component {
 
     return (
       <div ref="sidebar" className="sidebar-content">
-        <BookDisplayButtons />
-
         <SimpleButton
           gaCategory="Staff Picks"
           gaAction="Mobile Filter"
@@ -80,7 +77,6 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.propTypes = {
-  params: PropTypes.object,
   annualList: PropTypes.bool,
 };
 

@@ -29,10 +29,9 @@ class Hero extends React.Component {
         type: 'staffpicks',
         title: 'RECOMMENDATIONS',
         description: 'Staff Picks',
-        intro: 'True stories, tales of courage, historical romances, ' +
-            'edge-of-your-seat thrillers... There is a huge world of books ' +
-            'out there. Our expert staff members pick out their favorites ' +
-            'to help you find your next one.',
+        intro: 'True stories, tales of courage, historical romances, edge-of-your-seat ' +
+          'thrillers... There is a huge world of books out there. Our expert staff members ' +
+          'pick out their favorites to help you find your next one.',
         image: `${baseUrl}src/client/images/shelftalker.4.2.png`,
         url: `http://www.nypl.org${baseUrl}`,
       },
@@ -74,9 +73,7 @@ class Hero extends React.Component {
 
   render() {
     const heroData = this.getHeroData(this.getType());
-    const image = heroData.type === 'staffpicks' ?
-      (<div className={`${this.props.className}__image`}></div>)
-      : null;
+    const image = heroData.type === 'staffpicks' ? (<div className="Hero__image"></div>) : null;
     const bannerStyle = styles[heroData.type];
     const homepageTags = [
       { property: 'og:title', content: 'Recommendations | The New York Public Library' },
@@ -90,16 +87,16 @@ class Hero extends React.Component {
     const tags = utils.metaTagUnion(homepageTags);
 
     return (
-      <div className={this.props.className} style={bannerStyle}>
+      <div className="Hero" style={bannerStyle}>
         <DocMeta tags={tags} />
-        <div className={`${this.props.className}__container`}>
-          <div className={`${this.props.className}__text`}>
-            <div className={`${this.props.className}__text__HeroTitle`}>
+        <div className="Hero__container">
+          <div className="Hero__text">
+            <div className="Hero__text__HeroTitle">
               <h3>{heroData.title}</h3>
-              <p className={`${this.props.className}__text__HeroTitle__des`}>
+              <p className="Hero__text__HeroTitle__des">
                 {heroData.description}
               </p>
-              <p className={`${this.props.className}__text__HeroTitle__intro`}>
+              <p className="Hero__text__HeroTitle__intro">
                 {heroData.intro}
               </p>
             </div>
@@ -114,12 +111,7 @@ class Hero extends React.Component {
 Hero.propTypes = {
   params: PropTypes.object,
   location: PropTypes.object,
-  className: PropTypes.string,
   annualList: PropTypes.bool,
-};
-
-Hero.defaultProps = {
-  className: 'Hero',
 };
 
 export default Hero;

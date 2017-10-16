@@ -285,7 +285,7 @@ class BookFilters extends React.Component {
     const seasonYear = staffPicksDate(store.currentMonthPicks.date);
 
     return (
-      <div className={`BookFilters ${this.props.active}`} style={this.props.styles}>
+      <div className={`BookFilters ${this.props.active}`}>
         <CloseButton
           onClick={this.props.mobileCloseBtn}
           id="close-button"
@@ -316,7 +316,6 @@ class BookFilters extends React.Component {
 }
 
 BookFilters.propTypes = {
-  styles: PropTypes.object,
   mobileCloseBtn: PropTypes.func,
   active: PropTypes.string,
   annualList: PropTypes.bool,
