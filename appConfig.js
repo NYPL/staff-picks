@@ -13,13 +13,6 @@ const config = {
       qa: 'https://qa-refinery.nypl.org',
       production: 'https://refinery.nypl.org',
     },
-    baseEndpoint: '/api/nypl/ndo/v0.1/book-lists',
-    bookListUserEndpoint: '/book-list-users',
-    fields: '',
-    // default setting is loading five items at first
-    pageSize: '&page[size]=5',
-    pageNumber: '&page[number]=1',
-    includes: ['list-items.item', 'user'],
   },
   metaTags: [
     { property: 'og:type', content: 'website' },

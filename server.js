@@ -19,7 +19,7 @@ import alt from 'dgx-alt-center';
 import Iso from 'iso';
 
 import appRoutes from './src/app/routes/routes.jsx';
-import ApiRoutes from './src/server/ApiRoutes/ApiRoutes.js';
+import expressRoutes from './src/server/routes/routes.js';
 
 // URL configuration
 const ROOT_PATH = __dirname;
@@ -54,7 +54,7 @@ app.use('/', (req, res, next) => {
   next();
 });
 
-app.use('/', ApiRoutes);
+app.use('/', expressRoutes);
 
 // after get the path
 app.use('/', (req, res) => {
