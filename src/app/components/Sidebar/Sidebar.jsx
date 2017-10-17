@@ -15,11 +15,11 @@ class Sidebar extends React.Component {
       mobileDisplay: false,
     };
 
-    this.showFilters = this.showFilters.bind(this);
-    this.hideFilters = this.hideFilters.bind(this);
+    this.showMobileFilters = this.showMobileFilters.bind(this);
+    this.hideMobileFilters = this.hideMobileFilters.bind(this);
   }
 
-  showFilters() {
+  showMobileFilters() {
     this.setState({ mobileDisplay: true });
     // Make the whole document not scrollable for mobile version
     document.body.className = 'no-scroll';
@@ -28,7 +28,7 @@ class Sidebar extends React.Component {
     utils.trackPicks('Filters', 'Mobile display filters');
   }
 
-  hideFilters() {
+  hideMobileFilters() {
     this.setState({ mobileDisplay: false });
     // Make the whole document scrollable again
     document.body.className = '';
@@ -59,14 +59,14 @@ class Sidebar extends React.Component {
           gaAction="Mobile Filter"
           gaEvent="Filter"
           className="mobile-filter-btn"
-          onClick={this.showFilters}
+          onClick={this.showMobileFilters}
           label="Filter By Tags"
         />
 
         <BookFilters
           {...this.props}
           active={this.state.mobileDisplay ? 'active' : ''}
-          mobileCloseBtn={this.hideFilters}
+          mobileCloseBtn={this.hideMobileFilters}
           annualList={this.props.annualList}
         />
 

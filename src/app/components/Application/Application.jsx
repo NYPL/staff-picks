@@ -10,13 +10,12 @@ import AgeTabs from '../AgeTabs/AgeTabs.jsx';
 import Books from '../Books/Books.jsx';
 import Sidebar from '../Sidebar/Sidebar.jsx';
 import BookStore from '../../stores/BookStore.js';
-import BookActions from '../../actions/BookActions.js';
-
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = BookStore.getState();
     this.onChange = this.onChange.bind(this);
   }
 
@@ -67,7 +66,7 @@ class App extends React.Component {
 
           <div className="main-container">
             <div id="sidebar">
-              <Sidebar filters={this.props.filters} {...this.props} annualList={annualList} />
+              <Sidebar {...this.state} annualList={annualList} />
             </div>
             <div id="books">
               <Books {...this.props} annualList={annualList} />
