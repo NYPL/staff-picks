@@ -1,21 +1,18 @@
 // Library import
 import React from 'react';
 import PropTypes from 'prop-types';
-
-// Component import
-import HeroTitle from './HeroTitle/HeroTitle.jsx';
-
 import DocMeta from 'react-doc-meta';
-import utils from '../../utils/utils';
 
+import utils from '../../utils/utils';
+import config from '../../../../appConfig.js';
+
+const { baseUrl } = config;
 const styles = {
   childrens: {
-    backgroundImage: 'url("/books-music-dvds/recommendations/staff-picks/src/client/im' +
-      'ages/desktop.childrens100.FIN.png")',
+    backgroundImage: `url("${baseUrl}src/client/images/desktop.childrens100.FIN.png")`,
   },
   ya: {
-    backgroundImage: 'url("/books-music-dvds/recommendations/staff-picks/src/client/im' +
-      'ages/desktop.banner.YA.FIN.png")',
+    backgroundImage: `url("${baseUrl}src/client/images/desktop.banner.YA.FIN.png")`,
   },
 };
 
@@ -32,29 +29,27 @@ class Hero extends React.Component {
         type: 'staffpicks',
         title: 'RECOMMENDATIONS',
         description: 'Staff Picks',
-        intro: 'True stories, tales of courage, historical romances, ' +
-            'edge-of-your-seat thrillers... There is a huge world of books ' +
-            'out there. Our expert staff members pick out their favorites ' +
-            'to help you find your next one.',
-        image: '/books-music-dvds/recommendations/staff-picks/src/client/images/' +
-          'shelftalker.4.2.png',
-        url: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/',
+        intro: 'True stories, tales of courage, historical romances, edge-of-your-seat ' +
+          'thrillers... There is a huge world of books out there. Our expert staff members ' +
+          'pick out their favorites to help you find your next one.',
+        image: `${baseUrl}src/client/images/shelftalker.4.2.png`,
+        url: `http://www.nypl.org${baseUrl}`,
       },
       childrens: {
         type: 'childrens',
         title: 'RECOMMENDATIONS',
         description: 'Children\'s Books',
         intro: 'Explore our annual selection of 100 notable titles for reading and sharing.',
-        image: '/books-music-dvds/recommendations/staff-picks/src/client/images/c100.OG.png',
-        url: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/annual/childrens',
+        image: `${baseUrl}src/client/images/c100.OG.png`,
+        url: `http://www.nypl.org${baseUrl}annual/childrens`,
       },
       ya: {
         type: 'ya',
         title: 'RECOMMENDATIONS',
         description: 'Best Books for Teens',
         intro: 'Explore our annual selection of outstanding young adult titles.',
-        image: '/books-music-dvds/recommendations/staff-picks/src/client/images/YA.OG.png',
-        url: 'http://www.nypl.org/books-music-dvds/recommendations/staff-picks/annual/ya',
+        image: `${baseUrl}src/client/images/YA.OG.png`,
+        url: `http://www.nypl.org${baseUrl}annual/ya`,
       },
     };
 
@@ -62,8 +57,7 @@ class Hero extends React.Component {
   }
 
   getType() {
-    const clientParam = (this.props.params && this.props.params.type) ?
-        this.props.params.type : '';
+    const clientParam = (this.props.annualList) ? this.props.params.type : '';
     const route = this.props.location.pathname || clientParam;
 
     if (route.indexOf('childrens') !== -1) {
@@ -79,9 +73,7 @@ class Hero extends React.Component {
 
   render() {
     const heroData = this.getHeroData(this.getType());
-    const image = heroData.type === 'staffpicks' ?
-      <div key="HeroImageContainer" className={`${this.props.className}__image`}></div>
-      : null;
+    const image = heroData.type === 'staffpicks' ? (<div className="Hero__image"></div>) : null;
     const bannerStyle = styles[heroData.type];
     const homepageTags = [
       { property: 'og:title', content: 'Recommendations | The New York Public Library' },
@@ -95,16 +87,19 @@ class Hero extends React.Component {
     const tags = utils.metaTagUnion(homepageTags);
 
     return (
-      <div key="Hero" className={this.props.className} style={bannerStyle}>
+      <div className="Hero" style={bannerStyle}>
         <DocMeta tags={tags} />
-        <div key="HeroContainer" className={`${this.props.className}__container`}>
-          <div key="TextContainer" className={`${this.props.className}__text`}>
-            <HeroTitle
-              className={`${this.props.className}__text__HeroTitle`}
-              title={heroData.title}
-              des={heroData.description}
-              intro={heroData.intro}
-            />
+        <div className="Hero__container">
+          <div className="Hero__text">
+            <div className="Hero__text__HeroTitle">
+              <h3>{heroData.title}</h3>
+              <p className="Hero__text__HeroTitle__des">
+                {heroData.description}
+              </p>
+              <p className="Hero__text__HeroTitle__intro">
+                {heroData.intro}
+              </p>
+            </div>
           </div>
           {image}
         </div>
@@ -116,11 +111,7 @@ class Hero extends React.Component {
 Hero.propTypes = {
   params: PropTypes.object,
   location: PropTypes.object,
-  className: PropTypes.string,
-};
-
-Hero.defaultProps = {
-  className: 'Hero',
+  annualList: PropTypes.bool,
 };
 
 export default Hero;

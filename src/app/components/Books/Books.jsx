@@ -16,13 +16,10 @@ import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
 import utils from '../../utils/utils.js';
+import config from '../../../../appConfig.js';
 
 const styles = {
   base: {},
-  listWidth: {
-    width: '100%',
-    marginBottom: '20px',
-  },
   gridWidth: {
     width: '250px',
   },
@@ -39,15 +36,11 @@ class Books extends React.Component {
   constructor(props) {
     super(props);
 
-    const clientParams = (this.props.params && this.props.params.type) ?
-      this.props.params.type : '';
-    const route = this.props.location.pathname || clientParams;
+    const clientParams = (this.props.annualList) ? this.props.params.type : '';
     let transitionRoute = 'modal';
-    let pickType = 'staffpicks';
 
-    if ((route.indexOf('childrens') !== -1) || (route.indexOf('ya') !== -1)) {
+    if ((clientParams === 'childrens') || (clientParams === 'ya')) {
       transitionRoute = 'annualModal';
-      pickType = 'annual';
     }
 
     this.state = _extend({
@@ -57,7 +50,6 @@ class Books extends React.Component {
       modalIsOpen: false,
       noResults: false,
       transitionRoute,
-      pickType,
     }, BookStore.getState());
 
     this.onChange = this.onChange.bind(this);
@@ -103,13 +95,11 @@ class Books extends React.Component {
     const storeState = BookStore.getState();
     const age = `.${storeState.age}`;
     const filters = storeState.filters;
-    const params = this.props.params;
     let selector = age;
 
     // We don't need to filter based on age for c100 or ya100
     // and it needs to be removed from the Isotopes selector:
-    if (params && params.type &&
-      (params.type === 'childrens' || params.type === 'ya')) {
+    if (this.props.annualList) {
       selector = '';
     }
 
@@ -164,15 +154,16 @@ class Books extends React.Component {
     );
   }
 
-  openModal(book, date) {
+  openModal(e, book, date) {
+    e.preventDefault();
     const params = this.props.params;
-    let baseUrl = '/books-music-dvds/recommendations/staff-picks/';
+    let baseUrl = config.baseUrl;
 
     utils.trackPicks('Book', book.item.title);
 
     /* special cases for young adults and children */
-    if (params.type && (params.type === 'ya' || params.type === 'childrens')) {
-      baseUrl += `annual/${this.props.params.type}/`;
+    if (this.props.annualList) {
+      baseUrl += `annual/${params.type}/`;
     }
 
     this.routeHandler(`${baseUrl}${date}/${book.item.id}`, params.type);
@@ -184,7 +175,6 @@ class Books extends React.Component {
 
   render() {
     const openModal = this.openModal;
-    const gridDisplay = this.state.bookDisplay === 'grid';
     const currentMonthPicks = this.state.currentMonthPicks;
     const picks = currentMonthPicks.picks ? currentMonthPicks.picks : [];
     const books = picks.map(element => {
@@ -192,18 +182,18 @@ class Books extends React.Component {
       const age = this.getAge(element);
       const tagIDs = _map(tagList, tag => tag.id);
       const tagClasses = tagIDs.join(' ');
-      const listDisplay = gridDisplay ? styles.gridWidth : styles.listWidth;
-      const listItem = gridDisplay ? <Book book={element} className="book" />
-          : this.getBookListItem(element);
 
       return (
         <li
           className={`book-item ${age} ${tagClasses}`}
           key={element.id}
-          onClick={() => openModal(element, currentMonthPicks.date)}
-          style={listDisplay}
+          style={styles.gridWidth}
         >
-          {listItem}
+          <Book
+            book={element}
+            className="book"
+            onClick={(e) => openModal(e, element, currentMonthPicks.date)}
+          />
         </li>
       );
     });
@@ -211,9 +201,9 @@ class Books extends React.Component {
     return (
       <div>
         <TimeSelector
-          pickType={this.state.pickType}
           currentMonthPicks={currentMonthPicks}
-          {...this.props}
+          annualList={this.props.annualList}
+          params={this.props.params}
         />
 
         <div id="masonryContainer" ref="masonryContainer">
@@ -237,6 +227,7 @@ class Books extends React.Component {
 Books.propTypes = {
   location: PropTypes.object,
   params: PropTypes.object,
+  annualList: PropTypes.bool,
 };
 
 Books.defaultProps = {

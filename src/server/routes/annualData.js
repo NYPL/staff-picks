@@ -44,10 +44,7 @@ function annualCurrentData(type, req, res, next) {
 
       res.locals.data = {
         BookStore: {
-          bookDisplay: 'grid',
           age: 'Adult',
-          gridDisplay: true,
-          listDisplay: false,
           allFilters: [],
           initialFilters: filters,
           filters: [],
@@ -65,10 +62,7 @@ function annualCurrentData(type, req, res, next) {
       console.log(`Error calling API AnnualCurrentData: ${error}`);
       res.locals.data = {
         BookStore: {
-          bookDisplay: 'grid',
           age: 'Adult',
-          gridDisplay: true,
-          listDisplay: false,
           allFilters: [],
           initialFilters: [],
           filters: [],

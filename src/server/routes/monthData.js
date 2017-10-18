@@ -42,10 +42,7 @@ function currentMonthData(req, res, next) {
 
       res.locals.data = {
         BookStore: {
-          bookDisplay: 'grid',
           age: 'Adult',
-          gridDisplay: true,
-          listDisplay: false,
           allFilters: [],
           initialFilters: filters,
           filters: [],
@@ -63,10 +60,7 @@ function currentMonthData(req, res, next) {
       console.log(`Error calling API currentMonthData: ${error}`);
       res.locals.data = {
         BookStore: {
-          bookDisplay: 'grid',
           age: 'Adult',
-          gridDisplay: true,
-          listDisplay: false,
           allFilters: [],
           initialFilters: [],
           filters: [],

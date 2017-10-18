@@ -41,21 +41,18 @@ class BookShare extends React.Component {
     return (
       <ul className={`modalShareList ${this.props.className}`}>
         <li
-          key="fb"
           className="facebook"
           onClick={() => utils.trackPicks('Social Sharing', `Facebook: ${bookTitle}`)}
         >
           <a href={this.state.facebook} target="_blank" label="Share on Facebook"></a>
         </li>
         <li
-          key="twtr"
           className="twitter"
           onClick={() => utils.trackPicks('Social Sharing', `Twitter: ${bookTitle}`)}
         >
           <a href={this.state.twitter} label="Share on twitter"></a>
         </li>
         <li
-          key="tumblr"
           className="tumblr"
           onClick={() => utils.trackPicks('Social Sharing', `Tumblr: ${bookTitle}`)}
         >
