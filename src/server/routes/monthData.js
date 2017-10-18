@@ -78,7 +78,7 @@ function currentMonthData(req, res, next) {
  * Get a specific month's or season's staff pick list.
  */
 function selectMonthData(req, res, next) {
-  const month = req.params.monthOrAnnual;
+  const month = req.params.month;
   const endpoint = `${apiRoot}${apiEndpoint}/monthly-${month}?${fields}${includes}`;
 
   axios.get(endpoint)

@@ -80,13 +80,13 @@ function annualCurrentData(type, req, res, next) {
  * Map the url param to specific endpoint requests. Redirect otherwise to the homepage.
  */
 function selectAnnualData(req, res, next) {
-  const idOrType = req.params.idOrType;
+  const type = req.params.type;
 
-  if (idOrType === 'childrens') {
+  if (type === 'childrens') {
     return annualCurrentData('c100', req, res, next);
   }
 
-  if (idOrType === 'ya') {
+  if (type === 'ya') {
     return annualCurrentData('ya100', req, res, next);
   }
 
