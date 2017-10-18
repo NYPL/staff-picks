@@ -16,7 +16,7 @@ import BookStore from '../../stores/BookStore.js';
 import BookActions from '../../actions/BookActions.js';
 
 import utils from '../../utils/utils.js';
-import config from '../../../../appConfig.js';
+import appConfig from '../../../../appConfig.js';
 
 const styles = {
   base: {},
@@ -157,13 +157,15 @@ class Books extends React.Component {
   openModal(e, book, date) {
     e.preventDefault();
     const params = this.props.params;
-    let baseUrl = config.baseUrl;
+    let baseUrl = '';
 
     utils.trackPicks('Book', book.item.title);
 
     /* special cases for young adults and children */
     if (this.props.annualList) {
-      baseUrl += `annual/${params.type}/`;
+      baseUrl += `${appConfig.baseAnnualUrl}${params.type}/`;
+    } else {
+      baseUrl += `${appConfig.baseMonthUrl}`;
     }
 
     this.routeHandler(`${baseUrl}${date}/${book.item.id}`, params.type);

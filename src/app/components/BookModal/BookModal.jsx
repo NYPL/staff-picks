@@ -99,10 +99,12 @@ class BookModal extends React.Component {
       /* special cases for young adults and children */
       if (this.props.params.type &&
         (this.props.params.type === 'ya' || this.props.params.type === 'childrens')) {
-        returnUrl = `annual/${this.props.params.type}`;
+        returnUrl = `${config.baseAnnualUrl}${this.props.params.type}`;
+      } else {
+        returnUrl = `${config.baseMonthUrl}${returnUrl}`;
       }
 
-      return this.routeHandler(`${baseUrl}${returnUrl}`);
+      return this.routeHandler(returnUrl);
     }, 200);
   }
 
