@@ -8,7 +8,6 @@ const router = express.Router();
 const { baseUrl } = appConfig;
 
 /* getMonthData
- * Checks whether the route params dictate either an annual selection or a monthly selection.
  */
 function getMonthData(req, res, next) {
   const month = req.params.month;
