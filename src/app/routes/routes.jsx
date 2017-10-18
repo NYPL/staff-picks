@@ -24,6 +24,7 @@ const routes = {
       />
       <Route path="/books-music-dvds/recommendations/staff-picks/:month" component={Main} />
       <Route path="/books-music-dvds/recommendations/staff-picks/:month/:id" component={BookPage} />
+      <Route from="*" to="/books-music-dvds/recommendations/staff-picks/" />
     </Route>
   ),
   server: (
@@ -34,6 +35,7 @@ const routes = {
       <Route path="/annual/:type/:year/:id" component={BookPage} />
       <Route path="/:month" component={Main} />
       <Route path="/:month/:id" component={BookPage} />
+      <Redirect from="*" to="/" />
     </Route>
   ),
 };
