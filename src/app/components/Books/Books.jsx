@@ -20,10 +20,6 @@ import config from '../../../../appConfig.js';
 
 const styles = {
   base: {},
-  listWidth: {
-    width: '100%',
-    marginBottom: '20px',
-  },
   gridWidth: {
     width: '250px',
   },
@@ -158,7 +154,8 @@ class Books extends React.Component {
     );
   }
 
-  openModal(book, date) {
+  openModal(e, book, date) {
+    e.preventDefault();
     const params = this.props.params;
     let baseUrl = config.baseUrl;
 
@@ -178,7 +175,6 @@ class Books extends React.Component {
 
   render() {
     const openModal = this.openModal;
-    const gridDisplay = this.state.bookDisplay === 'grid';
     const currentMonthPicks = this.state.currentMonthPicks;
     const picks = currentMonthPicks.picks ? currentMonthPicks.picks : [];
     const books = picks.map(element => {
@@ -186,18 +182,18 @@ class Books extends React.Component {
       const age = this.getAge(element);
       const tagIDs = _map(tagList, tag => tag.id);
       const tagClasses = tagIDs.join(' ');
-      const listDisplay = gridDisplay ? styles.gridWidth : styles.listWidth;
-      const listItem = gridDisplay ? <Book book={element} className="book" />
-          : this.getBookListItem(element);
 
       return (
         <li
           className={`book-item ${age} ${tagClasses}`}
           key={element.id}
-          onClick={() => openModal(element, currentMonthPicks.date)}
-          style={listDisplay}
+          style={styles.gridWidth}
         >
-          {listItem}
+          <Book
+            book={element}
+            className="book"
+            onClick={(e) => openModal(e, element, currentMonthPicks.date)}
+          />
         </li>
       );
     });
@@ -207,7 +203,7 @@ class Books extends React.Component {
         <TimeSelector
           currentMonthPicks={currentMonthPicks}
           annualList={this.props.annualList}
-          {...this.props}
+          params={this.props.params}
         />
 
         <div id="masonryContainer" ref="masonryContainer">

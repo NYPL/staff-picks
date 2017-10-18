@@ -6,10 +6,6 @@ class Actions {
     return picks;
   }
 
-  updateBookDisplay(displayType) {
-    return displayType;
-  }
-
   updateFilterAge(age) {
     return age;
   }

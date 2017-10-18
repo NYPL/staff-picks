@@ -54,13 +54,13 @@ class TimeSelector extends React.Component {
       active: !_isEmpty(list),
       month: () => {
         if (_isEmpty(list)) {
-          return;
+          return undefined;
         }
         return staffPicksDate(date).month;
       },
       year: () => {
         if (_isEmpty(list)) {
-          return;
+          return undefined;
         }
         return staffPicksDate(date).year;
       },

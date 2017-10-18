@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import config from '../../../../appConfig.js';
 
 const Book = (props) => {
-  const handleClick = (e) => e.preventDefault();
   const book = props.book;
   const bookImgSrc = book.item.imageSlug;
   const fullImgSrc = bookImgSrc !== 'No Image' ?
@@ -14,7 +13,7 @@ const Book = (props) => {
 
   return (
     <div className={props.className}>
-      <a href="#" onClick={handleClick}>
+      <a href="#" onClick={props.onClick}>
         <img
           alt={book.item.title}
           src={fullImgSrc}
@@ -31,6 +30,7 @@ Book.propTypes = {
   className: PropTypes.string,
   height: PropTypes.string,
   width: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 Book.defaultProps = {
