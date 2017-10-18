@@ -61,8 +61,9 @@ app.use('/', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   const iso = new Iso();
 
-  const blogAppUrl = (req.url).indexOf('books-music-dvds/recommendations/staff-picks') !== -1;
-  const routes = blogAppUrl ? appRoutes.client : appRoutes.server;
+  const isApiRoute = (req.url).indexOf(appConfig.baseApiUrl) !== -1;
+
+  const routes = isApiRoute ? appRoutes.server : appRoutes.client;
 
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
