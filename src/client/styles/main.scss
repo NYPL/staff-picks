@@ -138,7 +138,7 @@ Import style rules from NYPL React module components
 @import 'utils/mixins';
 @import 'utils/animations';
 
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -151,8 +151,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
   margin: 0;
@@ -163,7 +163,7 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
@@ -199,7 +199,7 @@ table {
 }
 
 .signIn-up-arrow {
-  @include display-arrow('up', $color: #666, $position: 170px); 
+  @include display-arrow('up', $color: #666, $position: 170px);
 }
 
 body {
@@ -208,7 +208,7 @@ body {
   margin: 0;
   padding: 0;
 }
- 
+
 
 #content {
   @include Kievit-Regular;
@@ -248,7 +248,7 @@ span[class*="icon-"] {
   margin-left: 15px;
   opacity: 0;
 
-  @include breakpoint($min, $tablet) {      
+  @include breakpoint($min, $tablet) {
     margin-left: 0;
   }
 }
@@ -372,8 +372,6 @@ span[class*="icon-"] {
   }
 }
 
-@import 'components/modal';
-
 @import 'components/buttons';
 
 
@@ -446,7 +444,6 @@ span[class*="icon-"] {
 
 @import 'components/age-tabs';
 @import 'components/book';
-@import 'components/book-modal';
 @import 'components/hero';
 @import 'components/month-picker';
 @import 'components/bookDisplayButtons';
