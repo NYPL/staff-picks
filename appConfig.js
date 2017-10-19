@@ -2,6 +2,9 @@ const config = {
   port: 3001,
   webpackDevServerPort: 3000,
   baseUrl: '/books-music-dvds/recommendations/staff-picks/',
+  baseApiUrl: '/books-music-dvds/recommendations/staff-picks/api/',
+  baseAnnualUrl: '/books-music-dvds/recommendations/best-books/',
+  baseMonthUrl: '/books-music-dvds/recommendations/staff-picks/',
   apiRoot: 'https://refinery.nypl.org',
   apiEndpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists',
   fields: 'fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&' +

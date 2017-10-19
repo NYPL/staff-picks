@@ -7,9 +7,8 @@ import { isEmpty as _isEmpty } from 'underscore';
 import BookActions from '../../actions/BookActions.js';
 import staffPicksDate from '../../utils/DateService.js';
 import utils from '../../utils/utils.js';
-import config from '../../../../appConfig.js';
+import appConfig from '../../../../appConfig.js';
 
-const { baseUrl } = config;
 const styles = {
   timeSelector: {
     height: '35px',
@@ -72,7 +71,7 @@ class TimeSelector extends React.Component {
     let endpoint;
 
     if (month) {
-      endpoint = `${baseUrl}api/ajax/picks/${month.date}`;
+      endpoint = `${appConfig.baseApiUrl}ajax/picks/${month.date}`;
 
       axios
         .get(endpoint)
@@ -82,7 +81,7 @@ class TimeSelector extends React.Component {
 
           utils.trackPicks('Select Month', `${selection}: ${month.month()}`);
 
-          this.routeHandler(`${baseUrl}${month.date}`);
+          this.routeHandler(`${appConfig.baseMonthUrl}${month.date}`);
 
           BookActions.clearFilters();
           BookActions.isotopesDidUpdate(true);
