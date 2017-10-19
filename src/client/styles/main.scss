@@ -243,16 +243,6 @@ span[class*="icon-"] {
 
 @import 'components/book-content';
 
-#masonryContainer {
-  margin-top: 12px;
-  margin-left: 15px;
-  opacity: 0;
-
-  @include breakpoint($min, $tablet) {
-    margin-left: 0;
-  }
-}
-
 .main-container {
   overflow: auto;
   padding: 0;

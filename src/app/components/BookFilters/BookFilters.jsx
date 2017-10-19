@@ -40,11 +40,6 @@ class BookFilters extends React.Component {
   }
 
   componentDidMount() {
-    // Only trigger the Action for the homepage route.
-    if (!this.props.annualList) {
-      BookActions.updateFilterAge('adult');
-    }
-
     BookStore.listen(this.onChange);
   }
 
@@ -55,49 +50,13 @@ class BookFilters extends React.Component {
   onChange() {
     const storeState = BookStore.getState();
     const activeFilters = storeState.filters;
-    const age = storeState.age;
     const bookElems = storeState.updatedFilters;
     const updatedBooksElems = [];
     let filteredFilters = [];
 
-    _each(bookElems, elem => {
-      if (elem.className.indexOf(age) !== -1) {
-        updatedBooksElems.push(elem);
-      }
-    });
-
     // update filter list in state
     if (storeState.isotopesDidUpdate) {
       this.setFilters();
-    }
-
-    // Update/reset the filters based on a new age
-    if (this.state.age !== age || storeState.isotopesDidUpdate) {
-      this.setState({ age });
-      _each(this.state.drivenByFilters, filter => {
-        filter.active = false;
-        filter.show = true;
-        filter.remove = false;
-        _each(updatedBooksElems, elem => {
-          const classes = (elem.className.split(' '));
-
-          if (_contains(classes, filter.id)) {
-            filter.remove = true;
-          }
-        });
-      });
-      _each(this.state.themeFilters, filter => {
-        filter.active = false;
-        filter.show = true;
-        filter.remove = false;
-        _each(updatedBooksElems, elem => {
-          const classes = (elem.className.split(' '));
-
-          if (_contains(classes, filter.id)) {
-            filter.remove = true;
-          }
-        });
-      });
     }
 
     // For clearing the filters and unselecting a filter.
@@ -116,7 +75,7 @@ class BookFilters extends React.Component {
         let n = storeState.filters.length;
         let filters;
 
-        if (classes.indexOf(age) !== -1 || this.props.annualList) {
+        if (this.props.annualList) {
           _each(storeState.filters, filter => {
             if (classes.indexOf(filter) !== -1) {
               n -= 1;

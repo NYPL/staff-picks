@@ -3,7 +3,6 @@ import fs from 'fs';
 import express from 'express';
 import compress from 'compression';
 import analytics from './analytics.js';
-import colors from 'colors';
 
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
@@ -95,7 +94,7 @@ app.use('/', (req, res) => {
           endpoint: res.locals.data.endpoint,
         });
     } else {
-      res.status(404).send('Not found')
+      res.status(404).send('Not found');
     }
   });
 });
@@ -141,11 +140,8 @@ if (!isProduction) {
     },
   }).listen(appConfig.webpackDevServerPort, 'localhost', (err, result) => {
     if (err) {
-      console.log(colors.red(err));
+      console.log(err);
     }
-    console.log(
-      colors.magenta('Webpack Dev Server listening at'),
-      colors.cyan(`localhost: ${appConfig.webpackDevServerPort}`)
-    );
+    console.log(`Webpack Dev Server listening at localhost: ${appConfig.webpackDevServerPort}`);
   });
 }

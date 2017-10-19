@@ -6,9 +6,6 @@ import { each as _each } from 'underscore';
 
 import Book from '../Book/Book.jsx';
 import BookContent from '../BookContent/BookContent.jsx';
-import BookTitle from '../BookContent/BookTitle.jsx';
-import BookIntro from '../BookContent/BookIntro.jsx';
-import BookShare from '../BookContent/BookShare.jsx';
 
 import BookStore from '../../stores/BookStore.js';
 
@@ -182,6 +179,9 @@ class BookPage extends React.Component {
             {this.state.returnToText}
           </a>
           <BookTitle className={`${this.props.className}__BookTitle`} book={book} />
+          <div className={`${this.props.className}__BookTitle`}>
+            <h2>{book.item.title}</h2>
+          </div>
           <div className={`${this.props.className}__left-column`}>
             <div className={`${this.props.className}__left-column__image`}>
               <Book
@@ -189,15 +189,10 @@ class BookPage extends React.Component {
                 className={`${this.props.className}__left-column__image__cover`}
               />
             </div>
-            <div className={`${this.props.className}__left-column__share`}>
-              <BookShare
-                shareType={this.state.annualType}
-                className={`${this.props.className}__left-column__share-items`}
-                book={this.state.book}
-              />
-            </div>
           </div>
-          <BookIntro book={this.state.book} />
+          <div className="BookIntro">
+            <p className="BookIntro__author">By {this.state.book.item.author}</p>
+          </div>
           <BookContent book={this.state.book} type={this.state.transitionRoute} />
         </div>
       </div>
