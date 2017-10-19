@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 import {
   each as _each,
@@ -40,8 +40,8 @@ class BookFilters extends React.Component {
   }
 
   componentDidMount() {
-    // Only trigger the Action for the /books-music-dvds/recommendations/staff-picks route.
-    if (this.props.params && !this.props.params.type) {
+    // Only trigger the Action for the homepage route.
+    if (!this.props.annualList) {
       BookActions.updateFilterAge('adult');
     }
 
@@ -56,7 +56,6 @@ class BookFilters extends React.Component {
     const storeState = BookStore.getState();
     const activeFilters = storeState.filters;
     const age = storeState.age;
-    const params = this.props.params;
     const bookElems = storeState.updatedFilters;
     const updatedBooksElems = [];
     let filteredFilters = [];
@@ -74,7 +73,7 @@ class BookFilters extends React.Component {
 
     // Update/reset the filters based on a new age
     if (this.state.age !== age || storeState.isotopesDidUpdate) {
-      this.setState({ age: age });
+      this.setState({ age });
       _each(this.state.drivenByFilters, filter => {
         filter.active = false;
         filter.show = true;
@@ -117,8 +116,7 @@ class BookFilters extends React.Component {
         let n = storeState.filters.length;
         let filters;
 
-        if (classes.indexOf(age) !== -1 ||
-            (params && params.type && (params.type === 'childrens' || params.type === 'ya'))) {
+        if (classes.indexOf(age) !== -1 || this.props.annualList) {
           _each(storeState.filters, filter => {
             if (classes.indexOf(filter) !== -1) {
               n -= 1;
@@ -208,15 +206,15 @@ class BookFilters extends React.Component {
           <li key={elem.id} onClick={() => handleClick(elem)}>
             <a>
               {elem.attributes.displayName}
-              <ReactCSSTransitionGroup
+              <CSSTransitionGroup
                 transitionName="minus"
-                transitionAppear={true}
+                transitionAppear
                 transitionEnterTimeout={500}
                 transitionAppearTimeout={500}
                 transitionLeaveTimeout={500}
               >
                 <span className={`minus-icon ${active}`}></span>
-              </ReactCSSTransitionGroup>
+              </CSSTransitionGroup>
             </a>
           </li>
         );
@@ -287,7 +285,7 @@ class BookFilters extends React.Component {
     const seasonYear = staffPicksDate(store.currentMonthPicks.date);
 
     return (
-      <div className={`BookFilters ${this.props.active}`} style={this.props.styles}>
+      <div className={`BookFilters ${this.props.active}`}>
         <CloseButton
           onClick={this.props.mobileCloseBtn}
           id="close-button"
@@ -318,10 +316,9 @@ class BookFilters extends React.Component {
 }
 
 BookFilters.propTypes = {
-  params: PropTypes.object,
-  styles: PropTypes.object,
   mobileCloseBtn: PropTypes.func,
   active: PropTypes.string,
+  annualList: PropTypes.bool,
 };
 
 export default BookFilters;

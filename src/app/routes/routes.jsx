@@ -1,38 +1,45 @@
 // React library
 import React from 'react';
 // Import Router
-import { Route } from 'react-router';
+import { IndexRoute, Route, Redirect } from 'react-router';
 
 // Import components
 import App from '../components/Application/Application.jsx';
-import BookModal from '../components/BookModal/BookModal.jsx';
+import Main from '../components/Application/Main.jsx';
+import BookPage from '../components/BookPage/BookPage.jsx';
+
+import appConfig from '../../../appConfig';
 
 // Routes we need
 const routes = {
   client: (
-    <Route path="/books-music-dvds/recommendations/staff-picks" component={App}>
-      <Route path="/books-music-dvds/recommendations/staff-picks/annual">
-        <Route path="/books-music-dvds/recommendations/staff-picks/annual/:type">
-          <Route path="/books-music-dvds/recommendations/staff-picks/annual/:type/:year">
-            <Route
-              component={BookModal}
-              path="/books-music-dvds/recommendations/staff-picks/annual/:type/:year/:id"
-            />
-          </Route>
-        </Route>
+    <Route>
+      <Route path={`${appConfig.baseAnnualUrl}:type`} component={App}>
+        <IndexRoute component={Main} />
+        <Route path={`${appConfig.baseAnnualUrl}:type/:year`} component={Main} />
+        <Route path={`${appConfig.baseAnnualUrl}:type/:year/:id`} component={BookPage} />
+        <Redirect from="*" to={appConfig.baseMonthUrl} />
       </Route>
-      <Route path="/books-music-dvds/recommendations/staff-picks/:month">
-        <Route path="/books-music-dvds/recommendations/staff-picks/:month/:id" component={BookModal} />
+      <Route path={appConfig.baseMonthUrl} component={App}>
+        <IndexRoute component={Main} />
+        <Route path={`${appConfig.baseMonthUrl}:month`} component={Main} />
+        <Route path={`${appConfig.baseMonthUrl}:month/:id`} component={BookPage} />
+        <Redirect from="*" to={appConfig.baseMonthUrl} />
       </Route>
     </Route>
   ),
   server: (
-    <Route path="/" component={App}>
-      <Route path="/annual/:type" />
-      <Route path="/annual/:type/:year" />
-      <Route path="/annual/:type/:year/:id" component={BookModal} />
-      <Route path="/:month" />
-      <Route path="/:month/:id" component={BookModal} />
+    <Route>
+      <Route path={`${appConfig.baseAnnualUrl}:type`} component={App}>
+        <IndexRoute component={Main} />
+        <Route path={`${appConfig.baseAnnualUrl}:type/:year`} component={Main} />
+        <Route path={`${appConfig.baseAnnualUrl}:type/:year/:id`} component={BookPage} />
+      </Route>
+      <Route path={appConfig.baseMonthUrl} component={App}>
+        <IndexRoute component={Main} />
+        <Route path={`${appConfig.baseMonthUrl}:month`} component={Main} />
+        <Route path={`${appConfig.baseMonthUrl}:month/:id`} component={BookPage} />
+      </Route>
     </Route>
   ),
 };

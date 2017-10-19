@@ -6,7 +6,6 @@ import BookActions from '../actions/BookActions';
 class BookStore {
   constructor() {
     this.bindListeners({
-      updateBookDisplay: BookActions.UPDATE_BOOK_DISPLAY,
       updateFilterAge: BookActions.UPDATE_FILTER_AGE,
       toggleBookFilter: BookActions.TOGGLE_BOOK_FILTER,
       clearFilters: BookActions.CLEAR_FILTERS,
@@ -17,20 +16,13 @@ class BookStore {
     });
 
     this.exportPublicMethods({
-      getBookDisplay: this.getBookDisplay,
-      getActiveList: this.getActiveList,
-      getActiveGrid: this.getActiveGrid,
       getAge: this.getAge,
       getFilters: this.getFilters,
       getUpdatedFilters: this.getUpdatedFilters,
-      updateBookDisplay: this.updateBookDisplay,
     });
 
     this.on('init', () => {
-      this.bookDisplay = 'grid';
       this.age = 'Adult';
-      this.gridDisplay = true;
-      this.listDisplay = false;
       this.allFilters = [];
       this.filters = [];
       this.initialFilters = [];
@@ -40,9 +32,6 @@ class BookStore {
     });
   }
 
-  updateBookDisplay(bookDisplay) {
-    this.bookDisplay = bookDisplay;
-  }
   updateFilterAge(age) {
     this.age = age;
   }
@@ -71,16 +60,6 @@ class BookStore {
     this.initialFilters = filters;
   }
 
-  // Maybe not needed?
-  getBookDisplay() {
-    return this.bookDisplay;
-  }
-  getActiveList() {
-    return this.listDisplay;
-  }
-  getActiveGrid() {
-    return this.gridDisplay;
-  }
   // Gets age from the tabs
   getAge() {
     return this.age;
@@ -90,15 +69,6 @@ class BookStore {
   }
   getUpdatedFilters() {
     return this.updatedFilters;
-  }
-  setActiveDisplay(type) {
-    if (type === 'grid') {
-      this.gridDisplay = true;
-      this.listDisplay = false;
-    } else {
-      this.gridDisplay = false;
-      this.listDisplay = true;
-    }
   }
 }
 

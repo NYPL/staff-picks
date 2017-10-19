@@ -6,10 +6,6 @@ class Actions {
     return picks;
   }
 
-  updateBookDisplay(displayType) {
-    return displayType;
-  }
-
   updateFilterAge(age) {
     return age;
   }
@@ -33,6 +29,6 @@ class Actions {
   updateInitialFilters(filters) {
     return filters;
   }
-};
+}
 
 export default alt.createActions(Actions);
