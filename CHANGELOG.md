@@ -1,5 +1,8 @@
 ## Changelog
 
+### 2.5.0
+> Removing unnecessary npm packages, removing the modal, and updating routes. Also an update to React Router.
+
 ### 2.4.0
 > Adding unit tests, updating a few npm packages, and updating readme.
 
