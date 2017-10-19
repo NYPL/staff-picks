@@ -62,7 +62,6 @@ app.use('/', (req, res) => {
   const iso = new Iso();
 
   const isApiRoute = (req.url).indexOf(appConfig.baseApiUrl) !== -1;
-
   const routes = isApiRoute ? appRoutes.server : appRoutes.client;
 
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {

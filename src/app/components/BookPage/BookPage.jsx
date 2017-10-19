@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from 'react-modal';
 
 import DocMeta from 'react-doc-meta';
 import { each as _each } from 'underscore';
 
-import CloseButton from '../Buttons/CloseButton.jsx';
 import Book from '../Book/Book.jsx';
 import BookContent from '../BookContent/BookContent.jsx';
 import BookTitle from '../BookContent/BookTitle.jsx';
@@ -19,12 +17,7 @@ import config from '../../../../appConfig.js';
 
 const { baseUrl } = config;
 
-if (global.window) {
-  Modal.setAppElement(document.getElementById('content'));
-  Modal.injectCSS();
-}
-
-class BookModal extends React.Component {
+class BookPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -32,7 +25,7 @@ class BookModal extends React.Component {
     const store = BookStore.getState();
     const params = this.props.params;
     let books = store.currentMonthPicks.picks;
-    let modalBook = {};
+    let bookPage = {};
     let returnToText = 'RETURN TO STAFF PICKS';
     let annualType;
     let transitionRoute;
@@ -46,7 +39,7 @@ class BookModal extends React.Component {
 
     _each(books, (book) => {
       if (book.item.id === paramID) {
-        modalBook = book;
+        bookPage = book;
         age = book.age ? book.age.age : 'adult';
       }
     });
@@ -67,45 +60,14 @@ class BookModal extends React.Component {
     }
 
     this.state = {
-      modalIsOpen: true,
-      book: modalBook,
+      book: bookPage,
       transitionRoute,
       annualType,
       returnToText,
     };
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+
+    this.handleReturn = this.handleReturn.bind(this);
     this.getMetaData = this.getMetaData.bind(this);
-  }
-
-  openModal() {
-    utils.trackPicks('Modal', 'Open');
-
-    this.setState({
-      modalIsOpen: true,
-    });
-  }
-
-  closeModal() {
-    utils.trackPicks('Modal', 'Closed');
-
-    this.setState({
-      modalIsOpen: false,
-    });
-
-    setTimeout(() => {
-      let returnUrl = this.props.params.month;
-
-      /* special cases for young adults and children */
-      if (this.props.params.type &&
-        (this.props.params.type === 'ya' || this.props.params.type === 'childrens')) {
-        returnUrl = `${config.baseAnnualUrl}${this.props.params.type}`;
-      } else {
-        returnUrl = `${config.baseMonthUrl}${returnUrl}`;
-      }
-
-      return this.routeHandler(returnUrl);
-    }, 200);
   }
 
   getMetaData(selection) {
@@ -148,6 +110,21 @@ class BookModal extends React.Component {
     return heroData[type];
   }
 
+  handleReturn(e) {
+    e.preventDefault();
+    let returnUrl = this.props.params.month;
+
+    /* special cases for young adults and children */
+    if (this.props.params.type &&
+      (this.props.params.type === 'ya' || this.props.params.type === 'childrens')) {
+      returnUrl = `${config.baseAnnualUrl}${this.props.params.type}`;
+    } else {
+      returnUrl = `${config.baseMonthUrl}${returnUrl}`;
+    }
+
+    return this.routeHandler(returnUrl);
+  }
+
   routeHandler(url) {
     this.context.router.push(url);
   }
@@ -162,10 +139,6 @@ class BookModal extends React.Component {
         'to help you find your next one.';
     let bookId;
     let metaType;
-    let metaTagData;
-    let imageLink;
-    let modalTags;
-    let tags;
 
     if (!this.state.annualType) {
       metaType = 'staffpicks';
@@ -173,7 +146,7 @@ class BookModal extends React.Component {
       metaType = this.state.annualType.type;
     }
 
-    metaTagData = this.getMetaData(metaType);
+    const metaTagData = this.getMetaData(metaType);
     description = metaTagData.intro;
 
     if (book.item) {
@@ -183,10 +156,10 @@ class BookModal extends React.Component {
       bookId = book.item.id;
     }
 
-    imageLink = 'https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?' +
+    const imageLink = 'https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?' +
       `&userID=NYPL49807&password=CC68707&Value=${imageSrc}&content=M&Return=1&Type=M`;
 
-    modalTags = [
+    const bookPageTags = [
       { property: 'og:title', content: title },
       { property: 'og:image', content: imageLink },
       { property: 'og:description', content: description },
@@ -195,22 +168,19 @@ class BookModal extends React.Component {
       { name: 'twitter:description', content: description },
       { name: 'twitter:image', content: imageLink },
     ];
-    tags = utils.metaTagUnion(modalTags);
+    const tags = utils.metaTagUnion(bookPageTags);
 
     return (
       <div>
         <DocMeta tags={tags} />
-        <Modal
-          className={this.props.className}
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}
-          contentLabel="NYPL Staff Pick Selection"
-        >
-          <CloseButton
+        <div className={this.props.className}>
+          <a
+            href="#"
             className={`${this.props.className}__closeBtn`}
-            onClick={this.closeModal}
-            label={this.state.returnToText}
-          />
+            onClick={(e) => this.handleReturn(e)}
+          >
+            {this.state.returnToText}
+          </a>
           <BookTitle className={`${this.props.className}__BookTitle`} book={book} />
           <div className={`${this.props.className}__left-column`}>
             <div className={`${this.props.className}__left-column__image`}>
@@ -229,25 +199,25 @@ class BookModal extends React.Component {
           </div>
           <BookIntro book={this.state.book} />
           <BookContent book={this.state.book} type={this.state.transitionRoute} />
-        </Modal>
+        </div>
       </div>
     );
   }
 }
 
-BookModal.propTypes = {
+BookPage.propTypes = {
   className: PropTypes.string,
   params: PropTypes.object,
   data: PropTypes.array,
 };
 
-BookModal.defaultProps = {
-  className: 'BookModal',
-  id: 'BookModal',
+BookPage.defaultProps = {
+  className: 'BookPage',
+  id: 'BookPage',
 };
 
-BookModal.contextTypes = {
+BookPage.contextTypes = {
   router: PropTypes.object,
 };
 
-export default BookModal;
+export default BookPage;
