@@ -5,7 +5,7 @@ import config from '../../../../appConfig.js';
 
 const Book = (props) => {
   const book = props.book;
-  const bookImgSrc = book.item.imageSlug;
+  const bookImgSrc = book.imageSlug || '';
   const fullImgSrc = bookImgSrc !== 'No Image' ?
     'https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807' +
     `&password=CC68707&Value=${bookImgSrc}&content=M&Return=1&Type=M`
@@ -15,7 +15,7 @@ const Book = (props) => {
     <div className={props.className}>
       <a href="#" onClick={props.onClick}>
         <img
-          alt={book.item.title}
+          alt=""
           src={fullImgSrc}
           height={props.height}
           width={props.width}

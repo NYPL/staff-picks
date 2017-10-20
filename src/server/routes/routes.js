@@ -3,8 +3,15 @@ import express from 'express';
 import monthData from './monthData.js';
 import annualData from './annualData.js';
 import appConfig from '../../../appConfig.js';
+import dataSet from '../../../test2017Data.js';
 
 const router = express.Router();
+
+router
+  .route(`${appConfig.baseAnnualUrl}api`)
+  .get((req, res) => {
+    res.json(dataSet);
+  });
 
 router
   .route(appConfig.baseMonthUrl)
@@ -17,9 +24,5 @@ router
 router
   .route(`${appConfig.baseAnnualUrl}:type/:year?/:id?`)
   .get(annualData.selectAnnualData);
-
-router
-  .route(`${appConfig.baseApiUrl}ajax/picks/:month`)
-  .get(monthData.ajaxMonthData);
 
 export default router;

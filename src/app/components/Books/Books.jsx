@@ -16,15 +16,15 @@ const styles = {
 const Books = (props) => {
   const currentMonthPicks = props.currentMonthPicks;
   const picks = currentMonthPicks.picks ? currentMonthPicks.picks : [];
-  const books = picks.map(element => {
-    const tagList = element.item.tags || [];
+  const books = picks.length ? picks.map(element => {
+    const tagList = element.tags || [];
     const tagIDs = _map(tagList, tag => tag.id);
     const tagClasses = tagIDs.join(' ');
 
     return (
       <li
         className={`book-item ${tagClasses}`}
-        key={element.id}
+        key={element.title.trim()}
         style={styles.gridWidth}
       >
         <Book
@@ -33,7 +33,8 @@ const Books = (props) => {
         />
       </li>
     );
-  });
+  })
+  : null;
 
   return (
     <ul className="list-view">
