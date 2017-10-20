@@ -44,12 +44,7 @@ function annualCurrentData(type, req, res, next) {
 
       res.locals.data = {
         BookStore: {
-          age: 'Adult',
-          allFilters: [],
           initialFilters: filters,
-          filters: [],
-          updatedFilters: [],
-          isotopesDidUpdate: false,
           currentMonthPicks,
         },
         endpoint,
@@ -62,15 +57,10 @@ function annualCurrentData(type, req, res, next) {
       console.log(`Error calling API AnnualCurrentData: ${error}`);
       res.locals.data = {
         BookStore: {
-          age: 'Adult',
-          allFilters: [],
           initialFilters: [],
-          filters: [],
-          updatedFilters: [],
           currentMonthPicks: {},
-          isotopesDidUpdate: false,
         },
-        endpoint: '',
+        endpoint,
       };
       next();
     }); // end Axios call

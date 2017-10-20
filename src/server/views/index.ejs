@@ -26,7 +26,7 @@
   <% if (isProduction) { %>
     <script async src="dist/<%= assets.main.js %>"></script>
   <% } else { %>
-    <script src="http://localhost:3000/bundle.js"></script>
+    <script src="http://localhost:<%= webpackPort %>/bundle.js"></script>
   <% } %>
 
     <!-- Optimizely -->

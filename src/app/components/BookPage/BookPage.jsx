@@ -178,7 +178,9 @@ class BookPage extends React.Component {
           >
             {this.state.returnToText}
           </a>
-          <BookTitle className={`${this.props.className}__BookTitle`} book={book} />
+          <div className={`${this.props.className}__BookTitle`}>
+            <h2>{book.item.title}</h2>
+          </div>
           <div className={`${this.props.className}__BookTitle`}>
             <h2>{book.item.title}</h2>
           </div>

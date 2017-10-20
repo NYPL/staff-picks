@@ -1,9 +1,9 @@
 // Account codes for Google Analytics for different environments
-var Google = {
+const Google = {
   // Return the Google Analytics code for the production property if
   // is_prod is true, or the dev property if is_prod is false
-  code: function (isProd) {
-    var codes = {
+  code: (isProd) => {
+    const codes = {
       production: 'UA-1420324-3',
       dev: 'UA-1420324-122',
     };

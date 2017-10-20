@@ -6,16 +6,8 @@ class Actions {
     return picks;
   }
 
-  toggleBookFilter(filter) {
-    return filter;
-  }
-
   clearFilters() {
     return true;
-  }
-
-  updateNewFilters(filters) {
-    return filters;
   }
 
   updateInitialFilters(filters) {

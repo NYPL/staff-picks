@@ -60,8 +60,7 @@ app.use('/', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   const iso = new Iso();
 
-  const isApiRoute = (req.url).indexOf(appConfig.baseApiUrl) !== -1;
-  const routes = isApiRoute ? appRoutes.server : appRoutes.client;
+  const routes = appRoutes.client;
 
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
@@ -88,10 +87,7 @@ app.use('/', (req, res) => {
           gaCode: analytics.google.code(isProduction),
           appEnv: process.env.APP_ENV || 'no APP_ENV',
           assets: buildAssets,
-          appTitle: appConfig.appTitle,
-          favicon: appConfig.favIconPath,
           webpackPort: WEBPACK_DEV_PORT,
-          endpoint: res.locals.data.endpoint,
         });
     } else {
       res.status(404).send('Not found');
