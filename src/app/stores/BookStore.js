@@ -11,19 +11,19 @@ class BookStore {
     });
 
     this.state = {
-      initialFilters: [],
+      filters: [],
       currentMonthPicks: {},
     };
   }
 
   clearFilters() {
-    this.setState({ initialFilters: [] });
+    this.setState({ filters: [] });
   }
   updatePicks(currentMonthPicks) {
     this.setState({ currentMonthPicks });
   }
-  updateInitialFilters(initialFilters) {
-    this.setState({ initialFilters });
+  updateInitialFilters(filters) {
+    this.setState({ filters });
   }
 }
 

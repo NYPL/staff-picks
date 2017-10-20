@@ -1,9 +1,7 @@
 // Library import
 import React from 'react';
 import PropTypes from 'prop-types';
-import DocMeta from 'react-doc-meta';
 
-import utils from '../../utils/utils';
 import config from '../../../../appConfig.js';
 
 const { baseUrl } = config;
@@ -18,23 +16,13 @@ const styles = {
 
 class Hero extends React.Component {
   getHeroData(selection) {
-    let type = 'staffpicks';
+    let type = '';
 
     if (selection && selection.length) {
       type = selection;
     }
 
     const heroData = {
-      staffpicks: {
-        type: 'staffpicks',
-        title: 'RECOMMENDATIONS',
-        description: 'Staff Picks',
-        intro: 'True stories, tales of courage, historical romances, edge-of-your-seat ' +
-          'thrillers... There is a huge world of books out there. Our expert staff members ' +
-          'pick out their favorites to help you find your next one.',
-        image: `${baseUrl}src/client/images/shelftalker.4.2.png`,
-        url: `http://www.nypl.org${baseUrl}`,
-      },
       childrens: {
         type: 'childrens',
         title: 'RECOMMENDATIONS',
@@ -75,20 +63,9 @@ class Hero extends React.Component {
     const heroData = this.getHeroData(this.getType());
     const image = heroData.type === 'staffpicks' ? (<div className="Hero__image"></div>) : null;
     const bannerStyle = styles[heroData.type];
-    const homepageTags = [
-      { property: 'og:title', content: 'Recommendations | The New York Public Library' },
-      { property: 'og:image', content: heroData.image },
-      { property: 'og:description', content: `${heroData.description} | ${heroData.intro}` },
-      { property: 'og:url', content: heroData.url },
-      { name: 'twitter:title', content: 'Recommendations | The New York Public Library' },
-      { name: 'twitter:description', content: `${heroData.description} | ${heroData.intro}` },
-      { name: 'twitter:image', content: heroData.image },
-    ];
-    const tags = utils.metaTagUnion(homepageTags);
 
     return (
       <div className="Hero" style={bannerStyle}>
-        <DocMeta tags={tags} />
         <div className="Hero__container">
           <div className="Hero__text">
             <div className="Hero__text__HeroTitle">

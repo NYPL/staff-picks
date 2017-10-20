@@ -42,7 +42,7 @@ function currentMonthData(req, res, next) {
 
       res.locals.data = {
         BookStore: {
-          initialFilters: filters,
+          filters,
           currentMonthPicks,
         },
         endpoint,
@@ -55,7 +55,7 @@ function currentMonthData(req, res, next) {
       console.log(`Error calling API currentMonthData: ${error}`);
       res.locals.data = {
         BookStore: {
-          initialFilters: [],
+          filters: [],
           currentMonthPicks: {},
         },
         endpoint,
@@ -86,7 +86,7 @@ function selectMonthData(req, res, next) {
 
       res.locals.data = {
         BookStore: {
-          initialFilters: filters,
+          filters,
           currentMonthPicks,
         },
         endpoint,
@@ -98,7 +98,7 @@ function selectMonthData(req, res, next) {
       console.log(`Error calling API selectMonthData: ${error}`);
       res.locals.data = {
         BookStore: {
-          initialFilters: [],
+          filters: [],
           currentMonthPicks: {},
         },
         endpoint,

@@ -13,7 +13,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = _extend(this.props, BookStore.getState());
+    const annualList = !!(this.props.params && this.props.params.type &&
+      (this.props.params.type === 'childrens' || this.props.params.type === 'ya'));
+    this.state = _extend({ annualList }, this.props, BookStore.getState());
     this.onChange = this.onChange.bind(this);
   }
 
@@ -26,13 +28,10 @@ class App extends React.Component {
   }
 
   onChange() {
-    this.setState(_extend(this.props, BookStore.getState()));
+    this.setState(_extend({}, this.props, BookStore.getState()));
   }
 
   render() {
-    const annualList = !!(this.props.params && this.props.params.type &&
-      (this.props.params.type === 'childrens' || this.props.params.type === 'ya'));
-
     return (
       <div className="home">
         <Header
@@ -42,11 +41,11 @@ class App extends React.Component {
         <Hero
           params={this.props.params}
           location={this.props.location}
-          annualList={annualList}
+          annualList={this.state.annualList}
         />
 
         <div id="app-content">
-          {React.cloneElement(this.props.children, this.props)}
+          {React.cloneElement(this.props.children, this.state)}
         </div>
         <Footer id="footer" className="footer" />
       </div>
@@ -56,7 +55,7 @@ class App extends React.Component {
 
 App.propTypes = {
   children: PropTypes.object,
-  filters: PropTypes.object,
+  filters: PropTypes.array,
   params: PropTypes.object,
   location: PropTypes.object,
 };

@@ -44,7 +44,7 @@ function annualCurrentData(type, req, res, next) {
 
       res.locals.data = {
         BookStore: {
-          initialFilters: filters,
+          filters,
           currentMonthPicks,
         },
         endpoint,
@@ -57,7 +57,7 @@ function annualCurrentData(type, req, res, next) {
       console.log(`Error calling API AnnualCurrentData: ${error}`);
       res.locals.data = {
         BookStore: {
-          initialFilters: [],
+          filters: [],
           currentMonthPicks: {},
         },
         endpoint,

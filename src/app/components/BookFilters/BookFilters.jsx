@@ -2,41 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { sortBy as _sortBy } from 'underscore';
 
-import BookStore from '../../stores/BookStore.js';
-
 class BookFilters extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = BookStore.getState();
-    this.onChange = this.onChange.bind(this);
-    this.filterItems = this.filterItems.bind(this);
+    this.renderItems = this.renderItems.bind(this);
   }
 
-  componentDidMount() {
-    BookStore.listen(this.onChange);
-  }
-
-  componentWillUnmount() {
-    BookStore.unlisten(this.onChange);
-  }
-
-  onChange() {
-    this.setState(BookStore.getState());
-  }
-
-  filterItems(list) {
+  renderItems(list) {
     return list.map((elem) => <li key={elem.id}>{elem.attributes.tag}</li>);
   }
 
   renderFilterList() {
-    let filters = this.state.initialFilters;
+    const filters = _sortBy(this.props.filters, (f) => f.attributes.tag);
 
-    // Join the two set of filters and sort alphabetically.
-    filters = _sortBy(filters, (f) => f.attributes.tag);
     return (
       <ul>
-        {this.filterItems(filters)}
+        {this.renderItems(filters)}
       </ul>
     );
   }
@@ -55,9 +37,7 @@ class BookFilters extends React.Component {
 }
 
 BookFilters.propTypes = {
-  mobileCloseBtn: PropTypes.func,
-  active: PropTypes.string,
-  annualList: PropTypes.bool,
+  filters: PropTypes.array,
 };
 
 export default BookFilters;
