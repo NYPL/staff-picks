@@ -9,15 +9,15 @@ const SimpleButton = (props) => {
   };
 
   return (
-    <a
+    <button
       id={props.id}
       className={props.className}
       href={props.target}
-      onClick={() => onClick()}
+      onClick={onClick}
       style={props.style}
     >
       {props.label}
-    </a>
+    </button>
   );
 };
 

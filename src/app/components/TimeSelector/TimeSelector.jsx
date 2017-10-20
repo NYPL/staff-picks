@@ -12,8 +12,6 @@ import appConfig from '../../../../appConfig.js';
 const styles = {
   timeSelector: {
     height: '35px',
-    marginLeft: '-23px',
-    paddingTop: '7px',
     textAlign: 'center',
   },
   dateDisplay: {

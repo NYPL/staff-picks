@@ -8,14 +8,13 @@ const CloseButton = (props) => {
   };
 
   return (
-    <a
+    <button
       id="close-button"
-      href="#"
       className={props.className}
-      onClick={handleClick.bind(this)}
+      onClick={handleClick}
     >
       {props.label}
-    </a>
+    </button>
   );
 };
 

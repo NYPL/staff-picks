@@ -6,24 +6,8 @@ class Actions {
     return picks;
   }
 
-  updateFilterAge(age) {
-    return age;
-  }
-
-  toggleBookFilter(filter) {
-    return filter;
-  }
-
   clearFilters() {
     return true;
-  }
-
-  updateNewFilters(filters) {
-    return filters;
-  }
-
-  isotopesDidUpdate(bool) {
-    return bool;
   }
 
   updateInitialFilters(filters) {

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import AgeTabs from '../AgeTabs/AgeTabs.jsx';
 import Books from '../Books/Books.jsx';
 import Sidebar from '../Sidebar/Sidebar.jsx';
 import BookStore from '../../stores/BookStore.js';
@@ -44,8 +43,6 @@ class App extends React.Component {
 
     return (
       <div>
-        {!annualList && (<AgeTabs />)}
-
         <div className="main-container">
           <div id="sidebar">
             <Sidebar {...this.state} annualList={annualList} />
