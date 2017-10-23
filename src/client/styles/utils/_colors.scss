@@ -1,31 +1,31 @@
-$libraryRed: #E43534;
-$libraryBlue: #0095c8;
+// colors
+$nyplgray: #7B756F;
+$nypldarkgray: darken($nyplgray, 40%);
+$nypllightgray: lighten($nyplgray, 40%);
+$nyplyellow: #FEE24A;
+$nyplorange: #ffb81d;
+$nyplred: #e32b31;
+$nypldarkgreen: #4C842E;
+$nypllightgreen: lighten($nypldarkgreen, 20%);
+$nyplblue: #1DA1D4;
+$nyplbluedark: #1980a9;
 
-/* MAIN NAVIGATION MENU COLORS
- * ---------------------------
- * - In accordance with style-guide
- * - Uses HEX values
-*/
+// semantic colors
+$nyplsearchcolor: $nyplgray;
+$nyplsearchcolordark: darken($nyplsearchcolor, 10%);
+$nyplsearchcolorlight: lighten($nyplsearchcolor, 30%);
+$focuscolor: $nyplorange;
+$pagecolor: $nypldarkgray;
+$pagecolorlight: $nypllightgray;
+$pagetextcolor: $nypldarkgray;
+$footercolor: #54514A;
+$highlightcolor: $nyplbluedark;
+$alertcolor: $nyplyellow;
+$backgroundcolor: #fff;
 
-$BG_MENU_BROWSE_LEFT: #E73621;
-$BG_MENU_BROWSE_RIGHT: #BB1D12;
-
-$BG_MENU_ATTEND_LEFT: #72256D;
-$BG_MENU_ATTEND_RIGHT: #52174F;
-
-$BG_MENU_LEARN_LEFT: #579B34;
-$BG_MENU_LEARN_RIGHT: #437529;
-
-$BG_MENU_RESEARCH_LEFT: #00989E;
-$BG_MENU_RESEARCH_RIGHT: #047074;
-
-$BG_MENU_FINDUS_LEFT: #726958;
-$BG_MENU_FINDUS_RIGHT: #595141;
-
-$BG_MENU_GIVE_LEFT: #CF1D1E;
-$BG_MENU_GIVE_RIGHT: #9E0B0B;
-
-$BG_MENU_HELP_LEFT: #89806F;
-$BG_MENU_HELP_RIGHT: #655C4C;
-
-$BG_MENU_SEARCH: #1DA1D4;
+// link colors
+$linkcolor: $nyplred;
+$linkvisitedcolor: darken($linkcolor, 20%);
+$linkhovercolor: lighten($linkcolor, 10%);
+$invertedlinkcolor: white;
+$invertedlinkvisitedcolor: darken($invertedlinkcolor, 10%);

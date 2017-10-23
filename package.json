@@ -33,6 +33,7 @@
     "url": "https://github.com/NYPL/Staff-Picks/issues"
   },
   "dependencies": {
+    "@nypl/design-toolkit": "0.1.27",
     "@nypl/dgx-header-component": "2.1.1",
     "@nypl/dgx-react-footer": "0.4.0",
     "assets-webpack-plugin": "3.4.0",
@@ -41,8 +42,8 @@
     "babel-loader": "6.4.1",
     "babel-plugin-istanbul": "3.0.0",
     "babel-polyfill": "6.26.0",
-    "babel-preset-react": "6.24.1",
     "babel-preset-env": "1.6.1",
+    "babel-preset-react": "6.24.1",
     "babel-register": "6.26.0",
     "chai": "3.5.0",
     "clean-webpack-plugin": "0.1.3",

@@ -1,0 +1,16 @@
+.visuallyHidden {
+  @include visuallyHidden;
+}
+
+.displayVisuallyHidden {
+  @include displayVisuallyHidden;
+}
+
+$app-max-width: 1313px !default;
+$tablet-portrait: 768px !default;
+$tablet-landscape: 1024px !default;
+$desktop: 1313px !default;
+$mobile-padding-left-right: 14px !default;
+$tablet-portrait-padding-left-right: 36px !default;
+$tablet-landscape-padding-left-right: 20px !default;
+$mobile-margin-top-bottom: 15px !default;

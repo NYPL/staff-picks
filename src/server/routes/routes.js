@@ -11,15 +11,11 @@ router
   .get(monthData.currentMonthData);
 
 router
-  .route(`${appConfig.baseMonthUrl}:month/:id?`)
-  .get(monthData.selectMonthData);
-
-router
   .route(`${appConfig.baseAnnualUrl}:type/:year?/:id?`)
   .get(annualData.selectAnnualData);
 
 router
-  .route(`${appConfig.baseApiUrl}ajax/picks/:month`)
-  .get(monthData.ajaxMonthData);
+  .route(`${appConfig.baseMonthUrl}:month/:id?`)
+  .get(monthData.selectMonthData);
 
 export default router;
