@@ -8,9 +8,13 @@ const Books = (props) => {
   const books = picks.length ? picks.map((book, i) => <Book key={i} book={book} />) : null;
 
   return (
-    <ul className="nypl-column-three-quarters">
-      {books}
-    </ul>
+    <div className="booklist nypl-column-three-quarters">
+      <h2>2017 Picks</h2>
+
+      <ul className="nypl-row">
+        {books}
+      </ul>
+    </div>
   );
 };
 

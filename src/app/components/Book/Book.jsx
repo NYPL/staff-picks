@@ -12,7 +12,7 @@ const Book = ({ book }) => {
 
   return (
     <li
-      className="book-item"
+      className="book-item nypl-column-half"
       key={book.title.trim()}
     >
       <h4>{book.title}</h4>

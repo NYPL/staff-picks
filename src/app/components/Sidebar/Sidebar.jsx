@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { LeftWedgeIcon } from 'dgx-svg-icons';
 
 import BookFilters from '../BookFilters/BookFilters.jsx';
+import About from '../About/About.jsx';
 
 const Sidebar = (props) => (
   <div className="sidebar nypl-column-one-quarter">
+    <a href="#" className="back-link">
+      <LeftWedgeIcon />
+      Best Books for kids
+    </a>
+
     <BookFilters filters={props.filters} />
 
-    <div className="about">
-      <span className="about-divider"></span>
-      <h2 className="about-link">
-        <a href="http://nypl.org/books-music-dvds/recommendations/about/annual-lists">
-          About this list
-        </a>
-      </h2>
-    </div>
+    <About />
   </div>
 );
 

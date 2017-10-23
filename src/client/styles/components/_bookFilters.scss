@@ -1,0 +1,11 @@
+.book-filters {
+  &-heading {
+    border-top: 4px solid $nyplred;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+
+    h2 {
+      margin: 5px 0;
+      padding: 0 0 15px;
+    }
+  }
+}
