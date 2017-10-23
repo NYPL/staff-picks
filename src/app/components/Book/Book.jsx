@@ -9,10 +9,12 @@ const Book = ({ book }) => {
     'https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807' +
     `&password=CC68707&Value=${bookImgSrc}&content=M&Return=1&Type=M`
     : `${config.baseUrl}src/client/images/book-place-holder.png`;
+  const tagArray = book.tags.map(tag => tag.toLowerCase().split(' ').join('-'));
+  const tagClasses = tagArray.join(' ');
 
   return (
     <li
-      className="book-item nypl-column-half"
+      className={`book-item nypl-column-half ${tagClasses}`}
       key={book.title.trim()}
     >
       <h4>{book.title}</h4>

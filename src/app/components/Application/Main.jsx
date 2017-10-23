@@ -8,12 +8,16 @@ const App = (props) => (
   <div className="nypl-row">
     <Sidebar filters={props.filters} />
 
-    <BookList currentMonthPicks={props.currentMonthPicks} />
+    <BookList
+      currentMonthPicks={props.currentMonthPicks}
+      selectedFilters={props.selectedFilters}
+    />
   </div>
 );
 
 App.propTypes = {
   filters: PropTypes.array,
+  selectedFilters: PropTypes.array,
   currentMonthPicks: PropTypes.object,
 };
 
