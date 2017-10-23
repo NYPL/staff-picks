@@ -9,8 +9,8 @@ App-specific utilities and defaults
 */
 @import 'utils/variables';
 @import 'utils/mixins';
-// @import 'utils/fonts';
-// @import 'utils/colors';
+// // @import 'utils/fonts';
+// // @import 'utils/colors';
 @import 'utils/utils';
 @import 'utils/base';
 
@@ -30,34 +30,13 @@ body {
   padding: 0;
 }
 
-// Override:
-.FindUsWidget-FindUsFeature-Link {
-  span[class*="icon-"] {
-    display: inline-block;
-  }
+.container {
+  max-width: $container-width;
+  padding: 0.5rem 1rem;
+  margin: 0 auto;
+  @include box-sizing(border-box);
 }
 
-.EmailSubscription-Wrapper {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  -ms-box-sizing: content-box;
-  -o-box-sizing: content-box;
-  box-sizing: content-box;
-}
-
-#header-container {
-  font-size: 100%;
-}
-
-.Header {
-  .MyNypl-Wrapper,
-  .StickyMyNypl-Wrapper {
-    .MyNypl .icon {
-      display: inline-block !important;
-
-      &:before {
-        margin-right: 0px !important;
-      }
-    }
-  }
+.content-wrapper {
+  @include full-width-wrapper;
 }
