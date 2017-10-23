@@ -33,20 +33,24 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="home">
+      <div className="app-wrapper">
         <Header
           navData={navConfig.current}
           skipNav={{ target: 'app-content' }}
         />
-        <Hero
-          params={this.props.params}
-          location={this.props.location}
-          annualList={this.state.annualList}
-        />
 
-        <div id="app-content">
-          {React.cloneElement(this.props.children, this.state)}
-        </div>
+        <main className="main-page">
+          <Hero
+            params={this.props.params}
+            location={this.props.location}
+            annualList={this.state.annualList}
+          />
+
+          <div id="app-content" className="nypl-full-width-wrapper">
+            {React.cloneElement(this.props.children, this.state)}
+          </div>
+        </main>
+
         <Footer id="footer" className="footer" />
       </div>
     );

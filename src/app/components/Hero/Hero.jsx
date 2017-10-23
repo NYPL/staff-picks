@@ -72,7 +72,7 @@ class Hero extends React.Component {
 
     return (
       <div className="Hero" style={bannerStyle}>
-        <div className="Hero__container">
+        <div className="Hero__container nypl-full-width-wrapper">
           <div className="Hero__text">
             <div className="Hero__text__HeroTitle">
               <h3>{heroData.title}</h3>

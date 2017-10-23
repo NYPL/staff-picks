@@ -8,7 +8,7 @@ const Books = (props) => {
   const books = picks.length ? picks.map((book, i) => <Book key={i} book={book} />) : null;
 
   return (
-    <ul className="list-view">
+    <ul className="nypl-column-three-quarters">
       {books}
     </ul>
   );
