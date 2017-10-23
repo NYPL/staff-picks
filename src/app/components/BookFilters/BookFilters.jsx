@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FilterIcon } from 'dgx-svg-icons';
 
 class BookFilters extends React.Component {
   constructor(props) {
@@ -24,12 +25,11 @@ class BookFilters extends React.Component {
 
   render() {
     return (
-      <div className="BookFilters">
-        <span className="divider"></span>
-        <h2>What would you like to read?</h2>
-        <div className="BookFilters-lists">
-          {this.renderFilterList()}
+      <div className="book-filters">
+        <div className="book-filters-heading">
+          <h2><FilterIcon />Filter by Tags</h2>
         </div>
+        {this.renderFilterList()}
       </div>
     );
   }

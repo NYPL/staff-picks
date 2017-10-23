@@ -9,8 +9,8 @@ App-specific utilities and defaults
 */
 @import 'utils/variables';
 @import 'utils/mixins';
-// // @import 'utils/fonts';
-// // @import 'utils/colors';
+// @import 'utils/fonts';
+@import 'utils/colors';
 @import 'utils/utils';
 @import 'utils/base';
 
@@ -20,11 +20,15 @@ Import style rules from NYPL React module components
 @import "~@nypl/dgx-header-component/dist/styles/main";
 @import "~@nypl/dgx-react-footer/dist/styles/styles.scss";
 
-@import 'components/hero';
+@import 'components/about';
+@import 'components/bookFilters';
+@import 'components/bookList';
 @import 'components/error404Page';
+@import 'components/hero';
+@import 'components/sidebar';
 
 body {
-  background-color: #FFF;
+  background: #fff;
   color: #000;
   margin: 0;
   padding: 0;
@@ -39,4 +43,8 @@ body {
 
 .content-wrapper {
   @include full-width-wrapper;
+}
+
+li {
+  list-style: none;
 }

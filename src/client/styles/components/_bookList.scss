@@ -1,0 +1,20 @@
+.booklist {
+  h2 {
+    background: #fff;
+    color: $nyplred;
+    max-width: 100%;
+
+    &:before {
+      content: "";
+      background: $nyplred;
+      display: block;
+      height: 0.25rem;
+      margin-bottom: 0.5rem;
+      width: 100%;
+    }
+  }
+
+  li {
+    margin: 0;
+  }
+}
