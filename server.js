@@ -45,14 +45,6 @@ app.use('*/dist', express.static(DIST_PATH));
 // Assign the path for static client files
 app.use('*/src/client', express.static(INDEX_PATH));
 
-
-app.use('/', (req, res, next) => {
-  if (req.path === '/books-music-dvds/recommendations/staff-picks') {
-    return res.redirect('/books-music-dvds/recommendations/staff-picks/');
-  }
-  next();
-});
-
 app.use('/', expressRoutes);
 
 // after get the path

@@ -3,39 +3,29 @@ import PropTypes from 'prop-types';
 
 import config from '../../../../appConfig.js';
 
-const Book = (props) => {
-  const book = props.book;
-  const bookImgSrc = book.imageSlug || '';
+const Book = ({ book }) => {
+  const bookImgSrc = book.imageSlug || 'No Image';
   const fullImgSrc = bookImgSrc !== 'No Image' ?
     'https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807' +
     `&password=CC68707&Value=${bookImgSrc}&content=M&Return=1&Type=M`
     : `${config.baseUrl}src/client/images/book-place-holder.png`;
 
   return (
-    <div className={props.className}>
-      <a href="#" onClick={props.onClick}>
-        <img
-          alt=""
-          src={fullImgSrc}
-          height={props.height}
-          width={props.width}
-        />
+    <li
+      className="book-item"
+      key={book.title.trim()}
+    >
+      <h4>{book.title}</h4>
+      <p>{book.text}</p>
+      <a href="#">
+        <img alt="" src={fullImgSrc} />
       </a>
-    </div>
+    </li>
   );
 };
 
 Book.propTypes = {
   book: PropTypes.object,
-  className: PropTypes.string,
-  height: PropTypes.string,
-  width: PropTypes.string,
-  onClick: PropTypes.func,
-};
-
-Book.defaultProps = {
-  className: 'Book',
-  lang: 'en',
 };
 
 export default Book;

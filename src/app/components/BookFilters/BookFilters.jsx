@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { sortBy as _sortBy } from 'underscore';
 
 class BookFilters extends React.Component {
   constructor(props) {
@@ -10,11 +9,11 @@ class BookFilters extends React.Component {
   }
 
   renderItems(list) {
-    return list.map((elem) => <li key={elem.id}>{elem.attributes.tag}</li>);
+    return list.map((elem, i) => <li key={i}>{elem}</li>);
   }
 
   renderFilterList() {
-    const filters = _sortBy(this.props.filters, (f) => f.attributes.tag);
+    const filters = this.props.filters;
 
     return (
       <ul>

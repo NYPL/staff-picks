@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Books from '../Books/Books.jsx';
+import BookList from '../BookList/BookList.jsx';
 import Sidebar from '../Sidebar/Sidebar.jsx';
 
 const App = (props) => (
@@ -11,7 +11,7 @@ const App = (props) => (
         <Sidebar filters={props.filters} />
       </div>
       <div id="books">
-        <Books currentMonthPicks={props.currentMonthPicks} />
+        <BookList currentMonthPicks={props.currentMonthPicks} />
       </div>
 
       <div className="mobile-about">

@@ -1,4 +1,3 @@
-// Import React and other utility libraries
 import React from 'react';
 import PropTypes from 'prop-types';
 

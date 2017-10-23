@@ -15,10 +15,16 @@ const styles = {
 };
 
 class Hero extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.getHeroData = this.getHeroData.bind(this);
+    this.getType = this.getType.bind(this);
+  }
   getHeroData(selection) {
     let type = '';
 
-    if (selection && selection.length) {
+    if (selection) {
       type = selection;
     }
 
@@ -45,7 +51,7 @@ class Hero extends React.Component {
   }
 
   getType() {
-    const clientParam = (this.props.annualList) ? this.props.params.type : '';
+    const clientParam = (this.props.annualList && this.props.params) ? this.props.params.type : '';
     const route = this.props.location.pathname || clientParam;
 
     if (route.indexOf('childrens') !== -1) {
@@ -56,12 +62,12 @@ class Hero extends React.Component {
       return 'ya';
     }
 
-    return 'staffpicks';
+    // Temporary default:
+    return 'childrens';
   }
 
   render() {
     const heroData = this.getHeroData(this.getType());
-    const image = heroData.type === 'staffpicks' ? (<div className="Hero__image"></div>) : null;
     const bannerStyle = styles[heroData.type];
 
     return (
@@ -78,7 +84,6 @@ class Hero extends React.Component {
               </p>
             </div>
           </div>
-          {image}
         </div>
       </div>
     );

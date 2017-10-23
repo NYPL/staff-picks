@@ -15,19 +15,42 @@ function annualCurrentData(type, req, res, next) {
 
   res.locals.data = {
     BookStore: {
-      filters: [],
+      filters: [
+        'Adventure',
+        'Animals',
+        'Biographies',
+        'Culturally diverse',
+        'Early readers',
+        'Fairy tales & folklore',
+        'Families',
+        'Fantasy',
+        'Friendship',
+        'Funny',
+        'Graphic novels',
+        'Historical',
+        'Middle grade',
+        'Nature',
+        'Picture books',
+        'Poetry',
+        'Science fiction',
+        'STEM',
+        'Suspenseful',
+        'True stories',
+      ],
       currentMonthPicks: dataSet,
     },
     endpoint,
   };
 
   return next();
+
   // axios.get(endpoint)
   //   .then((data) => {
+  //     console.log(data);
   //     res.locals.data = {
   //       BookStore: {
   //         filters: [],
-  //         currentMonthPicks: dataSet,
+  //         currentMonthPicks: data,
   //       },
   //       endpoint,
   //     };
@@ -67,5 +90,4 @@ function selectAnnualData(req, res, next) {
 
 export default {
   selectAnnualData,
-  annualCurrentData,
 };
