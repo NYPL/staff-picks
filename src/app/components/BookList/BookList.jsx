@@ -13,7 +13,9 @@ const BookList = (props) => {
       // Only execute filtering if the selectedFilters object is not empty
       if (selectedFilters.length) {
         return pickItems.filter(book => {
+          // Get the pick's tags in an ID readable array
           const tagArray = utils.getPickTags(book);
+          // Get the array of selected tags found in the book item
           const inSelectedFilter = utils.getSelectedTags(tagArray, props.selectedFilters);
 
           if (inSelectedFilter.length &&
@@ -24,7 +26,7 @@ const BookList = (props) => {
           return undefined;
         });
       }
-      // No filters, return original pick
+      // No filters, return original picks
       return pickItems;
     }
     return pickItems;
@@ -50,7 +52,7 @@ BookList.propTypes = {
 };
 
 BookList.defaultProps = {
-  className: 'Books',
+  className: 'booklist',
   lang: 'en',
 };
 

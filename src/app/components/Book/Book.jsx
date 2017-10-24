@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import config from '../../../../appConfig.js';
+import utils from '../../utils/utils';
 
 const Book = ({ book }) => {
   const bookImgSrc = book.imageSlug || 'No Image';
@@ -9,7 +10,7 @@ const Book = ({ book }) => {
     'https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807' +
     `&password=CC68707&Value=${bookImgSrc}&content=M&Return=1&Type=M`
     : `${config.baseUrl}src/client/images/book-place-holder.png`;
-  const tagArray = book.tags.map(tag => tag.toLowerCase().split(' ').join('-'));
+  const tagArray = utils.getPickTags(book);
   const tagClasses = tagArray.join(' ');
 
   return (
