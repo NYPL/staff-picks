@@ -4,43 +4,54 @@ import PropTypes from 'prop-types';
 import Book from '../Book/Book.jsx';
 import utils from '../../utils/utils';
 
-const Books = (props) => {
-  const currentMonthPicks = props.currentMonthPicks;
-  const picks = currentMonthPicks.picks ? currentMonthPicks.picks : [];
-  const filteredBooks = props.selectedFilters.length ?
-    picks.filter(book => {
-      const tagArray = utils.getPickTags(book);
-      const inSelectedFilter = utils.getSelectedTags(tagArray, props.selectedFilters);
+const BookList = (props) => {
+  const currentPicks = props.currentMonthPicks;
+  const picks = currentPicks.picks ? currentPicks.picks : [];
+  const getFilteredBookItems = (pickItems, selectedFilters) => {
+    // Only execute filtering if the picks object is not empty
+    if (pickItems.length) {
+      // Only execute filtering if the selectedFilters object is not empty
+      if (selectedFilters.length) {
+        return pickItems.filter(book => {
+          const tagArray = utils.getPickTags(book);
+          const inSelectedFilter = utils.getSelectedTags(tagArray, props.selectedFilters);
 
-      if (inSelectedFilter.length && (inSelectedFilter.length === props.selectedFilters.length)) {
-        return book;
+          if (inSelectedFilter.length &&
+              (inSelectedFilter.length === props.selectedFilters.length)) {
+            return book;
+          }
+
+          return undefined;
+        });
       }
+      // No filters, return original pick
+      return pickItems;
+    }
+    return pickItems;
+  };
 
-      return undefined;
-    })
-    : picks;
-
-  const books = picks.length ? filteredBooks.map((book, i) => <Book key={i} book={book} />) : null;
+  const renderBookItems = (currentBooks) => (
+    currentBooks.length ? currentBooks.map((book, i) => <Book key={i} book={book} />) : null
+  );
 
   return (
     <div className="booklist nypl-column-three-quarters">
       <h2>2017 Picks</h2>
-
       <ul className="nypl-row">
-        {books}
+        {renderBookItems(getFilteredBookItems(picks, props.selectedFilters))}
       </ul>
     </div>
   );
 };
 
-Books.propTypes = {
+BookList.propTypes = {
   currentMonthPicks: PropTypes.object,
   selectedFilters: PropTypes.array,
 };
 
-Books.defaultProps = {
+BookList.defaultProps = {
   className: 'Books',
   lang: 'en',
 };
 
-export default Books;
+export default BookList;
