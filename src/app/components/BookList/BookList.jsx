@@ -1,28 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Book from '../Book/Book.jsx';
-import {
-  contains as _contains,
-  each as _each,
-} from 'underscore';
+import utils from '../../utils/utils';
 
 const Books = (props) => {
   const currentMonthPicks = props.currentMonthPicks;
   const picks = currentMonthPicks.picks ? currentMonthPicks.picks : [];
   const filteredBooks = props.selectedFilters.length ?
     picks.filter(book => {
-      const tagArray = book.tags.map(tag => tag.toLowerCase().split(' ').join('-'));
-      const inSelectedFilter = [];
-      _each(tagArray, (bookTag) => {
-        if (_contains(props.selectedFilters, bookTag)) {
-          inSelectedFilter.push(bookTag);
-        }
-      });
+      const tagArray = utils.getPickTags(book);
+      const inSelectedFilter = utils.getSelectedTags(tagArray, props.selectedFilters);
 
-      console.log(inSelectedFilter);
-      if (inSelectedFilter.length) {
+      if (inSelectedFilter.length && (inSelectedFilter.length === props.selectedFilters.length)) {
         return book;
       }
+
+      return undefined;
     })
     : picks;
 
