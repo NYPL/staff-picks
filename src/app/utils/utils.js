@@ -53,6 +53,22 @@ function Utils() {
 
     return inSelectedFilter;
   };
+
+  /**
+   * getSelectableTags(picks)
+   *
+   * @param {array} picks
+   */
+  this.getSelectableTags = (picks) => {
+    let selectableFilters = [];
+
+    _each(picks, book => {
+      const tagArray = this.getPickTags(book);
+      selectableFilters = _union(selectableFilters, tagArray);
+    });
+
+    return selectableFilters;
+  };
 }
 
 export default new Utils();
