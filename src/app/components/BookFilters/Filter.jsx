@@ -35,13 +35,13 @@ class Filter extends React.Component {
       buttonActive,
     } = this.state;
     const filter = this.props.filter;
-    const active = selected ? 'active' : '';
+    const activeClass = selected ? 'active' : '';
     const iconType = buttonActive ? <DotsIcon /> : <CheckSoloIcon />;
 
     return (
       <li className="filter-item">
         <button
-          className={`nypl-primary-button ${active}`}
+          className={`nypl-primary-button ${activeClass}`}
           onClick={this.onClick}
         >
           {iconType}
