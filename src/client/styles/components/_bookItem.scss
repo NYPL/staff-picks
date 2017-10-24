@@ -1,0 +1,27 @@
+.book-item {
+  margin: 0;
+  padding-bottom: .75em;
+  padding-top: .75em;
+
+  &:nth-child(odd) {
+    clear: left;
+  }
+
+  &-image-box {
+    display: inline-block;
+    height: auto;
+    margin-right: 2.5%;
+    vertical-align: top;
+    width: 37.5%;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  &-description {
+    display: inline-block;
+    margin-right: 2.5%;
+    width: 57.5%;
+  }
+}
