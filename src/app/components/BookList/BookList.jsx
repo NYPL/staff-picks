@@ -16,10 +16,10 @@ const BookList = (props) => {
           // Get the pick's tags in an ID readable array
           const tagArray = utils.getPickTags(book);
           // Get the array of selected tags found in the book item
-          const inSelectedFilter = utils.getSelectedTags(tagArray, props.selectedFilters);
+          const inSelectedFilter = utils.getSelectedTags(tagArray, selectedFilters);
 
           if (inSelectedFilter.length &&
-              (inSelectedFilter.length === props.selectedFilters.length)) {
+              (inSelectedFilter.length === selectedFilters.length)) {
             return book;
           }
 
