@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
+    "eb-start": "npm run dist && npm run start",
     "dist": "NODE_ENV=production webpack --config webpack.config.js",
-    "postinstall": "npm run dist",
     "test": "node_modules/.bin/mocha test/helpers/browser.js test/unit/*.test.js",
     "test-dev": "node_modules/.bin/mocha -w test/helpers/browser.js test/unit/*.test.js",
     "test-file": "node_modules/.bin/mocha -w test/helpers/browser.js",

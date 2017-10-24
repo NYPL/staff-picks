@@ -7,3 +7,8 @@ assets.json
 .DS_Store
 client/.DS_Store
 .nyc_output
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
