@@ -2,34 +2,38 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FilterIcon } from 'dgx-svg-icons';
 
+import Filter from './Filter';
+import Actions from '../../actions/BookActions';
+
 class BookFilters extends React.Component {
   constructor(props) {
     super(props);
 
     this.renderItems = this.renderItems.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
-  renderItems(list) {
-    return list.map((elem, i) => <li key={i}>{elem}</li>);
+  onClick(filterId, active) {
+    Actions.setSelectedFilter(filterId, active);
   }
 
-  renderFilterList() {
-    const filters = this.props.filters;
-
-    return (
-      <ul>
-        {this.renderItems(filters)}
-      </ul>
+  renderItems(filters) {
+    return filters.map((filter, i) =>
+      <Filter key={i} filter={filter} onClick={this.onClick} />
     );
   }
 
   render() {
+    const filters = this.props.filters;
+
     return (
       <div className="book-filters">
         <div className="book-filters-heading">
           <h2><FilterIcon />Filter by Tags</h2>
         </div>
-        {this.renderFilterList()}
+        <ul>
+          {this.renderItems(filters)}
+        </ul>
       </div>
     );
   }
