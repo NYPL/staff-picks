@@ -1,0 +1,27 @@
+li.filter-item {
+  margin: 15px 0;
+
+  button {
+    background: #fff;
+    color: #1b7fa7;
+    border-radius: 25px;
+
+    svg {
+      width: 30px;
+      float: left;
+      height: 30px;
+      margin: -4px 5px 0 0;
+      fill: #1b7fa7;
+    }
+
+    &:hover {
+      background: lighten(#1b7fa7, 50%);
+    }
+
+    &.active {
+      margin-left: -20px;
+      color: #1b7fa7;
+      border: 0.04167rem solid #1b7fa7;
+    }
+  }
+}

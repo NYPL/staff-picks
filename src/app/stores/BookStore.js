@@ -8,22 +8,36 @@ class BookStore {
       clearFilters: BookActions.CLEAR_FILTERS,
       updatePicks: BookActions.UPDATE_PICKS,
       updateInitialFilters: BookActions.UPDATE_INITIAL_FILTERS,
+      setSelectedFilter: BookActions.SET_SELECTED_FILTER,
     });
 
     this.state = {
       filters: [],
       currentMonthPicks: {},
+      selectedFilters: [],
     };
   }
 
   clearFilters() {
-    this.setState({ filters: [] });
+    this.setState({ selectedFilters: [] });
   }
   updatePicks(currentMonthPicks) {
     this.setState({ currentMonthPicks });
   }
   updateInitialFilters(filters) {
     this.setState({ filters });
+  }
+  setSelectedFilter(argsArray) {
+    const [filterId, active] = argsArray;
+    let newFilters = [];
+
+    if (active) {
+      newFilters = this.state.selectedFilters.concat(filterId);
+    } else {
+      newFilters = this.state.selectedFilters.filter(f => f !== filterId);
+    }
+
+    this.setState({ selectedFilters: newFilters });
   }
 }
 
