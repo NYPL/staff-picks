@@ -8,15 +8,15 @@
   }
 
   &-image-box {
-    display: block;
+    //display: block;
     height: auto;
 
-    @include min-screen($medium-screen-breakpoint) {
+    //@include min-screen($medium-screen-breakpoint) {
       display: inline-block;
       margin-right: 2.5%;
       vertical-align: top;
       width: 37.5%;
-    }
+    //}
 
     img {
       max-width: 100%;
@@ -24,12 +24,12 @@
   }
 
   &-description {
-    display: block;
+    //display: block;
 
-    @include min-screen($medium-screen-breakpoint) {
+    //@include min-screen($medium-screen-breakpoint) {
       display: inline-block;
       margin-right: 2.5%;
       width: 57.5%;
-    }
+    //}
   }
 }
