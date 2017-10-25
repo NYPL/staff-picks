@@ -1,37 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Book from '../Book/Book.jsx';
-import {
-  contains as _contains,
-  each as _each,
-} from 'underscore';
 
-const Books = (props) => {
-  const currentMonthPicks = props.currentMonthPicks;
-  const picks = currentMonthPicks.picks ? currentMonthPicks.picks : [];
-  const getFilteredBookItems = (picks, selectedFilters) => {
+import Book from '../Book/Book.jsx';
+import utils from '../../utils/utils';
+
+const BookList = (props) => {
+  const currentPicks = props.currentMonthPicks;
+  const picks = currentPicks.picks ? currentPicks.picks : [];
+  const getFilteredBookItems = (pickItems, selectedFilters) => {
     // Only execute filtering if the picks object is not empty
-    if (picks.length) {
+    if (pickItems.length) {
       // Only execute filtering if the selectedFilters object is not empty
       if (selectedFilters.length) {
-        return picks.filter(book => {
-          const tagArray = book.tags.map(tag => tag.toLowerCase().split(' ').join('-'));
-          const inSelectedFilter = [];
-          _each(tagArray, (bookTag) => {
-            if (_contains(selectedFilters, bookTag)) {
-              inSelectedFilter.push(bookTag);
-            }
-          });
-          console.log(inSelectedFilter);
-          if (inSelectedFilter.length) {
+        return pickItems.filter(book => {
+          // Get the pick's tags in an ID readable array
+          const tagArray = utils.getPickTags(book);
+          // Get the array of selected tags found in the book item
+          const inSelectedFilter = utils.getSelectedTags(tagArray, selectedFilters);
+
+          if (inSelectedFilter.length &&
+              (inSelectedFilter.length === selectedFilters.length)) {
             return book;
           }
+
+          return undefined;
         });
       }
       // No filters, return original picks
-      return picks;
+      return pickItems;
     }
-    return picks;
+    return pickItems;
   };
 
   const renderBookItems = (currentBooks) => (
@@ -48,14 +46,14 @@ const Books = (props) => {
   );
 };
 
-Books.propTypes = {
+BookList.propTypes = {
   currentMonthPicks: PropTypes.object,
   selectedFilters: PropTypes.array,
 };
 
-Books.defaultProps = {
-  className: 'Books',
+BookList.defaultProps = {
+  className: 'booklist',
   lang: 'en',
 };
 
-export default Books;
+export default BookList;
