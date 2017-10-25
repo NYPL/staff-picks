@@ -7,8 +7,8 @@
     max-width: 100%;
 
     &:before {
-      content: "";
       background: $nyplred;
+      content: '';
       display: block;
       height: 0.25rem;
       margin-bottom: 0.5rem;
@@ -16,7 +16,5 @@
     }
   }
 
-  li {
-    margin: 0;
-  }
+  @import 'bookItem';
 }

@@ -1,0 +1,20 @@
+.book-item {
+  margin: 0;
+  padding-bottom: .75em;
+  padding-top: .75em;
+
+  &:nth-child(odd) {
+    clear: left;
+  }
+
+  &-image-box {
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  &-description {
+
+  }
+}
