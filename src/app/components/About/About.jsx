@@ -2,7 +2,7 @@ import React from 'react';
 
 const Sidebar = () => (
   <div className="about">
-    <h3>Additional Info</h3>
+    <h3>Additional Information</h3>
     <p>Many of these titles are available in formats for <a href="">patrons
     with print disabilities.</a></p>
     <p><a href="">About Best Books</a></p>
