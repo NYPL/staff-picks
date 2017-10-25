@@ -44,18 +44,19 @@ function Utils() {
    * @param {array} selectedFilters
    */
   this.getSelectedTags = (tagArray, selectedFilters) => {
-    const inSelectedFilter = [];
+    const selectedTags = [];
     _each(tagArray, (bookTag) => {
       if (_contains(selectedFilters, bookTag)) {
-        inSelectedFilter.push(bookTag);
+        selectedTags.push(bookTag);
       }
     });
 
-    return inSelectedFilter;
+    return selectedTags;
   };
 
   /**
    * getSelectableTags(picks)
+   * Get the subset of tags that can be selected based on the subset of picks.
    *
    * @param {array} picks
    */

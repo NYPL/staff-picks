@@ -6,56 +6,62 @@ import {
   DotsIcon,
 } from 'dgx-svg-icons';
 
+const ANIMATION_TIMEOUT = 400;
+
 class Filter extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      active: this.props.filter.active,
-      buttonActive: false,
-    };
+    this.state = { loading: false };
     this.onClick = this.onClick.bind(this);
   }
 
+  componentDidMount() {
+    // Since the list of filters get re-rendered, when the a new list is generated and it's
+    // longer than the previous list, then we need to focus on the selected/deselected filter
+    // once all the filters are mounted.
+    setTimeout(() => {
+      if (this.props.filter.id === this.props.focusId) {
+        ReactDOM.findDOMNode(this.refs[this.props.filter.id]).focus();
+      }
+    }, ANIMATION_TIMEOUT);
+  }
+
   componentWillReceiveProps(nextProps) {
-    // If the new props are active and it's already NOT active,
-    // then make it active but delay the SVG icon switch.
-    if (nextProps.filter.active && !this.state.active) {
+    const {
+      filter,
+      focusId,
+    } = nextProps;
+    // If the focusId, the filter that was JUST selected/deselected, matches the filter,
+    // then load the animation and remove it shortly after. Also focus on it whether it was
+    // selected or deselected for accessibility.
+    if (filter.id === focusId) {
       this.setState({
-        buttonActive: true,
-        active: true,
+        loading: true,
       });
 
       setTimeout(() => {
-        this.setState({ buttonActive: false });
-      }, 500);
+        this.setState({ loading: false });
+        ReactDOM.findDOMNode(this.refs[filter.id]).focus();
+      }, ANIMATION_TIMEOUT);
     }
   }
 
   onClick() {
-    const filter = this.props.filter;
-    this.props.onClick(filter.label, !filter.active);
-    // Only set the state to false if it's already true.
-    // Only needed for the internal state of the animation SVG.
-    if (this.state.active) {
-      this.setState({ active: false });
-    }
-
-    setTimeout(() => {
-      ReactDOM.findDOMNode(this.refs[this.props.filter.label]).focus();
-    }, 400);
+    const { filter } = this.props;
+    this.props.onClick(filter.id, !filter.active);
   }
 
   render() {
-    const { buttonActive } = this.state;
-    const filter = this.props.filter;
+    const { loading } = this.state;
+    const { filter } = this.props;
     const activeClass = filter.active ? 'active' : '';
-    const iconType = buttonActive ? <DotsIcon /> : <CheckSoloIcon />;
+    const iconType = loading ? <DotsIcon /> : <CheckSoloIcon />;
 
     return (
       <li className="filter-item">
         <button
-          ref={filter.label}
+          ref={filter.id}
           className={`nypl-primary-button ${activeClass}`}
           onClick={this.onClick}
         >
@@ -70,6 +76,7 @@ class Filter extends React.Component {
 Filter.propTypes = {
   filter: PropTypes.object,
   onClick: PropTypes.func,
+  focusId: PropTypes.string,
 };
 
 export default Filter;

@@ -14,6 +14,7 @@ const {
  */
 function annualCurrentData(type, req, res, next) {
   const endpoint = `${baseAnnualUrl}api`;
+  // Get the subset of tags that the picks can be filtered by.
   const selectableFilters = utils.getSelectableTags(dataSet.picks);
 
   res.locals.data = {
