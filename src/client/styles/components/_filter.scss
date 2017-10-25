@@ -5,6 +5,9 @@ li.filter-item {
     background: #fff;
     color: #1b7fa7;
     border-radius: 25px;
+    width: 11rem;
+    text-align: left;
+    height: 2.5rem;
 
     svg {
       fill: #1b7fa7;
@@ -14,16 +17,19 @@ li.filter-item {
       position: relative;
       top: 0.5rem;
       width: 1.25rem;
+      margin-right: 0.5rem;
     }
 
     &:hover {
       background: lighten(#1b7fa7, 50%);
+      color: #1b7fa7;
     }
 
     &.active {
       margin-left: -20px;
       color: #1b7fa7;
       border: 0.04167rem solid #1b7fa7;
+      background: lighten(#1b7fa7, 50%);
     }
   }
 }

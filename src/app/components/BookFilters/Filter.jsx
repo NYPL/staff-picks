@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 import {
   CheckSoloIcon,
   DotsIcon,
+  XIcon,
 } from 'dgx-svg-icons';
 
-const ANIMATION_TIMEOUT = 400;
+const ANIMATION_TIMEOUT = 500;
 
 class Filter extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { loading: false };
+    this.state = { icon: <CheckSoloIcon /> };
     this.onClick = this.onClick.bind(this);
   }
 
@@ -32,16 +33,25 @@ class Filter extends React.Component {
       filter,
       focusId,
     } = nextProps;
+
+    // We want to set all back to the Check icon.
+    if (!filter.active) {
+      this.setState({
+        icon: <CheckSoloIcon />,
+      });
+    }
+
     // If the focusId, the filter that was JUST selected/deselected, matches the filter,
-    // then load the animation and remove it shortly after. Also focus on it whether it was
+    // then load the animation SVG and remove it shortly after. Also focus on it whether it was
     // selected or deselected for accessibility.
     if (filter.id === focusId) {
-      this.setState({
-        loading: true,
-      });
+      this.setState({ icon: <DotsIcon /> });
 
       setTimeout(() => {
-        this.setState({ loading: false });
+        const icon = filter.active ? <XIcon /> : <CheckSoloIcon />;
+
+        this.setState({ icon });
+
         ReactDOM.findDOMNode(this.refs[filter.id]).focus();
       }, ANIMATION_TIMEOUT);
     }
@@ -53,10 +63,9 @@ class Filter extends React.Component {
   }
 
   render() {
-    const { loading } = this.state;
+    const { icon } = this.state;
     const { filter } = this.props;
     const activeClass = filter.active ? 'active' : '';
-    const iconType = loading ? <DotsIcon /> : <CheckSoloIcon />;
 
     return (
       <li className="filter-item">
@@ -65,7 +74,7 @@ class Filter extends React.Component {
           className={`nypl-primary-button ${activeClass}`}
           onClick={this.onClick}
         >
-          {iconType}
+          {icon}
           {filter.label}
         </button>
       </li>
