@@ -28,11 +28,10 @@ class BookFilters extends React.Component {
   }
 
   onClick(filterId, active) {
-    // const filterId = filter.toLowerCase().split(' ').join('-');
-    const f = _findWhere(this.state.filters, { id: filterId });
+    const foundFilter = _findWhere(this.state.filters, { id: filterId });
     // This is still the filter object from the state, but we just want to modify
     // its active property.
-    f.active = active;
+    foundFilter.active = active;
     this.props.setSelectedFilter(filterId, active);
 
     this.setState({
