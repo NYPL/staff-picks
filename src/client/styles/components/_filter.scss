@@ -25,11 +25,20 @@ li.filter-item {
       color: #1b7fa7;
     }
 
+    &.transition {
+      background: lighten(#1b7fa7, 50%);
+      color: #1b7fa7;
+    }
+
     &.active {
       margin-left: -20px;
-      color: #1b7fa7;
+      color: #fff;
       border: 0.04167rem solid #1b7fa7;
-      background: lighten(#1b7fa7, 50%);
+      background: #1b7fa7;
+
+      svg {
+        fill: #fff;
+      }
     }
   }
 }
