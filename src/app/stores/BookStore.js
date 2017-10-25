@@ -9,12 +9,14 @@ class BookStore {
       updatePicks: BookActions.UPDATE_PICKS,
       updateInitialFilters: BookActions.UPDATE_INITIAL_FILTERS,
       setSelectedFilter: BookActions.SET_SELECTED_FILTER,
+      setSelectableFilters: BookActions.SET_SELECTABLE_FILTERS,
     });
 
     this.state = {
       filters: [],
       currentMonthPicks: {},
       selectedFilters: [],
+      selectableFilters: [],
     };
   }
 
@@ -38,6 +40,10 @@ class BookStore {
     }
 
     this.setState({ selectedFilters: newFilters });
+  }
+
+  setSelectableFilters(selectableFilters) {
+    this.setState({ selectableFilters });
   }
 }
 

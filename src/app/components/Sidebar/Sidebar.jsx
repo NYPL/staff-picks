@@ -12,7 +12,11 @@ const Sidebar = (props) => (
       Best Books for kids
     </a>
 
-    <BookFilters filters={props.filters} />
+    <BookFilters
+      filters={props.filters}
+      selectableFilters={props.selectableFilters}
+      setSelectedFilter={props.setSelectedFilter}
+    />
 
     <About />
   </div>
@@ -20,6 +24,8 @@ const Sidebar = (props) => (
 
 Sidebar.propTypes = {
   filters: PropTypes.array,
+  selectableFilters: PropTypes.array,
+  setSelectedFilter: PropTypes.func,
 };
 
 export default Sidebar;

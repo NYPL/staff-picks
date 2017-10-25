@@ -17,6 +17,10 @@ class Actions {
   setSelectedFilter(filterId, active) {
     return [filterId, active];
   }
+
+  setSelectableFilters(filters) {
+    return filters;
+  }
 }
 
 export default alt.createActions(Actions);

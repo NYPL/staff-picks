@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import config from '../../../../appConfig.js';
+import utils from '../../utils/utils';
 
 const Book = ({ book }) => {
   const fullImgSrc = (!book.imageSlug || book.imageSlug === '') ? `${config.baseUrl}src/client/images/book-place-holder.png` :
