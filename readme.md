@@ -77,22 +77,42 @@ To run the code coverage tool and view a better report, run
 
 This last command will create a folder called `coverage` in the root directory. You can open up `coverage/lcov-report/index.html` in a browser to see more details about what lines of codes have not been tested.
 
-## Bamboo
-### To create a release to deploy
+## AWS Elastic Beanstalk Workflow
+### Configuration
+All of the AWS Elastic Beanstalk configuration files exist in the `.ebextensions` directory. AWS will run all config files in numerical order based on the prefix `{NUM}_{FILENAME}.config` naming convention.
 
-- Go to Bamboo http://bamboo.nypl.org/browse/NA-SWR
-- Click on Deployments in the secondary navigation panel
-- Click on chosen environment (development, qa, production)
-- Click the ... on top right (under Search) and select 'Create release'
-- Select 'Create new release from build result'
-- Name release according to local naming conventions (e.g. master-v2.15)
-- Create release
+You must have AWS CLI installed on your machine with the proper AWS Profiles.
 
-### To deploy to branch from release
+> Note: Please use the instance profile of `_cloudwatchable-beanstalk_`. It is configured with all of the permissions necessary for a traditional or Docker-flavored Beanstalk machine that enables logging to CloudWatch.
 
-- Go to Bamboo http://bamboo.nypl.org/browse/NA-SWR
-- Click on Deployments in the secondary navigation panel
-- Click on chosen environment (development, qa, production)
-- Click Deploy on top right (under Search) and again select environment
-- Select 'Promote existing release to this environment'
-- Select release and start deployment
+### Initialization
+
+To initialize the application on AWS via the `aws-cli` run:
+
+```bash
+ eb init -i --profile ${your AWS profile}
+```
+### Creation
+
+Initially we want to create the app on AWS Elastic Beanstalk by using this command:
+```bash
+eb create ${environment name} \
+  --instance_type ${size of instance} (Ex: t2.small) \
+  --instance_profile cloudwatchable-beanstalk \
+  --scale ${amount of instances} (Ex: 1) \
+  --cname ${cname prefix} (Ex: XXX.us-east-1.elasticbeanstalk.com) \
+  --vpc.id ${ask for custom vpc_id} \
+  --vpc.ec2subnets ${privateSubnetId1,privateSubnetId2} \
+  --vpc.elbsubnets ${publicSubnetId1,publicSubnetId2} \
+  --vpc.elbpublic (exposes the IP to the public) \
+  --keyname ${ssh keyname} (allows the given ssh keyname to have ssh access) \
+  --profile ${your AWS profile}
+```
+> Note: This step is only required upon creation and should executed once.
+
+### Deployment
+Once the application has been created via `eb create ...` all subsequent updates and deployments should use the following command:
+
+```bash
+eb deploy ${environment name} --profile ${your AWS profile}
+```
