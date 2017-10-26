@@ -30,12 +30,12 @@ li.filter-item {
     }
 
     &.transition {
-      background: $nypl-sky-blue;
-      color: $nypl-dark-blue;
-      border-color: $nypl-dark-blue;
+      background: $nypl-blue-sky;
+      color: $nypl-blue-dark;
+      border-color: $nypl-blue-dark;
 
       svg {
-        fill: $nypl-dark-blue;
+        fill: $nypl-blue-dark;
       }
     }
 
