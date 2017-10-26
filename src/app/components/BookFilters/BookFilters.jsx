@@ -30,11 +30,7 @@ class BookFilters extends React.Component {
   }
 
   onClick(filterId, active) {
-    // const foundFilter = _findWhere(this.state.filters, { id: filterId });
     const activeIds = this.getActiveIds(filterId, active);
-    // This is still the filter object from the state, but we just want to modify
-    // its active property.
-    // foundFilter.active = active;
     this.props.setSelectedFilter(filterId, active);
 
     this.setState({
@@ -78,6 +74,12 @@ class BookFilters extends React.Component {
     return filters.filter(filter => _contains(selectableFilters, filter.id));
   }
 
+  /**
+   * clearFilters()
+   * Sets the state's activeIds array back to none so that no filters will be in the
+   * 'active' state when rendering. Also calls the clearFilters prop function for
+   * the app to handle the rest of its
+   */
   clearFilters() {
     this.setState({ activeIds: [] });
     this.props.clearFilters();
