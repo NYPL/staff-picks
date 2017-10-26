@@ -1,18 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import {
   FilterIcon,
   ResetIcon,
 } from 'dgx-svg-icons';
-import {
-  contains as _contains,
-  // findWhere as _findWhere,
-} from 'underscore';
+import { contains as _contains } from 'underscore';
 
 import Filter from './Filter';
-
-const ANIMATION_TIMEOUT = 600;
 
 class BookFilters extends React.Component {
   constructor(props) {

@@ -39,13 +39,21 @@ class App extends React.Component {
     });
   }
 
+  /**
+   * setSelectedFilter(filterId, active)
+   * Adds or removes the selected filter's ID from the selectedFilters array which keeps track
+   * of all active IDs. It then uses that array of IDs to filter down the list of
+   * filters that are selectable.
+   * @param {string} filterId
+   * @param {boolean} active
+   */
   setSelectedFilter(filterId, active) {
     let selectedFilters = [];
 
     if (active) {
       selectedFilters = this.state.selectedFilters.concat(filterId);
     } else {
-      selectedFilters = this.state.selectedFilters.filter(f => f !== filterId);
+      selectedFilters = this.state.selectedFilters.filter(id => id !== filterId);
     }
 
     const picks = this.getNewPickSet(this.props.currentMonthPicks.picks, selectedFilters);
@@ -58,6 +66,10 @@ class App extends React.Component {
     });
   }
 
+  /**
+   * clearFilters()
+   * Reset the list of picks and set the list of filters back to its initial state.
+   */
   clearFilters() {
     const selectedFilters = [];
     const picks = this.getNewPickSet(this.props.currentMonthPicks.picks, selectedFilters);
