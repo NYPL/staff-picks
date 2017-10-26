@@ -16,6 +16,7 @@ class App extends React.Component {
     };
 
     this.setSelectedFilter = this.setSelectedFilter.bind(this);
+    this.clearFilters = this.clearFilters.bind(this);
   }
 
   getNewPickSet(picks, selectedFilters) {
@@ -57,6 +58,17 @@ class App extends React.Component {
     });
   }
 
+  clearFilters() {
+    const selectedFilters = [];
+    const picks = this.getNewPickSet(this.props.currentMonthPicks.picks, selectedFilters);
+    const selectableFilters = utils.getSelectableTags(picks);
+    this.setState({
+      selectableFilters,
+      picks,
+      selectedFilters,
+    });
+  }
+
   render() {
     return (
       <div className="nypl-row">
@@ -64,6 +76,7 @@ class App extends React.Component {
           filters={this.props.filters}
           selectableFilters={this.state.selectableFilters}
           setSelectedFilter={this.setSelectedFilter}
+          clearFilters={this.clearFilters}
         />
 
         <BookList

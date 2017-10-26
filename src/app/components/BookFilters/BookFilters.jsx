@@ -1,12 +1,18 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { FilterIcon } from 'dgx-svg-icons';
+import {
+  FilterIcon,
+  ResetIcon,
+} from 'dgx-svg-icons';
 import {
   contains as _contains,
-  findWhere as _findWhere,
+  // findWhere as _findWhere,
 } from 'underscore';
 
 import Filter from './Filter';
+
+const ANIMATION_TIMEOUT = 600;
 
 class BookFilters extends React.Component {
   constructor(props) {
@@ -26,14 +32,15 @@ class BookFilters extends React.Component {
     this.onClick = this.onClick.bind(this);
     this.getFilterArray = this.getFilterArray.bind(this);
     this.getActiveIds = this.getActiveIds.bind(this);
+    this.clearFilters = this.clearFilters.bind(this);
   }
 
   onClick(filterId, active) {
-    const foundFilter = _findWhere(this.state.filters, { id: filterId });
+    // const foundFilter = _findWhere(this.state.filters, { id: filterId });
     const activeIds = this.getActiveIds(filterId, active);
     // This is still the filter object from the state, but we just want to modify
     // its active property.
-    foundFilter.active = active;
+    // foundFilter.active = active;
     this.props.setSelectedFilter(filterId, active);
 
     this.setState({
@@ -77,6 +84,15 @@ class BookFilters extends React.Component {
     return filters.filter(filter => _contains(selectableFilters, filter.id));
   }
 
+  clearFilters() {
+    this.setState({ activeIds: [] });
+    this.props.clearFilters();
+
+    setTimeout(() => {
+      ReactDOM.findDOMNode(this.refs.clearFilters).focus();
+    }, ANIMATION_TIMEOUT);
+  }
+
   /**
    * renderItems(filters)
    * Render the filter button list items.
@@ -110,6 +126,17 @@ class BookFilters extends React.Component {
         <ul>
           {this.renderItems(filtersToRender)}
         </ul>
+        {
+          !!this.state.activeIds.length &&
+            (<button
+              onClick={this.clearFilters}
+              className="nypl-primary-button clear-button"
+              ref="clearFilters"
+            >
+              <ResetIcon />
+              Clear Filters
+            </button>)
+        }
       </div>
     );
   }
@@ -119,6 +146,7 @@ BookFilters.propTypes = {
   filters: PropTypes.array,
   selectableFilters: PropTypes.array,
   setSelectedFilter: PropTypes.func,
+  clearFilters: PropTypes.func,
 };
 
 BookFilters.defaultProps = {

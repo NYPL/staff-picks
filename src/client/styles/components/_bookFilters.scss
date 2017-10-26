@@ -20,4 +20,22 @@
   ul {
     margin-left: 40px;
   }
+
+  .clear-button {
+    width: 100%;
+
+    svg {
+      height: 25px;
+      width: 25px;
+      float: left;
+      margin: 0;
+      fill: $nypl-white;
+    }
+
+    &:hover {
+      svg {
+        fill: $nypl-blue;
+      }
+    }
+  }
 }
