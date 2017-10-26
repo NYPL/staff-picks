@@ -30,16 +30,12 @@ li.filter-item {
     }
 
     &.transition {
-      // background: $nypl-sky-blue;
-      background: lighten($nypl-blue, 30%);
-      // color: $nypl-dark-blue;
-      color: darken($nypl-blue, 30%);
-      // border-color: $nypl-dark-blue;
-      border-color: darken($nypl-blue, 30%);
+      background: $nypl-blue-sky;
+      color: $nypl-blue-dark;
+      border-color: $nypl-blue-dark;
 
       svg {
-        // fill: $nypl-dark-blue;
-        fill: darken($nypl-blue, 30%);
+        fill: $nypl-blue-dark;
       }
     }
 

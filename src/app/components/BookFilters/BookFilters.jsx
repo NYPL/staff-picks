@@ -87,10 +87,6 @@ class BookFilters extends React.Component {
   clearFilters() {
     this.setState({ activeIds: [] });
     this.props.clearFilters();
-
-    setTimeout(() => {
-      ReactDOM.findDOMNode(this.refs.clearFilters).focus();
-    }, ANIMATION_TIMEOUT);
   }
 
   /**
