@@ -15,20 +15,22 @@ class BookFilters extends React.Component {
     this.state = {
       // Create an array data structure of filter objects.
       filters: this.props.filters.map(filter => ({
-        active: false,
         id: filter.toLowerCase().split(' ').join('-'),
         label: filter,
       })),
+      activeIds: [],
       focusId: '',
     };
 
     this.renderItems = this.renderItems.bind(this);
     this.onClick = this.onClick.bind(this);
     this.getFilterArray = this.getFilterArray.bind(this);
+    this.getActiveIds = this.getActiveIds.bind(this);
   }
 
   onClick(filterId, active) {
     const foundFilter = _findWhere(this.state.filters, { id: filterId });
+    const activeIds = this.getActiveIds(filterId, active);
     // This is still the filter object from the state, but we just want to modify
     // its active property.
     foundFilter.active = active;
@@ -37,10 +39,30 @@ class BookFilters extends React.Component {
     this.setState({
       filters: this.state.filters,
       focusId: filterId,
+      activeIds,
     });
   }
 
-  /*
+  /**
+   * getActiveIds(filterId, active)
+   * Get an array of filter IDs that are currently active/selected.
+   * @param {string} filterId
+   * @param {boolean} active
+   * @return {array}
+   */
+  getActiveIds(filterId, active) {
+    let activeIds = [];
+
+    if (active) {
+      activeIds = this.state.activeIds.concat(filterId);
+    } else {
+      activeIds = this.state.activeIds.filter(id => id !== filterId);
+    }
+
+    return activeIds;
+  }
+
+  /**
    * getFilterArray(selectableFilters, filters)
    * If the list of selectable filters is available, then we want the subset of all filters
    * that can be selected. A selectable filter is based on whether or not it is available
@@ -55,15 +77,24 @@ class BookFilters extends React.Component {
     return filters.filter(filter => _contains(selectableFilters, filter.id));
   }
 
-  /*
+  /**
    * renderItems(filters)
    * Render the filter button list items.
    * @param {array} filter
    */
   renderItems(filters) {
-    return filters.map((filter, i) =>
-      <Filter key={i} filter={filter} onClick={this.onClick} focusId={this.state.focusId} />
-    );
+    return filters.map((filter, i) => {
+      const active = _contains(this.state.activeIds, filter.id);
+      return (
+        <Filter
+          key={i}
+          filter={filter}
+          onClick={this.onClick}
+          focusId={this.state.focusId}
+          active={active}
+        />
+      );
+    });
   }
 
   render() {
