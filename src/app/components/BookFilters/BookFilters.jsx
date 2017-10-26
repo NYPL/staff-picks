@@ -43,6 +43,13 @@ class BookFilters extends React.Component {
     });
   }
 
+  /**
+   * getActiveIds(filterId, active)
+   * Get an array of filter IDs that are currently active/selected.
+   * @param {string} filterId
+   * @param {boolean} active
+   * @return {array}
+   */
   getActiveIds(filterId, active) {
     let activeIds = [];
 
@@ -55,7 +62,7 @@ class BookFilters extends React.Component {
     return activeIds;
   }
 
-  /*
+  /**
    * getFilterArray(selectableFilters, filters)
    * If the list of selectable filters is available, then we want the subset of all filters
    * that can be selected. A selectable filter is based on whether or not it is available
@@ -70,7 +77,7 @@ class BookFilters extends React.Component {
     return filters.filter(filter => _contains(selectableFilters, filter.id));
   }
 
-  /*
+  /**
    * renderItems(filters)
    * Render the filter button list items.
    * @param {array} filter

@@ -16,7 +16,6 @@ class Filter extends React.Component {
     const active = this.props.active;
     this.state = {
       icon: active ? <XIcon /> : <CheckSoloIcon />,
-      active,
       activeClass: active ? 'active' : '',
     };
     this.onClick = this.onClick.bind(this);
@@ -31,11 +30,11 @@ class Filter extends React.Component {
       focusId,
     } = this.props;
 
-    setTimeout(() => {
-      if (filter.id === focusId) {
+    if (filter.id === focusId) {
+      setTimeout(() => {
         ReactDOM.findDOMNode(this.refs[filter.id]).focus();
-      }
-    }, ANIMATION_TIMEOUT);
+      }, ANIMATION_TIMEOUT);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,33 +44,32 @@ class Filter extends React.Component {
       active,
     } = nextProps;
 
-    // We want to set all back to the Check icon.
-    const initIcon = active ? <XIcon /> : <CheckSoloIcon />;
-    this.setState({
-      icon: initIcon,
-      activeClass: active ? 'active' : '',
-    });
-
     // If the focusId, the id of the filter that was JUST selected/deselected, matches the filter,
     // then load the animation SVG and remove it shortly after. Also focus on it whether it was
     // selected or deselected for accessibility. We then want to add the appropriate SVG based
     // on whether it is active or not.
     if (filter.id === focusId) {
+      // Intermediate transition state:
       this.setState({
         icon: <DotsIcon />,
         activeClass: 'transition',
       });
 
+      // Back to either active or inactive:
       setTimeout(() => {
-        const icon = active ? <XIcon /> : <CheckSoloIcon />;
-
         this.setState({
-          icon,
+          icon: active ? <XIcon /> : <CheckSoloIcon />,
           activeClass: active ? 'active' : '',
         });
 
         ReactDOM.findDOMNode(this.refs[filter.id]).focus();
       }, ANIMATION_TIMEOUT);
+    } else {
+      // We want to set the icon back to its icon.
+      this.setState({
+        icon: active ? <XIcon /> : <CheckSoloIcon />,
+        activeClass: active ? 'active' : '',
+      });
     }
   }
 
@@ -88,11 +86,7 @@ class Filter extends React.Component {
       icon,
       activeClass,
     } = this.state;
-    const {
-      filter,
-      // active,
-    } = this.props;
-    // const activeClass = active ? 'active' : '';
+    const { filter } = this.props;
 
     return (
       <li className="filter-item">
