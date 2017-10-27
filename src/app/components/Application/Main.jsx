@@ -16,6 +16,7 @@ class App extends React.Component {
     };
 
     this.setSelectedFilter = this.setSelectedFilter.bind(this);
+    this.clearFilters = this.clearFilters.bind(this);
   }
 
   getNewPickSet(picks, selectedFilters) {
@@ -38,18 +39,41 @@ class App extends React.Component {
     });
   }
 
+  /**
+   * setSelectedFilter(filterId, active)
+   * Adds or removes the selected filter's ID from the selectedFilters array which keeps track
+   * of all active IDs. It then uses that array of IDs to filter down the list of
+   * filters that are selectable.
+   * @param {string} filterId
+   * @param {boolean} active
+   */
   setSelectedFilter(filterId, active) {
     let selectedFilters = [];
 
     if (active) {
       selectedFilters = this.state.selectedFilters.concat(filterId);
     } else {
-      selectedFilters = this.state.selectedFilters.filter(f => f !== filterId);
+      selectedFilters = this.state.selectedFilters.filter(id => id !== filterId);
     }
 
     const picks = this.getNewPickSet(this.props.currentPicks.picks, selectedFilters);
     const selectableFilters = utils.getSelectableTags(picks);
 
+    this.setState({
+      selectableFilters,
+      picks,
+      selectedFilters,
+    });
+  }
+
+  /**
+   * clearFilters()
+   * Reset the list of picks and set the list of filters back to its initial state.
+   */
+  clearFilters() {
+    const selectedFilters = [];
+    const picks = this.getNewPickSet(this.props.currentMonthPicks.picks, selectedFilters);
+    const selectableFilters = utils.getSelectableTags(picks);
     this.setState({
       selectableFilters,
       picks,
@@ -64,6 +88,7 @@ class App extends React.Component {
           filters={this.props.filters}
           selectableFilters={this.state.selectableFilters}
           setSelectedFilter={this.setSelectedFilter}
+          clearFilters={this.clearFilters}
         />
 
         <BookList
