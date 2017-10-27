@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { EReaderIcon, BookIcon } from 'dgx-svg-icons';
-import config from '../../../../appConfig.js';
+import config from '../../../../appConfig';
 import utils from '../../utils/utils';
 
 const Book = ({ book }) => {
@@ -71,7 +71,6 @@ const Book = ({ book }) => {
 
 Book.propTypes = {
   book: PropTypes.object,
-  index: PropTypes.number,
 };
 
 export default Book;
