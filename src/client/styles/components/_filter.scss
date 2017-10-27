@@ -2,28 +2,52 @@ li.filter-item {
   margin: 15px 0;
 
   button {
-    background: #fff;
-    color: #1b7fa7;
+    background: $nypl-white;
+    color: $nypl-blue;
     border-radius: 25px;
+    width: 11rem;
+    text-align: left;
+    height: 2.5rem;
 
     svg {
-      fill: #1b7fa7;
+      fill: $nypl-blue;
       float: left;
       height: 1.25rem;
       margin: -4px 5px 0 0;
       position: relative;
       top: 0.5rem;
       width: 1.25rem;
+      margin-right: 0.5rem;
     }
 
     &:hover {
-      background: lighten(#1b7fa7, 50%);
+      background: $nypl-blue;
+      color: $nypl-white;
+
+      svg {
+        fill: $nypl-white;
+      }
+    }
+
+    &.transition {
+      background: $nypl-blue-sky;
+      color: $nypl-blue-dark;
+      border-color: $nypl-blue-dark;
+
+      svg {
+        fill: $nypl-blue-dark;
+      }
     }
 
     &.active {
       margin-left: -20px;
-      color: #1b7fa7;
-      border: 0.04167rem solid #1b7fa7;
+      color: $nypl-white;
+      border: 0.04167rem solid $nypl-blue;
+      background: $nypl-blue;
+
+      svg {
+        fill: $nypl-white;
+      }
     }
   }
 }
