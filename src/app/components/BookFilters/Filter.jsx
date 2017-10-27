@@ -36,9 +36,7 @@ class Filter extends React.Component {
     // then load the animation and remove it shortly after. Also focus on it whether it was
     // selected or deselected for accessibility.
     if (filter.id === focusId) {
-      this.setState({
-        loading: true,
-      });
+      this.setState({ loading: true });
 
       setTimeout(() => {
         this.setState({ loading: false });
