@@ -16,6 +16,7 @@ const Sidebar = (props) => (
       filters={props.filters}
       selectableFilters={props.selectableFilters}
       setSelectedFilter={props.setSelectedFilter}
+      clearFilters={props.clearFilters}
     />
 
     <About />
@@ -26,6 +27,7 @@ Sidebar.propTypes = {
   filters: PropTypes.array,
   selectableFilters: PropTypes.array,
   setSelectedFilter: PropTypes.func,
+  clearFilters: PropTypes.func,
 };
 
 export default Sidebar;
