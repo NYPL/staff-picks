@@ -157,7 +157,7 @@ describe('Filter', () => {
       expect(component.find('svg').hasClass('x-icon')).to.equal(false);
     });
 
-    it('should become active when passing new props', () => {
+    it('should be in the transition state when passing new props', () => {
       component.setProps({
         active: true,
         focusId: 'funny',
