@@ -42,8 +42,7 @@ function annualCurrentData(type, req, res, next) {
         'Suspenseful',
         'True stories',
       ],
-      currentMonthPicks: dataSet,
-      selectedFilters: [],
+      currentPicks: dataSet,
       selectableFilters,
     },
     endpoint,
@@ -57,7 +56,7 @@ function annualCurrentData(type, req, res, next) {
   //     res.locals.data = {
   //       BookStore: {
   //         filters: [],
-  //         currentMonthPicks: data,
+  //         currentPicks: data,
   //       },
   //       endpoint,
   //     };
@@ -70,7 +69,7 @@ function annualCurrentData(type, req, res, next) {
   //     res.locals.data = {
   //       BookStore: {
   //         filters: [],
-  //         currentMonthPicks: {},
+  //         currentPicks: {},
   //       },
   //       endpoint,
   //     };

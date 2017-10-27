@@ -24,7 +24,6 @@ const BookList = (props) => {
 
 BookList.propTypes = {
   picks: PropTypes.array,
-  selectedFilters: PropTypes.array,
 };
 
 BookList.defaultProps = {
