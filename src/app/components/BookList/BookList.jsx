@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import About from '../About/About.jsx';
 import Book from '../Book/Book.jsx';
 
 const BookList = (props) => {
@@ -11,9 +12,12 @@ const BookList = (props) => {
   return (
     <div className="booklist nypl-column-three-quarters">
       <h2>2017 Picks</h2>
+
       <ul className="nypl-row">
         {renderBookItems(props.picks)}
       </ul>
+
+      <About />
     </div>
   );
 };

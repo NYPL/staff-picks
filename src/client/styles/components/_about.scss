@@ -1,7 +1,22 @@
 .about {
+  border-top: 2px solid $nypl-gray-cool;
+
+  h3 {
+    margin: 0.8rem 0;
+  }
+
   ul {
     li {
       list-style: none;
     }
+  }
+
+  a {
+    color: $nypl-blue;
+    background: $nypl-white;
+  }
+
+  .inner {
+    width: 20rem;
   }
 }
