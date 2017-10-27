@@ -4,11 +4,12 @@ import { LeftWedgeIcon } from 'dgx-svg-icons';
 
 import BookFilters from '../BookFilters/BookFilters.jsx';
 import About from '../About/About.jsx';
+import config from '../../../../appConfig';
 
 const Sidebar = (props) => (
   <div className="sidebar nypl-column-one-quarter">
-    <a href="https://www.nypl.org/books-music-dvds/recommendations" className="back-link">
-      <LeftWedgeIcon /> Recommendations
+    <a href={config.recommendationsLink.url} className="back-link">
+      <LeftWedgeIcon /> {config.recommendationsLink.label}
     </a>
 
     <BookFilters

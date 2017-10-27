@@ -11,7 +11,7 @@
       margin: -2px 0 0;
     }
 
-    @include min-screen(966px) {
+    @include min-screen($mobile-breakpoint) {
       display: block;
     }
   }
