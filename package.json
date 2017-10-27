@@ -59,7 +59,6 @@
     "node-sass": "3.8.0",
     "prop-types": "15.5.10",
     "react": "15.5.4",
-    "react-doc-meta": "0.2.0",
     "react-dom": "15.5.4",
     "react-hot-loader": "1.2.8",
     "react-router": "3.0.5",
