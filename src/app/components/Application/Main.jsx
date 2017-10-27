@@ -72,7 +72,7 @@ class App extends React.Component {
    */
   clearFilters() {
     const selectedFilters = [];
-    const picks = this.getNewPickSet(this.props.currentMonthPicks.picks, selectedFilters);
+    const picks = this.getNewPickSet(this.props.currentPicks.picks, selectedFilters);
     const selectableFilters = utils.getSelectableTags(picks);
     this.setState({
       selectableFilters,
