@@ -7,9 +7,8 @@ import About from '../About/About.jsx';
 
 const Sidebar = (props) => (
   <div className="sidebar nypl-column-one-quarter">
-    <a href="#" className="back-link">
-      <LeftWedgeIcon />
-      Best Books for kids
+    <a href="https://www.nypl.org/books-music-dvds/recommendations" className="back-link">
+      <LeftWedgeIcon /> Recommendations
     </a>
 
     <BookFilters
@@ -28,6 +27,13 @@ Sidebar.propTypes = {
   selectableFilters: PropTypes.array,
   setSelectedFilter: PropTypes.func,
   clearFilters: PropTypes.func,
+};
+
+Sidebar.defaultProps = {
+  filters: [],
+  selectableFilters: [],
+  setSelectableFilters: () => {},
+  clearFilters: () => {},
 };
 
 export default Sidebar;
