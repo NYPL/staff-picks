@@ -5,8 +5,8 @@ function currentMonthData(req, res, next) {
   res.locals.data = {
     BookStore: {
       filters: [],
-      currentMonthPicks: {},
-      selectedFilters: [],
+      currentPicks: {},
+      selectableFilters: [],
     },
   };
   next();
@@ -19,8 +19,8 @@ function selectMonthData(req, res, next) {
   res.locals.data = {
     BookStore: {
       filters: [],
-      currentMonthPicks: {},
-      selectedFilters: [],
+      currentPicks: {},
+      selectableFilters: [],
     },
   };
   next();

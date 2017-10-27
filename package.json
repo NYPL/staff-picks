@@ -32,6 +32,14 @@
   "bugs": {
     "url": "https://github.com/NYPL/staff-picks/issues"
   },
+  "nyc": {
+    "extension": [
+      ".jsx"
+    ],
+    "require": [
+      "babel-register"
+    ]
+  },
   "dependencies": {
     "@nypl/design-toolkit": "0.1.27",
     "@nypl/dgx-header-component": "2.1.1",
@@ -48,7 +56,6 @@
     "clean-webpack-plugin": "0.1.17",
     "compression": "1.7.0",
     "css-loader": "0.23.1",
-    "dgx-alt-center": "git+https://bitbucket.org/NYPL/dgx-alt-center.git#master",
     "dgx-feature-flags": "git+https://git@bitbucket.org/NYPL/dgx-feature-flags.git#master",
     "dgx-react-ga": "git+https://bitbucket.org/NYPL/dgx-react-ga.git#master",
     "ejs": "2.3.3",
