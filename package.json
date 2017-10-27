@@ -44,6 +44,7 @@
     "@nypl/design-toolkit": "0.1.27",
     "@nypl/dgx-header-component": "2.1.1",
     "@nypl/dgx-react-footer": "0.4.0",
+    "alt": "0.18.6",
     "assets-webpack-plugin": "3.4.0",
     "axios": "0.16.2",
     "babel-core": "6.26.0",

@@ -23,7 +23,7 @@ const picks = [
   {
     author: 'name',
     title: 'book title',
-  }
+  },
 ];
 const filters = ['offbeat', 'funny', 'historical'];
 const selectableFilters = ['offbeat', 'funny'];
