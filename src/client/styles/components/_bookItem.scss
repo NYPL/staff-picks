@@ -1,5 +1,5 @@
 .book-item {
-  border-bottom: 2px solid $nyplcoolgray;
+  border-bottom: 2px solid $nypl-gray-cool;
   margin: .5em .25em 1.5em .25em;
   padding-bottom: 1em;
   padding-top: .75em;
@@ -41,23 +41,6 @@
     }
   }
 
-  &-details {
-    // float: left;
-    // max-width: 70%;
-    // display: block;
-    // max-width: 100%;
-    // float: left;
-    // display: inline-block;
-    // margin-right: 2.5%;
-    // width: 64.5%;
-
-    @include min-screen($mobile-breakpoint) {
-      // display: inline-block;
-      // margin-right: 2.5%;
-      //width: 62.5%;
-    }
-  }
-
   &-title {
     float: left;
     font-weight: bold;
@@ -77,8 +60,8 @@
     width: 65%;
 
     @include min-screen($xtrasmall-breakpoint) {
-      margin-top: 3.5%;
       margin-bottom: 3.5%;
+      margin-top: 3.5%;
     }
   }
 
@@ -89,9 +72,9 @@
     @include min-screen($xtrasmall-breakpoint) {
       clear: none;
       float: left;
-      width: 65%;
       margin: 0 2.5%;
       padding: 0;
+      width: 65%;
     }
 
     a {
@@ -104,11 +87,10 @@
         $padding-vertical: .25rem,
         $text-color: $nypl-white
       );
-      // display: block;
-      // max-width: 260px;
+      // overrides
+      font-size: 14px;
       margin: 12.5px 0 12.5px 1%;
       max-width: 100%;
-      font-size: 14px;
 
       &:first-child {
         @include min-screen($xtrasmall-breakpoint) {
@@ -138,7 +120,7 @@
       }
 
       span {
-        bottom: 6px;
+        bottom: 7px;
         margin: 0 0 0 3px;
         position: relative;
       }

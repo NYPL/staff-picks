@@ -5,10 +5,18 @@ import config from '../../../../appConfig.js';
 import utils from '../../utils/utils';
 
 const Book = ({ book }) => {
-  const fullImgSrc = (!book.imageUrl || book.imageUrl === '') ?
-    `${config.baseUrl}src/client/images/book-place-holder.png` : book.imageUrl;
   const tagArray = book.tags.map(tag => tag.toLowerCase().split(' ').join('-'));
   const tagClasses = tagArray.join(' ');
+
+  const renderBookCoverImage = (imageUrl) => {
+    const defaultImageUrl = `${config.baseUrl}src/client/images/book-place-holder.png`;
+    const fullImgSrc = (!imageUrl || imageUrl === '') ? defaultImageUrl : imageUrl;
+    return (
+      <div className="book-item-image-box">
+        <img alt="" src={fullImgSrc} />
+      </div>
+    );
+  };
 
   const renderTitle = (title, link) => {
     const titleClass = 'book-item-title';
@@ -52,15 +60,11 @@ const Book = ({ book }) => {
       className={`book-item ${tagClasses}`}
       key={book.title.trim()}
     >
-      <div className="book-item-image-box">
-        <img alt="" src={fullImgSrc} />
-      </div>
-      <div className="book-item-details">
-        {renderTitle(book.title, '#')}
-        {renderAuthor(book.author)}
-        {renderCatalogLinks('#', '#')}
-        {renderDescription(book.text)}
-      </div>
+      {renderBookCoverImage(book.imageUrl)}
+      {renderTitle(book.title, '#')}
+      {renderAuthor(book.author)}
+      {renderCatalogLinks('#', '#')}
+      {renderDescription(book.text)}
     </li>
   );
 };
