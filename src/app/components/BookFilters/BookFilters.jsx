@@ -108,12 +108,17 @@ class BookFilters extends React.Component {
   render() {
     const { filters } = this.state;
     const { selectableFilters } = this.props;
+
+    if (!filters.length) {
+      return null;
+    }
+
     const filtersToRender = this.getFilterArray(selectableFilters, filters);
 
     return (
       <div className="book-filters">
         <div className="book-filters-heading">
-          <h2><FilterIcon />Filter by Tags</h2>
+          <h2><FilterIcon /> Filter by Tags</h2>
         </div>
         <ul>
           {this.renderItems(filtersToRender)}
@@ -143,6 +148,9 @@ BookFilters.propTypes = {
 
 BookFilters.defaultProps = {
   filters: [],
+  selectableFilters: [],
+  setSelectedFilter: () => {},
+  clearFilters: () => {},
 };
 
 export default BookFilters;

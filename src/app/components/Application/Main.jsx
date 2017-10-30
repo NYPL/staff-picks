@@ -11,8 +11,8 @@ class App extends React.Component {
 
     this.state = {
       selectableFilters: this.props.selectableFilters,
-      selectedFilters: this.props.selectedFilters,
-      picks: this.props.currentMonthPicks.picks,
+      selectedFilters: [],
+      picks: this.props.currentPicks.picks,
     };
 
     this.setSelectedFilter = this.setSelectedFilter.bind(this);
@@ -56,7 +56,7 @@ class App extends React.Component {
       selectedFilters = this.state.selectedFilters.filter(id => id !== filterId);
     }
 
-    const picks = this.getNewPickSet(this.props.currentMonthPicks.picks, selectedFilters);
+    const picks = this.getNewPickSet(this.props.currentPicks.picks, selectedFilters);
     const selectableFilters = utils.getSelectableTags(picks);
 
     this.setState({
@@ -72,7 +72,7 @@ class App extends React.Component {
    */
   clearFilters() {
     const selectedFilters = [];
-    const picks = this.getNewPickSet(this.props.currentMonthPicks.picks, selectedFilters);
+    const picks = this.getNewPickSet(this.props.currentPicks.picks, selectedFilters);
     const selectableFilters = utils.getSelectableTags(picks);
     this.setState({
       selectableFilters,
@@ -94,7 +94,6 @@ class App extends React.Component {
 
         <BookList
           picks={this.state.picks}
-          selectedFilters={this.state.selectedFilters}
           setSelectableFilters={this.setSelectableFilters}
           isJsEnabled={this.props.isJsEnabled}
         />
@@ -105,9 +104,8 @@ class App extends React.Component {
 
 App.propTypes = {
   filters: PropTypes.array,
-  selectedFilters: PropTypes.array,
   selectableFilters: PropTypes.array,
-  currentMonthPicks: PropTypes.object,
+  currentPicks: PropTypes.object,
   isJsEnabled: PropTypes.bool,
 };
 

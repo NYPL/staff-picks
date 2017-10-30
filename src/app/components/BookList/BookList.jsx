@@ -9,9 +9,9 @@ const BookList = (props) => {
   );
 
   return (
-    <div className="booklist nypl-column-three-quarters">
+    <div className="booklist-section nypl-column-three-quarters">
       <h2>2017 Picks</h2>
-      <ul className="nypl-row">
+      <ul className="booklist">
         {renderBookItems(props.picks)}
       </ul>
     </div>
@@ -20,7 +20,6 @@ const BookList = (props) => {
 
 BookList.propTypes = {
   picks: PropTypes.array,
-  selectedFilters: PropTypes.array,
   isJsEnabled: PropTypes.bool,
 };
 

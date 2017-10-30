@@ -31,6 +31,10 @@ const config = {
     Fall: ['September', 'October', 'November'],
     Winter: ['December', 'January', 'February'],
   },
+  recommendationsLink: {
+    url: 'https://www.nypl.org/books-music-dvds/recommendations',
+    label: 'Recommendations',
+  },
 };
 
 export default config;

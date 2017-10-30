@@ -1,25 +1,17 @@
 // ACTIONS
-import alt from 'dgx-alt-center';
+import alt from '../alt';
 
 class Actions {
   updatePicks(picks) {
     return picks;
   }
 
-  clearFilters() {
-    return true;
-  }
-
-  updateInitialFilters(filters) {
+  updateFilters(filters) {
     return filters;
   }
 
   setIsJsEnabled(bool) {
     return bool;
-  }
-
-  setSelectedFilter(filterId, active) {
-    return [filterId, active];
   }
 
   setSelectableFilters(filters) {

@@ -42,10 +42,9 @@ function annualCurrentData(type, req, res, next) {
         'Suspenseful',
         'True stories',
       ],
-      currentMonthPicks: dataSet,
-      isJsEnabled: false,
-      selectedFilters: [],
+      currentPicks: dataSet,
       selectableFilters,
+      isJsEnabled: false,
     },
     endpoint,
   };
@@ -58,7 +57,7 @@ function annualCurrentData(type, req, res, next) {
   //     res.locals.data = {
   //       BookStore: {
   //         filters: [],
-  //         currentMonthPicks: data,
+  //         currentPicks: data,
   //       },
   //       endpoint,
   //     };
@@ -71,7 +70,7 @@ function annualCurrentData(type, req, res, next) {
   //     res.locals.data = {
   //       BookStore: {
   //         filters: [],
-  //         currentMonthPicks: {},
+  //         currentPicks: {},
   //       },
   //       endpoint,
   //     };

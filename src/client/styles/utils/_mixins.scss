@@ -14,6 +14,14 @@
   width: 100%;
 }
 
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
 /* FONT FACE MIXIN
  * ---------------
  * Usage: @include font-face('Kievit-Regular', 'http://...');
