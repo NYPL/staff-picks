@@ -43,9 +43,7 @@ class App extends React.Component {
 
         <main className="main-page">
           <Hero
-            params={this.props.params}
-            location={this.props.location}
-            annualList={this.state.annualList}
+            currentPicks={this.state.currentPicks}
           />
 
           <div id="app-content" className="nypl-full-width-wrapper">
