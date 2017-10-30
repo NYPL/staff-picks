@@ -9,6 +9,7 @@ import { extend as _extend } from 'underscore';
 import Hero from '../Hero/Hero.jsx';
 import BookActions from '../../actions/BookActions';
 import BookStore from '../../stores/BookStore';
+import config from '../../../../appConfig.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -44,6 +45,7 @@ class App extends React.Component {
         <main className="main-page">
           <Hero
             currentPicks={this.state.currentPicks}
+            listMetaData={config.listMetaData.annual[this.props.params.type]}
           />
 
           <div id="app-content" className="nypl-full-width-wrapper">

@@ -3,10 +3,7 @@ export default {
   "type": "staff-picks",
   "date": "2017-01",
   "title": "Winter 2016 Staff Picks",
-  "heroUrl": 'http://staff-picks-dev.us-east-1.elasticbeanstalk.com/books-music-dvds/recommendations/staff-picks/src/client/images/desktop.banner.YA.FIN.png',
-  "subTitle": 'Recommendations',
-  "title": 'Best Books for Teens',
-  "description": 'Explore our annual selection of outstanding young adult titles.',
+  "heroImageUrl": 'http://staff-picks-dev.us-east-1.elasticbeanstalk.com/books-music-dvds/recommendations/staff-picks/src/client/images/desktop.banner.YA.FIN.png',
   "picks": [
     {
       "tags": [

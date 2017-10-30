@@ -35,6 +35,15 @@ const config = {
     url: 'https://www.nypl.org/books-music-dvds/recommendations',
     label: 'Recommendations',
   },
+  listMetaData: {
+    annual: {
+      ya: {
+        category: 'Recommends',
+        header: 'Best Books for Teens',
+        description: 'Explore our annual selection of outstanding young adult titles.',
+      },
+    },
+  },
 };
 
 export default config;
