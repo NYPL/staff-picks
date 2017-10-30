@@ -6,11 +6,18 @@ import config from '../../../../appConfig';
 import utils from '../../utils/utils';
 
 const Book = ({ pick }) => {
-  const book = pick.book;
-  const tagArray = pick.tags.map(tag => tag.toLowerCase().split(' ').join('-'));
-  const tagClasses = tagArray.join(' ');
-
   const isStringEmpty = (string) => (!_isString(string) || _isEmpty(string.trim()));
+
+  const getBookObject = (obj) => (
+    (!_isEmpty(obj) && obj.book) ? obj.book : null
+  );
+  const getReviewsArray = (obj) => (
+    (!_isEmpty(obj) && obj.reviews) ? obj.reviews : []
+  );
+  const getTagsArray = (obj) => (
+    (!_isEmpty(obj) && !_isEmpty(obj.tags)) ?
+      obj.tags.map(tag => tag.toLowerCase().split(' ').join('-')) : []
+  );
 
   const renderBookCoverImage = (imageUrl) => {
     const defaultImageUrl = `${config.baseUrl}src/client/images/book-place-holder.png`;
@@ -57,22 +64,30 @@ const Book = ({ pick }) => {
       </div> : null;
   };
 
-  const renderDescription = (desc) => (
-    !isStringEmpty(desc) ? <p className="book-item-description">{desc}</p> : null
-  );
+  const renderDescription = (reviewsArray) => {
+    if (!_isEmpty(reviewsArray) && reviewsArray[0].text && reviewsArray[0].text.trim() !== '') {
+      const text = reviewsArray[0].text;
+      return <p className="book-item-description">{text}</p>
+    }
+    return null;
+  };
 
-  return (
+  const book = getBookObject(pick) || {};
+  const tagClasses = !_isEmpty(getTagsArray(pick)) ? getTagsArray().join(' ') : '';
+  const reviewsArray = getReviewsArray(pick);
+
+  return getBookObject(pick) ? (
     <li
       className={`book-item ${tagClasses}`}
-      key={book.title.trim()}
+      key={!isStringEmpty(book.title) ? book.title : null}
     >
       {renderBookCoverImage(book.imageUrl)}
       {renderTitle(book.title, book.catalogUrl)}
       {renderAuthor(book.author)}
       {renderCatalogLinks(book.catalogUrl, book.ebookUrl)}
-      {renderDescription(pick.reviews[0].text)}
+      {renderDescription(reviewsArray)}
     </li>
-  );
+  ) : null;
 };
 
 Book.propTypes = {
