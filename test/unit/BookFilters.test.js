@@ -94,4 +94,152 @@ describe('BookFilters', () => {
       ]);
     });
   });
+
+  describe('Clicking on the clear filters button', () => {
+    let component;
+
+    before(() => {
+      component = mount(
+        <BookFilters filters={filtersArray} selectableFilters={selectableFilters} />
+      );
+      component.setState({ activeIds: ['funny', 'graphic-novels'] });
+    });
+
+    it('should render a clear filters button', () => {
+      expect(component.find('.clear-button').length).to.equal(1);
+    });
+
+    it('should remove all active ids from the state', () => {
+      component.find('.clear-button').simulate('click');
+
+      expect(component.state('activeIds')).to.eql([]);
+    });
+  });
+
+  describe('Methods', () => {
+    describe('getActiveIds', () => {
+      let component;
+      let getActiveIds;
+
+      before(() => {
+        component = mount(
+          <BookFilters filters={filtersArray} selectableFilters={selectableFilters} />
+        );
+        getActiveIds = component.instance().getActiveIds;
+      });
+
+      it('should be empty since the `active` param was not passed and is false', () => {
+        expect(getActiveIds()).to.eql([]);
+      });
+
+      it('should return an array with the filter id passed', () => {
+        expect(getActiveIds('funny', true)).to.eql(['funny']);
+      });
+
+      it('should remove the filter id from the state array', () => {
+        component.setState({ activeIds: ['funny', 'graphic-novels'] });
+
+        expect(component.state('activeIds')).to.eql(['funny', 'graphic-novels']);
+        expect(getActiveIds('funny', false)).to.eql(['graphic-novels']);
+
+        // Manually removing 'funny' from the state since that's taken care of
+        // by the `onClick` function and that's not being used in this test.
+        component.setState({ activeIds: ['graphic-novels'] });
+        expect(component.state('activeIds')).to.eql(['graphic-novels']);
+        expect(getActiveIds('graphic-novels', false)).to.eql([]);
+      });
+    });
+
+    describe('getFilterArray', () => {
+      const filters = [
+        { id: 'funny', label: 'Funny' },
+        { id: 'offbeat', label: 'Offbeat' },
+        { id: 'middle-grade', label: 'Middle Grade' },
+        { id: 'graphic-novels', label: 'Graphic Novels' },
+      ];
+      let component;
+      let getFilterArray;
+
+      before(() => {
+        component = mount(
+          <BookFilters filters={filtersArray} selectableFilters={selectableFilters} />
+        );
+        getFilterArray = component.instance().getFilterArray;
+      });
+
+      it('should return the filters passed since the selectableFilters array is empty', () => {
+        expect(getFilterArray([], filters)).to.eql(filters);
+      });
+
+      it('should return an array with only the values from the selectableFilters array', () => {
+        expect(getFilterArray(['funny', 'middle-grade'], filters))
+          .to.eql([
+            { id: 'funny', label: 'Funny' },
+            { id: 'middle-grade', label: 'Middle Grade' },
+          ]);
+      });
+    });
+
+    describe('onClick', () => {
+      let component;
+      let onClick;
+      let globalFilterId;
+      let globalActive;
+      const setSelectedFilterFn = (filterId, active) => {
+        globalFilterId = filterId;
+        globalActive = active;
+      };
+
+      before(() => {
+        component = mount(
+          <BookFilters
+            filters={filtersArray}
+            selectableFilters={selectableFilters}
+            setSelectedFilter={setSelectedFilterFn}
+          />
+        );
+        onClick = component.instance().onClick;
+      });
+
+      afterEach(() => {
+        globalActive = undefined;
+        globalFilterId = undefined;
+
+        component.setState({
+          activeIds: ['funny', 'adventure', 'offbeat'],
+          focusId: '',
+        });
+      });
+
+      it('should update the activeIds and focusId state if it clicked/selected', () => {
+        expect(component.state('activeIds')).to.eql([]);
+        expect(component.state('focusId')).to.eql('');
+
+        onClick('adventure', true);
+
+        expect(component.state('activeIds')).to.eql(['adventure']);
+        expect(component.state('focusId')).to.eql('adventure');
+      });
+
+      it('should update the activeIds and focusId state if it clicked/unselected', () => {
+        expect(component.state('activeIds')).to.eql(['funny', 'adventure', 'offbeat']);
+        expect(component.state('focusId')).to.eql('');
+
+        onClick('adventure', false);
+
+        expect(component.state('activeIds')).to.eql(['funny', 'offbeat']);
+        expect(component.state('focusId')).to.eql('adventure');
+      });
+
+      it('should call the `setSelectedFilter` prop function', () => {
+        expect(globalFilterId).to.equal(undefined);
+        expect(globalActive).to.equal(undefined);
+
+        onClick('historic', true);
+
+        expect(globalFilterId).to.equal('historic');
+        expect(globalActive).to.equal(true);
+      });
+    });
+  });
 });
