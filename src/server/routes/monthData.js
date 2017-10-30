@@ -7,6 +7,7 @@ function currentMonthData(req, res, next) {
       filters: [],
       currentPicks: {},
       selectableFilters: [],
+      isJsEnabled: false,
     },
   };
   next();
@@ -21,6 +22,7 @@ function selectMonthData(req, res, next) {
       filters: [],
       currentPicks: {},
       selectableFilters: [],
+      isJsEnabled: false,
     },
   };
   next();

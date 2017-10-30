@@ -25,6 +25,7 @@ Sidebar.propTypes = {
   selectableFilters: PropTypes.array,
   setSelectedFilter: PropTypes.func,
   clearFilters: PropTypes.func,
+  isJsEnabled: PropTypes.bool,
 };
 
 Sidebar.defaultProps = {

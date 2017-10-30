@@ -23,15 +23,11 @@ const BookList = (props) => {
 
 BookList.propTypes = {
   picks: PropTypes.array,
+  isJsEnabled: PropTypes.bool,
 };
 
 BookList.defaultProps = {
   picks: [],
-};
-
-BookList.defaultProps = {
-  className: 'booklist',
-  lang: 'en',
 };
 
 export default BookList;
