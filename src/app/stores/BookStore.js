@@ -8,6 +8,7 @@ class BookStore {
       clearFilters: BookActions.CLEAR_FILTERS,
       updatePicks: BookActions.UPDATE_PICKS,
       updateInitialFilters: BookActions.UPDATE_INITIAL_FILTERS,
+      setIsJsEnabled: BookActions.SET_IS_JS_ENABLED,
       setSelectedFilter: BookActions.SET_SELECTED_FILTER,
       setSelectableFilters: BookActions.SET_SELECTABLE_FILTERS,
     });
@@ -15,6 +16,7 @@ class BookStore {
     this.state = {
       filters: [],
       currentMonthPicks: {},
+      isJsEnabled: false,
       selectedFilters: [],
       selectableFilters: [],
     };
@@ -23,12 +25,19 @@ class BookStore {
   clearFilters() {
     this.setState({ selectedFilters: [] });
   }
+
   updatePicks(currentMonthPicks) {
     this.setState({ currentMonthPicks });
   }
+
   updateInitialFilters(filters) {
     this.setState({ filters });
   }
+
+  setIsJsEnabled(bool) {
+    this.setState({ isJsEnabled: bool });
+  }
+
   setSelectedFilter(argsArray) {
     const [filterId, active] = argsArray;
     let newFilters = [];

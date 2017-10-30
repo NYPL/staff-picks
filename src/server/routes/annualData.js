@@ -43,6 +43,7 @@ function annualCurrentData(type, req, res, next) {
         'True stories',
       ],
       currentMonthPicks: dataSet,
+      isJsEnabled: false,
       selectedFilters: [],
       selectableFilters,
     },

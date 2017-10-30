@@ -89,12 +89,14 @@ class App extends React.Component {
           selectableFilters={this.state.selectableFilters}
           setSelectedFilter={this.setSelectedFilter}
           clearFilters={this.clearFilters}
+          isJsEnabled={this.props.isJsEnabled}
         />
 
         <BookList
           picks={this.state.picks}
           selectedFilters={this.state.selectedFilters}
           setSelectableFilters={this.setSelectableFilters}
+          isJsEnabled={this.props.isJsEnabled}
         />
       </div>
     );
@@ -106,6 +108,7 @@ App.propTypes = {
   selectedFilters: PropTypes.array,
   selectableFilters: PropTypes.array,
   currentMonthPicks: PropTypes.object,
+  isJsEnabled: PropTypes.bool,
 };
 
 export default App;

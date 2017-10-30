@@ -7,7 +7,8 @@ import Footer from '@nypl/dgx-react-footer';
 import { extend as _extend } from 'underscore';
 
 import Hero from '../Hero/Hero.jsx';
-import BookStore from '../../stores/BookStore.js';
+import BookActions from '../../actions/BookActions';
+import BookStore from '../../stores/BookStore';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class App extends React.Component {
 
   componentDidMount() {
     BookStore.listen(this.onChange);
+    BookActions.setIsJsEnabled(true);
   }
 
   componentWillUnmount() {

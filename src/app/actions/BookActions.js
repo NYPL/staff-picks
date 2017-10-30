@@ -14,6 +14,10 @@ class Actions {
     return filters;
   }
 
+  setIsJsEnabled(bool) {
+    return bool;
+  }
+
   setSelectedFilter(filterId, active) {
     return [filterId, active];
   }

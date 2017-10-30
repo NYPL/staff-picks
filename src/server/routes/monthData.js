@@ -6,6 +6,7 @@ function currentMonthData(req, res, next) {
     BookStore: {
       filters: [],
       currentMonthPicks: {},
+      isJsEnabled: false,
       selectedFilters: [],
     },
   };
@@ -20,6 +21,7 @@ function selectMonthData(req, res, next) {
     BookStore: {
       filters: [],
       currentMonthPicks: {},
+      isJsEnabled: false,
       selectedFilters: [],
     },
   };
