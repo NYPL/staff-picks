@@ -1,29 +1,73 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import config from '../../../../appConfig.js';
+import { EReaderIcon, BookIcon } from 'dgx-svg-icons';
+import { isEmpty as _isEmpty, isString as _isString } from 'underscore';
+import config from '../../../../appConfig';
 import utils from '../../utils/utils';
 
 const Book = ({ book }) => {
-  const fullImgSrc = (!book.imageSlug || book.imageSlug === '') ? `${config.baseUrl}src/client/images/book-place-holder.png` :
-    'https://contentcafe2.btol.com/ContentCafe/Jacket.aspx' +
-    `?&userID=NYPL49807&password=CC68707&Value=${book.imageSlug}&content=M&Return=1&Type=M`;
   const tagArray = book.tags.map(tag => tag.toLowerCase().split(' ').join('-'));
   const tagClasses = tagArray.join(' ');
 
-  return (
-    <li
-      className={`book-item nypl-column-half ${tagClasses}`}
-      key={book.title.trim()}
-    >
+  const isStringEmpty = (string) => (!_isString(string) || _isEmpty(string.trim()));
+
+  const renderBookCoverImage = (imageUrl) => {
+    const defaultImageUrl = `${config.baseUrl}src/client/images/book-place-holder.png`;
+    const fullImgSrc = isStringEmpty(imageUrl) ? defaultImageUrl : imageUrl;
+    return (
       <div className="book-item-image-box">
         <img alt="" src={fullImgSrc} />
       </div>
-      <div className="book-item-description">
-        <h4>
-          <a href="#">{book.title}</a>
-        </h4>
-        <p>{book.text}</p>
-      </div>
+    );
+  };
+
+  const renderTitle = (title, link) => {
+    const titleClass = 'book-item-title';
+
+    if (!isStringEmpty(title)) {
+      if (!isStringEmpty(link)) {
+        return <h4 className={titleClass}><a href={link}>{title}</a></h4>;
+      }
+      return <h4 className={titleClass}>{title}</h4>;
+    }
+    return null;
+  };
+
+  const renderAuthor = (author) =>
+    !isStringEmpty(author) ? <p className="book-item-author">{author}</p> : null;
+
+  const renderCatalogLinks = (catalogUrl, ebookUrl) => {
+    const catalogLink = !isStringEmpty(catalogUrl) ?
+      <a href={catalogUrl} className="catalog-url">
+        <BookIcon width="32px" height="32px" ariaHidden />
+        <span>REQUEST THE BOOK</span>
+      </a> : null;
+    const ebookLink = !isStringEmpty(ebookUrl) ?
+      <a href={ebookUrl} className="ebook-url">
+        <EReaderIcon ariaHidden />
+        <span>REQUEST THE E-BOOK</span>
+      </a> : null;
+
+    return (catalogLink || ebookLink) ?
+      <div className="book-item-catalog-links">
+        {catalogLink}
+        {ebookLink}
+      </div> : null;
+  };
+
+  const renderDescription = (desc) =>
+    !isStringEmpty(desc) ? <p className="book-item-description">{desc}</p> : null;
+
+  return (
+    <li
+      className={`book-item ${tagClasses}`}
+      key={book.title.trim()}
+    >
+      {renderBookCoverImage(book.imageUrl)}
+      {renderTitle(book.title, '#')}
+      {renderAuthor(book.author)}
+      {renderCatalogLinks('#', '#')}
+      {renderDescription(book.text)}
     </li>
   );
 };
