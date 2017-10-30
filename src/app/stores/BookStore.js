@@ -1,47 +1,28 @@
-import alt from 'dgx-alt-center';
+import alt from '../alt';
 
 import BookActions from '../actions/BookActions';
 
 class BookStore {
   constructor() {
     this.bindListeners({
-      clearFilters: BookActions.CLEAR_FILTERS,
       updatePicks: BookActions.UPDATE_PICKS,
-      updateInitialFilters: BookActions.UPDATE_INITIAL_FILTERS,
-      setSelectedFilter: BookActions.SET_SELECTED_FILTER,
+      updateFilters: BookActions.UPDATE_FILTERS,
       setSelectableFilters: BookActions.SET_SELECTABLE_FILTERS,
     });
 
     this.state = {
       filters: [],
-      currentMonthPicks: {},
-      selectedFilters: [],
+      currentPicks: {},
       selectableFilters: [],
     };
   }
 
-  clearFilters() {
-    this.setState({ selectedFilters: [] });
+  updatePicks(currentPicks) {
+    this.setState({ currentPicks });
   }
-  updatePicks(currentMonthPicks) {
-    this.setState({ currentMonthPicks });
-  }
-  updateInitialFilters(filters) {
+  updateFilters(filters) {
     this.setState({ filters });
   }
-  setSelectedFilter(argsArray) {
-    const [filterId, active] = argsArray;
-    let newFilters = [];
-
-    if (active) {
-      newFilters = this.state.selectedFilters.concat(filterId);
-    } else {
-      newFilters = this.state.selectedFilters.filter(f => f !== filterId);
-    }
-
-    this.setState({ selectedFilters: newFilters });
-  }
-
   setSelectableFilters(selectableFilters) {
     this.setState({ selectableFilters });
   }
