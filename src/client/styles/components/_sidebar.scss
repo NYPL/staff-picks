@@ -1,13 +1,18 @@
 .sidebar {
   a.back-link {
+    text-decoration: none;
+    display: none;
     background: #fff;
     color: #000;
-    display: block;
     margin: 0 0 20px;
 
     svg {
       float: left;
       margin: -2px 0 0;
+    }
+
+    @include min-screen($mobile-breakpoint) {
+      display: block;
     }
   }
 }

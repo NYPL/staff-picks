@@ -1,6 +1,4 @@
 .about {
-  border-top: 2px solid $nypl-gray-cool;
-
   h3 {
     margin: 0.8rem 0;
   }
@@ -18,5 +16,9 @@
 
   .inner {
     width: 20rem;
+  }
+
+  @include min-screen($mobile-breakpoint) {
+    border-top: 2px solid $nypl-gray-cool;
   }
 }
