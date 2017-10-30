@@ -10,6 +10,10 @@ class Actions {
     return filters;
   }
 
+  setIsJsEnabled(bool) {
+    return bool;
+  }
+
   setSelectableFilters(filters) {
     return filters;
   }

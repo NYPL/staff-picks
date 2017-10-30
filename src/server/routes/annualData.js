@@ -44,6 +44,7 @@ function annualCurrentData(type, req, res, next) {
       ],
       currentPicks: dataSet,
       selectableFilters,
+      isJsEnabled: false,
     },
     endpoint,
   };
