@@ -6,6 +6,7 @@ import {
   DotsIcon,
   XIcon,
 } from 'dgx-svg-icons';
+import { isEmpty as _isEmpty } from 'underscore';
 
 const ANIMATION_TIMEOUT = 400;
 
@@ -30,7 +31,7 @@ class Filter extends React.Component {
       focusId,
     } = this.props;
 
-    if (filter.id === focusId) {
+    if (filter && (filter.id === focusId)) {
       setTimeout(() => {
         ReactDOM.findDOMNode(this.refs[filter.id]).focus();
       }, ANIMATION_TIMEOUT);
@@ -88,6 +89,10 @@ class Filter extends React.Component {
     } = this.state;
     const { filter } = this.props;
 
+    if (_isEmpty(filter)) {
+      return null;
+    }
+
     return (
       <li className="filter-item">
         <button
@@ -95,8 +100,7 @@ class Filter extends React.Component {
           className={`nypl-primary-button ${activeClass}`}
           onClick={this.onClick}
         >
-          {icon}
-          {filter.label}
+          {icon} {filter.label}
         </button>
       </li>
     );

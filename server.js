@@ -14,7 +14,7 @@ import DocMeta from 'react-doc-meta';
 import { match, RouterContext } from 'react-router';
 import ReactDOMServer from 'react-dom/server';
 
-import alt from 'dgx-alt-center';
+import alt from './src/app/alt';
 import Iso from 'iso';
 
 import appRoutes from './src/app/routes/routes.jsx';
