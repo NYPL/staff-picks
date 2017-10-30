@@ -33,9 +33,5 @@ describe('Sidebar', () => {
     it('should render a <BookFilters /> component', () => {
       expect(component.find('BookFilters')).to.have.length(1);
     });
-
-    it('should render a <About /> component', () => {
-      expect(component.find('.about')).to.have.length(1);
-    });
   });
 });
