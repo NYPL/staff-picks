@@ -13,9 +13,10 @@ export default {
       ],
       'overdriveid': '2678726',
       'isbn': '9780385539913',
-      'text': 'A fun, genre-bending read. An aging, competitive backgammon player is diagnosed with a life-threatening tumor and, upon it\'s removal, becomes convinced that he has psychic powers. The real star of this novel though is the game of backgammon, which I\'ve never had any interest in until I read this book. I still have no idea how to play the game, but Lethem makes it seem like a heck of a good time. ',
+      'text': 'This magical, multi-voiced novel of hope and renewal in San Francisco reveals that things are shifting... for an 11-year-old foster child who\'s about to be adopted, for a young owl who flies over the city keeping watch, and for the tectonic plates deep underground.',
       'name': 'Benjamin Sapadin',
-      'location': 'Morris Park'
+      'location': 'Morris Park',
+      'imageUrl': 'https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?UserID=NYPL49807&Password=CC68707&Return=1&Type=L&Value=9781596435995&erroroverride=1'
     },
     {
       'title': 'Across the Nightingale Floor',
