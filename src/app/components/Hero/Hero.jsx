@@ -16,7 +16,7 @@ class Hero extends React.Component {
         <div className="Hero__container nypl-full-width-wrapper">
           <div className="Hero__text nypl-column-three-quarters nypl-column-offset-one">
             <div className="Hero__text__HeroTitle">
-              <h3>{this.props.currentPicks.type}</h3>
+              <h3>{this.props.currentPicks.subTitle}</h3>
               <p className="Hero__text__HeroTitle__des">
                 {this.props.currentPicks.title}
               </p>
