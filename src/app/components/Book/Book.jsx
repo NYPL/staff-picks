@@ -5,8 +5,9 @@ import { isEmpty as _isEmpty, isString as _isString } from 'underscore';
 import config from '../../../../appConfig';
 import utils from '../../utils/utils';
 
-const Book = ({ book }) => {
-  const tagArray = book.tags.map(tag => tag.toLowerCase().split(' ').join('-'));
+const Book = ({ pick }) => {
+  const book = pick.book;
+  const tagArray = pick.tags.map(tag => tag.toLowerCase().split(' ').join('-'));
   const tagClasses = tagArray.join(' ');
 
   const isStringEmpty = (string) => (!_isString(string) || _isEmpty(string.trim()));
@@ -33,8 +34,9 @@ const Book = ({ book }) => {
     return null;
   };
 
-  const renderAuthor = (author) =>
-    !isStringEmpty(author) ? <p className="book-item-author">{author}</p> : null;
+  const renderAuthor = (author) => (
+    !isStringEmpty(author) ? <p className="book-item-author">{author}</p> : null
+  );
 
   const renderCatalogLinks = (catalogUrl, ebookUrl) => {
     const catalogLink = !isStringEmpty(catalogUrl) ?
@@ -55,8 +57,9 @@ const Book = ({ book }) => {
       </div> : null;
   };
 
-  const renderDescription = (desc) =>
-    !isStringEmpty(desc) ? <p className="book-item-description">{desc}</p> : null;
+  const renderDescription = (desc) => (
+    !isStringEmpty(desc) ? <p className="book-item-description">{desc}</p> : null
+  );
 
   return (
     <li
@@ -64,16 +67,16 @@ const Book = ({ book }) => {
       key={book.title.trim()}
     >
       {renderBookCoverImage(book.imageUrl)}
-      {renderTitle(book.title, '#')}
+      {renderTitle(book.title, book.catalogUrl)}
       {renderAuthor(book.author)}
-      {renderCatalogLinks('#', '#')}
-      {renderDescription(book.text)}
+      {renderCatalogLinks(book.catalogUrl, book.ebookUrl)}
+      {renderDescription(pick.reviews[0].text)}
     </li>
   );
 };
 
 Book.propTypes = {
-  book: PropTypes.object,
+  pick: PropTypes.object,
 };
 
 export default Book;
