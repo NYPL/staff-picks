@@ -3,11 +3,11 @@
 
   h2 {
     background: #fff;
-    color: $nyplred;
+    color: $nypl-red;
     max-width: 100%;
 
     &:before {
-      background: $nyplred;
+      background: $nypl-red;
       content: '';
       display: block;
       height: 0.25rem;
