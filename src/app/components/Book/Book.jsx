@@ -6,6 +6,7 @@ import config from '../../../../appConfig';
 import utils from '../../utils/utils';
 
 const Book = ({ pick }) => {
+  const book = pick.book;
   const tagArray = pick.tags.map(tag => tag.toLowerCase().split(' ').join('-'));
   const tagClasses = tagArray.join(' ');
 
@@ -63,12 +64,12 @@ const Book = ({ pick }) => {
   return (
     <li
       className={`book-item ${tagClasses}`}
-      key={pick.book.title.trim()}
+      key={book.title.trim()}
     >
-      {renderBookCoverImage(pick.book.imageUrl)}
-      {renderTitle(pick.book.title, '#')}
-      {renderAuthor(pick.book.author)}
-      {renderCatalogLinks('#', '#')}
+      {renderBookCoverImage(book.imageUrl)}
+      {renderTitle(book.title, book.catalogUrl)}
+      {renderAuthor(book.author)}
+      {renderCatalogLinks(book.catalogUrl, book.ebookUrl)}
       {renderDescription(pick.reviews[0].text)}
     </li>
   );
