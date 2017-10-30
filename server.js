@@ -10,7 +10,6 @@ import webpackConfig from './webpack.config.js';
 import appConfig from './appConfig.js';
 
 import React from 'react';
-import DocMeta from 'react-doc-meta';
 import { match, RouterContext } from 'react-router';
 import ReactDOMServer from 'react-dom/server';
 
@@ -61,8 +60,9 @@ app.use('/', (req, res) => {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
       const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
-      const metaTags = DocMeta.rewind();
       const safePath = req.path.replace(/'/g, '').replace(/"/g, '');
+      // Generate meta tags markup
+      const metaTags = appConfig.metaTags || [];
       const renderedTags = metaTags.map((tag, index) =>
         ReactDOMServer.renderToString(<meta data-doc-meta="true" key={index} {...tag} />)
       );
@@ -129,7 +129,8 @@ if (!isProduction) {
   }).listen(appConfig.webpackDevServerPort, 'localhost', (err, result) => {
     if (err) {
       console.log(err);
+    } else {
+      console.log(`Webpack Dev Server listening at localhost: ${appConfig.webpackDevServerPort}`);
     }
-    console.log(`Webpack Dev Server listening at localhost: ${appConfig.webpackDevServerPort}`);
   });
 }

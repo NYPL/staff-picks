@@ -1,20 +1,150 @@
 .book-item {
-  margin: 0;
-  padding-bottom: .75em;
+  border-bottom: 2px solid $nypl-gray-cool;
+  margin: .5em .25em 1.5em .25em;
+  padding-bottom: 1em;
   padding-top: .75em;
+  max-width: 100%;
+  @include clearfix;
 
-  &:nth-child(odd) {
-    clear: left;
+  // Split into two columns
+  @include min-screen($mobile-breakpoint) {
+    border: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    float: left;
+    max-width: 48.5%;
+    &:nth-child(odd) {
+      clear: left;
+      margin: 0;
+      margin-right: 1.5%;
+    }
+
+    &:nth-child(even) {
+      margin-right: 0;
+      margin-left: 1.5%;
+    }
   }
 
   &-image-box {
+    display: block;
+    max-width: 30%;
+    float: left;
+
+    @include min-screen($xtrasmall-breakpoint) {
+      min-height: 400px;
+    }
 
     img {
+      display: block;
       max-width: 100%;
+      margin: 0 2.5%;
+    }
+  }
+
+  &-title {
+    float: left;
+    font-weight: bold;
+    margin: 0 2.5%;
+    width: 65%;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  &-author {
+    float: left;
+    font-size: 1.05rem;
+    font-weight: normal;
+    margin: 7.5% 2.5%;
+    width: 65%;
+
+    @include min-screen($xtrasmall-breakpoint) {
+      margin-bottom: 3.5%;
+      margin-top: 3.5%;
+    }
+  }
+
+  &-catalog-links {
+    clear: left;
+    padding: 2.5% 0 0;
+
+    @include min-screen($xtrasmall-breakpoint) {
+      clear: none;
+      float: left;
+      margin: 0 2.5%;
+      padding: 0;
+      width: 65%;
+    }
+
+    a {
+      @include basic-button(
+        $background-color: $nypl-blue,
+        $border-color: $nypl-blue,
+        $border-radius: .25rem,
+        $hover-text-color: $nypl-blue,
+        $hover-background-color: $nypl-white,
+        $padding-vertical: .25rem,
+        $text-color: $nypl-white
+      );
+      // overrides
+      font-size: 14px;
+      margin: 12.5px 0 12.5px 1%;
+      max-width: 100%;
+
+      &:first-child {
+        @include min-screen($xtrasmall-breakpoint) {
+          margin: 0 10px 10px 0;
+        }
+      }
+
+      &:last-child {
+        @include min-screen($xtrasmall-breakpoint) {
+          margin: 10px 5px 15px 0;
+        }
+      }
+
+      svg {
+        fill: #fff;
+        height: 32px;
+        position: relative;
+        width: 32px;
+      }
+
+      .book-icon {
+        top: .28rem;
+      }
+
+      .eReader-icon {
+        top: .2rem;
+      }
+
+      span {
+        bottom: 7px;
+        margin: 0 0 0 3px;
+        position: relative;
+      }
+
+      &:hover {
+        svg {
+          fill: $nypl-blue;
+        }
+      }
     }
   }
 
   &-description {
+    font-size: .95rem;
+    padding: 0;
+    margin: 0 1%;
+    clear: left;
+    display: block;
 
+    @include min-screen($xtrasmall-breakpoint) {
+      clear: none;
+      float: left;
+      width: 65%;
+      margin: 1% 2.5%
+    }
   }
 }
