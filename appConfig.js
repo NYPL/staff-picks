@@ -35,6 +35,10 @@ const config = {
     url: 'https://www.nypl.org/books-music-dvds/recommendations',
     label: 'Recommendations',
   },
+  aboutUrls: {
+    print: 'https://www.nypl.org/accessibility/print-disabilities',
+    about: 'https://www.nypl.org/books-music-dvds/recommendations/about/annual-lists',
+  },
 };
 
 export default config;
