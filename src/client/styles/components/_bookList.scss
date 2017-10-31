@@ -1,7 +1,7 @@
 .booklist-section {
   margin-top: 22px;
 
-  h2 {
+  & > h2 {
     background: #fff;
     color: $nypl-red;
     max-width: 100%;
