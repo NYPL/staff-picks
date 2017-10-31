@@ -16,6 +16,7 @@ const Sidebar = (props) => (
       selectableFilters={props.selectableFilters}
       setSelectedFilter={props.setSelectedFilter}
       clearFilters={props.clearFilters}
+      selectedFilters={props.selectedFilters}
       picksCount={props.picksCount}
     />
   </div>
@@ -27,6 +28,7 @@ Sidebar.propTypes = {
   setSelectedFilter: PropTypes.func,
   clearFilters: PropTypes.func,
   isJsEnabled: PropTypes.bool,
+  selectedFilters: PropTypes.array,
   picksCount: PropTypes.number,
 };
 
