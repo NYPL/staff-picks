@@ -70,6 +70,23 @@ function Utils() {
 
     return selectableFilters;
   };
+
+  /**
+   * getAllTags(picks)
+   * Get all the tags from a pick list without modifying the tag's name.
+   *
+   * @param {array} picks
+   */
+  this.getAllTags = (picks) => {
+    let tags = [];
+
+    _each(picks, pick => {
+      const pickTags = pick.tags && pick.tags.length ? pick.tags : [];
+      tags = _union(tags, pickTags);
+    });
+
+    return tags;
+  };
 }
 
 export default new Utils();

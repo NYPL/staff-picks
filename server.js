@@ -18,6 +18,7 @@ import Iso from 'iso';
 
 import appRoutes from './src/app/routes/routes.jsx';
 import expressRoutes from './src/server/routes/routes.js';
+import nyplApiClient from './src/server/helper/nyplApiClient.js';
 
 // URL configuration
 const ROOT_PATH = __dirname;
@@ -38,11 +39,16 @@ app.set('view engine', 'ejs');
 app.set('views', path.resolve(ROOT_PATH, 'src/server/views'));
 app.set('port', process.env.PORT || appConfig.port);
 
+app.set('nyplPublicKey', appConfig.publicKey);
+
 // first assign the path
 app.use('*/dist', express.static(DIST_PATH));
 
 // Assign the path for static client files
 app.use('*/src/client', express.static(INDEX_PATH));
+
+// Init the nypl data api client.
+nyplApiClient();
 
 app.use('/', expressRoutes);
 
