@@ -1,81 +1,38 @@
-import axios from 'axios';
-
 import appConfig from '../../../appConfig.js';
-import dataSet from '../../../test2017Data.js';
 import utils from '../../app/utils/utils';
 
-const {
-  baseUrl,
-  baseAnnualUrl,
-} = appConfig;
+import nyplApiClient from '../helper/nyplApiClient.js';
+
+const { baseUrl } = appConfig;
+
+const nyplApiClientGet = (endpoint) =>
+  nyplApiClient().then(client => client.get(endpoint, { cache: false }));
 
 /* annualCurrentData
  * Get the latest annual staff pick list for either childrens or ya.
  */
 function annualCurrentData(type, req, res, next) {
-  const endpoint = `${baseAnnualUrl}api`;
-  // Get the subset of tags that the picks can be filtered by.
-  const selectableFilters = utils.getSelectableTags(dataSet.picks);
+  // Hard coded endpoint for now
+  nyplApiClientGet('/book-lists/kids/2017-11')
+    .then(data => {
+      const filters = utils.getAllTags(data.picks);
+      // Get the subset of tags that the picks can be filtered by.
+      const selectableFilters = utils.getSelectableTags(data.picks);
 
-  res.locals.data = {
-    BookStore: {
-      filters: [
-        'Adventure',
-        'Animals',
-        'Biographies',
-        'Culturally diverse',
-        'Early readers',
-        'Fairy tales & folklore',
-        'Families',
-        'Fantasy',
-        'Friendship',
-        'Funny',
-        'Graphic novels',
-        'Historical',
-        'Middle grade',
-        'Nature',
-        'Offbeat',
-        'Picture books',
-        'Poetry',
-        'Science fiction',
-        'STEM',
-        'Suspenseful',
-        'True stories',
-      ],
-      currentPicks: dataSet,
-      selectableFilters,
-      isJsEnabled: false,
-    },
-    endpoint,
-  };
+      res.locals.data = {
+        BookStore: {
+          filters,
+          currentPicks: data,
+          selectableFilters,
+          isJsEnabled: false,
+        },
+      };
 
-  return next();
-
-  // axios.get(endpoint)
-  //   .then((data) => {
-  //     console.log(data);
-  //     res.locals.data = {
-  //       BookStore: {
-  //         filters: [],
-  //         currentPicks: data,
-  //       },
-  //       endpoint,
-  //     };
-  //
-  //     next();
-  //   })
-  //   // console error messages
-  //   .catch(error => {
-  //     console.log(`Error calling API AnnualCurrentData: ${error}`);
-  //     res.locals.data = {
-  //       BookStore: {
-  //         filters: [],
-  //         currentPicks: {},
-  //       },
-  //       endpoint,
-  //     };
-  //     next();
-  //   }); // end Axios call
+      next();
+    })
+    .catch(error => {
+      console.log(`Error fetching endpoint: ${error}`);
+    })
 }
 
 /* selectAnnualData
