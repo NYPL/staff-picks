@@ -18,45 +18,26 @@ class BookFilters extends React.Component {
         id: filter.toLowerCase().split(' ').join('-'),
         label: filter,
       })),
-      activeIds: [],
+      selectedFilters: this.props.selectedFilters,
       focusId: '',
     };
 
     this.renderItems = this.renderItems.bind(this);
     this.onClick = this.onClick.bind(this);
     this.getFilterArray = this.getFilterArray.bind(this);
-    this.getActiveIds = this.getActiveIds.bind(this);
-    this.clearFilters = this.clearFilters.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ selectedFilters: nextProps.selectedFilters });
   }
 
   onClick(filterId, active) {
-    const activeIds = this.getActiveIds(filterId, active);
     this.props.setSelectedFilter(filterId, active);
 
     this.setState({
       filters: this.state.filters,
       focusId: filterId,
-      activeIds,
     });
-  }
-
-  /**
-   * getActiveIds(filterId, active)
-   * Get an array of filter IDs that are currently active/selected.
-   * @param {string} filterId
-   * @param {boolean} active
-   * @return {array}
-   */
-  getActiveIds(filterId, active) {
-    let activeIds = [];
-
-    if (active) {
-      activeIds = this.state.activeIds.concat(filterId);
-    } else {
-      activeIds = this.state.activeIds.filter(id => id !== filterId);
-    }
-
-    return activeIds;
   }
 
   /**
@@ -75,24 +56,13 @@ class BookFilters extends React.Component {
   }
 
   /**
-   * clearFilters()
-   * Sets the state's activeIds array back to none so that no filters will be in the
-   * 'active' state when rendering. Also calls the clearFilters prop function for
-   * the app to handle the rest of its
-   */
-  clearFilters() {
-    this.setState({ activeIds: [] });
-    this.props.clearFilters();
-  }
-
-  /**
    * renderItems(filters)
    * Render the filter button list items.
    * @param {array} filter
    */
   renderItems(filters) {
     return filters.map((filter, i) => {
-      const active = _contains(this.state.activeIds, filter.id);
+      const active = _contains(this.state.selectedFilters, filter.id);
       return (
         <Filter
           key={i}
@@ -124,9 +94,9 @@ class BookFilters extends React.Component {
           {this.renderItems(filtersToRender)}
         </ul>
         {
-          !!this.state.activeIds.length &&
+          !!this.state.selectedFilters.length &&
             (<button
-              onClick={this.clearFilters}
+              onClick={this.props.clearFilters}
               className="nypl-primary-button clear-button"
               ref="clearFilters"
             >
@@ -144,6 +114,7 @@ BookFilters.propTypes = {
   selectableFilters: PropTypes.array,
   setSelectedFilter: PropTypes.func,
   clearFilters: PropTypes.func,
+  selectedFilters: PropTypes.array,
 };
 
 BookFilters.defaultProps = {
@@ -151,6 +122,7 @@ BookFilters.defaultProps = {
   selectableFilters: [],
   setSelectedFilter: () => {},
   clearFilters: () => {},
+  selectedFilters: [],
 };
 
 export default BookFilters;

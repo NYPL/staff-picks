@@ -65,12 +65,23 @@ describe('Alt', () => {
       expect(dispatcherArgs.data).to.eql(filters);
     });
 
+    it('should pass the boolean to setIsJsEnabled Action', () => {
+      const action = actions.SET_IS_JS_ENABLED;
+
+      actions.setIsJsEnabled(true);
+
+      const dispatcherArgs = getDispatcherArguments(dispatcherSpy, 2);
+
+      expect(dispatcherArgs.action).to.equal(action);
+      expect(dispatcherArgs.data).to.eql(true);
+    });
+
     it('should pass data to setSelectableFilters Action', () => {
       const action = actions.SET_SELECTABLE_FILTERS;
 
       actions.setSelectableFilters(selectableFilters);
 
-      const dispatcherArgs = getDispatcherArguments(dispatcherSpy, 2);
+      const dispatcherArgs = getDispatcherArguments(dispatcherSpy, 3);
 
       expect(dispatcherArgs.action).to.equal(action);
       expect(dispatcherArgs.data).to.eql(selectableFilters);
@@ -118,6 +129,20 @@ describe('Alt', () => {
 
       expect(oldBib).to.eql(selectableFilters);
       expect(newBib).to.eql({});
+    });
+
+    it('should pass the boolean value to setIsJsEnabled Action', () => {
+      const initialIsJsEnabledValue = store.getState().isJsEnabled;
+      const action = actions.SET_IS_JS_ENABLED;
+      const data = false;
+
+      // Dispatch the updated boolean, the previous test had set the boolean to TRUE. We are testing
+      // the ability to dispatch an event and check the store update
+      alt.dispatcher.dispatch({ action, data });
+      const updatedIsJsEnabledValue = store.getState().isJsEnabled;
+
+      expect(initialIsJsEnabledValue).to.eql(true);
+      expect(updatedIsJsEnabledValue).to.eql(false);
     });
   });
 });

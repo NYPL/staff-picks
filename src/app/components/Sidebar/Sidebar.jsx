@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { LeftWedgeIcon } from 'dgx-svg-icons';
 
 import BookFilters from '../BookFilters/BookFilters.jsx';
-import About from '../About/About.jsx';
 import config from '../../../../appConfig';
 
 const Sidebar = (props) => (
@@ -17,9 +16,8 @@ const Sidebar = (props) => (
       selectableFilters={props.selectableFilters}
       setSelectedFilter={props.setSelectedFilter}
       clearFilters={props.clearFilters}
+      selectedFilters={props.selectedFilters}
     />
-
-    <About />
   </div>
 );
 
@@ -29,6 +27,7 @@ Sidebar.propTypes = {
   setSelectedFilter: PropTypes.func,
   clearFilters: PropTypes.func,
   isJsEnabled: PropTypes.bool,
+  selectedFilters: PropTypes.array,
 };
 
 Sidebar.defaultProps = {
