@@ -5,19 +5,6 @@ const config = {
   baseApiUrl: '/books-music-dvds/recommendations/staff-picks/api/',
   baseAnnualUrl: '/books-music-dvds/recommendations/best-books/',
   baseMonthUrl: '/books-music-dvds/recommendations/staff-picks/',
-  apiRoot: 'https://refinery.nypl.org',
-  apiEndpoint: '/api/nypl/ndo/v0.1/staff-picks/staff-pick-lists',
-  fields: 'fields[staff-pick-tag]=tag&fields[staff-pick-age]=age&' +
-    'fields[staff-pick-item]=title,author,catalog-slug,image-slug,tags,ebook-uri',
-  pageSize: '&page[size]=1',
-  includes: '&include=previous-list,next-list,picks.item.tags,picks.age',
-  api: {
-    root: {
-      development: 'https://dev-refinery.nypl.org',
-      qa: 'https://qa-refinery.nypl.org',
-      production: 'https://refinery.nypl.org',
-    },
-  },
   metaTags: [
     { property: 'og:type', content: 'website' },
     { property: 'og:site_name', content: 'Recommendations | The New York Public Library' },
@@ -39,12 +26,30 @@ const config = {
     print: 'https://www.nypl.org/accessibility/print-disabilities',
     about: 'https://www.nypl.org/books-music-dvds/recommendations/about/annual-lists',
   },
+  publicKey:
+    '-----BEGIN PUBLIC KEY-----\n' +
+    'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA44ilHg/PxcJYsISHMRyo\n' +
+    'xsmez178qZpkJVXg7rOMVTLZuf05an7Pl+lX4nw/rqcvGQDXyrimciLgLkWu00xh\n' +
+    'm6h6klTeJSNq2DgseF8OMw2olfuBKq1NBQ/vC8U0l5NJu34oSN4/iipgpovqAHHB\n' +
+    'GV4zDt0EWSXE5xpnBWi+w1NMAX/muB2QRfRxkkhueDkAmwKvz5MXJPay7FB/WRjf\n' +
+    '+7r2EN78x5iQKyCw0tpEZ5hpBX831SEnVULCnpFOcJWMPLdg0Ff6tBmgDxKQBVFI\n' +
+    'Q9RrzMLTqxKnVVn2+hVpk4F/8tMsGCdd4s/AJqEQBy5lsq7ji1B63XYqi5fc1SnJ\n' +
+    'EQIDAQAB\n' +
+    '-----END PUBLIC KEY-----',
+  api: {
+    development: 'https://dev-platform.nypl.org/api/v0.1',
+    production: 'https://platform.nypl.org/api/v0.1',
+  },
+  loginUrl: 'https://login.nypl.org/auth/login',
+  tokenUrl: 'https://isso.nypl.org/',
   heroData: {
     annual: {
       ya: {
         category: 'Recommends',
         header: 'Best Books for Teens',
         description: 'Explore our annual selection of outstanding young adult titles.',
+        heroImageUrl: 'http://staff-picks-dev.us-east-1.elasticbeanstalk.com/books-music-dvds/' +
+          'recommendations/staff-picks/src/client/images/desktop.banner.YA.FIN.png',
       },
     },
   },

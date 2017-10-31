@@ -11,7 +11,7 @@ class Hero extends React.Component {
     return (
       <div
         className="Hero"
-        style={{ backgroundImage: `url("${this.props.currentPicks.heroImageUrl}")` }}
+        style={{ backgroundImage: `url("${this.props.heroData.heroImageUrl}")` }}
       >
         <div className="Hero__container nypl-full-width-wrapper">
           <div className="Hero__text nypl-column-three-quarters nypl-column-offset-one">
