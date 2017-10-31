@@ -12,16 +12,23 @@ class App extends React.Component {
     this.state = {
       selectableFilters: this.props.selectableFilters,
       selectedFilters: [],
-      picks: this.props.currentPicks.picks,
+      picks: this.props.currentPicks.picks && this.props.currentPicks.picks.length ?
+        this.props.currentPicks.picks : [],
     };
 
     this.setSelectedFilter = this.setSelectedFilter.bind(this);
     this.clearFilters = this.clearFilters.bind(this);
   }
 
+  /**
+   * getNewPickSet(picks, selectedFilters)
+   * Gets the new set of picks filtered by the selected tags.
+   * @param {array} picks
+   * @param {array} selectedFilters
+   */
   getNewPickSet(picks, selectedFilters) {
-    if (!selectedFilters.length) {
-      return picks;
+    if (!selectedFilters || !selectedFilters.length) {
+      return picks || [];
     }
 
     return picks.filter(book => {
@@ -108,6 +115,13 @@ App.propTypes = {
   selectableFilters: PropTypes.array,
   currentPicks: PropTypes.object,
   isJsEnabled: PropTypes.bool,
+};
+
+App.defaultProps = {
+  filters: [],
+  selectableFilters: [],
+  currentPicks: {},
+  isJsEnabled: false,
 };
 
 export default App;
