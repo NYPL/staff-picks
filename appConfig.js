@@ -39,6 +39,15 @@ const config = {
     print: 'https://www.nypl.org/accessibility/print-disabilities',
     about: 'https://www.nypl.org/books-music-dvds/recommendations/about/annual-lists',
   },
+  heroData: {
+    annual: {
+      ya: {
+        category: 'Recommends',
+        header: 'Best Books for Teens',
+        description: 'Explore our annual selection of outstanding young adult titles.',
+      },
+    },
+  },
 };
 
 export default config;
