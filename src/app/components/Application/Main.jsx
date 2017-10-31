@@ -90,6 +90,7 @@ class App extends React.Component {
           setSelectedFilter={this.setSelectedFilter}
           clearFilters={this.clearFilters}
           isJsEnabled={this.props.isJsEnabled}
+          selectedFilters={this.state.selectedFilters}
         />
 
         <BookList
