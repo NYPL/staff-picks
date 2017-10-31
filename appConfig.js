@@ -22,6 +22,10 @@ const config = {
     url: 'https://www.nypl.org/books-music-dvds/recommendations',
     label: 'Recommendations',
   },
+  aboutUrls: {
+    print: 'https://www.nypl.org/accessibility/print-disabilities',
+    about: 'https://www.nypl.org/books-music-dvds/recommendations/about/annual-lists',
+  },
   publicKey:
     '-----BEGIN PUBLIC KEY-----\n' +
     'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA44ilHg/PxcJYsISHMRyo\n' +
