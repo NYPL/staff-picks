@@ -102,7 +102,6 @@ class App extends React.Component {
 
         <BookList
           picks={this.state.picks}
-          setSelectableFilters={this.setSelectableFilters}
           isJsEnabled={this.props.isJsEnabled}
         />
       </div>
