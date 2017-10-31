@@ -13,7 +13,7 @@ const nyplApiClientGet = (endpoint) =>
  */
 function annualCurrentData(type, req, res, next) {
   // Hard coded endpoint for now
-  nyplApiClientGet('/book-lists/kids/2017-11')
+  nyplApiClientGet(`/book-lists/${type}/2017`)
     .then(data => {
       const filters = utils.getAllTags(data.picks);
       // Get the subset of tags that the picks can be filtered by.
@@ -42,11 +42,11 @@ function selectAnnualData(req, res, next) {
   const type = req.params.type;
 
   if (type === 'childrens') {
-    return annualCurrentData('c100', req, res, next);
+    return annualCurrentData('kids', req, res, next);
   }
 
   if (type === 'ya') {
-    return annualCurrentData('ya100', req, res, next);
+    return annualCurrentData('teens', req, res, next);
   }
 
   return res.redirect(baseUrl);
