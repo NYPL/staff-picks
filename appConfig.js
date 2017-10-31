@@ -42,6 +42,17 @@ const config = {
   },
   loginUrl: 'https://login.nypl.org/auth/login',
   tokenUrl: 'https://isso.nypl.org/',
+  heroData: {
+    annual: {
+      ya: {
+        category: 'Recommends',
+        header: 'Best Books for Teens',
+        description: 'Explore our annual selection of outstanding young adult titles.',
+        heroImageUrl: 'http://staff-picks-dev.us-east-1.elasticbeanstalk.com/books-music-dvds/' +
+          'recommendations/staff-picks/src/client/images/desktop.banner.YA.FIN.png',
+      },
+    },
+  },
 };
 
 export default config;
