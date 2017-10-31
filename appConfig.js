@@ -51,6 +51,13 @@ const config = {
         heroImageUrl: 'http://staff-picks-dev.us-east-1.elasticbeanstalk.com/books-music-dvds/' +
           'recommendations/staff-picks/src/client/images/desktop.banner.YA.FIN.png',
       },
+      childrens: {
+        category: 'Recommends',
+        header: 'Best Books for Children',
+        description: 'Explore our annual selection of outstanding childrens titles.',
+        heroImageUrl: 'http://staff-picks-dev.us-east-1.elasticbeanstalk.com/books-music-dvds/' +
+          'recommendations/staff-picks/src/client/images/desktop.childrens100.FIN.png',
+      },
     },
   },
 };
