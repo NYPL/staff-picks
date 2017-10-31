@@ -27,8 +27,8 @@ class BookStore {
     this.setState({ filters });
   }
 
-  setIsJsEnabled(bool) {
-    this.setState({ isJsEnabled: bool });
+  setIsJsEnabled(isJsEnabled) {
+    this.setState({ isJsEnabled });
   }
 
   setSelectableFilters(selectableFilters) {

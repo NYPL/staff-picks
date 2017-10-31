@@ -12,6 +12,7 @@
     "test-file": "node_modules/.bin/mocha -w test/helpers/browser.js",
     "coverage": "BABEL_ENV=test node_modules/.bin/nyc --require mocha npm test",
     "coverage-report": "BABEL_ENV=test node_modules/.bin/nyc report --reporter=lcov",
+    "coverage-report-html": "BABEL_ENV=test ./node_modules/.bin/nyc report --reporter=html && open -a 'Google Chrome' ./coverage/index.html",
     "nightwatch": "./node_modules/.bin/nightwatch"
   },
   "repository": {
