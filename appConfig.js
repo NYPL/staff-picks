@@ -37,7 +37,7 @@ const config = {
     'EQIDAQAB\n' +
     '-----END PUBLIC KEY-----',
   api: {
-    development: 'https://api.nypltech.org/api/v0.1',
+    development: 'https://dev-platform.nypl.org/api/v0.1',
     production: 'https://platform.nypl.org/api/v0.1',
   },
   loginUrl: 'https://login.nypl.org/auth/login',
