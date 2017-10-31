@@ -88,11 +88,12 @@ class Filter extends React.Component {
       activeClass,
     } = this.state;
     const { filter } = this.props;
-    const arialLabel = activeClass === 'active' ? `${filter.label} remove filter` : filter.label;
 
     if (_isEmpty(filter)) {
       return null;
     }
+
+    const arialLabel = activeClass === 'active' ? `${filter.label} remove filter` : filter.label;
 
     return (
       <li className="filter-item">
