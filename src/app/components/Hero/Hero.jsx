@@ -16,12 +16,12 @@ class Hero extends React.Component {
         <div className="Hero__container nypl-full-width-wrapper">
           <div className="Hero__text nypl-column-three-quarters nypl-column-offset-one">
             <div className="Hero__text__HeroTitle">
-              <h3>{this.props.listMetaData.category}</h3>
+              <h3>{this.props.heroData.category}</h3>
               <p className="Hero__text__HeroTitle__des">
-                {this.props.listMetaData.header}
+                {this.props.heroData.header}
               </p>
               <p className="Hero__text__HeroTitle__intro">
-                {this.props.listMetaData.description}
+                {this.props.heroData.description}
               </p>
             </div>
           </div>
@@ -33,7 +33,7 @@ class Hero extends React.Component {
 
 Hero.propTypes = {
   currentPicks: PropTypes.object.isRequired,
-  listMetaData: PropTypes.object.isRequired,
+  heroData: PropTypes.object.isRequired,
 };
 
 export default Hero;

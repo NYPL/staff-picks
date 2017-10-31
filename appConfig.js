@@ -39,7 +39,7 @@ const config = {
     print: 'https://www.nypl.org/accessibility/print-disabilities',
     about: 'https://www.nypl.org/books-music-dvds/recommendations/about/annual-lists',
   },
-  listMetaData: {
+  heroData: {
     annual: {
       ya: {
         category: 'Recommends',
