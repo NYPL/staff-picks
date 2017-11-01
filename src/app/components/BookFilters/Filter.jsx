@@ -16,7 +16,7 @@ class Filter extends React.Component {
 
     const active = this.props.active;
     this.state = {
-      icon: active ? <XIcon /> : <CheckSoloIcon />,
+      icon: active ? <XIcon /> : <CheckSoloIcon ariaHidden />,
       activeClass: active ? 'active' : '',
     };
     this.onClick = this.onClick.bind(this);
@@ -59,7 +59,7 @@ class Filter extends React.Component {
       // Back to either active or inactive:
       setTimeout(() => {
         this.setState({
-          icon: active ? <XIcon /> : <CheckSoloIcon />,
+          icon: active ? <XIcon /> : <CheckSoloIcon ariaHidden />,
           activeClass: active ? 'active' : '',
         });
 
@@ -68,7 +68,7 @@ class Filter extends React.Component {
     } else {
       // We want to set the icon back to its icon.
       this.setState({
-        icon: active ? <XIcon /> : <CheckSoloIcon />,
+        icon: active ? <XIcon /> : <CheckSoloIcon ariaHidden />,
         activeClass: active ? 'active' : '',
       });
     }
@@ -93,12 +93,15 @@ class Filter extends React.Component {
       return null;
     }
 
+    const arialLabel = activeClass === 'active' ? `${filter.label} remove filter` : filter.label;
+
     return (
       <li className="filter-item">
         <button
           ref={filter.id}
           className={`nypl-primary-button ${activeClass}`}
           onClick={this.onClick}
+          aria-label={arialLabel}
         >
           {icon} {filter.label}
         </button>

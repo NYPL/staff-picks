@@ -98,6 +98,7 @@ class App extends React.Component {
           clearFilters={this.clearFilters}
           isJsEnabled={this.props.isJsEnabled}
           selectedFilters={this.state.selectedFilters}
+          picksCount={this.state.picks.length}
         />
 
         <BookList

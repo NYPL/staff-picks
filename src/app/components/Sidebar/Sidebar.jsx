@@ -7,9 +7,11 @@ import config from '../../../../appConfig';
 
 const Sidebar = (props) => (
   <div className="sidebar nypl-column-one-quarter">
-    <a href={config.recommendationsLink.url} className="back-link">
-      <LeftWedgeIcon /> {config.recommendationsLink.label}
-    </a>
+    <nav aria-label="Breadcrumbs">
+      <a href={config.recommendationsLink.url} className="back-link">
+        <LeftWedgeIcon title="Return to" ariaHidden={false} /> {config.recommendationsLink.label}
+      </a>
+    </nav>
 
     <BookFilters
       filters={props.filters}
@@ -17,6 +19,7 @@ const Sidebar = (props) => (
       setSelectedFilter={props.setSelectedFilter}
       clearFilters={props.clearFilters}
       selectedFilters={props.selectedFilters}
+      picksCount={props.picksCount}
     />
   </div>
 );
@@ -28,6 +31,7 @@ Sidebar.propTypes = {
   clearFilters: PropTypes.func,
   isJsEnabled: PropTypes.bool,
   selectedFilters: PropTypes.array,
+  picksCount: PropTypes.number,
 };
 
 Sidebar.defaultProps = {
