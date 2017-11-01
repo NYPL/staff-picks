@@ -30,7 +30,7 @@ function Utils() {
    * @param {object} book
    */
   this.getPickTags = (book) => {
-    if (!(book.tags && book.tags.length)) {
+    if (!book || !(book.tags && book.tags.length)) {
       return [];
     }
     return book.tags.map(tag => tag.toLowerCase().split(' ').join('-'));
