@@ -60,6 +60,10 @@ const config = {
       },
     },
   },
+  pageTitle: {
+    ya: 'Best Books for Teens',
+    childrens: 'Best Books for Kids',
+  },
 };
 
 export default config;

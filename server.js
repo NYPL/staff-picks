@@ -86,6 +86,7 @@ app.use('/', (req, res) => {
           appEnv: process.env.APP_ENV || 'no APP_ENV',
           assets: buildAssets,
           webpackPort: WEBPACK_DEV_PORT,
+          pageTitle: res.locals.data.pageTitle,
         });
     } else {
       res.status(404).send('Not found');
