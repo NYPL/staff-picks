@@ -60,6 +60,10 @@ const config = {
       },
     },
   },
+  requestUrlsText: {
+    catalog: 'Request Book',
+    ebook: 'Request E-Book',
+  },
 };
 
 export default config;
