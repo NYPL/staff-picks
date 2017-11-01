@@ -89,6 +89,9 @@ class BookFilters extends React.Component {
       <div className="book-filters">
         <div className="book-filters-heading">
           <h2><FilterIcon /> Filter by Tags</h2>
+          <span aria-live="assertive" aria-atomic="true">
+            {this.props.picksCount} Books found
+          </span>
         </div>
         <ul>
           {this.renderItems(filtersToRender)}
@@ -115,6 +118,7 @@ BookFilters.propTypes = {
   setSelectedFilter: PropTypes.func,
   clearFilters: PropTypes.func,
   selectedFilters: PropTypes.array,
+  picksCount: PropTypes.number,
 };
 
 BookFilters.defaultProps = {

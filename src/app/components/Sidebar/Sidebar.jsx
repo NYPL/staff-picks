@@ -18,6 +18,7 @@ const Sidebar = (props) => {
         setSelectedFilter={props.setSelectedFilter}
         clearFilters={props.clearFilters}
         selectedFilters={props.selectedFilters}
+        picksCount={props.picksCount}
       />
     );
   };
@@ -39,6 +40,7 @@ Sidebar.propTypes = {
   clearFilters: PropTypes.func,
   isJsEnabled: PropTypes.bool,
   selectedFilters: PropTypes.array,
+  picksCount: PropTypes.number,
 };
 
 Sidebar.defaultProps = {
