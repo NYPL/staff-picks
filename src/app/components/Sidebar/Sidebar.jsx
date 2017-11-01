@@ -25,9 +25,11 @@ const Sidebar = (props) => {
 
   return (
     <div className="sidebar nypl-column-one-quarter">
-      <a href={config.recommendationsLink.url} className="back-link">
-        <LeftWedgeIcon /> {config.recommendationsLink.label}
-      </a>
+      <nav aria-label="Breadcrumbs">
+        <a href={config.recommendationsLink.url} className="back-link">
+          <LeftWedgeIcon title="Return to" ariaHidden={false} /> {config.recommendationsLink.label}
+        </a>
+      </nav>
       {renderBookFilters(props.isJsEnabled)}
     </div>
   );
