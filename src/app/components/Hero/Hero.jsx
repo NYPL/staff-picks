@@ -16,6 +16,7 @@ class Hero extends React.Component {
         <div className="Hero__container nypl-full-width-wrapper">
           <div className="Hero__text nypl-column-three-quarters nypl-column-offset-one">
             <div className="Hero__text__HeroTitle">
+              {this.props.heroData.category ? <p>{this.props.heroData.category}</p> : ''}
               <h1 className="Hero__text__HeroTitle__des">
                 {this.props.heroData.header}
               </h1>
