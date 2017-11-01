@@ -90,7 +90,7 @@ class BookFilters extends React.Component {
         <div className="book-filters-heading">
           <h2><FilterIcon /> Filter by Tags</h2>
           <span aria-live="assertive" aria-atomic="true">
-            {this.props.picksCount} Books found
+            {this.props.picksCount} books found
           </span>
         </div>
         <ul>

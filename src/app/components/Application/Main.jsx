@@ -5,7 +5,7 @@ import BookList from '../BookList/BookList.jsx';
 import Sidebar from '../Sidebar/Sidebar.jsx';
 import utils from '../../utils/utils';
 
-class App extends React.Component {
+class Main extends React.Component {
   constructor(props) {
     super(props);
 
@@ -110,18 +110,18 @@ class App extends React.Component {
   }
 }
 
-App.propTypes = {
+Main.propTypes = {
   filters: PropTypes.array,
   selectableFilters: PropTypes.array,
   currentPicks: PropTypes.object,
   isJsEnabled: PropTypes.bool,
 };
 
-App.defaultProps = {
+Main.defaultProps = {
   filters: [],
   selectableFilters: [],
   currentPicks: {},
   isJsEnabled: false,
 };
 
-export default App;
+export default Main;
