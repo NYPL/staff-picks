@@ -93,7 +93,7 @@ describe('Book Component', () => {
       const linksWrapper = component.find('.book-item-catalog-links');
       expect(linksWrapper.length).to.equal(1);
       expect(linksWrapper.find('.catalog-url').length).to.equal(1);
-      expect(linksWrapper.find('.catalog-url').text()).to.contain('REQUEST THE BOOK');
+      expect(linksWrapper.find('.catalog-url').text()).to.contain('Request Book');
       expect(linksWrapper.find('.catalog-url').prop('href')).to.equal(pickObject.book.catalogUrl);
     });
 
@@ -101,7 +101,7 @@ describe('Book Component', () => {
       const linksWrapper = component.find('.book-item-catalog-links');
       expect(linksWrapper.length).to.equal(1);
       expect(linksWrapper.find('.ebook-url').length).to.equal(1);
-      expect(linksWrapper.find('.ebook-url').text()).to.contain('REQUEST THE E-BOOK');
+      expect(linksWrapper.find('.ebook-url').text()).to.contain('Request E-Book');
       expect(linksWrapper.find('.ebook-url').prop('href')).to.equal(pickObject.book.ebookUrl);
     });
   });
