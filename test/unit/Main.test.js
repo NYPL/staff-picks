@@ -146,5 +146,32 @@ describe('Main', () => {
       //   expect(component.state('selectedFilters')).to.eql(['funny']);
       // });
     });
+
+    describe('clearFilters', () => {
+      let component;
+      let clearFilters;
+
+      before(() => {
+        component = shallow(<Main currentPicks={{ picks: [] }} />);
+        clearFilters = component.instance().clearFilters;
+      });
+
+      it('should clear the state', () => {
+        component.setState({
+          picks,
+          selectedFilters,
+          selectableFilters: ['funny', 'graphic-novels'],
+        });
+
+        expect(component.state('selectedFilters')).to.eql(selectedFilters);
+        expect(component.state('picks')).to.eql(picks);
+
+        clearFilters();
+
+        expect(component.state('selectedFilters')).to.eql([]);
+        expect(component.state('selectableFilters')).to.eql([]);
+        expect(component.state('picks')).to.eql([]);
+      });
+    });
   });
 });
