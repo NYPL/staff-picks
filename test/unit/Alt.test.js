@@ -14,7 +14,6 @@ import store from '../../src/app/stores/BookStore.js';
  * @returns {object} object with the name and data of that the Action was called with.
  */
 const getDispatcherArguments = (dispatcherSpy, num) => dispatcherSpy.args[num][0];
-
 const picks = [
   {
     author: 'name',
@@ -27,6 +26,7 @@ const picks = [
 ];
 const filters = ['offbeat', 'funny', 'historical'];
 const selectableFilters = ['offbeat', 'funny'];
+
 describe('Alt', () => {
   describe('Actions', () => {
     let dispatcherSpy;
@@ -90,45 +90,48 @@ describe('Alt', () => {
 
   describe('Store', () => {
     it('should pass data to updatePicks Action', () => {
-      const oldSearchResults = store.getState().currentPicks;
+      const oldPicks = store.getState().currentPicks;
       const action = actions.UPDATE_PICKS;
       const data = {};
 
       // Dispatching new data.
       alt.dispatcher.dispatch({ action, data });
-      const newSearchResults = store.getState().currentPicks;
+      const newPicks = store.getState().currentPicks;
 
       // Since the action was already fired in a previous test, and we're using the same
       // instance, these tests are to verify that data updated and not caring so much
       // about what the actual data was.
-      expect(oldSearchResults).to.eql(picks);
-      expect(newSearchResults).to.eql({});
+      expect(oldPicks).to.eql(picks);
+      expect(newPicks).to.eql({});
     });
 
     it('should pass data to updateFilters Action', () => {
-      const oldSearchKeywords = store.getState().filters;
+      const oldFilters = store.getState().filters;
       const action = actions.UPDATE_FILTERS;
       const data = ['graphic-novels'];
 
       // Dispatching new data.
       alt.dispatcher.dispatch({ action, data });
-      const newSearchKeywords = store.getState().filters;
+      const newFilters = store.getState().filters;
 
-      expect(oldSearchKeywords).to.eql(filters);
-      expect(newSearchKeywords).to.eql(['graphic-novels']);
+      expect(oldFilters).to.eql(filters);
+      expect(newFilters).to.eql(['graphic-novels']);
+
+      // Clearing the data:
+      alt.dispatcher.dispatch({ action, data: [] });
     });
 
     it('should pass data to setSelectableFilters Action', () => {
-      const oldBib = store.getState().selectableFilters;
+      const oldSelectableFilters = store.getState().selectableFilters;
       const action = actions.SET_SELECTABLE_FILTERS;
-      const data = {};
+      const data = [];
 
       // Dispatching new data.
       alt.dispatcher.dispatch({ action, data });
-      const newBib = store.getState().selectableFilters;
+      const newSelectableFilters = store.getState().selectableFilters;
 
-      expect(oldBib).to.eql(selectableFilters);
-      expect(newBib).to.eql({});
+      expect(oldSelectableFilters).to.eql(selectableFilters);
+      expect(newSelectableFilters).to.eql([]);
     });
 
     it('should pass the boolean value to setIsJsEnabled Action', () => {

@@ -12,9 +12,13 @@ const BookList = (props) => {
   return (
     <div className="booklist-section nypl-column-three-quarters">
       <h2>2017 Picks</h2>
-      <ul className="booklist nypl-row">
-        {renderBookItems(props.picks)}
-      </ul>
+
+      {
+        !!props.picks.length &&
+        (<ul className="booklist nypl-row">
+          {renderBookItems(props.picks)}
+        </ul>)
+      }
 
       <About />
     </div>
