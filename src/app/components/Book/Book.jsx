@@ -12,10 +12,6 @@ const Book = ({ pick }) => {
 
   const getReviewsArray = (obj) => (obj.reviews || []);
 
-  const getTagsArray = (obj) => (
-    !_isEmpty(obj.tags) ? obj.tags.map(tag => tag.toLowerCase().split(' ').join('-')) : []
-  );
-
   const getTagClasses = (arrayOfTags) => (
     !_isEmpty(arrayOfTags) ? arrayOfTags.join(' ') : '');
 
@@ -71,7 +67,7 @@ const Book = ({ pick }) => {
 
   const book = getBookObject(pick);
   const reviewsArray = getReviewsArray(pick);
-  const tagsArray = getTagsArray(pick);
+  const tagsArray = utils.getPickTags(pick);
 
   return (
     <li
