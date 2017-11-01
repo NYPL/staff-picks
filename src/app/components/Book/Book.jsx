@@ -6,11 +6,14 @@ import config from '../../../../appConfig';
 import utils from '../../utils/utils';
 
 const Book = ({ pick }) => {
-  const book = pick.book;
-  const tagArray = pick.tags.map(tag => tag.toLowerCase().split(' ').join('-'));
-  const tagClasses = tagArray.join(' ');
-
   const isStringEmpty = (string) => (!_isString(string) || _isEmpty(string.trim()));
+
+  const getBookObject = (obj) => (obj.book || {});
+
+  const getReviewsArray = (obj) => (obj.reviews || []);
+
+  const getTagClasses = (arrayOfTags) => (
+    !_isEmpty(arrayOfTags) ? arrayOfTags.join(' ') : '');
 
   const renderBookCoverImage = (imageUrl) => {
     const defaultImageUrl = `${config.baseUrl}src/client/images/book-place-holder.png`;
@@ -22,17 +25,9 @@ const Book = ({ pick }) => {
     );
   };
 
-  const renderTitle = (title, link) => {
-    const titleClass = 'book-item-title';
-
-    if (!isStringEmpty(title)) {
-      if (!isStringEmpty(link)) {
-        return <h4 className={titleClass}><a href={link}>{title}</a></h4>;
-      }
-      return <h4 className={titleClass}>{title}</h4>;
-    }
-    return null;
-  };
+  const renderTitle = (title) => (
+    !isStringEmpty(title) ? <h3 className='book-item-title'>{title}</h3> : null
+  );
 
   const renderAuthor = (author) => (
     !isStringEmpty(author) ? <p className="book-item-author">{author}</p> : null
@@ -44,6 +39,7 @@ const Book = ({ pick }) => {
         <BookIcon width="32px" height="32px" ariaHidden />
         <span>REQUEST THE BOOK</span>
       </a> : null;
+
     const ebookLink = !isStringEmpty(ebookUrl) ?
       <a href={ebookUrl} className="ebook-url">
         <EReaderIcon ariaHidden />
@@ -57,20 +53,32 @@ const Book = ({ pick }) => {
       </div> : null;
   };
 
-  const renderDescription = (desc) => (
-    !isStringEmpty(desc) ? <p className="book-item-description">{desc}</p> : null
-  );
+  const renderDescription = (reviewsArray) => {
+    if (!_isEmpty(reviewsArray) && reviewsArray[0].text && reviewsArray[0].text.trim() !== '') {
+      const text = reviewsArray[0].text;
+      return <p className="book-item-description">{text}</p>
+    }
+    return null;
+  };
+
+  if (_isEmpty(pick)) {
+    return null;
+  }
+
+  const book = getBookObject(pick);
+  const reviewsArray = getReviewsArray(pick);
+  const tagsArray = utils.getPickTags(pick);
 
   return (
     <li
-      className={`book-item ${tagClasses}`}
-      key={book.title.trim()}
+      className={`book-item ${getTagClasses(tagsArray)}`}
+      key={!isStringEmpty(book.title) ? book.title : null}
     >
       {renderBookCoverImage(book.imageUrl)}
-      {renderTitle(book.title, book.catalogUrl)}
+      {renderTitle(book.title)}
       {renderAuthor(book.author)}
       {renderCatalogLinks(book.catalogUrl, book.ebookUrl)}
-      {renderDescription(pick.reviews[0].text)}
+      {renderDescription(reviewsArray)}
     </li>
   );
 };
