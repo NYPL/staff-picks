@@ -2,6 +2,7 @@ import {
   union as _union,
   contains as _contains,
   each as _each,
+  sortBy as _sortBy,
 } from 'underscore';
 
 import appConfig from '../../../appConfig.js';
@@ -73,7 +74,8 @@ function Utils() {
 
   /**
    * getAllTags(picks)
-   * Get all the tags from a pick list without modifying the tag's name.
+   * Get all the tags from a pick list without modifying the tag's name,
+   * and sorts them alphabetically.
    *
    * @param {array} picks
    */
@@ -85,7 +87,7 @@ function Utils() {
       tags = _union(tags, pickTags);
     });
 
-    return tags;
+    return _sortBy(tags, tag => tag);
   };
 }
 

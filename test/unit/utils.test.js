@@ -82,7 +82,7 @@ describe('Utils functions', () => {
           tags: [],
         },
       ];
-      expect(getAllTags(picks)).to.eql(['funny', 'horror', 'adventure', 'graphic-novels']);
+      expect(getAllTags(picks)).to.eql(['adventure', 'funny', 'graphic-novels', 'horror']);
     });
   });
 });
