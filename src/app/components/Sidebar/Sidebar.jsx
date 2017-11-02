@@ -5,24 +5,35 @@ import { LeftWedgeIcon } from 'dgx-svg-icons';
 import BookFilters from '../BookFilters/BookFilters.jsx';
 import config from '../../../../appConfig';
 
-const Sidebar = (props) => (
-  <div className="sidebar nypl-column-one-quarter">
-    <nav aria-label="Breadcrumbs">
-      <a href={config.recommendationsLink.url} className="back-link">
-        <LeftWedgeIcon title="Return to" ariaHidden={false} /> {config.recommendationsLink.label}
-      </a>
-    </nav>
+const Sidebar = (props) => {
+  const renderBookFilters = (shouldDisplay) => {
+    if (!shouldDisplay) {
+      return null;
+    }
 
-    <BookFilters
-      filters={props.filters}
-      selectableFilters={props.selectableFilters}
-      setSelectedFilter={props.setSelectedFilter}
-      clearFilters={props.clearFilters}
-      selectedFilters={props.selectedFilters}
-      picksCount={props.picksCount}
-    />
-  </div>
-);
+    return (
+      <BookFilters
+        filters={props.filters}
+        selectableFilters={props.selectableFilters}
+        setSelectedFilter={props.setSelectedFilter}
+        clearFilters={props.clearFilters}
+        selectedFilters={props.selectedFilters}
+        picksCount={props.picksCount}
+      />
+    );
+  };
+
+  return (
+    <div className="sidebar nypl-column-one-quarter">
+      <nav aria-label="Breadcrumbs">
+        <a href={config.recommendationsLink.url} className="back-link">
+          <LeftWedgeIcon title="Return to" ariaHidden={false} /> {config.recommendationsLink.label}
+        </a>
+      </nav>
+      {renderBookFilters(props.isJsEnabled)}
+    </div>
+  );
+};
 
 Sidebar.propTypes = {
   filters: PropTypes.array,

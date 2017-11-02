@@ -37,13 +37,13 @@ const Book = ({ pick }) => {
     const catalogLink = !isStringEmpty(catalogUrl) ?
       <a href={catalogUrl} className="catalog-url">
         <BookIcon width="32px" height="32px" ariaHidden />
-        <span>REQUEST THE BOOK</span>
+        <span>{config.requestUrlsText.catalog}</span>
       </a> : null;
 
     const ebookLink = !isStringEmpty(ebookUrl) ?
       <a href={ebookUrl} className="ebook-url">
         <EReaderIcon ariaHidden />
-        <span>REQUEST THE E-BOOK</span>
+        <span>{config.requestUrlsText.ebook}</span>
       </a> : null;
 
     return (catalogLink || ebookLink) ?
