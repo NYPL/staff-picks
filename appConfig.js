@@ -60,6 +60,10 @@ const config = {
       },
     },
   },
+  pageTitle: {
+    ya: 'Best Books for Teens | NYPL',
+    childrens: 'Best Books for Kids | NYPL',
+  },
   requestUrlsText: {
     catalog: 'Request Book',
     ebook: 'Request E-Book',

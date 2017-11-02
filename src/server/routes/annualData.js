@@ -12,8 +12,16 @@ const nyplApiClientGet = (endpoint) =>
  * Get the latest annual staff pick list for either childrens or ya.
  */
 function annualCurrentData(type, req, res, next) {
-  // Hard coded endpoint for now
-  nyplApiClientGet(`/book-lists/${type}/2017`)
+  const pageTitle = appConfig.pageTitle[type];
+  let dataType = '';
+
+  if (type === 'childrens') {
+    dataType = 'kids';
+  } else if (type === 'ya') {
+    dataType = 'teens';
+  }
+
+  nyplApiClientGet(`/book-lists/${dataType}/2017`)
     .then(data => {
       const filters = utils.getAllTags(data.picks);
       // Get the subset of tags that the picks can be filtered by.
@@ -26,6 +34,7 @@ function annualCurrentData(type, req, res, next) {
           selectableFilters,
           isJsEnabled: false,
         },
+        pageTitle,
       };
 
       next();
@@ -41,12 +50,8 @@ function annualCurrentData(type, req, res, next) {
 function selectAnnualData(req, res, next) {
   const type = req.params.type;
 
-  if (type === 'childrens') {
-    return annualCurrentData('kids', req, res, next);
-  }
-
-  if (type === 'ya') {
-    return annualCurrentData('teens', req, res, next);
+  if (type === 'childrens' || type === 'ya') {
+    return annualCurrentData(type, req, res, next);
   }
 
   return res.redirect(baseUrl);
