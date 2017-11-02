@@ -14,8 +14,8 @@
     background: $nypl-white;
   }
 
-  .inner {
-    width: 20rem;
+  p {
+    max-width: 100%;
   }
 
   @include min-screen($mobile-breakpoint) {
