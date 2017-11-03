@@ -13,14 +13,14 @@ class Hero extends React.Component {
         className="hero"
         style={{ backgroundImage: `url("${this.props.heroData.heroImageUrl}")` }}
       >
-        <div className="hero__container nypl-full-width-wrapper">
-          <div className="hero__text nypl-column-three-quarters nypl-column-offset-one">
-            <div className="hero__text__HeroTitle">
+        <div className="hero_container nypl-full-width-wrapper">
+          <div className="hero_text nypl-column-three-quarters nypl-column-offset-one">
+            <div className="hero_text_heroTitle">
               {this.props.heroData.category ? <p>{this.props.heroData.category}</p> : ''}
-              <h1 className="hero__text__HeroTitle__des">
+              <h1 className="hero_text_heroTitle_des">
                 {this.props.heroData.header}
               </h1>
-              <p className="hero__text__heroTitle__intro">
+              <p className="hero_text_heroTitle_intro">
                 {this.props.heroData.description}
               </p>
             </div>

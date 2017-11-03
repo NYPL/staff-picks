@@ -10,8 +10,8 @@
   padding: 0;
   width: 100%;
 
-  &__text {
-    &__heroTitle {
+  &_text {
+    &_heroTitle {
       h3 {
         // Not sure what the new font types should be:
         @include Kievit-Bold;
@@ -22,7 +22,7 @@
         text-transform: uppercase;
       }
 
-      &__des {
+      &_des {
         font-size: 2rem;
         font-weight: 400;
         line-height: 1.5;
@@ -32,7 +32,7 @@
         @include Milo-Regular;
       }
 
-      &__intro {
+      &_intro {
         background-color: transparentize(#fff, 0.5);
         font-family: 'KievitWeb-Book', sans-serif;
         font-size: 1.125rem;
@@ -47,7 +47,7 @@
     }
   }
 
-  &__image {
+  &_image {
     background-image: url('#{$staffPicksUrl}src/client/images/shelftalker.4.2.png');
     background-position: -10px 20px;
     background-size: 104%;
