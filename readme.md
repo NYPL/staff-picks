@@ -25,15 +25,20 @@
 
 ### Quick start
 
+- Get clientId and clientSecret environment variables.
 - Perform:
-    $ npm start
-- Navigate to http://localhost:3001/books-music-dvds/recommendations/staff-picks/
+    $ clientId=[clientId] clientSecret=[clientSecret] npm run dev-api-start
+- Navigate to http://localhost:3001/books-music-dvds/recommendations/best-books/ya or http://localhost:3001/books-music-dvds/recommendations/best-books/childrens
 
 ### Production mode
 
 To run locally in production mode, run:
 
-    $ NODE_ENV=production npm start
+    $ NODE_ENV=production clientId=[clientId] clientSecret=[clientSecret] npm run dev-api-start
+
+to use the `development` API, or the following to use the `production` API:
+
+    $ NODE_ENV=production clientId=[clientId] clientSecret=[clientSecret] npm run prod-api-start
 
 ## To promote code
 
@@ -115,4 +120,23 @@ Once the application has been created via `eb create ...` all subsequent updates
 
 ```bash
 eb deploy ${environment name} --profile ${your AWS profile}
+```
+
+### KMS Environment Variables
+Staff Picks and the API where the data is fetched from are currently deployed on NYPl's AWS instance. In order to fetch data, we are using the `@nypl/nypl-data-api-client` to make requests to the API with an authentication token. You can find the [full documentation here](https://www.npmjs.com/package/@nypl/nypl-data-api-client), but to be brief, we need a client id, a client secret, and a token url to authenticate.
+
+We currently have a process in NYPL Digital to get said pair of authentication strings. To be more secure in our AWS environment, we are encrypting those variables with AWS KMS. To encrypt the strings, make sure you have the `aws-cli` tool available on your computer and then run:
+
+```
+    $ aws kms encrypt --key-id [your-aws-key-id] --plaintext [string-to-encrypt] --output text --query CiphertextBlob --profile [name-of-your-aws-profile]
+```
+
+Running this command will output an base64 encrypted string which will be used as the `KMS_ENV` environment variable in AWS Elastic Beanstalk. The app will read the variable, and use the `aws-sdk` library to decrypt it. Once we decrypt it, we can use those values with the `@nypl/nypl-data-api-client` to connect to the API.
+
+As stated above, you will need the client id and secret when running the app locally, but they do not need to be encrypted. The encrypted values will be use in the AWS instances as environment variables and the app will pick those up and use them since the `KMS_ENV` variable will be set to `encrypted` in the Beanstalk instances.
+
+If you would like to use the encrypted variables, you can start the app using:
+
+```
+    $ NODE_ENV=production clientId=[encryptedClientId] clientSecret=[encryptedClientSecret] npm run prod-api-start
 ```

@@ -60,10 +60,10 @@ describe('BookFilters', () => {
       const filterListItem = component.find('li');
 
       expect(filterListItem.length).to.equal(4);
-      expect(filterListItem.at(0).text()).to.equal('NYPL Check Solo SVG Icon Funny');
-      expect(filterListItem.at(1).text()).to.equal('NYPL Check Solo SVG Icon Offbeat');
-      expect(filterListItem.at(2).text()).to.equal('NYPL Check Solo SVG Icon Middle Grade');
-      expect(filterListItem.at(3).text()).to.equal('NYPL Check Solo SVG Icon Graphic Novels');
+      expect(filterListItem.at(0).text()).to.equal('Funny');
+      expect(filterListItem.at(1).text()).to.equal('Offbeat');
+      expect(filterListItem.at(2).text()).to.equal('Middle Grade');
+      expect(filterListItem.at(3).text()).to.equal('Graphic Novels');
     });
 
     it('should not render the `clear filters` button', () => {
@@ -84,8 +84,8 @@ describe('BookFilters', () => {
       const filterListItem = component.find('li');
 
       expect(filterListItem.length).to.equal(2);
-      expect(filterListItem.at(0).text()).to.equal('NYPL Check Solo SVG Icon Funny');
-      expect(filterListItem.at(1).text()).to.equal('NYPL Check Solo SVG Icon Graphic Novels');
+      expect(filterListItem.at(0).text()).to.equal('Funny');
+      expect(filterListItem.at(1).text()).to.equal('Graphic Novels');
       // The state should still stay the same, but the list of actual filters to render reduces.
       expect(component.state('filters')).to.eql([
         { id: 'funny', label: 'Funny' },

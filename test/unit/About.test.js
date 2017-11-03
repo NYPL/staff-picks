@@ -19,12 +19,6 @@ describe('About', () => {
     expect(divWrapper.hasClass('nypl-row')).to.equal(true);
   });
 
-  it('should have an inner wrapper', () => {
-    const divWrapper = component.find('div').at(1);
-    expect(divWrapper.length).to.equal(1);
-    expect(divWrapper.hasClass('inner')).to.equal(true);
-  });
-
   it('should have four links', () => {
     expect(component.find('a').length).to.equal(4);
   });

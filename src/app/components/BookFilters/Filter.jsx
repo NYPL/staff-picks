@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import {
-  CheckSoloIcon,
   DotsIcon,
   XIcon,
 } from '@nypl/dgx-svg-icons';
@@ -16,7 +15,7 @@ class Filter extends React.Component {
 
     const active = this.props.active;
     this.state = {
-      icon: active ? <XIcon /> : <CheckSoloIcon ariaHidden />,
+      icon: active ? <XIcon /> : null,
       activeClass: active ? 'active' : '',
     };
     this.onClick = this.onClick.bind(this);
@@ -59,7 +58,7 @@ class Filter extends React.Component {
       // Back to either active or inactive:
       setTimeout(() => {
         this.setState({
-          icon: active ? <XIcon /> : <CheckSoloIcon ariaHidden />,
+          icon: active ? <XIcon /> : null,
           activeClass: active ? 'active' : '',
         });
 
@@ -68,7 +67,7 @@ class Filter extends React.Component {
     } else {
       // We want to set the icon back to its icon.
       this.setState({
-        icon: active ? <XIcon /> : <CheckSoloIcon ariaHidden />,
+        icon: active ? <XIcon /> : null,
         activeClass: active ? 'active' : '',
       });
     }
@@ -103,7 +102,7 @@ class Filter extends React.Component {
           onClick={this.onClick}
           aria-label={arialLabel}
         >
-          {icon} {filter.label}
+          {icon}{filter.label}
         </button>
       </li>
     );

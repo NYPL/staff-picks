@@ -45,12 +45,11 @@ describe('Filter', () => {
       expect(component.find('button').length).to.equal(1);
       expect(component.find('button').hasClass('nypl-primary-button')).to.equal(true);
       expect(component.find('button').hasClass('active')).to.equal(false);
-      expect(component.find('button').text()).to.equal('NYPL Check Solo SVG Icon funny');
+      expect(component.find('button').text()).to.equal('funny');
     });
 
-    it('should render the CheckSoloIcon SVG component', () => {
-      expect(component.find('svg').hasClass('check-solo-icon')).to.equal(true);
-      expect(component.find('svg').hasClass('x-icon')).to.equal(false);
+    it('should not render any SVG component', () => {
+      expect(component.find('svg').length).to.equal(0);
     });
 
     it('should have an inactive initial state', () => {
@@ -71,7 +70,7 @@ describe('Filter', () => {
       expect(component.find('button').length).to.equal(1);
       expect(component.find('button').hasClass('nypl-primary-button')).to.equal(true);
       expect(component.find('button').hasClass('active')).to.equal(true);
-      expect(component.find('button').text()).to.equal('Close Icon funny');
+      expect(component.find('button').text()).to.equal('Close Iconfunny');
     });
 
     it('should render the XIcon SVG component', () => {
@@ -95,15 +94,13 @@ describe('Filter', () => {
 
     it('should be inactive by default', () => {
       expect(component.state('activeClass')).to.equal('');
-      expect(component.find('svg').hasClass('check-solo-icon')).to.equal(true);
-      expect(component.find('svg').hasClass('x-icon')).to.equal(false);
+      expect(component.find('svg').length).to.equal(0);
     });
 
     it('should become active when passing new props', () => {
       component.setProps({ active: true });
 
       expect(component.state('activeClass')).to.equal('active');
-      expect(component.find('svg').hasClass('check-solo-icon')).to.equal(false);
       expect(component.find('svg').hasClass('x-icon')).to.equal(true);
     });
 
@@ -111,8 +108,7 @@ describe('Filter', () => {
       component.setProps({ active: false });
 
       expect(component.state('activeClass')).to.equal('');
-      expect(component.find('svg').hasClass('check-solo-icon')).to.equal(true);
-      expect(component.find('svg').hasClass('x-icon')).to.equal(false);
+      expect(component.find('svg').length).to.equal(0);
     });
   });
 
@@ -153,8 +149,7 @@ describe('Filter', () => {
 
     it('should be inactive by default', () => {
       expect(component.state('activeClass')).to.equal('');
-      expect(component.find('svg').hasClass('check-solo-icon')).to.equal(true);
-      expect(component.find('svg').hasClass('x-icon')).to.equal(false);
+      expect(component.find('svg').length).to.equal(0);
     });
 
     it('should be in the transition state when passing new props', () => {

@@ -30,24 +30,22 @@ class Sidebar extends React.Component {
 
     return (
       <div className="about nypl-row">
-        <div className="inner">
-          <h2>Additional Information</h2>
-          <p>Many of these titles are available in formats for <a href={aboutUrls.print}>patrons
-          with print disabilities.</a></p>
-          <p><a href={aboutUrls.about}>About Best Books</a></p>
-          <ul>
-            <li>
-              <a href={`${socialSharing.twitter}text=${shareText}&url=${shareUrl}&via=NYPL`}>
-                <TwitterIcon iconId="about-twitter" />
-              </a>
-            </li>
-            <li>
-              <a href={`${socialSharing.facebook}${this.state.location}`}>
-                <FaceBookIcon iconId="about-facebook" />
-              </a>
-            </li>
-          </ul>
-        </div>
+        <h2>Additional Information</h2>
+        <p>Many of these titles are available in formats for <a href={aboutUrls.print}>patrons
+        with print disabilities.</a></p>
+        <p><a href={aboutUrls.about}>About Best Books</a></p>
+        <ul>
+          <li>
+            <a href={`${socialSharing.twitter}text=${shareText}&url=${shareUrl}&via=NYPL`}>
+              <TwitterIcon iconId="about-twitter" />
+            </a>
+          </li>
+          <li>
+            <a href={`${socialSharing.facebook}${this.state.location}`}>
+              <FaceBookIcon iconId="about-facebook" />
+            </a>
+          </li>
+        </ul>
       </div>
     );
   }
