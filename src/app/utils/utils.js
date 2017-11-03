@@ -4,15 +4,9 @@ import {
   each as _each,
   sortBy as _sortBy,
 } from 'underscore';
-
-import appConfig from '../../../appConfig.js';
 import { gaUtils } from 'dgx-react-ga';
 
 function Utils() {
-  const unionFn = appTags => (newTags) => _union(appTags, newTags);
-
-  this.metaTagUnion = unionFn(appConfig.metaTags);
-
   /**
    * trackPicks(action, label)
    * Track a GA click event, where action and label come from

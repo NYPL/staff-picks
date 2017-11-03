@@ -83,7 +83,7 @@ const config = {
       childrens: {
         category: '',
         header: 'Best Books for Kids',
-        description: 'Explore our annual selection of outstanding childrens titles.',
+        description: 'Explore our annual selection of outstanding children\'s titles.',
         heroImageUrl: 'http://staff-picks-dev.us-east-1.elasticbeanstalk.com/books-music-dvds/' +
           'recommendations/staff-picks/src/client/images/desktop.childrens100.FIN.png',
       },
