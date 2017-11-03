@@ -13,6 +13,7 @@ const nyplApiClientGet = (endpoint) =>
  */
 function annualCurrentData(type, req, res, next) {
   const pageTitle = appConfig.pageTitle[type];
+  const metaTags = appConfig.metaTags[type];
   let dataType = '';
 
   if (type === 'childrens') {
@@ -35,12 +36,26 @@ function annualCurrentData(type, req, res, next) {
           isJsEnabled: false,
         },
         pageTitle,
+        metaTags,
       };
 
       next();
     })
     .catch(error => {
       console.log(`Error fetching endpoint: ${error}`);
+
+      res.locals.data = {
+        BookStore: {
+          filters: [],
+          currentPicks: {},
+          selectableFilters: [],
+          isJsEnabled: false,
+        },
+        pageTitle: '',
+        metaTags: [],
+      };
+
+      next();
     })
 }
 

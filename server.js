@@ -68,9 +68,9 @@ app.use('/', (req, res) => {
       const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
       const safePath = req.path.replace(/'/g, '').replace(/"/g, '');
       // Generate meta tags markup
-      const metaTags = appConfig.metaTags || [];
-      const renderedTags = metaTags.map((tag, index) =>
-        ReactDOMServer.renderToString(<meta data-doc-meta="true" key={index} {...tag} />)
+      const metaTags = res.locals.data.metaTags || [];
+      const renderedMetaTags = metaTags.map((tag, index) =>
+        ReactDOMServer.renderToString(<meta key={index} {...tag} />)
       );
 
       iso.add(html, alt.flush());
@@ -80,7 +80,7 @@ app.use('/', (req, res) => {
         .render('index', {
           path: safePath,
           isProduction,
-          metatags: renderedTags,
+          metatags: renderedMetaTags,
           markup: iso.render(),
           gaCode: analytics.google.code(isProduction),
           appEnv: process.env.APP_ENV || 'no APP_ENV',
