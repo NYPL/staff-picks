@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   FilterIcon,
   ResetIcon,
-} from 'dgx-svg-icons';
+} from '@nypl/dgx-svg-icons';
 import { contains as _contains } from 'underscore';
 
 import Filter from './Filter';

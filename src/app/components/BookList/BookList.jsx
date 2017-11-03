@@ -20,7 +20,7 @@ const BookList = (props) => {
         </ul>)
       }
 
-      <About />
+      <About listType={props.listType} />
     </div>
   );
 };
@@ -28,6 +28,7 @@ const BookList = (props) => {
 BookList.propTypes = {
   picks: PropTypes.array,
   isJsEnabled: PropTypes.bool,
+  listType: PropTypes.string,
 };
 
 BookList.defaultProps = {

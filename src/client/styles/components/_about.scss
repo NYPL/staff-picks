@@ -6,12 +6,22 @@
   ul {
     li {
       list-style: none;
+      display: inline-block;
     }
   }
 
   a {
     color: $nypl-blue;
     background: $nypl-white;
+  }
+
+  svg {
+    fill: $nypl-blue;
+    height: 30px;
+
+    &:first-child {
+      margin-right: 20px;
+    }
   }
 
   .inner {

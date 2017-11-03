@@ -5,7 +5,7 @@ import {
   CheckSoloIcon,
   DotsIcon,
   XIcon,
-} from 'dgx-svg-icons';
+} from '@nypl/dgx-svg-icons';
 import { isEmpty as _isEmpty } from 'underscore';
 
 const ANIMATION_TIMEOUT = 400;

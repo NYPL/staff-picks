@@ -68,6 +68,10 @@ const config = {
     catalog: 'Request Book',
     ebook: 'Request E-Book',
   },
+  socialSharing: {
+    facebook: 'https://www.facebook.com/sharer/sharer.php?u=',
+    twitter: 'https://twitter.com/intent/tweet?',
+  },
 };
 
 export default config;
