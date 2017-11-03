@@ -13,8 +13,8 @@ describe('Hero', () => {
       component = shallow(<Hero heroData={{}} />);
     });
 
-    it('should be wrapped in an .Hero class', () => {
-      expect(component.find('.Hero').length).to.equal(1);
+    it('should be wrapped in an .hero class', () => {
+      expect(component.find('.hero').length).to.equal(1);
     });
   });
 });

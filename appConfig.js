@@ -78,14 +78,14 @@ const config = {
         header: 'Best Books for Teens',
         description: 'Explore our annual selection of outstanding young adult titles.',
         heroImageUrl: 'http://staff-picks-dev.us-east-1.elasticbeanstalk.com/books-music-dvds/' +
-          'recommendations/staff-picks/src/client/images/desktop.banner.YA.FIN.png',
+          'recommendations/staff-picks/src/client/images/desktop.teens.cover.2017.png',
       },
       childrens: {
         category: '',
         header: 'Best Books for Kids',
         description: 'Explore our annual selection of outstanding children\'s titles.',
         heroImageUrl: 'http://staff-picks-dev.us-east-1.elasticbeanstalk.com/books-music-dvds/' +
-          'recommendations/staff-picks/src/client/images/desktop.childrens100.FIN.png',
+          'recommendations/src/client/images/desktop.kids.cover.2017.png',
       },
     },
   },
