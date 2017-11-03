@@ -5,13 +5,42 @@ const config = {
   baseApiUrl: '/books-music-dvds/recommendations/staff-picks/api/',
   baseAnnualUrl: '/books-music-dvds/recommendations/best-books/',
   baseMonthUrl: '/books-music-dvds/recommendations/staff-picks/',
-  metaTags: [
-    { property: 'og:type', content: 'website' },
-    { property: 'og:site_name', content: 'Recommendations | The New York Public Library' },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:site', content: '@nypl' },
-    { name: 'twitter:creator', content: '@nypl' },
-  ],
+  metaTags: {
+    ya: [
+      { property: 'og:type', content: 'website' },
+      { property: 'og:site_name', content: 'Best Books for Teens' },
+      { property: 'og:title', content: 'Best Books for Teens' },
+      { property: 'og:description', content: 'Explore The New York Public Library\'s annual ' +
+        'selection of outstanding young adult titles.' },
+      { property: 'og:url', content: 'https://www.nypl.org/books-music-dvds/recommendations' +
+        '/best-books/ya' },
+      { property: 'og:image', content: '' },
+      { name: 'twitter:title', content: 'Best Books for Teens' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:site', content: '@nypl' },
+      { name: 'twitter:creator', content: '@nypl' },
+      { name: 'twitter:description', content: 'Explore The New York Public Library\'s annual ' +
+        'selection of outstanding young adult titles.' },
+      { name: 'twitter:image', content: '' },
+    ],
+    childrens: [
+      { property: 'og:type', content: 'website' },
+      { property: 'og:site_name', content: 'Best Books for Kids' },
+      { property: 'og:title', content: 'Best Books for Kids' },
+      { property: 'og:description', content: 'Explore The New York Public Library\'s annual ' +
+        'selection of outstanding children\'s titles.' },
+      { property: 'og:url', content: 'https://www.nypl.org/books-music-dvds/recommendations' +
+        '/best-books/childrens' },
+      { property: 'og:image', content: '' },
+      { name: 'twitter:title', content: 'Best Books for Kids' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:site', content: '@nypl' },
+      { name: 'twitter:creator', content: '@nypl' },
+      { name: 'twitter:description', content: 'Explore The New York Public Library\'s annual ' +
+        'selection of outstanding children\'s titles.' },
+      { name: 'twitter:image', content: '' },
+    ],
+  },
   seasons: {
     Spring: ['March', 'April', 'May'],
     Summer: ['June', 'July', 'August'],
@@ -67,6 +96,10 @@ const config = {
   requestUrlsText: {
     catalog: 'Request Book',
     ebook: 'Request E-Book',
+  },
+  socialSharing: {
+    facebook: 'https://www.facebook.com/sharer/sharer.php?u=',
+    twitter: 'https://twitter.com/intent/tweet?',
   },
 };
 

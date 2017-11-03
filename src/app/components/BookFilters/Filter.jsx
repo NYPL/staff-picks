@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {
   DotsIcon,
   XIcon,
-} from 'dgx-svg-icons';
+} from '@nypl/dgx-svg-icons';
 import { isEmpty as _isEmpty } from 'underscore';
 
 const ANIMATION_TIMEOUT = 400;

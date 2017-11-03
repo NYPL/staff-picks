@@ -104,6 +104,7 @@ class Main extends React.Component {
         <BookList
           picks={this.state.picks}
           isJsEnabled={this.props.isJsEnabled}
+          listType={this.props.params.type}
         />
       </div>
     );
@@ -115,6 +116,7 @@ Main.propTypes = {
   selectableFilters: PropTypes.array,
   currentPicks: PropTypes.object,
   isJsEnabled: PropTypes.bool,
+  params: PropTypes.object,
 };
 
 Main.defaultProps = {
@@ -122,6 +124,7 @@ Main.defaultProps = {
   selectableFilters: [],
   currentPicks: {},
   isJsEnabled: false,
+  params: { type: '' },
 };
 
 export default Main;

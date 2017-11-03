@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LeftWedgeIcon } from 'dgx-svg-icons';
+import { LeftWedgeIcon } from '@nypl/dgx-svg-icons';
 
 import BookFilters from '../BookFilters/BookFilters.jsx';
 import config from '../../../../appConfig';
