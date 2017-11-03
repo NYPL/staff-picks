@@ -4,27 +4,6 @@ import { expect } from 'chai';
 import utils from '../../src/app/utils/utils.js';
 
 describe('Utils functions', () => {
-  describe('metaTagUnion', () => {
-    // utils.metaTagUnion is a curry function and is already initialized in the utils file.
-    const metaTagUnion = utils.metaTagUnion;
-
-    it('should merge any new tags with the existing tags in the app config', () => {
-      const newTags = [
-        { content: 'https://nypl.org', property: 'og:url' },
-        { content: 'The New York Public Library', name: 'twitter:title' },
-      ];
-      expect(metaTagUnion(newTags)).to.eql([
-        { content: 'website', property: 'og:type' },
-        { content: 'Recommendations | The New York Public Library', property: 'og:site_name' },
-        { content: 'summary_large_image', name: 'twitter:card' },
-        { content: '@nypl', name: 'twitter:site' },
-        { content: '@nypl', name: 'twitter:creator' },
-        { content: 'https://nypl.org', property: 'og:url' },
-        { content: 'The New York Public Library', name: 'twitter:title' },
-      ]);
-    });
-  });
-
   describe('getPickTags', () => {
     const getPickTags = utils.getPickTags;
 
