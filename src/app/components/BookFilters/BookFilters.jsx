@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   FilterIcon,
   ResetIcon,
-} from 'dgx-svg-icons';
+} from '@nypl/dgx-svg-icons';
 import { contains as _contains } from 'underscore';
 
 import Filter from './Filter';
@@ -77,7 +77,10 @@ class BookFilters extends React.Component {
 
   render() {
     const { filters } = this.state;
-    const { selectableFilters } = this.props;
+    const {
+      selectableFilters,
+      picksCount,
+    } = this.props;
 
     if (!filters.length) {
       return null;
@@ -90,7 +93,7 @@ class BookFilters extends React.Component {
         <div className="book-filters-heading">
           <h2><FilterIcon /> Filter by Tags</h2>
           <span aria-live="assertive" aria-atomic="true">
-            {this.props.picksCount} books found
+            {picksCount} book{picksCount === 1 ? '' : 's'} found
           </span>
         </div>
         <ul>

@@ -6,6 +6,7 @@
   ul {
     li {
       list-style: none;
+      display: inline-block;
     }
   }
 
@@ -14,8 +15,17 @@
     background: $nypl-white;
   }
 
-  .inner {
-    width: 20rem;
+  svg {
+    fill: $nypl-blue;
+    height: 30px;
+
+    &:first-child {
+      margin-right: 20px;
+    }
+  }
+
+  p {
+    max-width: 100%;
   }
 
   @include min-screen($mobile-breakpoint) {

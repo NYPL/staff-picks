@@ -19,14 +19,8 @@ describe('About', () => {
     expect(divWrapper.hasClass('nypl-row')).to.equal(true);
   });
 
-  it('should have an inner wrapper', () => {
-    const divWrapper = component.find('div').at(1);
-    expect(divWrapper.length).to.equal(1);
-    expect(divWrapper.hasClass('inner')).to.equal(true);
-  });
-
-  it('should have two links', () => {
-    expect(component.find('a').length).to.equal(2);
+  it('should have four links', () => {
+    expect(component.find('a').length).to.equal(4);
   });
 
   it('should have one link to the accessible print editions of the titles', () => {
