@@ -74,7 +74,7 @@ const Book = ({ pick, isJsEnabled }) => {
   const renderTags = (tags, isJsEnabled) => {
     const tagsMarkup = !_isEmpty(tags) ?
       tags.map((tag, i) => <span key={i}>{tag}{i !== (tags.length - 1) ? ', ' : ''}</span>) : null;
-    const hiddenClass = isJsEnabled ? '' : '';
+    const hiddenClass = isJsEnabled ? 'visuallyHidden' : '';
 
     return (tagsMarkup) ? <p className={`book-item-tags ${hiddenClass}`}>{tagsMarkup}</p> : null;
   };
