@@ -8,19 +8,17 @@ class Hero extends React.Component {
   }
 
   render() {
+    const image = this.props.heroData.heroImageUrl;
     return (
-      <div
-        className="hero"
-        style={{ backgroundImage: `url("${this.props.heroData.heroImageUrl}")` }}
-      >
-        <div className="hero_container nypl-full-width-wrapper">
-          <div className="hero_text nypl-column-three-quarters nypl-column-offset-one">
-            <div className="hero_text_heroTitle">
-              {this.props.heroData.category ? <p>{this.props.heroData.category}</p> : ''}
-              <h1 className="hero_text_heroTitle_des">
-                {this.props.heroData.header}
-              </h1>
-              <p className="hero_text_heroTitle_intro">
+      <div className="hero">
+        <div className="hero-image">
+          <img src={image} alt="" />
+        </div>
+        <div className="hero-container nypl-full-width-wrapper">
+          <div className="nypl-row">
+            <div className="hero-content nypl-column-three-quarters nypl-column-offset-one">
+              <h1>{this.props.heroData.header}</h1>
+              <p className="hero-content-description">
                 {this.props.heroData.description}
               </p>
             </div>
