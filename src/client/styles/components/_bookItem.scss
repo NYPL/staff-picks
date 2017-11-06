@@ -1,3 +1,6 @@
+$book-card-smallscreen-gutter: 2.5%;
+$book-card-largescreen-gutter: 3.5%;
+
 .book-item {
   border-bottom: 2px solid $nypl-gray-cool;
   margin: .5em .25em 1.5em .25em;
@@ -5,6 +8,12 @@
   padding-top: .75em;
   max-width: 100%;
   @include clearfix;
+
+  &.withTranslatorIllustrator {
+    .book-item-illustrator {
+      margin-bottom: 0;
+    }
+  }
 
   // Split into two columns
   @include min-screen($mobile-breakpoint) {
@@ -31,33 +40,65 @@
     float: left;
 
     @include min-screen($xtrasmall-breakpoint) {
+      min-height: 280px;
+    }
+
+    @include min-screen($xtrasmall-breakpoint + 150px) {
       min-height: 400px;
     }
 
     img {
       display: block;
       max-width: 100%;
-      margin: 0 2.5%;
+      margin: 0 $book-card-smallscreen-gutter;
     }
   }
 
   &-title {
     float: left;
     font-weight: bold;
-    margin: 0 2.5%;
+    margin: 0 $book-card-smallscreen-gutter;
     width: 65%;
+    line-height: 1.2;
+
+    @include min-screen($mobile-breakpoint) {
+      margin: 0 $book-card-largescreen-gutter;
+      width: 63%;
+    }
   }
 
   &-author {
     float: left;
     font-size: 1.05rem;
     font-weight: normal;
-    margin: 7.5% 2.5%;
+    margin: 3% $book-card-smallscreen-gutter 0;
     width: 65%;
 
-    @include min-screen($xtrasmall-breakpoint) {
-      margin-bottom: 3.5%;
-      margin-top: 3.5%;
+    @include min-screen($mobile-breakpoint) {
+      margin: 3% $book-card-largescreen-gutter 0;
+      width: 63%;
+    }
+  }
+
+  &-illustrator {
+    float: left;
+    width: 65%;
+    margin: 0 $book-card-smallscreen-gutter 1.25%;
+
+    @include min-screen($mobile-breakpoint) {
+      margin: 0 $book-card-largescreen-gutter 1.25%;
+      width: 63%;
+    }
+  }
+
+  &-translator {
+    float: left;
+    width: 65%;
+    margin: 0 $book-card-smallscreen-gutter 1.25%;
+
+    @include min-screen($mobile-breakpoint) {
+      margin: 0 $book-card-largescreen-gutter 1.25%;
+      width: 63%;
     }
   }
 
@@ -68,9 +109,14 @@
     @include min-screen($xtrasmall-breakpoint) {
       clear: none;
       float: left;
-      margin: 0 2.5%;
+      margin: 0 $book-card-smallscreen-gutter;
       padding: 0;
       width: 65%;
+    }
+
+    @include min-screen($mobile-breakpoint) {
+      width: 63%;
+      margin: 0 $book-card-largescreen-gutter;
     }
 
     a {
@@ -90,7 +136,7 @@
 
       &:first-child {
         @include min-screen($xtrasmall-breakpoint) {
-          margin: 0 10px 10px 0;
+          margin: 10px 10px 10px 0;
         }
       }
 
@@ -140,7 +186,12 @@
       clear: none;
       float: left;
       width: 65%;
-      margin: 1% 2.5%
+      margin: 1% $book-card-smallscreen-gutter;
+    }
+
+    @include min-screen($mobile-breakpoint) {
+      margin: 1% $book-card-largescreen-gutter;
+      width: 63%;
     }
   }
 }
