@@ -47,10 +47,10 @@ describe('Book Component', () => {
     });
   });
 
-  describe('Component with data', () => {
+  describe('Component with data and JavaScript enabled', () => {
     before(() => {
       component = mount(
-        <Book pick={pickObject} />
+        <Book pick={pickObject} isJsEnabled={true} />
       );
     });
 
@@ -124,6 +124,34 @@ describe('Book Component', () => {
     it('should assign a .withTranslatorIllustrator class if both translator and illustrator exist', () => {
       const bookWrapper = component.find('.book-item');
       expect(bookWrapper.hasClass('withTranslatorIllustrator')).to.equal(true);
+    });
+
+    it('should render the pick tags in a <p> tag nested with <span> elements', () => {
+      const tags = component.find('.book-item-tags');
+      expect(tags.length).to.equal(1);
+      expect(tags.find('span').length).to.equal(2);
+      expect(tags.childAt(0).text()).to.equal('offbeat, ');
+      expect(tags.childAt(1).text()).to.equal('seriously-good-writing');
+    });
+
+    it('should render the pick tags with a visuallyHidden class when JavaScript is enabled', () => {
+      const tags = component.find('.book-item-tags');
+      expect(tags.length).to.equal(1);
+      expect(tags.hasClass('visuallyHidden')).to.equal(true);
+    });
+  });
+
+  describe('Component with data and JavaScript disabled', () => {
+    before(() => {
+      component = mount(
+        <Book pick={pickObject} isJsEnabled={false} />
+      );
+    });
+
+    it('should render the pick tags in a <p> tag and contain should not visuallyHidden class', () => {
+      const tags = component.find('.book-item-tags');
+      expect(tags.length).to.equal(1);
+      expect(tags.hasClass('visuallyHidden')).to.equal(false);
     });
   });
 });

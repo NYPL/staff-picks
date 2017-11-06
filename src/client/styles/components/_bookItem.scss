@@ -40,11 +40,11 @@ $book-card-largescreen-gutter: 3.5%;
     float: left;
 
     @include min-screen($xtrasmall-breakpoint) {
-      min-height: 280px;
+      min-height: 300px;
     }
 
     @include min-screen($xtrasmall-breakpoint + 150px) {
-      min-height: 400px;
+      min-height: 350px;
     }
 
     img {
@@ -191,6 +191,27 @@ $book-card-largescreen-gutter: 3.5%;
 
     @include min-screen($mobile-breakpoint) {
       margin: 1% $book-card-largescreen-gutter;
+      width: 63%;
+    }
+  }
+
+  &-tags {
+    padding: 0;
+    margin: 0 1%;
+    clear: left;
+    display: block;
+    font-size: .75rem;
+    color: $nypl-red;
+
+    @include min-screen($xtrasmall-breakpoint) {
+      clear: none;
+      float: right;
+      width: 65%;
+      margin: 1% $book-card-smallscreen-gutter;
+    }
+
+    @include min-screen($mobile-breakpoint) {
+      margin: 0 $book-card-largescreen-gutter 1%;
       width: 63%;
     }
   }
