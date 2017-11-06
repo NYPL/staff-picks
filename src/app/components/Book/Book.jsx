@@ -33,6 +33,16 @@ const Book = ({ pick }) => {
     !isStringEmpty(author) ? <p className="book-item-author">{author}</p> : null
   );
 
+  const renderIllustrator = (illustrator) => (
+    !isStringEmpty(illustrator) ?
+      <p className="book-item-illustrator">Illustrated by {illustrator}</p> : null
+  );
+
+  const renderTranslator = (translator) => (
+    !isStringEmpty(translator) ?
+      <p className="book-item-translator">Translated by {translator}</p> : null
+  );
+
   const renderCatalogLinks = (catalogUrl, ebookUrl) => {
     const catalogLink = !isStringEmpty(catalogUrl) ?
       <a href={catalogUrl} className="catalog-url">
@@ -68,15 +78,19 @@ const Book = ({ pick }) => {
   const book = getBookObject(pick);
   const reviewsArray = getReviewsArray(pick);
   const tagsArray = utils.getPickTags(pick);
+  const hasIllustratorTranslatorClass = !isStringEmpty(book.translator)
+    && !isStringEmpty(book.illustrator) ? 'withTranslatorIllustrator' : '';
 
   return (
     <li
-      className={`book-item ${getTagClasses(tagsArray)}`}
+      className={`book-item ${getTagClasses(tagsArray)} ${hasIllustratorTranslatorClass}`}
       key={!isStringEmpty(book.title) ? book.title : null}
     >
       {renderBookCoverImage(book.imageUrl)}
       {renderTitle(book.title)}
       {renderAuthor(book.author)}
+      {renderIllustrator(book.illustrator)}
+      {renderTranslator(book.translator)}
       {renderCatalogLinks(book.catalogUrl, book.ebookUrl)}
       {renderDescription(reviewsArray)}
     </li>

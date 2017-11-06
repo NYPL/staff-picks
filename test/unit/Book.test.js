@@ -27,7 +27,9 @@ const pickObject = {
     "imageUrl": "http://imagesb.btol.com/ContentCafe/Jacket.aspx?UserID=ContentCafeClient&Password=Client&Return=T&Type=L&Value=9780385539906",
     "isbn": "9780385539913",
     "overdriveId": "2678726",
-    "title": "A Gambler's Anatomy"
+    "title": "A Gambler's Anatomy",
+    "illustrator": "I am an illustrator",
+    "translator": "I am a translator"
   }
 };
 
@@ -103,6 +105,25 @@ describe('Book Component', () => {
       expect(linksWrapper.find('.ebook-url').length).to.equal(1);
       expect(linksWrapper.find('.ebook-url').text()).to.contain('Request E-Book');
       expect(linksWrapper.find('.ebook-url').prop('href')).to.equal(pickObject.book.ebookUrl);
+    });
+
+    it('should render the pick translator <p> element with text', () => {
+      const text = component.find('.book-item-translator');
+      expect(text.length).to.equal(1);
+      expect(text.find('p').length).to.equal(1);
+      expect(text.find('p').text()).to.equal('Translated by ' + pickObject.book.translator);
+    });
+
+    it('should render the pick illustrator <p> element with text', () => {
+      const text = component.find('.book-item-illustrator');
+      expect(text.length).to.equal(1);
+      expect(text.find('p').length).to.equal(1);
+      expect(text.find('p').text()).to.equal('Illustrated by ' + pickObject.book.illustrator);
+    });
+
+    it('should assign a .withTranslatorIllustrator class if both translator and illustrator exist', () => {
+      const bookWrapper = component.find('.book-item');
+      expect(bookWrapper.hasClass('withTranslatorIllustrator')).to.equal(true);
     });
   });
 });
