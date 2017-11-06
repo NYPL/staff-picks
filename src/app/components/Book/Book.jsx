@@ -5,7 +5,7 @@ import { isEmpty as _isEmpty, isString as _isString } from 'underscore';
 import config from '../../../../appConfig';
 import utils from '../../utils/utils';
 
-const Book = ({ pick }) => {
+const Book = ({ pick, isJsEnabled }) => {
   const isStringEmpty = (string) => (!_isString(string) || _isEmpty(string.trim()));
 
   const getBookObject = (obj) => (obj.book || {});
@@ -37,10 +37,9 @@ const Book = ({ pick }) => {
     !isStringEmpty(illustrator) ? <p className="book-item-illustrator">Illustrated By: {illustrator}</p> : null
   );
 
-  const renderTranslator= (translator) => (
+  const renderTranslator = (translator) => (
     !isStringEmpty(translator) ? <p className="book-item-translator">Translated By: {translator}</p> : null
   );
-
 
   const renderCatalogLinks = (catalogUrl, ebookUrl) => {
     const catalogLink = !isStringEmpty(catalogUrl) ?
@@ -70,6 +69,14 @@ const Book = ({ pick }) => {
     return null;
   };
 
+  const renderTags = (tags, isJsEnabled) => {
+    const tagsMarkup = !_isEmpty(tags) ?
+      tags.map((tag, i) => <span key={i}>{tag}{i !== (tags.length - 1) ? ', ' : ''}</span>) : null;
+    const hiddenClass = isJsEnabled ? 'visuallyHidden' : '';
+
+    return (tagsMarkup) ? <p className={`book-item-tags ${hiddenClass}`}>{tagsMarkup}</p> : null;
+  };
+
   if (_isEmpty(pick)) {
     return null;
   }
@@ -92,12 +99,14 @@ const Book = ({ pick }) => {
       {renderTranslator(book.translator)}
       {renderCatalogLinks(book.catalogUrl, book.ebookUrl)}
       {renderDescription(reviewsArray)}
+      {renderTags(tagsArray, isJsEnabled)}
     </li>
   );
 };
 
 Book.propTypes = {
   pick: PropTypes.object,
+  isJsEnabled: PropTypes.bool,
 };
 
 export default Book;
