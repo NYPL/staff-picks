@@ -111,14 +111,14 @@ describe('Book Component', () => {
       const text = component.find('.book-item-translator');
       expect(text.length).to.equal(1);
       expect(text.find('p').length).to.equal(1);
-      expect(text.find('p').text()).to.equal('Translated By: ' + pickObject.book.translator);
+      expect(text.find('p').text()).to.equal('Translated by ' + pickObject.book.translator);
     });
 
     it('should render the pick illustrator <p> element with text', () => {
       const text = component.find('.book-item-illustrator');
       expect(text.length).to.equal(1);
       expect(text.find('p').length).to.equal(1);
-      expect(text.find('p').text()).to.equal('Illustrated By: ' + pickObject.book.illustrator);
+      expect(text.find('p').text()).to.equal('Illustrated by ' + pickObject.book.illustrator);
     });
 
     it('should assign a .withTranslatorIllustrator class if both translator and illustrator exist', () => {
