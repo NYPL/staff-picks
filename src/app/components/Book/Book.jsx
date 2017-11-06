@@ -34,13 +34,14 @@ const Book = ({ pick }) => {
   );
 
   const renderIllustrator = (illustrator) => (
-    !isStringEmpty(illustrator) ? <p className="book-item-illustrator">Illustrated By: {illustrator}</p> : null
+    !isStringEmpty(illustrator) ?
+      <p className="book-item-illustrator">Illustrated by {illustrator}</p> : null
   );
 
-  const renderTranslator= (translator) => (
-    !isStringEmpty(translator) ? <p className="book-item-translator">Translated By: {translator}</p> : null
+  const renderTranslator = (translator) => (
+    !isStringEmpty(translator) ?
+      <p className="book-item-translator">Translated by {translator}</p> : null
   );
-
 
   const renderCatalogLinks = (catalogUrl, ebookUrl) => {
     const catalogLink = !isStringEmpty(catalogUrl) ?
