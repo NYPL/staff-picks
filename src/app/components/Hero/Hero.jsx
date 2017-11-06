@@ -9,8 +9,8 @@ const Hero = ({ heroData }) => {
       <div className="hero-image">
         <img src={image} alt="" />
       </div>
-      <div className="hero-container nypl-full-width-wrapper">
-        <div className="nypl-row">
+      <div className="hero-container">
+        <div className="nypl-full-width-wrapper">
           <div className="hero-content nypl-column-three-quarters nypl-column-offset-one">
             <h1>{heroData.header}</h1>
             <p className="hero-content-description">

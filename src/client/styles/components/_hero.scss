@@ -1,11 +1,14 @@
 .hero {
   background-color: #fff;
-  border-bottom: 0.125rem solid #eee;
   color: #000000;
   width: 100%;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
+
+  @include min-screen($mobile-breakpoint) {
+    border-bottom: 0.125rem solid #eee;
+  }
 
   &-image {
     height: 15.625rem;
@@ -31,7 +34,6 @@
       position: absolute;
       margin: 0;
       padding: 0;
-      left: 6%;
       top: 55px;
       width: 100%;
     }
