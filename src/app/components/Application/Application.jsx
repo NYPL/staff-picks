@@ -44,7 +44,6 @@ class App extends React.Component {
 
         <main className="main-page">
           <Hero
-            currentPicks={this.state.currentPicks}
             heroData={config.heroData.annual[this.props.params.type]}
           />
 
