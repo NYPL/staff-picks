@@ -66,15 +66,15 @@ const Book = ({ pick, isJsEnabled }) => {
   const renderDescription = (reviewsArray) => {
     if (!_isEmpty(reviewsArray) && reviewsArray[0].text && reviewsArray[0].text.trim() !== '') {
       const text = reviewsArray[0].text;
-      return <p className="book-item-description">{text}</p>
+      return <p className="book-item-description">{text}</p>;
     }
     return null;
   };
 
-  const renderTags = (tags, isJsEnabled) => {
+  const renderTags = (tags, jsEnabled) => {
     const tagsMarkup = !_isEmpty(tags) ?
       tags.map((tag, i) => <span key={i}>{tag}{i !== (tags.length - 1) ? ', ' : ''}</span>) : null;
-    const hiddenClass = isJsEnabled ? 'visuallyHidden' : '';
+    const hiddenClass = jsEnabled ? 'visuallyHidden js' : 'no-js';
 
     return (tagsMarkup) ? <p className={`book-item-tags ${hiddenClass}`}>{tagsMarkup}</p> : null;
   };

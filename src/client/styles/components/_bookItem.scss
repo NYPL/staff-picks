@@ -199,9 +199,19 @@ $book-card-largescreen-gutter: 3.5%;
     padding: 0;
     margin: 0 1%;
     clear: left;
-    display: block;
+    display: none;
     font-size: .75rem;
     color: $nypl-red;
+
+    &.js {
+      animation: none;
+    }
+
+    &.no-js {
+      display: block;
+      animation-name: fadeIn;
+      animation-duration: 5s;
+    }
 
     @include min-screen($xtrasmall-breakpoint) {
       clear: none;
@@ -214,5 +224,16 @@ $book-card-largescreen-gutter: 3.5%;
       margin: 0 $book-card-largescreen-gutter 1%;
       width: 63%;
     }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
   }
 }
