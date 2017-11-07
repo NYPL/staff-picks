@@ -67,6 +67,7 @@ const config = {
     '-----END PUBLIC KEY-----',
   api: {
     development: 'https://dev-platform.nypl.org/api/v0.1',
+    qa: 'https://qa-platform.nypl.org/api/v0.1',
     production: 'https://platform.nypl.org/api/v0.1',
   },
   loginUrl: 'https://login.nypl.org/auth/login',
