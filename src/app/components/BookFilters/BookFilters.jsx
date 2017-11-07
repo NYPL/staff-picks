@@ -20,11 +20,13 @@ class BookFilters extends React.Component {
       })),
       selectedFilters: this.props.selectedFilters,
       focusId: '',
+      disabled: false,
     };
 
     this.renderItems = this.renderItems.bind(this);
     this.onClick = this.onClick.bind(this);
     this.getFilterArray = this.getFilterArray.bind(this);
+    this.setDisabled = this.setDisabled.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -37,6 +39,7 @@ class BookFilters extends React.Component {
     this.setState({
       filters: this.state.filters,
       focusId: filterId,
+      disabled: active,
     });
   }
 
@@ -55,6 +58,10 @@ class BookFilters extends React.Component {
     return filters.filter(filter => _contains(selectableFilters, filter.id));
   }
 
+  setDisabled(disabled) {
+    this.setState({ disabled });
+  }
+
   /**
    * renderItems(filters)
    * Render the filter button list items.
@@ -70,6 +77,8 @@ class BookFilters extends React.Component {
           onClick={this.onClick}
           focusId={this.state.focusId}
           active={active}
+          disabled={this.state.disabled}
+          setDisabled={this.setDisabled}
         />
       );
     });
