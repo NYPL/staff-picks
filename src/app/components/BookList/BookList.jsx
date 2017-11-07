@@ -6,7 +6,9 @@ import Book from '../Book/Book.jsx';
 
 const BookList = (props) => {
   const renderBookItems = (currentBooks) => (
-    currentBooks.length ? currentBooks.map((book, i) => <Book key={i} pick={book} isJsEnabled={props.isJsEnabled} />) : null
+    currentBooks.length ?
+      currentBooks.map((book, i) => <Book key={i} pick={book} isJsEnabled={props.isJsEnabled} />)
+      : null
   );
 
   return (

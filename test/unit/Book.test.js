@@ -50,7 +50,7 @@ describe('Book Component', () => {
   describe('Component with data and JavaScript enabled', () => {
     before(() => {
       component = mount(
-        <Book pick={pickObject} isJsEnabled={true} />
+        <Book pick={pickObject} isJsEnabled />
       );
     });
 
@@ -81,7 +81,7 @@ describe('Book Component', () => {
       expect(image.length).to.equal(1);
       expect(image.find('img').length).to.equal(1);
       expect(image.find('img').prop('src')).to.equal(pickObject.book.imageUrl);
-      expect(image.find('img').prop('alt')).to.equal("");
+      expect(image.find('img').prop('alt')).to.equal('');
     });
 
     it('should render the pick description <p> element with text', () => {
@@ -111,27 +111,28 @@ describe('Book Component', () => {
       const text = component.find('.book-item-translator');
       expect(text.length).to.equal(1);
       expect(text.find('p').length).to.equal(1);
-      expect(text.find('p').text()).to.equal('Translated by ' + pickObject.book.translator);
+      expect(text.find('p').text()).to.equal(`Translated by ${pickObject.book.translator}`);
     });
 
     it('should render the pick illustrator <p> element with text', () => {
       const text = component.find('.book-item-illustrator');
       expect(text.length).to.equal(1);
       expect(text.find('p').length).to.equal(1);
-      expect(text.find('p').text()).to.equal('Illustrated by ' + pickObject.book.illustrator);
+      expect(text.find('p').text()).to.equal(`Illustrated by ${pickObject.book.illustrator}`);
     });
 
-    it('should assign a .withTranslatorIllustrator class if both translator and illustrator exist', () => {
-      const bookWrapper = component.find('.book-item');
-      expect(bookWrapper.hasClass('withTranslatorIllustrator')).to.equal(true);
-    });
+    it('should assign a .withTranslatorIllustrator class if both translator and illustrator exist',
+      () => {
+        const bookWrapper = component.find('.book-item');
+        expect(bookWrapper.hasClass('withTranslatorIllustrator')).to.equal(true);
+      });
 
     it('should render the pick tags in a <p> tag nested with <span> elements', () => {
       const tags = component.find('.book-item-tags');
       expect(tags.length).to.equal(1);
-      expect(tags.find('span').length).to.equal(2);
-      expect(tags.childAt(0).text()).to.equal('offbeat, ');
-      expect(tags.childAt(1).text()).to.equal('seriously-good-writing');
+      expect(tags.find('span').length).to.equal(3);
+      expect(tags.childAt(1).text()).to.equal('Offbeat, ');
+      expect(tags.childAt(2).text()).to.equal('Seriously good writing');
     });
 
     it('should render the pick tags with a visuallyHidden class when JavaScript is enabled', () => {
@@ -148,10 +149,11 @@ describe('Book Component', () => {
       );
     });
 
-    it('should render the pick tags in a <p> tag and contain should not visuallyHidden class', () => {
-      const tags = component.find('.book-item-tags');
-      expect(tags.length).to.equal(1);
-      expect(tags.hasClass('visuallyHidden')).to.equal(false);
-    });
+    it('should render the pick tags in a <p> tag and contain should not visuallyHidden class',
+      () => {
+        const tags = component.find('.book-item-tags');
+        expect(tags.length).to.equal(1);
+        expect(tags.hasClass('visuallyHidden')).to.equal(false);
+      });
   });
 });
