@@ -156,6 +156,7 @@ describe('Filter', () => {
       component.setProps({
         active: true,
         focusId: 'funny',
+        disabled: true,
       });
 
       expect(component.state('activeClass')).to.equal('transition');
