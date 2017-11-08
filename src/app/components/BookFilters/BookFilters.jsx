@@ -108,6 +108,7 @@ class BookFilters extends React.Component {
             {booksfound}
           </span>
         </div>
+        <span className="visuallyHidden">Click to apply or remove tags.</span>
         <ul>
           {this.renderItems(filtersToRender)}
         </ul>
@@ -119,7 +120,7 @@ class BookFilters extends React.Component {
               ref="clearFilters"
             >
               <ResetIcon />
-              Clear Filters
+              Clear All Filters
             </button>)
         }
       </div>

@@ -76,7 +76,7 @@ class Filter extends React.Component {
       return null;
     }
 
-    const arialLabel = activeClass === 'active' ? `${filter.label} remove filter` : filter.label;
+    const arialLabel = activeClass === 'active' ? `${filter.label} tag applied` : filter.label;
 
     return (
       <li className="filter-item">
