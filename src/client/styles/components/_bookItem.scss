@@ -199,7 +199,6 @@ $book-card-largescreen-gutter: 3.5%;
     padding: 0;
     margin: 0 1%;
     clear: left;
-    display: none;
     font-size: .75rem;
     color: $nypl-red;
 
@@ -211,7 +210,6 @@ $book-card-largescreen-gutter: 3.5%;
     }
 
     &.no-js {
-      display: block;
       -webkit-animation: fadeIn 3s;
       -moz-animation: fadeIn 3s;
       -o-animation: fadeIn 3s;
