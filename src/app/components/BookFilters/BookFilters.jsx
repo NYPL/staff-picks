@@ -108,10 +108,10 @@ class BookFilters extends React.Component {
             {booksfound}
           </span>
         </div>
-        <span className="visuallyHidden" id="list-remove-description">
+        <span className="visuallyHidden" id="filter-list-description">
           Click to apply or remove tags.
         </span>
-        <ul aria-labelledby="list-remove-description">
+        <ul aria-labelledby="filter-list-description">
           {this.renderItems(filtersToRender)}
         </ul>
         {
