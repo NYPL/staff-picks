@@ -84,7 +84,10 @@ class Main extends React.Component {
     const picks = this.getNewPickSet(this.props.currentPicks.picks, selectedFilters);
     const selectableFilters = utils.getSelectableTags(picks);
 
-    ReactDOM.findDOMNode(ref).focus();
+    if (ref) {
+      ReactDOM.findDOMNode(ref).focus();
+    }
+
     this.setState({
       selectableFilters,
       picks,
