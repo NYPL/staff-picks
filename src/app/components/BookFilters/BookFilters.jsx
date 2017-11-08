@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   FilterIcon,
   ResetIcon,
+  LeftWedgeIcon,
 } from '@nypl/dgx-svg-icons';
 import { contains as _contains } from 'underscore';
 
@@ -20,10 +21,12 @@ class BookFilters extends React.Component {
       })),
       selectedFilters: this.props.selectedFilters,
       focusId: '',
+      showFilters: false,
     };
 
     this.renderItems = this.renderItems.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.toggleFilters = this.toggleFilters.bind(this);
     this.getFilterArray = this.getFilterArray.bind(this);
   }
 
@@ -38,6 +41,10 @@ class BookFilters extends React.Component {
       filters: this.state.filters,
       focusId: filterId,
     });
+  }
+
+  toggleFilters() {
+    this.setState({ showFilters: !this.state.showFilters });
   }
 
   /**
@@ -76,7 +83,7 @@ class BookFilters extends React.Component {
   }
 
   render() {
-    const { filters } = this.state;
+    const { filters, showFilters } = this.state;
     const {
       selectableFilters,
       picksCount,
@@ -87,16 +94,29 @@ class BookFilters extends React.Component {
     }
 
     const filtersToRender = this.getFilterArray(selectableFilters, filters);
+    const toggleFiltersDisplayClass = showFilters ? 'expand' : 'collapse';
+    const buttonAnimationClasses = showFilters ? 'rotate-up' : 'rotate-down';
 
     return (
       <div className="book-filters">
         <div className="book-filters-heading">
-          <h2><FilterIcon /> Filter by Tags</h2>
+          <h2>
+            <FilterIcon ariaHidden />
+            <span>Filter by Tags</span>
+          </h2>
           <span aria-live="assertive" aria-atomic="true">
             {picksCount} book{picksCount === 1 ? '' : 's'} found
           </span>
+          <button
+            aria-expanded={showFilters}
+            onClick={this.toggleFilters}
+            className="book-filters-toggleButton"
+          >
+            <LeftWedgeIcon ariaHidden className={buttonAnimationClasses} />
+            <span className="visuallyHidden">{showFilters ? 'Collapse' : 'Expand'}</span>
+          </button>
         </div>
-        <ul>
+        <ul className={`book-filters-list ${toggleFiltersDisplayClass}`}>
           {this.renderItems(filtersToRender)}
         </ul>
         {

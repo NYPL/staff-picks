@@ -1,5 +1,6 @@
 .book-filters {
   &-heading {
+    position: relative;
     border-top: 4px solid $nypl-red;
 
     h2 {
@@ -17,15 +18,56 @@
       }
     }
 
-    span {
+    & > span {
       font-size: 0.8rem;
-      margin: 0 0 0 15px;
+      margin: 0 0 0 12px;
       display: inline-block;
     }
   }
 
-  ul {
+  &-toggleButton {
+    -webkit-appearance: none;
+    background-color: $nypl-white;
+    border: none;
+    position: absolute;
+    right: .2em;
+    top: .4em;
+
+    @include min-screen($mobile-breakpoint) {
+      display: none;
+      visibility: hidden;
+    }
+
+    & .svgIcon {
+      @include transition-list(200ms linear);
+
+      &.rotate-up {
+        @include transform(rotate(90deg));
+      }
+      &.rotate-down {
+        @include transform(rotate(270deg));
+      }
+    }
+  }
+
+  &-list {
+    @include transition-list(max-height .3s ease-in-out);
     margin-left: 40px;
+    height: auto;
+    overflow: hidden;
+
+    // Accordion rules
+    &.collapse {
+      max-height: 0;
+
+      @include min-screen($mobile-breakpoint) {
+        max-height: none;
+      }
+    }
+
+    &.expand {
+      max-height: 50em;
+    }
   }
 
   .clear-button {
