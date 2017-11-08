@@ -6,7 +6,7 @@ import {
 } from '@nypl/dgx-svg-icons';
 import { isEmpty as _isEmpty } from 'underscore';
 
-const ANIMATION_TIMEOUT = 300;
+const ANIMATION_TIMEOUT = 1500;
 
 class Filter extends React.Component {
   constructor(props) {
@@ -40,7 +40,10 @@ class Filter extends React.Component {
       });
 
       // Back to either active or inactive:
-      setTimeout(() => {
+      let timeout;
+
+      this.props.clearTimeout(timeout);
+      timeout = setTimeout(() => {
         this.setState({
           icon: active ? <XIcon /> : null,
           activeClass: active ? 'active' : '',
@@ -100,6 +103,7 @@ Filter.propTypes = {
   focusId: PropTypes.string,
   active: PropTypes.bool,
   disabled: PropTypes.bool,
+  clearTimeout: PropTypes.func,
 };
 
 export default Filter;
