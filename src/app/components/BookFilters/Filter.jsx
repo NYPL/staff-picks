@@ -7,7 +7,7 @@ import {
 } from '@nypl/dgx-svg-icons';
 import { isEmpty as _isEmpty } from 'underscore';
 
-const ANIMATION_TIMEOUT = 400;
+const ANIMATION_TIMEOUT = 300;
 
 class Filter extends React.Component {
   constructor(props) {
@@ -42,13 +42,14 @@ class Filter extends React.Component {
       filter,
       focusId,
       active,
+      disabled,
     } = nextProps;
 
     // If the focusId, the id of the filter that was JUST selected/deselected, matches the filter,
     // then load the animation SVG and remove it shortly after. Also focus on it whether it was
     // selected or deselected for accessibility. We then want to add the appropriate SVG based
     // on whether it is active or not.
-    if (filter.id === focusId) {
+    if (filter.id === focusId && active && disabled) {
       // Intermediate transition state:
       this.setState({
         icon: <DotsIcon />,
@@ -62,6 +63,7 @@ class Filter extends React.Component {
           activeClass: active ? 'active' : '',
         });
 
+        this.props.setDisabled(false);
         ReactDOM.findDOMNode(this.refs[filter.id]).focus();
       }, ANIMATION_TIMEOUT);
     } else {
@@ -101,6 +103,7 @@ class Filter extends React.Component {
           className={`nypl-primary-button ${activeClass}`}
           onClick={this.onClick}
           aria-label={arialLabel}
+          disabled={this.props.disabled}
         >
           {icon}{filter.label}
         </button>
@@ -112,8 +115,10 @@ class Filter extends React.Component {
 Filter.propTypes = {
   filter: PropTypes.object,
   onClick: PropTypes.func,
+  setDisabled: PropTypes.func,
   focusId: PropTypes.string,
   active: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default Filter;

@@ -21,6 +21,18 @@ li.filter-item {
       position: relative;
     }
 
+    &:disabled {
+      background-color: $nypl-white;
+      border-color: $nypl-gray;
+      color: $nypl-gray;
+
+      &:hover {
+        background-color: $nypl-white;
+        border-color: $nypl-gray;
+        color: $nypl-gray;
+      }
+    }
+
     &:hover {
       background: $nypl-blue;
       color: $nypl-white;
