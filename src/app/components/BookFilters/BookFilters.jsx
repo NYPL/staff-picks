@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import {
   FilterIcon,
@@ -21,6 +22,7 @@ class BookFilters extends React.Component {
       })),
       selectedFilters: this.props.selectedFilters,
       focusId: '',
+      disabled: false,
       showFilters: false,
     };
 
@@ -28,6 +30,7 @@ class BookFilters extends React.Component {
     this.onClick = this.onClick.bind(this);
     this.toggleFilters = this.toggleFilters.bind(this);
     this.getFilterArray = this.getFilterArray.bind(this);
+    this.setDisabled = this.setDisabled.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -36,10 +39,12 @@ class BookFilters extends React.Component {
 
   onClick(filterId, active) {
     this.props.setSelectedFilter(filterId, active);
+    ReactDOM.findDOMNode(this.refs.booksFound).focus();
 
     this.setState({
       filters: this.state.filters,
       focusId: filterId,
+      disabled: active,
     });
   }
 
@@ -62,6 +67,10 @@ class BookFilters extends React.Component {
     return filters.filter(filter => _contains(selectableFilters, filter.id));
   }
 
+  setDisabled(disabled) {
+    this.setState({ disabled });
+  }
+
   /**
    * renderItems(filters)
    * Render the filter button list items.
@@ -77,6 +86,8 @@ class BookFilters extends React.Component {
           onClick={this.onClick}
           focusId={this.state.focusId}
           active={active}
+          disabled={this.state.disabled}
+          setDisabled={this.setDisabled}
         />
       );
     });
@@ -94,18 +105,18 @@ class BookFilters extends React.Component {
     }
 
     const filtersToRender = this.getFilterArray(selectableFilters, filters);
-    const toggleFiltersDisplayClass = showFilters ? 'expand' : 'collapse';
+    const booksfound = `${picksCount} book${picksCount === 1 ? '' : 's'} found`;
     const buttonAnimationClasses = showFilters ? 'rotate-up' : 'rotate-down';
+    const filtersContainerDisplayClass = showFilters ? 'expand' : 'collapse';
+    // const bookListDisplayStyles = showFilters ?
+    //   { display: 'block', visibility: 'visible' } : { display: 'none', visibility: 'hidden' };
 
     return (
       <div className="book-filters">
         <div className="book-filters-heading">
-          <h2>
-            <FilterIcon ariaHidden />
-            <span>Filter by Tags</span>
-          </h2>
-          <span aria-live="assertive" aria-atomic="true">
-            {picksCount} book{picksCount === 1 ? '' : 's'} found
+          <h2><FilterIcon /> Filter by Tags</h2>
+          <span tabIndex="0" aria-live="assertive" aria-atomic="true" ref="booksFound">
+            {booksfound}
           </span>
           <button
             aria-expanded={showFilters}
@@ -116,20 +127,22 @@ class BookFilters extends React.Component {
             <span className="visuallyHidden">{showFilters ? 'Collapse' : 'Expand'}</span>
           </button>
         </div>
-        <ul className={`book-filters-list ${toggleFiltersDisplayClass}`}>
-          {this.renderItems(filtersToRender)}
-        </ul>
-        {
-          !!this.state.selectedFilters.length &&
-            (<button
-              onClick={this.props.clearFilters}
-              className="nypl-primary-button clear-button"
-              ref="clearFilters"
-            >
-              <ResetIcon />
-              Clear Filters
-            </button>)
-        }
+        <div className={`book-filters-list ${filtersContainerDisplayClass}`}>
+          <ul>
+            {this.renderItems(filtersToRender)}
+          </ul>
+          {
+            !!this.state.selectedFilters.length &&
+              (<button
+                onClick={() => this.props.clearFilters(this.refs.booksFound)}
+                className="nypl-primary-button clear-button"
+                ref="clearFilters"
+              >
+                <ResetIcon />
+                Clear Filters
+              </button>)
+          }
+        </div>
       </div>
     );
   }

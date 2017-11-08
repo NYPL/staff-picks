@@ -199,9 +199,22 @@ $book-card-largescreen-gutter: 3.5%;
     padding: 0;
     margin: 0 1%;
     clear: left;
-    display: block;
     font-size: .75rem;
     color: $nypl-red;
+
+    &.js {
+      -webkit-animation: none;
+      -moz-animation: none;
+      -o-animation: none;
+      animation: none;
+    }
+
+    &.no-js {
+      -webkit-animation: fadeIn 3s;
+      -moz-animation: fadeIn 3s;
+      -o-animation: fadeIn 3s;
+      animation: fadeIn 3s;
+    }
 
     @include min-screen($xtrasmall-breakpoint) {
       clear: none;
@@ -214,5 +227,63 @@ $book-card-largescreen-gutter: 3.5%;
       margin: 0 $book-card-largescreen-gutter 1%;
       width: 63%;
     }
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  90% {
+    opacity: 0.1;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  90% {
+    opacity: 0.1;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  90% {
+    opacity: 0.1;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  90% {
+    opacity: 0.1;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
   }
 }

@@ -1,5 +1,8 @@
 li.filter-item {
-  margin: 15px 0;
+  margin: .75em 0 .75em 1.75em;
+  @include min-screen($mobile-breakpoint) {
+    margin-left: 1.25em;
+  }
 
   button {
     background: $nypl-white;
@@ -11,14 +14,34 @@ li.filter-item {
     white-space: pre-line;
     line-height: 1.2;
     min-height: 2.5rem;
+    position: relative;
 
     svg {
       fill: $nypl-blue;
       float: left;
       height: 1.25rem;
       width: 1.25rem;
-      margin: 0 5px 0 0;
-      position: relative;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 3.5%;
+      @include transform(translate(0, -50%));
+
+      @include min-screen($mobile-breakpoint) {
+        left: 2%;
+      }
+    }
+
+    &:disabled {
+      background-color: $nypl-white;
+      border-color: $nypl-gray;
+      color: $nypl-gray;
+
+      &:hover {
+        background-color: $nypl-white;
+        border-color: $nypl-gray;
+        color: $nypl-gray;
+      }
     }
 
     &:hover {
@@ -33,7 +56,7 @@ li.filter-item {
     &.transition,
     &.active {
       padding-left: 15px;
-      margin-left: -20px;
+      margin-left: -1em;
     }
 
     &.transition {

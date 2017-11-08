@@ -4,11 +4,16 @@
     border-top: 4px solid $nypl-red;
 
     h2 {
-      padding: 0px 0 15px 5px;
+      padding: 0px 0 12px 5px;
       font-size: 1rem;
       margin: 15px 0 0;
       font-weight: 200;
       display: inline-block;
+
+      @include min-screen($mobile-breakpoint) {
+        padding-left: 0;
+        font-size: .9rem;
+      }
 
       svg {
         height: 25px;
@@ -22,6 +27,15 @@
       font-size: 0.8rem;
       margin: 0 0 0 12px;
       display: inline-block;
+
+      @include min-screen($mobile-breakpoint) {
+        margin: 0;
+        text-align: right;
+        position: absolute;
+        right: 1%;
+        top: 50%;
+        @include transform(translate(0, -50%));
+      }
     }
   }
 
@@ -52,31 +66,39 @@
 
   &-list {
     @include transition-list(max-height .3s ease-in-out);
-    margin-left: 40px;
+    margin: 0;
     height: auto;
     overflow: hidden;
 
     // Accordion rules
     &.collapse {
       max-height: 0;
+      visibility: hidden;
 
       @include min-screen($mobile-breakpoint) {
         max-height: none;
+        visibility: visible;
       }
     }
 
     &.expand {
       max-height: 50em;
+      visibility: visible;
+    }
+
+    & > ul {
+      margin: 0;
     }
   }
 
   .clear-button {
-    width: 100%;
+    width: 88%;
     text-align: right;
     border-radius: 0px;
     font-size: 0.8rem;
     padding: 10px;
     font-size: 1rem;
+    margin: 0 0 0 1.3em;
 
     svg {
       float: left;
