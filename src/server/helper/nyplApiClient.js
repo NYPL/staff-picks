@@ -1,9 +1,14 @@
 import config from '../../../appConfig.js';
 
-import kmsClientHelper from './nyplApiClientHelper';
+import kmsClientHelper from './kmsClientHelper';
 
 const appEnvironment = process.env.APP_ENV || 'production';
-const kmsEnvironment = process.env.KMS_ENV || 'encrypted';
-const apiBase = config.api[appEnvironment];
+const options = {
+  kmsEnvironment: process.env.KMS_ENV || 'encrypted',
+  clientId: process.env.clientId || '',
+  clientSecret: process.env.clientSecret || '',
+  apiBase: config.api[appEnvironment],
+  tokenUrl: config.tokenUrl,
+};
 
-export default kmsClientHelper(appEnvironment, kmsEnvironment, apiBase, config.tokenUrl);
+export default kmsClientHelper(options);
