@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import {
   FilterIcon,
@@ -35,6 +36,7 @@ class BookFilters extends React.Component {
 
   onClick(filterId, active) {
     this.props.setSelectedFilter(filterId, active);
+    ReactDOM.findDOMNode(this.refs.booksFound).focus();
 
     this.setState({
       filters: this.state.filters,
@@ -96,13 +98,14 @@ class BookFilters extends React.Component {
     }
 
     const filtersToRender = this.getFilterArray(selectableFilters, filters);
+    const booksfound = `${picksCount} book${picksCount === 1 ? '' : 's'} found`;
 
     return (
       <div className="book-filters">
         <div className="book-filters-heading">
           <h2><FilterIcon /> Filter by Tags</h2>
-          <span aria-live="assertive" aria-atomic="true">
-            {picksCount} book{picksCount === 1 ? '' : 's'} found
+          <span tabIndex="0" aria-live="assertive" aria-atomic="true" ref="booksFound">
+            {booksfound}
           </span>
         </div>
         <ul>
@@ -111,7 +114,7 @@ class BookFilters extends React.Component {
         {
           !!this.state.selectedFilters.length &&
             (<button
-              onClick={this.props.clearFilters}
+              onClick={() => this.props.clearFilters(this.refs.booksFound)}
               className="nypl-primary-button clear-button"
               ref="clearFilters"
             >
