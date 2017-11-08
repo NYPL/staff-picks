@@ -108,8 +108,6 @@ class BookFilters extends React.Component {
     const booksfound = `${picksCount} book${picksCount === 1 ? '' : 's'} found`;
     const buttonAnimationClasses = showFilters ? 'rotate-up' : 'rotate-down';
     const filtersContainerDisplayClass = showFilters ? 'expand' : 'collapse';
-    // const bookListDisplayStyles = showFilters ?
-    //   { display: 'block', visibility: 'visible' } : { display: 'none', visibility: 'hidden' };
 
     return (
       <div className="book-filters">
