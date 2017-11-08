@@ -204,13 +204,18 @@ $book-card-largescreen-gutter: 3.5%;
     color: $nypl-red;
 
     &.js {
+      -webkit-animation: none;
+      -moz-animation: none;
+      -o-animation: none;
       animation: none;
     }
 
     &.no-js {
       display: block;
-      animation-name: fadeIn;
-      animation-duration: 5s;
+      -webkit-animation: fadeIn 3s;
+      -moz-animation: fadeIn 3s;
+      -o-animation: fadeIn 3s;
+      animation: fadeIn 3s;
     }
 
     @include min-screen($xtrasmall-breakpoint) {
@@ -227,12 +232,59 @@ $book-card-largescreen-gutter: 3.5%;
   }
 }
 
-@keyframes fadeIn {
-  from {
+@-webkit-keyframes fadeIn {
+  0% {
     opacity: 0;
     visibility: hidden;
   }
-  to {
+  90% {
+    opacity: 0.1;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  90% {
+    opacity: 0.1;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  90% {
+    opacity: 0.1;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  90% {
+    opacity: 0.1;
+    visibility: hidden;
+  }
+  100% {
     opacity: 1;
     visibility: visible;
   }

@@ -7,6 +7,14 @@
     li {
       list-style: none;
       display: inline-block;
+
+      a {
+        display: inline-block;
+      }
+
+      &:first-child {
+        margin-right: 20px;
+      }
     }
   }
 
@@ -18,10 +26,6 @@
   svg {
     fill: $nypl-blue;
     height: 30px;
-
-    &:first-child {
-      margin-right: 20px;
-    }
   }
 
   p {

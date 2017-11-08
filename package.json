@@ -7,6 +7,7 @@
     "start": "node index",
     "eb-start": "npm run dist && npm run start",
     "dev-api-start": "APP_ENV=development KMS_ENV=unencrypted node index",
+    "qa-api-start": "APP_ENV=qa KMS_ENV=unencrypted node index",
     "prod-api-start": "APP_ENV=production KMS_ENV=encrypted node index",
     "dist": "NODE_ENV=production webpack --config webpack.config.js",
     "test": "node_modules/.bin/mocha test/helpers/browser.js test/unit/*.test.js",

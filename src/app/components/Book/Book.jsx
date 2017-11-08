@@ -12,6 +12,8 @@ const Book = ({ pick, isJsEnabled }) => {
 
   const getReviewsArray = (obj) => (obj.reviews || []);
 
+  const getTagArray = (picks) => (picks.tags && picks.tags.length ? pick.tags : []);
+
   const getTagClasses = (arrayOfTags) => (
     !_isEmpty(arrayOfTags) ? arrayOfTags.join(' ') : '');
 
@@ -76,7 +78,9 @@ const Book = ({ pick, isJsEnabled }) => {
       tags.map((tag, i) => <span key={i}>{tag}{i !== (tags.length - 1) ? ', ' : ''}</span>) : null;
     const hiddenClass = jsEnabled ? 'visuallyHidden js' : 'no-js';
 
-    return (tagsMarkup) ? <p className={`book-item-tags ${hiddenClass}`}>{tagsMarkup}</p> : null;
+    return (tagsMarkup) ?
+      (<p className={`book-item-tags ${hiddenClass}`}><span>Tags: </span>{tagsMarkup}</p>)
+      : null;
   };
 
   if (_isEmpty(pick)) {
@@ -86,6 +90,7 @@ const Book = ({ pick, isJsEnabled }) => {
   const book = getBookObject(pick);
   const reviewsArray = getReviewsArray(pick);
   const tagsArray = utils.getPickTags(pick);
+  const fullTagsArray = getTagArray(pick);
   const hasIllustratorTranslatorClass = !isStringEmpty(book.translator)
     && !isStringEmpty(book.illustrator) ? 'withTranslatorIllustrator' : '';
 
@@ -101,7 +106,7 @@ const Book = ({ pick, isJsEnabled }) => {
       {renderTranslator(book.translator)}
       {renderCatalogLinks(book.catalogUrl, book.ebookUrl)}
       {renderDescription(reviewsArray)}
-      {renderTags(tagsArray, isJsEnabled)}
+      {renderTags(fullTagsArray, isJsEnabled)}
     </li>
   );
 };
