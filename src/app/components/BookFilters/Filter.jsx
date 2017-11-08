@@ -6,7 +6,7 @@ import {
 } from '@nypl/dgx-svg-icons';
 import { isEmpty as _isEmpty } from 'underscore';
 
-const ANIMATION_TIMEOUT = 1500;
+const ANIMATION_TIMEOUT = 300;
 
 class Filter extends React.Component {
   constructor(props) {
