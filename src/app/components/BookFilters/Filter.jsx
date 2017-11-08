@@ -106,4 +106,8 @@ Filter.propTypes = {
   clearTimeout: PropTypes.func,
 };
 
+Filter.defaultProps = {
+  clearTimeout: () => {},
+};
+
 export default Filter;
