@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import {
   DotsIcon,
@@ -19,22 +18,6 @@ class Filter extends React.Component {
       activeClass: active ? 'active' : '',
     };
     this.onClick = this.onClick.bind(this);
-  }
-
-  componentDidMount() {
-    // Since the list of filters get re-rendered, when the a new list is generated and it's
-    // longer than the previous list, then we need to focus on the selected/deselected filter
-    // once all the filters are mounted.
-    const {
-      filter,
-      focusId,
-    } = this.props;
-
-    if (filter && (filter.id === focusId)) {
-      setTimeout(() => {
-        ReactDOM.findDOMNode(this.refs[filter.id]).focus();
-      }, ANIMATION_TIMEOUT);
-    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -64,7 +47,6 @@ class Filter extends React.Component {
         });
 
         this.props.setDisabled(false);
-        ReactDOM.findDOMNode(this.refs[filter.id]).focus();
       }, ANIMATION_TIMEOUT);
     } else {
       // We want to set the icon back to its icon.
@@ -99,7 +81,6 @@ class Filter extends React.Component {
     return (
       <li className="filter-item">
         <button
-          ref={filter.id}
           className={`nypl-primary-button ${activeClass}`}
           onClick={this.onClick}
           aria-label={arialLabel}
