@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import BookList from '../BookList/BookList.jsx';
@@ -76,11 +77,14 @@ class Main extends React.Component {
   /**
    * clearFilters()
    * Reset the list of picks and set the list of filters back to its initial state.
+   * @param {object} ref
    */
-  clearFilters() {
+  clearFilters(ref) {
     const selectedFilters = [];
     const picks = this.getNewPickSet(this.props.currentPicks.picks, selectedFilters);
     const selectableFilters = utils.getSelectableTags(picks);
+
+    ReactDOM.findDOMNode(ref).focus();
     this.setState({
       selectableFilters,
       picks,
