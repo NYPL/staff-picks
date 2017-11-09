@@ -32,7 +32,7 @@ const Book = ({ pick, isJsEnabled }) => {
   );
 
   const renderAuthor = (author) => (
-    !isStringEmpty(author) ? <p className="book-item-author">{author}</p> : null
+    !isStringEmpty(author) ? <p className="book-item-author">By {author}</p> : null
   );
 
   const renderIllustrator = (illustrator) => (

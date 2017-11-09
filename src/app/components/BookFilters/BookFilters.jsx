@@ -31,6 +31,7 @@ class BookFilters extends React.Component {
     this.toggleFilters = this.toggleFilters.bind(this);
     this.getFilterArray = this.getFilterArray.bind(this);
     this.setDisabled = this.setDisabled.bind(this);
+    this.clearTimeout = this.clearTimeout.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -72,6 +73,15 @@ class BookFilters extends React.Component {
   }
 
   /**
+   * clearTimeout(id)
+   * Clear the setTimeout that is currently active for filter in transition.
+   * @param {string} id
+   */
+  clearTimeout(id) {
+    clearTimeout(id);
+  }
+
+  /**
    * renderItems(filters)
    * Render the filter button list items.
    * @param {array} filter
@@ -88,6 +98,7 @@ class BookFilters extends React.Component {
           active={active}
           disabled={this.state.disabled}
           setDisabled={this.setDisabled}
+          clearTimeout={this.clearTimeout}
         />
       );
     });
@@ -126,7 +137,10 @@ class BookFilters extends React.Component {
           </button>
         </div>
         <div className={`book-filters-list ${filtersContainerDisplayClass}`}>
-          <ul>
+          <span className="visuallyHidden" id="filter-list-description">
+            Click to apply or remove tags.
+          </span>
+          <ul aria-labelledby="filter-list-description">
             {this.renderItems(filtersToRender)}
           </ul>
           {
@@ -137,7 +151,7 @@ class BookFilters extends React.Component {
                 ref="clearFilters"
               >
                 <ResetIcon />
-                Clear Filters
+                Clear All Filters
               </button>)
           }
         </div>
