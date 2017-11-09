@@ -73,7 +73,7 @@ describe('Book Component', () => {
       const author = component.find('.book-item-author');
       expect(author.length).to.equal(1);
       expect(author.find('p').length).to.equal(1);
-      expect(author.find('p').text()).to.equal(pickObject.book.author);
+      expect(author.find('p').text()).to.equal(`By ${pickObject.book.author}`);
     });
 
     it('should render the pick image <img /> element with empty ALT text', () => {
