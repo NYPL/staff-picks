@@ -40,7 +40,10 @@ class Filter extends React.Component {
       });
 
       // Back to either active or inactive:
-      setTimeout(() => {
+      let timeout;
+
+      this.props.clearTimeout(timeout);
+      timeout = setTimeout(() => {
         this.setState({
           icon: active ? <XIcon /> : null,
           activeClass: active ? 'active' : '',
@@ -100,6 +103,11 @@ Filter.propTypes = {
   focusId: PropTypes.string,
   active: PropTypes.bool,
   disabled: PropTypes.bool,
+  clearTimeout: PropTypes.func,
+};
+
+Filter.defaultProps = {
+  clearTimeout: () => {},
 };
 
 export default Filter;

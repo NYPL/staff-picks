@@ -28,6 +28,7 @@ class BookFilters extends React.Component {
     this.onClick = this.onClick.bind(this);
     this.getFilterArray = this.getFilterArray.bind(this);
     this.setDisabled = this.setDisabled.bind(this);
+    this.clearTimeout = this.clearTimeout.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -65,6 +66,15 @@ class BookFilters extends React.Component {
   }
 
   /**
+   * clearTimeout(id)
+   * Clear the setTimeout that is currently active for filter in transition.
+   * @param {string} id
+   */
+  clearTimeout(id) {
+    clearTimeout(id);
+  }
+
+  /**
    * renderItems(filters)
    * Render the filter button list items.
    * @param {array} filter
@@ -81,6 +91,7 @@ class BookFilters extends React.Component {
           active={active}
           disabled={this.state.disabled}
           setDisabled={this.setDisabled}
+          clearTimeout={this.clearTimeout}
         />
       );
     });
