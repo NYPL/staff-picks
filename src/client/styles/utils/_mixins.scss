@@ -115,19 +115,13 @@
   -moz-transform:    $params;
   transform:         $params;
 }
+
 @mixin transform-origin($params) {
   -webkit-transform-origin: $params;
   -moz-transform-origin:    $params;
   transform-origin:         $params;
 }
 
-// @mixin transition($params) {
-//   -moz-transition:    $params;
-//   -o-transition:      $params;
-//   -webkit-transition: $params;
-//   -ms-transition:     $params;
-//   transition:         $params;
-// }
 @mixin transition-list($values...){
   -moz-transition:    $values;
   -o-transition:      $values;
@@ -135,6 +129,7 @@
   -ms-transition:     $values;
   transition:         $values;
 }
+
 @mixin transition-transform($values...) {
   -webkit-transition: -webkit-transform $values;
      -moz-transition: -moz-transform $values;

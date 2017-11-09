@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {
   FilterIcon,
   ResetIcon,
+  LeftWedgeIcon,
 } from '@nypl/dgx-svg-icons';
 import { contains as _contains } from 'underscore';
 
@@ -22,10 +23,12 @@ class BookFilters extends React.Component {
       selectedFilters: this.props.selectedFilters,
       focusId: '',
       disabled: false,
+      showFilters: false,
     };
 
     this.renderItems = this.renderItems.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.toggleFilters = this.toggleFilters.bind(this);
     this.getFilterArray = this.getFilterArray.bind(this);
     this.setDisabled = this.setDisabled.bind(this);
   }
@@ -43,6 +46,10 @@ class BookFilters extends React.Component {
       focusId: filterId,
       disabled: active,
     });
+  }
+
+  toggleFilters() {
+    this.setState({ showFilters: !this.state.showFilters });
   }
 
   /**
@@ -87,7 +94,7 @@ class BookFilters extends React.Component {
   }
 
   render() {
-    const { filters } = this.state;
+    const { filters, showFilters } = this.state;
     const {
       selectableFilters,
       picksCount,
@@ -99,6 +106,8 @@ class BookFilters extends React.Component {
 
     const filtersToRender = this.getFilterArray(selectableFilters, filters);
     const booksfound = `${picksCount} book${picksCount === 1 ? '' : 's'} found`;
+    const buttonAnimationClasses = showFilters ? 'rotate-up' : 'rotate-down';
+    const filtersContainerDisplayClass = showFilters ? 'expand' : 'collapse';
 
     return (
       <div className="book-filters">
@@ -107,21 +116,31 @@ class BookFilters extends React.Component {
           <span tabIndex="0" aria-live="assertive" aria-atomic="true" ref="booksFound">
             {booksfound}
           </span>
+          <button
+            aria-expanded={showFilters}
+            onClick={this.toggleFilters}
+            className="book-filters-toggleButton"
+          >
+            <LeftWedgeIcon ariaHidden className={buttonAnimationClasses} />
+            <span className="visuallyHidden">{showFilters ? 'Collapse' : 'Expand'}</span>
+          </button>
         </div>
-        <ul>
-          {this.renderItems(filtersToRender)}
-        </ul>
-        {
-          !!this.state.selectedFilters.length &&
-            (<button
-              onClick={() => this.props.clearFilters(this.refs.booksFound)}
-              className="nypl-primary-button clear-button"
-              ref="clearFilters"
-            >
-              <ResetIcon />
-              Clear Filters
-            </button>)
-        }
+        <div className={`book-filters-list ${filtersContainerDisplayClass}`}>
+          <ul>
+            {this.renderItems(filtersToRender)}
+          </ul>
+          {
+            !!this.state.selectedFilters.length &&
+              (<button
+                onClick={() => this.props.clearFilters(this.refs.booksFound)}
+                className="nypl-primary-button clear-button"
+                ref="clearFilters"
+              >
+                <ResetIcon />
+                Clear Filters
+              </button>)
+          }
+        </div>
       </div>
     );
   }
