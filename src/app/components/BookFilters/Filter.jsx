@@ -5,6 +5,7 @@ import {
   XIcon,
 } from '@nypl/dgx-svg-icons';
 import { isEmpty as _isEmpty } from 'underscore';
+import utils from '../../utils/utils';
 
 const ANIMATION_TIMEOUT = 300;
 
@@ -65,7 +66,10 @@ class Filter extends React.Component {
       filter,
       active,
     } = this.props;
+    const selectLabel = active ? 'Unselect' : 'Select';
     this.props.onClick(filter.id, !active);
+
+    utils.trackPicks('Filters', `${selectLabel} - ${filter.id}`);
   }
 
   render() {

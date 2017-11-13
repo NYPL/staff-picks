@@ -17,6 +17,15 @@ const Book = ({ pick, isJsEnabled }) => {
   const getTagClasses = (arrayOfTags) => (
     !_isEmpty(arrayOfTags) ? arrayOfTags.join(' ') : '');
 
+  if (_isEmpty(pick)) {
+    return null;
+  }
+
+  const book = getBookObject(pick);
+  const gaEvent = (type) => {
+    utils.trackPicks('Request', `${type} - ${book.title}`);
+  };
+
   const renderBookCoverImage = (imageUrl) => {
     const defaultImageUrl = `${config.baseUrl}src/client/images/book-place-holder.png`;
     const fullImgSrc = isStringEmpty(imageUrl) ? defaultImageUrl : imageUrl;
@@ -47,13 +56,13 @@ const Book = ({ pick, isJsEnabled }) => {
 
   const renderCatalogLinks = (catalogUrl, ebookUrl) => {
     const catalogLink = !isStringEmpty(catalogUrl) ?
-      <a href={catalogUrl} className="catalog-url">
+      <a href={catalogUrl} className="catalog-url" onClick={() => gaEvent('Book')}>
         <BookIcon width="32px" height="32px" ariaHidden />
         <span>{config.requestUrlsText.catalog}</span>
       </a> : null;
 
     const ebookLink = !isStringEmpty(ebookUrl) ?
-      <a href={ebookUrl} className="ebook-url">
+      <a href={ebookUrl} className="ebook-url" onClick={() => gaEvent('E-Book')}>
         <EReaderIcon ariaHidden />
         <span>{config.requestUrlsText.ebook}</span>
       </a> : null;
@@ -83,11 +92,6 @@ const Book = ({ pick, isJsEnabled }) => {
       : null;
   };
 
-  if (_isEmpty(pick)) {
-    return null;
-  }
-
-  const book = getBookObject(pick);
   const reviewsArray = getReviewsArray(pick);
   const tagsArray = utils.getPickTags(pick);
   const fullTagsArray = getTagArray(pick);

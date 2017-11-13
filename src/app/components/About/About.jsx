@@ -6,6 +6,7 @@ import {
 } from '@nypl/dgx-svg-icons';
 
 import appConfig from '../../../../appConfig';
+import utils from '../../utils/utils';
 
 const {
   aboutUrls,
@@ -18,10 +19,15 @@ class Sidebar extends React.Component {
     super(props);
 
     this.state = { location: {} };
+    this.gaSocialMediaEvent = this.gaSocialMediaEvent.bind(this);
   }
 
   componentDidMount() {
     this.setState({ location: window.location });
+  }
+
+  gaSocialMediaEvent(type) {
+    utils.trackPicks('Social Share', type);
   }
 
   render() {
@@ -36,12 +42,18 @@ class Sidebar extends React.Component {
         <p><a href={aboutUrls.about}>About Best Books</a></p>
         <ul>
           <li>
-            <a href={`${socialSharing.twitter}text=${shareText}&url=${shareUrl}&via=NYPL`}>
+            <a
+              href={`${socialSharing.twitter}text=${shareText}&url=${shareUrl}&via=NYPL`}
+              onClick={() => this.gaSocialMediaEvent('Twitter')}
+            >
               <TwitterIcon iconId="about-twitter" />
             </a>
           </li>
           <li>
-            <a href={`${socialSharing.facebook}${this.state.location}`}>
+            <a
+              href={`${socialSharing.facebook}${this.state.location}`}
+              onClick={() => this.gaSocialMediaEvent('Facebook')}
+            >
               <FaceBookIcon iconId="about-facebook" />
             </a>
           </li>

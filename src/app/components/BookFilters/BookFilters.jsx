@@ -9,6 +9,7 @@ import {
 import { contains as _contains } from 'underscore';
 
 import Filter from './Filter';
+import utils from '../../utils/utils';
 
 class BookFilters extends React.Component {
   constructor(props) {
@@ -49,10 +50,6 @@ class BookFilters extends React.Component {
     });
   }
 
-  toggleFilters() {
-    this.setState({ showFilters: !this.state.showFilters });
-  }
-
   /**
    * getFilterArray(selectableFilters, filters)
    * If the list of selectable filters is available, then we want the subset of all filters
@@ -70,6 +67,11 @@ class BookFilters extends React.Component {
 
   setDisabled(disabled) {
     this.setState({ disabled });
+  }
+
+  toggleFilters() {
+    utils.trackPicks('Mobile Filters', (this.state.showFilters ? 'Close' : 'Open'));
+    this.setState({ showFilters: !this.state.showFilters });
   }
 
   /**

@@ -83,7 +83,6 @@ app.use('/', (req, res) => {
           metatags: renderedMetaTags,
           markup: iso.render(),
           gaCode: analytics.google.code(isProduction),
-          appEnv: process.env.APP_ENV || 'no APP_ENV',
           assets: buildAssets,
           webpackPort: WEBPACK_DEV_PORT,
           pageTitle: res.locals.data.pageTitle,
