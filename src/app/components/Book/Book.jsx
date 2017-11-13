@@ -17,6 +17,10 @@ const Book = ({ pick, isJsEnabled }) => {
   const getTagClasses = (arrayOfTags) => (
     !_isEmpty(arrayOfTags) ? arrayOfTags.join(' ') : '');
 
+  if (_isEmpty(pick)) {
+    return null;
+  }
+
   const book = getBookObject(pick);
   const gaEvent = (type) => {
     utils.trackPicks('Request', `${type} - ${book.title}`);
@@ -87,10 +91,6 @@ const Book = ({ pick, isJsEnabled }) => {
       (<p className={`book-item-tags ${hiddenClass}`}><span>Tags: </span>{tagsMarkup}</p>)
       : null;
   };
-
-  if (_isEmpty(pick)) {
-    return null;
-  }
 
   const reviewsArray = getReviewsArray(pick);
   const tagsArray = utils.getPickTags(pick);
