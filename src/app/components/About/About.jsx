@@ -19,14 +19,14 @@ class Sidebar extends React.Component {
     super(props);
 
     this.state = { location: {} };
-    this.gaEvent = this.gaEvent.bind(this);
+    this.gaSocialMediaEvent = this.gaSocialMediaEvent.bind(this);
   }
 
   componentDidMount() {
     this.setState({ location: window.location });
   }
 
-  gaEvent(type) {
+  gaSocialMediaEvent(type) {
     utils.trackPicks('Social Share', type);
   }
 
@@ -44,7 +44,7 @@ class Sidebar extends React.Component {
           <li>
             <a
               href={`${socialSharing.twitter}text=${shareText}&url=${shareUrl}&via=NYPL`}
-              onClick={() => this.gaEvent('Twitter')}
+              onClick={() => this.gaSocialMediaEvent('Twitter')}
             >
               <TwitterIcon iconId="about-twitter" />
             </a>
@@ -52,7 +52,7 @@ class Sidebar extends React.Component {
           <li>
             <a
               href={`${socialSharing.facebook}${this.state.location}`}
-              onClick={() => this.gaEvent('Facebook')}
+              onClick={() => this.gaSocialMediaEvent('Facebook')}
             >
               <FaceBookIcon iconId="about-facebook" />
             </a>
