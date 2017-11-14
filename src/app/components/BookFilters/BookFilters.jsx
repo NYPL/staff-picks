@@ -139,10 +139,7 @@ class BookFilters extends React.Component {
           </button>
         </div>
         <div className={`book-filters-list ${filtersContainerDisplayClass}`}>
-          <span className="visuallyHidden" id="filter-list-description">
-            Click to apply or remove tags.
-          </span>
-          <ul aria-labelledby="filter-list-description">
+          <ul aria-label="Click to apply or remove tags.">
             {this.renderItems(filtersToRender)}
           </ul>
           {
