@@ -110,7 +110,7 @@
     width: 200px;
     @include border-radius(5px);
 
-    @include min-screen($mobile-breakpoint) {
+    @include min-screen($mobile-breakpoint + 1) {
       width: 100%;
       margin-left: 0;
     }
