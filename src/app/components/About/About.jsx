@@ -47,6 +47,7 @@ class Sidebar extends React.Component {
               onClick={() => this.gaSocialMediaEvent('Twitter')}
             >
               <TwitterIcon iconId="about-twitter" />
+              <span className="replaced-text visuallyHidden">Share on Twitter</span>
             </a>
           </li>
           <li>
@@ -55,6 +56,7 @@ class Sidebar extends React.Component {
               onClick={() => this.gaSocialMediaEvent('Facebook')}
             >
               <FaceBookIcon iconId="about-facebook" />
+              <span className="replaced-text visuallyHidden">Share on Facebook</span>
             </a>
           </li>
         </ul>
