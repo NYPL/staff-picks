@@ -103,11 +103,17 @@
   .clear-button {
     width: 88%;
     text-align: right;
-    border-radius: 0px;
     font-size: 0.8rem;
     padding: 10px;
     font-size: 1rem;
     margin: 0 0 0 1.3em;
+    width: 200px;
+    @include border-radius(5px);
+
+    @include min-screen($mobile-breakpoint + 1) {
+      width: 100%;
+      margin-left: 0;
+    }
 
     svg {
       float: left;

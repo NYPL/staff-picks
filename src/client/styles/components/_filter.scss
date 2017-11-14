@@ -1,7 +1,13 @@
 li.filter-item {
   margin: .75em 0 .75em 1.75em;
-  @include min-screen($mobile-breakpoint) {
+
+  @include min-screen($xtrasmall-breakpoint) {
+    display: inline-block;
+  }
+
+  @include min-screen($mobile-breakpoint + 1) {
     margin-left: 1.25em;
+    display: block;
   }
 
   button {
@@ -14,6 +20,7 @@ li.filter-item {
     white-space: pre-line;
     line-height: 1.2;
     min-height: 2.5rem;
+    padding: 0.75rem;
     position: relative;
 
     svg {
@@ -57,6 +64,14 @@ li.filter-item {
     &.active {
       padding-left: 15px;
       margin-left: -1em;
+
+      @include min-screen($xtrasmall-breakpoint) {
+        margin-left: 0;
+      }
+
+      @include min-screen($mobile-breakpoint + 1) {
+        margin-left: -1em;
+      }
     }
 
     &.transition {
