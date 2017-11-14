@@ -135,7 +135,9 @@ class BookFilters extends React.Component {
             className="book-filters-toggleButton"
           >
             <LeftWedgeIcon ariaHidden className={buttonAnimationClasses} />
-            <span className="visuallyHidden">{showFilters ? 'Collapse' : 'Expand'}</span>
+            <span className="visuallyHidden">
+              {showFilters ? 'Collapse tag list' : 'Expand tag list'}
+            </span>
           </button>
         </div>
         <div className={`book-filters-list ${filtersContainerDisplayClass}`}>
