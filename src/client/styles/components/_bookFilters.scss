@@ -4,7 +4,7 @@
     border-top: 4px solid $nypl-red;
 
     h2 {
-      padding: 0px 0 12px 5px;
+      padding: 0px 0 12px 3px;
       font-size: 1rem;
       margin: 15px 0 0;
       font-weight: 200;
@@ -30,7 +30,7 @@
     // book count text
     & > span {
       font-size: 0.78rem;
-      margin: 0 0 0 12px;
+      margin: 0 0 0 10px;
       display: inline-block;
 
       @include min-screen($mobile-breakpoint) {
