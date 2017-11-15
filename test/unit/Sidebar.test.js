@@ -25,7 +25,8 @@ describe('Sidebar', () => {
       const breadcrumbLink = component.find('a').at(0);
       expect(breadcrumbLink).to.have.length(1);
       // The first part of the "text" is the hidden SVG title which is not hidden in the tests.
-      expect(breadcrumbLink.text()).to.equal('Return to Recommendations');
+      expect(breadcrumbLink.text())
+        .to.equal('NYPL Left Wedge SVG IconReturn to Recommendations');
       expect(breadcrumbLink.prop('href'))
         .to.equal('https://www.nypl.org/books-music-dvds/recommendations');
     });
