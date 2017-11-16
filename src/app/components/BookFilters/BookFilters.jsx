@@ -25,6 +25,7 @@ class BookFilters extends React.Component {
       focusId: '',
       disabled: false,
       showFilters: false,
+      timeout: undefined,
     };
 
     this.renderItems = this.renderItems.bind(this);
@@ -42,7 +43,8 @@ class BookFilters extends React.Component {
   onClick(filterId, active) {
     this.props.setSelectedFilter(filterId, active);
 
-    setTimeout(() => {
+    this.clearTimeout(this.state.timeout);
+    const timeout = setTimeout(() => {
       ReactDOM.findDOMNode(this.refs.booksFound).focus();
     }, 300);
 
@@ -50,6 +52,7 @@ class BookFilters extends React.Component {
       filters: this.state.filters,
       focusId: filterId,
       disabled: active,
+      timeout,
     });
   }
 
