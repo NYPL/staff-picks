@@ -1,7 +1,7 @@
 # Staff Picks
 
 [![GitHub version](https://badge.fury.io/gh/nypl%2Fstaff-picks.svg)](https://badge.fury.io/gh/nypl%2Fstaff-picks)
-[![Build Status](https://travis-ci.org/NYPL/Staff-Picks.svg?branch=master)](https://travis-ci.org/NYPL/Staff-Picks)
+[![Build Status](https://travis-ci.org/NYPL/staff-picks.svg?branch=master)](https://travis-ci.org/NYPL/staff-picks)
 [![dependencies Status](https://david-dm.org/nypl/staff-picks/status.svg)](https://david-dm.org/nypl/staff-picks)
 [![devDependencies Status](https://david-dm.org/nypl/staff-picks/dev-status.svg)](https://david-dm.org/nypl/staff-picks?type=dev)
 
