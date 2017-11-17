@@ -25,15 +25,20 @@
 
 ### Quick start
 
+- Get clientId and clientSecret environment variables.
 - Perform:
-    $ npm start
-- Navigate to http://localhost:3001/books-music-dvds/recommendations/staff-picks/
+    $ clientId=[clientId] clientSecret=[clientSecret] npm run dev-api-start
+- Navigate to http://localhost:3001/books-music-dvds/recommendations/best-books/ya or http://localhost:3001/books-music-dvds/recommendations/best-books/childrens
 
 ### Production mode
 
 To run locally in production mode, run:
 
-    $ NODE_ENV=production npm start
+    $ NODE_ENV=production clientId=[clientId] clientSecret=[clientSecret] npm run dev-api-start
+
+to use the `development` API, or the following to use the `production` API:
+
+    $ NODE_ENV=production clientId=[clientId] clientSecret=[clientSecret] npm run prod-api-start
 
 ## To promote code
 
@@ -77,22 +82,61 @@ To run the code coverage tool and view a better report, run
 
 This last command will create a folder called `coverage` in the root directory. You can open up `coverage/lcov-report/index.html` in a browser to see more details about what lines of codes have not been tested.
 
-## Bamboo
-### To create a release to deploy
+## AWS Elastic Beanstalk Workflow
+### Configuration
+All of the AWS Elastic Beanstalk configuration files exist in the `.ebextensions` directory. AWS will run all config files in numerical order based on the prefix `{NUM}_{FILENAME}.config` naming convention.
 
-- Go to Bamboo http://bamboo.nypl.org/browse/NA-SWR
-- Click on Deployments in the secondary navigation panel
-- Click on chosen environment (development, qa, production)
-- Click the ... on top right (under Search) and select 'Create release'
-- Select 'Create new release from build result'
-- Name release according to local naming conventions (e.g. master-v2.15)
-- Create release
+You must have AWS CLI installed on your machine with the proper AWS Profiles.
 
-### To deploy to branch from release
+> Note: Please use the instance profile of `_cloudwatchable-beanstalk_`. It is configured with all of the permissions necessary for a traditional or Docker-flavored Beanstalk machine that enables logging to CloudWatch.
 
-- Go to Bamboo http://bamboo.nypl.org/browse/NA-SWR
-- Click on Deployments in the secondary navigation panel
-- Click on chosen environment (development, qa, production)
-- Click Deploy on top right (under Search) and again select environment
-- Select 'Promote existing release to this environment'
-- Select release and start deployment
+### Initialization
+
+To initialize the application on AWS via the `aws-cli` run:
+
+```bash
+ eb init -i --profile ${your AWS profile}
+```
+### Creation
+
+Initially we want to create the app on AWS Elastic Beanstalk by using this command:
+```bash
+eb create ${environment name} \
+  --instance_type ${size of instance} (Ex: t2.small) \
+  --instance_profile cloudwatchable-beanstalk \
+  --scale ${amount of instances} (Ex: 1) \
+  --cname ${cname prefix} (Ex: XXX.us-east-1.elasticbeanstalk.com) \
+  --vpc.id ${ask for custom vpc_id} \
+  --vpc.ec2subnets ${privateSubnetId1,privateSubnetId2} \
+  --vpc.elbsubnets ${publicSubnetId1,publicSubnetId2} \
+  --vpc.elbpublic (exposes the IP to the public) \
+  --keyname ${ssh keyname} (allows the given ssh keyname to have ssh access) \
+  --profile ${your AWS profile}
+```
+> Note: This step is only required upon creation and should executed once.
+
+### Deployment
+Once the application has been created via `eb create ...` all subsequent updates and deployments should use the following command:
+
+```bash
+eb deploy ${environment name} --profile ${your AWS profile}
+```
+
+### KMS Environment Variables
+Staff Picks and the API where the data is fetched from are currently deployed on NYPl's AWS instance. In order to fetch data, we are using the `@nypl/nypl-data-api-client` to make requests to the API with an authentication token. You can find the [full documentation here](https://www.npmjs.com/package/@nypl/nypl-data-api-client), but to be brief, we need a client id, a client secret, and a token url to authenticate.
+
+We currently have a process in NYPL Digital to get said pair of authentication strings. To be more secure in our AWS environment, we are encrypting those variables with AWS KMS. To encrypt the strings, make sure you have the `aws-cli` tool available on your computer and then run:
+
+```
+    $ aws kms encrypt --key-id [your-aws-key-id] --plaintext [string-to-encrypt] --output text --query CiphertextBlob --profile [name-of-your-aws-profile]
+```
+
+Running this command will output an base64 encrypted string which will be used as the `KMS_ENV` environment variable in AWS Elastic Beanstalk. The app will read the variable, and use the `aws-sdk` library to decrypt it. Once we decrypt it, we can use those values with the `@nypl/nypl-data-api-client` to connect to the API.
+
+As stated above, you will need the client id and secret when running the app locally, but they do not need to be encrypted. The encrypted values will be use in the AWS instances as environment variables and the app will pick those up and use them since the `KMS_ENV` variable will be set to `encrypted` in the Beanstalk instances.
+
+If you would like to use the encrypted variables, you can start the app using:
+
+```
+    $ NODE_ENV=production clientId=[encryptedClientId] clientSecret=[encryptedClientSecret] npm run prod-api-start
+```

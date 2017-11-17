@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 const BasicButton = (props) => (
   <button
-    ref="BasicButton"
     id={props.id}
     className={props.className}
     name={props.name}
@@ -23,9 +22,9 @@ BasicButton.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   lang: PropTypes.string,
-  onClick: PropTypes.function,
-  onMouseLeave: PropTypes.function,
-  onMouseEnter: PropTypes.function,
+  onClick: PropTypes.func,
+  onMouseLeave: PropTypes.func,
+  onMouseEnter: PropTypes.func,
   style: PropTypes.object,
 };
 
@@ -35,7 +34,7 @@ BasicButton.defaultProps = {
   name: 'BasicButton',
   label: 'Basic Button',
   lang: 'en',
-  onClick() {},
+  onClick: () => {},
 };
 
 // Export the component

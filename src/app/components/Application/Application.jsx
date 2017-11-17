@@ -7,18 +7,23 @@ import Footer from '@nypl/dgx-react-footer';
 import { extend as _extend } from 'underscore';
 
 import Hero from '../Hero/Hero.jsx';
-import BookStore from '../../stores/BookStore.js';
+import BookActions from '../../actions/BookActions';
+import BookStore from '../../stores/BookStore';
+import config from '../../../../appConfig.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = _extend(this.props, BookStore.getState());
+    const annualList = !!(this.props.params && this.props.params.type &&
+      (this.props.params.type === 'childrens' || this.props.params.type === 'ya'));
+    this.state = _extend({ annualList }, this.props, BookStore.getState());
     this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
     BookStore.listen(this.onChange);
+    BookActions.setIsJsEnabled(true);
   }
 
   componentWillUnmount() {
@@ -26,28 +31,27 @@ class App extends React.Component {
   }
 
   onChange() {
-    this.setState(_extend(this.props, BookStore.getState()));
+    this.setState(_extend({}, this.props, BookStore.getState()));
   }
 
   render() {
-    const annualList = !!(this.props.params && this.props.params.type &&
-      (this.props.params.type === 'childrens' || this.props.params.type === 'ya'));
-
     return (
-      <div className="home">
+      <div className="app-wrapper">
         <Header
           navData={navConfig.current}
           skipNav={{ target: 'app-content' }}
         />
-        <Hero
-          params={this.props.params}
-          location={this.props.location}
-          annualList={annualList}
-        />
 
-        <div id="app-content">
-          {React.cloneElement(this.props.children, this.props)}
-        </div>
+        <main className="main-page">
+          <Hero
+            heroData={config.heroData.annual[this.props.params.type]}
+          />
+
+          <div id="app-content" className="nypl-full-width-wrapper">
+            {React.cloneElement(this.props.children, this.state)}
+          </div>
+        </main>
+
         <Footer id="footer" className="footer" />
       </div>
     );
@@ -56,7 +60,7 @@ class App extends React.Component {
 
 App.propTypes = {
   children: PropTypes.object,
-  filters: PropTypes.object,
+  filters: PropTypes.array,
   params: PropTypes.object,
   location: PropTypes.object,
 };

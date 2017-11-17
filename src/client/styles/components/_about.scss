@@ -1,0 +1,38 @@
+.about {
+  h2 {
+    margin: 0.8rem 0;
+  }
+
+  ul {
+    li {
+      list-style: none;
+      display: inline-block;
+
+      a {
+        display: inline-block;
+      }
+
+      &:first-child {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  a {
+    color: $nypl-blue;
+    background: $nypl-white;
+  }
+
+  svg {
+    fill: $nypl-blue;
+    height: 30px;
+  }
+
+  p {
+    max-width: 100%;
+  }
+
+  @include min-screen($mobile-breakpoint) {
+    border-top: 2px solid $nypl-gray-cool;
+  }
+}

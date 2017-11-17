@@ -3,7 +3,6 @@ import fs from 'fs';
 import express from 'express';
 import compress from 'compression';
 import analytics from './analytics.js';
-import colors from 'colors';
 
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
@@ -11,15 +10,15 @@ import webpackConfig from './webpack.config.js';
 import appConfig from './appConfig.js';
 
 import React from 'react';
-import DocMeta from 'react-doc-meta';
 import { match, RouterContext } from 'react-router';
 import ReactDOMServer from 'react-dom/server';
 
-import alt from 'dgx-alt-center';
+import alt from './src/app/alt';
 import Iso from 'iso';
 
 import appRoutes from './src/app/routes/routes.jsx';
 import expressRoutes from './src/server/routes/routes.js';
+import nyplApiClient from './src/server/helper/nyplApiClient.js';
 
 // URL configuration
 const ROOT_PATH = __dirname;
@@ -40,19 +39,16 @@ app.set('view engine', 'ejs');
 app.set('views', path.resolve(ROOT_PATH, 'src/server/views'));
 app.set('port', process.env.PORT || appConfig.port);
 
+app.set('nyplPublicKey', appConfig.publicKey);
+
 // first assign the path
 app.use('*/dist', express.static(DIST_PATH));
 
 // Assign the path for static client files
 app.use('*/src/client', express.static(INDEX_PATH));
 
-
-app.use('/', (req, res, next) => {
-  if (req.path === '/books-music-dvds/recommendations/staff-picks') {
-    return res.redirect('/books-music-dvds/recommendations/staff-picks/');
-  }
-  next();
-});
+// Init the nypl data api client.
+nyplApiClient();
 
 app.use('/', expressRoutes);
 
@@ -61,8 +57,7 @@ app.use('/', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   const iso = new Iso();
 
-  const isApiRoute = (req.url).indexOf(appConfig.baseApiUrl) !== -1;
-  const routes = isApiRoute ? appRoutes.server : appRoutes.client;
+  const routes = appRoutes.client;
 
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
@@ -71,10 +66,11 @@ app.use('/', (req, res) => {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
       const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
-      const metaTags = DocMeta.rewind();
       const safePath = req.path.replace(/'/g, '').replace(/"/g, '');
-      const renderedTags = metaTags.map((tag, index) =>
-        ReactDOMServer.renderToString(<meta data-doc-meta="true" key={index} {...tag} />)
+      // Generate meta tags markup
+      const metaTags = res.locals.data.metaTags || [];
+      const renderedMetaTags = metaTags.map((tag, index) =>
+        ReactDOMServer.renderToString(<meta key={index} {...tag} />)
       );
 
       iso.add(html, alt.flush());
@@ -84,18 +80,15 @@ app.use('/', (req, res) => {
         .render('index', {
           path: safePath,
           isProduction,
-          metatags: renderedTags,
+          metatags: renderedMetaTags,
           markup: iso.render(),
           gaCode: analytics.google.code(isProduction),
-          appEnv: process.env.APP_ENV || 'no APP_ENV',
           assets: buildAssets,
-          appTitle: appConfig.appTitle,
-          favicon: appConfig.favIconPath,
           webpackPort: WEBPACK_DEV_PORT,
-          endpoint: res.locals.data.endpoint,
+          pageTitle: res.locals.data.pageTitle,
         });
     } else {
-      res.status(404).send('Not found')
+      res.status(404).send('Not found');
     }
   });
 });
@@ -141,11 +134,9 @@ if (!isProduction) {
     },
   }).listen(appConfig.webpackDevServerPort, 'localhost', (err, result) => {
     if (err) {
-      console.log(colors.red(err));
+      console.log(err);
+    } else {
+      console.log(`Webpack Dev Server listening at localhost: ${appConfig.webpackDevServerPort}`);
     }
-    console.log(
-      colors.magenta('Webpack Dev Server listening at'),
-      colors.cyan(`localhost: ${appConfig.webpackDevServerPort}`)
-    );
   });
 }

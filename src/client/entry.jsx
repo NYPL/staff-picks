@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { Router, useRouterHistory } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 
-import alt from 'dgx-alt-center';
+import alt from '../app/alt';
 import Iso from 'iso';
 
 import routes from '../app/routes/routes.jsx';

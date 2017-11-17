@@ -1,32 +1,20 @@
 // ACTIONS
-import alt from 'dgx-alt-center';
+import alt from '../alt';
 
 class Actions {
   updatePicks(picks) {
     return picks;
   }
 
-  updateFilterAge(age) {
-    return age;
-  }
-
-  toggleBookFilter(filter) {
-    return filter;
-  }
-
-  clearFilters() {
-    return true;
-  }
-
-  updateNewFilters(filters) {
+  updateFilters(filters) {
     return filters;
   }
 
-  isotopesDidUpdate(bool) {
+  setIsJsEnabled(bool) {
     return bool;
   }
 
-  updateInitialFilters(filters) {
+  setSelectableFilters(filters) {
     return filters;
   }
 }

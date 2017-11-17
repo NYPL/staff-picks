@@ -1,6 +1,9 @@
+
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>NYPL | Recommendations</title>
+    <title><%= pageTitle %></title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <% for (var i=0; i < metatags.length; i++) {%>
@@ -16,54 +19,26 @@
 
   </head>
   <body>
-    <div id='content'><%- markup %></div>
+    <%- markup %>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', '<%= gaCode %>', 'auto');
+      ga('send', 'pageview');
+    </script>
 
     <script type='text/javascript'>
       var path = '<%= path %>';
-      var appEnv = "<%= appEnv %>";
     </script>
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
-
-    <!-- twitter web intents widgets-->
-    <script>
-      window.twttr = (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0],
-          t = window.twttr || {};
-        if (d.getElementById(id)) return t;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://platform.twitter.com/widgets.js";
-        fjs.parentNode.insertBefore(js, fjs);
-
-        t._e = [];
-        t.ready = function(f) {
-          t._e.push(f);
-        };
-
-        return t;
-      }(document, "script", "twitter-wjs"));
-    </script>
-
-    <!-- tumblr share button widgets-->
-    <script>
-      !function(d,s,id){
-        var js,ajs=d.getElementsByTagName(s)[0];
-        if(!d.getElementById(id)){
-          js=d.createElement(s);
-          js.id=id;
-          js.src="https://secure.assets.tumblr.com/share-button.js";
-          ajs.parentNode.insertBefore(js,ajs);
-      }}(document, "script", "tumblr-js");
-    </script>
-
-    <script id="tumblr-js" async src="https://assets.tumblr.com/share-button.js"></script>
 
   <% if (isProduction) { %>
     <script async src="dist/<%= assets.main.js %>"></script>
   <% } else { %>
-    <script src="http://localhost:3000/bundle.js"></script>
+    <script src="http://localhost:<%= webpackPort %>/bundle.js"></script>
   <% } %>
 
     <!-- Optimizely -->

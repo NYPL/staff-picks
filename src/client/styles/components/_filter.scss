@@ -1,0 +1,97 @@
+li.filter-item {
+  margin: .75em 0 .75em 1.75em;
+
+  @include min-screen($xtrasmall-breakpoint) {
+    display: inline-block;
+  }
+
+  @include min-screen($mobile-breakpoint + 1) {
+    margin-left: 1.25em;
+    display: block;
+  }
+
+  button {
+    background: $nypl-white;
+    color: $nypl-blue;
+    border-radius: 25px;
+    width: 11rem;
+    text-align: center;
+    padding-left: 20px;
+    white-space: pre-line;
+    line-height: 1.2;
+    min-height: 2.5rem;
+    padding: 0.75rem;
+    position: relative;
+
+    svg {
+      fill: $nypl-blue;
+      float: left;
+      height: 1.25rem;
+      width: 1.25rem;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 3.5%;
+      @include transform(translate(0, -50%));
+
+      @include min-screen($mobile-breakpoint) {
+        left: 2%;
+      }
+    }
+
+    &:disabled {
+      background-color: $nypl-white;
+      border-color: $nypl-gray;
+      color: $nypl-gray;
+
+      &:hover {
+        background-color: $nypl-white;
+        border-color: $nypl-gray;
+        color: $nypl-gray;
+      }
+    }
+
+    &:hover {
+      background: $nypl-blue;
+      color: $nypl-white;
+
+      svg {
+        fill: $nypl-white;
+      }
+    }
+
+    &.transition,
+    &.active {
+      padding-left: 15px;
+      margin-left: -1em;
+
+      @include min-screen($xtrasmall-breakpoint) {
+        margin-left: 0;
+      }
+
+      @include min-screen($mobile-breakpoint + 1) {
+        margin-left: -1em;
+      }
+    }
+
+    &.transition {
+      background: $nypl-blue-sky;
+      color: $nypl-blue-dark;
+      border-color: $nypl-blue-dark;
+
+      svg {
+        fill: $nypl-blue-dark;
+      }
+    }
+
+    &.active {
+      color: $nypl-white;
+      border: 0.04167rem solid $nypl-blue;
+      background: $nypl-blue;
+
+      svg {
+        fill: $nypl-white;
+      }
+    }
+  }
+}

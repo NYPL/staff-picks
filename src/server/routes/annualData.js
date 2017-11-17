@@ -1,79 +1,62 @@
-import axios from 'axios';
-import parser from 'jsonapi-parserinator';
-import { sortBy as _sortBy } from 'underscore';
+import appConfig from '../../../appConfig.js';
+import utils from '../../app/utils/utils';
 
-import PicksListModel from '../../app/utils/PicksListModel.js';
-import config from '../../../appConfig.js';
+import nyplApiClient from '../helper/nyplApiClient.js';
 
-const {
-  apiEndpoint,
-  fields,
-  pageSize,
-  includes,
-  api,
-  baseUrl,
-} = config;
+const { baseUrl } = appConfig;
 
-const appEnvironment = process.env.APP_ENV || 'production';
-const apiRoot = api.root[appEnvironment];
-const options = {
-  includes: ['previous-list', 'next-list', 'picks.item.tags', 'picks.age'],
-};
+const nyplApiClientGet = (endpoint) =>
+  nyplApiClient().then(client => client.get(endpoint, { cache: false }));
 
 /* annualCurrentData
  * Get the latest annual staff pick list for either childrens or ya.
  */
 function annualCurrentData(type, req, res, next) {
-  const endpoint = `${apiRoot}${apiEndpoint}?filter[list-type]=${type}&` +
-    `${fields}${pageSize}${includes}`;
+  const pageTitle = appConfig.pageTitle[type];
+  const metaTags = appConfig.metaTags[type];
+  let dataType = '';
 
-  axios.get(endpoint)
-    .then((staffPicks) => {
-      const returnedData = staffPicks.data;
-      // Filters can be extracted without parsing since they are all in the
-      // included array:
-      const filters = _sortBy(
-        parser.getOfType(returnedData.included, 'staff-pick-tag'),
-        item => item.id
-      );
-      // parse the data
-      const parsed = parser.parse(returnedData, options);
-      // Since the endpoint returns a list of monthly picks
-      const currentMonth = parsed[0];
-      const currentMonthPicks = PicksListModel.build(currentMonth);
+  if (type === 'childrens') {
+    dataType = 'kids';
+  } else if (type === 'ya') {
+    dataType = 'teens';
+  }
+
+  nyplApiClientGet(`/book-lists/${dataType}/2017`)
+    .then(data => {
+      const filters = utils.getAllTags(data.picks);
+      // Get the subset of tags that the picks can be filtered by.
+      const selectableFilters = utils.getSelectableTags(data.picks);
 
       res.locals.data = {
         BookStore: {
-          age: 'Adult',
-          allFilters: [],
-          initialFilters: filters,
-          filters: [],
-          updatedFilters: [],
-          isotopesDidUpdate: false,
-          currentMonthPicks,
+          filters,
+          currentPicks: data,
+          selectableFilters,
+          isJsEnabled: false,
         },
-        endpoint,
+        pageTitle,
+        metaTags,
       };
 
       next();
     })
-    // console error messages
     .catch(error => {
-      console.log(`Error calling API AnnualCurrentData: ${error}`);
+      console.log(`Error fetching endpoint: ${error}`);
+
       res.locals.data = {
         BookStore: {
-          age: 'Adult',
-          allFilters: [],
-          initialFilters: [],
           filters: [],
-          updatedFilters: [],
-          currentMonthPicks: {},
-          isotopesDidUpdate: false,
+          currentPicks: {},
+          selectableFilters: [],
+          isJsEnabled: false,
         },
-        endpoint: '',
+        pageTitle: '',
+        metaTags: [],
       };
+
       next();
-    }); // end Axios call
+    })
 }
 
 /* selectAnnualData
@@ -82,12 +65,8 @@ function annualCurrentData(type, req, res, next) {
 function selectAnnualData(req, res, next) {
   const type = req.params.type;
 
-  if (type === 'childrens') {
-    return annualCurrentData('c100', req, res, next);
-  }
-
-  if (type === 'ya') {
-    return annualCurrentData('ya100', req, res, next);
+  if (type === 'childrens' || type === 'ya') {
+    return annualCurrentData(type, req, res, next);
   }
 
   return res.redirect(baseUrl);
@@ -95,5 +74,4 @@ function selectAnnualData(req, res, next) {
 
 export default {
   selectAnnualData,
-  annualCurrentData,
 };

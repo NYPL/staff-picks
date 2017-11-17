@@ -1,314 +1,166 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { CSSTransitionGroup } from 'react-transition-group';
-
 import {
-  each as _each,
-  extend as _extend,
-  indexOf as _indexOf,
-  union as _union,
-  contains as _contains,
-  sortBy as _sortBy,
-} from 'underscore';
+  FilterIcon,
+  ResetIcon,
+  LeftWedgeIcon,
+} from '@nypl/dgx-svg-icons';
+import { contains as _contains } from 'underscore';
 
-import BookStore from '../../stores/BookStore.js';
-import BookActions from '../../actions/BookActions.js';
-import CloseButton from '../Buttons/CloseButton.jsx';
-
-import utils from '../../utils/utils.js';
-import staffPicksDate from '../../utils/DateService.js';
-
-const styles = {
-  clearFilters: {
-    color: '#0095c8',
-    marginTop: '20px',
-  },
-  grayedOutFilter: {
-    color: '#bfbfbf',
-  },
-};
+import Filter from './Filter';
+import utils from '../../utils/utils';
 
 class BookFilters extends React.Component {
   constructor(props) {
     super(props);
 
-    this.setFilters();
+    this.state = {
+      // Create an array data structure of filter objects.
+      filters: this.props.filters.map(filter => ({
+        id: filter.toLowerCase().split(' ').join('-'),
+        label: filter,
+      })),
+      selectedFilters: this.props.selectedFilters,
+      focusId: '',
+      disabled: false,
+      showFilters: false,
+      timeout: undefined,
+    };
 
-    this.clearFilters = this.clearFilters.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.filterItems = this.filterItems.bind(this);
+    this.renderItems = this.renderItems.bind(this);
+    this.onClick = this.onClick.bind(this);
+    this.toggleFilters = this.toggleFilters.bind(this);
+    this.getFilterArray = this.getFilterArray.bind(this);
+    this.setDisabled = this.setDisabled.bind(this);
+    this.clearTimeout = this.clearTimeout.bind(this);
   }
 
-  componentDidMount() {
-    // Only trigger the Action for the homepage route.
-    if (!this.props.annualList) {
-      BookActions.updateFilterAge('adult');
-    }
-
-    BookStore.listen(this.onChange);
+  componentWillReceiveProps(nextProps) {
+    this.setState({ selectedFilters: nextProps.selectedFilters });
   }
 
-  componentWillUnmount() {
-    BookStore.unlisten(this.onChange);
-  }
+  onClick(filterId, active) {
+    this.props.setSelectedFilter(filterId, active);
 
-  onChange() {
-    const storeState = BookStore.getState();
-    const activeFilters = storeState.filters;
-    const age = storeState.age;
-    const bookElems = storeState.updatedFilters;
-    const updatedBooksElems = [];
-    let filteredFilters = [];
+    this.clearTimeout(this.state.timeout);
+    const timeout = setTimeout(() => {
+      ReactDOM.findDOMNode(this.refs.booksFound).focus();
+    }, 300);
 
-    _each(bookElems, elem => {
-      if (elem.className.indexOf(age) !== -1) {
-        updatedBooksElems.push(elem);
-      }
-    });
-
-    // update filter list in state
-    if (storeState.isotopesDidUpdate) {
-      this.setFilters();
-    }
-
-    // Update/reset the filters based on a new age
-    if (this.state.age !== age || storeState.isotopesDidUpdate) {
-      this.setState({ age });
-      _each(this.state.drivenByFilters, filter => {
-        filter.active = false;
-        filter.show = true;
-        filter.remove = false;
-        _each(updatedBooksElems, elem => {
-          const classes = (elem.className.split(' '));
-
-          if (_contains(classes, filter.id)) {
-            filter.remove = true;
-          }
-        });
-      });
-      _each(this.state.themeFilters, filter => {
-        filter.active = false;
-        filter.show = true;
-        filter.remove = false;
-        _each(updatedBooksElems, elem => {
-          const classes = (elem.className.split(' '));
-
-          if (_contains(classes, filter.id)) {
-            filter.remove = true;
-          }
-        });
-      });
-    }
-
-    // For clearing the filters and unselecting a filter.
-    if (!storeState.filters.length) {
-      _each(this.state.drivenByFilters, filter => {
-        filter.active = false;
-        filter.show = true;
-      });
-      _each(this.state.themeFilters, filter => {
-        filter.active = false;
-        filter.show = true;
-      });
-    } else {
-      _each(bookElems, elem => {
-        const classes = elem.className;
-        let n = storeState.filters.length;
-        let filters;
-
-        if (classes.indexOf(age) !== -1 || this.props.annualList) {
-          _each(storeState.filters, filter => {
-            if (classes.indexOf(filter) !== -1) {
-              n -= 1;
-            }
-          });
-
-          if (n === 0) {
-            filters = classes.split(' ');
-            filteredFilters = _union(filteredFilters, filters);
-          }
-        }
-      });
-
-      if (filteredFilters) {
-        _each(this.state.themeFilters, filter => {
-          filter.show = true;
-          if (_indexOf(filteredFilters, filter.id) === -1) {
-            filter.show = false;
-          }
-        });
-        _each(this.state.drivenByFilters, filter => {
-          filter.show = true;
-          if (_indexOf(filteredFilters, filter.id) === -1) {
-            filter.show = false;
-          }
-        });
-      }
-    }
-
-    this.setState(_extend({
-      filters: activeFilters,
-    }, BookStore.getState()));
-  }
-
-  setFilters() {
-    const store = BookStore.getState();
-    const initialFilters = store.initialFilters;
-    const themeFilters = [];
-    const drivenByFilters = [];
-    const seasonYear = staffPicksDate(store.currentMonthPicks.date);
-
-    _each(initialFilters, filter => {
-      const displayName = filter.attributes.tag;
-      let updatedDisplayName =
-        `${displayName.charAt(0).toUpperCase()}${displayName.substring(1).toLowerCase()}`;
-
-      filter.active = false;
-      filter.show = true;
-      filter.remove = true;
-      if (filter.attributes.tag.indexOf('Driven') !== -1) {
-        // If it's Summer of newer, then 'Driven' should appear in the display name
-        // but separated with a hypen.
-        if (seasonYear.month !== 'Spring' && seasonYear.year >= 2016) {
-          // The space is needed to update the display name from, for example:
-          // 'Plot Driven' to 'Plot-driven'.
-          filter.attributes.displayName = updatedDisplayName.replace(/\b Driven/ig, '-driven');
-        } else {
-          filter.attributes.displayName = updatedDisplayName.replace(/\bDriven/ig, '');
-        }
-
-        drivenByFilters.push(filter);
-      } else {
-        filter.attributes.displayName = updatedDisplayName;
-        themeFilters.push(filter);
-      }
-    });
-
-    this.state = _extend({
-      drivenByFilters,
-      themeFilters,
-    }, BookStore.getState());
-  }
-
-  filterItems(list) {
-    const handleClick = this.handleClick;
-
-    return list.map((elem) => {
-      let active = 'hide-filter';
-      let liElement;
-
-      if (elem.active) {
-        active = 'show-filter';
-      }
-
-      if (elem.show) {
-        liElement = (
-          <li key={elem.id} onClick={() => handleClick(elem)}>
-            <a>
-              {elem.attributes.displayName}
-              <CSSTransitionGroup
-                transitionName="minus"
-                transitionAppear
-                transitionEnterTimeout={500}
-                transitionAppearTimeout={500}
-                transitionLeaveTimeout={500}
-              >
-                <span className={`minus-icon ${active}`}></span>
-              </CSSTransitionGroup>
-            </a>
-          </li>
-        );
-      } else {
-        liElement = (
-          <li key={elem.id} style={styles.grayedOutFilter}>{elem.attributes.displayName}</li>
-        );
-      }
-
-      return elem.remove ? liElement : null;
+    this.setState({
+      filters: this.state.filters,
+      focusId: filterId,
+      disabled: active,
+      timeout,
     });
   }
 
-  clearFilters(e) {
-    e.preventDefault();
-    BookActions.clearFilters();
-
-    utils.trackPicks('Filters', 'Clear All Filters');
-  }
-
-  handleClick(filter) {
-    const filterType = filter.id;
-    let label = '';
-
-    if (!filter.active) {
-      label = `Selected filter: ${filterType}`;
-    } else {
-      label = `Unselected filter: ${filterType}`;
+  /**
+   * getFilterArray(selectableFilters, filters)
+   * If the list of selectable filters is available, then we want the subset of all filters
+   * that can be selected. A selectable filter is based on whether or not it is available
+   * from a rendered pick item.
+   * @param {array} selectableFilters
+   * @param {array} filters
+   */
+  getFilterArray(selectableFilters, filters) {
+    if (!selectableFilters.length) {
+      return filters;
     }
-
-    utils.trackPicks('Filters', label);
-
-    filter.active = !filter.active;
-    BookActions.toggleBookFilter(filterType);
+    return filters.filter(filter => _contains(selectableFilters, filter.id));
   }
 
-  renderFilterList(date) {
-    const isSpring2016 = (date.year === 2016 && date.month === 'Spring');
+  setDisabled(disabled) {
+    this.setState({ disabled });
+  }
 
-    if (date.year >= 2016 && !isSpring2016) {
-      let joinedFilters = this.state.drivenByFilters.concat(this.state.themeFilters);
+  toggleFilters() {
+    utils.trackPicks('Mobile Filters', (this.state.showFilters ? 'Close' : 'Open'));
+    this.setState({ showFilters: !this.state.showFilters });
+  }
 
-      // Join the two set of filters and sort alphabetically.
-      joinedFilters = _sortBy(joinedFilters, (f) => f.attributes.displayName);
+  /**
+   * clearTimeout(id)
+   * Clear the setTimeout that is currently active for filter in transition.
+   * @param {string} id
+   */
+  clearTimeout(id) {
+    clearTimeout(id);
+  }
+
+  /**
+   * renderItems(filters)
+   * Render the filter button list items.
+   * @param {array} filter
+   */
+  renderItems(filters) {
+    return filters.map((filter, i) => {
+      const active = _contains(this.state.selectedFilters, filter.id);
       return (
-        <ul>
-          {this.filterItems(joinedFilters)}
-        </ul>
+        <Filter
+          key={i}
+          filter={filter}
+          onClick={this.onClick}
+          focusId={this.state.focusId}
+          active={active}
+          disabled={this.state.disabled}
+          setDisabled={this.setDisabled}
+          clearTimeout={this.clearTimeout}
+        />
       );
-    }
-
-    return (
-      <div>
-        <span>Driven by...</span>
-        <ul>
-          {this.filterItems(this.state.drivenByFilters)}
-        </ul>
-        <span>Themes...</span>
-        <ul>
-          {this.filterItems(this.state.themeFilters)}
-        </ul>
-      </div>
-    );
+    });
   }
 
   render() {
-    const store = BookStore.getState();
-    const seasonYear = staffPicksDate(store.currentMonthPicks.date);
+    const { filters, showFilters } = this.state;
+    const {
+      selectableFilters,
+      picksCount,
+    } = this.props;
+
+    if (!filters.length) {
+      return null;
+    }
+
+    const filtersToRender = this.getFilterArray(selectableFilters, filters);
+    const booksfound = `${picksCount} book${picksCount === 1 ? '' : 's'} found`;
+    const buttonAnimationClasses = showFilters ? 'rotate-up' : 'rotate-down';
+    const filtersContainerDisplayClass = showFilters ? 'expand' : 'collapse';
 
     return (
-      <div className={`BookFilters ${this.props.active}`}>
-        <CloseButton
-          onClick={this.props.mobileCloseBtn}
-          id="close-button"
-          className="BookFilters__close-btn"
-        />
-        <span className="divider"></span>
-        <h2>What would you like to read?</h2>
-        <div className="BookFilters-lists">
-          {this.renderFilterList(seasonYear)}
-          {store.filters.length ?
-            <div className="clearFilters" style={styles.clearFilters}>
-              <a href="#" onClick={this.clearFilters}>
-                Clear Filters
-                <span className="close-icon"></span>
-              </a>
-            </div>
-            : null
+      <div className="book-filters">
+        <div className="book-filters-heading">
+          <h2><FilterIcon /> Filter by Tags</h2>
+          <span tabIndex="0" ref="booksFound">
+            {booksfound}
+          </span>
+          <button
+            aria-expanded={showFilters}
+            onClick={this.toggleFilters}
+            className="book-filters-toggleButton"
+          >
+            <LeftWedgeIcon ariaHidden className={buttonAnimationClasses} />
+            <span className="visuallyHidden">
+              {showFilters ? 'Collapse tag list' : 'Expand tag list'}
+            </span>
+          </button>
+        </div>
+        <div className={`book-filters-list ${filtersContainerDisplayClass}`}>
+          <ul aria-label="Click to apply or remove tags.">
+            {this.renderItems(filtersToRender)}
+          </ul>
+          {
+            !!this.state.selectedFilters.length &&
+              (<button
+                onClick={() => this.props.clearFilters(this.refs.booksFound)}
+                className="nypl-primary-button clear-button"
+                ref="clearFilters"
+              >
+                <ResetIcon />
+                Clear All Filters
+              </button>)
           }
-          <h2 className="mobile-done-button">
-            <a onClick={this.props.mobileCloseBtn}>
-              Done
-            </a>
-          </h2>
         </div>
       </div>
     );
@@ -316,9 +168,20 @@ class BookFilters extends React.Component {
 }
 
 BookFilters.propTypes = {
-  mobileCloseBtn: PropTypes.func,
-  active: PropTypes.string,
-  annualList: PropTypes.bool,
+  filters: PropTypes.array,
+  selectableFilters: PropTypes.array,
+  setSelectedFilter: PropTypes.func,
+  clearFilters: PropTypes.func,
+  selectedFilters: PropTypes.array,
+  picksCount: PropTypes.number,
+};
+
+BookFilters.defaultProps = {
+  filters: [],
+  selectableFilters: [],
+  setSelectedFilter: () => {},
+  clearFilters: () => {},
+  selectedFilters: [],
 };
 
 export default BookFilters;

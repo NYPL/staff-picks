@@ -1,140 +1,82 @@
-.Hero {
-  background-color: #e4382c;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  background-position: center;
-  color: white;
-  height: 72px;
-  padding: 0;
+.hero {
+  background-color: #fff;
+  color: #000000;
   width: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
 
-  @include breakpoint($min, 720px) {
-    height: 120px;
+  @include min-screen($mobile-breakpoint) {
+    border-bottom: 0.125rem solid #eee;
   }
 
-  @include breakpoint($min, $post-laptop) {
-    height: 320px;
-  }
-
-  &__container {
-    height: auto;
-    margin: 0;
-    max-width: 900px;
-    overflow: hidden;
+  &-image {
+    height: 15.625rem;
     position: relative;
 
-    @include breakpoint($min, 720px) {
-      margin: 0 auto;
-    }
-  }
-
-  &__text {
-
-    @include breakpoint($min, 720px) {
-      margin: 45px 40px 40px 70px;
-    }
-
-    @include breakpoint($min, $post-laptop) {
-      margin: 60px 8px 56px 106px;  
-      width: 45%;
-    }
-
-    &__HeroTitle {
-      h3 {
-        @include Kievit-Bold;
-        font-size: 15px;
-        font-weight: normal;
-        letter-spacing: 0.09rem;
-        margin: 30px 0 0 57px;
-        text-transform: uppercase;
-        display: none;
-
-        @include breakpoint($min, $post-palm) {
-          margin-left: 105px;
-        }
-
-        @include breakpoint($min, 720px) {
-          margin: 0 0 20px 0;
-        }
-
-        @include breakpoint($min, 992px) {
-          display: block;
-        }
-
-        @include breakpoint($min, $post-laptop) {
-          margin: 0 0 27px 0;
-        }
-      }
-
-      &__des {
-        font-size: 22px;
-        line-height: 36px;
-        margin: 20px 0 0 52px;
-        text-align: left;
-
-        @include Milo-Regular;
-
-        @include breakpoint($min, 992px) {
-          display: block;
-          font-size: 20px;
-          line-height: 24px;
-          margin: 0 0 20px 0;
-        }
-
-        @include breakpoint($min, $post-laptop) {
-          font-size: 34px;
-          line-height: 30px;
-          margin: 0 0 31px 0;
-        }
-      }
-
-      &__intro {
-        display: none;
-        font-family: 'KievitWeb-Book', sans-serif;
-        font-size: 16px;
-        line-height: 14px;
-        text-align: left;
-
-        @include breakpoint($min, 992px) {
-          display: block;
-        }
-
-         @include breakpoint($min, $post-laptop) {
-          font-size: 18px;
-          line-height: 25px;
-        }
-      }
-    }
-  }
-
-  &__image {
-    background-image: url('#{$staffPicksUrl}src/client/images/shelftalker.4.2.png');
-    background-position: -10px 20px;
-    background-size: 104%;
-    background-repeat: no-repeat;
-    border-radius: 50%;
-    display: none;
-    margin: -68px 0 -6px 0;
-    overflow: hidden;
-    position: relative;
-    display: none;
-
-    @include breakpoint($min, 720px) {
-      // display: inline-block;
-      height: 300px;
-      margin: -45px 0 -10px 0;
-      width: 300px;
-    }
-
-    @include breakpoint($min, $post-laptop) {
-      display: inline-block;
-      height: 380px;
-      margin: -60px 0 -10px 0;
-      width: 380px;
+    img {
       position: absolute;
-      left: 520px;
-      top: 0;
+      max-width: 100%;
+      height: 100%;
+      -o-object-fit: cover;
+      object-fit: cover;
+      -o-object-position: 80%;
+      object-position: 80%;
+      width: 100%;
+      -webkit-transition: opacity .3s;
+      transition: opacity .3s;
+      opacity: 1;
+    }
+  }
+
+  &-container {
+    @include min-screen($mobile-breakpoint) {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      top: 55px;
+      width: 100%;
+    }
+  }
+
+  &-content {
+    line-height: normal;
+    white-space: normal;
+
+    h1 {
+      font-family: Milo-Medium;
+      font-size: 2.5rem;
+      font-weight: 400;
+      line-height: 1.1;
+      margin: 0 0 0.75rem 0;
+      text-align: left;
+
+      &::before {
+        background: #d0343a;
+        content: '';
+        display: block;
+        height: 0.25rem;
+        margin-bottom: 0.5rem;
+        width: 50%;
+      }
+
+      @include min-screen($mobile-breakpoint) {
+        &::before {
+          content: none;
+        }
+      }
+    }
+
+    &-description {
+      background-color: transparentize(#fff, 0.5);
+      font-family: 'KievitWeb-Book', sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.5;
+      width: 50%;
+
+      @include media($mobile-breakpoint) {
+        width: 75%;
+      }
     }
   }
 }
