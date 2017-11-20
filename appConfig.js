@@ -14,14 +14,22 @@ const config = {
         'selection of outstanding young adult titles.' },
       { property: 'og:url', content: 'https://www.nypl.org/books-music-dvds/recommendations' +
         '/best-books/ya' },
-      { property: 'og:image', content: '' },
+      { property: 'og:image', content: 'https://d140u095r09w96.cloudfront.net/sites/default/' +
+        'files/teens-600x335.jpg' },
+      { property: 'og:image:alt', content: 'Featured title: The Wendy Project by Melissa Jane ' +
+        'Osborne, illustrated by Veronica Fish' },
+      { property: 'og:image:width', content: '335' },
+      { property: 'og:image:height', content: '600' },
       { name: 'twitter:title', content: 'Best Books for Teens' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:site', content: '@nypl' },
       { name: 'twitter:creator', content: '@nypl' },
       { name: 'twitter:description', content: 'Explore The New York Public Library\'s annual ' +
         'selection of outstanding young adult titles.' },
-      { name: 'twitter:image', content: '' },
+      { name: 'twitter:image', content: 'https://d140u095r09w96.cloudfront.net/sites/default/' +
+        'files/teens-600x335.jpg' },
+      { name: 'twitter:image:alt', content: 'Featured title: The Wendy Project by Melissa ' +
+        'Jane Osborne, illustrated by Veronica Fish' },
     ],
     childrens: [
       { property: 'og:type', content: 'website' },
@@ -31,14 +39,22 @@ const config = {
         'selection of outstanding children\'s titles.' },
       { property: 'og:url', content: 'https://www.nypl.org/books-music-dvds/recommendations' +
         '/best-books/childrens' },
-      { property: 'og:image', content: '' },
+      { property: 'og:image', content: 'https://d140u095r09w96.cloudfront.net/sites/default/' +
+        'files/kids-600x335.jpg' },
+      { property: 'og:image:alt', content: 'Featured title: The Book of Mistakes by ' +
+        'Corinna Luyken' },
+      { property: 'og:image:width', content: '335' },
+      { property: 'og:image:height', content: '600' },
       { name: 'twitter:title', content: 'Best Books for Kids' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:site', content: '@nypl' },
       { name: 'twitter:creator', content: '@nypl' },
       { name: 'twitter:description', content: 'Explore The New York Public Library\'s annual ' +
         'selection of outstanding children\'s titles.' },
-      { name: 'twitter:image', content: '' },
+      { name: 'twitter:image', content: 'https://d140u095r09w96.cloudfront.net/sites/default/' +
+        'files/kids-600x335.jpg' },
+      { name: 'twitter:image:alt', content: 'Featured title: The Book of Mistakes by ' +
+        'Corinna Luyken' },
     ],
   },
   seasons: {
