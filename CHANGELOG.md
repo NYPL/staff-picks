@@ -1,5 +1,9 @@
 ## Changelog
 
+### 3.0.1
+> Adding Twitter and FB OG tags for images.
+> Small style update to the # books found in the sidebar.
+
 ### 3.0.0
 > 2017 Best Books for Kids and Best Books for Teens!
 > We've refactored the base Node/React application based off [Discovery](https://github.com/NYPL-discovery/discovery-front-end), added unit tests, cleaned up and updated npm packages, completed accessibility and cross-browser reviews, and updated the routes for the next big version of Staff Picks. This initial re-implementation kicks off with the 2017 annual lists for kids and teens and will later incorporate the rest of the data. The data is now coming from NYPL Digital's API platform located on AWS. The app is also updated to use the [Design Toolkit](https://github.com/NYPL/design-toolkit)! Making huge progress to unify our designs and conventions.
