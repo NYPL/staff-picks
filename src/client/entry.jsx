@@ -10,7 +10,7 @@ import alt from '../app/alt';
 import Iso from 'iso';
 
 import routes from '../app/routes/routes.jsx';
-import { ga } from 'dgx-react-ga';
+import { config, gaUtils } from 'dgx-react-ga';
 
 import FeatureFlags from 'dgx-feature-flags';
 
@@ -25,9 +25,10 @@ window.onload = () => {
     alt.bootstrap(state);
 
     if (!window.ga) {
-      console.log('Analytics not available - loading through React.');
-      const gaOpts = { debug: false };
-      ga.initialize('UA-1420324-3', gaOpts);
+      const isProd = process.env.NODE_ENV === 'production';
+      const gaOpts = { debug: !isProd, titleCase: false };
+
+      gaUtils.initialize(config.google.code(isProd), gaOpts);
     }
 
     const appHistory = useRouterHistory(createBrowserHistory)();
@@ -36,5 +37,7 @@ window.onload = () => {
       <Router history={appHistory}>{routes.client}</Router>,
       container
     );
+
+    gaUtils.trackPageview(window.location.pathname);
   });
 };
