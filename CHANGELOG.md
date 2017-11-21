@@ -1,5 +1,8 @@
 ## Changelog
 
+### 3.0.2
+> Updated header to v2.3.0 -- Includes FundraisingBanner integration
+
 ### 3.0.1
 > Adding Twitter and FB OG tags for images.
 > Small style update to the # books found in the sidebar.
