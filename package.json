@@ -1,6 +1,6 @@
 {
   "name": "staff-picks",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "NYPL Staff Picks",
   "main": "index.js",
   "scripts": {
@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@nypl/design-toolkit": "0.1.27",
-    "@nypl/dgx-header-component": "git+https://bitbucket.org/NYPL/dgx-header-component.git#integrate-fundraising-component",
+    "@nypl/dgx-header-component": "2.3.0",
     "@nypl/dgx-react-footer": "0.4.0",
     "@nypl/dgx-svg-icons": "0.2.5",
     "@nypl/nypl-data-api-client": "0.2.5",
