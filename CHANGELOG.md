@@ -1,5 +1,9 @@
 ## Changelog
 
+### 3.1.0
+> Updating Header Component to 2.2.0.
+> Updating dgx-react-ga related functions for Header Component and dgx-react-ga updates.
+
 ### 3.0.1
 > Adding Twitter and FB OG tags for images.
 > Small style update to the # books found in the sidebar.
