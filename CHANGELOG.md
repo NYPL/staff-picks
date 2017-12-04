@@ -3,6 +3,9 @@
 ### 3.1.0
 > Updating dgx-react-ga related functions for Header Component and dgx-react-ga updates.
 
+### 3.0.3
+> Updating URL of hero images to be relative.
+
 ### 3.0.2
 > Updated header to v2.3.0 -- Includes FundraisingBanner integration
 
