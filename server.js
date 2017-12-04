@@ -2,7 +2,6 @@ import path from 'path';
 import fs from 'fs';
 import express from 'express';
 import compress from 'compression';
-import analytics from './analytics.js';
 
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
@@ -82,7 +81,6 @@ app.use('/', (req, res) => {
           isProduction,
           metatags: renderedMetaTags,
           markup: iso.render(),
-          gaCode: analytics.google.code(isProduction),
           assets: buildAssets,
           webpackPort: WEBPACK_DEV_PORT,
           pageTitle: res.locals.data.pageTitle,
