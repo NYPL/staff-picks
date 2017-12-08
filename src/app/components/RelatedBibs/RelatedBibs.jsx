@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import testData from './testData.js';
 import BookStore from '../../stores/BookStore';
+import Slider from 'react-slick';
 
 class RelatedBibs extends React.Component {
   constructor(props) {
@@ -30,24 +31,26 @@ class RelatedBibs extends React.Component {
     return (
       <div key={i}>
         <h3>{bib.title}</h3>
-        <p>{bib.author}</p>
       </div>
     );
   }
 
   render() {
-    console.log(this.state.bibs)
-
     if (!this.state.bibs && !this.state.bibs.length) {
       return <div>Loading...</div>;
     }
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 6,
+      slidesToScroll: 1,
+    };
 
     return (
-      <div>
-        {
-          this.state.bibs.map((bib, i) => this.renderBib(bib, i))
-        }
-      </div>
+      <Slider {...settings}>
+        {this.state.bibs.map((bib, i) => this.renderBib(bib, i))}
+      </Slider>
     );
   }
 }
