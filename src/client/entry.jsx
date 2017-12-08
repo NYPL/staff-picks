@@ -14,6 +14,8 @@ import { config, gaUtils } from 'dgx-react-ga';
 
 import FeatureFlags from 'dgx-feature-flags';
 
+import RelatedBibs from '../app/components/RelatedBibs/RelatedBibs';
+
 import './styles/main.scss';
 
 window.onload = () => {
@@ -34,7 +36,7 @@ window.onload = () => {
     const appHistory = useRouterHistory(createBrowserHistory)();
 
     ReactDOM.render(
-      <Router history={appHistory}>{routes.client}</Router>,
+      <RelatedBibs />,
       container
     );
 

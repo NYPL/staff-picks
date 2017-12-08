@@ -18,6 +18,7 @@ import Iso from 'iso';
 import appRoutes from './src/app/routes/routes.jsx';
 import expressRoutes from './src/server/routes/routes.js';
 import nyplApiClient from './src/server/helper/nyplApiClient.js';
+import RelatedBibs from './src/app/components/RelatedBibs/RelatedBibs.jsx';
 
 // URL configuration
 const ROOT_PATH = __dirname;
@@ -51,45 +52,64 @@ nyplApiClient();
 
 app.use('/', expressRoutes);
 
-// after get the path
-app.use('/', (req, res) => {
+app.use('/related-bibs', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   const iso = new Iso();
+  const html = ReactDOMServer.renderToString(<RelatedBibs />);
 
-  const routes = appRoutes.client;
+  iso.add(html, alt.flush());
+  res
+    .status(200)
+    .render('index', {
+      path: '',
+      isProduction,
+      metatags: [],
+      markup: iso.render(),
+      assets: buildAssets,
+      pageTitle: '',
+      webpackPort: WEBPACK_DEV_PORT,
+    });
+})
 
-  match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
-    if (error) {
-      res.status(500).send(error.message);
-    } else if (redirectLocation) {
-      res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-    } else if (renderProps) {
-      const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
-      const safePath = req.path.replace(/'/g, '').replace(/"/g, '');
-      // Generate meta tags markup
-      const metaTags = res.locals.data.metaTags || [];
-      const renderedMetaTags = metaTags.map((tag, index) =>
-        ReactDOMServer.renderToString(<meta key={index} {...tag} />)
-      );
-
-      iso.add(html, alt.flush());
-
-      res
-        .status(200)
-        .render('index', {
-          path: safePath,
-          isProduction,
-          metatags: renderedMetaTags,
-          markup: iso.render(),
-          assets: buildAssets,
-          webpackPort: WEBPACK_DEV_PORT,
-          pageTitle: res.locals.data.pageTitle,
-        });
-    } else {
-      res.status(404).send('Not found');
-    }
-  });
-});
+// after get the path
+// app.use('/', (req, res) => {
+//   alt.bootstrap(JSON.stringify(res.locals.data || {}));
+//   const iso = new Iso();
+//
+//   const routes = appRoutes.client;
+//
+//   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+//     if (error) {
+//       res.status(500).send(error.message);
+//     } else if (redirectLocation) {
+//       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
+//     } else if (renderProps) {
+//       const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
+//       const safePath = req.path.replace(/'/g, '').replace(/"/g, '');
+//       // Generate meta tags markup
+//       const metaTags = res.locals.data.metaTags || [];
+//       const renderedMetaTags = metaTags.map((tag, index) =>
+//         ReactDOMServer.renderToString(<meta key={index} {...tag} />)
+//       );
+//
+//       iso.add(html, alt.flush());
+//
+//       res
+//         .status(200)
+//         .render('index', {
+//           path: safePath,
+//           isProduction,
+//           metatags: renderedMetaTags,
+//           markup: iso.render(),
+//           assets: buildAssets,
+//           webpackPort: WEBPACK_DEV_PORT,
+//           pageTitle: res.locals.data.pageTitle,
+//         });
+//     } else {
+//       res.status(404).send('Not found');
+//     }
+//   });
+// });
 
 const server = app.listen(app.get('port'), () => {
   console.log(`server running at localhost: ${app.get('port')}, go refresh and see magic`);
