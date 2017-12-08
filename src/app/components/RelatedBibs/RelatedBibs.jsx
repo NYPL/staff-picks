@@ -95,7 +95,7 @@ class RelatedBibs extends React.Component {
       <div key={i} className="related-bib-container">
         <a target="_parent" href={`https://browse.nypl.org/iii/encore/record/C__Rb${bib.id}`}>
           <img style={{ width: '100px' }} src={imgUrl} alt="" />
-          <h3>{bib.title}</h3>
+          <h4>{bib.title}</h4>
         </a>
         <p>{bib.author}</p>
         <p>{publisher}</p>
