@@ -86,11 +86,15 @@ class RelatedBibs extends React.Component {
   renderBib(bib, i) {
     const isbns = extractIsbns(bib);
     const publisher = extractPublisher(bib);
+    let imgUrl = 'https://www.nypl.org/books-music-dvds/recommendations/lists/src/client/images/book-place-holder.png';
 
+    if (isbns[0]) {
+      imgUrl = `https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${isbns[0]}&content=S&Return=1&Type=M`;
+    }
     return (
-      <div key={i}>
-        <a href={`https://browse.nypl.org/iii/encore/record/C__Rb${bib.id}`}>
-          <img style={{ width: '100px' }} src={`https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${isbns[0]}&content=S&Return=1&Type=M`} alt="" />
+      <div key={i} className="related-bib-container">
+        <a target="_parent" href={`https://browse.nypl.org/iii/encore/record/C__Rb${bib.id}`}>
+          <img style={{ width: '100px' }} src={imgUrl} alt="" />
           <h3>{bib.title}</h3>
         </a>
         <p>{bib.author}</p>
@@ -109,15 +113,18 @@ class RelatedBibs extends React.Component {
       // dots: true,
       // infinite: true,
       speed: 500,
-      slidesToShow: 6,
+      slidesToShow: 4,
       slidesToScroll: 1,
-      arrows:true,
+      arrows: true,
     };
 
     return (
-      <Slider {...settings}>
-        {this.state.bibs.map((bib, i) => this.renderBib(bib, i))}
-      </Slider>
+      <div>
+        <h2>Also at NYPL</h2>
+        <Slider {...settings}>
+          {this.state.bibs.map((bib, i) => this.renderBib(bib, i))}
+        </Slider>
+      </div>
     );
   }
 }
