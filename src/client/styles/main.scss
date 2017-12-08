@@ -48,10 +48,15 @@ body {
 li {
   list-style: none;
 }
-
+.slider {
+  margin: 0 40px;
+}
 .related-bib-container {
   p {
     font-size: 14px;
     margin-bottom: 0;
   }
+}
+.slick-next:before, .slick-prev:before {
+  color: #000 !important;
 }

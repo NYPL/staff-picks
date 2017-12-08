@@ -121,7 +121,7 @@ class RelatedBibs extends React.Component {
     return (
       <div>
         <h2>Also at NYPL</h2>
-        <Slider {...settings}>
+        <Slider {...settings} className="slider">
           {this.state.bibs.map((bib, i) => this.renderBib(bib, i))}
         </Slider>
       </div>
