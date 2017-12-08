@@ -2,20 +2,25 @@ import express from 'express';
 
 import monthData from './monthData.js';
 import annualData from './annualData.js';
+import relatedBibs from './relatedBibs.js';
 import appConfig from '../../../appConfig.js';
 
 const router = express.Router();
 
-router
-  .route(appConfig.baseMonthUrl)
-  .get(monthData.currentMonthData);
+// router
+//   .route(appConfig.baseMonthUrl)
+//   .get(monthData.currentMonthData);
 
 router
-  .route(`${appConfig.baseAnnualUrl}:type/:year?/:id?`)
-  .get(annualData.selectAnnualData);
+  .route(`${appConfig.baseAnnualUrl}:type/:id`)
+  .get(relatedBibs.getBibs);
 
-router
-  .route(`${appConfig.baseMonthUrl}:month/:id?`)
-  .get(monthData.selectMonthData);
+// router
+//   .route(`${appConfig.baseAnnualUrl}:type/:year?/:id?`)
+//   .get(annualData.selectAnnualData);
+//
+// router
+//   .route(`${appConfig.baseMonthUrl}:month/:id?`)
+//   .get(monthData.selectMonthData);
 
 export default router;

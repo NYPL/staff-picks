@@ -2,32 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import testData from './testData.js';
+import BookStore from '../../stores/BookStore';
 
 class RelatedBibs extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       url: '',
-      bibs: [],
+      bibs: BookStore.getState().relatedBibs || [],
     };
 
     this.renderbib = this.renderBib.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
-    // Parse whatever encore url will be
-    this.setState({ url: window.location.pathname.substring(14) })
-
-    // axios.get()
-    this.setState({
-      bibs: testData,
-    });
+    BookStore.listen(this.onChange);
   }
 
-  renderBib(bib) {
+  componentWillUnmount() {
+    BookStore.unlisten(this.onChange);
+  }
+
+  onChange() {}
+
+  renderBib(bib, i) {
     return (
-      <div>
+      <div key={i}>
         <h3>{bib.title}</h3>
         <p>{bib.author}</p>
       </div>
@@ -44,7 +45,7 @@ class RelatedBibs extends React.Component {
     return (
       <div>
         {
-          this.state.bibs.map(bib => this.renderBib(bib))
+          this.state.bibs.map((bib, i) => this.renderBib(bib, i))
         }
       </div>
     );
@@ -53,7 +54,7 @@ class RelatedBibs extends React.Component {
 
 RelatedBibs.propTypes = {
   pick: PropTypes.object,
-  isJsEnabled: PropTypes.bool,
+  relatedBibs: PropTypes.array,
 };
 
 export default RelatedBibs;

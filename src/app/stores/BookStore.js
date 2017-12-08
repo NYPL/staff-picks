@@ -16,6 +16,7 @@ class BookStore {
       currentPicks: {},
       isJsEnabled: false,
       selectableFilters: [],
+      relatedBibs: [],
     };
   }
 
