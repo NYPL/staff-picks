@@ -52,7 +52,7 @@ nyplApiClient();
 
 app.use('/', expressRoutes);
 
-app.use('/related-bibs', (req, res) => {
+app.use('/books-music-dvds/recommendations/best-books/ya', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   const iso = new Iso();
   const html = ReactDOMServer.renderToString(<RelatedBibs />);
