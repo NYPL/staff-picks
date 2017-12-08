@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import testData from './testData.js';
 import BookStore from '../../stores/BookStore';
+import Slider from 'react-slick';
 
 function extractIsbns(bib) {
   var isbns = [];
@@ -59,8 +60,8 @@ class RelatedBibs extends React.Component {
     let publisher = extractPublisher(bib)
 
     return (
-      <div key={i}>
-        <img src={`https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${isbns[0]}&content=S&Return=1&Type=M`} alt="" />
+      <div key={i} style={{ width: '200px' }}>
+        <img style={{ width: '100px' }} src={`https://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=NYPL49807&password=CC68707&Value=${isbns[0]}&content=S&Return=1&Type=M`} alt="" />
         <h3>{bib.title}</h3>
         <p>{bib.author}</p>
         <p>{publisher}</p>
@@ -72,13 +73,19 @@ class RelatedBibs extends React.Component {
     if (!this.state.bibs && !this.state.bibs.length) {
       return <div>Loading...</div>;
     }
+    const settings = {
+      // dots: true,
+      // infinite: true,
+      speed: 500,
+      slidesToShow: 6,
+      slidesToScroll: 1,
+      arrows:true,
+    };
 
     return (
-      <div>
-        {
-          this.state.bibs.map((bib, i) => this.renderBib(bib, i))
-        }
-      </div>
+      <Slider {...settings}>
+        {this.state.bibs.map((bib, i) => this.renderBib(bib, i))}
+      </Slider>
     );
   }
 }
