@@ -1,5 +1,8 @@
 ## Changelog
 
+### 3.2.0
+> Update to the header, v2.4.0.
+
 ### 3.1.0
 > Updating dgx-react-ga related functions for Header Component and dgx-react-ga updates.
 
