@@ -1,8 +1,3 @@
-@mixin visuallyHidden {
-  width: 1px;
-  height: 1px;
-}
-
 @mixin displayVisuallyHidden {
   position: relative;
   left: 0;
