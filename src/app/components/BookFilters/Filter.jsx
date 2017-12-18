@@ -112,6 +112,7 @@ Filter.propTypes = {
 
 Filter.defaultProps = {
   clearTimeout: () => {},
+  setDisabled: () => {},
 };
 
 export default Filter;
