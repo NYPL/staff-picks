@@ -1,12 +1,16 @@
+process.traceDeprecation = true;
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const cleanBuild = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SaveAssetsJson = require('assets-webpack-plugin');
-const sassPaths = require('@nypl/design-toolkit').includePaths.map((sassPath) =>
-  `includePaths[]=${sassPath}`
-).join('&');
+const sassPaths = require('@nypl/design-toolkit').includePaths
+.map((sassPath) => sassPath).join('&');
+
+const assetsPluginInstance = new SaveAssetsJson({
+  filename: 'dist/assets.json',
+});
 
 // References the applications root path
 const ROOT_PATH = path.resolve(__dirname);
@@ -19,12 +23,14 @@ const commonSettings = {
   // path.resolve - resolves to an absolute path
   // This is the path and file of our top level
   // React App that is to be rendered.
-  entry: [
-    'babel-polyfill',
-    path.resolve(ROOT_PATH, 'src/client/entry.jsx'),
-  ],
+  entry: {
+    app: [
+      'babel-polyfill',
+      path.resolve(ROOT_PATH, 'src/client/entry.jsx'),
+    ],
+  },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
   output: {
     // Sets the output path to ROOT_PATH/dist
@@ -54,31 +60,39 @@ const commonSettings = {
 if (ENV === 'development') {
   module.exports = merge(commonSettings, {
     devtool: 'eval',
-    entry: [
-      'webpack-dev-server/client?http://localhost:3000',
-      'webpack/hot/only-dev-server',
-      path.resolve(ROOT_PATH, 'src/client/entry.jsx'),
-    ],
+    entry: {
+      app: [
+        'webpack-dev-server/client?http://localhost:3000',
+        'webpack/hot/only-dev-server',
+      ],
+    },
     output: {
       publicPath: 'http://localhost:3000/',
+      filename: 'bundle.js',
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin(),
     ],
     resolve: {
-      extensions: ['', '.js', '.jsx', '.scss'],
+      modules: [
+        'node_modules',
+      ],
+      extensions: ['.js', '.jsx', '.scss'],
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          loader: 'babel',
+          use: 'babel-loader',
         },
         {
           test: /\.scss?$/,
-          loader: `style!css!sass?${sassPaths}`,
+          use: [
+            'style-loader',
+            'css-loader',
+            `sass-loader?includePaths=${sassPaths}`,
+          ],
           include: path.resolve(ROOT_PATH, 'src/client'),
         },
       ],
@@ -95,31 +109,45 @@ if (ENV === 'development') {
  *
  **/
 if (ENV === 'production') {
+  const loaders = [
+    {
+      loader: 'css-loader',
+      options: {
+        sourceMap: true,
+      },
+    },
+    {
+      loader: 'sass-loader',
+      options: {
+        sourceMap: true,
+        includePaths: sassPaths,
+      },
+    },
+  ];
   module.exports = merge(commonSettings, {
     devtool: 'source-map',
     output: {
       filename: 'bundle.[hash].js',
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          loader: 'babel',
+          use: 'babel-loader',
         },
         {
           test: /\.scss$/,
           include: path.resolve(ROOT_PATH, 'src/client'),
-          // activate source maps via loader query
-          loader: ExtractTextPlugin.extract(`css?sourceMap!sass?sourceMap&${sassPaths}`),
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: loaders,
+          }),
         },
       ],
     },
     plugins: [
-      new SaveAssetsJson({
-        path: path.resolve(ROOT_PATH, 'dist'),
-        filename: 'assets.json',
-      }),
+      assetsPluginInstance,
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify('production'),
