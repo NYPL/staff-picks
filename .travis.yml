@@ -8,6 +8,7 @@ install: npm install
 before_script: npm run dist
 script: npm test
 deploy:
+  skip_cleanup: true
   provider: elasticbeanstalk
   access_key_id: AKIAILARBXRZ6LJM7K3A
   secret_access_key:
@@ -15,6 +16,7 @@ deploy:
   region: us-east-1
   app: nypl-staff-picks-app
   env: staff-picks-travis
+  bucket_name: elasticbeanstalk-us-east-1-946183545209
   on:
     repo: NYPL/staff-picks
     branch: setup-travis-ci-aws
