@@ -16,7 +16,8 @@ deploy:
   region: us-east-1
   app: nypl-staff-picks-app
   env: staff-picks-travis
-  bucket_name: nypl-staff-picks-app
+  bucket_name: elasticbeanstalk-us-east-1-946183545209
+  bucket_path: nypl-staff-picks-app
   on:
     repo: NYPL/staff-picks
     branch: setup-travis-ci-aws
