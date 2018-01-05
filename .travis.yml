@@ -7,6 +7,7 @@ cache:
 install: npm install
 before_script: npm run dist
 script: npm test
+before_deploy: "echo 'Passed all unit tests, preparing to deploy Staff Picks App to AWS EB'"
 deploy:
   skip_cleanup: true
   provider: elasticbeanstalk
@@ -21,3 +22,4 @@ deploy:
   on:
     repo: NYPL/staff-picks
     branch: setup-travis-ci-aws
+after_deploy: "echo 'Successfully executed deploy trigger for Staff Picks App on AWS EB'"
