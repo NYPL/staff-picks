@@ -7,13 +7,13 @@ cache:
 install: npm install
 before_script: npm run dist
 script: npm test
-before_deploy: "echo 'Passed all unit tests, preparing to deploy Staff Picks App to AWS EB'"
+before_deploy: "echo 'Passed all unit tests; Preparing to deploy Staff Picks App to AWS'"
 deploy:
   skip_cleanup: true
   provider: elasticbeanstalk
-  access_key_id: AKIAILARBXRZ6LJM7K3A
+  access_key_id: $AWS_PRODUCTION_ACCESS_KEY_ID
   secret_access_key:
-    secure: JRptuPihx3muQqlw3w0Mw1SvjEDJJkVDUqXRrAYygBVd99zfDZdoDFppBGFRSmGF1/4/c4NHq+FXrRo2xjlyIFM4cDzBn4VrOrJUpbtGoC2sbWaJ3lrUOL4cEHAcNCfV+doSl5QokRQ6kjQJP5aJgdI2VTSUzlRA+8ZBZQtmJRn4X2cqMWpusuZS3PoVeEFszHHTCHco5kXMc67CfqUXRdz3q23x4U0Hq+FWBQbs/ea6KXsccXO/E7N131qz5phNBaINhJODyqDZoEHEx8rXBeiz1Mz9VcruM1gEyHFBlOPDmEGck6OgUMP5wbM7Yw0TlgqoNX82m3F6PLu1OQ2v0ui2G3uRcWpfXYvCL5yADE8qI8lijKGUgBvJc/qJLMlO4fW+XqciUSoL3dwyR7wb2VW8Cg4TGVkpEjBLclrw5p6iyO8IRwKH9QzRtwi1ETw5n2Gq+8SgalPk5rdcMBKs7OtW3MOMYhbDt1YODvSk1RcXChRrFUrP0HC8/FsbtWf91ahIbc9LYwHGDc/Ids2nH5lRFJNqh4mC4NkHMgo7ZH5asfEO64rP07PqNbvWbIcwVY8ODx7N5Cc/zFkjvdb2ALy0plyFjG3iX+3cWYeo8ustCv+Szcacs+2prsOIqKWeN1WnbURMwDIZVrldKdbNbsu8eCVjRC/PqYtR0NeOATk=
+    secure: $AWS_PRODUCTION_SECRET_ACCESS_KEY
   region: us-east-1
   app: nypl-staff-picks-app
   env: staff-picks-travis
@@ -22,4 +22,4 @@ deploy:
   on:
     repo: NYPL/staff-picks
     branch: setup-travis-ci-aws
-after_deploy: "echo 'Successfully executed deploy trigger for Staff Picks App on AWS EB'"
+after_deploy: "echo 'Successfully executed deploy task for Staff Picks App to deploy on AWS'"
