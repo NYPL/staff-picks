@@ -1,5 +1,8 @@
 ## Changelog
 
+### 3.2.2
+> Update the header component to 2.4.2.
+
 ### 3.2.1
 > Update the header to v2.4.1 and footer to v0.4.1.
 
