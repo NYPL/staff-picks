@@ -13,7 +13,7 @@ deploy:
   provider: elasticbeanstalk
   access_key_id: $AWS_PRODUCTION_ACCESS_KEY_ID
   secret_access_key:
-    secure: "$AWS_PRODUCTION_ACCESS_SECRET"
+    secure: $AWS_PRODUCTION_ACCESS_SECRET
   region: us-east-1
   app: nypl-staff-picks-app
   env: staff-picks-travis
