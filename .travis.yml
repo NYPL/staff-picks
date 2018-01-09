@@ -14,10 +14,10 @@ deploy:
   access_key_id: $AWS_PRODUCTION_ACCESS_KEY_ID
   secret_access_key: "$AWS_PRODUCTION_ACCESS_SECRET"
   region: us-east-1
-  app: nypl-staff-picks-app
-  env: staff-picks-travis
+  app: $AWS_APP_NAME
+  env: $AWS_ENVIRONMENT_NAME
   bucket_name: elasticbeanstalk-us-east-1-946183545209
-  bucket_path: nypl-staff-picks-app
+  bucket_path: $AWS_APP_NAME
   on:
     repo: NYPL/staff-picks
     branch: master
