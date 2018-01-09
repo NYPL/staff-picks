@@ -20,5 +20,5 @@ deploy:
   bucket_path: nypl-staff-picks-app
   on:
     repo: NYPL/staff-picks
-    branch: setup-travis-ci-aws
+    branch: master
 after_deploy: "echo 'Successfully executed deploy trigger for Staff Picks on AWS'"
