@@ -1,5 +1,8 @@
 ## Changelog
 
+### 3.2.1
+> Update the header to v2.4.1 and footer to v0.4.1.
+
 ### 3.2.0
 > Update to the header, v2.4.0.
 
