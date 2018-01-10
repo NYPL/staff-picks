@@ -1,6 +1,24 @@
 language: node_js
 node_js:
-  - 5
+  - "8"
+cache:
+  directories:
+    - node_modules
 install: npm install
 before_script: npm run dist
 script: npm test
+before_deploy: "echo 'All unit tests passed; Preparing to deploy Staff Picks to AWS'"
+deploy:
+  skip_cleanup: true
+  provider: elasticbeanstalk
+  access_key_id: $AWS_PRODUCTION_ACCESS_KEY_ID
+  secret_access_key: "$AWS_PRODUCTION_ACCESS_SECRET"
+  region: us-east-1
+  app: $AWS_APP_NAME
+  env: $AWS_ENVIRONMENT_NAME
+  bucket_name: elasticbeanstalk-us-east-1-946183545209
+  bucket_path: $AWS_APP_NAME
+  on:
+    repo: NYPL/staff-picks
+    branch: master
+after_deploy: "echo 'Successfully executed deploy trigger for Staff Picks on AWS'"
