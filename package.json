@@ -65,7 +65,6 @@
     "compression": "1.7.0",
     "css-loader": "0.28.7",
     "dgx-feature-flags": "git+https://git@bitbucket.org/NYPL/dgx-feature-flags.git#master",
-    "dgx-react-ga": "git+https://bitbucket.org/NYPL/dgx-react-ga.git#master",
     "ejs": "2.5.5",
     "express": "4.13.0",
     "extract-text-webpack-plugin": "2.1.2",
