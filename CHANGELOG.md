@@ -1,5 +1,8 @@
 ## Changelog
 
+### 3.2.3
+> Update the header component to 2.4.5.
+
 ### 3.2.2
 > Update the header component to 2.4.2.
 
