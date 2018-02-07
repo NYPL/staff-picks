@@ -1,4 +1,9 @@
-## Changelog
+## CHANGELOG
+
+### 3.2.4
+> Added Travis CI configuration for AWS EB
+> Integrated swap-space configuration in ./ebextensions
+> Updated README to include AWS CI/CD workflow
 
 ### 3.2.3
 > Update the header component to 2.4.5.
