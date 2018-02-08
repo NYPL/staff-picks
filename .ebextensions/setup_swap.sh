@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SWAPFILE=/var/swapfile
-SWAP_MEGABYTES=4048
+SWAP_MEGABYTES=2048
 
 if [ -f $SWAPFILE ]; then
   echo "Swapfile $SWAPFILE found; swap space configuration already exists"
