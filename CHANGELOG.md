@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 3.2.5
+> Update the header component to 2.4.7.
+> Added OptinMonster for advocacy 2018.
+
 ### 3.2.4
 > Added Travis CI configuration for AWS EB
 > Integrated swap-space configuration in ./ebextensions
