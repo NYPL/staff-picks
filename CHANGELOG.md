@@ -3,6 +3,7 @@
 ### 3.2.5
 > Update the header component to 2.4.7.
 > Added OptinMonster for advocacy 2018.
+> Updating Travis CI configuration for CD to AWS Elastic Beanstalk
 
 ### 3.2.4
 > Added Travis CI configuration for AWS EB
