@@ -7,8 +7,8 @@ cache:
 install: npm install
 before_script: npm run dist
 script: npm test
-before_deploy: echo 'All unit tests passed; Successfully built distribution assets;
-  Preparing to deploy Staff Picks to AWS'
+before_deploy: echo 'All unit tests passed; Successfull built distribution assets;
+  Preparing to deploy Staff Picks to AWS.'
 deploy:
 - provider: elasticbeanstalk
   skip_cleanup: true
@@ -49,4 +49,4 @@ deploy:
 after_deploy: echo 'Successfully executed deploy trigger for Staff Picks on AWS'
 env:
   global:
-    secure: UVBXfd2gL3ImsFe5OfKPDFPDwCFJ7IvPmZ7vxAaL8TudHha5co34KuKeEIjkvRe1tbth7bO8tWU9w8a3ZzHxeHvpo1Y1xo51+mHFMKqQYm/RdYIZfbdfRtNAhgQUZej1XrkYVCY5avucKMALv7S4ZCcsincLxuDZYYnzpd3amntAHgzMMiEoGRquHlTJIyoFmMZYsGTjcaqIX4CYRwEDGY+1mh95p8+8k3HjoK27tuA9HeR/y9VUydp/moXBKE45tuJvZQkZZEEzSWcnS61Eho4WSQNC+H2MLZZiWF/uBAYS2uh6VMsqb2j144oUd3U+ICS+Nhqh+xesfyatdXtCQvX2XacnaCfwsQ6aWogPfzby3JT2FqWiaKxRTN6DScBUOSte4eHRo8rj9SOEPgcWYyWntLM+tnG+fW8JkRVuXRg94ZCR0te/7lOqUuNMqvNAASMDlDvn+j4WX+obVDYPXv/c7VL5QuTw5q1YZDyC5U6uTaOAWBJUHjDoamIqTJDeyGA0qU4evI7gvos2fiYsRvm+dbgiJ+JUxSYI4pg7uOX4K/TLnBoHWaekWgO55LjXsLJ8rQHVyr+jOvgPzbb5zoXUge1RXgZv1PNYPmkYzESURnFmuz5rGPsvL7xM4XuuQ8MgwETBa+10N3eRUynCBTJt/w/0km62CtOeVx3la5s=
+    secure: Jtyj6LV2p3nClM1sFjBo2/lNCJzTLwcgxTbEO0lqHaoEaq3Z8xb6r18w6MqOk2Sj4vUJMRTaqAUSFunqlbNk/XRDOROnNpovA/ix00RMLs5p2Hxewza1oC5CxnaCfDCCmPqSCplpe9kZWR7HqBvAuKD/ErBlV+uvjBAxtfLn+WNWZns385tLjDD/i85sm1Oc6T7CMHePKz9HsFUPmhwt2KYEGoftSiSrckPTEiUShQj8YgcqaUNraJyW1pPAJ0fc7Q/XI7AQ61aO2zm9yf8rhCJxmreAaf/wej5bQHZObU6IK4eGmLazMknO+Er5u2MmbEBA9wmGvDjcWjzyBQbNFdFUO+OQVrHwwtPUoXlkRm5L0IeTtQmJG3kI1yIy3fgk0aQsQVhfSGmGZUjbusq7PDRiBD6H5+LfVjL1T+RUZJz6C8LDMSV+gYRF4xD285gc5I+C8nQ5EGddUVNeq3Sk7W3DAc+8zNdKHCi20BcKwY+4e93y41mT2Lv6nRg0+4gFDQltH50hpo8kwBH9jIR3ZAQqQ023EgMWzQNx7P58rxrLxU/u9ZxJl768satFtAmL1quPD7mBpDN0FTZu+ne9hdXairQWbMoRgPKTKlbdf0LoAFJksbrGKhGlX0CwEYYlRiY6MXcVVvmv14mcNn1CM4+uoy7P/9cEGxKQm2OeBEY=
