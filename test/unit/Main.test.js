@@ -3,7 +3,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
 
-import Main from '../../src/app/components/Application/Main.jsx';
+import Main from '../../src/app/components/Application/Main';
 
 const picks = [
   {

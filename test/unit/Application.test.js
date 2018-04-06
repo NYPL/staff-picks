@@ -3,7 +3,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
-import Application from '../../src/app/components/Application/Application.jsx';
+import Application from '../../src/app/components/Application/Application';
 
 const params = {
   ya: {

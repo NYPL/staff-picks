@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import { expect } from 'chai';
 
-import utils from '../../src/app/utils/utils.js';
+import utils from '../../src/app/utils/utils';
 
 describe('Utils functions', () => {
   describe('getPickTags', () => {
