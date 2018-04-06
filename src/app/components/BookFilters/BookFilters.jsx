@@ -95,11 +95,11 @@ class BookFilters extends React.Component {
    * @param {array} filter
    */
   renderItems(filters) {
-    return filters.map((filter, i) => {
+    return filters.map((filter) => {
       const active = _contains(this.state.selectedFilters, filter.id);
       return (
         <Filter
-          key={i}
+          key={filter.id}
           filter={filter}
           onClick={this.onClick}
           focusId={this.state.focusId}

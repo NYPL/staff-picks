@@ -2,10 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { LeftWedgeIcon } from '@nypl/dgx-svg-icons';
 
-import BookFilters from '../BookFilters/BookFilters.jsx';
+import BookFilters from '../BookFilters/BookFilters';
 import config from '../../../../appConfig';
 
-const Sidebar = (props) => {
+const Sidebar = ({
+  filters,
+  selectableFilters,
+  setSelectedFilter,
+  clearFilters,
+  selectedFilters,
+  picksCount,
+  isJsEnabled,
+}) => {
   const renderBookFilters = (shouldDisplay) => {
     if (!shouldDisplay) {
       return null;
@@ -13,12 +21,12 @@ const Sidebar = (props) => {
 
     return (
       <BookFilters
-        filters={props.filters}
-        selectableFilters={props.selectableFilters}
-        setSelectedFilter={props.setSelectedFilter}
-        clearFilters={props.clearFilters}
-        selectedFilters={props.selectedFilters}
-        picksCount={props.picksCount}
+        filters={filters}
+        selectableFilters={selectableFilters}
+        setSelectedFilter={setSelectedFilter}
+        clearFilters={clearFilters}
+        selectedFilters={selectedFilters}
+        picksCount={picksCount}
       />
     );
   };
@@ -32,26 +40,29 @@ const Sidebar = (props) => {
           {config.recommendationsLink.label}
         </a>
       </nav>
-      {renderBookFilters(props.isJsEnabled)}
+      {renderBookFilters(isJsEnabled)}
     </div>
   );
 };
 
 Sidebar.propTypes = {
-  filters: PropTypes.array,
-  selectableFilters: PropTypes.array,
+  filters: PropTypes.arrayOf(PropTypes.object),
+  selectableFilters: PropTypes.arrayOf(PropTypes.object),
   setSelectedFilter: PropTypes.func,
   clearFilters: PropTypes.func,
   isJsEnabled: PropTypes.bool,
-  selectedFilters: PropTypes.array,
+  selectedFilters: PropTypes.arrayOf(PropTypes.object),
   picksCount: PropTypes.number,
 };
 
 Sidebar.defaultProps = {
   filters: [],
   selectableFilters: [],
-  setSelectableFilters: () => {},
+  setSelectedFilter: () => {},
   clearFilters: () => {},
+  isJsEnabled: false,
+  selectedFilters: [],
+  picksCount: 0,
 };
 
 export default Sidebar;

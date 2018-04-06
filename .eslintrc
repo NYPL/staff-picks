@@ -2,5 +2,11 @@
   "extends": [
     "airbnb",
     "plugin:jsx-a11y/recommended"
-  ]
+  ],
+  rules: {
+    "react/forbid-prop-types": 0,
+    "react/require-default-props": 0,
+    "prefer-destructuring": 0,
+    "class-methods-use-this": 0,
+  }
 }

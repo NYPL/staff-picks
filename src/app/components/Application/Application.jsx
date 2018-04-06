@@ -6,10 +6,10 @@ import { Header, navConfig } from '@nypl/dgx-header-component';
 import Footer from '@nypl/dgx-react-footer';
 import { extend as _extend } from 'underscore';
 
-import Hero from '../Hero/Hero.jsx';
+import Hero from '../Hero/Hero';
 import BookActions from '../../actions/BookActions';
 import BookStore from '../../stores/BookStore';
-import config from '../../../../appConfig.js';
+import config from '../../../../appConfig';
 
 class App extends React.Component {
   constructor(props) {
@@ -60,9 +60,7 @@ class App extends React.Component {
 
 App.propTypes = {
   children: PropTypes.object,
-  filters: PropTypes.array,
   params: PropTypes.object,
-  location: PropTypes.object,
 };
 
 App.contextTypes = {
