@@ -37,6 +37,7 @@ class App extends React.Component {
   }
 
   render() {
+    // temporarily add the check here for staff picks config
     let heroData = undefined;
 
     if (_isEmpty(this.props.params)) {
