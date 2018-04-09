@@ -6,6 +6,7 @@ import BookFilters from '../BookFilters/BookFilters.jsx';
 import ListFilter from '../ListFilter/ListFilter.jsx';
 import config from '../../../../appConfig';
 
+// This data is a temporary dummy data for creating the season list
 const fieldsetProps = {
   fieldsetName: 'season',
   options: [
