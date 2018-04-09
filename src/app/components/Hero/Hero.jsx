@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 const Hero = ({ heroData }) => {
   const image = heroData.heroImageUrl;
+
   return (
     <div className="hero">
       <div className="hero-image">

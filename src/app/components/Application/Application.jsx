@@ -11,6 +11,8 @@ import BookActions from '../../actions/BookActions';
 import BookStore from '../../stores/BookStore';
 import config from '../../../../appConfig.js';
 
+import { isEmpty as _isEmpty } from 'underscore';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -35,6 +37,14 @@ class App extends React.Component {
   }
 
   render() {
+    let heroData = undefined;
+
+    if (_isEmpty(this.props.params)) {
+      heroData = config.heroData.staffPicks;
+    } else {
+      heroData = config.heroData.annual[this.props.params.type];
+    }
+
     return (
       <div className="app-wrapper">
         <Header
@@ -44,7 +54,7 @@ class App extends React.Component {
 
         <main className="main-page">
           <Hero
-            heroData={config.heroData.annual[this.props.params.type]}
+            heroData={heroData}
           />
 
           <div id="app-content" className="nypl-full-width-wrapper">
