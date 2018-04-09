@@ -38,6 +38,7 @@ const Sidebar = (props) => {
             <option value="2017-06-01">2017 Summer</option>
             <option value="2017-04-01">2017 Spring</option>
           </select>
+          <input type="submit" value="Select Season" />
         </fieldset>
       </form>
     );
