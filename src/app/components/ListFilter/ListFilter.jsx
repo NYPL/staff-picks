@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 class ListFilter extends React.Component {
@@ -32,32 +31,43 @@ class ListFilter extends React.Component {
     );
   }
 
-  render() {
+  renderFieldset() {
+    const fieldsetProps = this.props.fieldsetProps;
     const visuallyHidden = (this.state.withJS) ? 'visuallyHidden' : '';
+    const selectName = fieldsetProps.fieldsetName;
+    const selectId = `${selectName}-input`;
+    const defaultValue = fieldsetProps.options[0].value;
+    const optionList = fieldsetProps.options.map(
+      (opt) => <option value={opt.value} key={opt.value}>{opt.name}</option>
+    );
 
     return (
+      <fieldset>
+        <label htmlFor={selectId}></label>
+        <select
+          id={selectId}
+          name={selectName}
+          defaultValue={defaultValue}
+          onChange={this.handleChange}
+        >
+         {optionList}
+        </select>
+        <input type="submit" value={`Select ${selectName}`} className={visuallyHidden} />
+      </fieldset>
+    );
+  }
+
+  render() {
+    return (
       <form>
-        <fieldset>
-          <label htmlFor="seanson-input"></label>
-          <select
-            id="seasion-input"
-            name="season"
-            defaultValue="2018-01-01"
-            onChange={this.handleChange}
-          >
-            <option value="2018-01-01">2018 Winter</option>
-            <option value="2017-09-01">2017 Fall</option>
-            <option value="2017-06-01">2017 Summer</option>
-            <option value="2017-04-01">2017 Spring</option>
-          </select>
-          <input type="submit" value="Select Season" className={visuallyHidden} />
-        </fieldset>
+        {this.renderFieldset()}
       </form>
     );
   }
 }
 
 ListFilter.propTypes = {
+  fieldsetProps: PropTypes.object,
 };
 
 ListFilter.defaultProps = {

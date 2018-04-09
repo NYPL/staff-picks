@@ -6,6 +6,16 @@ import BookFilters from '../BookFilters/BookFilters.jsx';
 import ListFilter from '../ListFilter/ListFilter.jsx';
 import config from '../../../../appConfig';
 
+const fieldsetProps = {
+  fieldsetName: 'season',
+  options: [
+    { name: '2018 Winter', value: '2018-01-01' },
+    { name: '2017 Fall', value: '2017-09-01' },
+    { name: '2017 Summer', value: '2017-06-01' },
+    { name: '2017 Spring', value: '2017-04-01' },
+  ],
+};
+
 const Sidebar = (props) => {
   const renderBookFilters = (shouldDisplay) => {
     if (!shouldDisplay) {
@@ -24,13 +34,13 @@ const Sidebar = (props) => {
     );
   };
 
-  const renderSeasonFilters = (shouldDisplay) => {
-    // if (!shouldDisplay) {
-    //   return null;
-    // }
+  const renderSeasonFilters = (data) => {
+    if (!data.options.length) {
+      return null;
+    }
 
     return (
-      <ListFilter />
+      <ListFilter fieldsetProps={data} />
     );
   };
 
@@ -43,7 +53,7 @@ const Sidebar = (props) => {
           {config.recommendationsLink.label}
         </a>
       </nav>
-      {renderSeasonFilters()}
+      {renderSeasonFilters(fieldsetProps)}
       {renderBookFilters(props.isJsEnabled)}
     </div>
   );
