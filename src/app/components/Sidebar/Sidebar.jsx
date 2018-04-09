@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { LeftWedgeIcon } from '@nypl/dgx-svg-icons';
 
 import BookFilters from '../BookFilters/BookFilters.jsx';
+import ListFilter from '../ListFilter/ListFilter.jsx';
 import config from '../../../../appConfig';
 
 const Sidebar = (props) => {
@@ -29,18 +30,7 @@ const Sidebar = (props) => {
     // }
 
     return (
-      <form>
-        <fieldset>
-          <label htmlFor="seanson-input"></label>
-          <select id="seasion-input" name="season" defaultValue="2018-01-01">
-            <option value="2018-01-01">2018 Winter</option>
-            <option value="2017-09-01">2017 Fall</option>
-            <option value="2017-06-01">2017 Summer</option>
-            <option value="2017-04-01">2017 Spring</option>
-          </select>
-          <input type="submit" value="Select Season" />
-        </fieldset>
-      </form>
+      <ListFilter />
     );
   };
 
