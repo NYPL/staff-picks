@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { LeftWedgeIcon } from '@nypl/dgx-svg-icons';
 
 import BookFilters from '../BookFilters/BookFilters.jsx';
-import ListFilter from '../ListFilter/ListFilter.jsx';
+import ListSelector from '../ListSelector/ListSelector.jsx';
 import config from '../../../../appConfig';
 
 // This data is a temporary dummy data for creating the season list
@@ -35,13 +35,13 @@ const Sidebar = (props) => {
     );
   };
 
-  const renderSeasonFilters = (data) => {
+  const renderListSelector = (data) => {
     if (!data.options.length) {
       return null;
     }
 
     return (
-      <ListFilter fieldsetProps={data} />
+      <ListSelector fieldsetProps={data} isJsEnabled={props.isJsEnabled} />
     );
   };
 
@@ -54,7 +54,7 @@ const Sidebar = (props) => {
           {config.recommendationsLink.label}
         </a>
       </nav>
-      {renderSeasonFilters(fieldsetProps)}
+      {renderListSelector(fieldsetProps)}
       {renderBookFilters(props.isJsEnabled)}
     </div>
   );

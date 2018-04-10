@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class ListFilter extends React.Component {
+class ListSelector extends React.Component {
   constructor(props) {
     super(props);
 
@@ -33,7 +33,6 @@ class ListFilter extends React.Component {
 
   renderFieldset() {
     const fieldsetProps = this.props.fieldsetProps;
-    const visuallyHidden = (this.state.withJS) ? 'visuallyHidden' : '';
     const selectName = fieldsetProps.fieldsetName;
     const selectId = `${selectName}-input`;
     const defaultValue = (fieldsetProps.options.length && fieldsetProps.options[0].value) ?
@@ -53,25 +52,27 @@ class ListFilter extends React.Component {
         >
          {optionList}
         </select>
-        <input type="submit" value={`Select ${selectName}`} className={visuallyHidden} />
       </fieldset>
     );
   }
 
   render() {
+    const visuallyHidden = (this.props.isJsEnabled) ? 'visuallyHidden' : '';
+
     return (
       <form>
         {this.renderFieldset()}
+        <input type="submit" value={`Select List`} className={visuallyHidden} />
       </form>
     );
   }
 }
 
-ListFilter.propTypes = {
+ListSelector.propTypes = {
   fieldsetProps: PropTypes.object,
 };
 
-ListFilter.defaultProps = {
+ListSelector.defaultProps = {
 };
 
-export default ListFilter;
+export default ListSelector;
