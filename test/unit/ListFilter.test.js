@@ -3,7 +3,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
-import ListFilter from '../../src/app/components/ListFilter/ListFilter.jsx';
+import ListFilter from '../../src/app/components/ListSelector/ListFilter.jsx';
 
 const fieldsetProps = {
   fieldsetName: 'season',

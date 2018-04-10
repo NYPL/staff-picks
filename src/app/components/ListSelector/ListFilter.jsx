@@ -27,6 +27,8 @@ const ListFilter = ({ fieldsetProps, handleChange }) => {
 };
 
 ListFilter.propTypes = {
+  fieldsetProps: PropTypes.object,
+  handleChange: PropTypes.func,
 };
 
 export default ListFilter;

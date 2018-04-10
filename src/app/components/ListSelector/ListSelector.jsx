@@ -29,14 +29,6 @@ class ListSelector extends React.Component {
       return null;
     }
 
-    const selectName = fieldsetProps.fieldsetName;
-    const selectId = `${selectName}-input`;
-    const defaultValue = (fieldsetProps.options.length && fieldsetProps.options[0].value) ?
-      fieldsetProps.options[0].value : '';
-    const optionList = (fieldsetProps.options.length) ? fieldsetProps.options.map(
-      (opt) => <option value={opt.value} key={opt.value}>{opt.name}</option>
-    ) : null;
-
     return (
       <ListFilter fieldsetProps={fieldsetProps} handleChange={this.handleChange} />
     );
@@ -49,7 +41,7 @@ class ListSelector extends React.Component {
       <form action={`${config.baseApiUrl}`} method="post">
         {this.renderFieldset(this.props.fieldsetProps.season)}
         {this.renderFieldset(this.props.fieldsetProps.audience)}
-        <input type="submit" value={`Select List`} className={visuallyHidden} />
+        <input type="submit" value="Select List" className={visuallyHidden} />
       </form>
     );
   }
@@ -57,6 +49,7 @@ class ListSelector extends React.Component {
 
 ListSelector.propTypes = {
   fieldsetProps: PropTypes.object,
+  isJsEnabled: PropTypes.bool,
 };
 
 ListSelector.defaultProps = {
