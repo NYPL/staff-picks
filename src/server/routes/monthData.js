@@ -28,7 +28,15 @@ function selectMonthData(req, res, next) {
   next();
 }
 
+/* selectClientMonthData
+ * Get a specific month's or season's staff pick list on the client side.
+ */
+function selectClientMonthData(req, res, next) {
+  res.json({test: 'this is a test'});
+}
+
 export default {
   currentMonthData,
   selectMonthData,
+  selectClientMonthData,
 };

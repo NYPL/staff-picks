@@ -15,6 +15,10 @@ router
   .get(annualData.selectAnnualData);
 
 router
+  .route(`${appConfig.baseApiUrl}:month/:id?`)
+  .get(monthData.selectClientMonthData);
+
+router
   .route(`${appConfig.baseMonthUrl}:month/:id?`)
   .get(monthData.selectMonthData);
 

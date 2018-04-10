@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import config from '../../../../appConfig';
 
 class ListFilter extends React.Component {
   constructor(props) {
@@ -19,14 +21,24 @@ class ListFilter extends React.Component {
     });
   }
 
+  submitFormRequest() {
+    // this function will be replaced by submiting to endpoint
+    axios.get(`${config.baseApiUrl}${this.state.submitValue}`)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+
+      });
+  }
+
   handleChange(e) {
     this.setState(
       {
         submitValue: e.target.value,
       },
       () => {
-        // this function will be replaced by submiting to endpoint
-        console.log(this.state.submitValue);
+        this.submitFormRequest();
       }
     );
   }
