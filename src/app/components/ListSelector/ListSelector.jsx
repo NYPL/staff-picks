@@ -1,22 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ListFilter from './ListFilter.jsx';
+import config from '../../../../appConfig';
 
 class ListSelector extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      withJS: false,
-      submitValue: '2018-01-01',
-    };
+    this.state = {};
 
     this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentDidMount() {
-    this.setState({
-      withJS: true,
-    });
   }
 
   handleChange(e) {
@@ -31,8 +24,11 @@ class ListSelector extends React.Component {
     );
   }
 
-  renderFieldset() {
-    const fieldsetProps = this.props.fieldsetProps;
+  renderFieldset(fieldsetProps) {
+    if (!fieldsetProps.options.length) {
+      return null;
+    }
+
     const selectName = fieldsetProps.fieldsetName;
     const selectId = `${selectName}-input`;
     const defaultValue = (fieldsetProps.options.length && fieldsetProps.options[0].value) ?
@@ -42,17 +38,7 @@ class ListSelector extends React.Component {
     ) : null;
 
     return (
-      <fieldset>
-        <label htmlFor={selectId}></label>
-        <select
-          id={selectId}
-          name={selectName}
-          defaultValue={defaultValue}
-          onChange={this.handleChange}
-        >
-         {optionList}
-        </select>
-      </fieldset>
+      <ListFilter fieldsetProps={fieldsetProps} handleChange={this.handleChange} />
     );
   }
 
@@ -60,8 +46,9 @@ class ListSelector extends React.Component {
     const visuallyHidden = (this.props.isJsEnabled) ? 'visuallyHidden' : '';
 
     return (
-      <form>
-        {this.renderFieldset()}
+      <form action={`${config.baseApiUrl}`} method="post">
+        {this.renderFieldset(this.props.fieldsetProps.season)}
+        {this.renderFieldset(this.props.fieldsetProps.audience)}
         <input type="submit" value={`Select List`} className={visuallyHidden} />
       </form>
     );

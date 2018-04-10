@@ -8,13 +8,23 @@ import config from '../../../../appConfig';
 
 // This data is a temporary dummy data for creating the season list
 const fieldsetProps = {
-  fieldsetName: 'season',
-  options: [
-    { name: '2018 Winter', value: '2018-01-01' },
-    { name: '2017 Fall', value: '2017-09-01' },
-    { name: '2017 Summer', value: '2017-06-01' },
-    { name: '2017 Spring', value: '2017-04-01' },
-  ],
+  season: {
+    fieldsetName: 'season',
+    options: [
+      { name: '2018 Winter', value: '2018-01-01' },
+      { name: '2017 Fall', value: '2017-09-01' },
+      { name: '2017 Summer', value: '2017-06-01' },
+      { name: '2017 Spring', value: '2017-04-01' },
+    ],
+  },
+  audience: {
+    fieldsetName: 'audience',
+    options: [
+      { name: 'Adult', value: 'adult' },
+      { name: 'Teen', value: 'teen' },
+      { name: 'Children', value: 'children' },
+    ],
+  },
 };
 
 const Sidebar = (props) => {
@@ -36,10 +46,6 @@ const Sidebar = (props) => {
   };
 
   const renderListSelector = (data) => {
-    if (!data.options.length) {
-      return null;
-    }
-
     return (
       <ListSelector fieldsetProps={data} isJsEnabled={props.isJsEnabled} />
     );
