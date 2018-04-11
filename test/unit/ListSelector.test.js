@@ -40,4 +40,9 @@ describe('ListSelector', () => {
       }
     );
   });
+
+  describe('When the selected option updates, it should make an API request to request new list.', () => {
+    describe('If the request fails, it should set BookStore back to the default.', () => {});
+    describe('If the request succeeds, it should update BookStore with the data responsed.', () => {});
+  });
 });
