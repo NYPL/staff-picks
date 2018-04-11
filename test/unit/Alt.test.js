@@ -3,8 +3,8 @@ import { expect } from 'chai';
 
 import sinon from 'sinon';
 import alt from '../../src/app/alt';
-import actions from '../../src/app/actions/BookActions.js';
-import store from '../../src/app/stores/BookStore.js';
+import actions from '../../src/app/actions/BookActions';
+import store from '../../src/app/stores/BookStore';
 
 /*
  * getDispatcherArguments

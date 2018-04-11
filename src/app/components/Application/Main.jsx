@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-import BookList from '../BookList/BookList.jsx';
-import Sidebar from '../Sidebar/Sidebar.jsx';
+import BookList from '../BookList/BookList';
+import Sidebar from '../Sidebar/Sidebar';
 import utils from '../../utils/utils';
 
 class Main extends React.Component {
@@ -45,7 +45,7 @@ class Main extends React.Component {
       return picks || [];
     }
 
-    return picks.filter(book => {
+    return picks.filter((book) => {
       // Get the pick's tags in an ID readable array
       const tagArray = utils.getPickTags(book);
       // Get the array of selected tags found in the book item

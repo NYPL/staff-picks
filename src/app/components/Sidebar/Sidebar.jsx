@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { LeftWedgeIcon } from '@nypl/dgx-svg-icons';
 
-import BookFilters from '../BookFilters/BookFilters.jsx';
-import ListSelector from '../ListSelector/ListSelector.jsx';
+import BookFilters from '../BookFilters/BookFilters';
+import ListSelector from '../ListSelector/ListSelector';
 import config from '../../../../appConfig';
 
 // This data is a temporary dummy data for creating the season list
@@ -64,20 +64,23 @@ const Sidebar = (props) => {
 };
 
 Sidebar.propTypes = {
-  filters: PropTypes.array,
-  selectableFilters: PropTypes.array,
+  filters: PropTypes.arrayOf(PropTypes.object),
+  selectableFilters: PropTypes.arrayOf(PropTypes.object),
   setSelectedFilter: PropTypes.func,
   clearFilters: PropTypes.func,
   isJsEnabled: PropTypes.bool,
-  selectedFilters: PropTypes.array,
+  selectedFilters: PropTypes.arrayOf(PropTypes.object),
   picksCount: PropTypes.number,
 };
 
 Sidebar.defaultProps = {
   filters: [],
   selectableFilters: [],
-  setSelectableFilters: () => {},
+  setSelectedFilter: () => {},
   clearFilters: () => {},
+  isJsEnabled: false,
+  selectedFilters: [],
+  picksCount: 0,
 };
 
 export default Sidebar;

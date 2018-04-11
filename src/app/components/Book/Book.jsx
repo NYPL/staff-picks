@@ -6,16 +6,15 @@ import config from '../../../../appConfig';
 import utils from '../../utils/utils';
 
 const Book = ({ pick, isJsEnabled }) => {
-  const isStringEmpty = (string) => (!_isString(string) || _isEmpty(string.trim()));
+  const isStringEmpty = string => (!_isString(string) || _isEmpty(string.trim()));
 
-  const getBookObject = (obj) => (obj.book || {});
+  const getBookObject = obj => (obj.book || {});
 
-  const getReviewsArray = (obj) => (obj.reviews || []);
+  const getReviewsArray = obj => (obj.reviews || []);
 
-  const getTagArray = (picks) => (picks.tags && picks.tags.length ? pick.tags : []);
+  const getTagArray = picks => (picks.tags && picks.tags.length ? pick.tags : []);
 
-  const getTagClasses = (arrayOfTags) => (
-    !_isEmpty(arrayOfTags) ? arrayOfTags.join(' ') : '');
+  const getTagClasses = arrayOfTags => (!_isEmpty(arrayOfTags) ? arrayOfTags.join(' ') : '');
 
   if (_isEmpty(pick)) {
     return null;
@@ -36,26 +35,26 @@ const Book = ({ pick, isJsEnabled }) => {
     );
   };
 
-  const renderTitle = (title) => (
+  const renderTitle = title => (
     !isStringEmpty(title) ? <h3 className="book-item-title">{title}</h3> : null
   );
 
-  const renderAuthor = (author) => (
+  const renderAuthor = author => (
     !isStringEmpty(author) ? <p className="book-item-author">By {author}</p> : null
   );
 
-  const renderIllustrator = (illustrator) => (
+  const renderIllustrator = illustrator => (
     !isStringEmpty(illustrator) ?
       <p className="book-item-illustrator">Illustrated by {illustrator}</p> : null
   );
 
-  const renderTranslator = (translator) => (
+  const renderTranslator = translator => (
     !isStringEmpty(translator) ?
       <p className="book-item-translator">Translated by {translator}</p> : null
   );
 
   const renderCatalogLinks = (catalogUrl, ebookUrl) => {
-    const catalogLink = !isStringEmpty(catalogUrl) ?
+    const catalogLink = !isStringEmpty(catalogUrl) ? (
       <a
         href={catalogUrl}
         className="catalog-url"
@@ -64,9 +63,9 @@ const Book = ({ pick, isJsEnabled }) => {
       >
         <BookIcon width="32px" height="32px" ariaHidden />
         <span>{config.requestUrlsText.catalog}</span>
-      </a> : null;
+      </a>) : null;
 
-    const ebookLink = !isStringEmpty(ebookUrl) ?
+    const ebookLink = !isStringEmpty(ebookUrl) ? (
       <a
         href={ebookUrl}
         className="ebook-url"
@@ -75,7 +74,7 @@ const Book = ({ pick, isJsEnabled }) => {
       >
         <EReaderIcon ariaHidden />
         <span>{config.requestUrlsText.ebook}</span>
-      </a> : null;
+      </a>) : null;
 
     return (catalogLink || ebookLink) ?
       <div className="book-item-catalog-links">

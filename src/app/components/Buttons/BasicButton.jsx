@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const BasicButton = (props) => (
+const BasicButton = props => (
   <button
     id={props.id}
     className={props.className}
@@ -21,7 +21,6 @@ BasicButton.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string,
   label: PropTypes.string,
-  lang: PropTypes.string,
   onClick: PropTypes.func,
   onMouseLeave: PropTypes.func,
   onMouseEnter: PropTypes.func,
@@ -33,7 +32,6 @@ BasicButton.defaultProps = {
   className: 'BasicButton',
   name: 'BasicButton',
   label: 'Basic Button',
-  lang: 'en',
   onClick: () => {},
 };
 

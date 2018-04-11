@@ -3,7 +3,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
-import About from '../../src/app/components/About/About.jsx';
+import About from '../../src/app/components/About/About';
 
 describe('About', () => {
   let component;

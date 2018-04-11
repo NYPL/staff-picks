@@ -2,22 +2,19 @@ import path from 'path';
 import fs from 'fs';
 import express from 'express';
 import compress from 'compression';
-
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import webpackConfig from './webpack.config.js';
-import appConfig from './appConfig.js';
-
 import React from 'react';
 import { match, RouterContext } from 'react-router';
 import ReactDOMServer from 'react-dom/server';
-
-import alt from './src/app/alt';
 import Iso from 'iso';
 
-import appRoutes from './src/app/routes/routes.jsx';
-import expressRoutes from './src/server/routes/routes.js';
-import nyplApiClient from './src/server/helper/nyplApiClient.js';
+import webpackConfig from './webpack.config';
+import appConfig from './appConfig';
+import appRoutes from './src/app/routes/routes';
+import expressRoutes from './src/server/routes/routes';
+import nyplApiClient from './src/server/helper/nyplApiClient';
+import alt from './src/app/alt';
 
 // URL configuration
 const ROOT_PATH = __dirname;
@@ -58,6 +55,9 @@ app.use('/', (req, res) => {
 
   const routes = appRoutes.client;
 
+  /* React Router specific code snippet to render appropriate server component or error.
+   *
+   */
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
       res.status(500).send(error.message);
@@ -69,8 +69,7 @@ app.use('/', (req, res) => {
       // Generate meta tags markup
       const metaTags = res.locals.data.metaTags || [];
       const renderedMetaTags = metaTags.map((tag, index) =>
-        ReactDOMServer.renderToString(<meta key={index} {...tag} />)
-      );
+        ReactDOMServer.renderToString(<meta key={index} {...tag} />));
 
       iso.add(html, alt.flush());
 

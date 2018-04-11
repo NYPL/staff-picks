@@ -3,7 +3,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import BasicButton from '../../src/app/components/Buttons/BasicButton.jsx';
+import BasicButton from '../../src/app/components/Buttons/BasicButton';
 
 describe('BasicButton', () => {
   let component;
