@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import ListFilter from './ListFilter.jsx';
 import config from '../../../../appConfig';
 
@@ -19,7 +20,8 @@ class ListSelector extends React.Component {
         console.log(response.data);
       })
       .catch(error => {
-
+        console.log(error.response.statusText);
+        console.log(error.response.status);
       });
   }
 
