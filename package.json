@@ -66,6 +66,7 @@
     "css-loader": "0.28.7",
     "dgx-feature-flags": "git+https://git@bitbucket.org/NYPL/dgx-feature-flags.git#master",
     "dgx-react-ga": "git+https://git@bitbucket.org/NYPL/dgx-react-ga.git#master",
+    "dotenv": "5.0.1",
     "ejs": "2.5.5",
     "express": "4.13.0",
     "extract-text-webpack-plugin": "2.1.2",

@@ -1,14 +1,14 @@
 import config from '../../../appConfig.js';
-
+import platformConfig from '../../../platformConfig.js';
 import kmsClientHelper from './kmsClientHelper';
 
-const appEnvironment = process.env.APP_ENV || 'production';
+const appEnvironment = platformConfig.appEnv || 'production';
 const options = {
-  kmsEnvironment: process.env.KMS_ENV || 'encrypted',
-  clientId: process.env.clientId || '',
-  clientSecret: process.env.clientSecret || '',
+  kmsEnvironment: platformConfig.kmsEnvironment || 'encrypted',
+  clientId: platformConfig.clientId || '',
+  clientSecret: platformConfig.clientSecret || '',
   apiBase: config.api[appEnvironment],
-  tokenUrl: config.tokenUrl,
+  tokenUrl: platformConfig.tokenUrl,
 };
 
 export default kmsClientHelper(options);
