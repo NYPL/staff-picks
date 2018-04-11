@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import About from '../About/About.jsx';
-import Book from '../Book/Book.jsx';
+import About from '../About/About';
+import Book from '../Book/Book';
 
-const BookList = (props) => {
-  const renderBookItems = (currentBooks) => (
+const BookList = ({ isJsEnabled, picks, listType }) => {
+  const renderBookItems = currentBooks => (
     currentBooks.length ?
-      currentBooks.map((book, i) => <Book key={i} pick={book} isJsEnabled={props.isJsEnabled} />)
+      currentBooks.map((book, i) => <Book key={i} pick={book} isJsEnabled={isJsEnabled} />)
       : null
   );
 
@@ -16,13 +16,13 @@ const BookList = (props) => {
       <h2>2017 Picks</h2>
 
       {
-        !!props.picks.length &&
-        (<ul className="booklist nypl-row">
-          {renderBookItems(props.picks)}
+        !!picks.length && (
+        <ul className="booklist nypl-row">
+          {renderBookItems(picks)}
         </ul>)
       }
 
-      <About listType={props.listType} />
+      <About listType={listType} />
     </div>
   );
 };

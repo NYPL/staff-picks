@@ -58,7 +58,7 @@ function Utils() {
   this.getSelectableTags = (picks) => {
     let selectableFilters = [];
 
-    _each(picks, book => {
+    _each(picks, (book) => {
       const tagArray = this.getPickTags(book);
       selectableFilters = _union(selectableFilters, tagArray);
     });
@@ -76,7 +76,7 @@ function Utils() {
   this.getAllTags = (picks) => {
     let tags = [];
 
-    _each(picks, pick => {
+    _each(picks, (pick) => {
       const pickTags = pick.tags && pick.tags.length ? pick.tags : [];
       tags = _union(tags, pickTags);
     });

@@ -3,7 +3,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
-import BookList from '../../src/app/components/BookList/BookList.jsx';
+import BookList from '../../src/app/components/BookList/BookList';
 
 const picks = [
   {

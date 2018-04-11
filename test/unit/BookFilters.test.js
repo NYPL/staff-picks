@@ -3,7 +3,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import BookFilters from '../../src/app/components/BookFilters/BookFilters.jsx';
+import BookFilters from '../../src/app/components/BookFilters/BookFilters';
 
 const filtersArray = ['Funny', 'Offbeat', 'Middle Grade', 'Graphic Novels'];
 const selectableFilters = ['funny', 'graphic-novels'];
@@ -26,9 +26,7 @@ describe('BookFilters', () => {
     let component;
 
     before(() => {
-      component = mount(
-        <BookFilters filters={filtersArray} />
-      );
+      component = mount(<BookFilters filters={filtersArray} />);
     });
 
     it('should have a .book-filters wrapper', () => {

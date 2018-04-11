@@ -1,4 +1,4 @@
-import config from '../../../appConfig.js';
+import config from '../../../appConfig';
 
 import kmsClientHelper from './kmsClientHelper';
 

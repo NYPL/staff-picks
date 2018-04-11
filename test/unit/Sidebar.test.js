@@ -3,7 +3,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import Sidebar from '../../src/app/components/Sidebar/Sidebar.jsx';
+import Sidebar from '../../src/app/components/Sidebar/Sidebar';
 
 describe('Sidebar', () => {
   describe('Default component with JS turned on', () => {
@@ -40,9 +40,7 @@ describe('Sidebar', () => {
     let component;
 
     before(() => {
-      component = mount(
-        <Sidebar isJsEnabled={false} />
-      );
+      component = mount(<Sidebar isJsEnabled={false} />);
     });
 
     it('should render .sidebar wrapper DOM', () => {

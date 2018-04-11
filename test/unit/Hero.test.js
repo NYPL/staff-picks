@@ -3,7 +3,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
-import Hero from '../../src/app/components/Hero/Hero.jsx';
+import Hero from '../../src/app/components/Hero/Hero';
 
 describe('Hero', () => {
   describe('Default', () => {

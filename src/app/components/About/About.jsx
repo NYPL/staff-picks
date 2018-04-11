@@ -1,3 +1,4 @@
+/* global window */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -38,7 +39,8 @@ class Sidebar extends React.Component {
       <div className="about nypl-row">
         <h2>Additional Information</h2>
         <p>Many of these titles are available in formats for <a href={aboutUrls.print}>patrons
-        with print disabilities.</a></p>
+        with print disabilities.</a>
+        </p>
         <p><a href={aboutUrls.about}>About Best Books</a></p>
         <ul>
           <li>

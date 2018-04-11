@@ -1,3 +1,4 @@
+/* global window */
 // Polyfill Promise for legacy browsers
 import 'babel-polyfill';
 
@@ -5,14 +6,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, useRouterHistory } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
+import Iso from 'iso';
+import { config, gaUtils } from 'dgx-react-ga';
+import FeatureFlags from 'dgx-feature-flags';
 
 import alt from '../app/alt';
-import Iso from 'iso';
-
-import routes from '../app/routes/routes.jsx';
-import { config, gaUtils } from 'dgx-react-ga';
-
-import FeatureFlags from 'dgx-feature-flags';
+import routes from '../app/routes/routes';
 
 import './styles/main.scss';
 
@@ -35,7 +34,7 @@ window.onload = () => {
 
     ReactDOM.render(
       <Router history={appHistory}>{routes.client}</Router>,
-      container
+      container,
     );
 
     gaUtils.trackPageview(window.location.pathname);
