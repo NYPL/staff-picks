@@ -3,17 +3,31 @@ import PropTypes from 'prop-types';
 import { LeftWedgeIcon } from '@nypl/dgx-svg-icons';
 
 import BookFilters from '../BookFilters/BookFilters';
+import ListSelector from '../ListSelector/ListSelector';
 import config from '../../../../appConfig';
 
-const Sidebar = ({
-  filters,
-  selectableFilters,
-  setSelectedFilter,
-  clearFilters,
-  selectedFilters,
-  picksCount,
-  isJsEnabled,
-}) => {
+// This data is a temporary dummy data for creating the season list
+const fieldsetProps = {
+  season: {
+    fieldsetName: 'season',
+    options: [
+      { name: '2018 Winter', value: '2018-01-01' },
+      { name: '2017 Fall', value: '2017-09-01' },
+      { name: '2017 Summer', value: '2017-06-01' },
+      { name: '2017 Spring', value: '2017-04-01' },
+    ],
+  },
+  audience: {
+    fieldsetName: 'audience',
+    options: [
+      { name: 'Adult', value: 'adult' },
+      { name: 'Teen', value: 'teen' },
+      { name: 'Children', value: 'children' },
+    ],
+  },
+};
+
+const Sidebar = (props) => {
   const renderBookFilters = (shouldDisplay) => {
     if (!shouldDisplay) {
       return null;
@@ -21,15 +35,18 @@ const Sidebar = ({
 
     return (
       <BookFilters
-        filters={filters}
-        selectableFilters={selectableFilters}
-        setSelectedFilter={setSelectedFilter}
-        clearFilters={clearFilters}
-        selectedFilters={selectedFilters}
-        picksCount={picksCount}
+        filters={props.filters}
+        selectableFilters={props.selectableFilters}
+        setSelectedFilter={props.setSelectedFilter}
+        clearFilters={props.clearFilters}
+        selectedFilters={props.selectedFilters}
+        picksCount={props.picksCount}
       />
     );
   };
+
+  const renderListSelector = (data) =>
+    (<ListSelector fieldsetProps={data} isJsEnabled={props.isJsEnabled} />);
 
   return (
     <div className="sidebar nypl-column-one-quarter">
@@ -40,7 +57,8 @@ const Sidebar = ({
           {config.recommendationsLink.label}
         </a>
       </nav>
-      {renderBookFilters(isJsEnabled)}
+      {renderListSelector(fieldsetProps)}
+      {renderBookFilters(props.isJsEnabled)}
     </div>
   );
 };
