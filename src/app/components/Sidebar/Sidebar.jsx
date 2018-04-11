@@ -21,7 +21,7 @@ const fieldsetProps = {
     fieldsetName: 'audience',
     options: [
       { name: 'Adult', value: 'adult' },
-      { name: 'Teen', value: 'teen' },
+      { name: 'Teen', value: 'ya' },
       { name: 'Children', value: 'children' },
     ],
   },
@@ -45,11 +45,8 @@ const Sidebar = (props) => {
     );
   };
 
-  const renderListSelector = (data) => {
-    return (
-      <ListSelector fieldsetProps={data} isJsEnabled={props.isJsEnabled} />
-    );
-  };
+  const renderListSelector = (data) =>
+    <ListSelector fieldsetProps={data} isJsEnabled={props.isJsEnabled} />;
 
   return (
     <div className="sidebar nypl-column-one-quarter">
