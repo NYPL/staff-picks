@@ -17,6 +17,12 @@ class ListSelector extends React.Component {
     // this function will be replaced by submiting to endpoint
     axios.get(`${config.baseApiUrl}${this.state.submitValue}`)
       .then(response => {
+        // Catch the error from API
+        if (response.data.statusCode >= 400) {
+          console.log(`API error: ${response.data.errorMessage}`);
+        }
+
+        // For valid API response
         console.log(response.data);
       })
       .catch(error => {
