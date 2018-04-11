@@ -7,7 +7,7 @@ const options = {
   kmsEnvironment: platformConfig.kmsEnvironment || 'encrypted',
   clientId: platformConfig.clientId || '',
   clientSecret: platformConfig.clientSecret || '',
-  apiBase: config.api[appEnvironment],
+  apiBase: platformConfig.api[appEnvironment],
   tokenUrl: platformConfig.tokenUrl,
 };
 

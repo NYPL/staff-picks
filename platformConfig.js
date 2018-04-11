@@ -9,6 +9,11 @@ const platformConfig = {
   clientSecret: process.env.CLIENT_SECRET,
   appEnv: process.env.APP_ENV,
   kmsEnvironment: process.env.KMS_ENV,
+  api: {
+    development: 'https://dev-platform.nypl.org/api/v0.1',
+    qa: 'https://qa-platform.nypl.org/api/v0.1',
+    production: 'https://platform.nypl.org/api/v0.1',
+  },
 };
 
 export default platformConfig;
