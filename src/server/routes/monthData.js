@@ -7,30 +7,74 @@ const nyplApiClientGet = (endpoint) =>
  * Get the default/latest monthly staff pick list.
  */
 function currentMonthData(req, res, next) {
-  res.locals.data = {
-    BookStore: {
-      filters: [],
-      currentPicks: {},
-      selectableFilters: [],
-      isJsEnabled: false,
-    },
-  };
-  next();
+  // only 2017-01 works currently. Comment out the dynamice API link below
+  // nyplApiClientGet(`/book-lists/staff-picks/${req.params.month}`)
+  nyplApiClientGet('/book-lists/staff-picks/2017-01')
+    .then(data => {
+      res.locals.data = {
+        BookStore: {
+          filters: [],
+          currentPicks: data,
+          selectableFilters: [],
+          isJsEnabled: false,
+        },
+        pageTitle: '',
+        metaTags: [],
+      };
+
+      next();
+    })
+    .catch(error => {
+      console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
+
+      res.locals.data = {
+        BookStore: {
+          filters: [],
+          currentPicks: {},
+          selectableFilters: [],
+          isJsEnabled: false,
+        },
+      };
+
+      next();
+    });
 }
 
 /* selectMonthData
  * Get a specific month's or season's staff pick list.
  */
 function selectMonthData(req, res, next) {
-  res.locals.data = {
-    BookStore: {
-      filters: [],
-      currentPicks: {},
-      selectableFilters: [],
-      isJsEnabled: false,
-    },
-  };
-  next();
+  // only 2017-01 works currently. Comment out the dynamice API link below
+  // nyplApiClientGet(`/book-lists/staff-picks/${req.params.month}`)
+  nyplApiClientGet('/book-lists/staff-picks/2017-01')
+    .then(data => {
+      res.locals.data = {
+        BookStore: {
+          filters: [],
+          currentPicks: data,
+          selectableFilters: [],
+          isJsEnabled: false,
+        },
+        pageTitle: '',
+        metaTags: [],
+      };
+
+      next();
+    })
+    .catch(error => {
+      console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
+
+      res.locals.data = {
+        BookStore: {
+          filters: [],
+          currentPicks: {},
+          selectableFilters: [],
+          isJsEnabled: false,
+        },
+      };
+
+      next();
+    });
 }
 
 /**
