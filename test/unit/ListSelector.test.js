@@ -67,4 +67,74 @@ describe('ListSelector', () => {
       expect(submitFormRequest.called).to.equal(true);
     });
   });
+
+  describe('After making the API request,', () => {
+    let mock = new MockAdapter(axios);
+    const updateBookStore = sinon.spy(ListSelector.prototype, 'updateBookStore');
+    const component = shallow(<ListSelector fieldsetProps={fieldsetProps} />);
+    const mockBookListResponse = {
+      date: '2017-01',
+      title: 'Winter 2016 Staff Picks',
+      currentPicks: {
+        picks: [
+          {
+            ageGroup: 'Adult',
+            book: {
+              title: 'book 01'
+            },
+          },
+          {
+            ageGroup: 'Children',
+            book: {
+              title: 'book 01'
+            },
+          },
+          {
+            ageGroup: 'YA',
+            book: {
+              title: 'book 03'
+            },
+          },
+        ],
+      },
+    };
+
+    before(() => {
+      mock
+        .onGet(`${config.baseApiUrl}2099-13`)
+        .reply(500, {
+          statusText: 'Undefined error',
+          status: 500,
+        })
+        .onGet(`${config.baseApiUrl}2017-01`)
+        .reply(200, mockBookListResponse);
+    });
+
+    after(() => {
+      updateBookStore.restore();
+      mock.reset();
+    });
+
+    it('should set BookStore back to the default, if the request fails.', () => {
+      component.instance().setState({ submitValue: '2099-13' });
+      component.instance().submitFormRequest();
+      setTimeout(
+        () => {
+          expect(updateBookStore.getCall(0).args).to.deep.equal([]);
+        }, 0
+      );
+    });
+
+    it('should update BookStore with the data responsed, if the request succeeds.', () => {
+      component.instance().setState({ submitValue: '2017-01' });
+      component.instance().submitFormRequest();
+      setTimeout(
+        () => {
+          expect(updateBookStore.getCall(1).args).to.deep.equal(
+            [mockBookListResponse.currentPicks, [], [],]
+          );
+        }, 0
+      );
+    });
+  });
 });
