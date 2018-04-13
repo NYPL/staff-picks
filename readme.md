@@ -23,18 +23,18 @@ $ npm install
 ```
 
 ## Running the Application
-Before running the application, be sure that you have all the configurations that are indicated in `.env.example` at the root folder. Please contact NYPL Digital Department if you need any help with them. After you got all the information, create a `.env` in the root folder by copy `.env.example` and replace the instruction texts with the real values. Now you are ready to run the application.
+Before running the application, the required variables are indicated in .env.sample at the application root. Please contact the NYPL Digital Department for any help with these. Copy .env.sample to .env and overwrite the placeholder values with the correct environment variables. You are now ready to run the application.
 
 ### Development Mode
 We use Webpack to fire off a hot-reloading development server. This allows for continuous code changes without the need to refresh your browser.
 
-You can run the application in development mode by running this command line:
+You can run the application in development mode by running this on the command line:
 
 ```sh
 npm run dev-api-start
 ```
 
-This will use the environment variables you have set in `.env`. Or, if you need to particularly indicate different credential settings. Run the command line below and overwrite the settings in `.env`:
+This will use the environment variables you have set in `.env`. Or, if you need to use different credentials, indicate these prior to the npm run command which will override the settings in .env:
 
 ```sh
 $ CLIENT_ID=[clientId] CLIENT_SECRET=[clientSecret] npm run dev-api-start
@@ -54,7 +54,7 @@ To use the `production` API, run:
 $ NODE_ENV=production npm run prod-api-start
 ```
 
-Notice that just as running in development mode, you can still overwrite the credential settings in `.env` by adding `CLIENT_ID=[clientId] CLIENT_SECRET=[clientSecret]` to your production mode command line.
+Notice that just as running in development mode, you can still override the credential settings in `.env` by adding `CLIENT_ID=[clientId] CLIENT_SECRET=[clientSecret]` to your production mode command line.
 
 ## GIT Workflow
 We follow a [feature-branch](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow) workflow. If you need to introduce/update the application code, you `SHOULD`:
