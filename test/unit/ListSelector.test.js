@@ -2,12 +2,8 @@
 import React from 'react';
 import sinon from 'sinon';
 import { expect } from 'chai';
-import { shallow, mount } from 'enzyme';
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
-
+import { shallow } from 'enzyme';
 import ListSelector from '../../src/app/components/ListSelector/ListSelector.jsx';
-import config from '../../appConfig';
 
 const fieldsetProps = {
   season: {
@@ -55,7 +51,7 @@ describe('ListSelector', () => {
     const component = shallow(<ListSelector fieldsetProps={fieldsetProps} />);
 
     before(() => {
-      component.instance().handleChange({ target: { value: '2017-01' }});
+      component.instance().handleChange({ target: { value: '2017-01' } });
     });
 
     after(() => {
