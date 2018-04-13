@@ -50,11 +50,14 @@ class ListSelector extends React.Component {
       .catch(error => {
         // Catch the internal server error, and update BookStore back to the default
         this.updateBookStore();
-        console.log(error.response.statusText);
-        console.log(error.response.status);
+        const errorResponse = error.response ?
+          error.response : { statusText: 'Undefined error', status: 500 };
+        const errorStatusText = errorResponse.statusText;
+        const errorStatus = errorResponse.status;
+
         console.log(
-          `Internal server error with status code ${error.response.status}: `+
-          `${error.response.statusText}`
+          `Internal server error with status code ${errorStatus}: `+
+          `${errorStatusText}`
         );
       });
   }
