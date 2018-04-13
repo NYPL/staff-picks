@@ -111,28 +111,28 @@ describe('ListSelector', () => {
 
     after(() => {
       updateBookStore.restore();
+      component.unmount();
       mock.reset();
     });
 
     it('should set BookStore back to the default, if the request fails.', () => {
-      component.instance().setState({ submitValue: '2099-13' });
-      component.instance().submitFormRequest();
+      component.instance().submitFormRequest('2099-13');
       setTimeout(
         () => {
-          expect(updateBookStore.getCall(0).args).to.deep.equal([]);
-        }, 0
+          expect(updateBookStore.called).to.equal(true);
+          expect(updateBookStore.getCall(1).args).to.deep.equal([]);
+        }, 150
       );
     });
 
     it('should update BookStore with the data responsed, if the request succeeds.', () => {
-      component.instance().setState({ submitValue: '2017-01' });
-      component.instance().submitFormRequest();
+      component.instance().submitFormRequest('2017-01');
       setTimeout(
         () => {
-          expect(updateBookStore.getCall(1).args).to.deep.equal(
-            [mockBookListResponse.currentPicks, [], [],]
+          expect(updateBookStore.getCall(2).args).to.deep.equal(
+            [mockBookListResponse.currentPicks]
           );
-        }, 0
+        }, 150
       );
     });
   });
