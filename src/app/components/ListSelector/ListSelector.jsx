@@ -9,9 +9,7 @@ class ListSelector extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      submitValue: '',
-    };
+    this.state = {};
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -29,12 +27,13 @@ class ListSelector extends React.Component {
   }
 
   /**
-   * submitFormRequest()
+   * submitFormRequest(submitValue)
    * Submits the request for a new list to the internal server
+   * @param {string} submitValue
    */
-  submitFormRequest() {
+  submitFormRequest(submitValue) {
     // this function will be replaced by submiting to endpoint
-    axios.get(`${config.baseApiUrl}${this.state.submitValue}`)
+    axios.get(`${config.baseApiUrl}${submitValue}`)
       .then(response => {
         // Catch the error from API, and update BookStore back to the default
         if (response.data.statusCode >= 400) {
@@ -68,14 +67,7 @@ class ListSelector extends React.Component {
    * @param {DOM event} e
    */
   handleChange(e) {
-    this.setState(
-      {
-        submitValue: e.target.value,
-      },
-      () => {
-        this.submitFormRequest();
-      }
-    );
+    this.submitFormRequest(e.target.value);
   }
 
   /**
