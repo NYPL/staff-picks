@@ -71,7 +71,7 @@
     "extract-text-webpack-plugin": "2.1.2",
     "history": "3.3.0",
     "iso": "5.2.0",
-    "node-sass": "4.0.0",
+    "node-sass": "3.8.0",
     "prop-types": "15.5.10",
     "react": "15.5.4",
     "react-dom": "15.5.4",
