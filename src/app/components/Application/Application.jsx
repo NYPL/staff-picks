@@ -43,9 +43,9 @@ class App extends React.Component {
         />
 
         <main className="main-page">
-          <Hero
-            heroData={config.heroData.annual[this.props.params.type]}
-          />
+          {/*<Hero*/}
+            {/*heroData={config.heroData.annual[this.props.params.type]}*/}
+          {/*/>*/}
 
           <div id="app-content" className="nypl-full-width-wrapper">
             {React.cloneElement(this.props.children, this.state)}
