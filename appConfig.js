@@ -1,10 +1,10 @@
 const config = {
   port: 3001,
   webpackDevServerPort: 3000,
-  baseUrl: '/books-music-dvds/recommendations/staff-picks/',
-  baseApiUrl: '/books-music-dvds/recommendations/staff-picks/api/',
-  baseAnnualUrl: '/books-music-dvds/recommendations/best-books/',
-  baseMonthUrl: '/books-music-dvds/recommendations/staff-picks/',
+  baseUrl: '/books-music-movies/recommendations/staff-picks/',
+  baseApiUrl: '/books-music-movies/recommendations/staff-picks/api/',
+  baseAnnualUrl: '/books-music-movies/recommendations/best-books/',
+  baseMonthUrl: '/books-music-movies/recommendations/staff-picks/',
   metaTags: {
     ya: [
       { property: 'og:type', content: 'website' },
@@ -56,6 +56,31 @@ const config = {
       { name: 'twitter:image:alt', content: 'Featured title: The Book of Mistakes by ' +
         'Corinna Luyken' },
     ],
+    month: [
+      { property: 'og:type', content: 'website' },
+      { property: 'og:site_name', content: 'Staff Picks' },
+      { property: 'og:title', content: 'Staff Picks' },
+      { property: 'og:description', content: 'Explore The New York Public Library\'s annual ' +
+        'selection of outstanding children\'s titles.' },
+      { property: 'og:url', content: 'https://www.nypl.org/books-music-dvds/recommendations' +
+        '/staff-picks' },
+      { property: 'og:image', content: 'https://d140u095r09w96.cloudfront.net/sites/default/' +
+        'files/kids-600x335.jpg' },
+      { property: 'og:image:alt', content: 'Featured title: The Book of Mistakes by ' +
+        'Corinna Luyken' },
+      { property: 'og:image:width', content: '335' },
+      { property: 'og:image:height', content: '600' },
+      { name: 'twitter:title', content: 'Best Books for Kids' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:site', content: '@nypl' },
+      { name: 'twitter:creator', content: '@nypl' },
+      { name: 'twitter:description', content: 'Explore The New York Public Library\'s annual ' +
+        'selection of outstanding children\'s titles.' },
+      { name: 'twitter:image', content: 'https://d140u095r09w96.cloudfront.net/sites/default/' +
+        'files/kids-600x335.jpg' },
+      { name: 'twitter:image:alt', content: 'Featured title: The Book of Mistakes by ' +
+        'Corinna Luyken' },
+    ]
   },
   seasons: {
     Spring: ['March', 'April', 'May'],
@@ -64,7 +89,7 @@ const config = {
     Winter: ['December', 'January', 'February'],
   },
   recommendationsLink: {
-    url: 'https://www.nypl.org/books-music-dvds/recommendations',
+    url: 'https://www.nypl.org/books-music-movies/recommendations',
     label: 'Recommendations',
   },
   aboutUrls: {
