@@ -4,6 +4,26 @@ import axios from 'axios';
 import ListFilter from './ListFilter.jsx';
 import config from '../../../../appConfig';
 import BookActions from '../../../app/actions/BookActions.js';
+import {
+  createHistory,
+  useQueries,
+  createMemoryHistory,
+} from 'history';
+
+/**
+ * createAppHistory
+ * Creates createHistory instance that supports both server side and client side rendering
+ */
+const createAppHistory = () => {
+  if (typeof(window) !== 'undefined') {
+    return useQueries(createHistory)();
+  }
+
+  return useQueries(createMemoryHistory)();
+};
+
+// createHistory() for update the URL and history with client side request
+const history = createAppHistory();
 
 class ListSelector extends React.Component {
   constructor(props) {
@@ -41,9 +61,17 @@ class ListSelector extends React.Component {
           console.log(
             `API error with status code ${response.data.statusCode}: ${response.data.errorMessage}`
           );
+          // Lead the user to the 404 page
+          history.push({
+            pathname: '/books-music-dvds/recommendations/staff-picks/404',
+          });
         } else {
           // For valid API response, update BookStore for the new list
           this.updateBookStore(response.data.currentPicks);
+          // Update and transit to the match URL
+          history.push({
+            pathname: `/books-music-dvds/recommendations/staff-picks/${submitValue}-01/`,
+          });
         }
       })
       .catch(error => {
@@ -55,9 +83,13 @@ class ListSelector extends React.Component {
         const errorStatus = errorResponse.status;
 
         console.log(
-          `Internal server error with status code ${errorStatus}: `+
+          `Internal server error with status code ${errorStatus}: ` +
           `${errorStatusText}`
         );
+        // Lead the user to the 404 page
+        history.push({
+          pathname: '/books-music-dvds/recommendations/staff-picks/404',
+        });
       });
   }
 

@@ -98,7 +98,7 @@ function selectClientMonthData(req, res) {
       console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
       res.json({
-        statusCode: error.statusCode,
+        statusCode: error.statusCode || 500,
         errorMessage: error.code,
       });
     });
