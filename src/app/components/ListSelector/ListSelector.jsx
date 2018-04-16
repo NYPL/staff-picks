@@ -34,6 +34,15 @@ class ListSelector extends React.Component {
   }
 
   /**
+   * updateHistory(url)
+   * Updates the browsing history with the URL that the client side request should go to
+   * @param {string} url
+   */
+  updateHistory(url) {
+    history.push({ pathname: url });
+  }
+
+  /**
    * updateBookStore(picks = {}, filters = [], selectedFilters = [])
    * Updates BookStore by BookActions based on latest client side API response
    * @param {object} picks
@@ -62,16 +71,14 @@ class ListSelector extends React.Component {
             `API error with status code ${response.data.statusCode}: ${response.data.errorMessage}`
           );
           // Lead the user to the 404 page
-          history.push({
-            pathname: '/books-music-dvds/recommendations/staff-picks/404',
-          });
+          this.updateHistory('/books-music-dvds/recommendations/staff-picks/404');
         } else {
           // For valid API response, update BookStore for the new list
           this.updateBookStore(response.data.currentPicks);
           // Update and transit to the match URL
-          history.push({
-            pathname: `/books-music-dvds/recommendations/staff-picks/${submitValue}-01/`,
-          });
+          this.updateHistory(
+            `/books-music-dvds/recommendations/staff-picks/${submitValue}-01/`
+          );
         }
       })
       .catch(error => {
@@ -87,9 +94,7 @@ class ListSelector extends React.Component {
           `${errorStatusText}`
         );
         // Lead the user to the 404 page
-        history.push({
-          pathname: '/books-music-dvds/recommendations/staff-picks/404',
-        });
+        this.updateHistory('/books-music-dvds/recommendations/staff-picks/404');
       });
   }
 

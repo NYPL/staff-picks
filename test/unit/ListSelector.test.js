@@ -70,6 +70,7 @@ describe('ListSelector', () => {
   describe('After making the API request,', () => {
     const mock = new MockAdapter(axios);
     const updateBookStore = sinon.spy(ListSelector.prototype, 'updateBookStore');
+    const updateHistory = sinon.spy(ListSelector.prototype, 'updateHistory');
     const component = shallow(<ListSelector fieldsetProps={fieldsetProps} />);
     const mockBookListResponse = {
       date: '2017-01',
@@ -112,11 +113,13 @@ describe('ListSelector', () => {
     afterEach(() => {
       // Clear the spy status after each time we run a test
       updateBookStore.reset();
+      updateHistory.reset();
     });
 
     after(() => {
       // And after all the tests are done, restore the spy
       updateBookStore.restore();
+      updateHistory.restore();
       component.unmount();
       mock.reset();
     });
@@ -129,25 +132,32 @@ describe('ListSelector', () => {
     // To prevent that, we pass "done" to make this test async, and then we call "done()" to mark
     // the point where the current test is completed. The mark tells chai it is the time to do the
     // next test.
-    it('should set BookStore back to the default, if the request fails.', (done) => {
+    it('should set BookStore back to the default and set URL to the 404 page, if the request fails.', (done) => {
       component.instance().submitFormRequest('2099-13');
       setTimeout(
         () => {
           expect(updateBookStore.called).to.equal(true);
           expect(updateBookStore.getCall(0).args).to.deep.equal([]);
 
+          expect(updateHistory.called).to.equal(true);
+          expect(updateHistory.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/404']);
+
           done();
         }, 150
       );
     });
 
-    it('should update BookStore with the data responsed, if the request succeeds.', (done) => {
+    it('should update BookStore with the data responsed and set the correct URL, if the request succeeds.', (done) => {
       component.instance().submitFormRequest('2017-01');
       setTimeout(
         () => {
+          expect(updateBookStore.called).to.equal(true);
           expect(updateBookStore.getCall(0).args).to.deep.equal(
             [mockBookListResponse.currentPicks]
           );
+
+          expect(updateHistory.called).to.equal(true);
+          expect(updateHistory.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/2017-01-01/']);
 
           done();
         }, 150
