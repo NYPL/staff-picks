@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Book from '../Book/Book.jsx';
-import BookStore from '../../stores/BookStore.js';
+import Book from '../Book/Book';
+import BookStore from '../../stores/BookStore';
 
 class BookPage extends React.Component {
   constructor(props) {
@@ -29,13 +29,10 @@ class BookPage extends React.Component {
 
 BookPage.propTypes = {
   className: PropTypes.string,
-  params: PropTypes.object,
-  data: PropTypes.array,
 };
 
 BookPage.defaultProps = {
   className: 'BookPage',
-  id: 'BookPage',
 };
 
 BookPage.contextTypes = {

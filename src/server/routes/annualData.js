@@ -1,11 +1,11 @@
-import appConfig from '../../../appConfig.js';
+import appConfig from '../../../appConfig';
 import utils from '../../app/utils/utils';
 
-import nyplApiClient from '../helper/nyplApiClient.js';
+import nyplApiClient from '../helper/nyplApiClient';
 
 const { baseUrl } = appConfig;
 
-const nyplApiClientGet = (endpoint) =>
+const nyplApiClientGet = endpoint =>
   nyplApiClient().then(client => client.get(endpoint, { cache: false }));
 
 /* annualCurrentData
@@ -23,7 +23,7 @@ function annualCurrentData(type, req, res, next) {
   }
 
   nyplApiClientGet(`/book-lists/${dataType}/2017`)
-    .then(data => {
+    .then((data) => {
       const filters = utils.getAllTags(data.picks);
       // Get the subset of tags that the picks can be filtered by.
       const selectableFilters = utils.getSelectableTags(data.picks);
@@ -41,7 +41,7 @@ function annualCurrentData(type, req, res, next) {
 
       next();
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(`Error fetching endpoint: ${error}`);
 
       res.locals.data = {
@@ -56,13 +56,14 @@ function annualCurrentData(type, req, res, next) {
       };
 
       next();
-    })
+    });
 }
 
 /* selectAnnualData
  * Map the url param to specific endpoint requests. Redirect otherwise to the homepage.
  */
 function selectAnnualData(req, res, next) {
+  // NOTE: req.params also contains `year` and `id` as attributes.
   const type = req.params.type;
 
   if (type === 'childrens' || type === 'ya') {

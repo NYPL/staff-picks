@@ -6,10 +6,12 @@ import { Header, navConfig } from '@nypl/dgx-header-component';
 import Footer from '@nypl/dgx-react-footer';
 import { extend as _extend } from 'underscore';
 
-import Hero from '../Hero/Hero.jsx';
+import Hero from '../Hero/Hero';
 import BookActions from '../../actions/BookActions';
 import BookStore from '../../stores/BookStore';
-import config from '../../../../appConfig.js';
+import config from '../../../../appConfig';
+
+import { isEmpty as _isEmpty } from 'underscore';
 
 class App extends React.Component {
   constructor(props) {
@@ -35,6 +37,15 @@ class App extends React.Component {
   }
 
   render() {
+    // temporarily add the check here for staff picks config
+    let heroData = undefined;
+
+    if (_isEmpty(this.props.params)) {
+      heroData = config.heroData.staffPicks;
+    } else {
+      heroData = config.heroData.annual[this.props.params.type];
+    }
+
     return (
       <div className="app-wrapper">
         <Header
@@ -43,9 +54,10 @@ class App extends React.Component {
         />
 
         <main className="main-page">
-          {/*<Hero*/}
-            {/*heroData={config.heroData.annual[this.props.params.type]}*/}
-          {/*/>*/}
+
+          <Hero
+            heroData={heroData}
+          />
 
           <div id="app-content" className="nypl-full-width-wrapper">
             {React.cloneElement(this.props.children, this.state)}
@@ -60,9 +72,7 @@ class App extends React.Component {
 
 App.propTypes = {
   children: PropTypes.object,
-  filters: PropTypes.array,
   params: PropTypes.object,
-  location: PropTypes.object,
 };
 
 App.contextTypes = {

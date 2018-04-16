@@ -2,8 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { LeftWedgeIcon } from '@nypl/dgx-svg-icons';
 
-import BookFilters from '../BookFilters/BookFilters.jsx';
+import BookFilters from '../BookFilters/BookFilters';
+import ListSelector from '../ListSelector/ListSelector';
 import config from '../../../../appConfig';
+
+// This data is a temporary dummy data for creating the season list
+const fieldsetProps = {
+  season: {
+    fieldsetName: 'season',
+    options: [
+      { name: '2018 Winter', value: '2018-01-01' },
+      { name: '2017 Fall', value: '2017-09-01' },
+      { name: '2017 Summer', value: '2017-06-01' },
+      { name: '2017 Spring', value: '2017-04-01' },
+    ],
+  },
+  audience: {
+    fieldsetName: 'audience',
+    options: [
+      { name: 'Adult', value: 'adult' },
+      { name: 'Teen', value: 'teen' },
+      { name: 'Children', value: 'children' },
+    ],
+  },
+};
 
 const Sidebar = (props) => {
   const renderBookFilters = (shouldDisplay) => {
@@ -23,6 +45,9 @@ const Sidebar = (props) => {
     );
   };
 
+  const renderListSelector = (data) =>
+    (<ListSelector fieldsetProps={data} isJsEnabled={props.isJsEnabled} />);
+
   return (
     <div className="sidebar nypl-column-one-quarter">
       <nav aria-label="Breadcrumbs">
@@ -32,26 +57,30 @@ const Sidebar = (props) => {
           {config.recommendationsLink.label}
         </a>
       </nav>
+      {renderListSelector(fieldsetProps)}
       {renderBookFilters(props.isJsEnabled)}
     </div>
   );
 };
 
 Sidebar.propTypes = {
-  filters: PropTypes.array,
-  selectableFilters: PropTypes.array,
+  filters: PropTypes.arrayOf(PropTypes.object),
+  selectableFilters: PropTypes.arrayOf(PropTypes.object),
   setSelectedFilter: PropTypes.func,
   clearFilters: PropTypes.func,
   isJsEnabled: PropTypes.bool,
-  selectedFilters: PropTypes.array,
+  selectedFilters: PropTypes.arrayOf(PropTypes.object),
   picksCount: PropTypes.number,
 };
 
 Sidebar.defaultProps = {
   filters: [],
   selectableFilters: [],
-  setSelectableFilters: () => {},
+  setSelectedFilter: () => {},
   clearFilters: () => {},
+  isJsEnabled: false,
+  selectedFilters: [],
+  picksCount: 0,
 };
 
 export default Sidebar;

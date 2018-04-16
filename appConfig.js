@@ -114,6 +114,12 @@ const config = {
   loginUrl: 'https://login.nypl.org/auth/login',
   tokenUrl: 'https://isso.nypl.org/',
   heroData: {
+    staffPicks: {
+      category: '',
+      header: 'Staff Picks',
+      description: 'This is staff picks page.',
+      heroImageUrl: 'src/client/images/desktop.teens.cover.2017.png',
+    },
     annual: {
       ya: {
         category: '',

@@ -3,7 +3,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import Filter from '../../src/app/components/BookFilters/Filter.jsx';
+import Filter from '../../src/app/components/BookFilters/Filter';
 
 const filtersData = {
   filter: {
@@ -31,9 +31,7 @@ describe('Filter', () => {
     let component;
 
     before(() => {
-      component = mount(
-        <Filter filter={filtersData.filter} />
-      );
+      component = mount(<Filter filter={filtersData.filter} />);
     });
 
     it('should render a list item with a .filter-item class', () => {
@@ -61,9 +59,7 @@ describe('Filter', () => {
     let component;
 
     before(() => {
-      component = mount(
-        <Filter filter={filtersData.filter} active />
-      );
+      component = mount(<Filter filter={filtersData.filter} active />);
     });
 
     it('should render a button with the filter\'s label', () => {
@@ -87,9 +83,7 @@ describe('Filter', () => {
     let component;
 
     before(() => {
-      component = mount(
-        <Filter filter={filtersData.filter} />
-      );
+      component = mount(<Filter filter={filtersData.filter} />);
     });
 
     it('should be inactive by default', () => {
@@ -122,9 +116,7 @@ describe('Filter', () => {
     };
 
     before(() => {
-      component = mount(
-        <Filter filter={filtersData.filter} onClick={onClick} />
-      );
+      component = mount(<Filter filter={filtersData.filter} onClick={onClick} />);
     });
 
     it('should call the `onClick` prop function', () => {
@@ -142,9 +134,7 @@ describe('Filter', () => {
     let component;
 
     before(() => {
-      component = mount(
-        <Filter filter={filtersData.filter} />
-      );
+      component = mount(<Filter filter={filtersData.filter} />);
     });
 
     it('should be inactive by default', () => {

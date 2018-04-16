@@ -60,7 +60,7 @@ const kmsClientHelper = (options) => {
 
           return nyplApiClient;
         })
-        .catch(error => {
+        .catch((error) => {
           throw ('ERROR trying to decrypt using KMS.', error);
         });
     }

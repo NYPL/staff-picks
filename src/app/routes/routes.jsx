@@ -3,7 +3,7 @@ import React from 'react';
 // Import Router
 import { IndexRoute, Route, Redirect } from 'react-router';
 
-// Import components
+// Import component
 import App from '../components/Application/Application.jsx';
 import Main from '../components/Application/Main.jsx';
 import BookPage from '../components/BookPage/BookPage.jsx';

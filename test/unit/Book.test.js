@@ -3,7 +3,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import Book from '../../src/app/components/Book/Book.jsx';
+import Book from '../../src/app/components/Book/Book';
 
 const pickObject = {
   "tags": [
@@ -121,11 +121,10 @@ describe('Book Component', () => {
       expect(text.find('p').text()).to.equal(`Illustrated by ${pickObject.book.illustrator}`);
     });
 
-    it('should assign a .withTranslatorIllustrator class if both translator and illustrator exist',
-      () => {
-        const bookWrapper = component.find('.book-item');
-        expect(bookWrapper.hasClass('withTranslatorIllustrator')).to.equal(true);
-      });
+    it('should assign a .withTranslatorIllustrator class if both translator and illustrator exist', () => {
+      const bookWrapper = component.find('.book-item');
+      expect(bookWrapper.hasClass('withTranslatorIllustrator')).to.equal(true);
+    });
 
     it('should render the pick tags in a <p> tag nested with <span> elements', () => {
       const tags = component.find('.book-item-tags');
