@@ -18,6 +18,10 @@ router
 
 // Not currently used in Best Books.
 router
+  .route(`${appConfig.baseApiUrl}:month/:id?`)
+  .get(monthData.selectClientMonthData);
+
+router
   .route(`${appConfig.baseMonthUrl}:month/:id?`)
   .get(monthData.selectMonthData);
 

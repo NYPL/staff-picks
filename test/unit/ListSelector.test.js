@@ -1,8 +1,8 @@
 /* eslint-env mocha */
 import React from 'react';
+import sinon from 'sinon';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-
 import ListSelector from '../../src/app/components/ListSelector/ListSelector.jsx';
 
 const fieldsetProps = {
@@ -33,11 +33,34 @@ describe('ListSelector', () => {
       component = shallow(<ListSelector fieldsetProps={fieldsetProps} />);
     });
 
+    after(() => {
+      component.unmount();
+    });
+
     it('should render a form, and inside the form, it should render <input>.',
       () => {
         expect(component.find('form').length).to.equal(1);
         expect(component.find('input').length).to.equal(1);
       }
     );
+  });
+
+  describe('When the selected option updates,', () => {
+    // Bind sinon.spy to the prototype of ListSelector, before ListSelector is mounted
+    const submitFormRequest = sinon.spy(ListSelector.prototype, 'submitFormRequest');
+    const component = shallow(<ListSelector fieldsetProps={fieldsetProps} />);
+
+    before(() => {
+      component.instance().handleChange({ target: { value: '2017-01' } });
+    });
+
+    after(() => {
+      submitFormRequest.restore();
+      component.unmount();
+    });
+
+    it('should make an API request to request a new list.', () => {
+      expect(submitFormRequest.called).to.equal(true);
+    });
   });
 });

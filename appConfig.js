@@ -81,13 +81,6 @@ const config = {
     'Q9RrzMLTqxKnVVn2+hVpk4F/8tMsGCdd4s/AJqEQBy5lsq7ji1B63XYqi5fc1SnJ\n' +
     'EQIDAQAB\n' +
     '-----END PUBLIC KEY-----',
-  api: {
-    development: 'https://dev-platform.nypl.org/api/v0.1',
-    qa: 'https://qa-platform.nypl.org/api/v0.1',
-    production: 'https://platform.nypl.org/api/v0.1',
-  },
-  loginUrl: 'https://login.nypl.org/auth/login',
-  tokenUrl: 'https://isso.nypl.org/',
   heroData: {
     staffPicks: {
       category: '',
