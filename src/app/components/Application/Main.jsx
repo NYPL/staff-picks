@@ -21,6 +21,19 @@ class Main extends React.Component {
     this.clearFilters = this.clearFilters.bind(this);
   }
 
+  componentWillReceiveProps() {
+    // Temperorily logging for development
+    console.log('update new props!');
+
+    // Update the props to reflect the latest updates from client side API responses
+    this.setState({
+      selectableFilters: this.props.selectableFilters,
+      selectedFilters: [],
+      picks: this.props.currentPicks.picks && this.props.currentPicks.picks.length ?
+        this.props.currentPicks.picks : [],
+    });
+  }
+
   /**
    * getNewPickSet(picks, selectedFilters)
    * Gets the new set of picks filtered by the selected tags.
