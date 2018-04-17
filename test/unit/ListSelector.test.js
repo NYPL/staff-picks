@@ -128,7 +128,7 @@ describe('ListSelector', () => {
     // to resolve and to be examined.
     // For doing that, we add a setTimeout to delay the test.
     // However, it raises another issue that the test after the current one will be executed,
-    // even when the curret test has not been done yet.
+    // even when the current test has not been done yet.
     // To prevent that, we pass "done" to make this test async, and then we call "done()" to mark
     // the point where the current test is completed. The mark tells chai it is the time to do the
     // next test.
