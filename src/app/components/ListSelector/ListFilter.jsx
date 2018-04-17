@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ListFilter = ({ fieldsetProps, handleChange }) => {
+const ListFilter = ({ fieldsetProps, listType, handleChange }) => {
   const selectName = fieldsetProps.fieldsetName;
   const selectId = `${selectName}-input`;
   let defaultValue;
@@ -26,7 +26,7 @@ const ListFilter = ({ fieldsetProps, handleChange }) => {
         id={selectId}
         name={selectName}
         defaultValue={defaultValue}
-        onChange={handleChange}
+        onChange={(e) => { handleChange(listType, e); }}
       >
        {optionList}
       </select>
