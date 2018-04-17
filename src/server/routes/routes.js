@@ -16,6 +16,10 @@ router
   .route(`${appConfig.baseAnnualUrl}:type/:year?/:id?`)
   .get(annualData.selectAnnualData);
 
+router
+  .route(`${appConfig.baseApiUrl}`)
+  .post(monthData.selectClientMonthDataPost);
+
 // The route for client side API request of Staff Picks
 router
   .route(`${appConfig.baseApiUrl}:month/:id?`)

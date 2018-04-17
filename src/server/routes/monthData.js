@@ -1,4 +1,5 @@
 import nyplApiClient from '../helper/nyplApiClient.js';
+import config from '../../../appConfig';
 
 const nyplApiClientGet = (endpoint) =>
   nyplApiClient().then(client => client.get(endpoint, { cache: false }));
@@ -104,8 +105,29 @@ function selectClientMonthData(req, res) {
     });
 }
 
+/**
+ * selectClientMonthDataPost(req, res, next)
+ * Handles the requests from the form submit button (when no JS).
+ * It redirects to the route to execute the function for server side requesting.
+ */
+function selectClientMonthDataPost(req, res) {
+  const season = (req.body.season) ? `${req.body.season}-01` : '';
+  const audience = req.body.audience;
+
+  if (!season || !audience) {
+    console.log(
+      `Form data of season or audience is undefined. season: ${season}, audience: ${audience}`
+    );
+  }
+
+  res.redirect(
+    `${config.baseMonthUrl}${season}`
+  );
+}
+
 export default {
   currentMonthData,
   selectMonthData,
   selectClientMonthData,
+  selectClientMonthDataPost,
 };
