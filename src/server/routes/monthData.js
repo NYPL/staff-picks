@@ -45,6 +45,26 @@ function currentMonthData(req, res, next) {
  * Get a specific month's or season's staff pick list.
  */
 function selectMonthData(req, res, next) {
+
+  // Checks if the URL input fits season's convention
+  const seasonMatches = req.params.month.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
+
+  // If no, throw an error
+  if (!seasonMatches) {
+    console.error('Status Code: 400, Error Message: Invalid season.');
+
+    res.locals.data = {
+      BookStore: {
+        filters: [],
+        currentPicks: {},
+        selectableFilters: [],
+        isJsEnabled: false,
+      },
+    };
+
+    next();
+  }
+
   // only 2017-01 works currently. Comment out the dynamice API link below
   // nyplApiClientGet(`/book-lists/staff-picks/${req.params.month}`)
   nyplApiClientGet('/book-lists/staff-picks/2017-01')
@@ -55,6 +75,8 @@ function selectMonthData(req, res, next) {
           currentPicks: data,
           selectableFilters: [],
           isJsEnabled: false,
+          currentSeason: `${seasonMatches[1]}-${seasonMatches[2]}`,
+          currentAudience: 'adult',
         },
         pageTitle: '',
         metaTags: [],

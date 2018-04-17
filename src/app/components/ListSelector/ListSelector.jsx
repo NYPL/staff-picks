@@ -49,8 +49,10 @@ class ListSelector extends React.Component {
    * @param {array} filters
    * @param {array} selectedFilters
    */
-  updateBookStore(picks = {}, filters = [], selectedFilters = []) {
+  updateBookStore(picks = {}, currentSeason = '', currentAudience = 'adult', filters = [], selectedFilters = []) {
     BookActions.updatePicks(picks);
+    BookActions.updateCurrentSeason(currentSeason);
+    BookActions.updateCurrentAudience(currentAudience);
     BookActions.updateFilters(filters);
     BookActions.setSelectableFilters(selectedFilters);
   }
@@ -74,7 +76,7 @@ class ListSelector extends React.Component {
           this.updateHistory('/books-music-dvds/recommendations/staff-picks/404');
         } else {
           // For valid API response, update BookStore for the new list
-          this.updateBookStore(response.data.currentPicks);
+          this.updateBookStore(response.data.currentPicks, submitValue);
           // Update and transit to the match URL
           this.updateHistory(
             `/books-music-dvds/recommendations/staff-picks/${submitValue}-01/`
@@ -118,7 +120,10 @@ class ListSelector extends React.Component {
     }
 
     return (
-      <ListFilter fieldsetProps={fieldsetProps} handleChange={this.handleChange} />
+      <ListFilter
+        fieldsetProps={fieldsetProps}
+        handleChange={this.handleChange}
+      />
     );
   }
 

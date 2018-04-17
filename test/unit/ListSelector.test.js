@@ -132,13 +132,22 @@ describe('ListSelector', () => {
     // To prevent that, we pass "done" to make this test async, and then we call "done()" to mark
     // the point where the current test is completed. The mark tells chai it is the time to do the
     // next test.
-    it('should set BookStore back to the default and set URL to the 404 page, if the request fails.', (done) => {
+    it('should set BookStore back to the default, if the request fails.', (done) => {
       component.instance().submitFormRequest('2099-13');
       setTimeout(
         () => {
           expect(updateBookStore.called).to.equal(true);
           expect(updateBookStore.getCall(0).args).to.deep.equal([]);
 
+          done();
+        }, 150
+      );
+    });
+
+    it('should set URL to the 404 page, if the request fails.', (done) => {
+      component.instance().submitFormRequest('2099-13');
+      setTimeout(
+        () => {
           expect(updateHistory.called).to.equal(true);
           expect(updateHistory.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/404']);
 
@@ -147,18 +156,28 @@ describe('ListSelector', () => {
       );
     });
 
-    it('should update BookStore with the data responsed and set the correct URL, if the request succeeds.', (done) => {
+    it('should update BookStore with the data responsed, if the request succeeds.', (done) => {
       component.instance().submitFormRequest('2017-01');
       setTimeout(
         () => {
           expect(updateBookStore.called).to.equal(true);
           expect(updateBookStore.getCall(0).args).to.deep.equal(
-            [mockBookListResponse.currentPicks]
+            [mockBookListResponse.currentPicks, '2017-01']
           );
 
+          done();
+        }, 150
+      );
+    });
+
+    it('should set the correct URL, if the request succeeds.', (done) => {
+      component.instance().submitFormRequest('2017-01');
+      setTimeout(
+        () => {
           expect(updateHistory.called).to.equal(true);
           expect(updateHistory.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/2017-01-01/']);
 
+          // expect the drop down menu fits the current select
           done();
         }, 150
       );
