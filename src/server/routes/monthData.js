@@ -13,9 +13,8 @@ const nyplApiClientGet = (endpoint) =>
  * Get the default/latest monthly staff pick list.
  */
 function currentMonthData(req, res, next) {
-  // only 2017-01 works currently. Comment out the dynamice API link below
-  // nyplApiClientGet(`/book-lists/staff-picks/${req.params.month}`)
-  nyplApiClientGet('/book-lists/staff-picks/2017-01')
+  // should get the latest list from the function getLatestSeason()
+  nyplApiClientGet('/book-lists/staff-picks/2018-01')
     .then(data => {
       res.locals.data = {
         BookStore: {
@@ -57,6 +56,7 @@ function selectMonthData(req, res, next) {
   // Checks if the URL input fits season's convention
   const seasonMatches = req.params.month.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
   const audience = req.query.audience;
+  let requestedSeason = '';
 
   // should add a check for req.query.audience here
 
@@ -76,11 +76,11 @@ function selectMonthData(req, res, next) {
     };
 
     next();
+  } else {
+    requestedSeason = `${seasonMatches[1]}-${seasonMatches[2]}`;
   }
 
-  // only 2017-01 works currently. Comment out the dynamice API link below
-  // nyplApiClientGet(`/book-lists/staff-picks/${req.params.month}`)
-  nyplApiClientGet(`/book-lists/staff-picks/2017-01?audience=${audience}`)
+  nyplApiClientGet(`/book-lists/staff-picks/${requestedSeason}?audience=${audience}`)
     .then(data => {
       res.locals.data = {
         BookStore: {
@@ -88,7 +88,7 @@ function selectMonthData(req, res, next) {
           currentPicks: data,
           selectableFilters: [],
           isJsEnabled: false,
-          currentSeason: `${seasonMatches[1]}-${seasonMatches[2]}`,
+          currentSeason: requestedSeason,
           currentAudience: audience,
         },
         pageTitle: '',
@@ -120,9 +120,18 @@ function selectMonthData(req, res, next) {
  * Gets a specific month's or season's staff pick list on the client side.
  */
 function selectClientMonthData(req, res) {
-  // only 2017-01 works currently. Comment out the dynamice API link below
-  // nyplApiClientGet(`/book-lists/staff-picks/${req.params.month}`)
-  nyplApiClientGet('/book-lists/staff-picks/2017-01')
+  const seasonMatches = req.params.month.match(/^(\d{4})\-(\d{2})$/);
+
+  if (!seasonMatches) {
+    console.error('Status Code: 400, Error Message: Invalid season.');
+
+    res.json({
+      statusCode: 400,
+      errorMessage: 'Invalid season.',
+    });
+  }
+
+  nyplApiClientGet(`/book-lists/staff-picks/${req.params.month}`)
     .then(data => {
       res.json({
         title: data.title,
