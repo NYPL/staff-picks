@@ -115,8 +115,9 @@ class ListSelector extends React.Component {
   }
 
   /**
-   * handleChange(e)
+   * handleChange(listType, e)
    * Triggers to submit requests when the selected value changed on the season or audience lists
+   * @param {string} listType
    * @param {DOM event} e
    */
   handleChange(listType, e) {

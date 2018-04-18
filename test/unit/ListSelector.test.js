@@ -11,18 +11,20 @@ import config from '../../appConfig';
 const fieldsetProps = {
   season: {
     fieldsetName: 'season',
+    currentValue: '2018-01',
     options: [
-      { name: '2018 Winter', value: '2018-01-01' },
-      { name: '2017 Fall', value: '2017-09-01' },
-      { name: '2017 Summer', value: '2017-06-01' },
-      { name: '2017 Spring', value: '2017-04-01' },
+      { name: '2018 Winter', value: '2018-01' },
+      { name: '2017 Fall', value: '2017-09' },
+      { name: '2017 Summer', value: '2017-06' },
+      { name: '2017 Spring', value: '2017-04' },
     ],
   },
   audience: {
     fieldsetName: 'audience',
+    currentValue: 'adult',
     options: [
       { name: 'Adult', value: 'adult' },
-      { name: 'Teen', value: 'teen' },
+      { name: 'Teen', value: 'ya' },
       { name: 'Children', value: 'children' },
     ],
   },
@@ -54,7 +56,7 @@ describe('ListSelector', () => {
     const component = shallow(<ListSelector fieldsetProps={fieldsetProps} />);
 
     before(() => {
-      component.instance().handleChange({ target: { value: '2017-01' } });
+      component.instance().handleChange('season', { target: { value: '2017-01' } });
     });
 
     after(() => {
@@ -106,7 +108,7 @@ describe('ListSelector', () => {
           statusText: 'Undefined error',
           status: 500,
         })
-        .onGet(`${config.baseApiUrl}2017-01`)
+        .onGet(`${config.baseApiUrl}2017-01?audience=adult`)
         .reply(200, mockBookListResponse);
     });
 
@@ -133,7 +135,7 @@ describe('ListSelector', () => {
     // the point where the current test is completed. The mark tells chai it is the time to do the
     // next test.
     it('should set BookStore back to the default, if the request fails.', (done) => {
-      component.instance().submitFormRequest('2099-13');
+      component.instance().submitFormRequest('season', '2099-13');
       setTimeout(
         () => {
           expect(updateBookStore.called).to.equal(true);
@@ -145,7 +147,7 @@ describe('ListSelector', () => {
     });
 
     it('should set URL to the 404 page, if the request fails.', (done) => {
-      component.instance().submitFormRequest('2099-13');
+      component.instance().submitFormRequest('season', '2099-13');
       setTimeout(
         () => {
           expect(updateHistory.called).to.equal(true);
@@ -157,12 +159,12 @@ describe('ListSelector', () => {
     });
 
     it('should update BookStore with the data responsed, if the request succeeds.', (done) => {
-      component.instance().submitFormRequest('2017-01');
+      component.instance().submitFormRequest('season', '2017-01');
       setTimeout(
         () => {
           expect(updateBookStore.called).to.equal(true);
           expect(updateBookStore.getCall(0).args).to.deep.equal(
-            [mockBookListResponse.currentPicks, '2017-01']
+            [mockBookListResponse.currentPicks, '2017-01', 'adult']
           );
 
           done();
@@ -171,13 +173,12 @@ describe('ListSelector', () => {
     });
 
     it('should set the correct URL, if the request succeeds.', (done) => {
-      component.instance().submitFormRequest('2017-01');
+      component.instance().submitFormRequest('season', '2017-01');
       setTimeout(
         () => {
           expect(updateHistory.called).to.equal(true);
           expect(updateHistory.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/2017-01-01/']);
 
-          // expect the drop down menu fits the current select
           done();
         }, 150
       );
