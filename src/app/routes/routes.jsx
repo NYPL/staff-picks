@@ -16,7 +16,7 @@ import appConfig from '../../../appConfig';
 const routes = {
   client: (
     <Route path={appConfig.baseMonthUrl} component={App}>
-      <IndexRoute component={Main} />
+      {/*<IndexRoute component={Main} />*/}
       <Route path={`${appConfig.baseAnnualUrl}:type`} component={Main} />
       <Route path={`${appConfig.baseAnnualUrl}:type/:year`} component={Main} />
       <Route path={`${appConfig.baseAnnualUrl}:type/:year/:id`} component={BookPage} />

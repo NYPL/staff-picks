@@ -12,7 +12,7 @@ class StaffPicks extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="staffpick">
       <p>This is a staff pick.</p>
       </div>
     );
