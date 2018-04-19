@@ -175,6 +175,7 @@ function selectClientMonthData(req, res) {
 function selectMonthDataFormPost(req, res) {
   const season = (req.body.season) ? `${req.body.season}` : '';
   const audience = req.body.audience;
+  const audienceQuery = audience ? `?audience=${audience}` : '';
 
   if (!season || !audience) {
     console.log(
@@ -184,7 +185,7 @@ function selectMonthDataFormPost(req, res) {
 
   // Redirects and calls selectMonthData() to make server side request for the season/audience list
   res.redirect(
-    `${config.baseMonthUrl}${season}${audience}`
+    `${config.baseMonthUrl}${season}${audienceQuery}`
   );
 }
 
