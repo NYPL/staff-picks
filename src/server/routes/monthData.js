@@ -57,7 +57,6 @@ function currentMonthData(req, res, next) {
  * Get a specific month's or season's staff pick list.
  */
 function selectMonthData(req, res, next) {
-<<<<<<< HEAD
   // Checks if the URL input fits season's convention
   const seasonMatches = req.params.month.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
   // Default audience list is the adult list

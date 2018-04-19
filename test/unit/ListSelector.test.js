@@ -151,7 +151,9 @@ describe('ListSelector', () => {
       setTimeout(
         () => {
           expect(updateHistory.called).to.equal(true);
-          expect(updateHistory.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/404']);
+          expect(updateHistory.getCall(0).args).to.deep.equal(
+            ['/books-music-dvds/recommendations/staff-picks/404']
+          );
 
           done();
         }, 150
@@ -164,7 +166,7 @@ describe('ListSelector', () => {
         () => {
           expect(updateBookStore.called).to.equal(true);
           expect(updateBookStore.getCall(0).args).to.deep.equal(
-            [mockBookListResponse.currentPicks, '2017-01-01', 'Adult', "staff-picks"]
+            [mockBookListResponse.currentPicks, '2017-01-01', 'Adult', 'staff-picks']
           );
 
           done();
@@ -177,7 +179,9 @@ describe('ListSelector', () => {
       setTimeout(
         () => {
           expect(updateHistory.called).to.equal(true);
-          expect(updateHistory.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/2017-01-01']);
+          expect(updateHistory.getCall(0).args).to.deep.equal(
+            ['/books-music-dvds/recommendations/staff-picks/2017-01-01']
+          );
 
           done();
         }, 150

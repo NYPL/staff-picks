@@ -65,7 +65,6 @@ class ListSelector extends React.Component {
 
     if (listType === 'audience') {
       audienceValue = submitValue;
-      audienceQuery = `?audience=${audienceValue}`;
     }
 
     // this function will be replaced by submiting to endpoint
