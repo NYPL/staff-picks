@@ -213,19 +213,61 @@ describe('Main', () => {
         ],
       };
       const extractAudienceGroup = sinon.spy(Main.prototype, 'extractAudienceGroup');
-      const component = shallow(<Main currentPicks={staffPicksData} currentAudience={'YA'} />);
-
-      before(() => {
-      });
+      const component = shallow(
+        <Main currentPicks={staffPicksData} currentAudience={'YA'} listType={'staff-picks'} />
+      );
 
       after(() => {
         extractAudienceGroup.restore();
         component.unmount();
       });
 
-      it('should return specific audience/age group based on the props', () => {
-        expect(extractAudienceGroup.called).to.equal(true);
-        expect(extractAudienceGroup.getCall(0).args).to.deep.equal([staffPicksData.picks, 'YA']);
+      it('should be called with the passed down picks, age group, and list tyep as the arguments.',
+        () => {
+          expect(extractAudienceGroup.called).to.equal(true);
+          expect(extractAudienceGroup.getCall(0).args).to.deep.equal(
+            [staffPicksData.picks, 'YA', 'staff-picks']
+          );
+        }
+      );
+
+      it('should return the original list if it is not a staff picks list.', () => {
+        const returnedValue = staffPicksData.picks;
+
+        expect(extractAudienceGroup(staffPicksData.picks, 'YA', 'some-other-list')).to.deep.equal(
+          returnedValue
+        );
+      });
+
+      it('should return an empty array if the passed down list is empty.', () => {
+        const returnedValue = [];
+
+        expect(extractAudienceGroup([], 'YA', 'staff-picks')).to.deep.equal(
+          returnedValue
+        );
+      });
+
+      it('should return an empty array if the passed down age group is not valid.', () => {
+        const returnedValue = [];
+
+        expect(extractAudienceGroup(staffPicksData.picks, 'Toddler', 'staff-picks')).to.deep.equal(
+          returnedValue
+        );
+      });
+
+      it('should return a specific audience/age group based on the props.', () => {
+        const returnedValue = [
+          {
+            ageGroup: 'YA',
+            book: {
+              title: 'book 03',
+            },
+          },
+        ];
+
+        expect(extractAudienceGroup(staffPicksData.picks, 'YA', 'staff-picks')).to.deep.equal(
+          returnedValue
+        );
       });
     });
   });
