@@ -103,12 +103,12 @@ describe('ListSelector', () => {
 
     before(() => {
       mock
-        .onGet(`${config.baseApiUrl}2099-13`)
+        .onGet(`${config.baseApiUrl}2099-13-01`)
         .reply(500, {
           statusText: 'Undefined error',
           status: 500,
         })
-        .onGet(`${config.baseApiUrl}2017-01`)
+        .onGet(`${config.baseApiUrl}2017-01-01`)
         .reply(200, mockBookListResponse);
     });
 
@@ -130,12 +130,12 @@ describe('ListSelector', () => {
     // to resolve and to be examined.
     // For doing that, we add a setTimeout to delay the test.
     // However, it raises another issue that the test after the current one will be executed,
-    // even when the curret test has not been done yet.
+    // even when the current test has not been done yet.
     // To prevent that, we pass "done" to make this test async, and then we call "done()" to mark
     // the point where the current test is completed. The mark tells chai it is the time to do the
     // next test.
     it('should set BookStore back to the default, if the request fails.', (done) => {
-      component.instance().submitFormRequest('season', '2099-13');
+      component.instance().submitFormRequest('season', '2099-13-01');
       setTimeout(
         () => {
           expect(updateBookStore.called).to.equal(true);
@@ -159,7 +159,7 @@ describe('ListSelector', () => {
     });
 
     it('should update BookStore with the data responsed, if the request succeeds.', (done) => {
-      component.instance().submitFormRequest('season', '2017-01');
+      component.instance().submitFormRequest('season', '2017-01-01');
       setTimeout(
         () => {
           expect(updateBookStore.called).to.equal(true);
@@ -177,7 +177,7 @@ describe('ListSelector', () => {
       setTimeout(
         () => {
           expect(updateHistory.called).to.equal(true);
-          expect(updateHistory.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/2017-01-01/']);
+          expect(updateHistory.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/2017-01-01']);
 
           done();
         }, 150
