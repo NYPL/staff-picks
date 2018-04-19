@@ -10,7 +10,7 @@ const nyplApiClientGet = (endpoint) =>
 function currentMonthData(req, res, next) {
   // only 2017-01 works currently. Comment out the dynamice API link below
   // nyplApiClientGet(`/book-lists/staff-picks/${req.params.month}`)
-  nyplApiClientGet('/book-lists/staff-picks/2017-01-01')
+  nyplApiClientGet('/book-lists/staff-picks/2017-06-01')
     .then(data => {
       res.locals.data = {
         BookStore: {
@@ -47,7 +47,7 @@ function currentMonthData(req, res, next) {
 function selectMonthData(req, res, next) {
   // only 2017-01 works currently. Comment out the dynamice API link below
   // nyplApiClientGet(`/book-lists/staff-picks/${req.params.month}`)
-  nyplApiClientGet('/book-lists/staff-picks/2017-01-01')
+  nyplApiClientGet('/book-lists/staff-picks/2017-06-01')
     .then(data => {
       res.locals.data = {
         BookStore: {
@@ -85,7 +85,7 @@ function selectMonthData(req, res, next) {
 function selectClientMonthData(req, res) {
   // only 2017-01 works currently. Comment out the dynamice API link below
   // nyplApiClientGet(`/book-lists/staff-picks/${req.params.month}`)
-  nyplApiClientGet('/book-lists/staff-picks/2017-01-01')
+  nyplApiClientGet('/book-lists/staff-picks/2017-06-01')
     .then(data => {
       res.json({
         title: data.title,

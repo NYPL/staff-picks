@@ -77,7 +77,7 @@ class ListSelector extends React.Component {
           this.updateBookStore(response.data.currentPicks);
           // Update and transit to the match URL
           this.updateHistory(
-            `/books-music-dvds/recommendations/staff-picks/${submitValue}-01/`
+            `/books-music-dvds/recommendations/staff-picks/${submitValue}`
           );
         }
       })
