@@ -147,7 +147,7 @@ describe('ListSelector', () => {
     });
 
     it('should set URL to the 404 page, if the request fails.', (done) => {
-      component.instance().submitFormRequest('season', '2099-13');
+      component.instance().submitFormRequest('season', '2099-13-01');
       setTimeout(
         () => {
           expect(updateHistory.called).to.equal(true);
@@ -164,7 +164,7 @@ describe('ListSelector', () => {
         () => {
           expect(updateBookStore.called).to.equal(true);
           expect(updateBookStore.getCall(0).args).to.deep.equal(
-            [mockBookListResponse.currentPicks, '2017-01', 'Adult', "staff-picks"]
+            [mockBookListResponse.currentPicks, '2017-01-01', 'Adult', "staff-picks"]
           );
 
           done();
@@ -173,7 +173,7 @@ describe('ListSelector', () => {
     });
 
     it('should set the correct URL, if the request succeeds.', (done) => {
-      component.instance().submitFormRequest('season', '2017-01');
+      component.instance().submitFormRequest('season', '2017-01-01');
       setTimeout(
         () => {
           expect(updateHistory.called).to.equal(true);
