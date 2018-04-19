@@ -101,12 +101,12 @@ describe('ListSelector', () => {
 
     before(() => {
       mock
-        .onGet(`${config.baseApiUrl}2099-13`)
+        .onGet(`${config.baseApiUrl}2099-13-01`)
         .reply(500, {
           statusText: 'Undefined error',
           status: 500,
         })
-        .onGet(`${config.baseApiUrl}2017-01`)
+        .onGet(`${config.baseApiUrl}2017-01-01`)
         .reply(200, mockBookListResponse);
     });
 
@@ -133,7 +133,7 @@ describe('ListSelector', () => {
     // the point where the current test is completed. The mark tells chai it is the time to do the
     // next test.
     it('should set BookStore back to the default and set URL to the 404 page, if the request fails.', (done) => {
-      component.instance().submitFormRequest('2099-13');
+      component.instance().submitFormRequest('2099-13-01');
       setTimeout(
         () => {
           expect(updateBookStore.called).to.equal(true);
@@ -148,7 +148,7 @@ describe('ListSelector', () => {
     });
 
     it('should update BookStore with the data responsed and set the correct URL, if the request succeeds.', (done) => {
-      component.instance().submitFormRequest('2017-01');
+      component.instance().submitFormRequest('2017-01-01');
       setTimeout(
         () => {
           expect(updateBookStore.called).to.equal(true);
@@ -157,7 +157,7 @@ describe('ListSelector', () => {
           );
 
           expect(updateHistory.called).to.equal(true);
-          expect(updateHistory.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/2017-01-01/']);
+          expect(updateHistory.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/2017-01-01']);
 
           done();
         }, 150
