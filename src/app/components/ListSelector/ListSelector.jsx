@@ -26,6 +26,9 @@ class ListSelector extends React.Component {
    * updateBookStore(picks = {}, filters = [], selectedFilters = [])
    * Updates BookStore by BookActions based on latest client side API response
    * @param {object} picks
+   * @param {string} currentSeason
+   * @param {string} currentAudience
+   * @param {string} listType
    * @param {array} filters
    * @param {array} selectedFilters
    */
