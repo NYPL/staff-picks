@@ -11,7 +11,7 @@ const nyplApiClientGet = (endpoint) =>
 function currentMonthData(req, res, next) {
   // only 2017-01 works currently. Comment out the dynamice API link below
   // nyplApiClientGet(`/book-lists/staff-picks/${req.params.month}`)
-  nyplApiClientGet('/book-lists/staff-picks/2017-01')
+  nyplApiClientGet('/book-lists/staff-picks/2017-06-01')
     .then(data => {
       res.locals.data = {
         BookStore: {
@@ -93,7 +93,7 @@ function selectMonthData(req, res, next) {
 function selectClientMonthData(req, res) {
   // only 2017-01 works currently. Comment out the dynamice API link below
   // nyplApiClientGet(`/book-lists/staff-picks/${req.params.month}`)
-  nyplApiClientGet('/book-lists/staff-picks/2017-01')
+  nyplApiClientGet('/book-lists/staff-picks/2017-06-01')
     .then(data => {
       res.json({
         title: data.title,
@@ -118,8 +118,8 @@ function selectClientMonthData(req, res) {
  * Handles the requests from the form submit button (when no JS).
  * It redirects to the route to execute the function for server side requesting.
  */
-function selectClientMonthDataPost(req, res) {
-  const season = (req.body.season) ? `${req.body.season}-01` : '';
+function selectMonthDataFormPost(req, res) {
+  const season = (req.body.season) ? `${req.body.season}` : '';
   const audience = req.body.audience;
 
   if (!season || !audience) {
@@ -137,5 +137,5 @@ export default {
   currentMonthData,
   selectMonthData,
   selectClientMonthData,
-  selectClientMonthDataPost,
+  selectMonthDataFormPost,
 };
