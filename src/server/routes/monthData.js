@@ -1,5 +1,6 @@
-import nyplApiClient from '../helper/nyplApiClient.js';
+import nyplApiClient from '../helper/nyplApiClient';
 import config from '../../../appConfig';
+import utils from '../../app/utils/utils';
 
 const nyplApiClientGet = (endpoint) =>
   nyplApiClient().then(client => client.get(endpoint, { cache: false }));
@@ -45,15 +46,22 @@ function currentMonthData(req, res, next) {
  * Get a specific month's or season's staff pick list.
  */
 function selectMonthData(req, res, next) {
-  // only 2017-01 works currently. Comment out the dynamice API link below
-  // nyplApiClientGet(`/book-lists/staff-picks/${req.params.month}`)
-  nyplApiClientGet('/book-lists/staff-picks/2017-01')
-    .then(data => {
+  const {
+    month,
+    itemId,
+  } = req.params;
+
+  nyplApiClientGet(`/book-lists/staff-picks/${month}`)
+    .then((data) => {
+      const filters = utils.getAllTags(data.picks);
+      // Get the subset of tags that the picks can be filtered by.
+      const selectableFilters = utils.getSelectableTags(data.picks);
+
       res.locals.data = {
         BookStore: {
-          filters: [],
+          filters,
           currentPicks: data,
-          selectableFilters: [],
+          selectableFilters,
           isJsEnabled: false,
         },
         pageTitle: '',
@@ -62,7 +70,7 @@ function selectMonthData(req, res, next) {
 
       next();
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
       res.locals.data = {

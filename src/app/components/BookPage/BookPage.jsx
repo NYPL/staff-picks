@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { each as _each } from 'underscore';
+import { Link } from 'react-router';
+import { LeftWedgeIcon } from '@nypl/dgx-svg-icons';
 
 import Book from '../Book/Book';
 import BookStore from '../../stores/BookStore';
+import appConfig from '../../../../appConfig';
+import staffPicksDate from '../../utils/DateService';
 
 class BookPage extends React.Component {
   constructor(props) {
@@ -12,16 +17,42 @@ class BookPage extends React.Component {
   }
 
   render() {
-    const book = this.state.book;
+    const paramId = this.props.params.id ? this.props.params.id : '';
+    const { date, type, picks } = this.state.currentPicks;
+    const displayDate = staffPicksDate(date);
+    let pick;
+    let age;
+
+    _each(picks, (item) => {
+      if (item.slug === paramId) {
+        pick = item;
+        age = pick.ageGroup || 'Adult';
+      }
+    });
 
     return (
-      <div className={this.props.className}>
-        <h2>{book.item.title}</h2>
-        <Book
-          book={this.state.book}
-          className={`${this.props.className}__left-column__image__cover`}
-        />
-        <p className="BookIntro__author">By {this.state.book.item.author}</p>
+      <div className="nypl-row book-page">
+        <div className="sidebar nypl-column-one-quarter">
+          <nav aria-label="Breadcrumbs">
+            <Link to={`${appConfig.baseMonthUrl}${date}`} className="back-link">
+              <LeftWedgeIcon ariaHidden />
+              <span className="replaced-text visuallyHidden">Return to </span>
+              Staff Picks
+            </Link>
+          </nav>
+          <div className="book-filters">
+            <div className="book-filters-heading" />
+          </div>
+        </div>
+
+        <div className="booklist-section nypl-column-three-quarters">
+          <h2>
+            {displayDate.month} {displayDate.year} Picks for {age}
+          </h2>
+          <ul className="booklist">
+            <Book pick={pick} />
+          </ul>
+        </div>
       </div>
     );
   }
