@@ -143,6 +143,7 @@ class Main extends React.Component {
           setSelectedFilter={this.setSelectedFilter}
           clearFilters={this.clearFilters}
           isJsEnabled={this.props.isJsEnabled}
+          listOptions={this.props.listOptions}
           selectedFilters={this.state.selectedFilters}
           picksCount={this.state.picks.length}
           currentSeason={this.props.currentSeason}
@@ -170,6 +171,7 @@ Main.propTypes = {
   isJsEnabled: PropTypes.bool,
   params: PropTypes.object,
   listType: PropTypes.string,
+  listOptions: PropTypes.object,
   currentSeason: PropTypes.string,
   currentAudience: PropTypes.string,
 };
