@@ -56,7 +56,7 @@ describe('ListSelector', () => {
     const component = shallow(<ListSelector fieldsetProps={fieldsetProps} />);
 
     before(() => {
-      component.instance().handleChange('season', { target: { value: '2017-01' } });
+      component.instance().handleSeasonChange({ target: { value: '2017-01-01' } });
     });
 
     after(() => {
@@ -75,7 +75,7 @@ describe('ListSelector', () => {
     const updateLocation = sinon.spy(ListSelector.prototype, 'updateLocation');
     const component = shallow(<ListSelector fieldsetProps={fieldsetProps} />);
     const mockBookListResponse = {
-      date: '2017-01',
+      date: '2017-01-01',
       title: 'Winter 2016 Staff Picks',
       currentPicks: {
         picks: [
@@ -161,12 +161,12 @@ describe('ListSelector', () => {
     });
 
     it('should update BookStore with the data responsed, if the request succeeds.', (done) => {
-      component.instance().submitFormRequest('season', '2017-01-01');
+      component.instance().submitFormRequest('2017-01-01');
       setTimeout(
         () => {
           expect(updateBookStore.called).to.equal(true);
           expect(updateBookStore.getCall(0).args).to.deep.equal(
-            [mockBookListResponse.currentPicks, '2017-01-01', 'Adult', 'staff-picks']
+            [mockBookListResponse.currentPicks, '2017-01-01', 'staff-picks']
           );
 
           done();
@@ -175,7 +175,7 @@ describe('ListSelector', () => {
     });
 
     it('should set the correct URL, if the request succeeds.', (done) => {
-      component.instance().submitFormRequest('season', '2017-01-01');
+      component.instance().submitFormRequest('2017-01-01');
       setTimeout(
         () => {
           expect(updateLocation.called).to.equal(true);
