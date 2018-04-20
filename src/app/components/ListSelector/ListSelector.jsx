@@ -4,10 +4,6 @@ import axios from 'axios';
 import ListFilter from './ListFilter.jsx';
 import config from '../../../../appConfig';
 import BookActions from '../../../app/actions/BookActions.js';
-import Utils from '../../utils/utils';
-
-// The module to update the URL and history with client side requests
-const history = Utils.createAppHistory();
 
 class ListSelector extends React.Component {
   constructor(props) {
@@ -18,12 +14,12 @@ class ListSelector extends React.Component {
   }
 
   /**
-   * updateHistory(url)
-   * Updates the browsing history with the URL that the client side request should go to
+   * updateLocation(url)
+   * Pushes a new location with the URL that the client side request should go to
    * @param {string} url
    */
-  updateHistory(url) {
-    history.push({ pathname: url });
+  updateLocation(url) {
+    this.props.router.push({ pathname: url });
   }
 
   /**
@@ -55,12 +51,12 @@ class ListSelector extends React.Component {
             `API error with status code ${response.data.statusCode}: ${response.data.errorMessage}`
           );
           // Lead the user to the 404 page
-          this.updateHistory('/books-music-dvds/recommendations/staff-picks/404');
+          this.updateLocation('/books-music-dvds/recommendations/staff-picks/404');
         } else {
           // For valid API response, update BookStore for the new list
           this.updateBookStore(response.data.currentPicks);
           // Update and transit to the match URL
-          this.updateHistory(
+          this.updateLocation(
             `/books-music-dvds/recommendations/staff-picks/${submitValue}`
           );
         }
@@ -78,7 +74,7 @@ class ListSelector extends React.Component {
           `${errorStatusText}`
         );
         // Lead the user to the 404 page
-        this.updateHistory('/books-music-dvds/recommendations/staff-picks/404');
+        this.updateLocation('/books-music-dvds/recommendations/staff-picks/404');
       });
   }
 
@@ -122,6 +118,7 @@ class ListSelector extends React.Component {
 ListSelector.propTypes = {
   fieldsetProps: PropTypes.object,
   isJsEnabled: PropTypes.bool,
+  router: PropTypes.object,
 };
 
 ListSelector.defaultProps = {

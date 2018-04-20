@@ -46,7 +46,7 @@ const Sidebar = (props) => {
   };
 
   const renderListSelector = (data) =>
-    <ListSelector fieldsetProps={data} isJsEnabled={props.isJsEnabled} />;
+    <ListSelector fieldsetProps={data} isJsEnabled={props.isJsEnabled} router={props.router} />;
 
   return (
     <div className="sidebar nypl-column-one-quarter">
@@ -71,6 +71,7 @@ Sidebar.propTypes = {
   isJsEnabled: PropTypes.bool,
   selectedFilters: PropTypes.arrayOf(PropTypes.object),
   picksCount: PropTypes.number,
+  router: PropTypes.object,
 };
 
 Sidebar.defaultProps = {
