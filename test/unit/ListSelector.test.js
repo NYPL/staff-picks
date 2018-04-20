@@ -50,6 +50,40 @@ describe('ListSelector', () => {
     );
   });
 
+  describe('renderFieldset()', () => {
+    const renderFieldset = sinon.spy(ListSelector.prototype, 'renderFieldset');
+    const emptyFieldset = {
+      fieldsetName: 'empty',
+      currentValue: 'Nothing',
+      options: [],
+    };
+    const mammalFieldset = {
+      fieldsetName: 'mammal',
+      currentValue: 'Dog',
+      options: [
+        { name: 'Dog', value: 'Dog' },
+        { name: 'Cat', value: 'Cat' },
+        { name: 'Whale', value: 'Whale' },
+      ],
+    };
+
+    afterEach(() => {
+      renderFieldset.reset();
+    });
+
+    after(() => {
+      renderFieldset.restore();
+    });
+
+    it('should return null, if the list have no options.', () => {
+      expect(renderFieldset(emptyFieldset)).to.equal(null);
+    });
+
+    it('should return null, if the list type is not "season" nor "audience".', () => {
+      expect(renderFieldset(mammalFieldset)).to.equal(null);
+    });
+  });
+
   describe('When the selected option updates,', () => {
     // Bind sinon.spy to the prototype of ListSelector, before ListSelector is mounted
     const submitFormRequest = sinon.spy(ListSelector.prototype, 'submitFormRequest');
