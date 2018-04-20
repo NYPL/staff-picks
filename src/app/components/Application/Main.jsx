@@ -124,7 +124,7 @@ class Main extends React.Component {
     const audienceGroup = [];
 
     if (Array.isArray(picks) && picks.length) {
-      picks.map((item) => {
+      picks.forEach((item) => {
         if (item.ageGroup === audience) {
           audienceGroup.push(item);
         }
@@ -148,6 +148,7 @@ class Main extends React.Component {
           picksCount={this.state.picks.length}
           currentSeason={this.props.currentSeason}
           currentAudience={this.props.currentAudience}
+          router={this.props.router}
         />
 
         <BookList
@@ -174,6 +175,7 @@ Main.propTypes = {
   listOptions: PropTypes.object,
   currentSeason: PropTypes.string,
   currentAudience: PropTypes.string,
+  router: PropTypes.object,
 };
 
 Main.defaultProps = {

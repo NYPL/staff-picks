@@ -52,6 +52,7 @@ const Sidebar = (props) => {
     <ListSelector
       fieldsetProps={data}
       isJsEnabled={props.isJsEnabled}
+      router={props.router}
     />;
 
   return (
@@ -78,6 +79,7 @@ Sidebar.propTypes = {
   listOptions: PropTypes.object,
   selectedFilters: PropTypes.arrayOf(PropTypes.object),
   picksCount: PropTypes.number,
+  router: PropTypes.object,
 };
 
 Sidebar.defaultProps = {
