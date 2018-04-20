@@ -55,9 +55,9 @@ class App extends React.Component {
 
         <main className="main-page">
 
-          <Hero
-            heroData={heroData}
-          />
+          {/*<Hero*/}
+            {/*heroData={heroData}*/}
+          {/*/>*/}
 
           <div id="app-content" className="nypl-full-width-wrapper">
             {React.cloneElement(this.props.children, this.state)}
