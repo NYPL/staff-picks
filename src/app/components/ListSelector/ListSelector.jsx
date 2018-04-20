@@ -140,9 +140,9 @@ class ListSelector extends React.Component {
           }
         />
       );
-    } else {
-      return null;
     }
+
+    return null;
   }
 
   render() {
