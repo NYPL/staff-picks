@@ -72,7 +72,7 @@ describe('ListSelector', () => {
   describe('After making the API request,', () => {
     const mock = new MockAdapter(axios);
     const updateBookStore = sinon.spy(ListSelector.prototype, 'updateBookStore');
-    const updateHistory = sinon.spy(ListSelector.prototype, 'updateHistory');
+    const updateLocation = sinon.spy(ListSelector.prototype, 'updateLocation');
     const component = shallow(<ListSelector fieldsetProps={fieldsetProps} />);
     const mockBookListResponse = {
       date: '2017-01',
@@ -115,13 +115,13 @@ describe('ListSelector', () => {
     afterEach(() => {
       // Clear the spy status after each time we run a test
       updateBookStore.reset();
-      updateHistory.reset();
+      updateLocation.reset();
     });
 
     after(() => {
       // And after all the tests are done, restore the spy
       updateBookStore.restore();
-      updateHistory.restore();
+      updateLocation.restore();
       component.unmount();
       mock.reset();
     });
@@ -150,8 +150,8 @@ describe('ListSelector', () => {
       component.instance().submitFormRequest('season', '2099-13-01');
       setTimeout(
         () => {
-          expect(updateHistory.called).to.equal(true);
-          expect(updateHistory.getCall(0).args).to.deep.equal(
+          expect(updateLocation.called).to.equal(true);
+          expect(updateLocation.getCall(0).args).to.deep.equal(
             ['/books-music-dvds/recommendations/staff-picks/404']
           );
 
@@ -178,8 +178,8 @@ describe('ListSelector', () => {
       component.instance().submitFormRequest('season', '2017-01-01');
       setTimeout(
         () => {
-          expect(updateHistory.called).to.equal(true);
-          expect(updateHistory.getCall(0).args).to.deep.equal(
+          expect(updateLocation.called).to.equal(true);
+          expect(updateLocation.getCall(0).args).to.deep.equal(
             ['/books-music-dvds/recommendations/staff-picks/2017-01-01']
           );
 
