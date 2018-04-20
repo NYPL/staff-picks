@@ -9,6 +9,12 @@ import BookStore from '../../stores/BookStore';
 import appConfig from '../../../../appConfig';
 import staffPicksDate from '../../utils/DateService';
 
+const audienceMap = {
+  Adult: 'Adult',
+  YA: 'Young Adult',
+  Children: 'Children',
+};
+
 class BookPage extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +24,7 @@ class BookPage extends React.Component {
 
   render() {
     const paramId = this.props.params.id ? this.props.params.id : '';
-    const { date, type, picks } = this.state.currentPicks;
+    const { date, picks } = this.state.currentPicks;
     const displayDate = staffPicksDate(date);
     let pick;
     let age;
@@ -26,7 +32,7 @@ class BookPage extends React.Component {
     _each(picks, (item) => {
       if (item.slug === paramId) {
         pick = item;
-        age = pick.ageGroup || 'Adult';
+        age = audienceMap[pick.ageGroup || 'Adult'];
       }
     });
 
@@ -60,6 +66,9 @@ class BookPage extends React.Component {
 
 BookPage.propTypes = {
   className: PropTypes.string,
+  params: PropTypes.shape({
+    id: PropTypes.string,
+  }),
 };
 
 BookPage.defaultProps = {
