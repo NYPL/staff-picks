@@ -70,7 +70,7 @@ describe('ListSelector', () => {
   describe('After making the API request,', () => {
     const mock = new MockAdapter(axios);
     const updateBookStore = sinon.spy(ListSelector.prototype, 'updateBookStore');
-    const updateHistory = sinon.spy(ListSelector.prototype, 'updateHistory');
+    const updateLocation = sinon.spy(ListSelector.prototype, 'updateLocation');
     const component = shallow(<ListSelector fieldsetProps={fieldsetProps} />);
     const mockBookListResponse = {
       date: '2017-01',
@@ -113,13 +113,13 @@ describe('ListSelector', () => {
     afterEach(() => {
       // Clear the spy status after each time we run a test
       updateBookStore.reset();
-      updateHistory.reset();
+      updateLocation.reset();
     });
 
     after(() => {
       // And after all the tests are done, restore the spy
       updateBookStore.restore();
-      updateHistory.restore();
+      updateLocation.restore();
       component.unmount();
       mock.reset();
     });
@@ -139,8 +139,8 @@ describe('ListSelector', () => {
           expect(updateBookStore.called).to.equal(true);
           expect(updateBookStore.getCall(0).args).to.deep.equal([]);
 
-          expect(updateHistory.called).to.equal(true);
-          expect(updateHistory.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/404']);
+          expect(updateLocation.called).to.equal(true);
+          expect(updateLocation.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/404']);
 
           done();
         }, 150
@@ -156,8 +156,8 @@ describe('ListSelector', () => {
             [mockBookListResponse.currentPicks]
           );
 
-          expect(updateHistory.called).to.equal(true);
-          expect(updateHistory.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/2017-01-01']);
+          expect(updateLocation.called).to.equal(true);
+          expect(updateLocation.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/2017-01-01']);
 
           done();
         }, 150
