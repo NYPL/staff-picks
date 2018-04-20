@@ -124,7 +124,7 @@ class Main extends React.Component {
     const audienceGroup = [];
 
     if (Array.isArray(picks) && picks.length) {
-      picks.map((item) => {
+      picks.forEach((item) => {
         if (item.ageGroup === audience) {
           audienceGroup.push(item);
         }
