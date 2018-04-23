@@ -118,7 +118,6 @@ class ListSelector extends React.Component {
 ListSelector.propTypes = {
   fieldsetProps: PropTypes.object,
   isJsEnabled: PropTypes.bool,
-  router: PropTypes.object,
 };
 
 ListSelector.defaultProps = {

@@ -121,7 +121,6 @@ class Main extends React.Component {
           isJsEnabled={this.props.isJsEnabled}
           selectedFilters={this.state.selectedFilters}
           picksCount={this.state.picks.length}
-          router={this.props.router}
         />
 
         <BookList
@@ -140,7 +139,6 @@ Main.propTypes = {
   currentPicks: PropTypes.object,
   isJsEnabled: PropTypes.bool,
   params: PropTypes.object,
-  router: PropTypes.object,
 };
 
 Main.defaultProps = {
