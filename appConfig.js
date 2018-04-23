@@ -1,13 +1,8 @@
 const config = {
   port: 3001,
   webpackDevServerPort: 3000,
-  baseUrl: '/books-music-movies/recommendations/staff-picks/',
-  baseApiUrl: '/books-music-movies/recommendations/staff-picks/api/',
-  baseAnnualUrl: '/books-music-movies/recommendations/best-books/',
-  baseMonthUrl: '/books-music-movies/recommendations/staff-picks/',
-  baseRouteUrl: '/books-music-movies/recommendations/best-books/',
-  baseRouteMonthUrl: '/books-music-movies/recommendations/best-books/staff-picks/',
-  baseRouteAnnualUrl: '/books-music-movies/recommendations/best-books/',
+  baseUrl: '/books-music-movies/recommendations/best-books/',
+  baseApiUrl: '/books-music-movies/recommendations/best-books/api/',
   metaTags: {
     ya: [
       { property: 'og:type', content: 'website' },
