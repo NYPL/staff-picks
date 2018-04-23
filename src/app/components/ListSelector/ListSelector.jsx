@@ -19,7 +19,7 @@ class ListSelector extends React.Component {
    * @param {string} url
    */
   updateLocation(url) {
-    this.props.router.push({ pathname: url });
+    this.context.router.push({ pathname: url });
   }
 
   /**
@@ -122,6 +122,10 @@ ListSelector.propTypes = {
 };
 
 ListSelector.defaultProps = {
+};
+
+ListSelector.contextTypes = {
+  router: PropTypes.object,
 };
 
 export default ListSelector;
