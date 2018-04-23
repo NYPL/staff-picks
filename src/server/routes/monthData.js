@@ -152,6 +152,10 @@ function selectMonthData(req, res, next) {
       return nyplApiClientGet(`${platformConfig.endpoints.staffPicksPath}${requestedSeason}`);
     })
     .then(data => {
+      // Uodate the option lists' default values by the request params
+      listOptions.season.currentValue = requestedSeason;
+      listOptions.audience.currentValue = audience;
+
       res.locals.data = {
         BookStore: {
           listType: 'staff-picks',
