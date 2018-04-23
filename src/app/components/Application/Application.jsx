@@ -54,7 +54,6 @@ class App extends React.Component {
         />
 
         <main className="main-page">
-
           {/*<Hero*/}
             {/*heroData={heroData}*/}
           {/*/>*/}
