@@ -1,17 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  extend as _extend,
+  isEmpty as _isEmpty,
+  findKey as _findKey,
+} from 'underscore';
 
 // NYPL Components
 import { Header, navConfig } from '@nypl/dgx-header-component';
 import Footer from '@nypl/dgx-react-footer';
-import { extend as _extend } from 'underscore';
 
 import Hero from '../Hero/Hero';
 import BookActions from '../../actions/BookActions';
 import BookStore from '../../stores/BookStore';
 import config from '../../../../appConfig';
-
-import { isEmpty as _isEmpty } from 'underscore';
 
 class App extends React.Component {
   constructor(props) {
@@ -43,7 +45,12 @@ class App extends React.Component {
     if (_isEmpty(this.props.params)) {
       heroData = config.heroData.staffPicks;
     } else {
-      heroData = config.heroData.annual[this.props.params.type];
+      // Check if the params are from Best Book URL or Staff Picks URL
+      if (_findKey(this.props.params, 'type')) {
+        heroData = config.heroData.annual[this.props.params.type];
+      } else {
+        heroData = config.heroData.staffPicks;
+      }
     }
 
     return (
@@ -74,7 +81,9 @@ App.propTypes = {
   params: PropTypes.object,
 };
 
+
 App.contextTypes = {
+  // Assigns router as React context
   router: PropTypes.object,
 };
 

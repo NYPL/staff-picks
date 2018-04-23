@@ -9,46 +9,80 @@ class ListSelector extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      submitValue: '',
-    };
-    this.handleChange = this.handleChange.bind(this);
+    this.state = {};
+    this.handleSeasonChange = this.handleSeasonChange.bind(this);
+  }
+
+  /**
+   * updateLocation(url)
+   * Pushes a new location with the URL that the client side request should go to
+   * @param {string} url
+   */
+  updateLocation(url) {
+    this.context.router.push({ pathname: url });
   }
 
   /**
    * updateBookStore(picks = {}, filters = [], selectedFilters = [])
    * Updates BookStore by BookActions based on latest client side API response
    * @param {object} picks
+   * @param {string} currentSeason
+   * @param {string} listType
    * @param {array} filters
    * @param {array} selectedFilters
    */
-  updateBookStore(picks = {}, filters = [], selectedFilters = []) {
+  updateBookStore(
+    picks = {},
+    currentSeason = '',
+    listType = 'staff-picks',
+    filters = [],
+    selectedFilters = []
+  ) {
     BookActions.updatePicks(picks);
+    BookActions.updateCurrentSeason(currentSeason);
     BookActions.updateFilters(filters);
     BookActions.setSelectableFilters(selectedFilters);
+    BookActions.updateListType(listType);
   }
 
   /**
-   * submitFormRequest()
+   * submitFormRequest(submitValue)
    * Submits the request for a new list to the internal server
+   * @param {string} submitValue
    */
-  submitFormRequest() {
-    // this function will be replaced by submiting to endpoint
-    axios.get(`${config.baseApiUrl}${this.state.submitValue}`)
+  submitFormRequest(submitValue) {
+    // If no valid season option passed
+    if (!submitValue) {
+      console.log('No valid season input.');
+      return;
+    }
+
+    // this function will be replaced by submitting to endpoint
+    axios.get(`${config.baseApiUrl}${submitValue}`)
       .then(response => {
-        // Catch the error from API, and update BookStore back to the default
+        // Catches the error from API, and update BookStore back to the default
         if (response.data.statusCode >= 400) {
           this.updateBookStore();
           console.log(
             `API error with status code ${response.data.statusCode}: ${response.data.errorMessage}`
           );
+          // Leads the user to the 404 page
+          this.updateLocation('/books-music-dvds/recommendations/staff-picks/404');
         } else {
-          // For valid API response, update BookStore for the new list
-          this.updateBookStore(response.data.currentPicks);
+          // For valid API response, updates BookStore for the new list
+          this.updateBookStore(
+            response.data.currentPicks,
+            submitValue,
+            'staff-picks'
+          );
+          // Updates and transit to the match URL
+          this.updateLocation(
+            `/books-music-dvds/recommendations/staff-picks/${submitValue}`
+          );
         }
       })
       .catch(error => {
-        // Catch the internal server error, and update BookStore back to the default
+        // Catches the internal server error, and update BookStore back to the default
         this.updateBookStore();
         const errorResponse = error.response ?
           error.response : { statusText: 'Undefined error', status: 500 };
@@ -56,26 +90,21 @@ class ListSelector extends React.Component {
         const errorStatus = errorResponse.status;
 
         console.log(
-          `Internal server error with status code ${errorStatus}: `+
+          `Internal server error with status code ${errorStatus}: ` +
           `${errorStatusText}`
         );
+        // Leads the user to the 404 page
+        this.updateLocation('/books-music-dvds/recommendations/staff-picks/404');
       });
   }
 
   /**
-   * handleChange(e)
+   * handleSeasonChange(e)
    * Triggers to submit requests when the selected value changed on the season or audience lists
    * @param {DOM event} e
    */
-  handleChange(e) {
-    this.setState(
-      {
-        submitValue: e.target.value,
-      },
-      () => {
-        this.submitFormRequest();
-      }
-    );
+  handleSeasonChange(e) {
+    this.submitFormRequest(e.target.value);
   }
 
   /**
@@ -88,9 +117,32 @@ class ListSelector extends React.Component {
       return null;
     }
 
-    return (
-      <ListFilter fieldsetProps={fieldsetProps} handleChange={this.handleChange} />
-    );
+    const listType = fieldsetProps.fieldsetName;
+
+    // Returns eifferent fieldsets based on different list types.
+    // Now we only have season and audience.
+    // Any types aside these two shouldn't be displayed.
+    if (listType === 'season') {
+      return (
+        <ListFilter
+          fieldsetProps={fieldsetProps}
+          handleChange={this.handleSeasonChange}
+        />
+      );
+    } else if (listType === 'audience') {
+      return (
+        <ListFilter
+          fieldsetProps={fieldsetProps}
+          handleChange={
+            (e) => {
+              BookActions.updateCurrentAudience(e.target.value);
+            }
+          }
+        />
+      );
+    }
+
+    return null;
   }
 
   render() {
@@ -112,6 +164,10 @@ ListSelector.propTypes = {
 };
 
 ListSelector.defaultProps = {
+};
+
+ListSelector.contextTypes = {
+  router: PropTypes.object,
 };
 
 export default ListSelector;

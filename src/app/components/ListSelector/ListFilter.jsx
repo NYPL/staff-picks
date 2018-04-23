@@ -5,11 +5,17 @@ import PropTypes from 'prop-types';
 const ListFilter = ({ fieldsetProps, handleChange }) => {
   const selectName = fieldsetProps.fieldsetName;
   const selectId = `${selectName}-input`;
-  const defaultValue = (fieldsetProps.options.length && fieldsetProps.options[0].value) ?
-    fieldsetProps.options[0].value : '';
+  let defaultValue;
   const optionList = (fieldsetProps.options.length) ? fieldsetProps.options.map(
     (opt) => <option value={opt.value} key={opt.value}>{opt.name}</option>
   ) : null;
+
+  if (fieldsetProps.currentValue) {
+    defaultValue = fieldsetProps.currentValue;
+  } else {
+    defaultValue = (fieldsetProps.options.length && fieldsetProps.options[0].value) ?
+      fieldsetProps.options[0].value : '';
+  }
 
   return (
     <fieldset>

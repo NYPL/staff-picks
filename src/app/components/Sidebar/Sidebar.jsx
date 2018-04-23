@@ -10,24 +10,33 @@ import config from '../../../../appConfig';
 const fieldsetProps = {
   season: {
     fieldsetName: 'season',
+    currentValue: '',
     options: [
-      { name: '2018 Winter', value: '2018-01' },
-      { name: '2017 Fall', value: '2017-09' },
-      { name: '2017 Summer', value: '2017-06' },
-      { name: '2017 Spring', value: '2017-04' },
+      { name: '2018 Spring', value: '2018-03-01', disabled: false },
+      { name: '2018 Winter', value: '2018-01-01', disabled: false },
+      { name: '2017 Fall', value: '2017-09-01', disabled: false },
+      { name: '2017 Summer', value: '2017-06-01', disabled: false },
     ],
   },
   audience: {
     fieldsetName: 'audience',
+    currentValue: '',
     options: [
-      { name: 'Adult', value: 'adult' },
-      { name: 'Teen', value: 'ya' },
-      { name: 'Children', value: 'children' },
+      { name: 'Adult', value: 'Adult', disabled: false },
+      { name: 'Teen', value: 'YA', disabled: false },
+      { name: 'Children', value: 'Children', disabled: false },
     ],
   },
 };
 
 const Sidebar = (props) => {
+  const updateCurrentListSelectorValue = (data) => {
+    fieldsetProps.season.currentValue = data.currentSeason;
+    fieldsetProps.audience.currentValue = data.currentAudience;
+
+    return fieldsetProps;
+  };
+
   const renderBookFilters = (shouldDisplay) => {
     if (!shouldDisplay) {
       return null;
@@ -57,7 +66,7 @@ const Sidebar = (props) => {
           {config.recommendationsLink.label}
         </a>
       </nav>
-      {renderListSelector(fieldsetProps)}
+      {renderListSelector(updateCurrentListSelectorValue(props))}
       {renderBookFilters(props.isJsEnabled)}
     </div>
   );
