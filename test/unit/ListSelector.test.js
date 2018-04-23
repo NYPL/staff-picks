@@ -11,6 +11,7 @@ import config from '../../appConfig';
 const fieldsetProps = {
   season: {
     fieldsetName: 'season',
+    currentValue: '2018-01',
     options: [
       { name: '2018 Winter', value: '2018-01-01' },
       { name: '2017 Fall', value: '2017-09-01' },
@@ -20,10 +21,11 @@ const fieldsetProps = {
   },
   audience: {
     fieldsetName: 'audience',
+    currentValue: 'Adult',
     options: [
-      { name: 'Adult', value: 'adult' },
-      { name: 'Teen', value: 'teen' },
-      { name: 'Children', value: 'children' },
+      { name: 'Adult', value: 'Adult' },
+      { name: 'Teen', value: 'YA' },
+      { name: 'Children', value: 'Children' },
     ],
   },
 };
@@ -48,13 +50,47 @@ describe('ListSelector', () => {
     );
   });
 
+  describe('renderFieldset()', () => {
+    const renderFieldset = sinon.spy(ListSelector.prototype, 'renderFieldset');
+    const emptyFieldset = {
+      fieldsetName: 'empty',
+      currentValue: 'Nothing',
+      options: [],
+    };
+    const mammalFieldset = {
+      fieldsetName: 'mammal',
+      currentValue: 'Dog',
+      options: [
+        { name: 'Dog', value: 'Dog' },
+        { name: 'Cat', value: 'Cat' },
+        { name: 'Whale', value: 'Whale' },
+      ],
+    };
+
+    afterEach(() => {
+      renderFieldset.reset();
+    });
+
+    after(() => {
+      renderFieldset.restore();
+    });
+
+    it('should return null, if the list have no options.', () => {
+      expect(renderFieldset(emptyFieldset)).to.equal(null);
+    });
+
+    it('should return null, if the list type is not "season" nor "audience".', () => {
+      expect(renderFieldset(mammalFieldset)).to.equal(null);
+    });
+  });
+
   describe('When the selected option updates,', () => {
     // Bind sinon.spy to the prototype of ListSelector, before ListSelector is mounted
     const submitFormRequest = sinon.spy(ListSelector.prototype, 'submitFormRequest');
     const component = shallow(<ListSelector fieldsetProps={fieldsetProps} />);
 
     before(() => {
-      component.instance().handleChange({ target: { value: '2017-01' } });
+      component.instance().handleSeasonChange({ target: { value: '2017-01-01' } });
     });
 
     after(() => {
@@ -73,7 +109,7 @@ describe('ListSelector', () => {
     const updateLocation = sinon.spy(ListSelector.prototype, 'updateLocation');
     const component = shallow(<ListSelector fieldsetProps={fieldsetProps} />);
     const mockBookListResponse = {
-      date: '2017-01',
+      date: '2017-01-01',
       title: 'Winter 2016 Staff Picks',
       currentPicks: {
         picks: [
@@ -132,32 +168,54 @@ describe('ListSelector', () => {
     // To prevent that, we pass "done" to make this test async, and then we call "done()" to mark
     // the point where the current test is completed. The mark tells chai it is the time to do the
     // next test.
-    it('should set BookStore back to the default and set URL to the 404 page, if the request fails.', (done) => {
-      component.instance().submitFormRequest('2099-13-01');
+    it('should set BookStore back to the default, if the request fails.', (done) => {
+      component.instance().submitFormRequest('season', '2099-13-01');
       setTimeout(
         () => {
           expect(updateBookStore.called).to.equal(true);
           expect(updateBookStore.getCall(0).args).to.deep.equal([]);
-
-          expect(updateLocation.called).to.equal(true);
-          expect(updateLocation.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/404']);
 
           done();
         }, 150
       );
     });
 
-    it('should update BookStore with the data responsed and set the correct URL, if the request succeeds.', (done) => {
+    it('should set URL to the 404 page, if the request fails.', (done) => {
+      component.instance().submitFormRequest('season', '2099-13-01');
+      setTimeout(
+        () => {
+          expect(updateLocation.called).to.equal(true);
+          expect(updateLocation.getCall(0).args).to.deep.equal(
+            ['/books-music-dvds/recommendations/staff-picks/404']
+          );
+
+          done();
+        }, 150
+      );
+    });
+
+    it('should update BookStore with the data responsed, if the request succeeds.', (done) => {
       component.instance().submitFormRequest('2017-01-01');
       setTimeout(
         () => {
           expect(updateBookStore.called).to.equal(true);
           expect(updateBookStore.getCall(0).args).to.deep.equal(
-            [mockBookListResponse.currentPicks]
+            [mockBookListResponse.currentPicks, '2017-01-01', 'staff-picks']
           );
 
+          done();
+        }, 150
+      );
+    });
+
+    it('should set the correct URL, if the request succeeds.', (done) => {
+      component.instance().submitFormRequest('2017-01-01');
+      setTimeout(
+        () => {
           expect(updateLocation.called).to.equal(true);
-          expect(updateLocation.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/2017-01-01']);
+          expect(updateLocation.getCall(0).args).to.deep.equal(
+            ['/books-music-dvds/recommendations/staff-picks/2017-01-01']
+          );
 
           done();
         }, 150
