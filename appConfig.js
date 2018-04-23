@@ -1,10 +1,13 @@
 const config = {
   port: 3001,
   webpackDevServerPort: 3000,
-  baseUrl: '/books-music-dvds/recommendations/staff-picks/',
-  baseApiUrl: '/books-music-dvds/recommendations/staff-picks/api/',
-  baseAnnualUrl: '/books-music-dvds/recommendations/best-books/',
-  baseMonthUrl: '/books-music-dvds/recommendations/staff-picks/',
+  baseUrl: '/books-music-movies/recommendations/staff-picks/',
+  baseApiUrl: '/books-music-movies/recommendations/staff-picks/api/',
+  baseAnnualUrl: '/books-music-movies/recommendations/best-books/',
+  baseMonthUrl: '/books-music-movies/recommendations/staff-picks/',
+  baseRouteUrl: '/books-music-movies/recommendations/best-books/',
+  baseRouteMonthUrl: '/books-music-movies/recommendations/best-books/staff-picks/',
+  baseRouteAnnualUrl: '/books-music-movies/recommendations/best-books/',
   metaTags: {
     ya: [
       { property: 'og:type', content: 'website' },
@@ -64,7 +67,7 @@ const config = {
     Winter: ['December', 'January', 'February'],
   },
   recommendationsLink: {
-    url: 'https://www.nypl.org/books-music-dvds/recommendations',
+    url: 'https://www.nypl.org/books-music-movies/recommendations',
     label: 'Recommendations',
   },
   aboutUrls: {

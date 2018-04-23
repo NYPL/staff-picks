@@ -66,10 +66,9 @@ function selectAnnualData(req, res, next) {
   // NOTE: req.params also contains `year` and `id` as attributes.
   const type = req.params.type;
 
-  if (type === 'childrens' || type === 'ya') {
+  if (type === 'childrens' || type === 'ya' || type === 'staff-picks') {
     return annualCurrentData(type, req, res, next);
   }
-
   return res.redirect(baseUrl);
 }
 
