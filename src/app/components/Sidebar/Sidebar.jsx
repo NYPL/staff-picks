@@ -13,7 +13,9 @@ const Sidebar = (props) => {
    * @param {object} data
    */
   const updateCurrentListSelectorValues = (data) => {
-    const listOptions = props.listOptions;
+    // Deep clones the object of props.listOptions to a new object so the update later will not
+    // affect the original props.listOptions
+    const listOptions = JSON.parse(JSON.stringify(props.listOptions));
 
     listOptions.season.currentValue = data.currentSeason;
     listOptions.audience.currentValue = data.currentAudience;
