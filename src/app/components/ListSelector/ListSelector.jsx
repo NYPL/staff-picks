@@ -14,6 +14,15 @@ class ListSelector extends React.Component {
   }
 
   /**
+   * updateLocation(url)
+   * Pushes a new location with the URL that the client side request should go to
+   * @param {string} url
+   */
+  updateLocation(url) {
+    this.context.router.push({ pathname: url });
+  }
+
+  /**
    * updateBookStore(picks = {}, filters = [], selectedFilters = [])
    * Updates BookStore by BookActions based on latest client side API response
    * @param {object} picks
@@ -41,9 +50,15 @@ class ListSelector extends React.Component {
           console.log(
             `API error with status code ${response.data.statusCode}: ${response.data.errorMessage}`
           );
+          // Lead the user to the 404 page
+          this.updateLocation('/books-music-dvds/recommendations/staff-picks/404');
         } else {
           // For valid API response, update BookStore for the new list
           this.updateBookStore(response.data.currentPicks);
+          // Update and transit to the match URL
+          this.updateLocation(
+            `/books-music-dvds/recommendations/staff-picks/${submitValue}`
+          );
         }
       })
       .catch(error => {
@@ -55,9 +70,11 @@ class ListSelector extends React.Component {
         const errorStatus = errorResponse.status;
 
         console.log(
-          `Internal server error with status code ${errorStatus}: `+
+          `Internal server error with status code ${errorStatus}: ` +
           `${errorStatusText}`
         );
+        // Lead the user to the 404 page
+        this.updateLocation('/books-music-dvds/recommendations/staff-picks/404');
       });
   }
 
@@ -104,6 +121,10 @@ ListSelector.propTypes = {
 };
 
 ListSelector.defaultProps = {
+};
+
+ListSelector.contextTypes = {
+  router: PropTypes.object,
 };
 
 export default ListSelector;

@@ -70,6 +70,7 @@ describe('ListSelector', () => {
   describe('After making the API request,', () => {
     const mock = new MockAdapter(axios);
     const updateBookStore = sinon.spy(ListSelector.prototype, 'updateBookStore');
+    const updateLocation = sinon.spy(ListSelector.prototype, 'updateLocation');
     const component = shallow(<ListSelector fieldsetProps={fieldsetProps} />);
     const mockBookListResponse = {
       date: '2017-01',
@@ -100,23 +101,25 @@ describe('ListSelector', () => {
 
     before(() => {
       mock
-        .onGet(`${config.baseApiUrl}2099-13`)
+        .onGet(`${config.baseApiUrl}2099-13-01`)
         .reply(500, {
           statusText: 'Undefined error',
           status: 500,
         })
-        .onGet(`${config.baseApiUrl}2017-01`)
+        .onGet(`${config.baseApiUrl}2017-01-01`)
         .reply(200, mockBookListResponse);
     });
 
     afterEach(() => {
       // Clear the spy status after each time we run a test
       updateBookStore.reset();
+      updateLocation.reset();
     });
 
     after(() => {
       // And after all the tests are done, restore the spy
       updateBookStore.restore();
+      updateLocation.restore();
       component.unmount();
       mock.reset();
     });
@@ -129,25 +132,32 @@ describe('ListSelector', () => {
     // To prevent that, we pass "done" to make this test async, and then we call "done()" to mark
     // the point where the current test is completed. The mark tells chai it is the time to do the
     // next test.
-    it('should set BookStore back to the default, if the request fails.', (done) => {
-      component.instance().submitFormRequest('2099-13');
+    it('should set BookStore back to the default and set URL to the 404 page, if the request fails.', (done) => {
+      component.instance().submitFormRequest('2099-13-01');
       setTimeout(
         () => {
           expect(updateBookStore.called).to.equal(true);
           expect(updateBookStore.getCall(0).args).to.deep.equal([]);
+
+          expect(updateLocation.called).to.equal(true);
+          expect(updateLocation.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/404']);
 
           done();
         }, 150
       );
     });
 
-    it('should update BookStore with the data responsed, if the request succeeds.', (done) => {
-      component.instance().submitFormRequest('2017-01');
+    it('should update BookStore with the data responsed and set the correct URL, if the request succeeds.', (done) => {
+      component.instance().submitFormRequest('2017-01-01');
       setTimeout(
         () => {
+          expect(updateBookStore.called).to.equal(true);
           expect(updateBookStore.getCall(0).args).to.deep.equal(
             [mockBookListResponse.currentPicks]
           );
+
+          expect(updateLocation.called).to.equal(true);
+          expect(updateLocation.getCall(0).args).to.deep.equal(['/books-music-dvds/recommendations/staff-picks/2017-01-01']);
 
           done();
         }, 150

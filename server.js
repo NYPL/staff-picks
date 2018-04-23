@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import express from 'express';
+import bodyParser from 'body-parser';
 import compress from 'compression';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
@@ -36,6 +37,10 @@ app.set('views', path.resolve(ROOT_PATH, 'src/server/views'));
 app.set('port', process.env.PORT || appConfig.port);
 
 app.set('nyplPublicKey', appConfig.publicKey);
+
+// For parsing the form data via POST, we need body-parser
+// and the format should be application/x-www-form-urlencoded for HTML from data
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // first assign the path
 app.use('*/dist', express.static(DIST_PATH));
