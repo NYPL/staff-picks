@@ -1,10 +1,10 @@
 import nyplApiClient from '../helper/nyplApiClient.js';
 import config from '../../../appConfig';
 import platformConfig from '../../../platformConfig';
-import staffPicksDate from '../../app/utils/DateService';
+import modelListOptions from '../../app/utils/modelListOptionsService';
 
-/* nyplApiClientGet = (endpoint)
- * The functions that wraps nyplApiClient for GET requests.
+/* nyplApiClientGet(endpoint)
+ * The function that wraps nyplApiClient for GET requests.
  * @param {string} endpoint
  */
 const nyplApiClientGet = (endpoint) =>
@@ -22,21 +22,11 @@ function currentMonthData(req, res, next) {
   // The first request to get all the available list options
   nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
     .then(data => {
-      if (Array.isArray(data) && data.length) {
-        data.forEach((list) => {
-          // Maps the option's name with the correct year and month
-          const optionDate = staffPicksDate(list.date);
-          const option = { name: `${optionDate.month} ${optionDate.year}`, value: list.date };
+      // Models the options based on the data returned
+      const modeledOptionObject = modelListOptions(data, 'staff-picks');
 
-          seasonListOptions.push(option);
-        });
-
-        // Reverses the order of the options as the data now is from oldest to newest
-        // However, a more thorough check to compare the values might be needed
-        seasonListOptions = seasonListOptions.reverse();
-        // Sets the latest season list
-        latestSeason = seasonListOptions[0].value;
-      }
+      seasonListOptions = modeledOptionObject.options;
+      latestSeason = modeledOptionObject.latestOption;
 
       // Updates default season list options with API response
       listOptions.season.options = seasonListOptions;
@@ -106,21 +96,11 @@ function selectMonthData(req, res, next) {
   // The first request to get all the available list options
   nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
     .then(data => {
-      if (Array.isArray(data) && data.length) {
-        data.forEach((list) => {
-          // Maps the option's name with the correct year and month
-          const optionDate = staffPicksDate(list.date);
-          const option = { name: `${optionDate.month} ${optionDate.year}`, value: list.date };
+      // Models the options based on the data returned
+      const modeledOptionObject = modelListOptions(data, 'staff-picks');
 
-          seasonListOptions.push(option);
-        });
-
-        // Reverses the order of the options as the data now is from oldest to newest
-        // However, a more thorough check to compare the values might be needed
-        seasonListOptions = seasonListOptions.reverse();
-        // Sets the latest season list
-        latestSeason = seasonListOptions[0].value;
-      }
+      seasonListOptions = modeledOptionObject.options;
+      latestSeason = modeledOptionObject.latestOption;
 
       // Updates default season list options with API response
       listOptions.season.options = seasonListOptions;
