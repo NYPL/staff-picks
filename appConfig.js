@@ -115,6 +115,11 @@ const config = {
     facebook: 'https://www.facebook.com/sharer/sharer.php?u=',
     twitter: 'https://twitter.com/intent/tweet?',
   },
+  audienceMap: {
+    Adult: 'Adult',
+    YA: 'Young Adult',
+    Children: 'Children',
+  },
 };
 
 export default config;

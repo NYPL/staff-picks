@@ -22,9 +22,6 @@ class Main extends React.Component {
   }
 
   componentWillReceiveProps() {
-    // Temperorily logging for development
-    console.log('update new props!');
-
     // Update the props to reflect the latest updates from client side API responses
     this.setState({
       selectableFilters: this.props.selectableFilters,
@@ -110,6 +107,33 @@ class Main extends React.Component {
     });
   }
 
+  /**
+   * extractAudienceGroup(picks, audience, listType)
+   * Picks up the items from the selected age/audience group
+   * @param {array} picks
+   * @param {string} audience
+   * @param {string} listType
+   */
+  extractAudienceGroup(picks, audience, listType) {
+    // Only applies the check for staff-picks lists
+    if (listType !== 'staff-picks') {
+      // skips the checks and returns the original picks
+      return picks;
+    }
+
+    const audienceGroup = [];
+
+    if (Array.isArray(picks) && picks.length) {
+      picks.forEach((item) => {
+        if (item.ageGroup === audience) {
+          audienceGroup.push(item);
+        }
+      });
+    }
+
+    return audienceGroup;
+  }
+
   render() {
     return (
       <div className="nypl-row">
@@ -121,10 +145,16 @@ class Main extends React.Component {
           isJsEnabled={this.props.isJsEnabled}
           selectedFilters={this.state.selectedFilters}
           picksCount={this.state.picks.length}
+          currentSeason={this.props.currentSeason}
+          currentAudience={this.props.currentAudience}
         />
 
         <BookList
-          picks={this.state.picks}
+          picks={this.extractAudienceGroup(
+            this.state.picks,
+            this.props.currentAudience,
+            this.props.listType
+          )}
           isJsEnabled={this.props.isJsEnabled}
           listType={this.props.params.type}
         />
@@ -139,6 +169,9 @@ Main.propTypes = {
   currentPicks: PropTypes.object,
   isJsEnabled: PropTypes.bool,
   params: PropTypes.object,
+  listType: PropTypes.string,
+  currentSeason: PropTypes.string,
+  currentAudience: PropTypes.string,
 };
 
 Main.defaultProps = {

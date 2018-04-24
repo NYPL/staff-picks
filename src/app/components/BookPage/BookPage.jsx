@@ -9,12 +9,6 @@ import BookStore from '../../stores/BookStore';
 import appConfig from '../../../../appConfig';
 import staffPicksDate from '../../utils/DateService';
 
-const audienceMap = {
-  Adult: 'Adult',
-  YA: 'Young Adult',
-  Children: 'Children',
-};
-
 class BookPage extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +26,7 @@ class BookPage extends React.Component {
     _each(picks, (item) => {
       if (item.slug === paramId) {
         pick = item;
-        age = audienceMap[pick.ageGroup || 'Adult'];
+        age = appConfig.audienceMap[pick.ageGroup || 'Adult'];
       }
     });
 
@@ -56,7 +50,7 @@ class BookPage extends React.Component {
             {displayDate.month} {displayDate.year} Picks for {age}
           </h2>
           <ul className="booklist">
-            <Book pick={pick} />
+            <Book pick={pick} isJsEnabled={this.props.isJsEnabled} />
           </ul>
         </div>
       </div>
@@ -69,10 +63,12 @@ BookPage.propTypes = {
   params: PropTypes.shape({
     id: PropTypes.string,
   }),
+  isJsEnabled: PropTypes.bool,
 };
 
 BookPage.defaultProps = {
   className: 'BookPage',
+  isJsEnabled: false,
 };
 
 BookPage.contextTypes = {
