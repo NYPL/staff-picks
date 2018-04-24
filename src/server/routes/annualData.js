@@ -59,21 +59,6 @@ function annualCurrentData(type, req, res, next) {
     });
 }
 
-/* selectAnnualData
- * Map the url param to specific endpoint requests. Redirect otherwise to the homepage.
- */
-function selectAnnualData(req, res, next) {
-  // NOTE: req.params also contains `year` and `id` as attributes.
-  const type = req.params.type;
-
-  // TODO: Changing function call by type. 'childrens' and 'ya' calls one function, 'staff-picks' calls another.
-  if (type === 'childrens' || type === 'ya' || type === 'staff-picks') {
-    return annualCurrentData(type, req, res, next);
-  }
-
-  return res.redirect(baseUrl);
-}
-
 export default {
-  selectAnnualData,
+  annualCurrentData,
 };
