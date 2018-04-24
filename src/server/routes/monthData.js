@@ -67,7 +67,7 @@ function currentMonthData(req, res, next) {
 
       res.redirect('/books-music-dvds/recommendations/404');
 
-      next();
+      return;
     });
 }
 
@@ -102,9 +102,9 @@ function selectMonthData(req, res, next) {
   if (!seasonMatches || !isValidAudience) {
     console.error('Status Code: 400, Error Message: Invalid season or audience.');
 
-    // res.redirect('/books-music-dvds/recommendations/404');
+    res.redirect('/books-music-dvds/recommendations/404');
 
-    next();
+    return;
   } else {
   // If the param fits season's convention, constructs the request param
   requestedSeason = seasonMatches[0];
@@ -141,7 +141,7 @@ function selectMonthData(req, res, next) {
 
         res.redirect('/books-music-dvds/recommendations/404');
 
-        next();
+        return;
       }
 
       // Uodate the option lists' default values by the request params
@@ -170,7 +170,7 @@ function selectMonthData(req, res, next) {
 
       res.redirect('/books-music-dvds/recommendations/404');
 
-      next();
+      return;
     });
   }
 }
@@ -225,12 +225,14 @@ function selectMonthDataFormPost(req, res) {
     console.error(
       `Form data of season or audience is undefined. season: ${season}, audience: ${audience}`
     );
-  }
 
-  // Redirects and calls selectMonthData() to make server side request for the season/audience list
-  res.redirect(
-    `${config.baseMonthUrl}${season}${audienceQuery}`
-  );
+    res.redirect('/books-music-dvds/recommendations/404');
+  } else {
+    // Redirects and calls selectMonthData() to make server side request for the season/audience list
+    res.redirect(
+      `${config.baseMonthUrl}${season}${audienceQuery}`
+    );
+  }
 }
 
 export default {
