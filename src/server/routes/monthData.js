@@ -1,12 +1,10 @@
 import nyplApiClient from '../helper/nyplApiClient.js';
 import config from '../../../appConfig';
 
-const getLatestSeason = () => {
+const getLatestSeason = () =>
   // this function should return the latest season by current month
-  return '';
-};
-
-const nyplApiClientGet = (endpoint) =>
+  '';
+const nyplApiClientGet = endpoint =>
   nyplApiClient().then(client => client.get(endpoint, { cache: false }));
 
 /* currentMonthData
@@ -17,7 +15,7 @@ function currentMonthData(req, res, next) {
   // It will always be adult for default audience list
   // After the API is ready, we can specify the audience query below
   nyplApiClientGet('/book-lists/staff-picks/2018-03-01')
-    .then(data => {
+    .then((data) => {
       res.locals.data = {
         BookStore: {
           listType: 'staff-picks',
@@ -34,7 +32,7 @@ function currentMonthData(req, res, next) {
 
       next();
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
       res.locals.data = {
@@ -58,7 +56,7 @@ function currentMonthData(req, res, next) {
  */
 function selectMonthData(req, res, next) {
   // Checks if the URL input fits season's convention
-  const seasonMatches = req.params.month.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
+  const seasonMatches = req.params.time.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
   // Default audience list is the adult list
   let audience = 'Adult';
   let requestedSeason = '';
@@ -89,13 +87,14 @@ function selectMonthData(req, res, next) {
   } else {
     // If the param fits season's convention, constructs the request param
     requestedSeason = seasonMatches[0];
+    console.log(`requestedSeason: ${requestedSeason}`);
   }
 
   // Now the audience query seems to have no influence to the API,
   // as it will always throw the adult lists
   // But we should show the audience we choose on the URL and selected value on the list
   nyplApiClientGet(`/book-lists/staff-picks/${requestedSeason}`)
-    .then(data => {
+    .then((data) => {
       res.locals.data = {
         BookStore: {
           listType: 'staff-picks',
@@ -109,10 +108,10 @@ function selectMonthData(req, res, next) {
         pageTitle: '',
         metaTags: [],
       };
-
+      console.log(res.locals.data);
       next();
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
       res.locals.data = {
@@ -148,7 +147,7 @@ function selectClientMonthData(req, res) {
   }
 
   nyplApiClientGet(`/book-lists/staff-picks/${seasonMatches[0]}`)
-    .then(data => {
+    .then((data) => {
       res.json({
         title: data.title,
         date: data.date,
@@ -157,7 +156,7 @@ function selectClientMonthData(req, res) {
         },
       });
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
       res.json({
@@ -178,15 +177,11 @@ function selectMonthDataFormPost(req, res) {
   const audienceQuery = audience ? `?audience=${audience}` : '';
 
   if (!season || !audience) {
-    console.log(
-      `Form data of season or audience is undefined. season: ${season}, audience: ${audience}`
-    );
+    console.log(`Form data of season or audience is undefined. season: ${season}, audience: ${audience}`);
   }
 
   // Redirects and calls selectMonthData() to make server side request for the season/audience list
-  res.redirect(
-    `${config.baseMonthUrl}${season}${audienceQuery}`
-  );
+  res.redirect(`${config.baseMonthUrl}${season}${audienceQuery}`);
 }
 
 export default {
