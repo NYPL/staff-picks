@@ -41,14 +41,6 @@
       max-width: 100%;
     }
 
-    .book-item-picked-by {
-      margin: 4% 1%;
-
-      @include min-screen($xtrasmall-breakpoint) {
-        margin: 2% 3.5%;
-      }
-    }
-
     .book-item-image-box {
       margin: 0;
 
