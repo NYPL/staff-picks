@@ -99,6 +99,16 @@ function selectMonthData(req, res, next) {
     }
   }
 
+  if (!seasonMatches || !isValidAudience) {
+    console.error('Status Code: 400, Error Message: Invalid season or audience.');
+
+    // res.redirect('/books-music-dvds/recommendations/404');
+
+    next();
+  } else {
+  // If the param fits season's convention, constructs the request param
+  requestedSeason = seasonMatches[0];
+
   // The first request to get all the available list options
   nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
     .then(data => {
@@ -120,18 +130,6 @@ function selectMonthData(req, res, next) {
 
       // Updates default season list options with API response
       listOptions.season.options = seasonListOptions;
-
-      // we handle bad season input here
-      if (!seasonMatches || !isValidAudience) {
-        console.error('Status Code: 400, Error Message: Invalid season or audience.');
-
-        res.redirect('/books-music-dvds/recommendations/404');
-
-        next();
-      } else {
-        // If the param fits season's convention, constructs the request param
-        requestedSeason = seasonMatches[0];
-      }
 
       // Calls the selected list
       return nyplApiClientGet(`${platformConfig.endpoints.staffPicksPath}${requestedSeason}`);
@@ -174,6 +172,7 @@ function selectMonthData(req, res, next) {
 
       next();
     });
+  }
 }
 
 /**
@@ -223,7 +222,7 @@ function selectMonthDataFormPost(req, res) {
   const audienceQuery = audience ? `?audience=${audience}` : '';
 
   if (!season || !audience) {
-    console.log(
+    console.error(
       `Form data of season or audience is undefined. season: ${season}, audience: ${audience}`
     );
   }
