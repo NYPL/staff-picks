@@ -14,6 +14,12 @@ const platformConfig = {
     qa: 'https://qa-platform.nypl.org/api/v0.1',
     production: 'https://platform.nypl.org/api/v0.1',
   },
+  endpoints: {
+    allStaffPicksLists: '/book-lists?type=staff-picks',
+    allTeensLists: '/book-lists?type=teens',
+    allKidsPicksLists: '/book-lists?type=kids',
+    staffPicksPath: '/book-lists/staff-picks/',
+  },
 };
 
 export default platformConfig;
