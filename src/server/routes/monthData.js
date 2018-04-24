@@ -23,7 +23,7 @@ function currentMonthData(req, res, next) {
   nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
     .then(data => {
       if (Array.isArray(data) && data.length) {
-        data.map((list) => {
+        data.forEach((list) => {
           // Maps the option's name with the correct year and month
           const optionDate = staffPicksDate(list.date);
           const option = { name: `${optionDate.month} ${optionDate.year}`, value: list.date };
@@ -113,7 +113,7 @@ function selectMonthData(req, res, next) {
   nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
     .then(data => {
       if (Array.isArray(data) && data.length) {
-        data.map((list) => {
+        data.forEach((list) => {
           // Maps the option's name with the correct year and month
           const optionDate = staffPicksDate(list.date);
           const option = { name: `${optionDate.month} ${optionDate.year}`, value: list.date };
