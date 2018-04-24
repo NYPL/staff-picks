@@ -57,14 +57,16 @@ class ListSelector extends React.Component {
       return;
     }
 
+    console.log('ListSelector url for get: ' + config.baseApiUrl + submitValue);
     // this function will be replaced by submitting to endpoint
     axios.get(`${config.baseApiUrl}${submitValue}`)
       .then(response => {
+        console.log(response.status);
         // Catches the error from API, and update BookStore back to the default
-        if (response.data.statusCode >= 400) {
+        if (!response.status || response.status >= 400) {
           this.updateBookStore();
           console.log(
-            `API error with status code ${response.data.statusCode}: ${response.data.errorMessage}`
+            `API error with status code ${response.status}: ${response.data.errorMessage}`
           );
           // Leads the user to the 404 page
           this.updateLocation('/books-music-movies/recommendations/best-books/404');
@@ -77,8 +79,9 @@ class ListSelector extends React.Component {
           );
           // Updates and transit to the match URL
           console.log(submitValue);
+          console.log('Updating url to ' + config.baseUrl + 'staff-picks/' + submitValue + '/');
           this.updateLocation(
-            `/books-music-movies/recommendations/best-books/staff-picks/${submitValue}`
+            `${config.baseUrl}staff-picks/${submitValue}/`
           );
         }
       })

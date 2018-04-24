@@ -11,19 +11,22 @@ function selectData(req, res, next) {
   const type = req.params.type;
   const time = req.params.time;
 
+  console.log(type);
   if (type === 'childrens' || type === 'ya') {
-    if (time !== undefined) {
+    if (time) {
       // TODO: Need to find function specific to calling annual data set.
+    } else {
+      return annualData.annualCurrentData(type, req, res, next);
     }
-    return annualData.annualCurrentData(type, req, res, next);
   }
 
   if (type === 'staff-picks') {
-    if (time !== undefined) {
+    if (time) {
       console.log('Running monthData.selectMonthData');
       return monthData.selectMonthData(req, res, next);
+    } else {
+      return monthData.currentMonthData(req, res, next);
     }
-    return monthData.currentMonthData(req, res, next);
   }
 
   return res.redirect(baseUrl);

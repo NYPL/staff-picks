@@ -17,10 +17,10 @@ const routes = {
     <Route path={`${appConfig.baseUrl}`} component={App}>
       <IndexRoute component={Main} />
       <Route path={`${appConfig.baseUrl}404`} component={Error404Page} />
-      <Route path={`${appConfig.baseUrl}:type`} component={Main} />
-      <Route path={`${appConfig.baseUrl}:type/:time?`} component={Main} />
-      <Route path={`${appConfig.baseUrl}:type/:time?/:id?`} component={BookPage} />
-      <Redirect from="*" to={`${appConfig.baseUrl}404`} />
+      <Route path={`${appConfig.baseUrl}:type/`} component={Main} />
+      <Route path={`${appConfig.baseUrl}:type/:time?/`} component={Main} />
+      <Route path={`${appConfig.baseUrl}:type/:time?/:id?/`} component={BookPage} />
+      {/*<Redirect from="*" to={`${appConfig.baseUrl}404`} />*/}
     </Route>
   ),
 };
