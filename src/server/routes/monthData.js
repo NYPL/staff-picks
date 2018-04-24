@@ -135,7 +135,7 @@ function selectMonthData(req, res, next) {
  * Gets a specific month's or season's staff pick list on the client side.
  */
 function selectClientMonthData(req, res) {
-  const seasonMatches = req.params.month.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
+  const seasonMatches = req.params.time.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
 
   if (!seasonMatches) {
     console.error('Status Code: 400, Error Message: Invalid season.');

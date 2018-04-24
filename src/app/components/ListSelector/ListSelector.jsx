@@ -67,7 +67,7 @@ class ListSelector extends React.Component {
             `API error with status code ${response.data.statusCode}: ${response.data.errorMessage}`
           );
           // Leads the user to the 404 page
-          this.updateLocation('/books-music-dvds/recommendations/staff-picks/404');
+          this.updateLocation('/books-music-movies/recommendations/best-books/404');
         } else {
           // For valid API response, updates BookStore for the new list
           this.updateBookStore(
@@ -76,8 +76,9 @@ class ListSelector extends React.Component {
             'staff-picks'
           );
           // Updates and transit to the match URL
+          console.log(submitValue);
           this.updateLocation(
-            `/books-music-dvds/recommendations/staff-picks/${submitValue}`
+            `/books-music-movies/recommendations/best-books/staff-picks/${submitValue}`
           );
         }
       })
@@ -94,7 +95,7 @@ class ListSelector extends React.Component {
           `${errorStatusText}`
         );
         // Leads the user to the 404 page
-        this.updateLocation('/books-music-dvds/recommendations/staff-picks/404');
+        this.updateLocation('/books-music-movies/recommendations/best-books/404');
       });
   }
 
