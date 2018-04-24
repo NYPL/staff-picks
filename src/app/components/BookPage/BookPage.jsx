@@ -17,7 +17,8 @@ class BookPage extends React.Component {
   }
 
   render() {
-    const paramId = this.props.params.id ? this.props.params.id : '';
+    const paramId = this.props.params && this.props.params.id ? this.props.params.id : '';
+
     const { date, picks } = this.state.currentPicks;
     const displayDate = staffPicksDate(date);
     let pick;
