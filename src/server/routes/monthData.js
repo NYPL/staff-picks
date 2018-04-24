@@ -1,7 +1,7 @@
 import nyplApiClient from '../helper/nyplApiClient.js';
 import config from '../../../appConfig';
 import platformConfig from '../../../platformConfig';
-import modelListOptions from '../../app/utils/modelListOptionsService';
+import modelListOptions from '../../app/utils/ModelListOptionsService';
 
 /* nyplApiClientGet(endpoint)
  * The function that wraps nyplApiClient for GET requests.

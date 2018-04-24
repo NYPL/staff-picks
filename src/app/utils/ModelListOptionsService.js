@@ -16,7 +16,9 @@ function modelListOptions(lists, listType) {
       // Now we only handle staff-picks, we will handle teens and kids later
       const optionDate = listType === 'staff-picks' ?
             staffPicksDate(list.date) : { month: '', year: '' };
-      const option = { name: `${optionDate.month} ${optionDate.year}`, value: list.date };
+      const optionName = (optionDate.month && optionDate.year) ?
+        `${optionDate.month} ${optionDate.year}` : '';
+      const option = { name: `${optionName}`, value: list.date };
 
       options.push(option);
     });
@@ -28,7 +30,7 @@ function modelListOptions(lists, listType) {
     latestOption = options[0].value;
   }
 
-  return { options: options, latestOption: latestOption };
+  return { options, latestOption };
 }
 
 export default modelListOptions;
