@@ -88,7 +88,6 @@ describe('Book Component', () => {
     it('should render the pick description <p> element with text', () => {
       const description = component.find('.book-item-description');
       expect(description.length).to.equal(1);
-      expect(description.length).to.equal(1);
       expect(description.text()).to.equal(pickObject.reviews[0].text);
     });
 
@@ -97,7 +96,6 @@ describe('Book Component', () => {
       const reviewerText = `Staff Pick By: ${pickObject.reviews[0].reviewerName}, ` +
         `${pickObject.reviews[0].reviewerLocation.prefLabel}`;
 
-      expect(reviewer.length).to.equal(1);
       expect(reviewer.length).to.equal(1);
       expect(reviewer.text()).to.equal(reviewerText);
     });
