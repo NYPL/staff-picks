@@ -66,7 +66,6 @@ function currentMonthData(req, res, next) {
 function selectMonthData(req, res, next) {
   const listOptions = config.staffPicksListOptions;
   let seasonListOptions = [];
-  let latestSeason = '';
 
   // Checks if the URL input fits season's convention
   const seasonMatches = req.params.month.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
@@ -90,8 +89,9 @@ function selectMonthData(req, res, next) {
   if (!seasonMatches || !isValidAudience) {
     console.error('Status Code: 400, Error Message: Invalid season or audience.');
 
-    return; res.redirect('/books-music-dvds/recommendations/404');
-  } else {
+    return res.redirect('/books-music-dvds/recommendations/404');
+  }
+
   // If the param fits season's convention, constructs the request param
   requestedSeason = seasonMatches[0];
 
@@ -102,7 +102,6 @@ function selectMonthData(req, res, next) {
       const modeledOptionObject = modelListOptions(data, 'staff-picks');
 
       seasonListOptions = modeledOptionObject.options;
-      latestSeason = modeledOptionObject.latestOption;
 
       // Updates default season list options with API response
       listOptions.season.options = seasonListOptions;
@@ -144,7 +143,6 @@ function selectMonthData(req, res, next) {
 
       return res.redirect('/books-music-dvds/recommendations/404');
     });
-  }
 }
 
 /**
@@ -200,7 +198,8 @@ function selectMonthDataFormPost(req, res) {
 
     res.redirect('/books-music-dvds/recommendations/404');
   } else {
-    // Redirects and calls selectMonthData() to make server side request for the season/audience list
+    // Redirects and calls selectMonthData() to make server side request
+    // for the season/audience list
     res.redirect(
       `${config.baseMonthUrl}${season}${audienceQuery}`
     );
