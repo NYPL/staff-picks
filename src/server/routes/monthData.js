@@ -1,21 +1,41 @@
 import nyplApiClient from '../helper/nyplApiClient.js';
 import config from '../../../appConfig';
+import platformConfig from '../../../platformConfig';
+import modelListOptions from '../../app/utils/ModelListOptionsService';
 
-const getLatestSeason = () =>
-  // this function should return the latest season by current month
-  '';
-const nyplApiClientGet = endpoint =>
+
+/* nyplApiClientGet(endpoint)
+ * The function that wraps nyplApiClient for GET requests.
+ * @param {string} endpoint
+ */
+const nyplApiClientGet = (endpoint) =>
   nyplApiClient().then(client => client.get(endpoint, { cache: false }));
 
 /* currentMonthData
- * Get the default/latest monthly staff pick list.
+ * Gets the default/latest monthly staff pick list.
+ * It calls '/book-lists?type=staff-picks' to get all the available list options first.
  */
 function currentMonthData(req, res, next) {
-  // should get the latest list from the function getLatestSeason()
-  // It will always be adult for default audience list
-  // After the API is ready, we can specify the audience query below
-  nyplApiClientGet('/book-lists/staff-picks/2018-03-01')
-    .then((data) => {
+  const listOptions = config.staffPicksListOptions;
+  let seasonListOptions = [];
+  let latestSeason = '';
+
+  // The first request to get all the available list options
+  nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
+    .then(data => {
+      // Models the options based on the data returned
+      const modeledOptionObject = modelListOptions(data, 'staff-picks');
+
+      seasonListOptions = modeledOptionObject.options;
+      latestSeason = modeledOptionObject.latestOption;
+
+      // Updates default season list options with API response
+      listOptions.season.options = seasonListOptions;
+
+      // Calls the latest list
+      return nyplApiClientGet(`${platformConfig.endpoints.staffPicksPath}${latestSeason}`);
+    })
+    .then(data => {
       res.locals.data = {
         BookStore: {
           listType: 'staff-picks',
@@ -23,7 +43,8 @@ function currentMonthData(req, res, next) {
           currentPicks: data,
           selectableFilters: [],
           isJsEnabled: false,
-          currentSeason: getLatestSeason(),
+          listOptions,
+          currentSeason: latestSeason,
           currentAudience: 'Adult',
         },
         pageTitle: '',
@@ -42,7 +63,8 @@ function currentMonthData(req, res, next) {
           currentPicks: {},
           selectableFilters: [],
           isJsEnabled: false,
-          currentSeason: getLatestSeason(),
+          listOptions,
+          currentSeason: latestSeason(),
           currentAudience: 'Adult',
         },
       };
@@ -53,8 +75,13 @@ function currentMonthData(req, res, next) {
 
 /* selectMonthData
  * Get a specific month's or season's staff pick list.
+* It calls '/book-lists?type=staff-picks' to get all the available list options first.
  */
 function selectMonthData(req, res, next) {
+  const listOptions = config.staffPicksListOptions;
+  let seasonListOptions = [];
+  let latestSeason = '';
+
   // Checks if the URL input fits season's convention
   const seasonMatches = req.params.time.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
   // Default audience list is the adult list
@@ -67,34 +94,49 @@ function selectMonthData(req, res, next) {
     audience = req.query.audience;
   }
 
-  // If the param does not fit season's convention, throws an error
-  if (!seasonMatches) {
-    console.error('Status Code: 400, Error Message: Invalid season.');
+  // The first request to get all the available list options
+  nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
+    .then(data => {
+      // Models the options based on the data returned
+      const modeledOptionObject = modelListOptions(data, 'staff-picks');
 
-    res.locals.data = {
-      BookStore: {
-        listType: 'staff-picks',
-        filters: [],
-        currentPicks: {},
-        selectableFilters: [],
-        isJsEnabled: false,
-        currentSeason: getLatestSeason(),
-        currentAudience: 'Adult',
-      },
-    };
+      seasonListOptions = modeledOptionObject.options;
+      latestSeason = modeledOptionObject.latestOption;
 
-    // next();
-  } else {
-    // If the param fits season's convention, constructs the request param
-    requestedSeason = seasonMatches[0];
-    console.log(`requestedSeason: ${requestedSeason}`);
-  }
+      // Updates default season list options with API response
+      listOptions.season.options = seasonListOptions;
 
-  // Now the audience query seems to have no influence to the API,
-  // as it will always throw the adult lists
-  // But we should show the audience we choose on the URL and selected value on the list
-  nyplApiClientGet(`/book-lists/staff-picks/${requestedSeason}`)
-    .then((data) => {
+      // we handle bad season input here
+      if (!seasonMatches) {
+        console.error('Status Code: 400, Error Message: Invalid season.');
+
+        res.locals.data = {
+          BookStore: {
+            listType: 'staff-picks',
+            filters: [],
+            currentPicks: {},
+            selectableFilters: [],
+            isJsEnabled: false,
+            listOptions,
+            currentSeason: latestSeason,
+            currentAudience: 'Adult',
+          },
+        };
+
+        next();
+      } else {
+        // If the param fits season's convention, constructs the request param
+        requestedSeason = seasonMatches[0];
+      }
+
+      // Calls the selected list
+      return nyplApiClientGet(`${platformConfig.endpoints.staffPicksPath}${requestedSeason}`);
+    })
+    .then(data => {
+      // Uodate the option lists' default values by the request params
+      listOptions.season.currentValue = requestedSeason;
+      listOptions.audience.currentValue = audience;
+
       res.locals.data = {
         BookStore: {
           listType: 'staff-picks',
@@ -102,6 +144,7 @@ function selectMonthData(req, res, next) {
           currentPicks: data,
           selectableFilters: [],
           isJsEnabled: false,
+          listOptions,
           currentSeason: requestedSeason,
           currentAudience: audience,
         },
@@ -120,7 +163,8 @@ function selectMonthData(req, res, next) {
           currentPicks: {},
           selectableFilters: [],
           isJsEnabled: false,
-          currentSeason: getLatestSeason(),
+          listOptions,
+          currentSeason: latestSeason,
           currentAudience: 'Adult',
         },
       };
