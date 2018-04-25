@@ -94,56 +94,56 @@ function selectMonthData(req, res, next) {
     return; res.redirect('/books-music-movies/recommendations/404');
   } else {
   // If the param fits season's convention, constructs the request param
-  requestedSeason = seasonMatches[0];
+    requestedSeason = seasonMatches[0];
 
-  // The first request to get all the available list options
-  nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
-    .then(data => {
-      // Models the options based on the data returned
-      const modeledOptionObject = modelListOptions(data, 'staff-picks');
+    // The first request to get all the available list options
+    nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
+      .then(data => {
+        // Models the options based on the data returned
+        const modeledOptionObject = modelListOptions(data, 'staff-picks');
 
-      seasonListOptions = modeledOptionObject.options;
-      latestSeason = modeledOptionObject.latestOption;
+        seasonListOptions = modeledOptionObject.options;
+        latestSeason = modeledOptionObject.latestOption;
 
-      // Updates default season list options with API response
-      listOptions.season.options = seasonListOptions;
+        // Updates default season list options with API response
+        listOptions.season.options = seasonListOptions;
 
-      // Calls the selected list
-      return nyplApiClientGet(`${platformConfig.endpoints.staffPicksPath}${requestedSeason}`);
-    })
-    .then(data => {
-      // If error returned from the endpoint
-      if (data.statusCode >= 400) {
-        console.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
+        // Calls the selected list
+        return nyplApiClientGet(`${platformConfig.endpoints.staffPicksPath}${requestedSeason}`);
+      })
+      .then(data => {
+        // If error returned from the endpoint
+        if (data.statusCode >= 400) {
+          console.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
+
+          return res.redirect('/books-music-movies/recommendations/404');
+        }
+
+        // Uodate the option lists' default values by the request params
+        listOptions.season.currentValue = requestedSeason;
+        listOptions.audience.currentValue = audience;
+
+        res.locals.data = {
+          BookStore: {
+            listType: 'staff-picks',
+            filters: [],
+            currentPicks: data,
+            selectableFilters: [],
+            isJsEnabled: false,
+            listOptions,
+            currentSeason: requestedSeason,
+            currentAudience: audience,
+          },
+          pageTitle: '',
+          metaTags: [],
+        };
+        next();
+      })
+      .catch((error) => {
+        console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
         return res.redirect('/books-music-movies/recommendations/404');
-      }
-
-      // Uodate the option lists' default values by the request params
-      listOptions.season.currentValue = requestedSeason;
-      listOptions.audience.currentValue = audience;
-
-      res.locals.data = {
-        BookStore: {
-          listType: 'staff-picks',
-          filters: [],
-          currentPicks: data,
-          selectableFilters: [],
-          isJsEnabled: false,
-          listOptions,
-          currentSeason: requestedSeason,
-          currentAudience: audience,
-        },
-        pageTitle: '',
-        metaTags: [],
-      };
-      next();
-    })
-    .catch((error) => {
-      console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
-
-      return res.redirect('/books-music-movies/recommendations/404');
-    });
+      });
   }
 }
 
@@ -200,7 +200,8 @@ function selectMonthDataFormPost(req, res) {
 
     res.redirect('/books-music-movies/recommendations/404');
   } else {
-    // Redirects and calls selectMonthData() to make server side request for the season/audience list
+    // Redirects and calls selectMonthData() to make server side request for
+    // the season/audience list
     res.redirect(
       `${config.baseUrl}staff-picks/${season}${audienceQuery}`
     );
