@@ -14,7 +14,7 @@ import appConfig from '../../../appConfig';
 // Routes we need
 const routes = {
   client: (
-    <Route path="/books-music-movies/recommendations/" component={App}>
+    <Route path={`${appConfig.baseUrl}`} component={App}>
       <IndexRoute component={Main} />
       <Route path={`${appConfig.baseUrl}404`} component={Error404Page} />
       <Route path={`${appConfig.baseUrl}:type`} component={Main} />
