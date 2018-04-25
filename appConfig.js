@@ -10,7 +10,7 @@ const config = {
       { property: 'og:title', content: 'Best Books for Teens' },
       { property: 'og:description', content: 'Explore The New York Public Library\'s annual ' +
         'selection of outstanding young adult titles.' },
-      { property: 'og:url', content: 'https://www.nypl.org/books-music-dvds/recommendations' +
+      { property: 'og:url', content: 'https://www.nypl.org/books-music-movies/recommendations' +
         '/best-books/ya' },
       { property: 'og:image', content: 'https://d140u095r09w96.cloudfront.net/sites/default/' +
         'files/teens-600x335.jpg' },
@@ -35,7 +35,7 @@ const config = {
       { property: 'og:title', content: 'Best Books for Kids' },
       { property: 'og:description', content: 'Explore The New York Public Library\'s annual ' +
         'selection of outstanding children\'s titles.' },
-      { property: 'og:url', content: 'https://www.nypl.org/books-music-dvds/recommendations' +
+      { property: 'og:url', content: 'https://www.nypl.org/books-music-movies/recommendations' +
         '/best-books/childrens' },
       { property: 'og:image', content: 'https://d140u095r09w96.cloudfront.net/sites/default/' +
         'files/kids-600x335.jpg' },
@@ -67,7 +67,7 @@ const config = {
   },
   aboutUrls: {
     print: 'https://www.nypl.org/accessibility/print-disabilities',
-    about: 'https://www.nypl.org/books-music-dvds/recommendations/about/annual-lists',
+    about: 'https://www.nypl.org/books-music-movies/recommendations/about/annual-lists',
   },
   publicKey:
     '-----BEGIN PUBLIC KEY-----\n' +
