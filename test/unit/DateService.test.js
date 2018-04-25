@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import { expect } from 'chai';
 
-import DateService from '../../src/app/utils/DateService.js';
+import DateService from '../../src/app/utils/DateService';
 
 describe('When no date is passed', () => {
   it('should return the object that has empty month and year values.', () => {
