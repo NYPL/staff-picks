@@ -1,7 +1,6 @@
 import express from 'express';
 
 import monthData from './monthData';
-import annualData from './annualData';
 import appConfig from '../../../appConfig';
 import selectData from './selectData';
 

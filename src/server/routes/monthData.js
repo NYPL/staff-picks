@@ -1,4 +1,4 @@
-import nyplApiClient from '../helper/nyplApiClient.js';
+import nyplApiClient from '../helper/nyplApiClient';
 import config from '../../../appConfig';
 import platformConfig from '../../../platformConfig';
 import modelListOptions from '../../app/utils/ModelListOptionsService';
