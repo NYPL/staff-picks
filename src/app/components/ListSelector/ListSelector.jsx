@@ -36,7 +36,7 @@ class ListSelector extends React.Component {
     currentSeason = '',
     listType = 'staff-picks',
     filters = [],
-    selectedFilters = []
+    selectedFilters = [],
   ) {
     BookActions.updatePicks(picks);
     BookActions.updateCurrentSeason(currentSeason);
@@ -57,17 +57,13 @@ class ListSelector extends React.Component {
       return;
     }
 
-    console.log('ListSelector url for get: ' + config.baseApiUrl + submitValue);
     // this function will be replaced by submitting to endpoint
     axios.get(`${config.baseApiUrl}${submitValue}`)
-      .then(response => {
-        console.log(response.status);
+      .then((response) => {
         // Catches the error from API, and update BookStore back to the default
         if (!response.status || response.status >= 400) {
           this.updateBookStore();
-          console.log(
-            `API error with status code ${response.status}: ${response.data.errorMessage}`
-          );
+          console.log(`API error with status code ${response.status}: ${response.data.errorMessage}`);
           // Leads the user to the 404 page
           this.updateLocation('/books-music-movies/recommendations/best-books/404');
         } else {
@@ -75,17 +71,13 @@ class ListSelector extends React.Component {
           this.updateBookStore(
             response.data.currentPicks,
             submitValue,
-            'staff-picks'
+            'staff-picks',
           );
           // Updates and transit to the match URL
-          console.log(submitValue);
-          console.log('Updating url to ' + config.baseUrl + 'staff-picks/' + submitValue + '/');
-          this.updateLocation(
-            `${config.baseUrl}staff-picks/${submitValue}/`
-          );
+          this.updateLocation(`${config.baseUrl}staff-picks/${submitValue}`);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         // Catches the internal server error, and update BookStore back to the default
         this.updateBookStore();
         const errorResponse = error.response ?
@@ -93,10 +85,8 @@ class ListSelector extends React.Component {
         const errorStatusText = errorResponse.statusText;
         const errorStatus = errorResponse.status;
 
-        console.log(
-          `Internal server error with status code ${errorStatus}: ` +
-          `${errorStatusText}`
-        );
+        console.log(`Internal server error with status code ${errorStatus}: ` +
+          `${errorStatusText}`);
         // Leads the user to the 404 page
         this.updateLocation('/books-music-movies/recommendations/best-books/404');
       });

@@ -57,7 +57,6 @@ function currentMonthData(req, res, next) {
 function selectMonthData(req, res, next) {
   // Checks if the URL input fits season's convention
   const seasonMatches = req.params.time.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
-  console.log(seasonMatches);
   // Default audience list is the adult list
   let audience = 'Adult';
   let requestedSeason = '';
@@ -109,7 +108,6 @@ function selectMonthData(req, res, next) {
         pageTitle: '',
         metaTags: [],
       };
-      console.log(res.locals.data);
       next();
     })
     .catch((error) => {
@@ -126,7 +124,6 @@ function selectMonthData(req, res, next) {
           currentAudience: 'Adult',
         },
       };
-      console.log(res.locals.data);
       next();
     });
 }
@@ -137,7 +134,6 @@ function selectMonthData(req, res, next) {
  */
 function selectClientMonthData(req, res) {
   const seasonMatches = req.params.time.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
-  console.log(seasonMatches);
   if (!seasonMatches) {
     console.error('Status Code: 400, Error Message: Invalid season.');
 
