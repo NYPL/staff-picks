@@ -1,7 +1,10 @@
 ## CHANGELOG
 
 ### 4.0.0
-> Update the routes. The basic route is now 
+> Update the routes. The basic route is now `/books-music-movies/recommendations/best-books/`. And `staff-picks`, `ya`, `childrens` are three lists on the same level of the structure.
+> Add the list selectors that help the user to choose the list by season/month or audience.
+> Add individual page for every single book for supporting legacy staff-picks links and homepage's staff-picks section. There won't be links to those pages from the main page.
+> Add an `.env.example` and updated the related README.md so now the user can set a `.env` to run the application locally.
 
 ### 3.2.6
 > Updating Travis CI configuration for CD to AWS Elastic Beanstalk
