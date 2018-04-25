@@ -36,7 +36,7 @@ class ListSelector extends React.Component {
     currentSeason = '',
     listType = 'staff-picks',
     filters = [],
-    selectedFilters = [],
+    selectedFilters = []
   ) {
     BookActions.updatePicks(picks);
     BookActions.updateCurrentSeason(currentSeason);
@@ -71,7 +71,7 @@ class ListSelector extends React.Component {
           this.updateBookStore(
             response.data.currentPicks,
             submitValue,
-            'staff-picks',
+            'staff-picks'
           );
           // Updates and transit to the match URL
           this.updateLocation(`${config.baseUrl}staff-picks/${submitValue}`);
