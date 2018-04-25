@@ -115,7 +115,7 @@ function selectMonthData(req, res, next) {
       if (data.statusCode >= 400) {
         console.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
 
-        return res.redirect('/books-music-dvds/recommendations/404');
+        return res.redirect(`${config.baseUrl}404`);
       }
 
       // Uodate the option lists' default values by the request params
@@ -160,7 +160,7 @@ function selectClientMonthData(req, res) {
     });
   }
 
-  nyplApiClientGet(`/book-lists/staff-picks/${seasonMatches[0]}`)
+  nyplApiClientGet(`${platformConfig.endpoints.staffPicksPath}${seasonMatches[0]}`)
     .then((data) => {
       res.json({
         title: data.title,
