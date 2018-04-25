@@ -56,7 +56,7 @@ function currentMonthData(req, res, next) {
     .catch((error) => {
       console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
-      return res.redirect('/books-music-movies/recommendations/404');
+      return res.redirect(`${config.baseUrl}404`);
     });
 }
 
@@ -91,7 +91,7 @@ function selectMonthData(req, res, next) {
   if (!seasonMatches || !isValidAudience) {
     console.error('Status Code: 400, Error Message: Invalid season or audience.');
 
-    return; res.redirect('/books-music-movies/recommendations/404');
+    return; res.redirect(`${config.baseUrl}404`);
   } else {
   // If the param fits season's convention, constructs the request param
     requestedSeason = seasonMatches[0];
@@ -116,7 +116,7 @@ function selectMonthData(req, res, next) {
         if (data.statusCode >= 400) {
           console.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
 
-          return res.redirect('/books-music-movies/recommendations/404');
+          return res.redirect(`${config.baseUrl}404`);
         }
 
         // Uodate the option lists' default values by the request params
@@ -142,7 +142,7 @@ function selectMonthData(req, res, next) {
       .catch((error) => {
         console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
-        return res.redirect('/books-music-movies/recommendations/404');
+        return res.redirect(`${config.baseUrl}404`);
       });
   }
 }
@@ -198,7 +198,7 @@ function selectMonthDataFormPost(req, res) {
       `Form data of season or audience is undefined. season: ${season}, audience: ${audience}`
     );
 
-    res.redirect('/books-music-movies/recommendations/404');
+    res.redirect(`${config.baseUrl}404`);
   } else {
     // Redirects and calls selectMonthData() to make server side request for
     // the season/audience list
