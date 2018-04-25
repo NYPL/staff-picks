@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+### 4.0.0
+> Update the routes. The basic route is now 
+
 ### 3.2.6
 > Updating Travis CI configuration for CD to AWS Elastic Beanstalk
 
