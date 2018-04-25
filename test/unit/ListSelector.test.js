@@ -5,7 +5,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import ListSelector from '../../src/app/components/ListSelector/ListSelector.jsx';
+import ListSelector from '../../src/app/components/ListSelector/ListSelector';
 import config from '../../appConfig';
 
 const fieldsetProps = {
