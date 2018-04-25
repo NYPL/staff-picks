@@ -5,7 +5,6 @@ import { LeftWedgeIcon } from '@nypl/dgx-svg-icons';
 import BookFilters from '../BookFilters/BookFilters';
 import ListSelector from '../ListSelector/ListSelector';
 import config from '../../../../appConfig';
-
 import { isEmpty as _isEmpty } from 'underscore';
 
 const Sidebar = (props) => {
