@@ -65,7 +65,7 @@ class ListSelector extends React.Component {
           this.updateBookStore();
           console.log(`API error with status code ${response.status}: ${response.data.errorMessage}`);
           // Leads the user to the 404 page
-          this.updateLocation('/books-music-movies/recommendations/best-books/404');
+          this.updateLocation(`${config.baseUrl}404`);
         } else {
           // For valid API response, updates BookStore for the new list
           this.updateBookStore(
@@ -88,7 +88,7 @@ class ListSelector extends React.Component {
         console.log(`Internal server error with status code ${errorStatus}: ` +
           `${errorStatusText}`);
         // Leads the user to the 404 page
-        this.updateLocation('/books-music-movies/recommendations/best-books/404');
+        this.updateLocation(`${config.baseUrl}404`);
       });
   }
 
