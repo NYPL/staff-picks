@@ -13,23 +13,30 @@ class Main extends React.Component {
     this.state = {
       selectableFilters: this.props.selectableFilters,
       selectedFilters: [],
-      picks: this.props.currentPicks.picks && this.props.currentPicks.picks.length ?
-        this.props.currentPicks.picks : [],
+      picks: this.extractAudienceGroup(
+        this.props.currentPicks.picks,
+        this.props.currentAudience,
+        this.props.listType
+      ),
     };
 
     this.setSelectedFilter = this.setSelectedFilter.bind(this);
     this.clearFilters = this.clearFilters.bind(this);
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(nextProps) {
     // Update the props to reflect the latest updates from client side API responses
     this.setState({
-      selectableFilters: this.props.selectableFilters,
+      selectableFilters: nextProps.selectableFilters,
       selectedFilters: [],
-      picks: this.props.currentPicks.picks && this.props.currentPicks.picks.length ?
-        this.props.currentPicks.picks : [],
+      picks: this.extractAudienceGroup(
+        nextProps.currentPicks.picks,
+        nextProps.currentAudience,
+        nextProps.listType
+      ),
     });
   }
+
 
   /**
    * getNewPickSet(picks, selectedFilters)
@@ -135,6 +142,7 @@ class Main extends React.Component {
   }
 
   render() {
+    console.log(this.state.picks.length);
     return (
       <div className="nypl-row">
         <Sidebar
@@ -151,11 +159,7 @@ class Main extends React.Component {
         />
 
         <BookList
-          picks={this.extractAudienceGroup(
-            this.state.picks,
-            this.props.currentAudience,
-            this.props.listType
-          )}
+          picks={this.state.picks}
           isJsEnabled={this.props.isJsEnabled}
           listType={this.props.params.type}
         />
