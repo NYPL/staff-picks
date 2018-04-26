@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import { expect } from 'chai';
 
-import ModelListOptionsService from '../../src/app/utils/ModelListOptionsService.js';
+import ModelListOptionsService from '../../src/app/utils/ModelListOptionsService';
 
 const mockListOptionsData = [
   { date: '2015-04-01' },
