@@ -37,12 +37,15 @@ function currentMonthData(req, res, next) {
       return nyplApiClientGet(`${platformConfig.endpoints.staffPicksPath}${latestSeason}`);
     })
     .then((data) => {
+      const filters = utils.getAllTags(data.picks);
+      // Get the subset of tags that the picks can be filtered by.
+      const selectableFilters = utils.getSelectableTags(data.picks);
+
       res.locals.data = {
         BookStore: {
-          listType: 'staff-picks',
-          filters: [],
-          currentPicks: data,
-          selectableFilters: [],
+          filters,
+          picksData: data,
+          selectableFilters,
           isJsEnabled: false,
           listOptions,
           currentSeason: latestSeason,
@@ -130,9 +133,8 @@ function selectMonthData(req, res, next) {
 
       res.locals.data = {
         BookStore: {
-          listType: 'staff-picks',
           filters,
-          currentPicks: data,
+          picksData: data,
           selectableFilters,
           isJsEnabled: false,
           listOptions,
@@ -171,9 +173,7 @@ function selectClientMonthData(req, res) {
       res.json({
         title: data.title,
         date: data.date,
-        currentPicks: {
-          picks: data.picks,
-        },
+        picksData: data,
       });
     })
     .catch((error) => {

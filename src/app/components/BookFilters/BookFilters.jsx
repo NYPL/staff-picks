@@ -45,8 +45,8 @@ class BookFilters extends React.Component {
 
     this.clearTimeout(this.state.timeout);
     const timeout = setTimeout(() => {
-      ReactDOM.findDOMNode(this.refs.booksFound).focus();
-    }, 300);
+      document.getElementById('list-title').focus();
+    }, 400);
 
     this.setState({
       filters: this.state.filters,
@@ -114,17 +114,13 @@ class BookFilters extends React.Component {
 
   render() {
     const { filters, showFilters } = this.state;
-    const {
-      selectableFilters,
-      picksCount,
-    } = this.props;
+    const { selectableFilters } = this.props;
 
     if (!filters.length) {
       return null;
     }
 
     const filtersToRender = this.getFilterArray(selectableFilters, filters);
-    const booksfound = `${picksCount} book${picksCount === 1 ? '' : 's'} found`;
     const buttonAnimationClasses = showFilters ? 'rotate-up' : 'rotate-down';
     const filtersContainerDisplayClass = showFilters ? 'expand' : 'collapse';
 
@@ -132,9 +128,6 @@ class BookFilters extends React.Component {
       <div className="book-filters">
         <div className="book-filters-heading">
           <h2><FilterIcon /> Filter by Tags</h2>
-          <span tabIndex="0" ref="booksFound">
-            {booksfound}
-          </span>
           <button
             aria-expanded={showFilters}
             onClick={this.toggleFilters}
@@ -153,7 +146,7 @@ class BookFilters extends React.Component {
           {
             !!this.state.selectedFilters.length &&
               (<button
-                onClick={() => this.props.clearFilters(this.refs.booksFound)}
+                onClick={() => this.props.clearFilters()}
                 className="nypl-primary-button clear-button"
                 ref="clearFilters"
               >
@@ -173,7 +166,6 @@ BookFilters.propTypes = {
   setSelectedFilter: PropTypes.func,
   clearFilters: PropTypes.func,
   selectedFilters: PropTypes.array,
-  picksCount: PropTypes.number,
 };
 
 BookFilters.defaultProps = {

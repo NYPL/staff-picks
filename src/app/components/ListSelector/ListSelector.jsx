@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+
 import ListFilter from './ListFilter';
 import config from '../../../../appConfig';
 import BookActions from '../../../app/actions/BookActions';
+import utils from '../../utils/utils';
 
 class ListSelector extends React.Component {
   constructor(props) {
@@ -23,26 +25,23 @@ class ListSelector extends React.Component {
   }
 
   /**
-   * updateBookStore(picks = {}, filters = [], selectedFilters = [])
+   * updateBookStore(data = {}, currentSeason, filters = [], selectedFilters = [])
    * Updates BookStore by BookActions based on latest client side API response
-   * @param {object} picks
+   * @param {object} data
    * @param {string} currentSeason
-   * @param {string} listType
    * @param {array} filters
    * @param {array} selectedFilters
    */
   updateBookStore(
-    picks = {},
+    data = {},
     currentSeason = '',
-    listType = 'staff-picks',
     filters = [],
     selectedFilters = [],
   ) {
-    BookActions.updatePicks(picks);
+    BookActions.updatePicksData(data.picksData);
     BookActions.updateCurrentSeason(currentSeason);
     BookActions.updateFilters(filters);
     BookActions.setSelectableFilters(selectedFilters);
-    BookActions.updateListType(listType);
   }
 
   /**
@@ -67,11 +66,17 @@ class ListSelector extends React.Component {
           // Leads the user to the 404 page
           this.updateLocation(`${config.baseUrl}404`);
         } else {
+          const data = response.data;
+          const filters = utils.getAllTags(data.picksData.picks);
+          // Get the subset of tags that the picks can be filtered by.
+          const selectableFilters = utils.getSelectableTags(data.picksData.picks);
+
           // For valid API response, updates BookStore for the new list
           this.updateBookStore(
-            response.data.currentPicks,
+            data,
             submitValue,
-            'staff-picks',
+            filters,
+            selectableFilters,
           );
           // Updates and transit to the match URL
           this.updateLocation(`${config.baseUrl}staff-picks/${submitValue}`);

@@ -33,7 +33,7 @@ class Sidebar extends React.Component {
 
   render() {
     const shareUrl = this.state.location.href;
-    const shareText = encodeURI(pageTitle[this.props.listType]);
+    const shareText = encodeURI(pageTitle[this.props.type]);
 
     return (
       <div className="about nypl-row">
@@ -68,7 +68,7 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.propTypes = {
-  listType: PropTypes.string,
+  type: PropTypes.string,
 };
 
 export default Sidebar;

@@ -192,7 +192,7 @@ describe('Main', () => {
       });
     });
 
-    describe('extractAudienceGroup', () => {
+    describe('filterByAudience', () => {
       const staffPicksData = {
         picks: [
           {
@@ -215,20 +215,20 @@ describe('Main', () => {
           },
         ],
       };
-      const extractAudienceGroup = sinon.spy(Main.prototype, 'extractAudienceGroup');
+      const filterByAudience = sinon.spy(Main.prototype, 'filterByAudience');
       const component = shallow(
         <Main currentPicks={staffPicksData} currentAudience={'YA'} listType={'staff-picks'} />
       );
 
       after(() => {
-        extractAudienceGroup.restore();
+        filterByAudience.restore();
         component.unmount();
       });
 
       it('should be called with the passed down picks, age group, and list tyep as the arguments.',
         () => {
-          expect(extractAudienceGroup.called).to.equal(true);
-          expect(extractAudienceGroup.getCall(0).args).to.deep.equal(
+          expect(filterByAudience.called).to.equal(true);
+          expect(filterByAudience.getCall(0).args).to.deep.equal(
             [staffPicksData.picks, 'YA', 'staff-picks']
           );
         }
@@ -237,7 +237,7 @@ describe('Main', () => {
       it('should return the original list if it is not a staff picks list.', () => {
         const returnedValue = staffPicksData.picks;
 
-        expect(extractAudienceGroup(staffPicksData.picks, 'YA', 'some-other-list')).to.deep.equal(
+        expect(filterByAudience(staffPicksData.picks, 'YA', 'some-other-list')).to.deep.equal(
           returnedValue
         );
       });
@@ -245,7 +245,7 @@ describe('Main', () => {
       it('should return an empty array if the passed down list is empty.', () => {
         const returnedValue = [];
 
-        expect(extractAudienceGroup([], 'YA', 'staff-picks')).to.deep.equal(
+        expect(filterByAudience([], 'YA', 'staff-picks')).to.deep.equal(
           returnedValue
         );
       });
@@ -253,7 +253,7 @@ describe('Main', () => {
       it('should return an empty array if the passed down age group is not valid.', () => {
         const returnedValue = [];
 
-        expect(extractAudienceGroup(staffPicksData.picks, 'Toddler', 'staff-picks')).to.deep.equal(
+        expect(filterByAudience(staffPicksData.picks, 'Toddler', 'staff-picks')).to.deep.equal(
           returnedValue
         );
       });
@@ -268,7 +268,7 @@ describe('Main', () => {
           },
         ];
 
-        expect(extractAudienceGroup(staffPicksData.picks, 'YA', 'staff-picks')).to.deep.equal(
+        expect(filterByAudience(staffPicksData.picks, 'YA', 'staff-picks')).to.deep.equal(
           returnedValue
         );
       });
