@@ -13,23 +13,30 @@ class Main extends React.Component {
     this.state = {
       selectableFilters: this.props.selectableFilters,
       selectedFilters: [],
-      picks: this.props.currentPicks.picks && this.props.currentPicks.picks.length ?
-        this.props.currentPicks.picks : [],
+      picks: this.extractAudienceGroup(
+        this.props.currentPicks.picks,
+        this.props.currentAudience,
+        this.props.listType
+      ),
     };
 
     this.setSelectedFilter = this.setSelectedFilter.bind(this);
     this.clearFilters = this.clearFilters.bind(this);
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(nextProps) {
     // Update the props to reflect the latest updates from client side API responses
     this.setState({
-      selectableFilters: this.props.selectableFilters,
+      selectableFilters: nextProps.selectableFilters,
       selectedFilters: [],
-      picks: this.props.currentPicks.picks && this.props.currentPicks.picks.length ?
-        this.props.currentPicks.picks : [],
+      picks: this.extractAudienceGroup(
+        nextProps.currentPicks.picks,
+        nextProps.currentAudience,
+        nextProps.listType
+      ),
     });
   }
+
 
   /**
    * getNewPickSet(picks, selectedFilters)
@@ -74,7 +81,14 @@ class Main extends React.Component {
       selectedFilters = this.state.selectedFilters.filter(id => id !== filterId);
     }
 
-    const picks = this.getNewPickSet(this.props.currentPicks.picks, selectedFilters);
+    // Here we have a variable to preserve all the picks with current audience selected
+    // So we can always trace back when any filter is removed
+    const allPicksWithCurrentAudience = this.extractAudienceGroup(
+      this.props.currentPicks.picks,
+      this.props.currentAudience,
+      this.props.listType
+    );
+    const picks = this.getNewPickSet(allPicksWithCurrentAudience, selectedFilters);
     const selectableFilters = utils.getSelectableTags(picks);
 
     this.setState({
@@ -151,11 +165,7 @@ class Main extends React.Component {
         />
 
         <BookList
-          picks={this.extractAudienceGroup(
-            this.state.picks,
-            this.props.currentAudience,
-            this.props.listType
-          )}
+          picks={this.state.picks}
           isJsEnabled={this.props.isJsEnabled}
           listType={this.props.params.type}
         />
