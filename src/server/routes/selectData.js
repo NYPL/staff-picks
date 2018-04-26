@@ -12,7 +12,9 @@ function selectData(req, res, next) {
   const time = req.params.time;
 
   if (type === 'childrens' || type === 'ya') {
-    if (time) { }
+    if (time) {
+      return res.redirect(baseUrl);
+    }
     return annualData.annualCurrentData(type, req, res, next);
   }
 

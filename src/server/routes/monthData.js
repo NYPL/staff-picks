@@ -1,14 +1,15 @@
 import nyplApiClient from '../helper/nyplApiClient';
 import config from '../../../appConfig';
+
+import utils from '../../app/utils/utils';
 import platformConfig from '../../../platformConfig';
 import modelListOptions from '../../app/utils/ModelListOptionsService';
-
 
 /* nyplApiClientGet(endpoint)
  * The function that wraps nyplApiClient for GET requests.
  * @param {string} endpoint
  */
-const nyplApiClientGet = (endpoint) =>
+const nyplApiClientGet = endpoint =>
   nyplApiClient().then(client => client.get(endpoint, { cache: false }));
 
 /* currentMonthData
@@ -22,7 +23,7 @@ function currentMonthData(req, res, next) {
 
   // The first request to get all the available list options
   nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
-    .then(data => {
+    .then((data) => {
       // Models the options based on the data returned
       const modeledOptionObject = modelListOptions(data, 'staff-picks');
 
@@ -35,7 +36,7 @@ function currentMonthData(req, res, next) {
       // Calls the latest list
       return nyplApiClientGet(`${platformConfig.endpoints.staffPicksPath}${latestSeason}`);
     })
-    .then(data => {
+    .then((data) => {
       res.locals.data = {
         BookStore: {
           listType: 'staff-picks',
@@ -67,7 +68,6 @@ function currentMonthData(req, res, next) {
 function selectMonthData(req, res, next) {
   const listOptions = config.staffPicksListOptions;
   let seasonListOptions = [];
-  let latestSeason = '';
 
   // Checks if the URL input fits season's convention
   const seasonMatches = req.params.time.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
@@ -91,60 +91,64 @@ function selectMonthData(req, res, next) {
   if (!seasonMatches || !isValidAudience) {
     console.error('Status Code: 400, Error Message: Invalid season or audience.');
 
-    return; res.redirect(`${config.baseUrl}404`);
-  } else {
+    return res.redirect(`${config.baseUrl}404`);
+  }
+
   // If the param fits season's convention, constructs the request param
-    requestedSeason = seasonMatches[0];
+  requestedSeason = seasonMatches[0];
 
-    // The first request to get all the available list options
-    nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
-      .then(data => {
-        // Models the options based on the data returned
-        const modeledOptionObject = modelListOptions(data, 'staff-picks');
+  // The first request to get all the available list options
+  nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
+    .then((data) => {
+      // Models the options based on the data returned
+      const modeledOptionObject = modelListOptions(data, 'staff-picks');
 
-        seasonListOptions = modeledOptionObject.options;
-        latestSeason = modeledOptionObject.latestOption;
+      const latestSeason = modeledOptionObject.latestOption;
+      seasonListOptions = modeledOptionObject.options;
 
-        // Updates default season list options with API response
-        listOptions.season.options = seasonListOptions;
+      // Updates default season list options with API response
+      listOptions.season.options = seasonListOptions;
 
-        // Calls the selected list
-        return nyplApiClientGet(`${platformConfig.endpoints.staffPicksPath}${requestedSeason}`);
-      })
-      .then(data => {
-        // If error returned from the endpoint
-        if (data.statusCode >= 400) {
-          console.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
+      // Calls the selected list
+      return nyplApiClientGet(`${platformConfig.endpoints.staffPicksPath}${requestedSeason}`);
+    })
+    .then((data) => {
+      const filters = utils.getAllTags(data.picks);
+      // Get the subset of tags that the picks can be filtered by.
+      const selectableFilters = utils.getSelectableTags(data.picks);
 
-          return res.redirect(`${config.baseUrl}404`);
-        }
-
-        // Uodate the option lists' default values by the request params
-        listOptions.season.currentValue = requestedSeason;
-        listOptions.audience.currentValue = audience;
-
-        res.locals.data = {
-          BookStore: {
-            listType: 'staff-picks',
-            filters: [],
-            currentPicks: data,
-            selectableFilters: [],
-            isJsEnabled: false,
-            listOptions,
-            currentSeason: requestedSeason,
-            currentAudience: audience,
-          },
-          pageTitle: '',
-          metaTags: [],
-        };
-        next();
-      })
-      .catch((error) => {
-        console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
+      // If error returned from the endpoint
+      if (data.statusCode >= 400) {
+        console.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
 
         return res.redirect(`${config.baseUrl}404`);
-      });
-  }
+      }
+
+      // Uodate the option lists' default values by the request params
+      listOptions.season.currentValue = requestedSeason;
+      listOptions.audience.currentValue = audience;
+
+      res.locals.data = {
+        BookStore: {
+          listType: 'staff-picks',
+          filters,
+          currentPicks: data,
+          selectableFilters,
+          isJsEnabled: false,
+          listOptions,
+          currentSeason: requestedSeason,
+          currentAudience: audience,
+        },
+        pageTitle: '',
+        metaTags: [],
+      };
+      next();
+    })
+    .catch((error) => {
+      console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
+
+      return res.redirect(`${config.baseUrl}404`);
+    });
 }
 
 /**
@@ -193,7 +197,6 @@ function selectMonthDataFormPost(req, res) {
   const audienceQuery = audience ? `?audience=${audience}` : '';
 
   if (!season || !audience) {
-
     console.error(
       `Form data of season or audience is undefined. season: ${season}, audience: ${audience}`
     );
