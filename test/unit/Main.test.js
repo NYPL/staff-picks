@@ -29,12 +29,19 @@ const picks = [
 ];
 const selectedFilters = ['funny', 'graphic-novels'];
 
+// this.props.currentPicks.picks,
+//         this.props.currentAudience,
+//         this.props.listType
+
+
 describe('Main', () => {
   describe('Default', () => {
     let component;
 
     before(() => {
-      component = shallow(<Main />);
+      component = shallow(
+        <Main currentPicks={{ picks }} currentAudience="Adult" listType="staff-picks" />
+      );
     });
 
     it('should be wrapped in an .nypl-row class', () => {
@@ -62,7 +69,14 @@ describe('Main', () => {
       let getNewPickSet;
 
       before(() => {
-        component = mount(<Main listOptions={config.staffPicksListOptions} />);
+        component = shallow(
+          <Main
+            listOptions={config.staffPicksListOptions}
+            currentPicks={{ picks }}
+            currentAudience="Adult"
+            listType="staff-picks"
+          />
+        );
         getNewPickSet = component.instance().getNewPickSet;
       });
 
