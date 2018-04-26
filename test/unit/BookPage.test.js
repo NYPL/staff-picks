@@ -3,9 +3,11 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import { Link } from 'react-router';
+import { stub } from 'sinon';
 
 import BookPage from '../../src/app/components/BookPage/BookPage';
 import Book from '../../src/app/components/Book/Book';
+import appConfig from '../../appConfig';
 
 const params = {
   id: '9780062422644-allegedly',
@@ -73,22 +75,24 @@ const currentPicks = {
   ],
   slug: 'staff-picks/2018-01-01',
   title: '2018 Winter Staff Picks',
-  type: 'Staff-Picks',
+  type: 'staff-picks',
 };
+
+const contextObject = { context: { router: { push: stub(), createHref: stub() } } };
 
 describe('BookPage Component', () => {
   let component;
 
   describe('Default component without data', () => {
     it('should not render the Book component if the pick object prop is not defined', () => {
-      component = mount(<BookPage />);
+      component = mount(<BookPage />, contextObject);
       expect(component.find('.book-item').length).to.equal(0);
     });
   });
 
   describe('Component with data and JavaScript enabled', () => {
     before(() => {
-      component = mount(<BookPage params={params} />);
+      component = mount(<BookPage params={params} />, contextObject);
       component.setState({ currentPicks });
     });
 
@@ -109,7 +113,7 @@ describe('BookPage Component', () => {
 
       expect(nav.length).to.equal(1);
       expect(link.length).to.equal(1);
-      expect(link.prop('to')).to.equal('/books-music-dvds/recommendations/staff-picks/2018-01-01');
+      expect(link.prop('to')).to.equal(`${appConfig.baseUrl}staff-picks/2018-01-01`);
       expect(link.text()).to.equal('NYPL Left Wedge SVG IconReturn to Staff Picks');
     });
 

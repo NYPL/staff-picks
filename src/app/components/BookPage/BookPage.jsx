@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { each as _each } from 'underscore';
+import {
+  each as _each,
+  isEmpty as _isEmpty,
+} from 'underscore';
 import { Link } from 'react-router';
 import { LeftWedgeIcon } from '@nypl/dgx-svg-icons';
 
 import Book from '../Book/Book';
 import BookStore from '../../stores/BookStore';
+import Actions from '../../actions/BookActions';
 import appConfig from '../../../../appConfig';
 import staffPicksDate from '../../utils/DateService';
 
@@ -14,13 +18,24 @@ class BookPage extends React.Component {
     super(props);
 
     this.state = BookStore.getState();
+    this.getPickAndAge = this.getPickAndAge.bind(this);
   }
 
-  render() {
-    const paramId = this.props.params && this.props.params.id ? this.props.params.id : '';
+  componentDidMount() {
+    const { picks } = this.state.currentPicks;
+    const { age } = this.getPickAndAge(picks);
 
-    const { date, picks } = this.state.currentPicks;
-    const displayDate = staffPicksDate(date);
+    Actions.updateCurrentAudience(age);
+  }
+
+  /**
+   * getPickAndAge(picks)
+   * Returns the found pick and its age.
+   * @param {array} picks
+   * @returns {object}
+   */
+  getPickAndAge(picks) {
+    const paramId = this.props.params && this.props.params.id ? this.props.params.id : '';
     let pick;
     let age;
 
@@ -31,11 +46,24 @@ class BookPage extends React.Component {
       }
     });
 
+    // No pick? Go to 404 instead of displaying an empty page.
+    if (!pick || _isEmpty(pick)) {
+      this.context.router.push(`${appConfig.baseUrl}404`);
+    }
+
+    return { pick, age };
+  }
+
+  render() {
+    const { date, picks, type = '' } = this.state.currentPicks || {};
+    const displayDate = staffPicksDate(date);
+    const { pick, age } = this.getPickAndAge(picks);
+
     return (
       <div className="nypl-row book-page">
         <div className="sidebar nypl-column-one-quarter">
           <nav aria-label="Breadcrumbs">
-            <Link to={`${appConfig.baseMonthUrl}${date}`} className="back-link">
+            <Link to={`${appConfig.baseUrl}${type}/${date}`} className="back-link">
               <LeftWedgeIcon ariaHidden />
               <span className="replaced-text visuallyHidden">Return to </span>
               Staff Picks
