@@ -129,6 +129,11 @@ const config = {
       ],
     },
   },
+  audienceMap: {
+    Adult: 'Adult',
+    YA: 'Young Adult',
+    Children: 'Children',
+  },
 };
 
 export default config;

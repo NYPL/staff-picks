@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import ListFilter from './ListFilter.jsx';
+import ListFilter from './ListFilter';
 import config from '../../../../appConfig';
-import BookActions from '../../../app/actions/BookActions.js';
+import BookActions from '../../../app/actions/BookActions';
 
 class ListSelector extends React.Component {
   constructor(props) {

@@ -71,8 +71,8 @@ const Sidebar = (props) => {
 };
 
 Sidebar.propTypes = {
-  filters: PropTypes.arrayOf(PropTypes.object),
-  selectableFilters: PropTypes.arrayOf(PropTypes.object),
+  filters: PropTypes.arrayOf(PropTypes.string),
+  selectableFilters: PropTypes.arrayOf(PropTypes.string),
   setSelectedFilter: PropTypes.func,
   clearFilters: PropTypes.func,
   isJsEnabled: PropTypes.bool,
