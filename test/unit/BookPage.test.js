@@ -8,6 +8,7 @@ import { stub } from 'sinon';
 import BookPage from '../../src/app/components/BookPage/BookPage';
 import Book from '../../src/app/components/Book/Book';
 import appConfig from '../../appConfig';
+import Actions from '../../src/app/actions/BookActions';
 
 const params = {
   id: '9780062422644-allegedly',
@@ -82,6 +83,7 @@ const contextObject = { context: { router: { push: stub(), createHref: stub() } 
 
 describe('BookPage Component', () => {
   let component;
+  Actions.updateCurrentAudience = stub();
 
   describe('Default component without data', () => {
     it('should not render the Book component if the pick object prop is not defined', () => {
