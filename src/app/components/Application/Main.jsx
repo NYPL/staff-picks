@@ -24,6 +24,8 @@ class Main extends React.Component {
     this.setSelectedFilter = this.setSelectedFilter.bind(this);
     this.clearFilters = this.clearFilters.bind(this);
     this.getPicksInfo = this.getPicksInfo.bind(this);
+    this.getNewPickSet = this.getNewPickSet.bind(this);
+    this.filterByAudience = this.filterByAudience.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -49,7 +51,11 @@ class Main extends React.Component {
     if (!selectedFilters || !selectedFilters.length) {
       const updatedPicks =
         this.filterByAudience(picks, this.props.currentAudience, 'staff-picks');
-      return updatedPicks || [];
+      return updatedPicks;
+    }
+
+    if (!Array.isArray(picks) || !picks.length) {
+      return [];
     }
 
     return picks.filter((book) => {
@@ -150,7 +156,7 @@ class Main extends React.Component {
     // Only applies the check for staff-picks lists
     if (type !== 'staff-picks') {
       // skips the checks and returns the original picks
-      return picks;
+      return picks || [];
     }
 
     const updatedPicks = [];

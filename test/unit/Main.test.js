@@ -214,10 +214,11 @@ describe('Main', () => {
             },
           },
         ],
+        type: 'staff-picks',
       };
       const filterByAudience = sinon.spy(Main.prototype, 'filterByAudience');
       const component = shallow(
-        <Main currentPicks={staffPicksData} currentAudience={'YA'} listType={'staff-picks'} />
+        <Main picksData={staffPicksData} currentAudience="YA" listType="staff-picks" />
       );
 
       after(() => {

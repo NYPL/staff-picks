@@ -1,5 +1,5 @@
+/* globals document */
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import {
   FilterIcon,
@@ -45,7 +45,9 @@ class BookFilters extends React.Component {
 
     this.clearTimeout(this.state.timeout);
     const timeout = setTimeout(() => {
-      document.getElementById('list-title').focus();
+      if (document.getElementById('list-title')) {
+        document.getElementById('list-title').focus();
+      }
     }, 400);
 
     this.setState({

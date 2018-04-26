@@ -35,7 +35,7 @@ describe('BookList', () => {
 
     it('should have an h2', () => {
       expect(component.find('h2').length).to.equal(1);
-      expect(component.find('h2').text()).to.equal('2017 Picks');
+      expect(component.find('h2').text()).to.equal(' Picks for 0 Books Found');
     });
 
     it('should not render an ul', () => {

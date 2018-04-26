@@ -23,7 +23,7 @@ class BookPage extends React.Component {
 
   componentDidMount() {
     const { picks } = this.state.picksData;
-    const { pick } = this.getPickAndAge(picks);
+    const { pick = {} } = this.getPickAndAge(picks);
 
     Actions.updateCurrentAudience(pick.ageGroup);
   }

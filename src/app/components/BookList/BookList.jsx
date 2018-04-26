@@ -17,7 +17,7 @@ const BookList = ({
       : null
   );
 
-  const { displayDate, displayAge } = displayInfo;
+  const { displayDate = {}, displayAge } = displayInfo;
   const booksfound = `${picksCount} Book${picksCount === 1 ? '' : 's'} Found`;
 
   return (
@@ -50,6 +50,7 @@ BookList.propTypes = {
 BookList.defaultProps = {
   picks: [],
   picksCount: 0,
+  displayInfo: {},
 };
 
 export default BookList;
