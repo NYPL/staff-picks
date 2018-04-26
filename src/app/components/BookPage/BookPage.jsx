@@ -22,7 +22,7 @@ class BookPage extends React.Component {
   }
 
   componentDidMount() {
-    const { picks } = this.state.currentPicks;
+    const { picks } = this.state.picksData;
     const { age } = this.getPickAndAge(picks);
 
     Actions.updateCurrentAudience(age);
@@ -55,7 +55,7 @@ class BookPage extends React.Component {
   }
 
   render() {
-    const { date, picks, type = '' } = this.state.currentPicks || {};
+    const { date, picks, type = '' } = this.state.picksData || {};
     const displayDate = staffPicksDate(date);
     const { pick, age } = this.getPickAndAge(picks);
 
