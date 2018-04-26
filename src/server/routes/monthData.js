@@ -102,7 +102,6 @@ function selectMonthData(req, res, next) {
     .then((data) => {
       // Models the options based on the data returned
       const modeledOptionObject = modelListOptions(data, 'staff-picks');
-      const latestSeason = modeledOptionObject.latestOption;
 
       seasonListOptions = modeledOptionObject.options;
 
