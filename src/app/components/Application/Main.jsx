@@ -81,7 +81,14 @@ class Main extends React.Component {
       selectedFilters = this.state.selectedFilters.filter(id => id !== filterId);
     }
 
-    const picks = this.getNewPickSet(this.props.currentPicks.picks, selectedFilters);
+    // Here we have a variable to preserve all the picks with current audience selected
+    // So we can always trace back when any filter is removed
+    const allPicksWithCurrentAudience = this.extractAudienceGroup(
+      this.props.currentPicks.picks,
+      this.props.currentAudience,
+      this.props.listType
+    );
+    const picks = this.getNewPickSet(allPicksWithCurrentAudience, selectedFilters);
     const selectableFilters = utils.getSelectableTags(picks);
 
     this.setState({
@@ -142,7 +149,6 @@ class Main extends React.Component {
   }
 
   render() {
-    console.log(this.state.picks.length);
     return (
       <div className="nypl-row">
         <Sidebar
