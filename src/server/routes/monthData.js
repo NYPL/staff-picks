@@ -1,14 +1,15 @@
 import nyplApiClient from '../helper/nyplApiClient';
 import config from '../../../appConfig';
+
+import utils from '../../app/utils/utils';
 import platformConfig from '../../../platformConfig';
 import modelListOptions from '../../app/utils/ModelListOptionsService';
-
 
 /* nyplApiClientGet(endpoint)
  * The function that wraps nyplApiClient for GET requests.
  * @param {string} endpoint
  */
-const nyplApiClientGet = (endpoint) =>
+const nyplApiClientGet = endpoint =>
   nyplApiClient().then(client => client.get(endpoint, { cache: false }));
 
 /* currentMonthData
@@ -22,7 +23,7 @@ function currentMonthData(req, res, next) {
 
   // The first request to get all the available list options
   nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
-    .then(data => {
+    .then((data) => {
       // Models the options based on the data returned
       const modeledOptionObject = modelListOptions(data, 'staff-picks');
 
@@ -35,7 +36,7 @@ function currentMonthData(req, res, next) {
       // Calls the latest list
       return nyplApiClientGet(`${platformConfig.endpoints.staffPicksPath}${latestSeason}`);
     })
-    .then(data => {
+    .then((data) => {
       res.locals.data = {
         BookStore: {
           listType: 'staff-picks',
@@ -98,9 +99,10 @@ function selectMonthData(req, res, next) {
 
   // The first request to get all the available list options
   nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
-    .then(data => {
+    .then((data) => {
       // Models the options based on the data returned
       const modeledOptionObject = modelListOptions(data, 'staff-picks');
+      const latestSeason = modeledOptionObject.latestOption;
 
       seasonListOptions = modeledOptionObject.options;
 
@@ -110,7 +112,11 @@ function selectMonthData(req, res, next) {
       // Calls the selected list
       return nyplApiClientGet(`${platformConfig.endpoints.staffPicksPath}${requestedSeason}`);
     })
-    .then(data => {
+    .then((data) => {
+      const filters = utils.getAllTags(data.picks);
+      // Get the subset of tags that the picks can be filtered by.
+      const selectableFilters = utils.getSelectableTags(data.picks);
+
       // If error returned from the endpoint
       if (data.statusCode >= 400) {
         console.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
@@ -125,9 +131,9 @@ function selectMonthData(req, res, next) {
       res.locals.data = {
         BookStore: {
           listType: 'staff-picks',
-          filters: [],
+          filters,
           currentPicks: data,
-          selectableFilters: [],
+          selectableFilters,
           isJsEnabled: false,
           listOptions,
           currentSeason: requestedSeason,
@@ -138,7 +144,7 @@ function selectMonthData(req, res, next) {
       };
       next();
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
       return res.redirect(`${config.baseUrl}404`);
