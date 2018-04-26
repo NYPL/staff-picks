@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { isEmpty as _isEmpty } from 'underscore';
 
 import BookList from '../BookList/BookList';
 import Sidebar from '../Sidebar/Sidebar';
