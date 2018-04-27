@@ -12,7 +12,7 @@ describe('Sidebar', () => {
 
     before(() => {
       component = mount(
-        <Sidebar isJsEnabled listOptions={config.staffPicksListOptions} />
+        <Sidebar isJsEnabled={true} listOptions={config.staffPicksListOptions} />
       );
     });
 

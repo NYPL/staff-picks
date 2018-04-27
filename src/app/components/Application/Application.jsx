@@ -19,9 +19,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    const annualList = !!(this.props.params && this.props.params.type &&
-      (this.props.params.type === 'childrens' || this.props.params.type === 'ya'));
-    this.state = _extend({ annualList }, this.props, BookStore.getState());
+    this.state = _extend({}, this.props, BookStore.getState());
     this.onChange = this.onChange.bind(this);
   }
 
@@ -61,9 +59,7 @@ class App extends React.Component {
         />
 
         <main className="main-page">
-          <Hero
-            heroData={heroData}
-          />
+          <Hero heroData={heroData} />
 
           <div id="app-content" className="nypl-full-width-wrapper">
             {React.cloneElement(this.props.children, this.state)}

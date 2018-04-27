@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { LeftWedgeIcon } from '@nypl/dgx-svg-icons';
+import { isEmpty as _isEmpty } from 'underscore';
 
 import BookFilters from '../BookFilters/BookFilters';
 import ListSelector from '../ListSelector/ListSelector';
 import config from '../../../../appConfig';
-import { isEmpty as _isEmpty } from 'underscore';
 
 const Sidebar = (props) => {
   /**
@@ -30,7 +30,7 @@ const Sidebar = (props) => {
    * Renders book filters
    * @param {boolean} shouldDisplay
    */
-  const renderBookFilters = (shouldDisplay) => {
+  const renderBookFilters = (shouldDisplay = false) => {
     if (!shouldDisplay) {
       return null;
     }
@@ -42,7 +42,6 @@ const Sidebar = (props) => {
         setSelectedFilter={props.setSelectedFilter}
         clearFilters={props.clearFilters}
         selectedFilters={props.selectedFilters}
-        picksCount={props.picksCount}
       />
     );
   };
@@ -52,7 +51,7 @@ const Sidebar = (props) => {
    * Renders list selector
    * @param {object} data
    */
-  const renderListSelector = (data) =>
+  const renderListSelector = data =>
     <ListSelector fieldsetProps={data} isJsEnabled={props.isJsEnabled} />;
 
   return (
@@ -81,7 +80,6 @@ Sidebar.propTypes = {
   isJsEnabled: PropTypes.bool,
   listOptions: PropTypes.object,
   selectedFilters: PropTypes.arrayOf(PropTypes.object),
-  picksCount: PropTypes.number,
 };
 
 Sidebar.defaultProps = {
@@ -92,7 +90,6 @@ Sidebar.defaultProps = {
   isJsEnabled: false,
   listOptions: {},
   selectedFilters: [],
-  picksCount: 0,
 };
 
 export default Sidebar;
