@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LeftWedgeIcon } from '@nypl/dgx-svg-icons';
+import { LeftWedgeIcon, ListIcon } from '@nypl/dgx-svg-icons';
 import { isEmpty as _isEmpty } from 'underscore';
 
 import BookFilters from '../BookFilters/BookFilters';
@@ -54,6 +54,9 @@ const Sidebar = (props) => {
   const renderListSelector = data =>
     <ListSelector fieldsetProps={data} isJsEnabled={props.isJsEnabled} />;
 
+  const { displayDate = {}, displayAge } = props.displayInfo;
+  const booksfound = `${props.picksCount} Book${props.picksCount === 1 ? '' : 's'} Found`;
+
   return (
     <div className="sidebar nypl-column-one-quarter">
       <nav aria-label="Breadcrumbs" className="book-filters-heading">
@@ -63,8 +66,11 @@ const Sidebar = (props) => {
         </a>
       </nav>
       <div className="book-filters-heading">
-        <p>// we need to put the component of title and picks count here //</p>
-        <h3><span>some svg icon here</span><span>Select a List</span></h3>
+        <h2 id="list-title" tabIndex="0">
+          {displayDate.month} {displayDate.year} Picks for {displayAge}
+          <span>{booksfound}</span>
+        </h2>
+        <h3><ListIcon /><span>Select a List</span></h3>
         {renderListSelector(updateCurrentListSelectorValues(props))}
         {renderBookFilters(props.isJsEnabled)}
       </div>
