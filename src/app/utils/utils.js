@@ -100,6 +100,17 @@ function Utils() {
 
     return _sortBy(tags, tag => tag);
   };
+
+  /**
+   * upperCaseFirstChar(str)
+   * Makes the first character uppercase in a string
+   * @param {string} str
+   */
+  this.upperCaseFirstChar = (str) => {
+    return str.replace(/^\w/, function (chr) {
+      return chr.toUpperCase();
+    });
+  };
 }
 
 export default new Utils();

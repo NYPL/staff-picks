@@ -57,15 +57,18 @@ const Sidebar = (props) => {
 
   return (
     <div className="sidebar nypl-column-one-quarter">
-      <nav aria-label="Breadcrumbs">
+      <nav aria-label="Breadcrumbs" className="book-filters-heading">
         <a href={config.recommendationsLink.url} className="back-link">
           <LeftWedgeIcon ariaHidden />
-          <span className="replaced-text visuallyHidden">Return to </span>
           {config.recommendationsLink.label}
         </a>
       </nav>
-      {renderListSelector(updateCurrentListSelectorValues(props))}
-      {renderBookFilters(props.isJsEnabled)}
+      <div className="book-filters-heading">
+        <p>// we need to put the component of title and picks count here //</p>
+        <h3><span>some svg icon here</span><span>Select a List</span></h3>
+        {renderListSelector(updateCurrentListSelectorValues(props))}
+        {renderBookFilters(props.isJsEnabled)}
+      </div>
     </div>
   );
 };

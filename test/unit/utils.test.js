@@ -64,4 +64,8 @@ describe('Utils functions', () => {
       expect(getAllTags(picks)).to.eql(['adventure', 'funny', 'graphic-novels', 'horror']);
     });
   });
+
+  describe('upperCaseFirstChar', () => {
+    it('should make the first character of a string uppercase.');
+  });
 });
