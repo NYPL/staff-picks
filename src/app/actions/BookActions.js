@@ -2,7 +2,7 @@
 import alt from '../alt';
 
 class Actions {
-  updatePicks(picks) {
+  updatePicksData(picks) {
     return picks;
   }
 
@@ -10,8 +10,20 @@ class Actions {
     return filters;
   }
 
+  updateCurrentSeason(season) {
+    return season;
+  }
+
+  updateCurrentAudience(audience) {
+    return audience;
+  }
+
   setIsJsEnabled(bool) {
     return bool;
+  }
+
+  setListOptions(listOptions) {
+    return listOptions;
   }
 
   setSelectableFilters(filters) {

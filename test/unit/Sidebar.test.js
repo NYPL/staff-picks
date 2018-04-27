@@ -3,7 +3,8 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import Sidebar from '../../src/app/components/Sidebar/Sidebar.jsx';
+import Sidebar from '../../src/app/components/Sidebar/Sidebar';
+import config from '../../appConfig';
 
 describe('Sidebar', () => {
   describe('Default component with JS turned on', () => {
@@ -11,7 +12,7 @@ describe('Sidebar', () => {
 
     before(() => {
       component = mount(
-        <Sidebar isJsEnabled={true} />
+        <Sidebar isJsEnabled={true} listOptions={config.staffPicksListOptions} />
       );
     });
 
@@ -28,7 +29,7 @@ describe('Sidebar', () => {
       expect(breadcrumbLink.text())
         .to.equal('NYPL Left Wedge SVG IconReturn to Recommendations');
       expect(breadcrumbLink.prop('href'))
-        .to.equal('https://www.nypl.org/books-music-dvds/recommendations');
+        .to.equal('https://www.nypl.org/books-music-movies/recommendations');
     });
 
     it('should render a <BookFilters /> component', () => {
@@ -40,9 +41,7 @@ describe('Sidebar', () => {
     let component;
 
     before(() => {
-      component = mount(
-        <Sidebar isJsEnabled={false} />
-      );
+      component = mount(<Sidebar isJsEnabled={false} listOptions={config.staffPicksListOptions} />);
     });
 
     it('should render .sidebar wrapper DOM', () => {

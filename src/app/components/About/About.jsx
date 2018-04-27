@@ -1,3 +1,4 @@
+/* global window */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -14,7 +15,7 @@ const {
   pageTitle,
 } = appConfig;
 
-class Sidebar extends React.Component {
+class About extends React.Component {
   constructor(props) {
     super(props);
 
@@ -32,13 +33,14 @@ class Sidebar extends React.Component {
 
   render() {
     const shareUrl = this.state.location.href;
-    const shareText = encodeURI(pageTitle[this.props.listType]);
+    const shareText = encodeURI(pageTitle[this.props.type]);
 
     return (
       <div className="about nypl-row">
         <h2>Additional Information</h2>
         <p>Many of these titles are available in formats for <a href={aboutUrls.print}>patrons
-        with print disabilities.</a></p>
+        with print disabilities.</a>
+        </p>
         <p><a href={aboutUrls.about}>About Best Books</a></p>
         <ul>
           <li>
@@ -65,8 +67,8 @@ class Sidebar extends React.Component {
   }
 }
 
-Sidebar.propTypes = {
-  listType: PropTypes.string,
+About.propTypes = {
+  type: PropTypes.string,
 };
 
-export default Sidebar;
+export default About;

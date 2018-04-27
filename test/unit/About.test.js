@@ -3,7 +3,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
-import About from '../../src/app/components/About/About.jsx';
+import About from '../../src/app/components/About/About';
 
 describe('About', () => {
   let component;
@@ -34,7 +34,7 @@ describe('About', () => {
     const aboutLink = component.find('a').at(1);
     expect(aboutLink.text()).to.equal('About Best Books');
     expect(aboutLink.prop('href'))
-      .to.equal('https://www.nypl.org/books-music-dvds/recommendations/about/annual-lists');
+      .to.equal('https://www.nypl.org/books-music-movies/recommendations/about/annual-lists');
   });
 
   it('should have two social media list items', () => {
