@@ -106,7 +106,6 @@ function selectMonthData(req, res, next) {
       // Models the options based on the data returned
       const modeledOptionObject = modelListOptions(data, 'staff-picks');
 
-      const latestSeason = modeledOptionObject.latestOption;
       seasonListOptions = modeledOptionObject.options;
 
       // Updates default season list options with API response
@@ -168,7 +167,7 @@ function selectClientMonthData(req, res) {
     });
   }
 
-  nyplApiClientGet(`/book-lists/staff-picks/${seasonMatches[0]}`)
+  nyplApiClientGet(`${platformConfig.endpoints.staffPicksPath}${seasonMatches[0]}`)
     .then((data) => {
       res.json({
         title: data.title,
