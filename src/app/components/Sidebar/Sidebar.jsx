@@ -68,8 +68,8 @@ const Sidebar = (props) => {
       <div className="book-filters-heading">
         <h2 id="list-title" tabIndex="0">
           {displayDate.month} {displayDate.year} Picks for {displayAge}
-          <span>{booksfound}</span>
         </h2>
+        <span className="pick-count">{booksfound}</span>
         <h3><ListIcon /><span>Select a List</span></h3>
         {renderListSelector(updateCurrentListSelectorValues(props))}
         {renderBookFilters(props.isJsEnabled)}

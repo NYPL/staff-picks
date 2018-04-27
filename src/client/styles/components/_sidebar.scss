@@ -1,4 +1,9 @@
 .sidebar {
+  h2 {
+    color: $nypl-red;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
   a.back-link {
     text-decoration: none;
     display: block;
@@ -16,5 +21,9 @@
     @include min-screen($mobile-breakpoint) {
       display: block;
     }
+  }
+  .pick-count {
+    display: block;
+    margin: 0;
   }
 }
