@@ -149,8 +149,8 @@ class ListSelector extends React.Component {
 
     return (
       <form action={`${config.baseApiUrl}`} method="post">
-        {this.renderFieldset(this.props.fieldsetProps.season)}
         {this.renderFieldset(this.props.fieldsetProps.audience)}
+        {this.renderFieldset(this.props.fieldsetProps.season)}
         <input type="submit" value="Select List" className={visuallyHidden} />
       </form>
     );

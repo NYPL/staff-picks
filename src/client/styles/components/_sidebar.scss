@@ -1,8 +1,34 @@
 .sidebar {
-  h2 {
+  h2#list-title {
     color: $nypl-red;
     font-size: 1.2rem;
     font-weight: 700;
+  }
+  h3 {
+    font-size: 1rem;
+    font-weight: 200;
+    margin: 16px 0;
+
+    svg {
+      float: left;
+      margin: -4px 0 0 -5px;
+    }
+  }
+  fieldset {
+    border: 0;
+    padding: 0.35rem 0;
+    margin: 0 0 10px 0;
+    label {
+      font-size: 0.75rem;
+      vertical-align: sub;
+    }
+    select {
+      background-color: #fff;
+      left: 120px;
+      height: 40px;
+      min-width: 160px;
+      position: absolute;
+    }
   }
   a.back-link {
     text-decoration: none;
