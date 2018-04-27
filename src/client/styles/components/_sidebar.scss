@@ -4,11 +4,13 @@
     display: block;
     background: #fff;
     color: #000;
-    margin: 0 0 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 12px 0;
 
     svg {
       float: left;
-      margin: -2px 0 0 -10px;
+      margin: 0 0 0 -10px;
     }
 
     @include min-screen($mobile-breakpoint) {
