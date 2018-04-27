@@ -4,6 +4,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import BookList from '../../src/app/components/BookList/BookList';
+import About from '../../src/app/components/About/About';
 
 const picks = [
   {
@@ -35,27 +36,38 @@ describe('BookList', () => {
 
     it('should have an h2', () => {
       expect(component.find('h2').length).to.equal(1);
-      expect(component.find('h2').text()).to.equal('2017 Picks');
+      expect(component.find('h2').text()).to.equal(' Picks for 0 Books Found');
     });
 
     it('should not render an ul', () => {
       expect(component.find('ul').length).to.equal(0);
     });
 
-    // Not sure why this is not working:
-    // it('should render an <About> component', () => {
-    //   expect(component.find('About').length).to.equal(1);
-    // });
+    it('should render an <About> component', () => {
+      expect(component.find(About).length).to.equal(1);
+    });
   });
 
   describe('With picks data passed', () => {
     let component;
+    const displayInfo = { displayDate: { month: 'Winter', year: 2017 }, displayAge: 'Adult' };
 
     before(() => {
       component = shallow(<BookList picks={picks} />);
     });
 
-    it('should not render an ul', () => {
+    it('should render the date and age selected for the list', () => {
+      expect(component.find('h2').length).to.equal(1);
+      expect(component.find('h2').text()).to.equal(' Picks for 0 Books Found');
+
+      component.setProps({ picksCount: 3, displayInfo });
+      expect(component.find('h2').text()).to.equal('Winter 2017 Picks for Adult3 Books Found');
+
+      component.setProps({ picksCount: 453 });
+      expect(component.find('h2').text()).to.equal('Winter 2017 Picks for Adult453 Books Found');
+    });
+
+    it('should render an ul', () => {
       expect(component.find('ul').length).to.equal(1);
     });
 

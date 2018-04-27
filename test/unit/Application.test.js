@@ -43,30 +43,12 @@ describe('Application', () => {
       expect(component.find('#app-content').length).to.equal(1);
     });
 
-    it('should have the `annualList` state variable set to true since `ya` is in the param', () => {
-      expect(component.state('annualList')).to.equal(true);
-    });
-
     it('should have empty values for the state', () => {
       expect(component.state('filters')).to.eql([]);
       expect(component.state('selectableFilters')).to.eql([]);
-      expect(component.state('currentPicks')).to.eql({});
+      expect(component.state('picksData')).to.eql({});
       // Since the component did not mount yet:
       expect(component.state('isJsEnabled')).to.eql(false);
-    });
-  });
-
-  describe('Childrens param', () => {
-    it('should have the `annualList` state variable set to true', () => {
-      const component = shallow(<Application params={params.childrens} children={[]} />);
-      expect(component.state('annualList')).to.equal(true);
-    });
-  });
-
-  describe('No specific param', () => {
-    it('should have the `annualList` state variable set to false', () => {
-      const component = shallow(<Application params={{}} children={[]} />);
-      expect(component.state('annualList')).to.equal(false);
     });
   });
 });
