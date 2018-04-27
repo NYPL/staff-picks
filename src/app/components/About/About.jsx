@@ -15,7 +15,7 @@ const {
   pageTitle,
 } = appConfig;
 
-class Sidebar extends React.Component {
+class About extends React.Component {
   constructor(props) {
     super(props);
 
@@ -67,8 +67,8 @@ class Sidebar extends React.Component {
   }
 }
 
-Sidebar.propTypes = {
+About.propTypes = {
   type: PropTypes.string,
 };
 
-export default Sidebar;
+export default About;

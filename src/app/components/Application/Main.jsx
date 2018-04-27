@@ -1,3 +1,4 @@
+/* globals document */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -26,6 +27,7 @@ class Main extends React.Component {
     this.getPicksInfo = this.getPicksInfo.bind(this);
     this.getNewPickSet = this.getNewPickSet.bind(this);
     this.filterByAudience = this.filterByAudience.bind(this);
+    this.getCount = this.getCount.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -68,7 +70,13 @@ class Main extends React.Component {
     });
   }
 
-  getPicksInfo(picksData) {
+  /**
+   * getPicksInfo(picksData, currentAudience)
+   * Gets display information for a specific pick data set.
+   * @param {object} picksData
+   * @param {string} currentAudience
+   */
+  getPicksInfo(picksData, currentAudience) {
     if (!picksData) {
       return {};
     }
@@ -78,7 +86,7 @@ class Main extends React.Component {
 
     return {
       displayDate,
-      displayAge: appConfig.audienceMap[this.props.currentAudience || 'Adult'],
+      displayAge: appConfig.audienceMap[currentAudience || 'Adult'],
     };
   }
 
@@ -140,9 +148,11 @@ class Main extends React.Component {
       selectedFilters,
     });
 
-    setTimeout(() => {
-      document.getElementById('list-title').focus();
-    }, 400);
+    if (document.getElementById('list-title')) {
+      setTimeout(() => {
+        document.getElementById('list-title').focus();
+      }, 400);
+    }
   }
 
   /**
@@ -194,7 +204,7 @@ class Main extends React.Component {
           picks={this.state.picks}
           isJsEnabled={this.props.isJsEnabled}
           type={type}
-          displayInfo={this.getPicksInfo(this.props.picksData)}
+          displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
           picksCount={picksCount}
         />
       </div>

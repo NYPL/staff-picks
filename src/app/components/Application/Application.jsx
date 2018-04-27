@@ -19,8 +19,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    // const annualList = !!(this.props.params && this.props.params.type &&
-    //   (this.props.params.type === 'childrens' || this.props.params.type === 'ya'));
     this.state = _extend({}, this.props, BookStore.getState());
     this.onChange = this.onChange.bind(this);
   }

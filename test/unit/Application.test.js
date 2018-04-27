@@ -51,18 +51,4 @@ describe('Application', () => {
       expect(component.state('isJsEnabled')).to.eql(false);
     });
   });
-
-  // describe('Childrens param', () => {
-  //   it('should have the `annualList` state variable set to true', () => {
-  //     const component = shallow(<Application params={params.childrens} children={[]} />);
-  //     expect(component.state('annualList')).to.equal(true);
-  //   });
-  // });
-  //
-  // describe('No specific param', () => {
-  //   it('should have the `annualList` state variable set to false', () => {
-  //     const component = shallow(<Application params={{}} children={[]} />);
-  //     expect(component.state('annualList')).to.equal(false);
-  //   });
-  // });
 });
