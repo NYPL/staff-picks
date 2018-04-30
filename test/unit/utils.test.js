@@ -66,6 +66,10 @@ describe('Utils functions', () => {
   });
 
   describe('upperCaseFirstChar', () => {
-    it('should make the first character of a string uppercase.');
+    const upperCaseFirstChar = utils.upperCaseFirstChar;
+
+    it('should make the first character of a string uppercase.', () => {
+      expect(upperCaseFirstChar('audience')).to.equal('Audience');
+    });
   });
 });
