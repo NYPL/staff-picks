@@ -82,6 +82,8 @@ class ListSelector extends React.Component {
           );
           // Updates and transit to the match URL
           this.updateLocation(`${config.baseUrl}staff-picks/${submitValue}`);
+          // Focuses on the title
+          utils.focusOnFirstAvailableElement(['sidebar-list-title', 'list-title']);
         }
       })
       .catch((error) => {
@@ -140,6 +142,8 @@ class ListSelector extends React.Component {
           handleChange={
             (e) => {
               BookActions.updateCurrentAudience(e.target.value);
+              // Focuses on the title
+              utils.focusOnFirstAvailableElement(['sidebar-list-title', 'list-title']);
 
               // Adds to GA event
               utils.trackPicks('Lists', `${this.props.fieldsetProps.season} - ${e.target.value}`);
