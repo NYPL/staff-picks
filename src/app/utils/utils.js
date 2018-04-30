@@ -102,11 +102,11 @@ function Utils() {
   };
 
   /**
-   * upperCaseFirstChar(str)
+   * capitalizeFirstChar(str)
    * Makes the first character uppercase in a string
    * @param {string} str
    */
-  this.upperCaseFirstChar = (str) => {
+  this.capitalizeFirstChar = (str) => {
     return str.replace(/^\w/, function (chr) {
       return chr.toUpperCase();
     });
