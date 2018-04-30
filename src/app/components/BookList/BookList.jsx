@@ -31,9 +31,10 @@ const BookList = ({
 
       {
         !!picks.length && (
-        <ul className="booklist nypl-row">
-          {renderBookItems(picks)}
-        </ul>)
+          <ul className="booklist nypl-row">
+            {renderBookItems(picks)}
+          </ul>
+        )
       }
 
       <About type={type} />

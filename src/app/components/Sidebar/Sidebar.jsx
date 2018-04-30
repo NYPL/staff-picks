@@ -86,6 +86,8 @@ Sidebar.propTypes = {
   isJsEnabled: PropTypes.bool,
   listOptions: PropTypes.object,
   selectedFilters: PropTypes.arrayOf(PropTypes.object),
+  displayInfo: PropTypes.object,
+  picksCount: PropTypes.number,
 };
 
 Sidebar.defaultProps = {

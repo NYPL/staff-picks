@@ -62,7 +62,9 @@ class ListSelector extends React.Component {
         // Catches the error from API, and update BookStore back to the default
         if (!response.status || response.status >= 400) {
           this.updateBookStore();
-          console.log(`API error with status code ${response.status}: ${response.data.errorMessage}`);
+          console.log(
+            `API error with status code ${response.status}: ${response.data.errorMessage}`
+          );
           // Leads the user to the 404 page
           this.updateLocation(`${config.baseUrl}404`);
         } else {
