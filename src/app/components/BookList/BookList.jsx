@@ -22,10 +22,12 @@ const BookList = ({
 
   return (
     <div className="booklist-section nypl-column-three-quarters">
-      <h2 id="list-title" tabIndex="0">
-        {displayDate.month} {displayDate.year} Picks for {displayAge}
-        <span>{booksfound}</span>
-      </h2>
+      <div className="list-title-container">
+        <h2 id="list-title" tabIndex="0">
+          {displayDate.month} {displayDate.year} Picks for {displayAge}
+          <span>{booksfound}</span>
+        </h2>
+      </div>
 
       {
         !!picks.length && (
