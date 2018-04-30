@@ -117,7 +117,6 @@ function Utils() {
    * Jumps the focus to the first available HTML element that is listed in an array of element IDs
    * @param {array} elementIds
    */
-  // this.focusOnTitle = (title1, title2) => {
   this.focusOnFirstAvailableElement = (elementIds) => {
     elementIds.some((elementId) => {
       const elementDOM = document.getElementById(elementId);
