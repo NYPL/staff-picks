@@ -25,7 +25,7 @@ const BookList = ({
       <div className="list-title-container">
         <h2 id="list-title" tabIndex="0">
           {displayDate.month} {displayDate.year} Picks for {displayAge}
-          <span>{booksfound}</span>
+          <span tabIndex="0">{booksfound}</span>
         </h2>
       </div>
 

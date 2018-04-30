@@ -20,7 +20,8 @@
     & > h2 {
       background: #fff;
       color: $nypl-red;
-      display: none;
+      display: block;
+      /*display: none;*/
       max-width: 100%;
 
       @include min-screen($mobile-breakpoint) {

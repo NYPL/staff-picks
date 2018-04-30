@@ -66,7 +66,7 @@ const Sidebar = (props) => {
         </a>
       </nav>
       <div className="book-filters-heading">
-        <h2 id="list-title" tabIndex="0">
+        <h2 id="sidebar-list-title" tabIndex="0">
           {displayDate.month} {displayDate.year} Picks for {displayAge}
         </h2>
         <span className="pick-count" tabIndex="0">{booksfound}</span>

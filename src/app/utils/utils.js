@@ -111,6 +111,27 @@ function Utils() {
       return chr.toUpperCase();
     });
   };
+
+  /**
+   * focusOnFirstAvailableElement(elementIds)
+   * Jumps the focus to the first available HTML element that is listed in an array of element IDs
+   * @param {array} elementIds
+   */
+  // this.focusOnTitle = (title1, title2) => {
+  this.focusOnFirstAvailableElement = (elementIds) => {
+    elementIds.some((elementId) => {
+      const elementDOM = document.getElementById(elementId);
+      const isDisplay = elementDOM ?
+        window.getComputedStyle(elementDOM).getPropertyValue('display') !== 'none' : false;
+
+      // Checks if the element exists and is displayed
+      if (elementDOM && isDisplay) {
+        elementDOM.focus();
+        // Returns true to stop the iteration
+        return true;
+      }
+    });
+  };
 }
 
 export default new Utils();

@@ -42,12 +42,10 @@ class BookFilters extends React.Component {
 
   onClick(filterId, active) {
     this.props.setSelectedFilter(filterId, active);
-
     this.clearTimeout(this.state.timeout);
+
     const timeout = setTimeout(() => {
-      if (document.getElementById('list-title')) {
-        document.getElementById('list-title').focus();
-      }
+      utils.focusOnFirstAvailableElement(['sidebar-list-title', 'list-title']);
     }, 400);
 
     this.setState({
