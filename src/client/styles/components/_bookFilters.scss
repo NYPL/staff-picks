@@ -54,7 +54,7 @@
     border: none;
     position: absolute;
     right: .2em;
-    top: .4em;
+    top: 14.2em;
 
     @include min-screen($mobile-breakpoint) {
       display: none;
