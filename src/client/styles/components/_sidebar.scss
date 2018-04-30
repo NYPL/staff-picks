@@ -74,5 +74,9 @@
   .pick-count {
     display: block;
     margin: 0;
+
+    @include min-screen($mobile-breakpoint) {
+      display: none;
+    }
   }
 }
