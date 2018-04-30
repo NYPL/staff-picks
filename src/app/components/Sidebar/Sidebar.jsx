@@ -69,7 +69,7 @@ const Sidebar = (props) => {
         <h2 id="list-title" tabIndex="0">
           {displayDate.month} {displayDate.year} Picks for {displayAge}
         </h2>
-        <span className="pick-count">{booksfound}</span>
+        <span className="pick-count" tabIndex="0">{booksfound}</span>
         <h3><ListIcon /><span>Select a List</span></h3>
         {renderListSelector(updateCurrentListSelectorValues(props))}
         {renderBookFilters(props.isJsEnabled)}
