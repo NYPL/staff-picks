@@ -23,11 +23,20 @@
       vertical-align: sub;
     }
     select {
+      /* Hides -webkit-appearance so we can use costmized dropdown icon*/
+      -webkit-appearance: none;
+      appearance: none;
+      /* The costmized dropdown icon*/
+      background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3LjY5OTA1IiBoZWlnaHQ9IjMuOTg3MTMiIHZpZXdCb3g9IjAgMCA3LjY5OTA1IDMuOTg3MTMiPgogIDx0aXRsZT5kb3duLjIud2VkZ2U8L3RpdGxlPgogIDxwb2x5bGluZSBwb2ludHM9IjcuMzk1IDAuMzYgMy44NSAzLjM3IDAuMzA0IDAuMzU4IiBmaWxsPSIjZmZmIiBzdHJva2U9IiMyMzFmMjAiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLXdpZHRoPSIwLjk0MDUiLz4KPC9zdmc+) no-repeat 95% #fff;
       background-color: #fff;
+      border-radius: 5px;
       left: 120px;
       height: 40px;
-      min-width: 160px;
+      min-width: 100px;
+      padding-left: 0.5rem;
+      padding-right: 7%;
       position: absolute;
+      width: 40%;
     }
   }
   a.back-link {
