@@ -64,7 +64,11 @@ const Sidebar = (props) => {
         </a>
       </nav>
       <div className="book-filters-heading">
-        <ListTitle displayInfo={props.displayInfo} picksCount={props.picksCount} />
+        <ListTitle
+          displayInfo={props.displayInfo}
+          picksCount={props.picksCount}
+          idPrefix="sidebar"
+        />
         <h3><ListIcon /><span>Select a List</span></h3>
         {renderListSelector(updateCurrentListSelectorValues(props))}
         {renderBookFilters(props.isJsEnabled)}
