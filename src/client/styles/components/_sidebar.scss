@@ -7,6 +7,14 @@
    @include min-screen($mobile-breakpoint) {
       display: none;
     }
+
+    span {
+      color: #000;
+      display: block;
+      font-size: .75rem;
+      font-weight: 400;
+      margin: 20px 0 0 0;
+    }
   }
   h3 {
     font-size: 1rem;
@@ -71,14 +79,6 @@
     svg {
       float: left;
       margin: 0 0 0 -10px;
-    }
-  }
-  .pick-count {
-    display: block;
-    margin: 0;
-
-    @include min-screen($mobile-breakpoint) {
-      display: none;
     }
   }
 }
