@@ -44,7 +44,7 @@ class App extends React.Component {
     if (type && _allKeys(config.heroData).includes(type)) {
       heroData = config.heroData[this.props.params.type];
     } else {
-      heroData = config.heroData['staff-picks'];
+      heroData = config.heroData.staffPicks;
     }
 
     return (

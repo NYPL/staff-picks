@@ -5,6 +5,7 @@ import { isEmpty as _isEmpty } from 'underscore';
 
 import BookFilters from '../BookFilters/BookFilters';
 import ListSelector from '../ListSelector/ListSelector';
+import ListTitle from '../ListTitle/ListTitle';
 import config from '../../../../appConfig';
 
 const Sidebar = (props) => {
@@ -54,9 +55,6 @@ const Sidebar = (props) => {
   const renderListSelector = data =>
     <ListSelector fieldsetProps={data} isJsEnabled={props.isJsEnabled} />;
 
-  const { displayDate = {}, displayAge } = props.displayInfo;
-  const booksfound = `${props.picksCount} Book${props.picksCount === 1 ? '' : 's'} Found`;
-
   return (
     <div className="sidebar nypl-column-one-quarter">
       <nav aria-label="Breadcrumbs" className="book-filters-heading">
@@ -66,10 +64,11 @@ const Sidebar = (props) => {
         </a>
       </nav>
       <div className="book-filters-heading">
-        <h2 id="sidebar-list-title" tabIndex="0">
-          {displayDate.month} {displayDate.year} Picks for {displayAge}
-        </h2>
-        <span className="pick-count" tabIndex="0">{booksfound}</span>
+        <ListTitle
+          displayInfo={props.displayInfo}
+          picksCount={props.picksCount}
+          idPrefix="sidebar"
+        />
         <h3><ListIcon /><span>Select a List</span></h3>
         {renderListSelector(updateCurrentListSelectorValues(props))}
         {renderBookFilters(props.isJsEnabled)}

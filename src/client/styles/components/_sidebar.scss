@@ -7,6 +7,14 @@
    @include min-screen($mobile-breakpoint) {
       display: none;
     }
+
+    span {
+      color: #000;
+      display: block;
+      font-size: .75rem;
+      font-weight: 400;
+      margin: 20px 0 0 0;
+    }
   }
   h3 {
     font-size: 1rem;
@@ -32,10 +40,12 @@
       vertical-align: sub;
     }
     select {
-      /* Hides -webkit-appearance so we can use costmized dropdown icon*/
+      /* Hides -moz-appearance so we can use costmized dropdown icon on FF */
+      -moz-appearance: none;
+      /* Hides -webkit-appearance so we can use costmized dropdown icon on WebKit-based browsers */
       -webkit-appearance: none;
       appearance: none;
-      /* The costmized dropdown icon*/
+      /* The costmized dropdown icon */
       background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3LjY5OTA1IiBoZWlnaHQ9IjMuOTg3MTMiIHZpZXdCb3g9IjAgMCA3LjY5OTA1IDMuOTg3MTMiPgogIDx0aXRsZT5kb3duLjIud2VkZ2U8L3RpdGxlPgogIDxwb2x5bGluZSBwb2ludHM9IjcuMzk1IDAuMzYgMy44NSAzLjM3IDAuMzA0IDAuMzU4IiBmaWxsPSIjZmZmIiBzdHJva2U9IiMyMzFmMjAiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLXdpZHRoPSIwLjk0MDUiLz4KPC9zdmc+) no-repeat 95% #fff;
       background-color: #fff;
       border-radius: 5px;
@@ -69,14 +79,6 @@
     svg {
       float: left;
       margin: 0 0 0 -10px;
-    }
-  }
-  .pick-count {
-    display: block;
-    margin: 0;
-
-    @include min-screen($mobile-breakpoint) {
-      display: none;
     }
   }
 }
