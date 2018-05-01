@@ -20,7 +20,7 @@ const ListFilter = ({ fieldsetProps, handleChange }) => {
 
   return (
     <fieldset>
-      <label htmlFor={selectId}>{`Select ${utils.capitalizeFirstChar(selectName)}`}</label>
+      <label htmlFor={selectId}>{`Select ${utils.capitalizeAString(selectName)}`}</label>
       <select
         id={selectId}
         name={selectName}
