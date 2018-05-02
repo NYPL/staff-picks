@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LeftWedgeIcon } from '@nypl/dgx-svg-icons';
+import { LeftWedgeIcon, ListIcon } from '@nypl/dgx-svg-icons';
 import { isEmpty as _isEmpty } from 'underscore';
 
 import BookFilters from '../BookFilters/BookFilters';
 import ListSelector from '../ListSelector/ListSelector';
+import ListTitle from '../ListTitle/ListTitle';
 import config from '../../../../appConfig';
 
 const Sidebar = (props) => {
@@ -56,15 +57,22 @@ const Sidebar = (props) => {
 
   return (
     <div className="sidebar nypl-column-one-quarter">
-      <nav aria-label="Breadcrumbs">
+      <nav aria-label="Breadcrumbs" className="book-filters-heading">
         <a href={config.recommendationsLink.url} className="back-link">
           <LeftWedgeIcon ariaHidden />
-          <span className="replaced-text visuallyHidden">Return to </span>
           {config.recommendationsLink.label}
         </a>
       </nav>
-      {renderListSelector(updateCurrentListSelectorValues(props))}
-      {renderBookFilters(props.isJsEnabled)}
+      <div className="book-filters-heading">
+        <ListTitle
+          displayInfo={props.displayInfo}
+          picksCount={props.picksCount}
+          idPrefix="sidebar"
+        />
+        <h3><ListIcon /><span>Select a List</span></h3>
+        {renderListSelector(updateCurrentListSelectorValues(props))}
+        {renderBookFilters(props.isJsEnabled)}
+      </div>
     </div>
   );
 };
@@ -77,6 +85,8 @@ Sidebar.propTypes = {
   isJsEnabled: PropTypes.bool,
   listOptions: PropTypes.object,
   selectedFilters: PropTypes.arrayOf(PropTypes.object),
+  displayInfo: PropTypes.object,
+  picksCount: PropTypes.number,
 };
 
 Sidebar.defaultProps = {
