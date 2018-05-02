@@ -1,16 +1,3 @@
-    // it('should have an h2', () => {
-    //   expect(component.find('h2').length).to.equal(1);
-    //   expect(component.find('h2').text()).to.equal(' Picks for 0 Books Found');
-    // });
-
-      // expect(component.find('h2').text()).to.equal(' Picks for 0 Books Found');
-
-      // component.setProps({ displayInfo, picksCount: 3, displayInfo });
-      // expect(component.find('h2').text()).to.equal('Winter 2017 Picks for Adult3 Books Found');
-
-      // component.setProps({ picksCount: 453 });
-      // expect(component.find('h2').text()).to.equal('Winter 2017 Picks for Adult453 Books Found');
-
 /* eslint-env mocha */
 import React from 'react';
 import { expect } from 'chai';

@@ -102,11 +102,11 @@ function Utils() {
   };
 
   /**
-   * capitalizeAString(str)
+   * capitalize(str)
    * capitalizes a string
    * @param {string} str
    */
-  this.capitalizeAString = (str) =>
+  this.capitalize = (str) =>
     str.replace(/^\w/, (chr) => chr.toUpperCase());
 
   /**

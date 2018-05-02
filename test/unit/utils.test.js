@@ -66,11 +66,11 @@ describe('Utils functions', () => {
     });
   });
 
-  describe('capitalizeAString', () => {
-    const capitalizeAString = utils.capitalizeAString;
+  describe('capitalize', () => {
+    const capitalize = utils.capitalize;
 
     it('should make the first character of a string uppercase.', () => {
-      expect(capitalizeAString('audience')).to.equal('Audience');
+      expect(capitalize('audience')).to.equal('Audience');
     });
   });
 
@@ -137,6 +137,12 @@ describe('Utils functions', () => {
       // On the first time, it should skip calling it as there's no valid DOM
       // And the third time should be the last interation as it satisfies the condition
       expect(getComputedStyle.callCount).to.equal(2);
+
+      // Tests which element got focused here (focus() got called)
+      expect(mockElements[0].focus.callCount).to.equal(0);
+      expect(mockElements[1].focus.callCount).to.equal(0);
+      expect(mockElements[2].focus.callCount).to.equal(1);
+      expect(mockElements[3].focus.callCount).to.equal(0);
     });
   });
 });
