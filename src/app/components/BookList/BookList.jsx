@@ -11,7 +11,6 @@ const BookList = ({
   type,
   displayInfo,
   picksCount,
-  idPrefix,
 }) => {
   const renderBookItems = currentBooks => (
     currentBooks.length ?
@@ -22,7 +21,7 @@ const BookList = ({
   return (
     <div className="booklist-section nypl-column-three-quarters">
       <div className="list-title-container">
-        <ListTitle displayInfo={displayInfo} picksCount={picksCount} idPrefix={idPrefix} />
+        <ListTitle displayInfo={displayInfo} picksCount={picksCount} />
       </div>
 
       {
@@ -50,7 +49,6 @@ BookList.defaultProps = {
   picks: [],
   picksCount: 0,
   displayInfo: {},
-  idPrefix: '',
 };
 
 export default BookList;
