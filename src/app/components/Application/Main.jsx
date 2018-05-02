@@ -22,6 +22,7 @@ class Main extends React.Component {
       picks,
     };
 
+    this.setSelectableFilter = this.setSelectableFilter.bind(this);
     this.setSelectedFilter = this.setSelectedFilter.bind(this);
     this.clearFilters = this.clearFilters.bind(this);
     this.getPicksInfo = this.getPicksInfo.bind(this);
@@ -119,6 +120,9 @@ class Main extends React.Component {
     });
   }
 
+  setSelectableFilter(filterId, active) {
+  }
+
   /**
    * getCount(picksData = {})
    * Returns the count of the current set of picks.
@@ -179,6 +183,8 @@ class Main extends React.Component {
       });
     }
 
+    this.setSelectableFilter();
+
     return updatedPicks;
   }
 
@@ -190,6 +196,7 @@ class Main extends React.Component {
       <div className="nypl-row">
         <Sidebar
           filters={this.props.filters}
+          // TODO: Selectable Filters needs to be refreshed
           selectableFilters={this.state.selectableFilters}
           setSelectedFilter={this.setSelectedFilter}
           clearFilters={this.clearFilters}
@@ -215,6 +222,7 @@ class Main extends React.Component {
 Main.propTypes = {
   filters: PropTypes.array,
   selectableFilters: PropTypes.array,
+  setSelectableFilter: PropTypes.func,
   picksData: PropTypes.object,
   isJsEnabled: PropTypes.bool,
   listOptions: PropTypes.object,
