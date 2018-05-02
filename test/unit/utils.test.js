@@ -77,6 +77,7 @@ describe('Utils functions', () => {
   describe('focusOnFirstAvailableElement', () => {
     const mockElementIds = ['element1', 'element2', 'element3', 'element4'];
     // The mockups of the elements that getElementById will return
+    // As we will run focus() on the function, we stub a focus function to each element
     const mockElements = [
       {
         id: 'element1',
