@@ -65,11 +65,11 @@ describe('Utils functions', () => {
     });
   });
 
-  describe('capitalizeAString', () => {
-    const capitalizeAString = utils.capitalizeAString;
+  describe('capitalize', () => {
+    const capitalize = utils.capitalize;
 
     it('should make the first character of a string uppercase.', () => {
-      expect(capitalizeAString('audience')).to.equal('Audience');
+      expect(capitalize('audience')).to.equal('Audience');
     });
   });
 });

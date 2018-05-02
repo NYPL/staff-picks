@@ -11,6 +11,7 @@ const BookList = ({
   type,
   displayInfo,
   picksCount,
+  idPrefix,
 }) => {
   const renderBookItems = currentBooks => (
     currentBooks.length ?

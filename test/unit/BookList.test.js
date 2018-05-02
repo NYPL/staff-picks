@@ -27,7 +27,7 @@ describe('BookList', () => {
     let component;
 
     before(() => {
-      component = shallow(<BookList />);
+      component = shallow(<BookList displayInfo={{}} picksCount={0} idPrefix={''} />);
     });
 
     it('should be wrapped in an .booklist-section and .nypl-column-three-quarters class', () => {
@@ -58,7 +58,7 @@ describe('BookList', () => {
 
     it('should render the date and age selected for the list', () => {
       // Passes empty data
-      component.setProps({ displayInfo: {}, picksCount: 0 });
+      component.setProps({ displayInfo: {}, picksCount: 0, idPrefix: '' });
 
       expect(component.find(ListTitle).node.props.displayInfo).to.deep.equal({});
       expect(component.find(ListTitle).node.props.picksCount).to.equal(0);
