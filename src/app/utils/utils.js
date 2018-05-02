@@ -100,6 +100,17 @@ function Utils() {
 
     return _sortBy(tags, tag => tag);
   };
+
+  /**
+   * capitalize(str)
+   * capitalizes a string
+   * @param {string} str
+   */
+  this.capitalize = (str) => {
+    return str.replace(/^\w/, function (chr) {
+      return chr.toUpperCase();
+    });
+  };
 }
 
 export default new Utils();

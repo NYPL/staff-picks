@@ -198,6 +198,8 @@ class Main extends React.Component {
           selectedFilters={this.state.selectedFilters}
           currentSeason={this.props.currentSeason}
           currentAudience={this.props.currentAudience}
+          displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
+          picksCount={picksCount}
         />
 
         <BookList

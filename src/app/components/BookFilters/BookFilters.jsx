@@ -128,7 +128,7 @@ class BookFilters extends React.Component {
 
     return (
       <div className="book-filters">
-        <div className="book-filters-heading">
+        <div className="book-filters-container">
           <h2><FilterIcon /> Filter by Tags</h2>
           <button
             aria-expanded={showFilters}
