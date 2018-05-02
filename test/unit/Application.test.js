@@ -4,6 +4,9 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import Application from '../../src/app/components/Application/Application';
+import { Header } from '@nypl/dgx-header-component';
+import Footer from '@nypl/dgx-react-footer';
+import Hero from '../../src/app/components/Hero/Hero';
 
 const params = {
   'staff-picks': {
@@ -31,16 +34,16 @@ describe('Application', () => {
     });
 
     it('should render a <Header> component', () => {
-      expect(component.find('Header').length).to.equal(1);
+      expect(component.find(Header).length).to.equal(1);
     });
 
     it('should render a <Footer> component', () => {
-      expect(component.find('Footer').length).to.equal(1);
+      expect(component.find(Footer).length).to.equal(1);
     });
 
     it('should render a <Hero> component', () => {
-      expect(component.find('Hero').length).to.equal(1);
-      expect(component.find('Hero').node.props.heroData.header).to.equal('Staff Picks');
+      expect(component.find(Hero).length).to.equal(1);
+      expect(component.find(Hero).node.props.heroData.header).to.equal('Staff Picks');
     });
 
     it('should render a div with id `app-content` for the skip navigation', () => {
@@ -69,16 +72,16 @@ describe('Application', () => {
     });
 
     it('should render a <Header> component', () => {
-      expect(component.find('Header').length).to.equal(1);
+      expect(component.find(Header).length).to.equal(1);
     });
 
     it('should render a <Footer> component', () => {
-      expect(component.find('Footer').length).to.equal(1);
+      expect(component.find(Footer).length).to.equal(1);
     });
 
     it('should render a <Hero> component', () => {
-      expect(component.find('Hero').length).to.equal(1);
-      expect(component.find('Hero').node.props.heroData.header).to.equal('Staff Picks');
+      expect(component.find(Hero).length).to.equal(1);
+      expect(component.find(Hero).node.props.heroData.header).to.equal('Staff Picks');
     });
 
     it('should render a div with id `app-content` for the skip navigation', () => {
@@ -107,16 +110,16 @@ describe('Application', () => {
     });
 
     it('should render a <Header> component', () => {
-      expect(component.find('Header').length).to.equal(1);
+      expect(component.find(Header).length).to.equal(1);
     });
 
     it('should render a <Footer> component', () => {
-      expect(component.find('Footer').length).to.equal(1);
+      expect(component.find(Footer).length).to.equal(1);
     });
 
     it('should render a <Hero> component', () => {
-      expect(component.find('Hero').length).to.equal(1);
-      expect(component.find('Hero').node.props.heroData.header).to.equal('Best Books for Teens');
+      expect(component.find(Hero).length).to.equal(1);
+      expect(component.find(Hero).node.props.heroData.header).to.equal('Best Books for Teens');
     });
 
     it('should render a div with id `app-content` for the skip navigation', () => {
