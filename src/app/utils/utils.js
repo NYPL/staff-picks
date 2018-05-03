@@ -106,10 +106,34 @@ function Utils() {
    * capitalizes a string
    * @param {string} str
    */
-  this.capitalize = (str) => {
-    return str.replace(/^\w/, function (chr) {
-      return chr.toUpperCase();
+  this.capitalize = (str) =>
+    str.replace(/^\w/, (chr) => chr.toUpperCase());
+
+  /**
+   * focusOnFirstAvailableElement(elementIds)
+   * Jumps the focus to the first available HTML element that is listed in an array of element IDs.
+   * @param {array} elementIds
+   */
+  this.focusOnFirstAvailableElement = (elementIds) => {
+    if (!Array.isArray(elementIds) || !elementIds.length) {
+      return;
+    }
+
+    // Finds the element that meets the condition by its ID
+    const IdOfElementToBeFocused = elementIds.find((elementId) => {
+      const elementDOM = document.getElementById(elementId);
+      const isDisplay = elementDOM ?
+        window.getComputedStyle(elementDOM).getPropertyValue('display') !== 'none' : false;
+
+      // Checks if the element exists and is displayed
+      // If so, return the ID of the element
+      return elementDOM && isDisplay;
     });
+
+    // Checks if any element is returned as IdOfElementToBeFocused
+    if (IdOfElementToBeFocused) {
+      document.getElementById(IdOfElementToBeFocused).focus();
+    }
   };
 }
 

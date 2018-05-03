@@ -82,6 +82,8 @@ class ListSelector extends React.Component {
           );
           // Updates and transit to the match URL
           this.updateLocation(`${config.baseUrl}staff-picks/${submitValue}`);
+          // Focuses on the title
+          utils.focusOnFirstAvailableElement(['sidebar-list-title', 'list-title']);
         }
       })
       .catch((error) => {
@@ -106,6 +108,9 @@ class ListSelector extends React.Component {
    */
   handleSeasonChange(e) {
     this.submitFormRequest(e.target.value);
+
+    // Adds to GA event
+    utils.trackPicks('Lists', `${e.target.value} - ${this.props.fieldsetProps.audience}`);
   }
 
   /**
@@ -137,6 +142,11 @@ class ListSelector extends React.Component {
           handleChange={
             (e) => {
               BookActions.updateCurrentAudience(e.target.value);
+              // Focuses on the title
+              utils.focusOnFirstAvailableElement(['sidebar-list-title', 'list-title']);
+
+              // Adds to GA event
+              utils.trackPicks('Lists', `${this.props.fieldsetProps.season} - ${e.target.value}`);
             }
           }
         />
@@ -153,7 +163,12 @@ class ListSelector extends React.Component {
       <form action={`${config.baseApiUrl}`} method="post">
         {this.renderFieldset(this.props.fieldsetProps.audience)}
         {this.renderFieldset(this.props.fieldsetProps.season)}
-        <input type="submit" value="Select List" className={visuallyHidden} />
+        <input
+          type="submit"
+          value="Select List"
+          className={visuallyHidden}
+          tabIndex={visuallyHidden ? -1 : 0}
+        />
       </form>
     );
   }
