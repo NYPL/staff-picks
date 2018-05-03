@@ -130,7 +130,10 @@ function Utils() {
       return elementDOM && isDisplay;
     });
 
-    document.getElementById(IdOfElementToBeFocused).focus();
+    // Checks if any element is returned as IdOfElementToBeFocused
+    if (IdOfElementToBeFocused) {
+      document.getElementById(IdOfElementToBeFocused).focus();
+    }
   };
 }
 
