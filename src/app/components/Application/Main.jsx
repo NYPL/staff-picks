@@ -22,7 +22,7 @@ class Main extends React.Component {
       picks,
     };
 
-    this.setSelectableFilter = this.setSelectableFilter.bind(this);
+    this.setSelectableFilters = this.setSelectableFilters.bind(this);
     this.setSelectedFilter = this.setSelectedFilter.bind(this);
     this.clearFilters = this.clearFilters.bind(this);
     this.getPicksInfo = this.getPicksInfo.bind(this);
@@ -120,7 +120,9 @@ class Main extends React.Component {
     });
   }
 
-  setSelectableFilter(filterId, active) {
+  setSelectableFilters(picks) {
+    const selectableFilters = utils.getSelectableTags(picks);
+    return selectableFilters;
   }
 
   /**
@@ -183,10 +185,9 @@ class Main extends React.Component {
       });
     }
 
-    this.setSelectableFilter();
-
     return updatedPicks;
   }
+
 
   render() {
     const { type } = this.props.picksData;
@@ -196,8 +197,7 @@ class Main extends React.Component {
       <div className="nypl-row">
         <Sidebar
           filters={this.props.filters}
-          // TODO: Selectable Filters needs to be refreshed
-          selectableFilters={this.state.selectableFilters}
+          selectableFilters={this.setSelectableFilters(this.state.picks)}
           setSelectedFilter={this.setSelectedFilter}
           clearFilters={this.clearFilters}
           isJsEnabled={this.props.isJsEnabled}
