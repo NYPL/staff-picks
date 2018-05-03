@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   extend as _extend,
   isEmpty as _isEmpty,
-  findKey as _findKey,
+  allKeys as _allKeys,
 } from 'underscore';
 
 // NYPL Components
@@ -37,18 +37,14 @@ class App extends React.Component {
   }
 
   render() {
-    // temporarily add the check here for staff picks config
     let heroData = undefined;
+    const type = !_isEmpty(this.props.params) ? this.props.params.type : undefined;
 
-    if (_isEmpty(this.props.params)) {
-      heroData = config.heroData.staffPicks;
+    // Check if the params type is included in valid data set
+    if (type && _allKeys(config.heroData).includes(type)) {
+      heroData = config.heroData[this.props.params.type];
     } else {
-      // Check if the params are from Best Book URL or Staff Picks URL
-      if (_findKey(this.props.params, 'type')) {
-        heroData = config.heroData.annual[this.props.params.type];
-      } else {
-        heroData = config.heroData.staffPicks;
-      }
+      heroData = config.heroData.staffPicks;
     }
 
     return (

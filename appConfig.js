@@ -86,19 +86,17 @@ const config = {
       description: 'This is staff picks page.',
       heroImageUrl: 'src/client/images/desktop.teens.cover.2017.png',
     },
-    annual: {
-      ya: {
-        category: '',
-        header: 'Best Books for Teens',
-        description: 'Explore our annual selection of outstanding young adult titles.',
-        heroImageUrl: 'src/client/images/desktop.teens.cover.2017.png',
-      },
-      childrens: {
-        category: '',
-        header: 'Best Books for Kids',
-        description: 'Explore our annual selection of outstanding children\'s titles.',
-        heroImageUrl: 'src/client/images/desktop.kids.cover.2017.png',
-      },
+    ya: {
+      category: '',
+      header: 'Best Books for Teens',
+      description: 'Explore our annual selection of outstanding young adult titles.',
+      heroImageUrl: 'src/client/images/desktop.teens.cover.2017.png',
+    },
+    childrens: {
+      category: '',
+      header: 'Best Books for Kids',
+      description: 'Explore our annual selection of outstanding children\'s titles.',
+      heroImageUrl: 'src/client/images/desktop.kids.cover.2017.png',
     },
   },
   pageTitle: {

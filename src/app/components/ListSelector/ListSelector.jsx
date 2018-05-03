@@ -62,7 +62,9 @@ class ListSelector extends React.Component {
         // Catches the error from API, and update BookStore back to the default
         if (!response.status || response.status >= 400) {
           this.updateBookStore();
-          console.log(`API error with status code ${response.status}: ${response.data.errorMessage}`);
+          console.log(
+            `API error with status code ${response.status}: ${response.data.errorMessage}`
+          );
           // Leads the user to the 404 page
           this.updateLocation(`${config.baseUrl}404`);
         } else {
@@ -80,6 +82,8 @@ class ListSelector extends React.Component {
           );
           // Updates and transit to the match URL
           this.updateLocation(`${config.baseUrl}staff-picks/${submitValue}`);
+          // Focuses on the title
+          utils.focusOnFirstAvailableElement(['sidebar-list-title', 'list-title']);
         }
       })
       .catch((error) => {
@@ -104,6 +108,9 @@ class ListSelector extends React.Component {
    */
   handleSeasonChange(e) {
     this.submitFormRequest(e.target.value);
+
+    // Adds to GA event
+    utils.trackPicks('Lists', `${e.target.value} - ${this.props.fieldsetProps.audience}`);
   }
 
   /**
@@ -135,6 +142,11 @@ class ListSelector extends React.Component {
           handleChange={
             (e) => {
               BookActions.updateCurrentAudience(e.target.value);
+              // Focuses on the title
+              utils.focusOnFirstAvailableElement(['sidebar-list-title', 'list-title']);
+
+              // Adds to GA event
+              utils.trackPicks('Lists', `${this.props.fieldsetProps.season} - ${e.target.value}`);
             }
           }
         />
@@ -149,9 +161,14 @@ class ListSelector extends React.Component {
 
     return (
       <form action={`${config.baseApiUrl}`} method="post">
-        {this.renderFieldset(this.props.fieldsetProps.season)}
         {this.renderFieldset(this.props.fieldsetProps.audience)}
-        <input type="submit" value="Select List" className={visuallyHidden} />
+        {this.renderFieldset(this.props.fieldsetProps.season)}
+        <input
+          type="submit"
+          value="Select List"
+          className={visuallyHidden}
+          tabIndex={visuallyHidden ? -1 : 0}
+        />
       </form>
     );
   }

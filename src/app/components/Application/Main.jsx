@@ -148,11 +148,9 @@ class Main extends React.Component {
       selectedFilters,
     });
 
-    if (document.getElementById('list-title')) {
-      setTimeout(() => {
-        document.getElementById('list-title').focus();
-      }, 400);
-    }
+    setTimeout(() => {
+      utils.focusOnFirstAvailableElement(['sidebar-list-title', 'list-title']);
+    }, 400);
   }
 
   /**
@@ -198,6 +196,8 @@ class Main extends React.Component {
           selectedFilters={this.state.selectedFilters}
           currentSeason={this.props.currentSeason}
           currentAudience={this.props.currentAudience}
+          displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
+          picksCount={picksCount}
         />
 
         <BookList
