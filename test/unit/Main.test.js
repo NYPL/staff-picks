@@ -54,7 +54,6 @@ describe('Main', () => {
 
     it('should have a state of empty default values', () => {
       expect(component.state('selectedFilters')).to.eql([]);
-      expect(component.state('selectableFilters')).to.eql([]);
       expect(component.state('picks')).to.eql([]);
     });
   });
@@ -166,13 +165,11 @@ describe('Main', () => {
 
       it('should not change the state if nothing was passed', () => {
         expect(component.state('selectedFilters')).to.eql([]);
-        expect(component.state('selectableFilters')).to.eql([]);
         expect(component.state('picks')).to.eql([]);
 
         setSelectedFilter();
 
         expect(component.state('selectedFilters')).to.eql([]);
-        expect(component.state('selectableFilters')).to.eql([]);
         expect(component.state('picks')).to.eql([]);
       });
 
@@ -201,7 +198,6 @@ describe('Main', () => {
         setSelectedFilter = component.instance().setSelectedFilter;
 
         expect(component.state('picks')).to.eql(picks);
-        expect(component.state('selectableFilters')).to.eql([]);
         expect(component.state('selectedFilters')).to.eql([]);
 
         setSelectedFilter('funny', true);
