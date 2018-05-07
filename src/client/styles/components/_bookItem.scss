@@ -211,10 +211,10 @@ $book-card-largescreen-gutter: 3.5%;
     }
 
     &.no-js {
-      -webkit-animation: fadeIn 3s;
-      -moz-animation: fadeIn 3s;
-      -o-animation: fadeIn 3s;
-      animation: fadeIn 3s;
+      -webkit-animation: fadeInBeforeJSDetected 3s;
+      -moz-animation: fadeInBeforeJSDetected 3s;
+      -o-animation: fadeInBeforeJSDetected 3s;
+      animation: fadeInBeforeJSDetected 3s;
     }
 
     @include min-screen($xtrasmall-breakpoint) {

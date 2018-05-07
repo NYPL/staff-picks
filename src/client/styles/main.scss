@@ -12,6 +12,7 @@ App-specific utilities and defaults
 // @import 'utils/fonts';
 @import 'utils/colors';
 @import 'utils/utils';
+@import 'utils/animations';
 
 /*
 Import style rules from NYPL React module components
@@ -48,63 +49,4 @@ body {
 
 li {
   list-style: none;
-}
-
-/* Sets fade in animation for different browsers */
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 0;
-    visibility: hidden;
-  }
-  99% {
-    opacity: 0.1;
-    visibility: hidden;
-  }
-  100% {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-
-@-moz-keyframes fadeIn {
-  0% {
-    opacity: 0;
-    visibility: hidden;
-  }
-  99% {
-    opacity: 0.1;
-    visibility: hidden;
-  }
-  100% {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-@-o-keyframes fadeIn {
-  0% {
-    opacity: 0;
-    visibility: hidden;
-  }
-  99% {
-    opacity: 0.1;
-    visibility: hidden;
-  }
-  100% {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    visibility: hidden;
-  }
-  99% {
-    opacity: 0.1;
-    visibility: hidden;
-  }
-  100% {
-    opacity: 1;
-    visibility: visible;
-  }
 }
