@@ -217,7 +217,6 @@ class Main extends React.Component {
 Main.propTypes = {
   filters: PropTypes.array,
   selectableFilters: PropTypes.array,
-  setSelectableFilter: PropTypes.func,
   picksData: PropTypes.object,
   isJsEnabled: PropTypes.bool,
   listOptions: PropTypes.object,

@@ -23,7 +23,6 @@ class BookFilters extends React.Component {
       disabled: false,
       showFilters: false,
       timeout: undefined,
-      selectableFilters: this.props.selectableFilters,
     };
 
     this.renderItems = this.renderItems.bind(this);
@@ -167,7 +166,6 @@ BookFilters.propTypes = {
   filters: PropTypes.array,
   selectableFilters: PropTypes.array,
   setSelectedFilter: PropTypes.func,
-  setSelectableFilters: PropTypes.func,
   clearFilters: PropTypes.func,
   selectedFilters: PropTypes.array,
 };
