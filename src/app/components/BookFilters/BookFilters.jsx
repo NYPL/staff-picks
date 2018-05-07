@@ -17,7 +17,7 @@ class BookFilters extends React.Component {
 
     this.state = {
       // Create an array data structure of filter objects.
-      filters: utils.getFilters(this.props.filters),
+      filters: utils.getFiltersMapping(this.props.filters),
       selectedFilters: this.props.selectedFilters,
       focusId: '',
       disabled: false,
@@ -34,8 +34,8 @@ class BookFilters extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const newFilters = utils.getFilters(nextProps.filters);
-    this.setState({ selectedFilters: nextProps.selectedFilters, filters: newFilters });
+    const filters = utils.getFiltersMapping(nextProps.filters);
+    this.setState({ selectedFilters: nextProps.selectedFilters, filters });
   }
 
   onClick(filterId, active) {
