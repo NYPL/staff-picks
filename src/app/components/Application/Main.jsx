@@ -17,7 +17,6 @@ class Main extends React.Component {
       this.filterByAudience(picksData.picks, this.props.currentAudience, picksData.type);
 
     this.state = {
-      selectableFilters: this.props.selectableFilters,
       selectedFilters: [],
       picks,
     };

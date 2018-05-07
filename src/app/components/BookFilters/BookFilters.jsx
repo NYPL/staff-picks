@@ -34,8 +34,10 @@ class BookFilters extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const filters = utils.getFiltersMapping(nextProps.filters);
-    this.setState({ selectedFilters: nextProps.selectedFilters, filters });
+    this.setState({
+      selectedFilters: nextProps.selectedFilters,
+      filters: utils.getFiltersMapping(nextProps.filters)
+    });
   }
 
   onClick(filterId, active) {
