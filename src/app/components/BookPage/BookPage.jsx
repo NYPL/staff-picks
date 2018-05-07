@@ -26,6 +26,12 @@ class BookPage extends React.Component {
     const { pick = {} } = this.getPickAndAge(picks);
 
     Actions.updateCurrentAudience(pick.ageGroup);
+
+    const hash = this.props.location.hash;
+    if (hash) {
+      const { date, type = '' } = this.state.picksData || {};
+      this.context.router.push(`${appConfig.baseUrl}${type}/${date}${hash}`);
+    }
   }
 
   /**

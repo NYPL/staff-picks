@@ -1,6 +1,7 @@
 /* globals document */
 import React from 'react';
 import PropTypes from 'prop-types';
+import Scrollchor from 'react-scrollchor';
 
 import BookList from '../BookList/BookList';
 import Sidebar from '../Sidebar/Sidebar';
@@ -20,6 +21,7 @@ class Main extends React.Component {
       selectableFilters: this.props.selectableFilters,
       selectedFilters: [],
       picks,
+      refs: [],
     };
 
     this.setSelectedFilter = this.setSelectedFilter.bind(this);
@@ -28,6 +30,16 @@ class Main extends React.Component {
     this.getNewPickSet = this.getNewPickSet.bind(this);
     this.filterByAudience = this.filterByAudience.bind(this);
     this.getCount = this.getCount.bind(this);
+  }
+
+  componentDidMount() {
+    const hash = this.props.location.hash;
+    console.log(this.state.refs);
+    if (hash) {
+      // setTimeout(() => this["9781410493996-behind-closed-doors"].simulateClick(), 500);
+      setTimeout(() => document.getElementById(hash.substr(1)).scrollIntoView(), 500);
+      // <Scrollchor ref={ref => (this["9781410493996-behind-closed-doors"] = ref)} to="9781410493996-behind-closed-doors" />
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -180,6 +192,10 @@ class Main extends React.Component {
     return updatedPicks;
   }
 
+  addToRefs(ref) {
+    this.setState({ refs: this.state.refs.append(ref) });
+  }
+
   render() {
     const { type } = this.props.picksData;
     const picksCount = this.getCount();
@@ -206,6 +222,7 @@ class Main extends React.Component {
           type={type}
           displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
           picksCount={picksCount}
+          addToRefs={this.addToRefs}
         />
       </div>
     );

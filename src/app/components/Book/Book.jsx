@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { EReaderIcon, BookIcon } from '@nypl/dgx-svg-icons';
 import { isEmpty as _isEmpty, isString as _isString } from 'underscore';
+import Scrollchor from 'react-scrollchor';
+
 import config from '../../../../appConfig';
 import utils from '../../utils/utils';
 
@@ -35,8 +37,13 @@ const Book = ({ pick, isJsEnabled }) => {
     );
   };
 
-  const renderTitle = title => (
-    !isStringEmpty(title) ? <h3 className="book-item-title">{title}</h3> : null
+  const renderTitle = (title, slug) => (
+    !isStringEmpty(title) ? (
+      <h3 className="book-item-title" id={slug}>
+        <Scrollchor to={`#${slug}`}>
+          {title}
+        </Scrollchor>
+      </h3>) : null
   );
 
   const renderAuthor = author => (
@@ -122,7 +129,7 @@ const Book = ({ pick, isJsEnabled }) => {
       key={!isStringEmpty(book.title) ? book.title : null}
     >
       {renderBookCoverImage(book.imageUrl)}
-      {renderTitle(book.title)}
+      {renderTitle(book.title, pick.slug)}
       {renderAuthor(book.author)}
       {renderIllustrator(book.illustrator)}
       {renderTranslator(book.translator)}
