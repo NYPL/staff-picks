@@ -22,7 +22,6 @@ class Main extends React.Component {
       picks,
     };
 
-    this.setSelectableFilters = this.setSelectableFilters.bind(this);
     this.setSelectedFilter = this.setSelectedFilter.bind(this);
     this.clearFilters = this.clearFilters.bind(this);
     this.getPicksInfo = this.getPicksInfo.bind(this);
@@ -120,11 +119,6 @@ class Main extends React.Component {
     });
   }
 
-  setSelectableFilters(picks) {
-    const selectableFilters = utils.getSelectableTags(picks);
-    return selectableFilters;
-  }
-
   /**
    * getCount(picksData = {})
    * Returns the count of the current set of picks.
@@ -192,12 +186,11 @@ class Main extends React.Component {
   render() {
     const { type } = this.props.picksData;
     const picksCount = this.getCount();
-
     return (
       <div className="nypl-row">
         <Sidebar
           filters={this.props.filters}
-          selectableFilters={this.setSelectableFilters(this.state.picks)}
+          selectableFilters={utils.getSelectableTags(this.state.picks)}
           setSelectedFilter={this.setSelectedFilter}
           clearFilters={this.clearFilters}
           isJsEnabled={this.props.isJsEnabled}
