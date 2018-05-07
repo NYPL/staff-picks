@@ -34,10 +34,12 @@ class Main extends React.Component {
 
   componentDidMount() {
     const hash = this.props.location.hash;
-    console.log(this.state.refs);
     if (hash) {
       // setTimeout(() => this["9781410493996-behind-closed-doors"].simulateClick(), 500);
-      setTimeout(() => document.getElementById(hash.substr(1)).scrollIntoView(), 500);
+      setTimeout(() => {
+        document.getElementById(hash.substr(1)).scrollIntoView();
+        // setTimeout(() => this["9781410493996-behind-closed-doors"].simulateClick(), 500);
+      }, 800);
       // <Scrollchor ref={ref => (this["9781410493996-behind-closed-doors"] = ref)} to="9781410493996-behind-closed-doors" />
     }
   }

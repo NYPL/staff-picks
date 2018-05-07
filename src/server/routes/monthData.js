@@ -71,6 +71,12 @@ function currentMonthData(req, res, next) {
 function selectMonthData(req, res, next) {
   const listOptions = config.staffPicksListOptions;
   let seasonListOptions = [];
+  const itemId = req.params.id;
+  const type = req.params.type;
+
+  if (itemId) {
+    return res.redirect(`${config.baseUrl}${type}/${req.params.time}#${itemId}`);
+  }
 
   // Checks if the URL input fits season's convention
   const seasonMatches = req.params.time.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);

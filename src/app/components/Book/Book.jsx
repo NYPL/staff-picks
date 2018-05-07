@@ -39,7 +39,7 @@ const Book = ({ pick, isJsEnabled }) => {
 
   const renderTitle = (title, slug) => (
     !isStringEmpty(title) ? (
-      <h3 className="book-item-title" id={slug}>
+      <h3 className="book-item-title" id={slug} tabIndex="0">
         <Scrollchor to={`#${slug}`}>
           {title}
         </Scrollchor>
@@ -125,7 +125,7 @@ const Book = ({ pick, isJsEnabled }) => {
 
   return (
     <li
-      className={`book-item ${getTagClasses(tagsArray)} ${hasIllustratorTranslatorClass}`}
+      className={`book-item ${getTagClasses(tagsArray)} ${hasIllustratorTranslatorClass} ${pick.slug}`}
       key={!isStringEmpty(book.title) ? book.title : null}
     >
       {renderBookCoverImage(book.imageUrl)}
