@@ -68,7 +68,8 @@ function Utils() {
 
   /**
    * getFilters(filters)
-   * Returns an array of (id, label) pair for pick tags.
+   * Generates a Map of (pick tag id => pick tag label) key-value pairs,
+   * returns an Object of this map.
    * @param filters
    * @returns {object} filters
    */
