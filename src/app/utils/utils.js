@@ -67,6 +67,19 @@ function Utils() {
   };
 
   /**
+   * getFilters(filters)
+   * Returns an array of (id, label) pair for pick tags.
+   * @param filters
+   * @returns {object} filters
+   */
+  this.getFilters = (filters) => {
+    return filters.map(filter => ({
+      id: filter.toLowerCase().split(' ').join('-'),
+      label: filter,
+    }));
+  };
+
+  /**
    * getSelectableTags(picks)
    * Get the subset of tags that can be selected based on the subset of picks.
    *
