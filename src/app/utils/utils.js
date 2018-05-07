@@ -67,13 +67,13 @@ function Utils() {
   };
 
   /**
-   * getFilters(filters)
-   * Generates a Map of (pick tag id => pick tag label) key-value pairs,
-   * returns an Object of this map.
-   * @param filters
-   * @returns {object} filters
+   * getFiltersMapping(filters)
+   * Return mapping of filters
+   *
+   * @return {Object} filters - A map of id and label key-value pairs of filters
+   * @param {array} filters - Array of filters
    */
-  this.getFilters = (filters) => {
+  this.getFiltersMapping = (filters) => {
     return filters.map(filter => ({
       id: filter.toLowerCase().split(' ').join('-'),
       label: filter,
