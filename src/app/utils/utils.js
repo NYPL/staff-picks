@@ -74,6 +74,9 @@ function Utils() {
    * @param {array} filters - Array of filters
    */
   this.getFiltersMapping = (filters) => {
+    if (!filters) {
+      return [];
+    }
     return filters.map(filter => ({
       id: filter.toLowerCase().split(' ').join('-'),
       label: filter,

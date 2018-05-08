@@ -72,4 +72,24 @@ describe('Utils functions', () => {
       expect(capitalize('audience')).to.equal('Audience');
     });
   });
+
+  describe('getFiltersMapping', () => {
+    const getFiltersMapping = utils.getFiltersMapping;
+
+    it('should return an empty array', () => {
+      expect(getFiltersMapping()).to.eql([]);
+    });
+
+    it('should return an array of all the tags in the picks', () => {
+      const filters = [
+        'Graphic Novels',
+      ];
+      expect(getFiltersMapping(filters)).to.eql([
+        {
+          id: 'graphic-novels',
+          label: 'Graphic Novels',
+        }
+      ]);
+    });
+  });
 });
