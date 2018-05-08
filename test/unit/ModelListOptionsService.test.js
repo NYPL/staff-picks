@@ -3,11 +3,18 @@ import { expect } from 'chai';
 
 import ModelListOptionsService from '../../src/app/utils/ModelListOptionsService';
 
-const mockListOptionsData = [
+const mockStaffPicksListOptionsData = [
   { date: '2015-04-01' },
   { date: '2017-01-01' },
   { date: '2017-04-01' },
   { date: '2018-01-01' },
+];
+
+const mockAnnualListOptionsData = [
+  { date: '2015' },
+  { date: '2016' },
+  { date: '2017' },
+  { date: '2018' },
 ];
 
 const mockModeledOptions = [
@@ -18,10 +25,10 @@ const mockModeledOptions = [
 ];
 
 const mockModeledOptionsNotStaffPicks = [
-  { name: '', value: '2018-01-01' },
-  { name: '', value: '2017-04-01' },
-  { name: '', value: '2017-01-01' },
-  { name: '', value: '2015-04-01' },
+  { name: '2018', value: '2018' },
+  { name: '2017', value: '2017' },
+  { name: '2016', value: '2016' },
+  { name: '2015', value: '2015' },
 ];
 
 describe('ModelListOptionsService', () => {
@@ -36,24 +43,23 @@ describe('ModelListOptionsService', () => {
   describe('When the data is an empty array', () => {
     it('should return the object, { options: [], latestOption: \'\' }', () => {
       expect(ModelListOptionsService([], 'staff-picks')).to.deep.equal(
-        { options: [], latestOption: '' }
+        { options: [], latestOption: '' },
       );
     });
   });
 
   describe('When the list type is not "staff-picks"', () => {
     it('should return the object with empty option names.', () => {
-      expect(ModelListOptionsService(mockListOptionsData, 'some-list')).to.deep.equal(
-        { options: mockModeledOptionsNotStaffPicks, latestOption: '2018-01-01' }
+      expect(ModelListOptionsService(mockAnnualListOptionsData, 'teens')).to.deep.equal(
+        { options: mockModeledOptionsNotStaffPicks, latestOption: '2018' },
       );
     });
   });
 
   describe('When there is valid data and the list type is "staff-picks"', () => {
     it('should return the modeled options and "latestOption" equals the first option value.', () => {
-      expect(ModelListOptionsService(mockListOptionsData, 'staff-picks')).to.deep.equal(
-        { options: mockModeledOptions, latestOption: '2018-01-01' }
-      );
+      expect(ModelListOptionsService(mockStaffPicksListOptionsData, 'staff-picks')).to.deep.equal(
+        { options: mockModeledOptions, latestOption: '2018-01-01' });
     });
   });
 });
