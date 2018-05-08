@@ -137,72 +137,69 @@ describe('Utils functions', () => {
     });
 
     it('should focus the first available element even if multiple suggested elements are visible.',
-        () => {
-          const mockElements = [
-            {
-              id: 'i-am-here-but-invisible',
-              children: [],
-              focus: sinon.spy(),
-            },
-            {
-              id: 'i-am-here-and-visible-and-should-get-focused',
-              children: [],
-              focus: sinon.spy(),
-            },
-            {
-              id: 'i-am-here-and-visible-but-should-not-get-focused',
-              children: [],
-              focus: sinon.spy(),
-            },
-          ];
+      () => {
+        const mockElements = [
+          {
+            id: 'i-am-here-but-invisible',
+            children: [],
+            focus: sinon.spy(),
+          },
+          {
+            id: 'i-am-here-and-visible-and-should-get-focused',
+            children: [],
+            focus: sinon.spy(),
+          },
+          {
+            id: 'i-am-here-and-visible-but-should-not-get-focused',
+            children: [],
+            focus: sinon.spy(),
+          },
+        ];
 
-          // After calling getComputedStyle, it returns different functions based on dfferent
-          // mockElements that passed as the argument
-          const mockGetPropertyValue01 = {
-            getPropertyValue: sinon.stub().withArgs('display').returns('none'),
-          };
-          const mockGetPropertyValue02 = {
-            getPropertyValue: sinon.stub().withArgs('display').returns('block'),
-          };
-          const mockGetPropertyValue03 = {
-            getPropertyValue: sinon.stub().withArgs('display').returns('block'),
-          };
+        // After calling getComputedStyle, it returns different functions based on dfferent
+        // mockElements that passed as the argument
+        const mockGetPropertyValueDisplayNone = {
+          getPropertyValue: sinon.stub().withArgs('display').returns('none'),
+        };
+        const mockGetPropertyValueDisplayBlock = {
+          getPropertyValue: sinon.stub().withArgs('display').returns('block'),
+        };
 
-          // Sets the objects for returning after calling getElementById
-          getElementById.withArgs('i-am-here-but-invisible').returns(mockElements[0]);
-          getElementById.withArgs('i-am-here-and-visible-and-should-get-focused')
-            .returns(mockElements[1]);
-          getElementById.withArgs('i-am-here-and-visible-but-should-not-get-focused')
-            .returns(mockElements[2]);
+        // Sets the objects for returning after calling getElementById
+        getElementById.withArgs('i-am-here-but-invisible').returns(mockElements[0]);
+        getElementById.withArgs('i-am-here-and-visible-and-should-get-focused')
+          .returns(mockElements[1]);
+        getElementById.withArgs('i-am-here-and-visible-but-should-not-get-focused')
+          .returns(mockElements[2]);
 
-          // Runs the function
-          getComputedStyle
-            .withArgs(mockElements[0]).returns(mockGetPropertyValue01)
-            .withArgs(mockElements[1]).returns(mockGetPropertyValue02)
-            .withArgs(mockElements[2]).returns(mockGetPropertyValue03);
+        // Runs the function
+        getComputedStyle
+          .withArgs(mockElements[0]).returns(mockGetPropertyValueDisplayNone)
+          .withArgs(mockElements[1]).returns(mockGetPropertyValueDisplayBlock)
+          .withArgs(mockElements[2]).returns(mockGetPropertyValueDisplayBlock);
 
-          focusOnFirstAvailableElement([
-            'i-am-here-but-invisible',
-            'i-am-here-and-visible-and-should-get-focused',
-            'i-am-here-and-visible-but-should-not-get-focused',
-          ]);
+        focusOnFirstAvailableElement([
+          'i-am-here-but-invisible',
+          'i-am-here-and-visible-and-should-get-focused',
+          'i-am-here-and-visible-but-should-not-get-focused',
+        ]);
 
-          expect(getElementById.withArgs('i-am-here-but-invisible').callCount).to.equal(1);
-          // The first time is to check if the DOM exists and the second time is to call focus()
-          expect(getElementById.withArgs('i-am-here-and-visible-and-should-get-focused')
-            .callCount).to.equal(2);
-          // Since it have found the available element already, the iteration stops
-          expect(getElementById.withArgs('i-am-here-and-visible-but-should-not-get-focused')
-            .callCount).to.equal(0);
+        expect(getElementById.withArgs('i-am-here-but-invisible').callCount).to.equal(1);
+        // The first time is to check if the DOM exists and the second time is to call focus()
+        expect(getElementById.withArgs('i-am-here-and-visible-and-should-get-focused')
+          .callCount).to.equal(2);
+        // Since it have found the available element already, the iteration stops
+        expect(getElementById.withArgs('i-am-here-and-visible-but-should-not-get-focused')
+          .callCount).to.equal(0);
 
-          expect(getComputedStyle.withArgs(mockElements[0]).callCount).to.equal(1);
-          expect(getComputedStyle.withArgs(mockElements[1]).callCount).to.equal(1);
-          expect(getComputedStyle.withArgs(mockElements[2]).callCount).to.equal(0);
+        expect(getComputedStyle.withArgs(mockElements[0]).callCount).to.equal(1);
+        expect(getComputedStyle.withArgs(mockElements[1]).callCount).to.equal(1);
+        expect(getComputedStyle.withArgs(mockElements[2]).callCount).to.equal(0);
 
-          expect(mockElements[0].focus.callCount).to.equal(0);
-          expect(mockElements[1].focus.callCount).to.equal(1);
-          expect(mockElements[2].focus.callCount).to.equal(0);
-        }
-      );
+        expect(mockElements[0].focus.callCount).to.equal(0);
+        expect(mockElements[1].focus.callCount).to.equal(1);
+        expect(mockElements[2].focus.callCount).to.equal(0);
+      }
+    );
   });
 });
