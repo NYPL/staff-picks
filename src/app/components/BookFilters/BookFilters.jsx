@@ -36,7 +36,7 @@ class BookFilters extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       selectedFilters: nextProps.selectedFilters,
-      filters: utils.getFiltersMapping(nextProps.filters)
+      filters: utils.getFiltersMapping(nextProps.filters),
     });
   }
 
