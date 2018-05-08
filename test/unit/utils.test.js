@@ -187,8 +187,18 @@ describe('Utils functions', () => {
             'i-am-here-and-visible-but-should-not-get-focused',
           ]);
 
-          expect(getElementById.callCount).to.equal(3);
-          expect(getComputedStyle.callCount).to.equal(2);
+          expect(getElementById.withArgs('i-am-here-but-invisible').callCount).to.equal(1);
+          // The first time is to check if the DOM exists and the second time is to call focus()
+          expect(getElementById.withArgs('i-am-here-and-visible-and-should-get-focused')
+            .callCount).to.equal(2);
+          // Since it have found the available element already, the iteration stops
+          expect(getElementById.withArgs('i-am-here-and-visible-but-should-not-get-focused')
+            .callCount).to.equal(0);
+
+          expect(getComputedStyle.withArgs(mockElements[0]).callCount).to.equal(1);
+          expect(getComputedStyle.withArgs(mockElements[1]).callCount).to.equal(1);
+          expect(getComputedStyle.withArgs(mockElements[2]).callCount).to.equal(0);
+
           expect(mockElements[0].focus.callCount).to.equal(0);
           expect(mockElements[1].focus.callCount).to.equal(1);
           expect(mockElements[2].focus.callCount).to.equal(0);
