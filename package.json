@@ -84,7 +84,8 @@
     "underscore": "1.8.3",
     "webpack": "2.7.0",
     "webpack-dev-server": "2.9.7",
-    "webpack-merge": "0.8.4"
+    "webpack-merge": "0.8.4",
+    "winston": "2.3.1"
   },
   "devDependencies": {
     "axios-mock-adapter": "1.7.1",

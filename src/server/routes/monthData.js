@@ -5,6 +5,8 @@ import utils from '../../app/utils/utils';
 import platformConfig from '../../../platformConfig';
 import modelListOptions from '../../app/utils/ModelListOptionsService';
 
+import logger from '../../../logger';
+
 /* nyplApiClientGet(endpoint)
  * The function that wraps nyplApiClient for GET requests.
  * @param {string} endpoint
@@ -58,7 +60,7 @@ function currentMonthData(req, res, next) {
       next();
     })
     .catch((error) => {
-      console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
       return res.redirect(`${config.baseUrl}404`);
     });
@@ -92,7 +94,7 @@ function selectMonthData(req, res, next) {
   }
 
   if (!seasonMatches || !isValidAudience) {
-    console.error('Status Code: 400, Error Message: Invalid season or audience.');
+    logger.error('Status Code: 400, Error Message: Invalid season or audience.');
 
     return res.redirect(`${config.baseUrl}404`);
   }
@@ -121,7 +123,7 @@ function selectMonthData(req, res, next) {
 
       // If error returned from the endpoint
       if (data.statusCode >= 400) {
-        console.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
+        logger.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
 
         return res.redirect(`${config.baseUrl}404`);
       }
@@ -146,7 +148,7 @@ function selectMonthData(req, res, next) {
       next();
     })
     .catch((error) => {
-      console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
       return res.redirect(`${config.baseUrl}404`);
     });
@@ -159,7 +161,7 @@ function selectMonthData(req, res, next) {
 function selectClientMonthData(req, res) {
   const seasonMatches = req.params.time.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
   if (!seasonMatches) {
-    console.error('Status Code: 400, Error Message: Invalid season.');
+    logger.error('Status Code: 400, Error Message: Invalid season.');
 
     res.json({
       statusCode: 400,
@@ -176,7 +178,7 @@ function selectClientMonthData(req, res) {
       });
     })
     .catch((error) => {
-      console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
       res.json({
         statusCode: error.statusCode || 500,
@@ -196,7 +198,7 @@ function selectMonthDataFormPost(req, res) {
   const audienceQuery = audience ? `?audience=${audience}` : '';
 
   if (!season || !audience) {
-    console.error(
+    logger.error(
       `Form data of season or audience is undefined. season: ${season}, audience: ${audience}`
     );
 
