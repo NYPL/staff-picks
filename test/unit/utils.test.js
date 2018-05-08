@@ -80,7 +80,7 @@ describe('Utils functions', () => {
       expect(getFiltersMapping()).to.eql([]);
     });
 
-    it('should return an array of all the tags in the picks', () => {
+    it('should return a map of all the tags with ids and labels', () => {
       const filters = [
         'Graphic Novels',
       ];
