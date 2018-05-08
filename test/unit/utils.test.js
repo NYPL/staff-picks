@@ -94,7 +94,7 @@ describe('Utils functions', () => {
       expect(focusOnFirstAvailableElement([])).to.equal(undefined);
     });
 
-    it('should remain the current focus if there is no elements match the input IDs.', () => {
+    it('should remain the current focus if there are no elements match the input IDs.', () => {
       // Sets the first return for calling getElementById
       getElementById.onCall('i-do-not-exist').returns(null);
 
