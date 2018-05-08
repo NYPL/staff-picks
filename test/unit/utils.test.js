@@ -73,8 +73,7 @@ describe('Utils functions', () => {
       expect(capitalize('audience')).to.equal('Audience');
     });
   });
-
-
+  
   describe('getFiltersMapping', () => {
     const getFiltersMapping = utils.getFiltersMapping;
 
@@ -184,6 +183,7 @@ describe('Utils functions', () => {
       expect(mockElements[1].focus.callCount).to.equal(0);
       expect(mockElements[2].focus.callCount).to.equal(1);
       expect(mockElements[3].focus.callCount).to.equal(0);
+
     });
   });
 });
