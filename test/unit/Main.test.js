@@ -203,8 +203,6 @@ describe('Main', () => {
         setSelectedFilter('funny', true);
 
         expect(component.state('picks')).to.eql([picks[0], picks[2]]);
-        expect(component.state('selectableFilters'))
-          .to.eql(['funny', 'horror', 'graphic-novels']);
         expect(component.state('selectedFilters')).to.eql(['funny']);
       });
     });
@@ -235,7 +233,6 @@ describe('Main', () => {
         clearFilters();
 
         expect(component.state('selectedFilters')).to.eql([]);
-        expect(component.state('selectableFilters')).to.eql([]);
         expect(component.state('picks')).to.eql([]);
       });
     });
