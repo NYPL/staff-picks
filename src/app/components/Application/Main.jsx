@@ -142,11 +142,9 @@ class Main extends React.Component {
       selectedFilters,
     });
 
-    if (document.getElementById('list-title')) {
-      setTimeout(() => {
-        document.getElementById('list-title').focus();
-      }, 400);
-    }
+    setTimeout(() => {
+      utils.focusOnFirstAvailableElement(['sidebar-list-title', 'list-title']);
+    }, 400);
   }
 
   /**
