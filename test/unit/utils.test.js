@@ -75,79 +75,13 @@ describe('Utils functions', () => {
   });
 
   describe('focusOnFirstAvailableElement', () => {
-    // The IDs this test should be calling
-    // const mockElementIds = ['element1', 'element2', 'element3', 'element4'];
-    // The mockups of the elements that getElementById will return
-    // As we will run focus() on the function, we stub a focus function to each element
-    // There should not be any element with ID as "element1"
-    // const mockElements = [
-    //   {
-    //     id: 'not-exist-element',
-    //     children: [],
-    //     focus: sinon.spy(),
-    //   },
-    //   {
-    //     id: 'element2',
-    //     children: [],
-    //     focus: sinon.spy(),
-    //   },
-    //   {
-    //     id: 'element3',
-    //     children: [],
-    //     focus: sinon.spy(),
-    //   },
-    //   {
-    //     id: 'element4',
-    //     children: [],
-    //     focus: sinon.spy(),
-    //   },
-    // ];
     const focusOnFirstAvailableElement = utils.focusOnFirstAvailableElement;
     const getElementById = sinon.stub(document, 'getElementById');
-
-    // Sets the stub function as the callback when calling getComputedStyle
-    // So we can test the chained method of getComputedStyle().getPropertyValue('display')
-    // Set two returns that have different values of styles for 'display'
-    // let getPropertyValue;
-    // let getPropertyValue = {
-    //   getPropertyValue: sinon.stub().withArgs('display')
-    //     .onCall(0).returns('none')
-    //     .onCall(1).returns('none')
-    //     // getPropertyValue should never be called the third time as we got the correct element
-    //     // at the third time
-    //     .onCall(2).returns('block')
-    //     .onCall(3).returns('block'),
-    // };
-    // const getComputedStyle = sinon.stub(window, 'getComputedStyle').returns(getPropertyValue);
     const getComputedStyle = sinon.stub(window, 'getComputedStyle');
-
-    // Sets three different returns when calling mockElements
-    // getElementById
-    //   .onCall(0).returns(null)
-    //   .onCall(1).returns(mockElements[1])
-    //   .onCall(2).returns(mockElements[2])
-      // The last time getElementById gets called should be the time it executes focus on
-      // the correct element, which is element3
-      // .onCall(3).returns(mockElements[2]);
-
-    // beforeEach(() => {
-      // getElementById.resetHistory();
-      // getComputedStyle.resetHistory();
-      // getElementById.reset();
-      // getComputedStyle.reset();
-      // mockElements[0].focus.reset();
-      // mockElements[1].focus.reset();
-      // mockElements[2].focus.reset();
-      // mockElements[3].focus.reset();
-    // });
 
     afterEach(() => {
       getElementById.reset();
       getComputedStyle.reset();
-      // mockElements[0].focus.reset();
-      // mockElements[1].focus.reset();
-      // mockElements[2].focus.reset();
-      // mockElements[3].focus.reset();
     });
 
     after(() => {
@@ -160,19 +94,9 @@ describe('Utils functions', () => {
       expect(focusOnFirstAvailableElement([])).to.equal(undefined);
     });
 
-    // it('should focus the first available element.', () => {
-    //   focusOnFirstAvailableElement(mockElementIds);
-
-    //   // Tests which element got focused here (means focus() got called)
-    //   expect(mockElements[0].focus.callCount).to.equal(0);
-    //   expect(mockElements[1].focus.callCount).to.equal(0);
-    //   expect(mockElements[2].focus.callCount).to.equal(1);
-    //   expect(mockElements[3].focus.callCount).to.equal(0);
-    // });
-
     it('should remain the current focus if there is no elements match the input IDs.', () => {
       // Sets the first return for calling getElementById
-      getElementById.onCall(0).returns(null);
+      getElementById.onCall('i-do-not-exist').returns(null);
 
       // Runs the function
       focusOnFirstAvailableElement(['i-do-not-exist']);
@@ -192,17 +116,16 @@ describe('Utils functions', () => {
 
       // After calling getComputedStyle, it returns the function getPropertyValue
       const mockGetPropertyValue = {
-        // The first time calling getPropertyValue with "display" as the argument should return
+        // Calling getPropertyValue with "display" as the argument should return
         // "none"
-        getPropertyValue: sinon.stub().withArgs('display')
-          .onCall(0).returns('none'),
+        getPropertyValue: sinon.stub().withArgs('display').returns('none'),
       };
 
       // Sets the returned object for calling getElementById
       getElementById.withArgs('i-am-here-but-invisible').returns(mockElement);
 
-      // Sets the first return for calling getComputedStyle
-      getComputedStyle.returns(mockGetPropertyValue);
+      // Sets the return function for calling getComputedStyle with mockElement
+      getComputedStyle.withArgs(mockElement).returns(mockGetPropertyValue);
 
       // Runs the function
       focusOnFirstAvailableElement(['i-am-here-but-invisible']);
@@ -233,13 +156,16 @@ describe('Utils functions', () => {
             },
           ];
 
-          // After calling getComputedStyle, it returns the function getPropertyValue
-          const mockGetPropertyValue = {
-            // The returned values after calling getPropertyValue with "display" as the argument
-            getPropertyValue: sinon.stub().withArgs('display')
-              .onCall(0).returns('none')
-              .onCall(1).returns('block')
-              .onCall(2).returns('block'),
+          // After calling getComputedStyle, it returns different functions based on dfferent
+          // mockElements that passed as the argument
+          const mockGetPropertyValue01 = {
+            getPropertyValue: sinon.stub().withArgs('display').returns('none'),
+          };
+          const mockGetPropertyValue02 = {
+            getPropertyValue: sinon.stub().withArgs('display').returns('block'),
+          };
+          const mockGetPropertyValue03 = {
+            getPropertyValue: sinon.stub().withArgs('display').returns('block'),
           };
 
           // Sets the objects for returning after calling getElementById
@@ -250,7 +176,10 @@ describe('Utils functions', () => {
             .returns(mockElements[2]);
 
           // Runs the function
-          getComputedStyle.returns(mockGetPropertyValue);
+          getComputedStyle
+            .withArgs(mockElements[0]).returns(mockGetPropertyValue01)
+            .withArgs(mockElements[1]).returns(mockGetPropertyValue02)
+            .withArgs(mockElements[2]).returns(mockGetPropertyValue03);
 
           focusOnFirstAvailableElement([
             'i-am-here-but-invisible',
