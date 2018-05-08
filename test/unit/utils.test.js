@@ -74,6 +74,26 @@ describe('Utils functions', () => {
     });
   });
 
+  describe('getFiltersMapping', () => {
+    const getFiltersMapping = utils.getFiltersMapping;
+
+    it('should return an empty array', () => {
+      expect(getFiltersMapping()).to.eql([]);
+    });
+
+    it('should return a map of all the tags with ids and labels', () => {
+      const filters = [
+        'Graphic Novels',
+      ];
+      expect(getFiltersMapping(filters)).to.eql([
+        {
+          id: 'graphic-novels',
+          label: 'Graphic Novels',
+        }
+      ]);
+    });
+  });
+
   describe('focusOnFirstAvailableElement', () => {
     // The IDs this test should be calling
     const mockElementIds = ['element1', 'element2', 'element3', 'element4'];
