@@ -28,6 +28,7 @@ const fieldsetProps = {
       { name: 'Children', value: 'Children' },
     ],
   },
+  type: 'staff-picks',
 };
 
 describe('ListSelector', () => {
@@ -75,7 +76,7 @@ describe('ListSelector', () => {
       renderFieldset.restore();
     });
 
-    it('should return null, if the list have no options.', () => {
+    it('should return null, if the list has no options.', () => {
       expect(renderFieldset(emptyFieldset)).to.equal(null);
     });
 
@@ -142,7 +143,7 @@ describe('ListSelector', () => {
           statusText: 'Undefined error',
           status: 500,
         })
-        .onGet(`${config.baseApiUrl}2017-01-01`)
+        .onGet(`${config.baseApiUrl}staff-picks/2017-01-01`)
         .reply(200, mockBookListResponse);
     });
 
@@ -194,7 +195,7 @@ describe('ListSelector', () => {
       );
     });
 
-    it('should update BookStore with the data responsed, if the request succeeds.', (done) => {
+    it('should update BookStore with the data response, if the request succeeds.', (done) => {
       component.instance().submitFormRequest('2017-01-01');
       setTimeout(
         () => {
