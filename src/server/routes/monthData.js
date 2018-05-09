@@ -193,19 +193,20 @@ function selectClientMonthData(req, res) {
  */
 function selectDataFormPost(req, res) {
   const season = (req.body.season) ? `${req.body.season}` : '';
-  const audience = req.body.audience;
+  const audience = (req.body.audience) ? req.body.audience : '';
   const audienceQuery = audience ? `?audience=${audience}` : '';
+  const type = utils.getDataType(req.body.type, true);
 
-  if (!season || !audience) {
+  if (!season && !audience) {
     console.error(
-      `Form data of season or audience is undefined. season: ${season}, audience: ${audience}`
+      `Form data of season and audience is undefined. season: ${season}, audience: ${audience}`
     );
 
     res.redirect(`${config.baseUrl}404`);
   } else {
-    // Redirects and calls selectMonthData() to make server side request for
+    // Redirects to the appropriate list route to make server side request for
     // the season/audience list
-    res.redirect(`${config.baseUrl}/${season}${audienceQuery}`);
+    res.redirect(`${config.baseUrl}${type}/${season}${audienceQuery}`);
   }
 }
 

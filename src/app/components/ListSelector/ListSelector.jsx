@@ -171,6 +171,11 @@ class ListSelector extends React.Component {
         {this.renderFieldset(this.props.fieldsetProps.audience)}
         {this.renderFieldset(this.props.fieldsetProps.season)}
         <input
+          type="hidden"
+          name="type"
+          value={this.props.fieldsetProps.type}
+        />
+        <input
           type="submit"
           value="Select List"
           className={hiddenClass}
