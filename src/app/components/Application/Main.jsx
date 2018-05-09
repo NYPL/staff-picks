@@ -200,7 +200,7 @@ class Main extends React.Component {
         <BookList
           picks={this.state.picks}
           isJsEnabled={this.props.isJsEnabled}
-          type={type}
+          displayType={type}
           displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
           picksCount={picksCount}
         />
