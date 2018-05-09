@@ -69,7 +69,7 @@ const Sidebar = (props) => {
       <div className="book-filters-heading">
         <ListTitle
           displayInfo={props.displayInfo}
-          displayType={props.currentType}
+          displayType={props.type}
           picksCount={props.picksCount}
           idPrefix="sidebar"
         />

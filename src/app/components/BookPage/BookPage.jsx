@@ -63,7 +63,7 @@ class BookPage extends React.Component {
       <div className="nypl-row book-page">
         <div className="sidebar nypl-column-one-quarter">
           <nav aria-label="Breadcrumbs">
-            <Link to={`${appConfig.baseUrl}${type}/${date}`} className="back-link">
+            <Link href={`${appConfig.baseUrl}${type}/${date}`} className="back-link">
               <LeftWedgeIcon ariaHidden />
               <span className="replaced-text visuallyHidden">Return to </span>
               Staff Picks

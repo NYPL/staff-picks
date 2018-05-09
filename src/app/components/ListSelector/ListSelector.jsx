@@ -57,7 +57,6 @@ class ListSelector extends React.Component {
     }
     const type = this.props.fieldsetProps.type;
 
-    console.log(`${config.baseApiUrl}${type}/${submitValue}`);
     // this function will be replaced by submitting to endpoint
     axios.get(`${config.baseApiUrl}${type}/${submitValue}`)
       .then((response) => {
@@ -168,7 +167,7 @@ class ListSelector extends React.Component {
     const hiddenClass = (isJsEnabled) ? 'visuallyHidden' : 'no-js';
 
     return (
-      <form action={`${config.baseApiUrl}`} method="post">
+      <form action={`${config.baseApiUrl}post`} method="post">
         {this.renderFieldset(this.props.fieldsetProps.audience)}
         {this.renderFieldset(this.props.fieldsetProps.season)}
         <input

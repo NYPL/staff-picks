@@ -86,7 +86,8 @@ class Main extends React.Component {
 
     return {
       displayDate,
-      displayAge: (appConfig.audienceMap[currentAudience]) ? appConfig.audienceMap[currentAudience] : displayAudience,
+      displayAge: (appConfig.audienceMap[currentAudience]) ?
+        appConfig.audienceMap[currentAudience] : displayAudience,
     };
   }
 

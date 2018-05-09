@@ -205,9 +205,7 @@ function selectDataFormPost(req, res) {
   } else {
     // Redirects and calls selectMonthData() to make server side request for
     // the season/audience list
-    res.redirect(
-      `${config.baseUrl}/${season}${audienceQuery}`
-    );
+    res.redirect(`${config.baseUrl}/${season}${audienceQuery}`);
   }
 }
 
