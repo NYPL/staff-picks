@@ -4,7 +4,8 @@ import appConfig from '../../../appConfig';
 
 const { baseUrl } = appConfig;
 
-/* selectData
+/**
+ * selectData(req, res, next)
  * Map the url param to specific endpoint requests. Redirect otherwise to the homepage.
  */
 function selectData(req, res, next) {

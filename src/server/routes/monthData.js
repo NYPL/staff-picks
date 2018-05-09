@@ -187,7 +187,7 @@ function selectClientMonthData(req, res) {
 }
 
 /**
- * selectDataPost(req, res, next)
+ * selectDataFormPost(req, res, next)
  * Handles the requests from the form submit button (when no JS).
  * It redirects to the route to execute the function for server side requesting.
  */

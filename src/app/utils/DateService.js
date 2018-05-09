@@ -24,11 +24,18 @@ function monthOrSeason(month, year) {
   return (year >= 2016) ? season : monthsArr[month];
 }
 
+/**
+ * matchListDate(dateStr, type)
+ * Date based pattern matching for picks' routes.
+ * @param {string} dateStr 
+ * @param {string} type
+ * @return {array|null}
+ */
 function matchListDate(dateStr, type = 'staff-picks') {
   let pattern = '';
 
   if (!dateStr && !type) {
-    return false;
+    return null;
   }
 
   if (type !== 'staff-picks') {
@@ -43,6 +50,7 @@ function matchListDate(dateStr, type = 'staff-picks') {
 }
 
 /**
+ * staffPicksDate(dateStr)
  * Reads an string date that's specific to the Staff Picks API endpoint, such as "2018-01-01".
  * The string gets parsed to get either the correct month or season, and year.
  * @param {string} dateStr
@@ -68,6 +76,12 @@ function staffPicksDate(dateStr) {
   };
 }
 
+/**
+ * annualDate(dateStr)
+ * Returns annual list identifier, four-digit year.
+ * @param {string} dateStr
+ * @return {object}
+ */
 function annualDate(dateStr) {
   if (!dateStr) {
     return { year: '' };

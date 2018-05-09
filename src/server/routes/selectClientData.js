@@ -4,7 +4,8 @@ import config from '../../../appConfig';
 
 const { baseUrl } = config;
 
-/* selectData
+/**
+ * selectClientData(req, res, next)
  * Map the url param to specific endpoint requests. Redirect otherwise to the homepage.
  */
 function selectClientData(req, res, next) {

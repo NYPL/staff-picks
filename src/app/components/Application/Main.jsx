@@ -176,7 +176,6 @@ class Main extends React.Component {
     return updatedPicks;
   }
 
-
   render() {
     const { type } = this.props.picksData;
     const picksCount = this.getCount();

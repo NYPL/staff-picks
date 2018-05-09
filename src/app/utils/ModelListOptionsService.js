@@ -1,6 +1,7 @@
 import { staffPicksDate, annualDate } from './DateService';
 
-/* modelListOptions(lists, listType)
+/**
+ * modelListOptions(lists, listType)
  * The function that models and returns the list options and the latest option.
  * The model might be different based on different list types.
  * @param {array} lists

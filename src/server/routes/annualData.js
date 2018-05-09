@@ -10,6 +10,7 @@ const nyplApiClientGet = endpoint =>
   nyplApiClient().then(client => client.get(endpoint, { cache: false }));
 
 /**
+ * annualCurrentListData(req, res, next)
  * Get the latest annual staff pick list for either childrens or ya.
  * @param {object} req
  * @param {object} res
@@ -73,6 +74,7 @@ function annualCurrentListData(req, res, next) {
 }
 
 /**
+ * annualListData(req, res, next)
  * Get a specific month's or season's staff pick list.
  * It calls '/book-lists?type=staff-picks' to get all the available list options first.
  * @param {object} req
@@ -150,6 +152,7 @@ function annualListData(req, res, next) {
 }
 
 /**
+ * annualClientListData(req, res, next)
  * Gets a specific month's or season's staff pick list on the client side.
  * @param {object} req
  * @param {object} res
