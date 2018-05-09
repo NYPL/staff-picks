@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import BookList from '../BookList/BookList';
 import Sidebar from '../Sidebar/Sidebar';
 import utils from '../../utils/utils';
-import staffPicksDate from '../../utils/DateService';
+import { staffPicksDate, annualDate } from '../../utils/DateService';
 import appConfig from '../../../../appConfig';
 
 class Main extends React.Component {
@@ -82,11 +82,13 @@ class Main extends React.Component {
     }
 
     const { date } = picksData;
-    const displayDate = staffPicksDate(date);
+    const { type } = picksData;
+    const displayDate = type === 'staff-picks' ? staffPicksDate(date) : annualDate(date);
+    const displayAudience = !['teens', 'kids'].includes(type) ? 'Adult' : utils.capitalize(type);
 
     return {
       displayDate,
-      displayAge: appConfig.audienceMap[currentAudience || 'Adult'],
+      displayAge: (appConfig.audienceMap[currentAudience]) ? appConfig.audienceMap[currentAudience] : displayAudience,
     };
   }
 
@@ -198,6 +200,7 @@ class Main extends React.Component {
           currentAudience={this.props.currentAudience}
           displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
           picksCount={picksCount}
+          type={this.props.picksData.type}
         />
 
         <BookList

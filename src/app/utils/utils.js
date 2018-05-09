@@ -3,6 +3,7 @@ import {
   contains as _contains,
   each as _each,
   sortBy as _sortBy,
+  invert as _invert,
 } from 'underscore';
 import { gaUtils } from 'dgx-react-ga';
 import {
@@ -69,7 +70,6 @@ function Utils() {
   /**
    * getSelectableTags(picks)
    * Get the subset of tags that can be selected based on the subset of picks.
-   *
    * @param {array} picks
    */
   this.getSelectableTags = (picks) => {
@@ -87,7 +87,6 @@ function Utils() {
    * getAllTags(picks)
    * Get all the tags from a pick list without modifying the tag's name,
    * and sorts them alphabetically.
-   *
    * @param {array} picks
    */
   this.getAllTags = (picks) => {
@@ -106,8 +105,8 @@ function Utils() {
    * capitalizes a string
    * @param {string} str
    */
-  this.capitalize = (str) =>
-    str.replace(/^\w/, (chr) => chr.toUpperCase());
+  this.capitalize = str =>
+    str.replace(/^\w/, chr => chr.toUpperCase());
 
   /**
    * focusOnFirstAvailableElement(elementIds)
@@ -134,6 +133,26 @@ function Utils() {
     if (IdOfElementToBeFocused) {
       document.getElementById(IdOfElementToBeFocused).focus();
     }
+  };
+
+  /**
+   * getDataType(type)
+   * Rectify difference between API service type and given type.
+   * @param {string} type
+   * @return {string}
+   */
+  this.getDataType = (type, invert = false) => {
+    const types = { childrens: 'kids', ya: 'teens' };
+
+    if (!type) {
+      return 'staff-picks';
+    }
+
+    if (invert) {
+      return !_invert(types)[type] ? type : _invert(types)[type];
+    }
+
+    return !types[type] ? type : types[type];
   };
 }
 

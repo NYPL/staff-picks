@@ -87,10 +87,14 @@ const Book = ({ pick, isJsEnabled }) => {
     if (!_isEmpty(reviewsArray) && reviewsArray[0].text && reviewsArray[0].text.trim() !== '') {
       const review = reviewsArray[0];
       const text = review.text;
-      const reviewerName = review.reviewerName;
-      const location = review.reviewerLocation.prefLabel ? review.reviewerLocation.prefLabel : '';
+      let reviewerName = '';
+      let location = '';
+      if (review.reviewerName) {
+        reviewerName = review.reviewerName;
+        location = review.reviewerLocation.prefLabel ? review.reviewerLocation.prefLabel : '';
+      }
 
-      return (
+      return (!reviewerName) ? (<div><p className="book-item-description">{text}</p></div>) : (
         <div>
           <p className="book-item-description">{text}</p>
           <p className="book-item-picked-by">Staff Pick By: {reviewerName}, {location}</p>

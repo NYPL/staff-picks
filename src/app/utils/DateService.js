@@ -1,6 +1,7 @@
 import {
   findKey as _findKey,
   contains as _contains,
+  isNaN as _isNaN,
 } from 'underscore';
 import config from '../../../appConfig';
 
@@ -23,21 +24,39 @@ function monthOrSeason(month, year) {
   return (year >= 2016) ? season : monthsArr[month];
 }
 
-/** staffPicksDate(date)
+function matchListDate(dateStr, type = 'staff-picks') {
+  let pattern = '';
+
+  if (!dateStr && !type) {
+    return false;
+  }
+
+  if (type !== 'staff-picks') {
+    pattern = /(\d{4})/;
+  } else {
+    pattern = /(\d{4})\-(\d{2})\-(\d{2})/;
+  }
+
+  const validMatch = dateStr.match(pattern);
+
+  return validMatch;
+}
+
+/**
  * Reads an string date that's specific to the Staff Picks API endpoint, such as "2018-01-01".
  * The string gets parsed to get either the correct month or season, and year.
- * @param {string} date
+ * @param {string} dateStr
  * @returns {object}
  */
-function staffPicksDate(date) {
-  if (!date) {
+function staffPicksDate(dateStr) {
+  if (!dateStr) {
     return {
       month: '',
       year: '',
     };
   }
 
-  const d = date.match(/(\d{4})\-(\d{2})\-(\d{2})/);
+  const d = matchListDate(dateStr);
   const regexMonth = parseInt(d[1], 10) <= 2015 ? d[2] - 1 : d[2];
   const newDate = new Date(d[1], regexMonth, d[3]);
   const year = newDate.getFullYear();
@@ -49,4 +68,15 @@ function staffPicksDate(date) {
   };
 }
 
-export default staffPicksDate;
+function annualDate(dateStr) {
+  if (!dateStr) {
+    return { year: '' };
+  }
+
+  const annDate = matchListDate(dateStr, 'annual');
+  const year = new Date(annDate[1], '01', '01').getFullYear();
+
+  return { year };
+}
+
+export { staffPicksDate, annualDate, matchListDate };
