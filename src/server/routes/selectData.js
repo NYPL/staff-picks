@@ -13,9 +13,9 @@ function selectData(req, res, next) {
 
   if (type === 'childrens' || type === 'ya') {
     if (time) {
-      return res.redirect(baseUrl);
+      return annualData.annualListData(req, res, next);
     }
-    return annualData.annualCurrentData(type, req, res, next);
+    return annualData.annualCurrentListData(req, res, next);
   }
 
   if (type === 'staff-picks') {
