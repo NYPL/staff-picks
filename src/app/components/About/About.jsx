@@ -32,8 +32,11 @@ class About extends React.Component {
   }
 
   render() {
+    const type = this.props.type;
     const shareUrl = this.state.location.href;
-    const shareText = encodeURI(pageTitle[this.props.type]);
+    const shareText = encodeURI(pageTitle[type]);
+    const aboutBestBooksLink = ['teens', 'kids'].includes(type) ?
+      <p><a href={aboutUrls.about}>About Best Books</a></p> : null;
 
     return (
       <div className="about nypl-row">
@@ -41,7 +44,7 @@ class About extends React.Component {
         <p>Many of these titles are available in formats for <a href={aboutUrls.print}>patrons
         with print disabilities.</a>
         </p>
-        <p><a href={aboutUrls.about}>About Best Books</a></p>
+        {aboutBestBooksLink}
         <ul>
           <li>
             <a
