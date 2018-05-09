@@ -15,7 +15,7 @@ const BookList = ({
 }) => {
   const renderBookItems = currentBooks => (
     currentBooks.length ?
-      currentBooks.map(book => <Book pick={book} isJsEnabled={isJsEnabled} />)
+      currentBooks.map(book => <Book key={book.slug} pick={book} isJsEnabled={isJsEnabled} />)
       : null
   );
 

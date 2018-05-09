@@ -174,6 +174,7 @@ class ListSelector extends React.Component {
           type="hidden"
           name="type"
           value={this.props.fieldsetProps.type}
+          className={hiddenClass}
         />
         <input
           type="submit"
