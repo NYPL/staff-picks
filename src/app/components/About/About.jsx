@@ -29,6 +29,7 @@ class About extends React.Component {
 
   gaSocialMediaEvent(type) {
     utils.trackPicks('Social Share', type);
+        console.log(type);
   }
 
   render() {
@@ -48,6 +49,7 @@ class About extends React.Component {
         <ul>
           <li>
             <a
+              className="twitter-link"
               href={`${socialSharing.twitter}text=${shareText}&url=${shareUrl}&via=NYPL`}
               onClick={() => this.gaSocialMediaEvent('Twitter')}
             >
@@ -57,6 +59,7 @@ class About extends React.Component {
           </li>
           <li>
             <a
+            className="facebook-link"
               href={`${socialSharing.facebook}${this.state.location}`}
               onClick={() => this.gaSocialMediaEvent('Facebook')}
             >

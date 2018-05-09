@@ -1,9 +1,11 @@
 /* eslint-env mocha */
 import React from 'react';
 import { expect } from 'chai';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
+import sinon from 'sinon';
 
 import About from '../../src/app/components/About/About';
+import utils from '../../src/app/utils/utils';
 
 describe('About', () => {
   describe('Default', () => {
@@ -110,4 +112,89 @@ describe('About', () => {
       expect(aboutLink).to.have.length(0);
     });
   });
+
+  describe('Twitter Link', () => {
+    let component;
+    let twitterLink;
+    let gaSocialMediaEvent;
+
+
+
+    before(() => {
+      component = mount(<About />);
+      twitterLink = component.find('a.twitter-link');
+      gaSocialMediaEvent = sinon.spy(About.prototype, 'gaSocialMediaEvent');
+      console.log(1);
+    });
+
+    after(() => {
+      component.unmount();
+      gaSocialMediaEvent.restore();
+
+      console.log(4);
+    });
+
+    it('should call the function "gaSocialMediaEvent" after the twitter link is clicked', () => {
+      twitterLink.simulate('click');
+      // component.find('a.twitter-link').first().childAt(0).simulate('click');
+      console.log(2);
+
+      console.log(gaSocialMediaEvent);
+
+      expect(gaSocialMediaEvent.callCount).to.equal(1);
+      expect(gaSocialMediaEvent.calledWith('Twitter')).to.equal(true);
+
+      console.log(3);
+    });
+  });
+
+  describe('Facebook Link', () => {
+    let component;
+    let facebookLink;
+    let gaSocialMediaEvent;
+
+
+    before(() => {
+      component = shallow(<About />);
+      facebookLink = component.find('a.facebook-link');
+      gaSocialMediaEvent = sinon.spy(About.prototype, 'gaSocialMediaEvent');
+    });
+
+    after(() => {
+      component.unmount();
+      gaSocialMediaEvent.restore();
+
+     
+    });
+
+    it('should call the function "gaSocialMediaEvent" after the twitter link is clicked', () => {
+      // facebookLink.simulate('click');
+
+      component.find('a.facebook-link').first().childAt(0).simulate('click');
+
+      expect(gaSocialMediaEvent.callCount).to.equal(1);
+      expect(gaSocialMediaEvent.calledWith('Facebook')).to.equal(true);
+    });
+  });
+
+
+  // describe('gaSocialMediaEvent', () => {
+  //   const component = shallow(<About />);
+  //   const gaSocialMediaEvent = component.instance().gaSocialMediaEvent;
+  //   const trackPicks = sinon.stub(utils, 'trackPicks');
+
+
+
+  //   after(() => {
+  //     trackPicks.restore();
+  //     component.unmount();
+  //   });
+
+  //   it('should call utils/trackPicks with the passed argument "type".', () => {
+  //     gaSocialMediaEvent('kids');
+
+  //     // expect(trackPicks.callCount).to.equal(1);
+  //     expect(trackPicks.calledWith('Social Share', 'kids')).to.equal(true);
+  //   });
+  // });
 });
