@@ -17,7 +17,6 @@ class Main extends React.Component {
       this.filterByAudience(picksData.picks, this.props.currentAudience, picksData.type);
 
     this.state = {
-      selectableFilters: this.props.selectableFilters,
       selectedFilters: [],
       picks,
     };
@@ -37,7 +36,6 @@ class Main extends React.Component {
 
     // Update the props to reflect the latest updates from client side API responses
     this.setState({
-      selectableFilters: nextProps.selectableFilters,
       selectedFilters: [],
       picks,
     });
@@ -110,12 +108,10 @@ class Main extends React.Component {
     }
 
     let picks = this.getNewPickSet(this.props.picksData.picks, selectedFilters);
-    const selectableFilters = utils.getSelectableTags(picks);
 
     picks = this.filterByAudience(picks, this.props.currentAudience, this.props.picksData.type);
 
     this.setState({
-      selectableFilters,
       picks,
       selectedFilters,
     });
@@ -140,12 +136,10 @@ class Main extends React.Component {
   clearFilters() {
     const selectedFilters = [];
     const picks = this.getNewPickSet(this.props.picksData.picks, selectedFilters);
-    const selectableFilters = utils.getSelectableTags(picks);
 
     utils.trackPicks('Clear Filters', 'Clicked');
 
     this.setState({
-      selectableFilters,
       picks,
       selectedFilters,
     });
@@ -182,15 +176,15 @@ class Main extends React.Component {
     return updatedPicks;
   }
 
+
   render() {
     const { type } = this.props.picksData;
     const picksCount = this.getCount();
-
     return (
       <div className="nypl-row">
         <Sidebar
           filters={this.props.filters}
-          selectableFilters={this.state.selectableFilters}
+          selectableFilters={utils.getSelectableTags(this.state.picks)}
           setSelectedFilter={this.setSelectedFilter}
           clearFilters={this.clearFilters}
           isJsEnabled={this.props.isJsEnabled}
@@ -217,7 +211,6 @@ class Main extends React.Component {
 
 Main.propTypes = {
   filters: PropTypes.array,
-  selectableFilters: PropTypes.array,
   picksData: PropTypes.object,
   isJsEnabled: PropTypes.bool,
   listOptions: PropTypes.object,
@@ -227,7 +220,6 @@ Main.propTypes = {
 
 Main.defaultProps = {
   filters: [],
-  selectableFilters: [],
   picksData: {},
   isJsEnabled: false,
 };

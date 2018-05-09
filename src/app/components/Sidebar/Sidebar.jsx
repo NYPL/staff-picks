@@ -39,7 +39,6 @@ const Sidebar = (props) => {
     if (!shouldDisplay) {
       return null;
     }
-
     return (
       <BookFilters
         filters={props.filters}
