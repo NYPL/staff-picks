@@ -1,7 +1,6 @@
 import {
   findKey as _findKey,
   contains as _contains,
-  isNaN as _isNaN,
 } from 'underscore';
 import config from '../../../appConfig';
 
