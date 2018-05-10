@@ -84,7 +84,8 @@ const config = {
     staffPicks: {
       category: '',
       header: 'Staff Picks',
-      description: 'This is staff picks page.',
+      description: 'Nobody loves books more than our experts. ' +
+        'Browse and filter hundreds of their favorites.',
       heroImageUrl: 'src/client/images/desktop.teens.cover.2017.png',
     },
     ya: {
