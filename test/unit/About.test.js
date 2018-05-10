@@ -45,11 +45,11 @@ describe('About', () => {
     });
   });
 
-  describe('The list type is "teens"', () => {
+  describe('The list displayType is "teens"', () => {
     let component;
 
     before(() => {
-      component = shallow(<About type="teens" />);
+      component = shallow(<About displayType="teens" />);
     });
 
     after(() => {
@@ -68,11 +68,11 @@ describe('About', () => {
     });
   });
 
-  describe('The list type is "kids"', () => {
+  describe('The list displayType is "kids"', () => {
     let component;
 
     before(() => {
-      component = shallow(<About type="kids" />);
+      component = shallow(<About displayType="kids" />);
     });
 
     after(() => {
@@ -91,11 +91,11 @@ describe('About', () => {
     });
   });
 
-  describe('The list type is "staff-picks"', () => {
+  describe('The list displayType is "staff-picks"', () => {
     let component;
 
     before(() => {
-      component = shallow(<About type="staff-picks" />);
+      component = shallow(<About displayType="staff-picks" />);
     });
 
     after(() => {
