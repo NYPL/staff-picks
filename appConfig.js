@@ -2,6 +2,7 @@ const config = {
   port: 3001,
   webpackDevServerPort: 3000,
   baseUrl: '/books-music-movies/recommendations/best-books/',
+  base404: '/books-music-movies/recommendations/best-books/404',
   baseApiUrl: '/books-music-movies/recommendations/best-books/api/',
   metaTags: {
     ya: [
@@ -102,7 +103,7 @@ const config = {
   pageTitle: {
     ya: 'Best Books for Teens | NYPL',
     childrens: 'Best Books for Kids | NYPL',
-    'staff-picks': 'Staff Picks | NYPL',
+    'staff-picks': 'NYPL | Staff Picks',
   },
   requestUrlsText: {
     catalog: 'Request Book',
@@ -126,6 +127,13 @@ const config = {
         { name: 'Young Adult', value: 'YA' },
         { name: 'Children', value: 'Children' },
       ],
+    },
+  },
+  annualListOptions: {
+    season: {
+      fieldsetName: 'season',
+      currentValue: '',
+      options: [],
     },
   },
   audienceMap: {
