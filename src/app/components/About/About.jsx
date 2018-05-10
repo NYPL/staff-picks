@@ -74,7 +74,7 @@ class About extends React.Component {
 }
 
 About.propTypes = {
-  type: PropTypes.string,
+  displayType: PropTypes.string,
 };
 
 export default About;
