@@ -88,16 +88,20 @@ const Book = ({ pick, isJsEnabled }) => {
       const review = reviewsArray[0];
       const text = review.text;
       let reviewerName = '';
+      let reviewerNameDOM;
       let location = '';
       if (review.reviewerName) {
         reviewerName = review.reviewerName.trim();
         location = review.reviewerLocation ? `, ${review.reviewerLocation.prefLabel}` : '';
+        reviewerNameDOM = (
+          <p className="book-item-picked-by">Staff Pick By: {reviewerName}{location}</p>
+        );
       }
 
-      return (!reviewerName) ? (<div><p className="book-item-description">{text}</p></div>) : (
+      return (
         <div>
           <p className="book-item-description">{text}</p>
-          <p className="book-item-picked-by">Staff Pick By: {reviewerName}{location}</p>
+          {reviewerNameDOM}
         </div>
       );
     }
@@ -106,7 +110,7 @@ const Book = ({ pick, isJsEnabled }) => {
 
   const renderTags = (tags, jsEnabled) => {
     const tagsMarkup = !_isEmpty(tags) ?
-      tags.map((tag, i) => <span key={tag}>{tag}{i !== (tags.length - 1) ? ', ' : ''}</span>) : null;
+      tags.map((tag, i) => <span key={i}>{tag}{i !== (tags.length - 1) ? ', ' : ''}</span>) : null;
     const hiddenClass = jsEnabled ? 'visuallyHidden js' : 'no-js';
 
     return (tagsMarkup) ?

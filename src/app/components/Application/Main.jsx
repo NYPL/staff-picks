@@ -82,12 +82,10 @@ class Main extends React.Component {
     const { date } = picksData;
     const { type } = picksData;
     const displayDate = type === 'staff-picks' ? staffPicksDate(date) : annualDate(date);
-    const displayAudience = !['teens', 'kids'].includes(type) ? 'Adult' : utils.capitalize(type);
 
     return {
       displayDate,
-      displayAge: (appConfig.audienceMap[currentAudience]) ?
-        appConfig.audienceMap[currentAudience] : displayAudience,
+      displayAge: appConfig.audienceMap[currentAudience || 'Adult'],
     };
   }
 
@@ -178,7 +176,6 @@ class Main extends React.Component {
   }
 
   render() {
-    const { type } = this.props.picksData;
     const picksCount = this.getCount();
     return (
       <div className="nypl-row">
@@ -200,7 +197,7 @@ class Main extends React.Component {
         <BookList
           picks={this.state.picks}
           isJsEnabled={this.props.isJsEnabled}
-          displayType={type}
+          displayType={this.props.picksData.type}
           displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
           picksCount={picksCount}
         />

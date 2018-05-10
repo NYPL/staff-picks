@@ -19,6 +19,10 @@ const ListTitle = (props) => {
     );
   }
 
+  if (!displayDate.month || !displayDate.year || !displayAge) {
+    return null;
+  }
+
   return (
     <h2 id={`${idPrefix}list-title`} tabIndex="0">
       {displayDate.month} {displayDate.year} Picks for {displayAge}
