@@ -29,7 +29,6 @@ class About extends React.Component {
 
   gaSocialMediaEvent(type) {
     utils.trackPicks('Social Share', type);
-        console.log(type);
   }
 
   render() {
