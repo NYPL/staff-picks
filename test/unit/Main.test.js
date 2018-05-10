@@ -6,6 +6,7 @@ import { shallow, mount } from 'enzyme';
 
 import Main from '../../src/app/components/Application/Main';
 import config from '../../appConfig';
+import Actions from '../../src/app/actions/BookActions';
 
 const picks = [
   {
@@ -14,6 +15,7 @@ const picks = [
     },
     tags: ['funny', 'horror'],
     ageGroup: 'Adult',
+    slug: '01-first-book-title',
   },
   {
     book: {
@@ -21,6 +23,7 @@ const picks = [
     },
     tags: ['adventure', 'horror'],
     ageGroup: 'Adult',
+    slug: '02-second-book-title',
   },
   {
     book: {
@@ -28,6 +31,7 @@ const picks = [
     },
     tags: ['graphic-novels', 'funny'],
     ageGroup: 'YA',
+    slug: '03-third-book-title',
   },
 ];
 const selectedFilters = ['funny', 'graphic-novels'];
@@ -55,6 +59,36 @@ describe('Main', () => {
     it('should have a state of empty default values', () => {
       expect(component.state('selectedFilters')).to.eql([]);
       expect(component.state('picks')).to.eql([]);
+    });
+  });
+
+  describe('Hash id on mount', () => {
+    let component;
+
+    it('should do nothing if the location is wrong', () => {
+      component = mount(
+        <Main
+          listOptions={config.staffPicksListOptions}
+          currentAudience="Adult"
+          location={{ hash: '#01-third-book-title' }}
+          picksData={{ picks }}
+          />
+      );
+
+      expect(component.state('picks')).to.eql(picks);
+    });
+
+    it('should update the state and call the Action to update the age group', () => {
+      component = mount(
+        <Main
+          listOptions={config.staffPicksListOptions}
+          currentAudience="Adult"
+          location={{ hash: '#03-third-book-title' }}
+          picksData={{ picks, type: 'staff-picks' }}
+          />
+      );
+
+      expect(component.state('picks')).to.eql([picks[2]]);
     });
   });
 
@@ -90,6 +124,7 @@ describe('Main', () => {
             },
             tags: ['adventure', 'horror'],
             ageGroup: 'Adult',
+            slug: '02-second-book-title',
           },
         ]);
       });
@@ -102,6 +137,7 @@ describe('Main', () => {
             },
             tags: ['graphic-novels', 'funny'],
             ageGroup: 'YA',
+            slug: '03-third-book-title',
           },
         ]);
       });

@@ -37,15 +37,18 @@ class Main extends React.Component {
       (this.props.location.hash).substr(1): '';
     if (hash) {
       const pick = _findWhere(picksData.picks, { slug: hash });
+      const age = pick && pick.ageGroup ? pick.ageGroup : 'Adult';
       const picks =
-        this.filterByAudience(picksData.picks, pick.ageGroup, picksData.type);
+        this.filterByAudience(picksData.picks, age, picksData.type);
 
-      BookActions.updateCurrentAudience(pick.ageGroup);
+      BookActions.updateCurrentAudience(age);
       this.setState({ picks }, () => {
         setTimeout(() => {
           const elem = document.getElementById(hash);
-          elem.scrollIntoView();
-          elem.focus();
+          if (elem) {
+            elem.scrollIntoView();
+            elem.focus();
+          }
         }, 800);
       });
     }
