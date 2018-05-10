@@ -54,7 +54,6 @@ describe('Main', () => {
 
     it('should have a state of empty default values', () => {
       expect(component.state('selectedFilters')).to.eql([]);
-      expect(component.state('selectableFilters')).to.eql([]);
       expect(component.state('picks')).to.eql([]);
     });
   });
@@ -122,13 +121,13 @@ describe('Main', () => {
       });
 
       it('should return a date object and default of Adult age', () => {
-        expect(getPicksInfo({ date: '2018-01-01' })).to.eql({
+        expect(getPicksInfo({ date: '2018-01-01', type: 'staff-picks' })).to.eql({
           displayDate: { month: 'Winter', year: 2018 }, displayAge: 'Adult',
         });
       });
 
       it('should return a date object with updated age', () => {
-        expect(getPicksInfo({ date: '2017-03-01' }, 'YA')).to.eql({
+        expect(getPicksInfo({ date: '2017-03-01', type: 'staff-picks' }, 'YA')).to.eql({
           displayDate: { month: 'Spring', year: 2017 }, displayAge: 'Young Adult',
         });
       });
@@ -166,13 +165,11 @@ describe('Main', () => {
 
       it('should not change the state if nothing was passed', () => {
         expect(component.state('selectedFilters')).to.eql([]);
-        expect(component.state('selectableFilters')).to.eql([]);
         expect(component.state('picks')).to.eql([]);
 
         setSelectedFilter();
 
         expect(component.state('selectedFilters')).to.eql([]);
-        expect(component.state('selectableFilters')).to.eql([]);
         expect(component.state('picks')).to.eql([]);
       });
 
@@ -201,14 +198,11 @@ describe('Main', () => {
         setSelectedFilter = component.instance().setSelectedFilter;
 
         expect(component.state('picks')).to.eql(picks);
-        expect(component.state('selectableFilters')).to.eql([]);
         expect(component.state('selectedFilters')).to.eql([]);
 
         setSelectedFilter('funny', true);
 
         expect(component.state('picks')).to.eql([picks[0], picks[2]]);
-        expect(component.state('selectableFilters'))
-          .to.eql(['funny', 'horror', 'graphic-novels']);
         expect(component.state('selectedFilters')).to.eql(['funny']);
       });
     });
@@ -239,7 +233,6 @@ describe('Main', () => {
         clearFilters();
 
         expect(component.state('selectedFilters')).to.eql([]);
-        expect(component.state('selectableFilters')).to.eql([]);
         expect(component.state('picks')).to.eql([]);
       });
     });
