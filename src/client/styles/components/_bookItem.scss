@@ -10,6 +10,12 @@ $book-card-largescreen-gutter: 3.5%;
   display: block;
   @include clearfix;
 
+  &:focus {
+    // From @nypl/design-toolkit
+    @include box-shadow(inset 0 0 0 0.125rem $focus-color);
+    outline: none;
+  }
+
   &.withTranslatorIllustrator {
     .book-item-illustrator {
       margin-bottom: 0;

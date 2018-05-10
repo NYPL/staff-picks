@@ -1,13 +1,14 @@
 /* globals document */
 import React from 'react';
 import PropTypes from 'prop-types';
-import Scrollchor from 'react-scrollchor';
+import { findWhere as _findWhere } from 'underscore';
 
 import BookList from '../BookList/BookList';
 import Sidebar from '../Sidebar/Sidebar';
 import utils from '../../utils/utils';
 import { staffPicksDate, annualDate } from '../../utils/DateService';
 import appConfig from '../../../../appConfig';
+import BookActions from '../../actions/BookActions';
 
 class Main extends React.Component {
   constructor(props) {
@@ -32,14 +33,22 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    const hash = this.props.location.hash;
+    const picksData = this.props.picksData;
+    const hash = this.props.location && this.props.location.hash ?
+      (this.props.location.hash).substr(1): '';
     if (hash) {
-      // setTimeout(() => this["9781410493996-behind-closed-doors"].simulateClick(), 500);
-      setTimeout(() => {
-        document.getElementById(hash.substr(1)).scrollIntoView();
-        // setTimeout(() => this["9781410493996-behind-closed-doors"].simulateClick(), 500);
-      }, 800);
-      // <Scrollchor ref={ref => (this["9781410493996-behind-closed-doors"] = ref)} to="9781410493996-behind-closed-doors" />
+      const pick = _findWhere(picksData.picks, { slug: hash });
+      const picks =
+        this.filterByAudience(picksData.picks, pick.ageGroup, picksData.type);
+
+      BookActions.updateCurrentAudience(pick.ageGroup);
+      this.setState({ picks }, () => {
+        setTimeout(() => {
+          const elem = document.getElementById(hash);
+          elem.scrollIntoView();
+          elem.focus();
+        }, 800);
+      });
     }
   }
 
@@ -189,10 +198,6 @@ class Main extends React.Component {
     return updatedPicks;
   }
 
-  addToRefs(ref) {
-    this.setState({ refs: this.state.refs.append(ref) });
-  }
-
   render() {
     const picksCount = this.getCount();
     return (
@@ -218,7 +223,6 @@ class Main extends React.Component {
           displayType={this.props.picksData.type}
           displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
           picksCount={picksCount}
-          addToRefs={this.addToRefs}
         />
       </div>
     );

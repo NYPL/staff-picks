@@ -75,10 +75,6 @@ function selectMonthData(req, res, next) {
   const itemId = req.params.id;
   const type = req.params.type;
 
-  if (itemId) {
-    return res.redirect(`${config.baseUrl}${type}/${req.params.time}#${itemId}`);
-  }
-
   // Checks if the URL input fits season's convention
   const seasonMatches = matchListDate(req.params.time);
   // Default audience list is the adult list
