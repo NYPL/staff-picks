@@ -81,8 +81,6 @@ app.use('/', (req, res) => {
 
       iso.add(html, alt.flush());
 
-      console.log(pageTitle, metaTags);
-
       res
         .status(200)
         .render('index', {
