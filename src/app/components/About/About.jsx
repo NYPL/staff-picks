@@ -32,10 +32,10 @@ class About extends React.Component {
   }
 
   render() {
-    const type = this.props.type;
+    const displayType = this.props.displayType;
     const shareUrl = this.state.location.href;
-    const shareText = encodeURI(pageTitle[type]);
-    const aboutBestBooksLink = ['teens', 'kids'].includes(type) ?
+    const shareText = encodeURI(pageTitle[displayType]);
+    const aboutBestBooksLink = ['teens', 'kids'].includes(displayType) ?
       <p><a className="about-best-books-link" href={aboutUrls.about}>About Best Books</a></p>
       : null;
 
