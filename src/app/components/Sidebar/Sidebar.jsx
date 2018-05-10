@@ -21,7 +21,11 @@ const Sidebar = (props) => {
       JSON.parse(JSON.stringify(props.listOptions)) : config.staffPicksListOptions;
 
     listOptions.season.currentValue = data.currentSeason;
-    listOptions.audience.currentValue = data.currentAudience;
+    listOptions.type = data.type;
+
+    if (data.currentAudience) {
+      listOptions.audience.currentValue = data.currentAudience;
+    }
 
     return listOptions;
   };
@@ -35,7 +39,6 @@ const Sidebar = (props) => {
     if (!shouldDisplay) {
       return null;
     }
-
     return (
       <BookFilters
         filters={props.filters}
@@ -66,6 +69,7 @@ const Sidebar = (props) => {
       <div className="book-filters-heading">
         <ListTitle
           displayInfo={props.displayInfo}
+          displayType={props.type}
           picksCount={props.picksCount}
           idPrefix="sidebar"
         />
@@ -86,6 +90,7 @@ Sidebar.propTypes = {
   listOptions: PropTypes.object,
   selectedFilters: PropTypes.arrayOf(PropTypes.object),
   displayInfo: PropTypes.object,
+  type: PropTypes.string,
   picksCount: PropTypes.number,
 };
 
