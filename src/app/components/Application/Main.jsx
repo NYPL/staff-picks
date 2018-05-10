@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import BookList from '../BookList/BookList';
 import Sidebar from '../Sidebar/Sidebar';
 import utils from '../../utils/utils';
-import staffPicksDate from '../../utils/DateService';
+import { staffPicksDate, annualDate } from '../../utils/DateService';
 import appConfig from '../../../../appConfig';
 
 class Main extends React.Component {
@@ -17,7 +17,6 @@ class Main extends React.Component {
       this.filterByAudience(picksData.picks, this.props.currentAudience, picksData.type);
 
     this.state = {
-      selectableFilters: this.props.selectableFilters,
       selectedFilters: [],
       picks,
     };
@@ -37,7 +36,6 @@ class Main extends React.Component {
 
     // Update the props to reflect the latest updates from client side API responses
     this.setState({
-      selectableFilters: nextProps.selectableFilters,
       selectedFilters: [],
       picks,
     });
@@ -82,7 +80,8 @@ class Main extends React.Component {
     }
 
     const { date } = picksData;
-    const displayDate = staffPicksDate(date);
+    const { type } = picksData;
+    const displayDate = type === 'staff-picks' ? staffPicksDate(date) : annualDate(date);
 
     return {
       displayDate,
@@ -108,12 +107,10 @@ class Main extends React.Component {
     }
 
     let picks = this.getNewPickSet(this.props.picksData.picks, selectedFilters);
-    const selectableFilters = utils.getSelectableTags(picks);
 
     picks = this.filterByAudience(picks, this.props.currentAudience, this.props.picksData.type);
 
     this.setState({
-      selectableFilters,
       picks,
       selectedFilters,
     });
@@ -138,12 +135,10 @@ class Main extends React.Component {
   clearFilters() {
     const selectedFilters = [];
     const picks = this.getNewPickSet(this.props.picksData.picks, selectedFilters);
-    const selectableFilters = utils.getSelectableTags(picks);
 
     utils.trackPicks('Clear Filters', 'Clicked');
 
     this.setState({
-      selectableFilters,
       picks,
       selectedFilters,
     });
@@ -181,14 +176,12 @@ class Main extends React.Component {
   }
 
   render() {
-    const { type } = this.props.picksData;
     const picksCount = this.getCount();
-
     return (
       <div className="nypl-row">
         <Sidebar
           filters={this.props.filters}
-          selectableFilters={this.state.selectableFilters}
+          selectableFilters={utils.getSelectableTags(this.state.picks)}
           setSelectedFilter={this.setSelectedFilter}
           clearFilters={this.clearFilters}
           isJsEnabled={this.props.isJsEnabled}
@@ -198,12 +191,13 @@ class Main extends React.Component {
           currentAudience={this.props.currentAudience}
           displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
           picksCount={picksCount}
+          type={this.props.picksData.type}
         />
 
         <BookList
           picks={this.state.picks}
           isJsEnabled={this.props.isJsEnabled}
-          type={type}
+          displayType={this.props.picksData.type}
           displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
           picksCount={picksCount}
         />
@@ -214,7 +208,6 @@ class Main extends React.Component {
 
 Main.propTypes = {
   filters: PropTypes.array,
-  selectableFilters: PropTypes.array,
   picksData: PropTypes.object,
   isJsEnabled: PropTypes.bool,
   listOptions: PropTypes.object,
@@ -224,7 +217,6 @@ Main.propTypes = {
 
 Main.defaultProps = {
   filters: [],
-  selectableFilters: [],
   picksData: {},
   isJsEnabled: false,
 };

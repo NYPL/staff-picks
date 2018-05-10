@@ -17,10 +17,7 @@ class BookFilters extends React.Component {
 
     this.state = {
       // Create an array data structure of filter objects.
-      filters: this.props.filters.map(filter => ({
-        id: filter.toLowerCase().split(' ').join('-'),
-        label: filter,
-      })),
+      filters: utils.getFiltersMapping(this.props.filters),
       selectedFilters: this.props.selectedFilters,
       focusId: '',
       disabled: false,
@@ -37,7 +34,10 @@ class BookFilters extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ selectedFilters: nextProps.selectedFilters });
+    this.setState({
+      selectedFilters: nextProps.selectedFilters,
+      filters: utils.getFiltersMapping(nextProps.filters),
+    });
   }
 
   onClick(filterId, active) {
@@ -68,8 +68,10 @@ class BookFilters extends React.Component {
     if (!selectableFilters.length) {
       return filters;
     }
+
     return filters.filter(filter => _contains(selectableFilters, filter.id));
   }
+
 
   setDisabled(disabled) {
     this.setState({ disabled });
@@ -145,14 +147,16 @@ class BookFilters extends React.Component {
           </ul>
           {
             !!this.state.selectedFilters.length &&
-              (<button
-                onClick={() => this.props.clearFilters()}
-                className="nypl-primary-button clear-button"
-                ref="clearFilters"
-              >
-                <ResetIcon />
-                Clear All Filters
-              </button>)
+              (
+                <button
+                  onClick={() => this.props.clearFilters()}
+                  className="nypl-primary-button clear-button"
+                  ref="clearFilters"
+                >
+                  <ResetIcon />
+                  Clear All Filters
+                </button>
+              )
           }
         </div>
       </div>
