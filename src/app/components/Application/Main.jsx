@@ -21,7 +21,6 @@ class Main extends React.Component {
     this.state = {
       selectedFilters: [],
       picks,
-      refs: [],
     };
 
     this.setSelectedFilter = this.setSelectedFilter.bind(this);

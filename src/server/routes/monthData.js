@@ -72,8 +72,6 @@ function currentMonthData(req, res, next) {
 function selectMonthData(req, res, next) {
   const listOptions = config.staffPicksListOptions;
   let seasonListOptions = [];
-  const itemId = req.params.id;
-  const type = req.params.type;
 
   // Checks if the URL input fits season's convention
   const seasonMatches = matchListDate(req.params.time);
