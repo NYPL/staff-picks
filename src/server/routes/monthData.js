@@ -6,6 +6,8 @@ import platformConfig from '../../../platformConfig';
 import modelListOptions from '../../app/utils/ModelListOptionsService';
 import { matchListDate } from '../../app/utils/DateService';
 
+const STAFF_PICKS = 'staff-picks';
+
 /* nyplApiClientGet(endpoint)
  * The function that wraps nyplApiClient for GET requests.
  * @param {string} endpoint
@@ -26,7 +28,7 @@ function currentMonthData(req, res, next) {
   nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
     .then((data) => {
       // Models the options based on the data returned
-      const modeledOptionObject = modelListOptions(data, 'staff-picks');
+      const modeledOptionObject = modelListOptions(data, STAFF_PICKS);
 
       seasonListOptions = modeledOptionObject.options;
       latestSeason = modeledOptionObject.latestOption;
@@ -52,8 +54,8 @@ function currentMonthData(req, res, next) {
           currentSeason: latestSeason,
           currentAudience: 'Adult',
         },
-        pageTitle: '',
-        metaTags: [],
+        pageTitle: config.pageTitle[STAFF_PICKS],
+        metaTags: config.metaTags[STAFF_PICKS],
       };
 
       next();
@@ -105,7 +107,7 @@ function selectMonthData(req, res, next) {
   nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
     .then((data) => {
       // Models the options based on the data returned
-      const modeledOptionObject = modelListOptions(data, 'staff-picks');
+      const modeledOptionObject = modelListOptions(data, STAFF_PICKS);
 
       seasonListOptions = modeledOptionObject.options;
 
@@ -141,8 +143,8 @@ function selectMonthData(req, res, next) {
           currentSeason: requestedSeason,
           currentAudience: audience,
         },
-        pageTitle: '',
-        metaTags: [],
+        pageTitle: config.pageTitle[STAFF_PICKS],
+        metaTags: config.metaTags[STAFF_PICKS],
       };
       next();
     })

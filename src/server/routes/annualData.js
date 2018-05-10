@@ -18,14 +18,15 @@ const nyplApiClientGet = endpoint =>
  */
 function annualCurrentListData(req, res, next) {
   const listOptions = config.annualListOptions;
+  const { type } = req.params;
   let seasonListOptions = [];
   let latestSeason = '';
-  const dataType = utils.getDataType(req.params.type);
+  const dataType = utils.getDataType(type);
 
   nyplApiClientGet(platformConfig.endpoints.annualLists[dataType])
     .then((data) => {
       // Models the options based on the data returned
-      const modeledOptionObject = modelListOptions(data, req.params.type);
+      const modeledOptionObject = modelListOptions(data, type);
 
       seasonListOptions = modeledOptionObject.options;
       latestSeason = modeledOptionObject.latestOption;
@@ -60,8 +61,8 @@ function annualCurrentListData(req, res, next) {
           listOptions,
           currentSeason: latestSeason,
         },
-        pageTitle: '',
-        metaTags: [],
+        pageTitle: config.pageTitle[type],
+        metaTags: config.metaTags[type],
       };
 
       next();
@@ -85,10 +86,11 @@ function annualCurrentListData(req, res, next) {
 function annualListData(req, res, next) {
   const listOptions = config.annualListOptions;
   let seasonListOptions = [];
-  const dataType = utils.getDataType(req.params.type);
+  const { type } = req.params;
+  const dataType = utils.getDataType(type);
 
   // Checks if the URL input fits season's convention
-  const seasonMatches = matchListDate(req.params.time, req.params.type);
+  const seasonMatches = matchListDate(req.params.time, type);
   // Default audience list is the adult list
   let requestedSeason = '';
 
@@ -105,7 +107,7 @@ function annualListData(req, res, next) {
   nyplApiClientGet(platformConfig.endpoints.annualLists[`${dataType}`])
     .then((data) => {
       // Models the options based on the data returned
-      const modeledOptionObject = modelListOptions(data, req.params.type);
+      const modeledOptionObject = modelListOptions(data, type);
 
       seasonListOptions = modeledOptionObject.options;
 
@@ -139,8 +141,8 @@ function annualListData(req, res, next) {
           listOptions,
           currentSeason: requestedSeason,
         },
-        pageTitle: '',
-        metaTags: [],
+        pageTitle: config.pageTitle[type],
+        metaTags: config.metaTags[type],
       };
       next();
     })
