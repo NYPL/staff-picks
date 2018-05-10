@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { EReaderIcon, BookIcon } from '@nypl/dgx-svg-icons';
 import { isEmpty as _isEmpty, isString as _isString } from 'underscore';
-import Scrollchor from 'react-scrollchor';
 
 import config from '../../../../appConfig';
 import utils from '../../utils/utils';
