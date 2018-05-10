@@ -102,7 +102,7 @@ const config = {
   pageTitle: {
     ya: 'Best Books for Teens | NYPL',
     childrens: 'Best Books for Kids | NYPL',
-    'staff-picks': 'Staff Picks | NYPL',
+    'staff-picks': 'NYPL | Recommendations',
   },
   requestUrlsText: {
     catalog: 'Request Book',
