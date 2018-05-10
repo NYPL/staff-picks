@@ -36,7 +36,8 @@ class About extends React.Component {
     const shareUrl = this.state.location.href;
     const shareText = encodeURI(pageTitle[type]);
     const aboutBestBooksLink = ['teens', 'kids'].includes(type) ?
-      <p><a className="about-best-books-link" href={aboutUrls.about}>About Best Books</a></p> : null;
+      <p><a className="about-best-books-link" href={aboutUrls.about}>About Best Books</a></p>
+      : null;
 
     return (
       <div className="about nypl-row">
