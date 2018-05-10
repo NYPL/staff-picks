@@ -10,6 +10,7 @@ const BookList = ({
   picks,
   type,
   displayInfo,
+  displayType,
   picksCount,
 }) => {
   const renderBookItems = currentBooks => (
@@ -21,7 +22,7 @@ const BookList = ({
   return (
     <div className="booklist-section nypl-column-three-quarters">
       <div className="list-title-container">
-        <ListTitle displayInfo={displayInfo} picksCount={picksCount} />
+        <ListTitle displayInfo={displayInfo} displayType={displayType} picksCount={picksCount} />
       </div>
 
       {
@@ -42,6 +43,7 @@ BookList.propTypes = {
   isJsEnabled: PropTypes.bool,
   type: PropTypes.string,
   displayInfo: PropTypes.object,
+  displayType: PropTypes.string,
   picksCount: PropTypes.number,
 };
 
