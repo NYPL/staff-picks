@@ -2,7 +2,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-
+import sinon from 'sinon';
 import About from '../../src/app/components/About/About';
 
 describe('About', () => {
@@ -108,6 +108,56 @@ describe('About', () => {
       // Without "About Best Books" link now we should have 3 anchor links
       expect(component.find('a').length).to.equal(3);
       expect(aboutLink).to.have.length(0);
+    });
+  });
+
+  describe('Twitter Link', () => {
+    let component;
+    let twitterLink;
+    let gaSocialMediaEvent;
+
+    before(() => {
+      // As we are wrapping spy to the prototype function, it has to come before component mounting
+      gaSocialMediaEvent = sinon.spy(About.prototype, 'gaSocialMediaEvent');
+      component = shallow(<About />);
+      twitterLink = component.find('a.twitter-link');
+    });
+
+    after(() => {
+      component.unmount();
+      gaSocialMediaEvent.restore();
+    });
+
+    it('should call the function "gaSocialMediaEvent" after the twitter link is clicked', () => {
+      twitterLink.simulate('click');
+
+      expect(gaSocialMediaEvent.callCount).to.equal(1);
+      expect(gaSocialMediaEvent.calledWith('Twitter')).to.equal(true);
+    });
+  });
+
+  describe('Facebook Link', () => {
+    let component;
+    let facebookLink;
+    let gaSocialMediaEvent;
+
+    before(() => {
+      // As we are wrapping spy to the prototype function, it has to come before component mounting
+      gaSocialMediaEvent = sinon.spy(About.prototype, 'gaSocialMediaEvent');
+      component = shallow(<About />);
+      facebookLink = component.find('a.facebook-link');
+    });
+
+    after(() => {
+      component.unmount();
+      gaSocialMediaEvent.restore();
+    });
+
+    it('should call the function "gaSocialMediaEvent" after the twitter link is clicked', () => {
+      facebookLink.simulate('click');
+
+      expect(gaSocialMediaEvent.callCount).to.equal(1);
+      expect(gaSocialMediaEvent.calledWith('Facebook')).to.equal(true);
     });
   });
 });
