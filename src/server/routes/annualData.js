@@ -11,15 +11,15 @@ const nyplApiClientGet = endpoint =>
 
 /**
  * annualCurrentListData(req, res, next)
- * Get the latest annual staff pick list for either childrens or ya.
+ * Get the latest year's list for either childrens or ya.
  * @param {object} req
  * @param {object} res
  * @param {object} next
  */
 function annualCurrentListData(req, res, next) {
   const listOptions = config.annualListOptions;
-  let seasonListOptions = [];
-  let latestSeason = '';
+  let annualListOptions = [];
+  let latestYear = '';
   const dataType = utils.getDataType(req.params.type);
 
   nyplApiClientGet(platformConfig.endpoints.annualLists[dataType])
@@ -27,14 +27,14 @@ function annualCurrentListData(req, res, next) {
       // Models the options based on the data returned
       const modeledOptionObject = modelListOptions(data, req.params.type);
 
-      seasonListOptions = modeledOptionObject.options;
-      latestSeason = modeledOptionObject.latestOption;
+      annualListOptions = modeledOptionObject.options;
+      latestYear = modeledOptionObject.latestOption;
 
-      // Updates default season list options with API response
-      listOptions.season.options = seasonListOptions;
+      // Updates default year's list options with API response
+      listOptions.season.options = annualListOptions;
 
       // Calls the latest list
-      return nyplApiClientGet(`${platformConfig.endpoints.annualPath}${dataType}/${latestSeason}`);
+      return nyplApiClientGet(`${platformConfig.endpoints.annualPath}${dataType}/${latestYear}`);
     })
     .then((data) => {
       const filters = utils.getAllTags(data.picks);
@@ -49,7 +49,7 @@ function annualCurrentListData(req, res, next) {
       }
 
       // Uodate the option lists' default values by the request params
-      listOptions.season.currentValue = latestSeason;
+      listOptions.season.currentValue = latestYear;
 
       res.locals.data = {
         BookStore: {
@@ -58,7 +58,7 @@ function annualCurrentListData(req, res, next) {
           selectableFilters,
           isJsEnabled: false,
           listOptions,
-          currentSeason: latestSeason,
+          currentSeason: latestYear,
         },
         pageTitle: '',
         metaTags: [],
@@ -75,31 +75,29 @@ function annualCurrentListData(req, res, next) {
 
 /**
  * annualListData(req, res, next)
- * Get a specific month's or season's staff pick list.
- * It calls '/book-lists?type=staff-picks' to get all the available list options first.
+ * Get a specific year's list.
+ * It calls '/book-lists?type={type}' to get all the available list options first.
  * @param {object} req
  * @param {object} res
  * @param {object} next
- * @return {object}
  */
 function annualListData(req, res, next) {
   const listOptions = config.annualListOptions;
-  let seasonListOptions = [];
+  let annualListOptions = [];
   const dataType = utils.getDataType(req.params.type);
 
-  // Checks if the URL input fits season's convention
-  const seasonMatches = matchListDate(req.params.time, req.params.type);
-  // Default audience list is the adult list
-  let requestedSeason = '';
+  // Checks if the URL input fits year's convention
+  const yearMatches = matchListDate(req.params.time, req.params.type);
+  let requestedYear = '';
 
-  if (!seasonMatches) {
-    console.error('Status Code: 400, Error Message: Invalid season or audience.');
+  if (!yearMatches) {
+    console.error('Status Code: 400, Error Message: Invalid year.');
 
     return res.redirect(`${config.baseUrl}404`);
   }
 
-  // If the param fits season's convention, constructs the request param
-  requestedSeason = seasonMatches[0];
+  // If the param fits year's convention, constructs the request param
+  requestedYear = yearMatches[0];
 
   // The first request to get all the available list options
   nyplApiClientGet(platformConfig.endpoints.annualLists[`${dataType}`])
@@ -107,13 +105,13 @@ function annualListData(req, res, next) {
       // Models the options based on the data returned
       const modeledOptionObject = modelListOptions(data, req.params.type);
 
-      seasonListOptions = modeledOptionObject.options;
+      annualListOptions = modeledOptionObject.options;
 
-      // Updates default season list options with API response
-      listOptions.season.options = seasonListOptions;
+      // Updates default year's list options with API response
+      listOptions.season.options = annualListOptions;
 
       // Calls the selected list
-      return nyplApiClientGet(`${platformConfig.endpoints.annualPath}${dataType}/${requestedSeason}`);
+      return nyplApiClientGet(`${platformConfig.endpoints.annualPath}${dataType}/${requestedYear}`);
     })
     .then((data) => {
       const filters = utils.getAllTags(data.picks);
@@ -128,7 +126,7 @@ function annualListData(req, res, next) {
       }
 
       // Uodate the option lists' default values by the request params
-      listOptions.season.currentValue = requestedSeason;
+      listOptions.season.currentValue = requestedYear;
 
       res.locals.data = {
         BookStore: {
@@ -137,7 +135,7 @@ function annualListData(req, res, next) {
           selectableFilters,
           isJsEnabled: false,
           listOptions,
-          currentSeason: requestedSeason,
+          currentSeason: requestedYear,
         },
         pageTitle: '',
         metaTags: [],
@@ -153,24 +151,24 @@ function annualListData(req, res, next) {
 
 /**
  * annualClientListData(req, res, next)
- * Gets a specific month's or season's staff pick list on the client side.
+ * Gets a specific year's list on the client side.
  * @param {object} req
  * @param {object} res
  */
 function annualClientListData(req, res) {
   const dataType = utils.getDataType(req.params.type);
-  const seasonMatches = matchListDate(req.params.time, req.params.type);
+  const yearMatches = matchListDate(req.params.time, req.params.type);
 
-  if (!seasonMatches) {
-    console.error('Status Code: 400, Error Message: Invalid season.');
+  if (!yearMatches) {
+    console.error('Status Code: 400, Error Message: Invalid year.');
 
     res.json({
       statusCode: 400,
-      errorMessage: 'Invalid season.',
+      errorMessage: 'Invalid year.',
     });
   }
 
-  nyplApiClientGet(`${platformConfig.endpoints.annualPath}${dataType}/${seasonMatches[0]}`)
+  nyplApiClientGet(`${platformConfig.endpoints.annualPath}${dataType}/${yearMatches[0]}`)
     .then((data) => {
       res.json({
         title: data.title,
