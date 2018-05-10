@@ -59,7 +59,7 @@ class About extends React.Component {
           </li>
           <li>
             <a
-            className="facebook-link"
+              className="facebook-link"
               href={`${socialSharing.facebook}${this.state.location}`}
               onClick={() => this.gaSocialMediaEvent('Facebook')}
             >
