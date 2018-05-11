@@ -200,7 +200,7 @@ function selectDataFormPost(req, res) {
   const type = utils.getDataType(req.body.type, true);
 
   if (!season && !audience) {
-    console.error(
+    logger.error(
       `Form data of season and audience is undefined. season: ${season}, audience: ${audience}`
     );
 
