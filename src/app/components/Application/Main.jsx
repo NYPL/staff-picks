@@ -238,7 +238,9 @@ Main.propTypes = {
   listOptions: PropTypes.object,
   currentSeason: PropTypes.string,
   currentAudience: PropTypes.string,
-  location: PropTypes.shape(PropTypes.object),
+  location: PropTypes.shape({
+    hash: PropTypes.string,
+  }),
 };
 
 Main.defaultProps = {
