@@ -76,7 +76,7 @@ app.use('/', (req, res) => {
         res.locals.data.metaTags : [];
       const renderedMetaTags = metaTags.map((tag, index) =>
         ReactDOMServer.renderToString(<meta key={index} {...tag} />));
-      const renderedPageTitle = (res.locals.data && res.locals.data.pageTitle) ?
+      const pageTitle = (res.locals.data && res.locals.data.pageTitle) ?
         res.locals.data.pageTitle : '';
 
       iso.add(html, alt.flush());
@@ -90,7 +90,7 @@ app.use('/', (req, res) => {
           markup: iso.render(),
           assets: buildAssets,
           webpackPort: WEBPACK_DEV_PORT,
-          pageTitle: renderedPageTitle,
+          pageTitle,
         });
     } else {
       res.status(404).send('Not found');
