@@ -33,7 +33,7 @@ const Book = ({ pick, isJsEnabled }) => {
     return (
       // Uses lazy load to load the images based on the view
       <Lazy component="div" className="book-item-image-box" cushion={2000} ltIE9>
-        <img className="on-load" alt="" src={fullImgSrc} />
+        <img alt="" src={fullImgSrc} />
       </Lazy>
     );
   };

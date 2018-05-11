@@ -54,12 +54,10 @@ $book-card-largescreen-gutter: 3.5%;
       margin: 0 $book-card-smallscreen-gutter;
 
       /* fade in transition for images loading*/
-      &.on-load {
-        -webkit-animation: fadeInBookImage 1s;
-        -moz-animation: fadeInBookImage 1s;
-        -o-animation: fadeInBookImage 1s;
-        animation: fadeInBookImage 1s;
-      }
+      -webkit-animation: fadeInBookImage 1s;
+      -moz-animation: fadeInBookImage 1s;
+      -o-animation: fadeInBookImage 1s;
+      animation: fadeInBookImage 1s;
     }
   }
 
