@@ -12,12 +12,11 @@ import Iso from 'iso';
 
 import webpackConfig from './webpack.config';
 import appConfig from './appConfig';
+import logger from './logger';
 import appRoutes from './src/app/routes/routes';
 import expressRoutes from './src/server/routes/routes';
 import nyplApiClient from './src/server/helper/nyplApiClient';
 import alt from './src/app/alt';
-
-import logger from './logger';
 
 // URL configuration
 const ROOT_PATH = __dirname;
