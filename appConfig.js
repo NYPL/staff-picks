@@ -55,6 +55,31 @@ const config = {
       { name: 'twitter:image:alt', content: 'Featured title: The Book of Mistakes by ' +
         'Corinna Luyken' },
     ],
+    'staff-picks': [
+      { property: 'og:type', content: 'website' },
+      { property: 'og:site_name', content: 'Staff Picks' },
+      { property: 'og:title', content: 'Staff Picks' },
+      { property: 'og:description', content: 'True stories, tales of courage, historical ' +
+        'romances, edge-of-your-seat thrillers... There is a huge world of books out there. ' +
+        'Our expert staff members pick out their favorites to help you find your next one.' },
+      { property: 'og:url', content: 'https://www.nypl.org/books-music-movies/recommendations' +
+        '/best-books/staff-picks' },
+      { property: 'og:image', content: 'https://www.nypl.org/books-music-movies/recommendations' +
+        '/best-books/src/client/images/shelftalker.4.2.png' },
+      { property: 'og:image:alt', content: 'Featured title: Anathem by Neal Stephenson' },
+      { property: 'og:image:width', content: '335' },
+      { property: 'og:image:height', content: '600' },
+      { name: 'twitter:title', content: 'Staff Picks' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:site', content: '@nypl' },
+      { name: 'twitter:creator', content: '@nypl' },
+      { name: 'twitter:description', content: 'True stories, tales of courage, historical ' +
+        'romances, edge-of-your-seat thrillers... There is a huge world of books out there. ' +
+        'Our expert staff members pick out their favorites to help you find your next one.' },
+      { name: 'twitter:image', content: 'https://www.nypl.org/books-music-movies/recommendations' +
+        '/best-books/src/client/images/shelftalker.4.2.png' },
+      { name: 'twitter:image:alt', content: 'Featured title: Anathem by Neal Stephenson' },
+    ],
   },
   seasons: {
     Spring: ['March', 'April', 'May'],
