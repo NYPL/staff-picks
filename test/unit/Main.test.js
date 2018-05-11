@@ -6,7 +6,6 @@ import { shallow, mount } from 'enzyme';
 
 import Main from '../../src/app/components/Application/Main';
 import config from '../../appConfig';
-import Actions from '../../src/app/actions/BookActions';
 
 const picks = [
   {
@@ -72,8 +71,7 @@ describe('Main', () => {
           currentAudience="Adult"
           location={{ hash: '#01-third-book-title' }}
           picksData={{ picks }}
-          />
-      );
+        />);
 
       expect(component.state('picks')).to.eql(picks);
     });
@@ -85,8 +83,7 @@ describe('Main', () => {
           currentAudience="Adult"
           location={{ hash: '#03-third-book-title' }}
           picksData={{ picks, type: 'staff-picks' }}
-          />
-      );
+        />);
 
       expect(component.state('picks')).to.eql([picks[2]]);
     });
@@ -99,8 +96,7 @@ describe('Main', () => {
 
       before(() => {
         component = mount(
-          <Main listOptions={config.staffPicksListOptions} currentAudience="Adult" />
-        );
+          <Main listOptions={config.staffPicksListOptions} currentAudience="Adult" />);
         getNewPickSet = component.instance().getNewPickSet;
       });
 
@@ -194,8 +190,7 @@ describe('Main', () => {
 
       before(() => {
         component = mount(
-          <Main picksData={{ picks: [] }} listOptions={config.staffPicksListOptions} />
-        );
+          <Main picksData={{ picks: [] }} listOptions={config.staffPicksListOptions} />);
         setSelectedFilter = component.instance().setSelectedFilter;
       });
 
@@ -299,8 +294,7 @@ describe('Main', () => {
       };
       const filterByAudience = sinon.spy(Main.prototype, 'filterByAudience');
       const component = shallow(
-        <Main picksData={staffPicksData} currentAudience="YA" listType="staff-picks" />
-      );
+        <Main picksData={staffPicksData} currentAudience="YA" listType="staff-picks" />);
 
       after(() => {
         filterByAudience.restore();
@@ -311,33 +305,29 @@ describe('Main', () => {
         () => {
           expect(filterByAudience.called).to.equal(true);
           expect(filterByAudience.getCall(0).args).to.deep.equal(
-            [staffPicksData.picks, 'YA', 'staff-picks']
+            [staffPicksData.picks, 'YA', 'staff-picks'],
           );
-        }
-      );
+        });
 
       it('should return the original list if it is not a staff picks list.', () => {
         const returnedValue = staffPicksData.picks;
 
-        expect(filterByAudience(staffPicksData.picks, 'YA', 'some-other-list')).to.deep.equal(
-          returnedValue
-        );
+        expect(filterByAudience(staffPicksData.picks, 'YA', 'some-other-list'))
+          .to.deep.equal(returnedValue);
       });
 
       it('should return an empty array if the passed down list is empty.', () => {
         const returnedValue = [];
 
-        expect(filterByAudience([], 'YA', 'staff-picks')).to.deep.equal(
-          returnedValue
-        );
+        expect(filterByAudience([], 'YA', 'staff-picks'))
+          .to.deep.equal(returnedValue);
       });
 
       it('should return an empty array if the passed down age group is not valid.', () => {
         const returnedValue = [];
 
-        expect(filterByAudience(staffPicksData.picks, 'Toddler', 'staff-picks')).to.deep.equal(
-          returnedValue
-        );
+        expect(filterByAudience(staffPicksData.picks, 'Toddler', 'staff-picks'))
+          .to.deep.equal(returnedValue);
       });
 
       it('should return a specific audience/age group based on the props.', () => {
@@ -350,9 +340,8 @@ describe('Main', () => {
           },
         ];
 
-        expect(filterByAudience(staffPicksData.picks, 'YA', 'staff-picks')).to.deep.equal(
-          returnedValue
-        );
+        expect(filterByAudience(staffPicksData.picks, 'YA', 'staff-picks'))
+          .to.deep.equal(returnedValue);
       });
     });
   });

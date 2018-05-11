@@ -34,7 +34,7 @@ class Main extends React.Component {
   componentDidMount() {
     const picksData = this.props.picksData;
     const hash = this.props.location && this.props.location.hash ?
-      (this.props.location.hash).substr(1): '';
+      (this.props.location.hash).substr(1) : '';
     if (hash) {
       const pick = _findWhere(picksData.picks, { slug: hash });
       const age = pick && pick.ageGroup ? pick.ageGroup : 'Adult';
@@ -238,6 +238,7 @@ Main.propTypes = {
   listOptions: PropTypes.object,
   currentSeason: PropTypes.string,
   currentAudience: PropTypes.string,
+  location: PropTypes.shape(PropTypes.object),
 };
 
 Main.defaultProps = {

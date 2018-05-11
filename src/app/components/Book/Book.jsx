@@ -36,7 +36,7 @@ const Book = ({ pick, isJsEnabled }) => {
     );
   };
 
-  const renderTitle = (title) => (
+  const renderTitle = title => (
     !isStringEmpty(title) ? (<h3 className="book-item-title">{title}</h3>) : null
   );
 
