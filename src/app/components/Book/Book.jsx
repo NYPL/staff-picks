@@ -4,6 +4,7 @@ import { EReaderIcon, BookIcon } from '@nypl/dgx-svg-icons';
 import { isEmpty as _isEmpty, isString as _isString } from 'underscore';
 import config from '../../../../appConfig';
 import utils from '../../utils/utils';
+import { Lazy } from 'react-lazy';
 
 const Book = ({ pick, isJsEnabled }) => {
   const isStringEmpty = string => (!_isString(string) || _isEmpty(string.trim()));
@@ -28,10 +29,12 @@ const Book = ({ pick, isJsEnabled }) => {
   const renderBookCoverImage = (imageUrl) => {
     const defaultImageUrl = `${config.baseUrl}src/client/images/book-place-holder.png`;
     const fullImgSrc = isStringEmpty(imageUrl) ? defaultImageUrl : imageUrl;
+
     return (
-      <div className="book-item-image-box">
-        <img alt="" src={fullImgSrc} />
-      </div>
+      // Uses lazy load to load the images based on the view
+      <Lazy component="div" className="book-item-image-box" cushion={2000} ltIE9>
+        <img className="on-load" alt="" src={fullImgSrc} />
+      </Lazy>
     );
   };
 
