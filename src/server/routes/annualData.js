@@ -1,12 +1,11 @@
 import nyplApiClient from '../helper/nyplApiClient';
 import config from '../../../appConfig';
+import logger from '../../../logger';
 
 import utils from '../../app/utils/utils';
 import platformConfig from '../../../platformConfig';
 import modelListOptions from '../../app/utils/ModelListOptionsService';
 import { matchListDate } from '../../app/utils/DateService';
-
-import logger from '../../../logger';
 
 const nyplApiClientGet = endpoint =>
   nyplApiClient().then(client => client.get(endpoint, { cache: false }));
