@@ -38,13 +38,19 @@ class App extends React.Component {
 
   render() {
     let heroData;
-    const type = !_isEmpty(this.props.params) ? this.props.params.type : undefined;
+    let heroDOM;
+    // Use pathname index as type since routes.jsx specifies them directly.
+    let type = this.props.location.pathname.split('/')[4];
+    // Convert '/' path or 'staff-picks' to use the heroData key 'staffPicks' to properly
+    // match the heroData configuration.
+    if (type === 'staff-picks' || _isEmpty(type)) {
+      type = 'staffPicks';
+    }
 
     // Check if the params type is included in valid data set
     if (type && _allKeys(config.heroData).includes(type)) {
-      heroData = config.heroData[this.props.params.type];
-    } else {
-      heroData = config.heroData.staffPicks;
+      heroData = config.heroData[type] ? config.heroData[type] : config.heroData.staffPicks;
+      heroDOM = <Hero heroData={heroData} />;
     }
 
     return (
@@ -55,7 +61,7 @@ class App extends React.Component {
         />
 
         <main className="main-page">
-          <Hero heroData={heroData} />
+          {heroDOM}
 
           <div id="app-content" className="nypl-full-width-wrapper">
             {React.cloneElement(this.props.children, this.state)}

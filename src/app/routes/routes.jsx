@@ -8,17 +8,22 @@ import App from '../components/Application/Application';
 import Main from '../components/Application/Main';
 import Error404Page from '../components/Error404Page/Error404Page';
 
-import appConfig from '../../../appConfig';
+import config from '../../../appConfig';
 
-// Routes we need
+// Routes are specified directly here in order to properly match and route to
+// the 404 page appropriately.
 const routes = {
   client: (
     <Router>
-      <Route path={`${appConfig.baseUrl}`} component={App}>
+      <Route path={`${config.baseUrl}`} component={App}>
         <IndexRoute component={Main} />
-        <Route path={`${appConfig.baseUrl}staff-picks`} component={Main} />
-        <Route path={`${appConfig.baseUrl}childrens`} component={Main} />
-        <Route path={`${appConfig.baseUrl}ya`} component={Main} />
+        <Route path={`${config.base404}`} status={404} component={Error404Page} />
+        <Route path={`${config.baseUrl}staff-picks`} component={Main} />
+        <Route path={`${config.baseUrl}childrens`} component={Main} />
+        <Route path={`${config.baseUrl}ya`} component={Main} />
+        <Route path={`${config.baseUrl}staff-picks/:time`} component={Main} />
+        <Route path={`${config.baseUrl}childrens/:time`} component={Main} />
+        <Route path={`${config.baseUrl}ya/:time`} component={Main} />
         <Route path="*" status={404} component={Error404Page} />
       </Route>
     </Router>

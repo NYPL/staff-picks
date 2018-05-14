@@ -17,10 +17,6 @@ router
   .route(`${appConfig.baseApiUrl}:type/:time/:id?`)
   .get(selectClientData.selectClientData);
 
-router
-  .route(`${appConfig.base404}`)
-  .get((req, res, next) => { console.log('trapped!'); next(); });
-
 // Type detection between best books and staff picks.
 router
   .route(`${appConfig.baseUrl}:type/:time?/:id?`)

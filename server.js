@@ -64,7 +64,6 @@ app.use('/', (req, res) => {
    *
    */
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
-    console.log('e: ', error, 'rend: ', redirectLocation, 'p: ', renderProps);
     if (error) {
       res.status(500).send(error.message);
     } else if (redirectLocation) {

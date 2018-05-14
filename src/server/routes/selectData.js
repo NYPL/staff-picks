@@ -1,8 +1,5 @@
 import monthData from './monthData';
 import annualData from './annualData';
-import appConfig from '../../../appConfig';
-
-const { baseUrl, base404 } = appConfig;
 
 /**
  * selectData(req, res, next)
@@ -27,7 +24,7 @@ function selectData(req, res, next) {
     return monthData.currentMonthData(req, res, next);
   }
 
-  return res.redirect(base404);
+  next();
 }
 
 export default {
