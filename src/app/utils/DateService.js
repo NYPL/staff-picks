@@ -38,9 +38,9 @@ function matchListDate(dateStr, type = 'staff-picks') {
   }
 
   if (type !== 'staff-picks') {
-    pattern = /(\d{4})/;
+    pattern = /^(\d{4})$/;
   } else {
-    pattern = /(\d{4})\-(\d{2})\-(\d{2})/;
+    pattern = /^(\d{4})\-(\d{2})\-(\d{2})$/;
   }
 
   const validMatch = dateStr.match(pattern);
