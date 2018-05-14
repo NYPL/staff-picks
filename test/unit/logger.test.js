@@ -4,6 +4,7 @@ import { expect } from 'chai';
 import logger from '../../logger';
 
 describe('Logger', () => {
+  
   describe('Transports', () => {
     it('should be an object', () => {
       expect(logger.transports).to.be.an('object');
