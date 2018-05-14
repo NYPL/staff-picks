@@ -2,9 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Hero = ({ heroData }) => {
-  // Check if this list is one of "Staff Picks"
-  const isStaffPicksList = heroData.header === 'Staff Picks';
+const Hero = ({ heroData, isStaffPicksHero = true }) => {
   const image = heroData.heroImageUrl;
   let sectionTitleDOM = null;
   let staffPicksHeroClassName = '';
@@ -14,7 +12,7 @@ const Hero = ({ heroData }) => {
     </div>
   );
 
-  if (isStaffPicksList) {
+  if (isStaffPicksHero) {
     // "Staff Picks" lists have the section title
     sectionTitleDOM = <p className="hero-section-title">{heroData.sectionTitle}</p>;
     staffPicksHeroClassName = ' staff-picks-hero';
@@ -42,6 +40,7 @@ const Hero = ({ heroData }) => {
 
 Hero.propTypes = {
   heroData: PropTypes.object.isRequired,
+  isStaffPicksHero: PropTypes.bool,
 };
 
 export default Hero;

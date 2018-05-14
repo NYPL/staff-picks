@@ -28,7 +28,7 @@ describe('Hero', () => {
     const teensHeroData = config.heroData.ya;
 
     before(() => {
-      component = shallow(<Hero heroData={teensHeroData} />);
+      component = shallow(<Hero heroData={teensHeroData} isStaffPicksHero={false} />);
     });
 
     after(() => {
@@ -58,7 +58,7 @@ describe('Hero', () => {
     const kidsHeroData = config.heroData.childrens;
 
     before(() => {
-      component = shallow(<Hero heroData={kidsHeroData} />);
+      component = shallow(<Hero heroData={kidsHeroData} isStaffPicksHero={false} />);
     });
 
     after(() => {
@@ -88,7 +88,7 @@ describe('Hero', () => {
     const staffPicksHeroData = config.heroData.staffPicks;
 
     before(() => {
-      component = shallow(<Hero heroData={staffPicksHeroData} />);
+      component = shallow(<Hero heroData={staffPicksHeroData} isStaffPicksHero />);
     });
 
     after(() => {
