@@ -38,7 +38,6 @@ const getLogLevelCode = (levelString) => {
   }
 };
 
-// const logLevel = (process.env.NODE_ENV === 'production') ? 'info' : 'debug';
 const timestamp = () => new Date().toISOString();
 const formatter = (options) => {
   const result = {
