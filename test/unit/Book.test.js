@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import React from 'react';
 import { expect } from 'chai';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import Book from '../../src/app/components/Book/Book';
 
@@ -34,6 +34,7 @@ const pickObject = {
     illustrator: 'I am an illustrator',
     translator: 'I am a translator',
   },
+  slug: '9780385539913-a-gamblers-anatomy',
 };
 
 describe('Book Component', () => {
@@ -41,18 +42,18 @@ describe('Book Component', () => {
 
   describe('Default component without data', () => {
     it('should not render the Book component if the pick object prop is not defined', () => {
-      component = mount(<Book />);
+      component = shallow(<Book />);
       expect(component.find('.book-item').length).to.equal(0);
     });
 
     it('should not render the Book component if the pick object prop is empty', () => {
-      component = mount(<Book pick={{}} />);
+      component = shallow(<Book pick={{}} />);
     });
   });
 
   describe('Component with data and JavaScript enabled', () => {
     before(() => {
-      component = mount(<Book pick={pickObject} isJsEnabled />);
+      component = shallow(<Book pick={pickObject} isJsEnabled />);
     });
 
     it('should render the pick list item with proper tag classes', () => {
@@ -61,6 +62,8 @@ describe('Book Component', () => {
       expect(pickListElement.find('li').length).to.equal(1);
       expect(pickListElement.hasClass('offbeat')).to.equal(true);
       expect(pickListElement.hasClass('seriously-good-writing')).to.equal(true);
+      expect(pickListElement.prop('id')).to.equal('9780385539913-a-gamblers-anatomy');
+      expect(pickListElement.prop('tabIndex')).to.equal('0');
     });
 
     it('should render the pick title <h3> element with text', () => {
@@ -78,11 +81,13 @@ describe('Book Component', () => {
     });
 
     it('should render the pick image <img /> element with empty ALT text', () => {
-      const image = component.find('.book-item-image-box');
-      expect(image.length).to.equal(1);
-      expect(image.find('img').length).to.equal(1);
-      expect(image.find('img').prop('src')).to.equal(pickObject.book.imageUrl);
-      expect(image.find('img').prop('alt')).to.equal('');
+      const imageBox = component.find('.book-item-image-box');
+      const bookCoverImage = imageBox.find('img');
+
+      expect(imageBox.length).to.equal(1);
+      expect(bookCoverImage.length).to.equal(1);
+      expect(bookCoverImage.prop('src')).to.equal(pickObject.book.imageUrl);
+      expect(bookCoverImage.prop('alt')).to.equal('');
     });
 
     it('should render the pick description <p> element with text', () => {
@@ -152,7 +157,7 @@ describe('Book Component', () => {
 
   describe('Component with data and JavaScript disabled', () => {
     before(() => {
-      component = mount(<Book pick={pickObject} isJsEnabled={false} />);
+      component = shallow(<Book pick={pickObject} isJsEnabled={false} />);
     });
 
     it('should render the pick tags in a <p> tag and contain should not visuallyHidden class', () => {

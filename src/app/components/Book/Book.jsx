@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { EReaderIcon, BookIcon } from '@nypl/dgx-svg-icons';
 import { isEmpty as _isEmpty, isString as _isString } from 'underscore';
+
 import config from '../../../../appConfig';
 import utils from '../../utils/utils';
+import { Lazy } from 'react-lazy';
 
 const Book = ({ pick, isJsEnabled }) => {
   const isStringEmpty = string => (!_isString(string) || _isEmpty(string.trim()));
@@ -28,15 +30,17 @@ const Book = ({ pick, isJsEnabled }) => {
   const renderBookCoverImage = (imageUrl) => {
     const defaultImageUrl = `${config.baseUrl}src/client/images/book-place-holder.png`;
     const fullImgSrc = isStringEmpty(imageUrl) ? defaultImageUrl : imageUrl;
+
     return (
-      <div className="book-item-image-box">
+      // Uses lazy load to load the images based on the view
+      <Lazy component="div" className="book-item-image-box" cushion={2000} ltIE9>
         <img alt="" src={fullImgSrc} />
-      </div>
+      </Lazy>
     );
   };
 
   const renderTitle = title => (
-    !isStringEmpty(title) ? <h3 className="book-item-title">{title}</h3> : null
+    !isStringEmpty(title) ? (<h3 className="book-item-title">{title}</h3>) : null
   );
 
   const renderAuthor = author => (
@@ -128,6 +132,8 @@ const Book = ({ pick, isJsEnabled }) => {
     <li
       className={`book-item ${getTagClasses(tagsArray)} ${hasIllustratorTranslatorClass}`}
       key={!isStringEmpty(book.title) ? book.title : null}
+      tabIndex="0"
+      id={pick.slug}
     >
       {renderBookCoverImage(book.imageUrl)}
       {renderTitle(book.title)}

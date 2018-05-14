@@ -7,7 +7,14 @@ $book-card-largescreen-gutter: 3.5%;
   padding-bottom: 1em;
   padding-top: .75em;
   max-width: 100%;
+  display: block;
   @include clearfix;
+
+  &:focus {
+    // From @nypl/design-toolkit
+    @include box-shadow(inset 0 0 0 0.125rem $focus-color);
+    outline: none;
+  }
 
   &.withTranslatorIllustrator {
     .book-item-illustrator {
@@ -38,19 +45,26 @@ $book-card-largescreen-gutter: 3.5%;
     display: block;
     max-width: 30%;
     float: left;
+    width: 30%;
 
     @include min-screen($xtrasmall-breakpoint) {
-      min-height: 300px;
+      min-height: 400px;
     }
 
     @include min-screen($xtrasmall-breakpoint + 150px) {
-      min-height: 350px;
+      min-height: 510px;
     }
 
     img {
       display: block;
       max-width: 100%;
       margin: 0 $book-card-smallscreen-gutter;
+
+      /* fade in transition for images loading*/
+      -webkit-animation: fadeInBookImage 1s;
+      -moz-animation: fadeInBookImage 1s;
+      -o-animation: fadeInBookImage 1s;
+      animation: fadeInBookImage 1s;
     }
   }
 

@@ -14,6 +14,7 @@ const picks = [
     },
     tags: ['funny', 'horror'],
     ageGroup: 'Adult',
+    slug: '01-first-book-title',
   },
   {
     book: {
@@ -21,6 +22,7 @@ const picks = [
     },
     tags: ['adventure', 'horror'],
     ageGroup: 'Adult',
+    slug: '02-second-book-title',
   },
   {
     book: {
@@ -28,6 +30,7 @@ const picks = [
     },
     tags: ['graphic-novels', 'funny'],
     ageGroup: 'YA',
+    slug: '03-third-book-title',
   },
 ];
 const selectedFilters = ['funny', 'graphic-novels'];
@@ -58,6 +61,34 @@ describe('Main', () => {
     });
   });
 
+  describe('Hash id on mount', () => {
+    let component;
+
+    it('should do nothing if the location is wrong', () => {
+      component = mount(
+        <Main
+          listOptions={config.staffPicksListOptions}
+          currentAudience="Adult"
+          location={{ hash: '#01-third-book-title' }}
+          picksData={{ picks }}
+        />);
+
+      expect(component.state('picks')).to.eql(picks);
+    });
+
+    it('should update the state and call the Action to update the age group', () => {
+      component = mount(
+        <Main
+          listOptions={config.staffPicksListOptions}
+          currentAudience="Adult"
+          location={{ hash: '#03-third-book-title' }}
+          picksData={{ picks, type: 'staff-picks' }}
+        />);
+
+      expect(component.state('picks')).to.eql([picks[2]]);
+    });
+  });
+
   describe('Methods', () => {
     describe('getNewPickSet', () => {
       let component;
@@ -65,8 +96,7 @@ describe('Main', () => {
 
       before(() => {
         component = mount(
-          <Main listOptions={config.staffPicksListOptions} currentAudience="Adult" />
-        );
+          <Main listOptions={config.staffPicksListOptions} currentAudience="Adult" />);
         getNewPickSet = component.instance().getNewPickSet;
       });
 
@@ -90,6 +120,7 @@ describe('Main', () => {
             },
             tags: ['adventure', 'horror'],
             ageGroup: 'Adult',
+            slug: '02-second-book-title',
           },
         ]);
       });
@@ -102,6 +133,7 @@ describe('Main', () => {
             },
             tags: ['graphic-novels', 'funny'],
             ageGroup: 'YA',
+            slug: '03-third-book-title',
           },
         ]);
       });
@@ -158,8 +190,7 @@ describe('Main', () => {
 
       before(() => {
         component = mount(
-          <Main picksData={{ picks: [] }} listOptions={config.staffPicksListOptions} />
-        );
+          <Main picksData={{ picks: [] }} listOptions={config.staffPicksListOptions} />);
         setSelectedFilter = component.instance().setSelectedFilter;
       });
 
@@ -263,8 +294,7 @@ describe('Main', () => {
       };
       const filterByAudience = sinon.spy(Main.prototype, 'filterByAudience');
       const component = shallow(
-        <Main picksData={staffPicksData} currentAudience="YA" listType="staff-picks" />
-      );
+        <Main picksData={staffPicksData} currentAudience="YA" listType="staff-picks" />);
 
       after(() => {
         filterByAudience.restore();
@@ -275,33 +305,29 @@ describe('Main', () => {
         () => {
           expect(filterByAudience.called).to.equal(true);
           expect(filterByAudience.getCall(0).args).to.deep.equal(
-            [staffPicksData.picks, 'YA', 'staff-picks']
+            [staffPicksData.picks, 'YA', 'staff-picks'],
           );
-        }
-      );
+        });
 
       it('should return the original list if it is not a staff picks list.', () => {
         const returnedValue = staffPicksData.picks;
 
-        expect(filterByAudience(staffPicksData.picks, 'YA', 'some-other-list')).to.deep.equal(
-          returnedValue
-        );
+        expect(filterByAudience(staffPicksData.picks, 'YA', 'some-other-list'))
+          .to.deep.equal(returnedValue);
       });
 
       it('should return an empty array if the passed down list is empty.', () => {
         const returnedValue = [];
 
-        expect(filterByAudience([], 'YA', 'staff-picks')).to.deep.equal(
-          returnedValue
-        );
+        expect(filterByAudience([], 'YA', 'staff-picks'))
+          .to.deep.equal(returnedValue);
       });
 
       it('should return an empty array if the passed down age group is not valid.', () => {
         const returnedValue = [];
 
-        expect(filterByAudience(staffPicksData.picks, 'Toddler', 'staff-picks')).to.deep.equal(
-          returnedValue
-        );
+        expect(filterByAudience(staffPicksData.picks, 'Toddler', 'staff-picks'))
+          .to.deep.equal(returnedValue);
       });
 
       it('should return a specific audience/age group based on the props.', () => {
@@ -314,9 +340,8 @@ describe('Main', () => {
           },
         ];
 
-        expect(filterByAudience(staffPicksData.picks, 'YA', 'staff-picks')).to.deep.equal(
-          returnedValue
-        );
+        expect(filterByAudience(staffPicksData.picks, 'YA', 'staff-picks'))
+          .to.deep.equal(returnedValue);
       });
     });
   });

@@ -1,10 +1,13 @@
 import nyplApiClient from '../helper/nyplApiClient';
 import config from '../../../appConfig';
+import logger from '../../../logger';
 
 import utils from '../../app/utils/utils';
 import platformConfig from '../../../platformConfig';
 import modelListOptions from '../../app/utils/ModelListOptionsService';
 import { matchListDate } from '../../app/utils/DateService';
+
+const STAFF_PICKS = 'staff-picks';
 
 /* nyplApiClientGet(endpoint)
  * The function that wraps nyplApiClient for GET requests.
@@ -26,7 +29,7 @@ function currentMonthData(req, res, next) {
   nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
     .then((data) => {
       // Models the options based on the data returned
-      const modeledOptionObject = modelListOptions(data, 'staff-picks');
+      const modeledOptionObject = modelListOptions(data, STAFF_PICKS);
 
       seasonListOptions = modeledOptionObject.options;
       latestSeason = modeledOptionObject.latestOption;
@@ -52,14 +55,14 @@ function currentMonthData(req, res, next) {
           currentSeason: latestSeason,
           currentAudience: 'Adult',
         },
-        pageTitle: '',
-        metaTags: [],
+        pageTitle: config.pageTitle[STAFF_PICKS],
+        metaTags: config.metaTags[STAFF_PICKS],
       };
 
       next();
     })
     .catch((error) => {
-      console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
       return res.redirect(`${config.baseUrl}404`);
     });
@@ -93,7 +96,7 @@ function selectMonthData(req, res, next) {
   }
 
   if (!seasonMatches || !isValidAudience) {
-    console.error('Status Code: 400, Error Message: Invalid season or audience.');
+    logger.error('Status Code: 400, Error Message: Invalid season or audience.');
 
     return res.redirect(`${config.baseUrl}404`);
   }
@@ -105,7 +108,7 @@ function selectMonthData(req, res, next) {
   nyplApiClientGet(platformConfig.endpoints.allStaffPicksLists)
     .then((data) => {
       // Models the options based on the data returned
-      const modeledOptionObject = modelListOptions(data, 'staff-picks');
+      const modeledOptionObject = modelListOptions(data, STAFF_PICKS);
 
       seasonListOptions = modeledOptionObject.options;
 
@@ -122,7 +125,7 @@ function selectMonthData(req, res, next) {
 
       // If error returned from the endpoint
       if (data.statusCode >= 400) {
-        console.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
+        logger.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
 
         return res.redirect(`${config.baseUrl}404`);
       }
@@ -141,13 +144,13 @@ function selectMonthData(req, res, next) {
           currentSeason: requestedSeason,
           currentAudience: audience,
         },
-        pageTitle: '',
-        metaTags: [],
+        pageTitle: config.pageTitle[STAFF_PICKS],
+        metaTags: config.metaTags[STAFF_PICKS],
       };
       next();
     })
     .catch((error) => {
-      console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
       return res.redirect(`${config.baseUrl}404`);
     });
@@ -160,7 +163,7 @@ function selectMonthData(req, res, next) {
 function selectClientMonthData(req, res) {
   const seasonMatches = matchListDate(req.params.time);
   if (!seasonMatches) {
-    console.error('Status Code: 400, Error Message: Invalid season.');
+    logger.error('Status Code: 400, Error Message: Invalid season.');
 
     res.json({
       statusCode: 400,
@@ -177,7 +180,7 @@ function selectClientMonthData(req, res) {
       });
     })
     .catch((error) => {
-      console.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
       res.json({
         statusCode: error.statusCode || 500,
@@ -198,7 +201,7 @@ function selectDataFormPost(req, res) {
   const type = utils.getDataType(req.body.type, true);
 
   if (!season && !audience) {
-    console.error(
+    logger.error(
       `Form data of season and audience is undefined. season: ${season}, audience: ${audience}`
     );
 

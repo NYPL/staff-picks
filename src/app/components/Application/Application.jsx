@@ -38,13 +38,16 @@ class App extends React.Component {
 
   render() {
     let heroData;
+    let isStaffPicksHero;
     const type = !_isEmpty(this.props.params) ? this.props.params.type : undefined;
 
     // Check if the params type is included in valid data set
     if (type && _allKeys(config.heroData).includes(type)) {
       heroData = config.heroData[this.props.params.type];
+      isStaffPicksHero = (heroData.header === 'Staff Picks');
     } else {
       heroData = config.heroData.staffPicks;
+      isStaffPicksHero = true;
     }
 
     return (
@@ -55,7 +58,7 @@ class App extends React.Component {
         />
 
         <main className="main-page">
-          <Hero heroData={heroData} />
+          <Hero heroData={heroData} isStaffPicksHero={isStaffPicksHero} />
 
           <div id="app-content" className="nypl-full-width-wrapper">
             {React.cloneElement(this.props.children, this.state)}
