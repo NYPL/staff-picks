@@ -19,14 +19,15 @@ const nyplApiClientGet = endpoint =>
  */
 function annualCurrentListData(req, res, next) {
   const listOptions = config.annualListOptions;
+  const { type } = req.params;
   let annualListOptions = [];
   let latestYear = '';
-  const dataType = utils.getDataType(req.params.type);
+  const dataType = utils.getDataType(type);
 
   nyplApiClientGet(platformConfig.endpoints.annualLists[dataType])
     .then((data) => {
       // Models the options based on the data returned
-      const modeledOptionObject = modelListOptions(data, req.params.type);
+      const modeledOptionObject = modelListOptions(data, type);
 
       annualListOptions = modeledOptionObject.options;
       latestYear = modeledOptionObject.latestOption;
@@ -61,8 +62,8 @@ function annualCurrentListData(req, res, next) {
           listOptions,
           currentSeason: latestYear,
         },
-        pageTitle: '',
-        metaTags: [],
+        pageTitle: config.pageTitle[type],
+        metaTags: config.metaTags[type],
       };
 
       next();
@@ -84,11 +85,12 @@ function annualCurrentListData(req, res, next) {
  */
 function annualListData(req, res, next) {
   const listOptions = config.annualListOptions;
+  const { type } = req.params;
   let annualListOptions = [];
-  const dataType = utils.getDataType(req.params.type);
+  const dataType = utils.getDataType(type);
 
   // Checks if the URL input fits year's convention
-  const yearMatches = matchListDate(req.params.time, req.params.type);
+  const yearMatches = matchListDate(req.params.time, type);
   let requestedYear = '';
 
   if (!yearMatches) {
@@ -104,7 +106,7 @@ function annualListData(req, res, next) {
   nyplApiClientGet(platformConfig.endpoints.annualLists[`${dataType}`])
     .then((data) => {
       // Models the options based on the data returned
-      const modeledOptionObject = modelListOptions(data, req.params.type);
+      const modeledOptionObject = modelListOptions(data, type);
 
       annualListOptions = modeledOptionObject.options;
 
@@ -138,8 +140,8 @@ function annualListData(req, res, next) {
           listOptions,
           currentSeason: requestedYear,
         },
-        pageTitle: '',
-        metaTags: [],
+        pageTitle: config.pageTitle[type],
+        metaTags: config.metaTags[type],
       };
       next();
     })

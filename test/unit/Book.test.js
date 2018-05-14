@@ -34,6 +34,7 @@ const pickObject = {
     illustrator: 'I am an illustrator',
     translator: 'I am a translator',
   },
+  slug: '9780385539913-a-gamblers-anatomy',
 };
 
 describe('Book Component', () => {
@@ -61,6 +62,8 @@ describe('Book Component', () => {
       expect(pickListElement.find('li').length).to.equal(1);
       expect(pickListElement.hasClass('offbeat')).to.equal(true);
       expect(pickListElement.hasClass('seriously-good-writing')).to.equal(true);
+      expect(pickListElement.prop('id')).to.equal('9780385539913-a-gamblers-anatomy');
+      expect(pickListElement.prop('tabIndex')).to.equal('0');
     });
 
     it('should render the pick title <h3> element with text', () => {

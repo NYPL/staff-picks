@@ -64,13 +64,13 @@ describe('ListFilter', () => {
     it('should be the first option\'s value, if no currentValue in props passed down.', () => {
       component = shallow(<ListFilter fieldsetProps={fieldsetProps} />);
 
-      expect(component.find('select').nodes[0].props.defaultValue).to.equal('2018-01-01');
+      expect(component.find('select').nodes[0].props.value).to.equal('2018-01-01');
     });
 
     it('should be assigned with the props\'s currentValue, if the value exists.', () => {
       component = shallow(<ListFilter fieldsetProps={fieldsetPropsWithCurrentValue} />);
 
-      expect(component.find('select').nodes[0].props.defaultValue).to.equal('2017-04-01');
+      expect(component.find('select').nodes[0].props.value).to.equal('2017-04-01');
     });
   });
 });
