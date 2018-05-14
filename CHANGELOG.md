@@ -7,7 +7,7 @@
 > Add a list selector component that consists of two dropdown menus for choosing both seasons and audience from Staff Picks, or only seasons from Best YA Books and Best Children Books.
 > Update hero elements and styles based on different list types. Staff Picks and Children/YA lists now have different heros.
 > Add lazy load when loading images for better performance.
-> Add winston and logging.
+> Add Winston and logging.
 
 ### 3.2.6
 > Updating Travis CI configuration for CD to AWS Elastic Beanstalk
