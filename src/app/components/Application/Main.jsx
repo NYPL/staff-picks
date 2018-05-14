@@ -1,12 +1,14 @@
 /* globals document */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { findWhere as _findWhere } from 'underscore';
 
 import BookList from '../BookList/BookList';
 import Sidebar from '../Sidebar/Sidebar';
 import utils from '../../utils/utils';
 import { staffPicksDate, annualDate } from '../../utils/DateService';
 import appConfig from '../../../../appConfig';
+import BookActions from '../../actions/BookActions';
 
 class Main extends React.Component {
   constructor(props) {
@@ -27,6 +29,29 @@ class Main extends React.Component {
     this.getNewPickSet = this.getNewPickSet.bind(this);
     this.filterByAudience = this.filterByAudience.bind(this);
     this.getCount = this.getCount.bind(this);
+  }
+
+  componentDidMount() {
+    const picksData = this.props.picksData;
+    const hash = this.props.location && this.props.location.hash ?
+      (this.props.location.hash).substr(1) : '';
+    if (hash) {
+      const pick = _findWhere(picksData.picks, { slug: hash });
+      const age = pick && pick.ageGroup ? pick.ageGroup : 'Adult';
+      const picks =
+        this.filterByAudience(picksData.picks, age, picksData.type);
+
+      BookActions.updateCurrentAudience(age);
+      this.setState({ picks }, () => {
+        setTimeout(() => {
+          const elem = document.getElementById(hash);
+          if (elem) {
+            elem.scrollIntoView();
+            elem.focus();
+          }
+        }, 800);
+      });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -213,6 +238,9 @@ Main.propTypes = {
   listOptions: PropTypes.object,
   currentSeason: PropTypes.string,
   currentAudience: PropTypes.string,
+  location: PropTypes.shape({
+    hash: PropTypes.string,
+  }),
 };
 
 Main.defaultProps = {
