@@ -4,6 +4,7 @@ import {
   extend as _extend,
   isEmpty as _isEmpty,
   allKeys as _allKeys,
+  isString as _isString,
 } from 'underscore';
 
 // NYPL Components
@@ -40,7 +41,7 @@ class App extends React.Component {
     let heroData;
     let heroDOM;
     // Use pathname index as type since routes.jsx specifies them directly.
-    let type = this.props.location.pathname.split('/')[4];
+    let type = _isString(this.props.location.pathname) ? this.props.location.pathname.split('/')[4] : '';
     // Convert '/' path or 'staff-picks' to use the heroData key 'staffPicks' to properly
     // match the heroData configuration.
     if (type === 'staff-picks' || _isEmpty(type)) {

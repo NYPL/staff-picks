@@ -82,12 +82,16 @@ function staffPicksDate(dateStr) {
  * @return {object}
  */
 function annualDate(dateStr) {
+  let year = '';
+
   if (!dateStr) {
     return { year: '' };
   }
 
   const annDate = matchListDate(dateStr, 'annual');
-  const year = new Date(annDate[1], '01', '01').getFullYear();
+  if (annDate) {
+    year = new Date(annDate[1], '01', '01').getFullYear();
+  }
 
   return { year };
 }
