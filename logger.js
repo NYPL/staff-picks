@@ -59,7 +59,7 @@ const formatter = (options) => {
 
 const loggerTransports = [
   new winston.transports.File({
-    filename: './log/staff-picks.log',
+    filename: './log/staffpicks-app.log',
     handleExceptions: true,
     maxsize: 5242880, // 5MB
     maxFiles: 5,
