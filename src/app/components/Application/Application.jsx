@@ -76,7 +76,7 @@ class App extends React.Component {
 
 App.propTypes = {
   children: PropTypes.object,
-  params: PropTypes.object,
+  location: PropTypes.object,
 };
 
 

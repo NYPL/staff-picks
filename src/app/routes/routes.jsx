@@ -1,7 +1,7 @@
 // React library
 import React from 'react';
 // Import Router
-import { IndexRoute, Router, Route, Redirect } from 'react-router';
+import { IndexRoute, Router, Route } from 'react-router';
 
 // Import components
 import App from '../components/Application/Application';
