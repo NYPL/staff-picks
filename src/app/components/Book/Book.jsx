@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { EReaderIcon, BookIcon } from '@nypl/dgx-svg-icons';
 import { isEmpty as _isEmpty, isString as _isString } from 'underscore';
+
 import config from '../../../../appConfig';
 import utils from '../../utils/utils';
 import { Lazy } from 'react-lazy';
@@ -39,7 +40,7 @@ const Book = ({ pick, isJsEnabled }) => {
   };
 
   const renderTitle = title => (
-    !isStringEmpty(title) ? <h3 className="book-item-title">{title}</h3> : null
+    !isStringEmpty(title) ? (<h3 className="book-item-title">{title}</h3>) : null
   );
 
   const renderAuthor = author => (
@@ -131,6 +132,8 @@ const Book = ({ pick, isJsEnabled }) => {
     <li
       className={`book-item ${getTagClasses(tagsArray)} ${hasIllustratorTranslatorClass}`}
       key={!isStringEmpty(book.title) ? book.title : null}
+      tabIndex="0"
+      id={pick.slug}
     >
       {renderBookCoverImage(book.imageUrl)}
       {renderTitle(book.title)}
