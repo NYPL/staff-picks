@@ -12,6 +12,7 @@ import Iso from 'iso';
 
 import webpackConfig from './webpack.config';
 import appConfig from './appConfig';
+import logger from './logger';
 import appRoutes from './src/app/routes/routes';
 import expressRoutes from './src/server/routes/routes';
 import nyplApiClient from './src/server/helper/nyplApiClient';
@@ -99,20 +100,20 @@ app.use('/', (req, res) => {
 });
 
 const server = app.listen(app.get('port'), () => {
-  console.log(`server running at localhost: ${app.get('port')}, go refresh and see magic`);
+  logger.info(`server running at localhost: ${app.get('port')}, go refresh and see magic`);
 });
 
 // this function is called when you want the server to die gracefully
 // i.e. wait for existing connections
 const gracefulShutdown = () => {
-  console.log('Received kill signal, shutting down gracefully.');
+  logger.info('Received kill signal, shutting down gracefully.');
   server.close(() => {
-    console.log('Closed out remaining connections.');
+    logger.info('Closed out remaining connections.');
     process.exit();
   });
   // if after
   setTimeout(() => {
-    console.error('Could not close connections in time, forcefully shutting down');
+    logger.error('Could not close connections in time, forcefully shutting down');
     process.exit();
   }, 1000);
 };
@@ -139,9 +140,9 @@ if (!isProduction) {
     },
   }).listen(appConfig.webpackDevServerPort, 'localhost', (err, result) => {
     if (err) {
-      console.log(err);
+      logger.error(err);
     } else {
-      console.log(`Webpack Dev Server listening at localhost: ${appConfig.webpackDevServerPort}`);
+      logger.info(`Webpack Dev Server listening at localhost: ${appConfig.webpackDevServerPort}`);
     }
   });
 }

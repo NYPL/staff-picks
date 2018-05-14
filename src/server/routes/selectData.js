@@ -1,6 +1,7 @@
 import monthData from './monthData';
 import annualData from './annualData';
 import appConfig from '../../../appConfig';
+import logger from '../../../logger';
 
 const { baseUrl } = appConfig;
 
@@ -37,6 +38,8 @@ function selectData(req, res, next) {
 
     return monthData.currentMonthData(req, res, next);
   }
+
+  logger.info(`Type '${type}' not found in selectData`);
 
   return res.redirect(baseUrl);
 }
