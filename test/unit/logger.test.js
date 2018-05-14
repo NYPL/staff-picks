@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import { expect } from 'chai';
 
-import logger from '../logger';
+import logger from '../../logger';
 
 describe('Logger', () => {
   describe('Transports', () => {
