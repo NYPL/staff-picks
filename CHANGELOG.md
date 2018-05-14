@@ -2,7 +2,7 @@
 
 ### 4.0.0
 > Update the routes. The base route is now `/books-music-movies/recommendations/best-books/`. And `staff-picks`, `ya`, `childrens` are three lists on the same level of the structure.
-> Add an ID on each book item and update the functions for handling their routes. If a patron adds the hash that consists of a book's name and its ISBN to the URL, it will scroll down and focus on the book. Same as the routes will do with the book's name and ISBN as a path. The pages for individual books are no longer supported.
+> Update the routes for supporting the old URLs for individual books. Now the links no longer lead to a modal but scroll down and focus on the particular book in the list.
 > Add an `.env.example` and update the related README.md so now the developer can set a `.env` to run the application locally.
 > Add a list selector component that consists of two dropdown menus for choosing both seasons and audience from Staff Picks, or only seasons from Best YA Books and Best Children Books.
 > Update hero elements and styles based on different list types. Staff Picks and Children/YA lists now have different heros.
