@@ -18,14 +18,14 @@ const routes = {
       <Route path={`${config.baseUrl}`} component={App}>
         <IndexRoute component={Main} />
         <Route path={`${config.base404}`} status={404} component={Error404Page} />
-        <Route path={`${config.baseUrl}staff-picks`} component={Main}>
-          <Route path={`${config.baseUrl}staff-picks/:time`} component={Main} />
+        <Route path={`${config.baseUrl}/staff-picks`} component={Main}>
+          <Route path={`${config.baseUrl}/staff-picks/:time`} component={Main} />
         </Route>
-        <Route path={`${config.baseUrl}childrens`} component={Main}>
-          <Route path={`${config.baseUrl}childrens/:time`} component={Main} />
+        <Route path={`${config.baseUrl}/childrens`} component={Main}>
+          <Route path={`${config.baseUrl}/childrens/:time`} component={Main} />
         </Route>
-        <Route path={`${config.baseUrl}ya`} component={Main}>
-          <Route path={`${config.baseUrl}ya/:time`} component={Main} />
+        <Route path={`${config.baseUrl}/ya`} component={Main}>
+          <Route path={`${config.baseUrl}/ya/:time`} component={Main} />
         </Route>
         <Route path="*" status={404} component={Error404Page} />
       </Route>

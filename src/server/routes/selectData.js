@@ -16,7 +16,7 @@ function selectData(req, res, next) {
 
   if (id) {
     if (type && time) {
-      return res.redirect(`${appConfig.baseUrl}${type}/${time}#${id}`);
+      return res.redirect(`${appConfig.baseUrl}/${type}/${time}#${id}`);
     }
     // If there's an id in the url but just in case there's no type or time:
     return res.redirect(`${appConfig.base404}`);

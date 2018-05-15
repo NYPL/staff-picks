@@ -53,6 +53,7 @@ class Main extends React.Component {
           }, 800);
         });
       } else {
+        console.log(this.context.router);
         this.context.router.push({ pathname: this.props.location.pathname });
       }
     }
@@ -244,6 +245,7 @@ Main.propTypes = {
   currentAudience: PropTypes.string,
   location: PropTypes.shape({
     hash: PropTypes.string,
+    pathname: PropTypes.string,
   }),
 };
 

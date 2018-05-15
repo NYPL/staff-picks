@@ -11,16 +11,16 @@ import config from '../../appConfig';
 
 const location = {
   staffPicks: {
-    pathname: `${config.baseUrl}staff-picks`,
+    pathname: `${config.baseUrl}/staff-picks`,
   },
   ya: {
-    pathname: `${config.baseUrl}ya`,
+    pathname: `${config.baseUrl}/ya`,
   },
   childrens: {
-    pathname: `${config.baseUrl}childrens`,
+    pathname: `${config.baseUrl}/childrens`,
   },
   notValid: {
-    pathname: `${config.baseUrl}not-valid`,
+    pathname: `${config.baseUrl}/not-valid`,
   },
 };
 

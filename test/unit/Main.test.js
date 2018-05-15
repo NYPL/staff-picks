@@ -63,6 +63,7 @@ describe('Main', () => {
 
   describe('Hash id on mount', () => {
     let component;
+    const router = { push() {} };
 
     it('should do nothing if the location is wrong', () => {
       component = mount(
@@ -71,7 +72,8 @@ describe('Main', () => {
           currentAudience="Adult"
           location={{ hash: '#01-third-book-title' }}
           picksData={{ picks }}
-        />);
+          context={router}
+        />, { context: { router } });
 
       expect(component.state('picks')).to.eql(picks);
     });
