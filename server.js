@@ -56,7 +56,7 @@ app.use('/', expressRoutes);
 
 // Handle trailing slash
 app.use((req, res, next) => {
-  const hasSlash = /\?[^]*\//.hasSlash(req.url);
+  const hasSlash = /\?[^]*\//.test(req.url);
   if (req.url.substr(-1) === '/' && req.url.length > 1 && !hasSlash) {
     res.redirect(301, req.url.slice(0, -1));
   } else {
