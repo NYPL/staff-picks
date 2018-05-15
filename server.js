@@ -58,7 +58,7 @@ app.use('/', expressRoutes);
 app.use((req, res, next) => {
   const hasSlash = /\?[^]*\//.test(req.url);
   if (req.url.substr(-1) === '/' && req.url.length > 1 && !hasSlash) {
-    // res.redirect(301, req.url.slice(0, -1));
+    res.redirect(301, req.url.slice(0, -1));
   } else {
     next();
   }
