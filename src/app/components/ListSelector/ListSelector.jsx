@@ -67,7 +67,7 @@ class ListSelector extends React.Component {
             `API error with status code ${response.status}: ${response.data.errorMessage}`
           );
           // Leads the user to the 404 page
-          this.updateLocation(`${config.baseUrl}404`);
+          this.updateLocation(`${config.baseUrl}/404`);
         } else {
           const data = response.data;
           const filters = utils.getAllTags(data.picksData.picks);
@@ -83,7 +83,7 @@ class ListSelector extends React.Component {
           );
           // Updates and transit to the match URL
           const dataType = utils.getDataType(data.picksData.type, true);
-          this.updateLocation(`${config.baseUrl}${dataType}/${submitValue}`);
+          this.updateLocation(`${config.baseUrl}/${dataType}/${submitValue}`);
           // Focuses on the title
           utils.focusOnFirstAvailableElement(['sidebar-list-title', 'list-title']);
         }
@@ -99,7 +99,7 @@ class ListSelector extends React.Component {
         console.log(`Internal server error with status code ${errorStatus}: ` +
           `${errorStatusText}`);
         // Leads the user to the 404 page
-        this.updateLocation(`${config.baseUrl}404`);
+        this.updateLocation(`${config.baseUrl}/404`);
       });
   }
 

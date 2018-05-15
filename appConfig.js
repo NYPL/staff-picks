@@ -1,7 +1,7 @@
 const config = {
   port: 3001,
   webpackDevServerPort: 3000,
-  baseUrl: '/books-music-movies/recommendations/best-books/',
+  baseUrl: '/books-music-movies/recommendations/best-books',
   base404: '/books-music-movies/recommendations/best-books/404',
   baseApiUrl: '/books-music-movies/recommendations/best-books/api/',
   metaTags: {

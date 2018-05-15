@@ -37,20 +37,25 @@ class Main extends React.Component {
       (this.props.location.hash).substr(1) : '';
     if (hash) {
       const pick = _findWhere(picksData.picks, { slug: hash });
-      const age = pick && pick.ageGroup ? pick.ageGroup : 'Adult';
-      const picks =
-        this.filterByAudience(picksData.picks, age, picksData.type);
+      if (pick) {
+        const age = pick && pick.ageGroup ? pick.ageGroup : 'Adult';
+        const picks =
+          this.filterByAudience(picksData.picks, age, picksData.type);
 
-      BookActions.updateCurrentAudience(age);
-      this.setState({ picks }, () => {
-        setTimeout(() => {
-          const elem = document.getElementById(hash);
-          if (elem) {
-            elem.scrollIntoView();
-            elem.focus();
-          }
-        }, 800);
-      });
+        BookActions.updateCurrentAudience(age);
+        this.setState({ picks }, () => {
+          setTimeout(() => {
+            const elem = document.getElementById(hash);
+            if (elem) {
+              elem.scrollIntoView();
+              elem.focus();
+            }
+          }, 800);
+        });
+      } else {
+        console.log(this.context.router);
+        this.context.router.push({ pathname: this.props.location.pathname });
+      }
     }
   }
 
@@ -240,7 +245,12 @@ Main.propTypes = {
   currentAudience: PropTypes.string,
   location: PropTypes.shape({
     hash: PropTypes.string,
+    pathname: PropTypes.string,
   }),
+};
+
+Main.contextTypes = {
+  router: PropTypes.object,
 };
 
 Main.defaultProps = {

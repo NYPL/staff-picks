@@ -44,8 +44,8 @@ describe('DateService', () => {
     });
 
     describe('When passed a year and month', () => {
-      it('should return year only.', () => {
-        expect(annualDate('2015-01')).to.deep.equal({ year: 2015 });
+      it('should return an empty year.', () => {
+        expect(annualDate('2015-01')).to.deep.equal({ year: '' });
       });
     });
   });
