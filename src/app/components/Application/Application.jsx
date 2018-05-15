@@ -39,6 +39,7 @@ class App extends React.Component {
 
   render() {
     let heroData;
+    let isStaffPicksHero;
     let heroDOM;
     // Use pathname index as type since routes.jsx specifies them directly.
     let type = _isString(this.props.location.pathname) ? this.props.location.pathname.split('/')[4] : '';
@@ -50,8 +51,9 @@ class App extends React.Component {
 
     // Check if the params type is included in valid data set
     if (type && _allKeys(config.heroData).includes(type)) {
-      heroData = config.heroData[type] ? config.heroData[type] : config.heroData.staffPicks;
-      heroDOM = <Hero heroData={heroData} />;
+      heroData = config.heroData[type];
+      isStaffPicksHero = type === 'staffPicks';
+      heroDOM = <Hero heroData={heroData} isStaffPicksHero={isStaffPicksHero} />;
     }
 
     return (
