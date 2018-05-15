@@ -16,6 +16,7 @@ function Utils() {
   /**
    * createAppHistory
    * Create a history in the browser or server that coincides with react-router.
+   * @return {object}
    */
   this.createAppHistory = () => {
     if (typeof window !== 'undefined') {
@@ -29,7 +30,6 @@ function Utils() {
    * trackPicks(action, label)
    * Track a GA click event, where action and label come from
    * the higher level function call from _trackEvent().
-   *
    * @param {string} action Action for GA event.
    * @param {string} label Label for GA event.
    */
@@ -52,7 +52,6 @@ function Utils() {
   /**
    * getSelectedTags(tagArray, selectedFilters)
    * Return an array of the filters in a pick's tagArray if the selectedFilters is found.
-   *
    * @param {array} tagArray
    * @param {array} selectedFilters
    */
@@ -70,7 +69,6 @@ function Utils() {
   /**
    * getFiltersMapping(filters)
    * Return mapping of filters
-   *
    * @return {Object} filters - A map of id and label key-value pairs of filters
    * @param {array} filters - Array of filters
    */

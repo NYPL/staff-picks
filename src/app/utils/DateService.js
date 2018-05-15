@@ -89,6 +89,7 @@ function annualDate(dateStr) {
   }
 
   const annDate = matchListDate(dateStr, 'annual');
+
   if (annDate) {
     year = new Date(annDate[1], '01', '01').getFullYear();
   }
