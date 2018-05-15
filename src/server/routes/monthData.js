@@ -64,7 +64,7 @@ function currentMonthData(req, res, next) {
     .catch((error) => {
       logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
-      return res.redirect(`${config.baseUrl}404`);
+      return res.redirect(`${config.baseUrl}/404`);
     });
 }
 
@@ -98,7 +98,7 @@ function selectMonthData(req, res, next) {
   if (!seasonMatches || !isValidAudience) {
     logger.error('Status Code: 400, Error Message: Invalid season or audience.');
 
-    return res.redirect(`${config.baseUrl}404`);
+    return res.redirect(`${config.baseUrl}/404`);
   }
 
   // If the param fits season's convention, constructs the request param
@@ -127,7 +127,7 @@ function selectMonthData(req, res, next) {
       if (data.statusCode >= 400) {
         logger.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
 
-        return res.redirect(`${config.baseUrl}404`);
+        return res.redirect(`${config.baseUrl}/404`);
       }
 
       // Uodate the option lists' default values by the request params
@@ -152,7 +152,7 @@ function selectMonthData(req, res, next) {
     .catch((error) => {
       logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
-      return res.redirect(`${config.baseUrl}404`);
+      return res.redirect(`${config.baseUrl}/404`);
     });
 }
 
@@ -205,11 +205,11 @@ function selectDataFormPost(req, res) {
       `Form data of season and audience is undefined. season: ${season}, audience: ${audience}`
     );
 
-    res.redirect(`${config.baseUrl}404`);
+    res.redirect(`${config.baseUrl}/404`);
   } else {
     // Redirects to the appropriate list route to make server side request for
     // the season/audience list
-    res.redirect(`${config.baseUrl}${type}/${season}${audienceQuery}`);
+    res.redirect(`${config.baseUrl}/${type}/${season}${audienceQuery}`);
   }
 }
 

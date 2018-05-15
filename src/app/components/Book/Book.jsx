@@ -28,7 +28,7 @@ const Book = ({ pick, isJsEnabled }) => {
   };
 
   const renderBookCoverImage = (imageUrl) => {
-    const defaultImageUrl = `${config.baseUrl}src/client/images/book-place-holder.png`;
+    const defaultImageUrl = `${config.baseUrl}/src/client/images/book-place-holder.png`;
     const fullImgSrc = isStringEmpty(imageUrl) ? defaultImageUrl : imageUrl;
 
     return (

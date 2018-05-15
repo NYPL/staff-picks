@@ -4,6 +4,7 @@ import {
   extend as _extend,
   isEmpty as _isEmpty,
   allKeys as _allKeys,
+  isString as _isString,
 } from 'underscore';
 
 // NYPL Components
@@ -39,15 +40,20 @@ class App extends React.Component {
   render() {
     let heroData;
     let isStaffPicksHero;
-    const type = !_isEmpty(this.props.params) ? this.props.params.type : undefined;
+    let heroDOM;
+    // Use pathname index as type since routes.jsx specifies them directly.
+    let type = _isString(this.props.location.pathname) ? this.props.location.pathname.split('/')[4] : '';
+    // Convert '/' path or 'staff-picks' to use the heroData key 'staffPicks' to properly
+    // match the heroData configuration.
+    if (type === 'staff-picks' || _isEmpty(type)) {
+      type = 'staffPicks';
+    }
 
     // Check if the params type is included in valid data set
     if (type && _allKeys(config.heroData).includes(type)) {
-      heroData = config.heroData[this.props.params.type];
-      isStaffPicksHero = (heroData.header === 'Staff Picks');
-    } else {
-      heroData = config.heroData.staffPicks;
-      isStaffPicksHero = true;
+      heroData = config.heroData[type];
+      isStaffPicksHero = type === 'staffPicks';
+      heroDOM = <Hero heroData={heroData} isStaffPicksHero={isStaffPicksHero} />;
     }
 
     return (
@@ -58,7 +64,7 @@ class App extends React.Component {
         />
 
         <main className="main-page">
-          <Hero heroData={heroData} isStaffPicksHero={isStaffPicksHero} />
+          {heroDOM}
 
           <div id="app-content" className="nypl-full-width-wrapper">
             {React.cloneElement(this.props.children, this.state)}
@@ -73,7 +79,7 @@ class App extends React.Component {
 
 App.propTypes = {
   children: PropTypes.object,
-  params: PropTypes.object,
+  location: PropTypes.object,
 };
 
 

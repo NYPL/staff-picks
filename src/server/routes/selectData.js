@@ -1,9 +1,7 @@
 import monthData from './monthData';
 import annualData from './annualData';
-import appConfig from '../../../appConfig';
 import logger from '../../../logger';
-
-const { baseUrl } = appConfig;
+import appConfig from '../../../appConfig';
 
 /**
  * selectData(req, res, next)
@@ -18,7 +16,7 @@ function selectData(req, res, next) {
 
   if (id) {
     if (type && time) {
-      return res.redirect(`${appConfig.baseUrl}${type}/${time}#${id}`);
+      return res.redirect(`${appConfig.baseUrl}/${type}/${time}#${id}`);
     }
     // If there's an id in the url but just in case there's no type or time:
     return res.redirect(`${appConfig.base404}`);
@@ -41,7 +39,7 @@ function selectData(req, res, next) {
 
   logger.info(`Type '${type}' not found in selectData`);
 
-  return res.redirect(baseUrl);
+  next();
 }
 
 export default {

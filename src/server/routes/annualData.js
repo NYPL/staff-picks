@@ -47,7 +47,7 @@ function annualCurrentListData(req, res, next) {
       if (data.statusCode >= 400) {
         logger.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
 
-        return res.redirect(`${config.baseUrl}404`);
+        return res.redirect(`${config.baseUrl}/404`);
       }
 
       // Uodate the option lists' default values by the request params
@@ -71,7 +71,7 @@ function annualCurrentListData(req, res, next) {
     .catch((error) => {
       logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
-      return res.redirect(`${config.baseUrl}404`);
+      return res.redirect(`${config.baseUrl}/404`);
     });
 }
 
@@ -96,7 +96,7 @@ function annualListData(req, res, next) {
   if (!yearMatches) {
     logger.error('Status Code: 400, Error Message: Invalid year.');
 
-    return res.redirect(`${config.baseUrl}404`);
+    return res.redirect(`${config.baseUrl}/404`);
   }
 
   // If the param fits year's convention, constructs the request param
@@ -125,7 +125,7 @@ function annualListData(req, res, next) {
       if (data.statusCode >= 400) {
         logger.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
 
-        return res.redirect(`${config.baseUrl}404`);
+        return res.redirect(`${config.baseUrl}/404`);
       }
 
       // Uodate the option lists' default values by the request params
@@ -148,7 +148,7 @@ function annualListData(req, res, next) {
     .catch((error) => {
       logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
 
-      return res.redirect(`${config.baseUrl}404`);
+      return res.redirect(`${config.baseUrl}/404`);
     });
 }
 

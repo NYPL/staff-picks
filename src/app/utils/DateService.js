@@ -38,9 +38,9 @@ function matchListDate(dateStr, type = 'staff-picks') {
   }
 
   if (type !== 'staff-picks') {
-    pattern = /(\d{4})/;
+    pattern = /^(\d{4})$/;
   } else {
-    pattern = /(\d{4})\-(\d{2})\-(\d{2})/;
+    pattern = /^(\d{4})\-(\d{2})\-(\d{2})$/;
   }
 
   const validMatch = dateStr.match(pattern);
@@ -82,12 +82,16 @@ function staffPicksDate(dateStr) {
  * @return {object}
  */
 function annualDate(dateStr) {
+  let year = '';
+
   if (!dateStr) {
     return { year: '' };
   }
 
   const annDate = matchListDate(dateStr, 'annual');
-  const year = new Date(annDate[1], '01', '01').getFullYear();
+  if (annDate) {
+    year = new Date(annDate[1], '01', '01').getFullYear();
+  }
 
   return { year };
 }

@@ -54,6 +54,16 @@ nyplApiClient();
 
 app.use('/', expressRoutes);
 
+// Handle trailing slash
+app.use((req, res, next) => {
+  const hasSlash = /\?[^]*\//.hasSlash(req.url);
+  if (req.url.substr(-1) === '/' && req.url.length > 1 && !hasSlash) {
+    res.redirect(301, req.url.slice(0, -1));
+  } else {
+    next();
+  }
+});
+
 // after get the path
 app.use('/', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
