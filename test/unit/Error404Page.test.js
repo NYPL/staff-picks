@@ -12,6 +12,10 @@ describe('Error404Page', () => {
       component = shallow(<Error404Page />);
     });
 
+    after(() => {
+      component.unmount();
+    });
+
     it('should have an <h1> title with the correct contents.', () => {
       const title = component.find('h1');
 
