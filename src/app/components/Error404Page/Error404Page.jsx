@@ -7,11 +7,11 @@ const Error404Page = () => (
       The page you requested is either unavailable or you need permission to view the content.
     </p>
     <p>
-      If you can&#39;t find the page you&#39;re looking for, please try our
+      If you can&#39;t find the page you&#39;re looking for, please try our&nbsp;
       <a href="http://www.nypl.org/ask-nypl">
         ASK NYPL
       </a>
-      service.
+      &nbsp;service.
     </p>
   </div>
 );
