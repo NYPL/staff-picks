@@ -98,7 +98,7 @@ describe('Book Component', () => {
 
     it('should render the pick reviewer', () => {
       const reviewer = component.find('.book-item-picked-by');
-      const reviewerText = `Staff Pick By: ${pickObject.reviews[0].reviewerName}, ` +
+      const reviewerText = `Staff Pick by ${pickObject.reviews[0].reviewerName}, ` +
         `${pickObject.reviews[0].reviewerLocation.prefLabel}`;
 
       expect(reviewer.length).to.equal(1);
