@@ -23,7 +23,7 @@ const Sidebar = (props) => {
     listOptions.season.currentValue = data.currentSeason;
     listOptions.type = data.type;
 
-    if (data.currentAudience) {
+    if (data.currentAudience && listOptions.type === 'staff-picks') {
       listOptions.audience.currentValue = data.currentAudience;
     }
 
