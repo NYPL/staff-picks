@@ -169,6 +169,17 @@ function Utils() {
 
     return !types[type] ? type : types[type];
   };
+
+  /**
+   * toMonthAndYear(match, d1, d2)
+   * Returns first two matches hyphenated for redirecting a three part date
+   * to a two part date in a URL.
+   * @param {object} match
+   * @param {integer} d1
+   * @param {integer} d2
+   * @return {string}
+   */
+  this.toMonthAndYear = (match, d1, d2) => [d1, d2].join('-');
 }
 
 export default new Utils();

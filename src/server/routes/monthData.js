@@ -68,18 +68,6 @@ function currentMonthData(req, res, next) {
     });
 }
 
-/**
- * Returns first two matches hyphenated for redirecting a three part date
- * to a two part date in a URL.
- * @param {object} match
- * @param {integer} d1
- * @param {integer} d2
- * @return {string}
- */
-function toMonthAndYear(match, d1, d2) {
-  return [d1, d2].join('-');
-}
-
 /* selectMonthData
  * Get a specific month's or season's staff pick list.
 * It calls '/book-lists?type=staff-picks' to get all the available list options first.
@@ -91,7 +79,7 @@ function selectMonthData(req, res, next) {
 
   // Redirects older three part dates in URLs to the new two part date before validation.
   if (dateRequest && /^(\d{4})-(\d{2})-(\d{2})$/.test(dateRequest)) {
-    const newPath = req.url.replace(/(\d{4})-(\d{2})-(\d{2})/, toMonthAndYear);
+    const newPath = req.url.replace(/(\d{4})-(\d{2})-(\d{2})/, utils.toMonthAndYear);
     return res.redirect(newPath);
   }
 

@@ -65,7 +65,7 @@ function staffPicksDate(dateStr) {
 
   const d = matchListDate(dateStr);
   const regexMonth = parseInt(d[1], 10) <= 2015 ? d[2] - 1 : d[2];
-  const newDate = new Date(d[1], regexMonth, '01');
+  const newDate = new Date(d[1], regexMonth);
   const year = newDate.getFullYear();
   const month = monthOrSeason(newDate.getMonth(), year);
 
