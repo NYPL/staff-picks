@@ -98,7 +98,7 @@ const Book = ({ pick, isJsEnabled }) => {
         reviewerName = review.reviewerName.trim();
         location = review.reviewerLocation ? `, ${review.reviewerLocation.prefLabel}` : '';
         reviewerNameDOM = (
-          <p className="book-item-picked-by">Staff Pick By: {reviewerName}{location}</p>
+          <p className="book-item-picked-by">Staff Pick by {reviewerName}{location}</p>
         );
       }
 
