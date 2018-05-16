@@ -163,6 +163,15 @@ Once the application has been created via `eb create ...` all subsequent updates
 eb deploy ${environment name} --profile ${your AWS profile}
 ```
 
+#### Switching Loadbalancer settings between accounts
+
+Loadbalancer settings is required for HTTPS to run behind the load balancers for Elastic Beanstalk. Each Loadbalancer setting is unique to each AWS profile, so switching configuration files is required to deploy to different AWS profiles.
+
+| AWS Profile | Configuration File | 
+|---|---|
+| `nypl-digital-dev` | `https-nypl-digital-dev.config` | 
+| `nypl-sandbox` | `https-nypl-sandbox.config` | 
+
 ### KMS Environment Variables
 Staff Picks and the API where the data is fetched from are currently deployed on NYPl's AWS instance. In order to fetch data, we are using the `@nypl/nypl-data-api-client` to make requests to the API with an authentication token. You can find the [full documentation here](https://www.npmjs.com/package/@nypl/nypl-data-api-client), but to be brief, we need a client id, a client secret, and a token url to authenticate.
 
