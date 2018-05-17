@@ -59,7 +59,7 @@ describe('Book Component', () => {
     it('should render the pick list item with proper tag classes', () => {
       const pickListElement = component.find('.book-item');
       expect(pickListElement.length).to.equal(1);
-      expect(pickListElement.find('li').length).to.equal(1);
+      expect(pickListElement.type()).to.equal('li');
       expect(pickListElement.hasClass('offbeat')).to.equal(true);
       expect(pickListElement.hasClass('seriously-good-writing')).to.equal(true);
       expect(pickListElement.prop('id')).to.equal('9780385539913-a-gamblers-anatomy');
@@ -140,21 +140,31 @@ describe('Book Component', () => {
       expect(bookWrapper.hasClass('withTranslatorIllustrator')).to.equal(true);
     });
 
-    it('should render the pick tags in a <p> tag nested with <span> elements', () => {
+    it('should render the pick tags in a <p> tag nested with a <ul> for tags and a <span>' +
+      'for the instruction.', () => {
       const tags = component.find('.book-item-tags');
+
       expect(tags.length).to.equal(1);
-      expect(tags.find('span').length).to.equal(3);
-      expect(tags.childAt(1).text()).to.equal('Offbeat, ');
-      expect(tags.childAt(2).text()).to.equal('Seriously good writing');
+      expect(tags.type()).to.equal('p');
+      expect(tags.find('span').length).to.equal(1);
+      expect(tags.find('span').text()).to.equal('Tags: ');
+    });
+
+    it('should render each tags to be an <li>.', () => {
+      const tagsWrapper = component.find('.book-item-tags').find('ul');
+
+      expect(tagsWrapper.length).to.equal(1);
+      expect(tagsWrapper.find('li').length).to.equal(2);
+      expect(tagsWrapper.find('li').at(0).text()).to.equal('Offbeat, ');
+      expect(tagsWrapper.find('li').at(1).text()).to.equal('Seriously good writing');
     });
 
     it('should render the pick tags with a visuallyHidden class when JavaScript is enabled', () => {
       const tags = component.find('.book-item-tags');
+
       expect(tags.length).to.equal(1);
       expect(tags.hasClass('visuallyHidden')).to.equal(true);
     });
-
-    it('should render a <ul> that wrapps all the pick tags in. And each tags should be an <li>.');
   });
 
   describe('Component with data and JavaScript disabled', () => {
@@ -162,12 +172,32 @@ describe('Book Component', () => {
       component = shallow(<Book pick={pickObject} isJsEnabled={false} />);
     });
 
-    it('should render the pick tags in a <p> tag and contain should not visuallyHidden class', () => {
+    it('should render the pick tags in a <p> tag nested with a <ul> for tags and a <span>' +
+      'for the instruction.', () => {
       const tags = component.find('.book-item-tags');
+
       expect(tags.length).to.equal(1);
-      expect(tags.hasClass('visuallyHidden')).to.equal(false);
+      expect(tags.type()).to.equal('p');
+      expect(tags.find('span').length).to.equal(1);
+      expect(tags.find('span').text()).to.equal('Tags: ');
     });
 
-    it('should render a <ul> that wrapps all the pick tags in. And each tags should be an <li>.');
+    it('should render each tags to be an <li>.', () => {
+      const tagsWrapper = component.find('.book-item-tags').find('ul');
+
+      expect(tagsWrapper.length).to.equal(1);
+      expect(tagsWrapper.find('li').length).to.equal(2);
+      expect(tagsWrapper.find('li').at(0).text()).to.equal('Offbeat, ');
+      expect(tagsWrapper.find('li').at(1).text()).to.equal('Seriously good writing');
+    });
+
+    it('should render the pick tags in a <p> tag and its class should not be visuallyHidden.',
+      () => {
+        const tags = component.find('.book-item-tags');
+
+        expect(tags.length).to.equal(1);
+        expect(tags.hasClass('visuallyHidden')).to.equal(false);
+      }
+    );
   });
 });
