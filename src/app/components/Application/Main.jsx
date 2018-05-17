@@ -1,4 +1,4 @@
-/* globals document */
+/* globals document, window */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { findWhere as _findWhere } from 'underscore';
@@ -21,6 +21,7 @@ class Main extends React.Component {
     this.state = {
       selectedFilters: [],
       picks,
+      isMobile: false,
     };
 
     this.setSelectedFilter = this.setSelectedFilter.bind(this);
@@ -29,6 +30,7 @@ class Main extends React.Component {
     this.getNewPickSet = this.getNewPickSet.bind(this);
     this.filterByAudience = this.filterByAudience.bind(this);
     this.getCount = this.getCount.bind(this);
+    this.checkWindowWidth = this.checkWindowWidth.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +59,12 @@ class Main extends React.Component {
         this.context.router.push({ pathname: this.props.location.pathname });
       }
     }
+
+    if (document.body.clientWidth < appConfig.MOBILE_BREAKPOINT) {
+      this.setState({ isMobile: true });
+    }
+
+    this.checkWindowWidth();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -157,6 +165,13 @@ class Main extends React.Component {
     return (picks && picks.length) ? picks.length : 0;
   }
 
+  checkWindowWidth() {
+    window.addEventListener('resize', () => {
+      const isMobile = !!(window.innerWidth < appConfig.MOBILE_BREAKPOINT);
+      this.setState({ isMobile });
+    });
+  }
+
   /**
    * clearFilters()
    * Reset the list of picks and set the list of filters back to its initial state.
@@ -208,7 +223,7 @@ class Main extends React.Component {
   render() {
     const picksCount = this.getCount();
     return (
-      <div className="nypl-row">
+      <div className="nypl-row flex-container">
         <Sidebar
           filters={this.props.filters}
           selectableFilters={utils.getSelectableTags(this.state.picks)}
@@ -222,6 +237,7 @@ class Main extends React.Component {
           displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
           picksCount={picksCount}
           type={this.props.picksData.type}
+          isMobile={this.state.isMobile}
         />
 
         <BookList
@@ -230,6 +246,7 @@ class Main extends React.Component {
           displayType={this.props.picksData.type}
           displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
           picksCount={picksCount}
+          isMobile={this.state.isMobile}
         />
       </div>
     );

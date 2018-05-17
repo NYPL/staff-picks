@@ -67,12 +67,15 @@ const Sidebar = (props) => {
         </a>
       </nav>
       <div className="book-filters-heading">
-        <ListTitle
-          displayInfo={props.displayInfo}
-          displayType={props.type}
-          picksCount={props.picksCount}
-          idPrefix="sidebar"
-        />
+        {
+          props.isMobile &&
+            <ListTitle
+              displayInfo={props.displayInfo}
+              displayType={props.type}
+              picksCount={props.picksCount}
+              idPrefix="sidebar"
+            />
+        }
         <h3><ListIcon /><span>Select a List</span></h3>
         {renderListSelector(updateCurrentListSelectorValues(props))}
         {renderBookFilters(props.isJsEnabled)}
@@ -92,6 +95,7 @@ Sidebar.propTypes = {
   displayInfo: PropTypes.object,
   type: PropTypes.string,
   picksCount: PropTypes.number,
+  isMobile: PropTypes.bool,
 };
 
 Sidebar.defaultProps = {
@@ -102,6 +106,7 @@ Sidebar.defaultProps = {
   isJsEnabled: false,
   listOptions: {},
   selectedFilters: [],
+  isMobile: false,
 };
 
 export default Sidebar;

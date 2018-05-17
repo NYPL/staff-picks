@@ -63,10 +63,9 @@ const Book = ({ pick, isJsEnabled }) => {
         href={catalogUrl}
         className="catalog-url"
         onClick={() => gaEvent('Book')}
-        aria-label={`Request Book: ${book.title}`}
       >
         <BookIcon width="32px" height="32px" ariaHidden />
-        <span>{config.requestUrlsText.catalog}</span>
+        <span aria-label={`Request Book: ${book.title}`}>{config.requestUrlsText.catalog}</span>
       </a>) : null;
 
     const ebookLink = !isStringEmpty(ebookUrl) ? (
@@ -74,10 +73,9 @@ const Book = ({ pick, isJsEnabled }) => {
         href={ebookUrl}
         className="ebook-url"
         onClick={() => gaEvent('E-Book')}
-        aria-label={`Request E-Book: ${book.title}`}
       >
         <EReaderIcon ariaHidden />
-        <span>{config.requestUrlsText.ebook}</span>
+        <span aria-label={`Request E-Book: ${book.title}`}>{config.requestUrlsText.ebook}</span>
       </a>) : null;
 
     return (catalogLink || ebookLink) ?
@@ -134,6 +132,7 @@ const Book = ({ pick, isJsEnabled }) => {
       key={!isStringEmpty(book.title) ? book.title : null}
       tabIndex="0"
       id={pick.slug}
+      aria-labelledBy={book.title}
     >
       {renderBookCoverImage(book.imageUrl)}
       {renderTitle(book.title)}

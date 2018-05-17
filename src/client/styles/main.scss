@@ -50,3 +50,12 @@ body {
 li {
   list-style: none;
 }
+
+// .flex-container {
+//   display: flex;
+//   flex-direction: column-reverse;
+//
+//   @include min-screen($mobile-breakpoint) {
+//     flex-direction: row-reverse;
+//   }
+// }

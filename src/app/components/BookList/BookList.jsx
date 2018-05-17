@@ -11,6 +11,7 @@ const BookList = ({
   displayInfo,
   displayType,
   picksCount,
+  isMobile,
 }) => {
   const renderBookItems = currentBooks => (
     currentBooks.length ?
@@ -21,7 +22,14 @@ const BookList = ({
   return (
     <div className="booklist-section nypl-column-three-quarters">
       <div className="list-title-container">
-        <ListTitle displayInfo={displayInfo} displayType={displayType} picksCount={picksCount} />
+        {
+          !isMobile &&
+            <ListTitle
+              displayInfo={displayInfo}
+              displayType={displayType}
+              picksCount={picksCount}
+            />
+        }
       </div>
 
       {
@@ -43,12 +51,14 @@ BookList.propTypes = {
   displayInfo: PropTypes.object,
   displayType: PropTypes.string,
   picksCount: PropTypes.number,
+  isMobile: PropTypes.bool,
 };
 
 BookList.defaultProps = {
   picks: [],
   picksCount: 0,
   displayInfo: {},
+  isMobile: false,
 };
 
 export default BookList;
