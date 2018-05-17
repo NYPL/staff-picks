@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { isEmpty as _isEmpty } from 'underscore';
 
 import ListFilter from './ListFilter';
 import config from '../../../../appConfig';
@@ -111,11 +112,12 @@ class ListSelector extends React.Component {
   handleSeasonChange(e) {
     this.submitFormRequest(e.target.value);
 
+    const audience = this.props.fieldsetProps.audience;
     // Adds to GA event
-    if (!this.props.fieldsetProps.audience) {
+    if (_isEmpty(audience)) {
       utils.trackPicks('Lists', `${e.target.value}`);
     } else {
-      utils.trackPicks('Lists', `${e.target.value} - ${this.props.fieldsetProps.audience}`);
+      utils.trackPicks('Lists', `${e.target.value} - ${audience.currentValue}`);
     }
   }
 
@@ -152,7 +154,10 @@ class ListSelector extends React.Component {
               utils.focusOnFirstAvailableElement(['sidebar-list-title', 'list-title']);
 
               // Adds to GA event
-              utils.trackPicks('Lists', `${this.props.fieldsetProps.season} - ${e.target.value}`);
+              utils.trackPicks(
+                'Lists',
+                `${this.props.fieldsetProps.season.currentValue} - ${e.target.value}`
+              );
             }
           }
         />
