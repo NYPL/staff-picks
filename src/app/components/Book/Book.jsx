@@ -114,12 +114,12 @@ const Book = ({ pick, isJsEnabled }) => {
 
   const renderTags = (tags, jsEnabled) => {
     const tagsMarkup = !_isEmpty(tags) ?
-      tags.map((tag, i) => <li key={i}>{tag}{i !== (tags.length - 1) ? ', ' : ''}</li>) : null;
+      tags.map((tag, i) => <li key={i}><span>{tag}{i !== (tags.length - 1) ? ', ' : ''}</span></li>) : null;
     const hiddenClass = jsEnabled ? 'visuallyHidden js' : 'no-js';
     const tagsWrapperMarkup = <ul>{tagsMarkup}</ul>;
 
     return (tagsWrapperMarkup) ?
-      (<p className={`book-item-tags ${hiddenClass}`}><span>Tags: </span>{tagsWrapperMarkup}</p>)
+      (<div className={`book-item-tags ${hiddenClass}`}><div>Tags: </div>{tagsWrapperMarkup}</div>)
       : null;
   };
 
