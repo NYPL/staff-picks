@@ -9,6 +9,7 @@ import utils from '../../utils/utils';
 import { staffPicksDate, annualDate } from '../../utils/DateService';
 import appConfig from '../../../../appConfig';
 import BookActions from '../../actions/BookActions';
+import ListTitle from '../ListTitle/ListTitle';
 
 class Main extends React.Component {
   constructor(props) {
@@ -21,7 +22,6 @@ class Main extends React.Component {
     this.state = {
       selectedFilters: [],
       picks,
-      isMobile: false,
     };
 
     this.setSelectedFilter = this.setSelectedFilter.bind(this);
@@ -30,7 +30,6 @@ class Main extends React.Component {
     this.getNewPickSet = this.getNewPickSet.bind(this);
     this.filterByAudience = this.filterByAudience.bind(this);
     this.getCount = this.getCount.bind(this);
-    this.checkWindowWidth = this.checkWindowWidth.bind(this);
   }
 
   componentDidMount() {
@@ -55,16 +54,9 @@ class Main extends React.Component {
           }, 800);
         });
       } else {
-        console.log(this.context.router);
         this.context.router.push({ pathname: this.props.location.pathname });
       }
     }
-
-    if (document.body.clientWidth < appConfig.MOBILE_BREAKPOINT) {
-      this.setState({ isMobile: true });
-    }
-
-    this.checkWindowWidth();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -165,13 +157,6 @@ class Main extends React.Component {
     return (picks && picks.length) ? picks.length : 0;
   }
 
-  checkWindowWidth() {
-    window.addEventListener('resize', () => {
-      const isMobile = !!(window.innerWidth < appConfig.MOBILE_BREAKPOINT);
-      this.setState({ isMobile });
-    });
-  }
-
   /**
    * clearFilters()
    * Reset the list of picks and set the list of filters back to its initial state.
@@ -223,7 +208,13 @@ class Main extends React.Component {
   render() {
     const picksCount = this.getCount();
     return (
-      <div className="nypl-row flex-container">
+      <div className="nypl-row">
+        <ListTitle
+          displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
+          displayType={this.props.picksData.type}
+          picksCount={picksCount}
+        />
+
         <Sidebar
           filters={this.props.filters}
           selectableFilters={utils.getSelectableTags(this.state.picks)}
@@ -234,19 +225,13 @@ class Main extends React.Component {
           selectedFilters={this.state.selectedFilters}
           currentSeason={this.props.currentSeason}
           currentAudience={this.props.currentAudience}
-          displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
-          picksCount={picksCount}
           type={this.props.picksData.type}
-          isMobile={this.state.isMobile}
         />
 
         <BookList
           picks={this.state.picks}
           isJsEnabled={this.props.isJsEnabled}
           displayType={this.props.picksData.type}
-          displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
-          picksCount={picksCount}
-          isMobile={this.state.isMobile}
         />
       </div>
     );
