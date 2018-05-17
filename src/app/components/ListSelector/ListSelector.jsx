@@ -131,10 +131,10 @@ class ListSelector extends React.Component {
 
     const listType = fieldsetProps.fieldsetName;
 
-    // Returns eifferent fieldsets based on different list types.
-    // Now we only have season and audience.
-    // Any types aside these two shouldn't be displayed.
-    if (listType === 'season') {
+    // Returns different fieldsets based on different list types.
+    // Now we only have season/year and audience.
+    // Any types aside from these two shouldn't be displayed.
+    if (listType === 'season' || listType === 'year') {
       return (
         <ListFilter
           fieldsetProps={fieldsetProps}
