@@ -102,6 +102,7 @@ app.use('/', (req, res) => {
           assets: buildAssets,
           webpackPort: WEBPACK_DEV_PORT,
           pageTitle,
+          baseUrl: appConfig.baseUrl,
         });
     } else {
       res.status(404).send('Not found');
