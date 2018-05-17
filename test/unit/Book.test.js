@@ -153,6 +153,8 @@ describe('Book Component', () => {
       expect(tags.length).to.equal(1);
       expect(tags.hasClass('visuallyHidden')).to.equal(true);
     });
+
+    it('should render a <ul> that wrapps all the pick tags in. And each tags should be an <li>.');
   });
 
   describe('Component with data and JavaScript disabled', () => {
@@ -165,5 +167,7 @@ describe('Book Component', () => {
       expect(tags.length).to.equal(1);
       expect(tags.hasClass('visuallyHidden')).to.equal(false);
     });
+
+    it('should render a <ul> that wrapps all the pick tags in. And each tags should be an <li>.');
   });
 });
