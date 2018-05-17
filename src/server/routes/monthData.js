@@ -75,9 +75,16 @@ function currentMonthData(req, res, next) {
 function selectMonthData(req, res, next) {
   const listOptions = config.staffPicksListOptions;
   let seasonListOptions = [];
+  const dateRequest = req.params.time;
+
+  // Redirects older three part dates in URLs to the new two part date before validation.
+  if (dateRequest && /^(\d{4})-(\d{2})-(\d{2})$/.test(dateRequest)) {
+    const newPath = req.url.replace(/(\d{4})-(\d{2})-(\d{2})/, utils.toMonthAndYear);
+    return res.redirect(newPath);
+  }
 
   // Checks if the URL input fits season's convention
-  const seasonMatches = matchListDate(req.params.time);
+  const seasonMatches = matchListDate(dateRequest);
   // Default audience list is the adult list
   let audience = 'Adult';
   let isValidAudience = true;
@@ -161,7 +168,15 @@ function selectMonthData(req, res, next) {
  * Gets a specific month's or season's staff pick list on the client side.
  */
 function selectClientMonthData(req, res) {
-  const seasonMatches = matchListDate(req.params.time);
+  const dateRequest = req.params.time;
+  // Redirects older three part dates in URLs to the new two part date before validation.
+  if (dateRequest && /^(\d{4})-(\d{2})-(\d{2})$/.test(dateRequest)) {
+    const newPath = req.url.replace(/(\d{4})-(\d{2})-(\d{2})/, toMonthAndYear);
+    return res.redirect(`${config.baseUrl}${newPath}`);
+  }
+
+  // Checks if the URL input fits season's convention
+  const seasonMatches = matchListDate(dateRequest);
   if (!seasonMatches) {
     logger.error('Status Code: 400, Error Message: Invalid season.');
 

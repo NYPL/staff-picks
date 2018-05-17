@@ -13,13 +13,13 @@ describe('DateService', () => {
 
     describe('When the passed year is earlier than 2016', () => {
       it('should return the correct month and year.', () => {
-        expect(staffPicksDate('2015-04-01')).to.deep.equal({ month: 'April', year: 2015 });
+        expect(staffPicksDate('2015-04')).to.deep.equal({ month: 'April', year: 2015 });
       });
     });
 
     describe('When the passed year is later than 2016', () => {
       it('should return month value as the season with the correct year.', () => {
-        expect(staffPicksDate('2016-06-01')).to.deep.equal({ month: 'Summer', year: 2016 });
+        expect(staffPicksDate('2016-06')).to.deep.equal({ month: 'Summer', year: 2016 });
       });
     });
   });
