@@ -119,7 +119,7 @@ const Book = ({ pick, isJsEnabled }) => {
     const tagsWrapperMarkup = <ul>{tagsMarkup}</ul>;
 
     return (tagsWrapperMarkup) ?
-      (<div className={`book-item-tags ${hiddenClass}`}><div>Tags: </div>{tagsWrapperMarkup}</div>)
+      (<div className={`book-item-tags ${hiddenClass}`}><li>Tags: </li>{tagsWrapperMarkup}</div>)
       : null;
   };
 
