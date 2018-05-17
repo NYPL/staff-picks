@@ -160,7 +160,7 @@ const config = {
   },
   annualListOptions: {
     season: {
-      fieldsetName: 'season',
+      fieldsetName: 'year',
       currentValue: '',
       options: [],
     },
