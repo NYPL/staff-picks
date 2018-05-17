@@ -171,7 +171,7 @@ function selectClientMonthData(req, res) {
   const dateRequest = req.params.time;
   // Redirects older three part dates in URLs to the new two part date before validation.
   if (dateRequest && /^(\d{4})-(\d{2})-(\d{2})$/.test(dateRequest)) {
-    const newPath = req.url.replace(/(\d{4})-(\d{2})-(\d{2})/, toMonthAndYear);
+    const newPath = req.url.replace(/(\d{4})-(\d{2})-(\d{2})/, utils.toMonthAndYear);
     return res.redirect(`${config.baseUrl}${newPath}`);
   }
 
