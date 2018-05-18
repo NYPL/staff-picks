@@ -140,20 +140,12 @@ describe('Book Component', () => {
       expect(bookWrapper.hasClass('withTranslatorIllustrator')).to.equal(true);
     });
 
-    it('should render the pick tags in a <div> tag nested with a <ul> for tags.', () => {
+    it('should render the pick tags in a <div> tag nested with a <ul> for the tags.', () => {
       const tags = component.find('.book-item-tags');
 
       expect(tags.length).to.equal(1);
       expect(tags.type()).to.equal('div');
-    });
-
-    it('should render each tags to be an <li>.', () => {
-      const tagsWrapper = component.find('.book-item-tags').find('ul');
-
-      expect(tagsWrapper.length).to.equal(1);
-      expect(tagsWrapper.find('li').length).to.equal(2);
-      expect(tagsWrapper.find('li').at(0).text()).to.equal('Offbeat, ');
-      expect(tagsWrapper.find('li').at(1).text()).to.equal('Seriously good writing');
+      expect(tags.find('ul').length).to.equal(1);
     });
 
     it('should render the pick tags with a visuallyHidden class when JavaScript is enabled', () => {
@@ -162,6 +154,14 @@ describe('Book Component', () => {
       expect(tags.length).to.equal(1);
       expect(tags.hasClass('visuallyHidden')).to.equal(true);
     });
+
+    it('should render each tag to be an <li>.', () => {
+      const tagsWrapper = component.find('.book-item-tags').find('ul');
+
+      expect(tagsWrapper.find('li').length).to.equal(2);
+      expect(tagsWrapper.find('li').at(0).text()).to.equal('Offbeat,');
+      expect(tagsWrapper.find('li').at(1).text()).to.equal('Seriously good writing');
+    });
   });
 
   describe('Component with data and JavaScript disabled', () => {
@@ -169,29 +169,27 @@ describe('Book Component', () => {
       component = shallow(<Book pick={pickObject} isJsEnabled={false} />);
     });
 
-    it('should render the pick tags in a <div> tag nested with a <ul> for tags.', () => {
+    it('should render the pick tags in a <div> tag nested with a <ul> for the tags.', () => {
       const tags = component.find('.book-item-tags');
 
       expect(tags.length).to.equal(1);
       expect(tags.type()).to.equal('div');
+      expect(tags.find('ul').length).to.equal(1);
     });
 
-    it('should render each tags to be an <li>.', () => {
+    it('should render the pick tags and its class should not be visuallyHidden.', () => {
+      const tags = component.find('.book-item-tags');
+
+      expect(tags.length).to.equal(1);
+      expect(tags.hasClass('visuallyHidden')).to.equal(false);
+    });
+
+    it('should render each tag to be an <li>.', () => {
       const tagsWrapper = component.find('.book-item-tags').find('ul');
 
-      expect(tagsWrapper.length).to.equal(1);
       expect(tagsWrapper.find('li').length).to.equal(2);
-      expect(tagsWrapper.find('li').at(0).text()).to.equal('Offbeat, ');
+      expect(tagsWrapper.find('li').at(0).text()).to.equal('Offbeat,');
       expect(tagsWrapper.find('li').at(1).text()).to.equal('Seriously good writing');
     });
-
-    it('should render the pick tags and its class should not be visuallyHidden.',
-      () => {
-        const tags = component.find('.book-item-tags');
-
-        expect(tags.length).to.equal(1);
-        expect(tags.hasClass('visuallyHidden')).to.equal(false);
-      }
-    );
   });
 });
