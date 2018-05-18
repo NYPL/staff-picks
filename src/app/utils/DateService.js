@@ -26,7 +26,7 @@ function monthOrSeason(month, year) {
 /**
  * matchListDate(dateStr, type)
  * Date based pattern matching for picks' routes.
- * @param {string} dateStr 
+ * @param {string} dateStr
  * @param {string} type
  * @return {array|null}
  */
@@ -39,10 +39,11 @@ function matchListDate(dateStr, type = 'staff-picks') {
 
   if (type !== 'staff-picks') {
     pattern = /^(\d{4})$/;
+  } else if (dateStr.length > 7) {
+    pattern = /^(\d{4})\-(\d{2})-(\d{2})$/;
   } else {
     pattern = /^(\d{4})\-(\d{2})$/;
   }
-
   const validMatch = dateStr.match(pattern);
 
   return validMatch;
