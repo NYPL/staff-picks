@@ -69,7 +69,7 @@ function annualCurrentListData(req, res, next) {
       next();
     })
     .catch((error) => {
-      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Endpoint: ${platformConfig.endpoints.annualLists[dataType]},Redirecting to: ${config.baseUrl}/404`);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Source: annualData.annualCurrentListData, Redirecting to: ${config.baseUrl}/404`, error);
 
       return res.redirect(`${config.baseUrl}/404`);
     });
@@ -145,7 +145,7 @@ function annualListData(req, res, next) {
       next();
     })
     .catch((error) => {
-      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Endpoint: ${platformConfig.endpoints.annualLists[dataType]},Redirecting to: ${config.baseUrl}/404`);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Endpoint: ${platformConfig.endpoints.annualLists[dataType]}, Redirecting to: ${config.baseUrl}/404`, error);
 
       return res.redirect(`${config.baseUrl}/404`);
     });
@@ -162,11 +162,11 @@ function annualClientListData(req, res) {
   const yearMatches = matchListDate(req.params.time, req.params.type);
 
   if (!yearMatches) {
-    logger.error('Status Code: 400, Error Message: Invalid year.');
+    logger.error(`Status Code: 400, Error Message: Invalid year ${req.params.time}`);
 
     res.json({
       statusCode: 400,
-      errorMessage: 'Invalid year.',
+      errorMessage: `Invalid year ${req.params.time}`,
     });
   }
 
@@ -179,7 +179,7 @@ function annualClientListData(req, res) {
       });
     })
     .catch((error) => {
-      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Endpoint: ${platformConfig.endpoints.annualPath}${dataType}/${yearMatches[0]}`);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Endpoint: ${platformConfig.endpoints.annualPath}${dataType}/${yearMatches[0]}`, error);
 
       res.json({
         statusCode: error.statusCode || 500,

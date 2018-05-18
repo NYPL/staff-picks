@@ -62,7 +62,7 @@ function currentMonthData(req, res, next) {
       next();
     })
     .catch((error) => {
-      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Endpoint: ${platformConfig.endpoints.staffPicksPath}${latestSeason}`);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Redirect to: ${config.baseUrl}/404`, error);
 
       return res.redirect(`${config.baseUrl}/404`);
     });
@@ -157,7 +157,7 @@ function selectMonthData(req, res, next) {
       next();
     })
     .catch((error) => {
-      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Endpoint: ${platformConfig.endpoints.allStaffPicksLists},Redirecting to: ${config.baseUrl}/404`);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Redirecting to: ${config.baseUrl}/404`, error);
 
       return res.redirect(`${config.baseUrl}/404`);
     });
@@ -195,7 +195,7 @@ function selectClientMonthData(req, res) {
       });
     })
     .catch((error) => {
-      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Endpoint: ${platformConfig.endpoints.staffPicksPath}${seasonMatches[0]}`);
+      logger.error(`Status Code: ${error.statusCode}, Endpoint: ${platformConfig.endpoints.staffPicksPath}${seasonMatches[0]},Error Message: ${error.code}`, error);
 
       res.json({
         statusCode: error.statusCode || 500,
