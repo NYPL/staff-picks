@@ -123,7 +123,7 @@ function annualListData(req, res, next) {
 
       // If error returned from the endpoint
       if (data.statusCode >= 400) {
-        logger.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
+        logger.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}, Endpoint: ${platformConfig.endpoints.annualPath}${dataType}/${requestedYear}`);
 
         return res.redirect(`${config.baseUrl}/404`);
       }

@@ -132,7 +132,7 @@ function selectMonthData(req, res, next) {
 
       // If error returned from the endpoint
       if (data.statusCode >= 400) {
-        logger.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}`);
+        logger.error(`Status Code: ${data.statusCode}, Error Message: ${data.error}, Endpoint: ${platformConfig.endpoints.staffPicksPath}${requestedSeason}`);
 
         return res.redirect(`${config.baseUrl}/404`);
       }
@@ -195,7 +195,7 @@ function selectClientMonthData(req, res) {
       });
     })
     .catch((error) => {
-      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Endpoint: ${platformConfig.endpoints.staffPicksPath}${seasonMatches[0]}`);
 
       res.json({
         statusCode: error.statusCode || 500,
