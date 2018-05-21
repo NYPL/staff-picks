@@ -172,7 +172,7 @@ Loadbalancer settings are required for HTTPS to run behind the load balancers fo
 | `nypl-digital-dev` | `https-nypl-digital-dev.config` | 
 | `nypl-sandbox` | `https-nypl-sandbox.config` | 
 
-When `development` is ready to merge into `qa`, only include `https-nypl-digital-dev.config` within `.ebextensions` directory. Since CI/CD is being performed via Travis CI, the following needs to be done on the local `qa` branch, after a merge with the most up-to-date local `development` branch, before pushing into remote `qa`:
+When `development` is ready to merge into `qa`, only include `https-nypl-digital-dev.config` within the `.ebextensions` directory. Since CI/CD is being performed via Travis CI, run the following commands on the local qa branch after a merge:
 
 ```bash
 git checkout qa
@@ -183,7 +183,7 @@ git commit
 git push origin qa
 ```
 
-At `git push origin qa`, Travis CI will deploy to the QA server with the correct credentials..
+At `git push origin qa`, Travis CI will deploy to the QA server with the correct credentials.
 
 This procedure is not needed for deployment to `production` environment when merging from `qa`. The `qa` branch uses the same credentials from `nypl-digital-dev` account, and will be reused by `production` environment.
 
