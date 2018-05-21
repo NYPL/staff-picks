@@ -9,6 +9,7 @@ import utils from '../../utils/utils';
 import { staffPicksDate, annualDate } from '../../utils/DateService';
 import appConfig from '../../../../appConfig';
 import BookActions from '../../actions/BookActions';
+import TopHeading from '../TopHeading/TopHeading';
 
 class Main extends React.Component {
   constructor(props) {
@@ -53,7 +54,6 @@ class Main extends React.Component {
           }, 800);
         });
       } else {
-        console.log(this.context.router);
         this.context.router.push({ pathname: this.props.location.pathname });
       }
     }
@@ -166,7 +166,10 @@ class Main extends React.Component {
     const selectedFilters = [];
     const picks = this.getNewPickSet(this.props.picksData.picks, selectedFilters);
 
-    utils.trackPicks('Clear Filters', 'Clicked');
+    utils.trackPicks(
+      `${appConfig.niceLabelMap[this.props.picksData.type]} Clear Filters`,
+      'Clicked',
+    );
 
     this.setState({
       picks,
@@ -208,29 +211,33 @@ class Main extends React.Component {
   render() {
     const picksCount = this.getCount();
     return (
-      <div className="nypl-row">
-        <Sidebar
-          filters={this.props.filters}
-          selectableFilters={utils.getSelectableTags(this.state.picks)}
-          setSelectedFilter={this.setSelectedFilter}
-          clearFilters={this.clearFilters}
-          isJsEnabled={this.props.isJsEnabled}
-          listOptions={this.props.listOptions}
-          selectedFilters={this.state.selectedFilters}
-          currentSeason={this.props.currentSeason}
-          currentAudience={this.props.currentAudience}
+      <div>
+        <TopHeading
           displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
+          displayType={this.props.picksData.type}
           picksCount={picksCount}
-          type={this.props.picksData.type}
         />
 
-        <BookList
-          picks={this.state.picks}
-          isJsEnabled={this.props.isJsEnabled}
-          displayType={this.props.picksData.type}
-          displayInfo={this.getPicksInfo(this.props.picksData, this.props.currentAudience)}
-          picksCount={picksCount}
-        />
+        <div className="nypl-row">
+          <Sidebar
+            filters={this.props.filters}
+            selectableFilters={utils.getSelectableTags(this.state.picks)}
+            setSelectedFilter={this.setSelectedFilter}
+            clearFilters={this.clearFilters}
+            isJsEnabled={this.props.isJsEnabled}
+            listOptions={this.props.listOptions}
+            selectedFilters={this.state.selectedFilters}
+            currentSeason={this.props.currentSeason}
+            currentAudience={this.props.currentAudience}
+            type={this.props.picksData.type}
+          />
+
+          <BookList
+            picks={this.state.picks}
+            isJsEnabled={this.props.isJsEnabled}
+            displayType={this.props.picksData.type}
+          />
+        </div>
       </div>
     );
   }
