@@ -13,7 +13,7 @@ const { seasons } = config;
  * @param {number} year
  * @returns {string}
  */
-function monthOrSeason(month, year) {
+function monthOrSeason(month = 0, year = 0) {
   const monthsArr = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -98,4 +98,9 @@ function annualDate(dateStr) {
   return { year };
 }
 
-export { staffPicksDate, annualDate, matchListDate };
+export {
+  staffPicksDate,
+  annualDate,
+  matchListDate,
+  monthOrSeason,
+};
