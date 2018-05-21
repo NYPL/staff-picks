@@ -172,6 +172,21 @@ Loadbalancer settings is required for HTTPS to run behind the load balancers for
 | `nypl-digital-dev` | `https-nypl-digital-dev.config` | 
 | `nypl-sandbox` | `https-nypl-sandbox.config` | 
 
+When `development` is ready to merge into `qa`, only include `https-nypl-digital-dev.config` within `.ebextensions` directory. Since CI/CD is being performed via Travis CI, the following needs to be done on the local `qa` branch, after a merge with the most up-to-date local `development` branch, before pushing into remote `qa`:
+
+```bash
+git checkout qa
+git merge development
+git rm .ebextensions/https-nypl-sandbox.config
+git add .ebextensions/https-nypl-digital-dev.config
+git commit
+git push origin qa
+```
+
+At `git push origin qa`, Travis CI will be triggered and will deploy to QA server with the correct credentials.
+
+For details, please see [NYPL common instructions on Elastic Beanstalk](https://github.com/NYPL/aws/blob/hp/add-global-docs/common/elasticbeanstalk.md).
+
 ### KMS Environment Variables
 Staff Picks and the API where the data is fetched from are currently deployed on NYPl's AWS instance. In order to fetch data, we are using the `@nypl/nypl-data-api-client` to make requests to the API with an authentication token. You can find the [full documentation here](https://www.npmjs.com/package/@nypl/nypl-data-api-client), but to be brief, we need a client id, a client secret, and a token url to authenticate.
 
