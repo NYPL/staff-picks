@@ -9,7 +9,6 @@ App-specific utilities and defaults
 */
 @import 'utils/variables';
 @import 'utils/mixins';
-// @import 'utils/fonts';
 @import 'utils/colors';
 @import 'utils/utils';
 @import 'utils/animations';
@@ -21,13 +20,14 @@ Import style rules from NYPL React module components
 @import "~@nypl/dgx-react-footer/dist/styles/styles.scss";
 
 @import 'components/about';
-@import 'components/bookFilters';
 @import 'components/bookList';
 @import 'components/error404Page';
 @import 'components/filter';
 @import 'components/hero';
 @import 'components/sidebar';
+@import 'components/bookFilters';
 @import 'components/bookPage';
+@import 'components/topHeading';
 
 body {
   background: #fff;

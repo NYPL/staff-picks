@@ -86,7 +86,7 @@ class ListSelector extends React.Component {
           const dataType = utils.getDataType(data.picksData.type, true);
           this.updateLocation(`${config.baseUrl}/${dataType}/${submitValue}`);
           // Focuses on the title
-          utils.focusOnFirstAvailableElement(['sidebar-list-title', 'list-title']);
+          utils.focusOnFirstAvailableElement(['list-title']);
         }
       })
       .catch((error) => {
@@ -152,7 +152,7 @@ class ListSelector extends React.Component {
             (e) => {
               BookActions.updateCurrentAudience(e.target.value);
               // Focuses on the title
-              utils.focusOnFirstAvailableElement(['sidebar-list-title', 'list-title']);
+              utils.focusOnFirstAvailableElement(['list-title']);
 
               // Adds to GA event
               utils.trackPicks(

@@ -39,8 +39,10 @@ const Book = ({ pick, isJsEnabled, displayType }) => {
     );
   };
 
-  const renderTitle = title => (
-    !isStringEmpty(title) ? (<h3 className="book-item-title">{title}</h3>) : null
+  const renderTitle = (title, slug) => (
+    !isStringEmpty(title) ?
+      (<h3 className="book-item-title" id={`book-${slug}`}>{title}</h3>) :
+      null
   );
 
   const renderAuthor = author => (
@@ -66,7 +68,7 @@ const Book = ({ pick, isJsEnabled, displayType }) => {
         aria-label={`Request Book: ${book.title}`}
       >
         <BookIcon width="32px" height="32px" ariaHidden />
-        <span>{config.requestUrlsText.catalog}</span>
+        <span aria-label={`Request Book: ${book.title}`}>{config.requestUrlsText.catalog}</span>
       </a>) : null;
 
     const ebookLink = !isStringEmpty(ebookUrl) ? (
@@ -77,7 +79,7 @@ const Book = ({ pick, isJsEnabled, displayType }) => {
         aria-label={`Request E-Book: ${book.title}`}
       >
         <EReaderIcon ariaHidden />
-        <span>{config.requestUrlsText.ebook}</span>
+        <span aria-label={`Request E-Book: ${book.title}`}>{config.requestUrlsText.ebook}</span>
       </a>) : null;
 
     return (catalogLink || ebookLink) ?
@@ -134,9 +136,10 @@ const Book = ({ pick, isJsEnabled, displayType }) => {
       key={!isStringEmpty(book.title) ? book.title : null}
       tabIndex="0"
       id={pick.slug}
+      aria-labelledby={`book-${pick.slug}`}
     >
       {renderBookCoverImage(book.imageUrl)}
-      {renderTitle(book.title)}
+      {renderTitle(book.title, pick.slug)}
       {renderAuthor(book.author)}
       {renderIllustrator(book.illustrator)}
       {renderTranslator(book.translator)}
