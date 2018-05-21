@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { EReaderIcon, BookIcon } from '@nypl/dgx-svg-icons';
 import { isEmpty as _isEmpty, isString as _isString } from 'underscore';
+import { Lazy } from 'react-lazy';
 
 import config from '../../../../appConfig';
 import utils from '../../utils/utils';
-import { Lazy } from 'react-lazy';
 
-const Book = ({ pick, isJsEnabled }) => {
+const Book = ({ pick, isJsEnabled, displayType }) => {
   const isStringEmpty = string => (!_isString(string) || _isEmpty(string.trim()));
 
   const getBookObject = obj => (obj.book || {});
@@ -23,8 +23,8 @@ const Book = ({ pick, isJsEnabled }) => {
   }
 
   const book = getBookObject(pick);
-  const gaEvent = (type) => {
-    utils.trackPicks('Request', `${type} - ${book.title}`);
+  const gaEvent = (type, listType) => {
+    utils.trackPicks(`${config.niceLabelMap[listType]} Request`, `${type} - ${book.title}`);
   };
 
   const renderBookCoverImage = (imageUrl) => {
@@ -39,8 +39,10 @@ const Book = ({ pick, isJsEnabled }) => {
     );
   };
 
-  const renderTitle = title => (
-    !isStringEmpty(title) ? (<h3 className="book-item-title">{title}</h3>) : null
+  const renderTitle = (title, slug) => (
+    !isStringEmpty(title) ?
+      (<h3 className="book-item-title" id={`book-${slug}`}>{title}</h3>) :
+      null
   );
 
   const renderAuthor = author => (
@@ -57,27 +59,27 @@ const Book = ({ pick, isJsEnabled }) => {
       <p className="book-item-translator">Translated by {translator}</p> : null
   );
 
-  const renderCatalogLinks = (catalogUrl, ebookUrl) => {
+  const renderCatalogLinks = (catalogUrl, ebookUrl, listType) => {
     const catalogLink = !isStringEmpty(catalogUrl) ? (
       <a
         href={catalogUrl}
         className="catalog-url"
-        onClick={() => gaEvent('Book')}
+        onClick={() => gaEvent('Book', listType)}
         aria-label={`Request Book: ${book.title}`}
       >
         <BookIcon width="32px" height="32px" ariaHidden />
-        <span>{config.requestUrlsText.catalog}</span>
+        <span aria-label={`Request Book: ${book.title}`}>{config.requestUrlsText.catalog}</span>
       </a>) : null;
 
     const ebookLink = !isStringEmpty(ebookUrl) ? (
       <a
         href={ebookUrl}
         className="ebook-url"
-        onClick={() => gaEvent('E-Book')}
+        onClick={() => gaEvent('E-Book', listType)}
         aria-label={`Request E-Book: ${book.title}`}
       >
         <EReaderIcon ariaHidden />
-        <span>{config.requestUrlsText.ebook}</span>
+        <span aria-label={`Request E-Book: ${book.title}`}>{config.requestUrlsText.ebook}</span>
       </a>) : null;
 
     return (catalogLink || ebookLink) ?
@@ -134,13 +136,14 @@ const Book = ({ pick, isJsEnabled }) => {
       key={!isStringEmpty(book.title) ? book.title : null}
       tabIndex="0"
       id={pick.slug}
+      aria-labelledby={`book-${pick.slug}`}
     >
       {renderBookCoverImage(book.imageUrl)}
-      {renderTitle(book.title)}
+      {renderTitle(book.title, pick.slug)}
       {renderAuthor(book.author)}
       {renderIllustrator(book.illustrator)}
       {renderTranslator(book.translator)}
-      {renderCatalogLinks(book.catalogUrl, book.ebookUrl)}
+      {renderCatalogLinks(book.catalogUrl, book.ebookUrl, displayType)}
       {renderDescription(reviewsArray)}
       {renderTags(fullTagsArray, isJsEnabled)}
     </li>
@@ -150,6 +153,7 @@ const Book = ({ pick, isJsEnabled }) => {
 Book.propTypes = {
   pick: PropTypes.object,
   isJsEnabled: PropTypes.bool,
+  displayType: PropTypes.string,
 };
 
 export default Book;
