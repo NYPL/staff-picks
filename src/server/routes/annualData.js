@@ -69,7 +69,7 @@ function annualCurrentListData(req, res, next) {
       next();
     })
     .catch((error) => {
-      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Source: annualData.annualCurrentListData, Redirecting to: ${config.baseUrl}/404`, error);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Source: annualData.annualCurrentListData, Redirecting to: ${config.baseUrl}/404`, data);
 
       return res.redirect(`${config.baseUrl}/404`);
     });
@@ -162,11 +162,11 @@ function annualClientListData(req, res) {
   const yearMatches = matchListDate(req.params.time, req.params.type);
 
   if (!yearMatches) {
-    logger.error(`Status Code: 400, Error Message: Invalid year ${req.params.time}`);
+    logger.error(`Status Code: 400, Error Message: Invalid year ${req.params.time} for type ${dataType}`);
 
     res.json({
       statusCode: 400,
-      errorMessage: `Invalid year ${req.params.time}`,
+      errorMessage: `Invalid year ${req.params.time} and time ${req.params.type}`,
     });
   }
 
