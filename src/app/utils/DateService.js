@@ -13,7 +13,7 @@ const { seasons } = config;
  * @param {number} year
  * @returns {string}
  */
-function monthOrSeason(month, year) {
+function monthOrSeason(month = 0, year = 0) {
   const monthsArr = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -26,7 +26,7 @@ function monthOrSeason(month, year) {
 /**
  * matchListDate(dateStr, type)
  * Date based pattern matching for picks' routes.
- * @param {string} dateStr 
+ * @param {string} dateStr
  * @param {string} type
  * @return {array|null}
  */
@@ -39,10 +39,11 @@ function matchListDate(dateStr, type = 'staff-picks') {
 
   if (type !== 'staff-picks') {
     pattern = /^(\d{4})$/;
+  } else if (dateStr.length > 7) {
+    pattern = /^(\d{4})\-(\d{2})-(\d{2})$/;
   } else {
-    pattern = /^(\d{4})\-(\d{2})\-(\d{2})$/;
+    pattern = /^(\d{4})\-(\d{2})$/;
   }
-
   const validMatch = dateStr.match(pattern);
 
   return validMatch;
@@ -50,7 +51,7 @@ function matchListDate(dateStr, type = 'staff-picks') {
 
 /**
  * staffPicksDate(dateStr)
- * Reads an string date that's specific to the Staff Picks API endpoint, such as "2018-01-01".
+ * Reads an string date that's specific to the Staff Picks API endpoint, such as "2018-01".
  * The string gets parsed to get either the correct month or season, and year.
  * @param {string} dateStr
  * @returns {object}
@@ -65,7 +66,7 @@ function staffPicksDate(dateStr) {
 
   const d = matchListDate(dateStr);
   const regexMonth = parseInt(d[1], 10) <= 2015 ? d[2] - 1 : d[2];
-  const newDate = new Date(d[1], regexMonth, d[3]);
+  const newDate = new Date(d[1], regexMonth);
   const year = newDate.getFullYear();
   const month = monthOrSeason(newDate.getMonth(), year);
 
@@ -89,6 +90,7 @@ function annualDate(dateStr) {
   }
 
   const annDate = matchListDate(dateStr, 'annual');
+
   if (annDate) {
     year = new Date(annDate[1], '01', '01').getFullYear();
   }
@@ -96,4 +98,9 @@ function annualDate(dateStr) {
   return { year };
 }
 
-export { staffPicksDate, annualDate, matchListDate };
+export {
+  staffPicksDate,
+  annualDate,
+  matchListDate,
+  monthOrSeason,
+};

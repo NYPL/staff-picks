@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { isEmpty as _isEmpty } from 'underscore';
 
 import ListFilter from './ListFilter';
 import config from '../../../../appConfig';
@@ -64,7 +65,7 @@ class ListSelector extends React.Component {
         if (!response.status || response.status >= 400) {
           this.updateBookStore();
           console.log(
-            `API error with status code ${response.status}: ${response.data.errorMessage}`
+            `API error with status code ${response.status}: ${response.data.errorMessage}`,
           );
           // Leads the user to the 404 page
           this.updateLocation(`${config.baseUrl}/404`);
@@ -85,7 +86,7 @@ class ListSelector extends React.Component {
           const dataType = utils.getDataType(data.picksData.type, true);
           this.updateLocation(`${config.baseUrl}/${dataType}/${submitValue}`);
           // Focuses on the title
-          utils.focusOnFirstAvailableElement(['sidebar-list-title', 'list-title']);
+          utils.focusOnFirstAvailableElement(['list-title']);
         }
       })
       .catch((error) => {
@@ -111,11 +112,13 @@ class ListSelector extends React.Component {
   handleSeasonChange(e) {
     this.submitFormRequest(e.target.value);
 
+    const audience = this.props.fieldsetProps.audience;
+    const displayType = config.niceLabelMap[this.props.displayType];
     // Adds to GA event
-    if (!this.props.fieldsetProps.audience) {
-      utils.trackPicks('Lists', `${e.target.value}`);
+    if (_isEmpty(audience)) {
+      utils.trackPicks(`${displayType} Lists`, `${e.target.value}`);
     } else {
-      utils.trackPicks('Lists', `${e.target.value} - ${this.props.fieldsetProps.audience}`);
+      utils.trackPicks(`${displayType} Lists`, `${e.target.value} - ${audience.currentValue}`);
     }
   }
 
@@ -131,10 +134,10 @@ class ListSelector extends React.Component {
 
     const listType = fieldsetProps.fieldsetName;
 
-    // Returns eifferent fieldsets based on different list types.
-    // Now we only have season and audience.
-    // Any types aside these two shouldn't be displayed.
-    if (listType === 'season') {
+    // Returns different fieldsets based on different list types.
+    // Now we only have season/year and audience.
+    // Any types aside from these two shouldn't be displayed.
+    if (listType === 'season' || listType === 'year') {
       return (
         <ListFilter
           fieldsetProps={fieldsetProps}
@@ -149,10 +152,13 @@ class ListSelector extends React.Component {
             (e) => {
               BookActions.updateCurrentAudience(e.target.value);
               // Focuses on the title
-              utils.focusOnFirstAvailableElement(['sidebar-list-title', 'list-title']);
+              utils.focusOnFirstAvailableElement(['list-title']);
 
               // Adds to GA event
-              utils.trackPicks('Lists', `${this.props.fieldsetProps.season} - ${e.target.value}`);
+              utils.trackPicks(
+                `${config.niceLabelMap[this.props.displayType]} Lists`,
+                `${this.props.fieldsetProps.season.currentValue} - ${e.target.value}`,
+              );
             }
           }
         />
@@ -190,6 +196,7 @@ class ListSelector extends React.Component {
 ListSelector.propTypes = {
   fieldsetProps: PropTypes.object,
   isJsEnabled: PropTypes.bool,
+  displayType: PropTypes.string,
 };
 
 ListSelector.defaultProps = {
