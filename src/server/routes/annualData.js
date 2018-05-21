@@ -166,7 +166,7 @@ function annualClientListData(req, res) {
 
     res.json({
       statusCode: 400,
-      errorMessage: `Invalid year ${req.params.time} and time ${req.params.type}`,
+      errorMessage: `Invalid year ${req.params.time} for type ${dataType}`,
     });
   }
 
