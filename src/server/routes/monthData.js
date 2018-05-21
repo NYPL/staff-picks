@@ -62,7 +62,7 @@ function currentMonthData(req, res, next) {
       next();
     })
     .catch((error) => {
-      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Redirect to: ${config.baseUrl}/404`, error);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Source: monthData.currentMonthData, Redirect to: ${config.baseUrl}/404`, error);
 
       return res.redirect(`${config.baseUrl}/404`);
     });
