@@ -53,7 +53,6 @@ class Main extends React.Component {
           }, 800);
         });
       } else {
-        console.log(this.context.router);
         this.context.router.push({ pathname: this.props.location.pathname });
       }
     }
@@ -166,7 +165,10 @@ class Main extends React.Component {
     const selectedFilters = [];
     const picks = this.getNewPickSet(this.props.picksData.picks, selectedFilters);
 
-    utils.trackPicks('Clear Filters', 'Clicked');
+    utils.trackPicks(
+      `${appConfig.niceLabelMap[this.props.picksData.type]} Clear Filters`,
+      'Clicked',
+    );
 
     this.setState({
       picks,

@@ -46,6 +46,7 @@ const Sidebar = (props) => {
         setSelectedFilter={props.setSelectedFilter}
         clearFilters={props.clearFilters}
         selectedFilters={props.selectedFilters}
+        displayType={props.type}
       />
     );
   };
@@ -56,7 +57,7 @@ const Sidebar = (props) => {
    * @param {object} data
    */
   const renderListSelector = data =>
-    <ListSelector fieldsetProps={data} isJsEnabled={props.isJsEnabled} />;
+    <ListSelector fieldsetProps={data} isJsEnabled={props.isJsEnabled} displayType={props.type} />;
 
   return (
     <div className="sidebar nypl-column-one-quarter">
