@@ -185,7 +185,7 @@ git push origin qa
 
 At `git push origin qa`, Travis CI will be triggered and will deploy to QA server with the correct credentials.
 
-For details, please see [NYPL common instructions on Elastic Beanstalk](https://github.com/NYPL/aws/blob/hp/add-global-docs/common/elasticbeanstalk.md).
+For details, please see [NYPL common instructions on Elastic Beanstalk](https://github.com/NYPL/aws/blob/master/common/elasticbeanstalk.md).
 
 ### KMS Environment Variables
 Staff Picks and the API where the data is fetched from are currently deployed on NYPl's AWS instance. In order to fetch data, we are using the `@nypl/nypl-data-api-client` to make requests to the API with an authentication token. You can find the [full documentation here](https://www.npmjs.com/package/@nypl/nypl-data-api-client), but to be brief, we need a client id, a client secret, and a token url to authenticate.
