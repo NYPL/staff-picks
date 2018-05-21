@@ -165,7 +165,7 @@ eb deploy ${environment name} --profile ${your AWS profile}
 
 #### Switching Loadbalancer settings between accounts
 
-Loadbalancer settings is required for HTTPS to run behind the load balancers for Elastic Beanstalk. Each Loadbalancer setting is unique to each AWS profile, so switching configuration files is required to deploy to different AWS profiles.
+Loadbalancer settings are required for HTTPS to run behind the load balancers for Elastic Beanstalk. Each Loadbalancer setting is unique to each AWS profile, so switching configuration files is required when deploying to different AWS profiles.
 
 | AWS Profile | Configuration File | 
 |---|---|
@@ -183,7 +183,9 @@ git commit
 git push origin qa
 ```
 
-At `git push origin qa`, Travis CI will be triggered and will deploy to QA server with the correct credentials.
+At `git push origin qa`, Travis CI will deploy to the QA server with the correct credentials..
+
+This procedure is not needed for deployment to `production` environment when merging from `qa`. The `qa` branch uses the same credentials from `nypl-digital-dev` account, and will be reused by `production` environment.
 
 For details, please see [NYPL common instructions on Elastic Beanstalk](https://github.com/NYPL/aws/blob/master/common/elasticbeanstalk.md).
 
