@@ -157,7 +157,7 @@ function selectMonthData(req, res, next) {
       next();
     })
     .catch((error) => {
-      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Redirecting to: ${config.baseUrl}/404`, error);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Source: monthData.selectMonthData, Redirecting to: ${config.baseUrl}/404`, error);
 
       return res.redirect(`${config.baseUrl}/404`);
     });
