@@ -69,7 +69,8 @@ function annualCurrentListData(req, res, next) {
       next();
     })
     .catch((error) => {
-      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Source: annualData.annualCurrentListData, Redirecting to: ${config.baseUrl}/404`, error);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}`);
+
       return res.redirect(`${config.baseUrl}/404`);
     });
 }
