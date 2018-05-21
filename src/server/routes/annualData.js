@@ -145,7 +145,7 @@ function annualListData(req, res, next) {
       next();
     })
     .catch((error) => {
-      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Endpoint: ${platformConfig.endpoints.annualLists[dataType]}, Redirecting to: ${config.baseUrl}/404`, error);
+      logger.error(`Status Code: ${error.statusCode}, Error Message: ${error.code}, Source: annualData.annualListData, Redirecting to: ${config.baseUrl}/404`, error);
 
       return res.redirect(`${config.baseUrl}/404`);
     });
