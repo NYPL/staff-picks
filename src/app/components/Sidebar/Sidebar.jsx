@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ListIcon } from '@nypl/dgx-svg-icons';
 import { isEmpty as _isEmpty } from 'underscore';
 
 import BookFilters from '../BookFilters/BookFilters';
@@ -61,7 +60,6 @@ const Sidebar = (props) => {
   return (
     <div className="sidebar nypl-column-one-quarter">
       <div className="book-filters-heading">
-        <h3><ListIcon /><span>Select a List</span></h3>
         {renderListSelector(updateCurrentListSelectorValues(props))}
         {renderBookFilters(props.isJsEnabled)}
       </div>
