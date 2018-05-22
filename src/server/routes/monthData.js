@@ -68,9 +68,10 @@ function currentMonthData(req, res, next) {
     });
 }
 
-/* selectMonthData
+/**
+ * selectMonthData
  * Get a specific month's or season's staff pick list.
-* It calls '/book-lists?type=staff-picks' to get all the available list options first.
+ * It calls '/book-lists?type=staff-picks' to get all the available list options first.
  */
 function selectMonthData(req, res, next) {
   const listOptions = config.staffPicksListOptions;
@@ -86,24 +87,23 @@ function selectMonthData(req, res, next) {
   // Checks if the URL input fits season's convention
   const seasonMatches = matchListDate(dateRequest);
   // Default audience list is the adult list
-  let audience = 'Adult';
+  let audience = '';
   let isValidAudience = true;
   let requestedSeason = '';
 
   // Checks if req.query.audience exists
   if (req.query.audience) {
+    audience = req.query.audience;
     // If so, checks if it equals to one of the three values
-    if (['Adult', 'YA', 'Children'].includes(req.query.audience)) {
-      // If so, updates the selected audience list value
-      audience = req.query.audience;
-    } else {
-      // Or set it is an invalid audience query
-      isValidAudience = false;
-    }
+    isValidAudience = ['Adult', 'YA', 'Children'].includes(audience);
   }
 
   if (!seasonMatches || !isValidAudience) {
-    logger.error(`Status Code: 400, Error Message: Invalid season ${seasonMatches[0]} or audience ${audience}, Redirecting to: ${config.baseUrl}/404`);
+    let matches = 'undefined';
+    if (Array.isArray(seasonMatches) && seasonMatches.length >= 1) {
+      matches = seasonMatches[0];
+    }
+    logger.error(`Status Code: 400, Error Message: Invalid season ${matches} or audience ${audience}, Redirecting to: ${config.baseUrl}/404`);
 
     return res.redirect(`${config.baseUrl}/404`);
   }
