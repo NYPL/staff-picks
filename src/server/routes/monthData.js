@@ -149,7 +149,7 @@ function selectMonthData(req, res, next) {
           isJsEnabled: false,
           listOptions,
           currentSeason: requestedSeason,
-          currentAudience: audience,
+          currentAudience: listOptions.audience.currentValue,
         },
         pageTitle: config.pageTitle[STAFF_PICKS],
         metaTags: config.metaTags[STAFF_PICKS],
