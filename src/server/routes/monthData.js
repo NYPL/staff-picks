@@ -139,7 +139,7 @@ function selectMonthData(req, res, next) {
 
       // Uodate the option lists' default values by the request params
       listOptions.season.currentValue = requestedSeason;
-      listOptions.audience.currentValue = audience;
+      listOptions.audience.currentValue = (!audience) ? 'Adult' : audience;
 
       res.locals.data = {
         BookStore: {
