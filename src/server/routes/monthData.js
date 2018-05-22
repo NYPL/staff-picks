@@ -99,7 +99,7 @@ function selectMonthData(req, res, next) {
   }
 
   if (!seasonMatches || !isValidAudience) {
-    let matches = 'undefined';
+    let matches;
     if (Array.isArray(seasonMatches) && seasonMatches.length >= 1) {
       matches = seasonMatches[0];
     }
