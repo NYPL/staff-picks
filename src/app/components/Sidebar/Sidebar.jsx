@@ -74,7 +74,7 @@ Sidebar.propTypes = {
   clearFilters: PropTypes.func,
   isJsEnabled: PropTypes.bool,
   listOptions: PropTypes.object,
-  selectedFilters: PropTypes.arrayOf(PropTypes.object),
+  selectedFilters: PropTypes.arrayOf(PropTypes.string),
   type: PropTypes.string,
 };
 
@@ -86,6 +86,7 @@ Sidebar.defaultProps = {
   isJsEnabled: false,
   listOptions: {},
   selectedFilters: [],
+  type: '',
 };
 
 export default Sidebar;
