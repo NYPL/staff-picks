@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import utils from '../../utils/utils';
 
 const ListTitle = (props) => {
   const { displayDate = {}, displayAge } = props.displayInfo;
@@ -12,8 +13,9 @@ const ListTitle = (props) => {
   }
 
   const isStaffPicks = (props.displayType === 'staff-picks');
+  const ageGroup = utils.makeAgeGroupPlural(displayAge);
   const content = isStaffPicks ?
-    `${displayDate.month} ${displayDate.year} Picks for ${displayAge}` :
+    `${displayDate.month} ${displayDate.year} Picks for ${ageGroup}` :
     `${displayDate.year} Picks`;
 
   // If it's staff picks and we don't have the following data then return null;

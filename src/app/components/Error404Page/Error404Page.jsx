@@ -7,8 +7,14 @@ const Error404Page = () => (
       We’re sorry. The page you were looking for doesn’t exist.
     </p>
     <p>
+      Ready to discover your next great read? Browse and filter our&nbsp;
+      <a href="/books-music-movies/recommendations/best-books/staff-picks">
+        Staff Picks.
+      </a>
+    </p>
+    <p>
       Need help or have a question?&nbsp;
-      <a href="https://www.nypl.org/get-help/contact-us">
+      <a href="/get-help/contact-us">
         Contact us.
       </a>
     </p>

@@ -222,4 +222,15 @@ describe('Utils functions', () => {
       }
     );
   });
+
+  describe('makeAgeGroupPlural', () => {
+    it('should add an `s` to the end of the given word', () => {
+      expect(utils.makeAgeGroupPlural('Adult')).to.eql('Adults');
+      expect(utils.makeAgeGroupPlural('Young Adult')).to.eql('Young Adults');
+      expect(utils.makeAgeGroupPlural('cat')).to.eql('cats');
+    });
+    it('should ignore children which is already plural', () => {
+      expect(utils.makeAgeGroupPlural('Children')).to.eql('Children');
+    });
+  });
 });
