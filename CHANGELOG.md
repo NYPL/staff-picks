@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+### 4.0.1
+> Updating @nypl/dgx-react-footer version to 0.5.0 and @nypl/dgx-header-component to 2.4.8.
+
 ### 4.0.0
 > Update the routes. The base route is now `/books-music-movies/recommendations/best-books/`. And `staff-picks`, `ya`, `childrens` are three lists on the same level of the structure.
 > Update the routes for supporting the old URLs for individual books. Now the links no longer lead to a modal but scroll down and focus on the particular book in the list.
