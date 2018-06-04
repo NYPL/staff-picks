@@ -3,6 +3,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import Error404Page from '../../src/app/components/Error404Page/Error404Page';
+import config from '../../appConfig';
 
 describe('Error404Page', () => {
   describe('Default', () => {
@@ -42,7 +43,7 @@ describe('Error404Page', () => {
       const askNyplLink = component.find('a');
 
       expect(askNyplLink.length).to.equal(2);
-      expect(askNyplLink.nodes[0].props.href).to.equal('/books-music-movies/recommendations/best-books/staff-picks');
+      expect(askNyplLink.nodes[0].props.href).to.equal(`${config.baseUrl}/staff-picks`);
       expect(askNyplLink.nodes[0].props.children).to.equal('Staff Picks.');
     });
 

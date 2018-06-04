@@ -11,6 +11,8 @@ import {
   useQueries,
   createMemoryHistory,
 } from 'history';
+import pluralize from 'pluralize';
+import logger from '../../../logger';
 
 function Utils() {
   /**
@@ -185,17 +187,32 @@ function Utils() {
    * makeAgeGroupPlural(word)
    * Simply return an appended 's' for the plural form.
    * @param {string} ageGroup
-   * @return {string}
+   * @return {string|null}
    */
   this.makeAgeGroupPlural = (ageGroup) => {
     let plural;
     // If the ageGroup is not already plural, make it so.
-    if (ageGroup.toLowerCase() !== 'children') {
+    if (typeof ageGroup === 'string' && ageGroup.toLowerCase() !== 'children') {
       plural = `${ageGroup}s`;
     } else {
       plural = ageGroup;
     }
     return plural;
+  };
+
+  /**
+   * Use the pluralize package to make a word plural based on predefined rules.
+   * @param {string} word
+   * @param {integer} count
+   * @param {boolean} inclusive
+   * @return {string}
+   */
+  this.makePlural = (word, count, inclusive) => {
+    if (typeof word !== 'string') {
+      logger.info('Word passed to pluralize function is not a string.');
+      return word;
+    }
+    return pluralize(word, count, inclusive);
   };
 }
 

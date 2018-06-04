@@ -4,7 +4,8 @@ import utils from '../../utils/utils';
 
 const ListTitle = (props) => {
   const { displayDate = {}, displayAge } = props.displayInfo;
-  const booksfound = `${props.picksCount} Book${props.picksCount === 1 ? '' : 's'} Found`;
+  const booksCount = utils.makePlural('Book', props.picksCount, true);
+  const booksFound = `${booksCount} Found`;
   const idPrefix = props.idPrefix ? `${props.idPrefix}-` : '';
 
   // General check to see if the year is available.
@@ -13,7 +14,7 @@ const ListTitle = (props) => {
   }
 
   const isStaffPicks = (props.displayType === 'staff-picks');
-  const ageGroup = utils.makeAgeGroupPlural(displayAge);
+  const ageGroup = utils.makePlural(displayAge);
   const content = isStaffPicks ?
     `${displayDate.month} ${displayDate.year} Picks for ${ageGroup}` :
     `${displayDate.year} Picks`;
@@ -26,7 +27,7 @@ const ListTitle = (props) => {
   return (
     <h2 id={`${idPrefix}list-title`} tabIndex="0">
       {content}
-      <span className="pick-count">{booksfound}</span>
+      <span className="pick-count">{booksFound}</span>
     </h2>
   );
 };

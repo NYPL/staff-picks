@@ -1,4 +1,5 @@
 import React from 'react';
+import config from '../../../../appConfig';
 
 const Error404Page = () => (
   <div className="error-container">
@@ -8,7 +9,7 @@ const Error404Page = () => (
     </p>
     <p>
       Ready to discover your next great read? Browse and filter our&nbsp;
-      <a href="/books-music-movies/recommendations/best-books/staff-picks">
+      <a aria-label="Browse and filter our Staff Picks" href={`${config.baseUrl}/staff-picks`}>
         Staff Picks.
       </a>
     </p>
