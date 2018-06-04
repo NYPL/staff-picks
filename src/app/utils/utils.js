@@ -12,7 +12,6 @@ import {
   createMemoryHistory,
 } from 'history';
 import pluralize from 'pluralize';
-import logger from '../../../logger';
 
 function Utils() {
   /**
@@ -209,7 +208,6 @@ function Utils() {
    */
   this.makePlural = (word, count, inclusive) => {
     if (typeof word !== 'string') {
-      logger.info('Word passed to pluralize function is not a string.');
       return word;
     }
     return pluralize(word, count, inclusive);
