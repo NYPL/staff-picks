@@ -43,8 +43,8 @@ class About extends React.Component {
     return (
       <div className="about nypl-row">
         <h2>Additional Information</h2>
-        <p>Many of these titles are available in formats for&nbsp;
-          <a href={aboutUrls.print}>patrons with print disabilities.</a>
+        <p>Many of these titles are available in&nbsp;
+          <a href={aboutUrls.print}>formats for patrons with print disabilities.</a>
         </p>
         {aboutBestBooksLink}
         <ul>
