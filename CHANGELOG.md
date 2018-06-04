@@ -3,7 +3,7 @@
 ### 4.0.1
 > Updating @nypl/dgx-react-footer version to 0.5.0 and @nypl/dgx-header-component to 2.4.8.
 > Updating 404 page content to include a link back to /staff-picks.
-> Updating about page to include related content in the accessibility link.
+> Updating additional info link to include 'formats for'.
 > Adds npm pacakge pluralize v7.0.0 to handle singular and plural word forms for titles and book counts.
 
 ### 4.0.0
