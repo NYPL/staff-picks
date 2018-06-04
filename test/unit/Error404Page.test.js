@@ -51,7 +51,7 @@ describe('Error404Page', () => {
       const askNyplLink = component.find('a');
 
       expect(askNyplLink.length).to.equal(2);
-      expect(askNyplLink.nodes[1].props.href).to.equal('/get-help/contact-us');
+      expect(askNyplLink.nodes[1].props.href).to.equal('https://www.nypl.org/get-help/contact-us');
       expect(askNyplLink.nodes[1].props.children).to.equal('Contact us.');
     });
   });
