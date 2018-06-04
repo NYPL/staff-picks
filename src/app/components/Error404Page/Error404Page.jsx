@@ -15,7 +15,7 @@ const Error404Page = () => (
     </p>
     <p>
       Need help or have a question?&nbsp;
-      <a href="/get-help/contact-us">
+      <a href="https://www.nypl.org/get-help/contact-us">
         Contact us.
       </a>
     </p>
