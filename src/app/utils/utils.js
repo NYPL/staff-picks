@@ -183,23 +183,7 @@ function Utils() {
   this.toMonthAndYear = (match, d1, d2) => [d1, d2].join('-');
 
   /**
-   * makeAgeGroupPlural(word)
-   * Simply return an appended 's' for the plural form.
-   * @param {string} ageGroup
-   * @return {string|null}
-   */
-  this.makeAgeGroupPlural = (ageGroup) => {
-    let plural;
-    // If the ageGroup is not already plural, make it so.
-    if (typeof ageGroup === 'string' && ageGroup.toLowerCase() !== 'children') {
-      plural = `${ageGroup}s`;
-    } else {
-      plural = ageGroup;
-    }
-    return plural;
-  };
-
-  /**
+   * makePlural(word, count, inclusive)
    * Use the pluralize package to make a word plural based on predefined rules.
    * @param {string} word
    * @param {integer} count
