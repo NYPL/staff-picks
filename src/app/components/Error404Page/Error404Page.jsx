@@ -9,7 +9,7 @@ const Error404Page = () => (
     </p>
     <p>
       Ready to discover your next great read? Browse and filter our&nbsp;
-      <a aria-label="Browse and filter our Staff Picks" href={`${config.baseUrl}/staff-picks`}>
+      <a href={`${config.baseUrl}/staff-picks`}>
         Staff Picks.
       </a>
     </p>
