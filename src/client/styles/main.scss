@@ -51,7 +51,8 @@ li {
   list-style: none;
 }
 
-// Small override to a normalize rule
+// Small override to a normalize rule which mess up the layout for
+// the footer in the mobile and tablet viewports.
 .footer {
   .socialMedia li {
     margin-left: 0;
