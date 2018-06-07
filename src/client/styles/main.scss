@@ -69,4 +69,10 @@ li {
   .copyright p {
     max-width: 100%;
   }
+
+  &-content {
+    @include min-screen(768px) {
+      left: auto;
+    }
+  }
 }
