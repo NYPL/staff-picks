@@ -52,6 +52,20 @@ li {
 }
 
 // Small override to a normalize rule
-.footer-content .socialMedia li {
-  margin-left: 0;
+.footer {
+  .socialMedia li {
+    margin-left: 0;
+  }
+
+  .footerLinks {
+    width: 81%;
+
+    @include min-screen(768px) {
+      width: 100%;
+    }
+  }
+
+  .copyright p {
+    max-width: 100%;
+  }
 }
