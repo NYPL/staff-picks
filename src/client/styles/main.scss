@@ -54,8 +54,14 @@ li {
 // Small override to a normalize rule which mess up the layout for
 // the footer in the mobile and tablet viewports.
 .footer {
-  .socialMedia li {
-    margin-left: 0;
+  .socialMedia {
+    li {
+      margin-left: 0;
+    }
+
+    @include min-screen(1500px) {
+      width: 380px;
+    }
   }
 
   .footerLinks {
