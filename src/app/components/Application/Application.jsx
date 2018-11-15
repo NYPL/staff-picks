@@ -52,6 +52,11 @@ class App extends React.Component {
     // Check if the params type is included in valid data set
     if (type && _allKeys(config.heroData).includes(type)) {
       heroData = config.heroData[type];
+      // If currently displayed list has a custom `heroImageUrl`, override
+      // the default:
+      heroData.heroImageUrl = this.state.picksData.heroImageUrl ?
+        this.state.picksData.heroImageUrl
+        : config.heroData[type].heroImageUrl;
       isStaffPicksHero = type === 'staffPicks';
       heroDOM = <Hero heroData={heroData} isStaffPicksHero={isStaffPicksHero} />;
     }
