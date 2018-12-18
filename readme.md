@@ -4,6 +4,9 @@
 [![dependencies Status](https://david-dm.org/nypl/staff-picks/status.svg)](https://david-dm.org/nypl/staff-picks)
 [![devDependencies Status](https://david-dm.org/nypl/staff-picks/dev-status.svg)](https://david-dm.org/nypl/staff-picks?type=dev)
 
+### Version
+> v4.0.6
+
 ## Technology
 * Universal React
 * [Alt](http://alt.js.org/)/Iso as the Flux implementation

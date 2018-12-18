@@ -1,4 +1,15 @@
 ## CHANGELOG
+### 4.0.6
+> Updating @nypl/dgx-header-component to 2.4.15 and checking for QA in APP_ENV.
+
+### 4.0.5
+> Updating @nypl/dgx-header-component to 2.4.14 and setting APP_ENV.
+
+### 4.0.4
+> Updating @nypl/dgx-header-component to 2.4.13.
+
+### 4.0.3
+> Updating @nypl/dgx-header-component to 2.4.12.
 
 ### 4.0.2
 > Updating @nypl/dgx-react-footer version to 0.5.1 and @nypl/dgx-header-component to 2.4.11.
