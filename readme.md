@@ -5,7 +5,7 @@
 [![devDependencies Status](https://david-dm.org/nypl/staff-picks/dev-status.svg)](https://david-dm.org/nypl/staff-picks?type=dev)
 
 ### Version
-> v4.0.6
+> v4.0.8
 
 ## Technology
 * Universal React
@@ -170,10 +170,10 @@ eb deploy ${environment name} --profile ${your AWS profile}
 
 Loadbalancer settings are required for HTTPS to run behind the load balancers for Elastic Beanstalk. Each Loadbalancer setting is unique to each AWS profile, so switching configuration files is required when deploying to different AWS profiles.
 
-| AWS Profile | Configuration File | 
+| AWS Profile | Configuration File |
 |---|---|
-| `nypl-digital-dev` | `https-nypl-digital-dev.config` | 
-| `nypl-sandbox` | `https-nypl-sandbox.config` | 
+| `nypl-digital-dev` | `https-nypl-digital-dev.config` |
+| `nypl-sandbox` | `https-nypl-sandbox.config` |
 
 When `development` is ready to merge into `qa`, only include `https-nypl-digital-dev.config` within the `.ebextensions` directory. Since CI/CD is being performed via Travis CI, run the following commands on the local qa branch after a merge:
 
