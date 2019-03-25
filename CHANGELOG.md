@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+### 4.0.9
+> Adding Falcon Crowdstrike to operating system.
+
 ### 4.0.8
 > Updating @nypl/dgx-react-footer to 0.5.2.
 
