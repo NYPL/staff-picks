@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+### 4.0.10
+> Added fix to skip CrowdStrike installation to prevent deployment failures.
+
 ### 4.0.9
 > Adding Falcon Crowdstrike to operating system.
 
