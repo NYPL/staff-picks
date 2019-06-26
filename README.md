@@ -46,13 +46,18 @@ $ CLIENT_ID=[clientId] CLIENT_SECRET=[clientSecret] npm run dev-api-start
 > Navigate to http://localhost:3001/books-music-dvds/recommendations/best-books/ya or http://localhost:3001/books-music-dvds/recommendations/best-books/childrens
 
 ### Production Mode
+
+Note: The following must be run before running the app in production mode:
+
+```npm run dist```
+
 To run locally in production mode using the `development` API, run:
 
 ```sh
 $ NODE_ENV=production npm run dev-api-start
 ```
 
-To use the `production` API, run:
+To use the `production` API (note this assumes encrypted creds), run:
 ```sh
 $ NODE_ENV=production npm run prod-api-start
 ```
