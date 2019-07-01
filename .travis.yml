@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '6.14.4'
+- 6.14.4
 cache:
   directories:
   - node_modules
@@ -9,11 +9,6 @@ before_script: npm run dist
 script: npm test
 before_deploy: echo 'All unit tests passed; Successfull built distribution assets;
   Preparing to deploy Staff Picks to AWS.'
-# For every branch mentioned below that does not match the current branch, the following
-# message will appear:
-#   "Skipping a deployment with the elasticbeanstalk provider because this branch is not permitted"
-# When a Pull Request is submitted and Travis finishes building, the following message will appear:
-#   "Skipping a deployment with the elasticbeanstalk provider because the current build is a pull request."
 deploy:
 - provider: elasticbeanstalk
   skip_cleanup: true
@@ -29,8 +24,8 @@ deploy:
     branch: master
 - provider: elasticbeanstalk
   skip_cleanup: true
-  access_key_id: "$AWS_ACCESS_KEY_ID_PRODUCTION"
-  secret_access_key: "$AWS_SECRET_ACCESS_KEY_PRODUCTION"
+  access_key_id: "$AWS_ACCESS_KEY_ID_QA"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY_QA"
   region: us-east-1
   app: nypl-staff-picks-app
   env: staff-picks-qa
@@ -51,7 +46,9 @@ deploy:
   on:
     repo: NYPL/staff-picks
     branch: development
+    # We've removed the development EB, so skip deploy:
+    condition: 1 == 0
 after_deploy: echo 'Successfully executed deploy trigger for Staff Picks on AWS'
 env:
   global:
-    secure: Jtyj6LV2p3nClM1sFjBo2/lNCJzTLwcgxTbEO0lqHaoEaq3Z8xb6r18w6MqOk2Sj4vUJMRTaqAUSFunqlbNk/XRDOROnNpovA/ix00RMLs5p2Hxewza1oC5CxnaCfDCCmPqSCplpe9kZWR7HqBvAuKD/ErBlV+uvjBAxtfLn+WNWZns385tLjDD/i85sm1Oc6T7CMHePKz9HsFUPmhwt2KYEGoftSiSrckPTEiUShQj8YgcqaUNraJyW1pPAJ0fc7Q/XI7AQ61aO2zm9yf8rhCJxmreAaf/wej5bQHZObU6IK4eGmLazMknO+Er5u2MmbEBA9wmGvDjcWjzyBQbNFdFUO+OQVrHwwtPUoXlkRm5L0IeTtQmJG3kI1yIy3fgk0aQsQVhfSGmGZUjbusq7PDRiBD6H5+LfVjL1T+RUZJz6C8LDMSV+gYRF4xD285gc5I+C8nQ5EGddUVNeq3Sk7W3DAc+8zNdKHCi20BcKwY+4e93y41mT2Lv6nRg0+4gFDQltH50hpo8kwBH9jIR3ZAQqQ023EgMWzQNx7P58rxrLxU/u9ZxJl768satFtAmL1quPD7mBpDN0FTZu+ne9hdXairQWbMoRgPKTKlbdf0LoAFJksbrGKhGlX0CwEYYlRiY6MXcVVvmv14mcNn1CM4+uoy7P/9cEGxKQm2OeBEY=
+    secure: orHnGXkizmaUVoECk+yBRTOSVqLM77PQ2ldTjB8+ePqbVEAnf1wYjZO49iTKUXEQnchmxHOAsQ5Hk8u8lArR3a2jMOnwBdMUdf+5HrnErlmOBGYeOJewXSHabb39UUEgb3draANbkozFvhkR0wMQ3GwTPIBd7syPBuQCjJ3AMDCRR7HOmLymnoY9hagZZaw+sBz8Q2xuPb7w7z0PtO1c/12UcRLKZNj4vE9rhAwZ0KBtgPIi8YLkF6XEz2Z7uB3xSxkO2JZxgypXCuum4g/9ThpFqYPg8ONVh1QF9YXKENftOtZoj/oqxYoNj3fKVSihDtQ1cPr7onCIf7/zgYzx0pbWXabKjwtDhKY7uv8uvp3J7G953E3XYPf8nQyqgYPw00GOiLUwx2IJ8ytXkhIgJ0FoD19Gomv3m1vgIXCmV73G3yhWAp1eeNI0QXqi8anTlgv45Nn0B4x8Pz83LlZngmtcG03OUwNaHVBSeDNdiv0DDLakCIWgk4fc0DhL03RCB0ehm5Wd9H51ChPpLrlL3fGutIJRgOe5RutolDW3Zl5B59kFkOYoyvEoIqqSi7GTKrnHoZj18V74bdbD9ks1WwFzU6As7bInhlc1ekjveQr+CCteUooycVhNsOXjn/Ho/Vw2BwdO/QLtxfV/0KMaaJOPNqZhdRcpAbH/8d0C7d4=

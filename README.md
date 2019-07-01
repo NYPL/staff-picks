@@ -70,7 +70,7 @@ We follow a [feature-branch](https://www.atlassian.com/git/tutorials/comparing-w
 * Create a new branch off the `development` branch
 * Send a pull request pointing to the `development` branch upon completion
 * Once the pull request is approved, it should be merged into the `development` branch
-* Travis CI is setup to automatically build and deploy the `development` branch on our Elastic Beanstalk Development server
+* ~Travis CI is setup to automatically build and deploy the `development` branch on our Elastic Beanstalk Development server~ Development deploys are disabled for cost savings.
 * If there are several pull requests in process, a release should be scheduled by merging all completed pull requests into the `development` branch
 * When a release is scheduled to be deployed, the `development` branch `SHOULD` be merged into the `qa` branch
 * Travis CI will build and deploy the `qa` branch into our Elastic Beanstalk QA server
