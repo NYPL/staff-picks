@@ -1,6 +1,6 @@
 {
   "name": "staff-picks",
-  "version": "4.0.10",
+  "version": "4.0.11",
   "description": "NYPL Staff Picks",
   "main": "index.js",
   "scripts": {
