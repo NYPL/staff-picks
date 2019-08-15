@@ -5,7 +5,7 @@
 [![devDependencies Status](https://david-dm.org/nypl/staff-picks/dev-status.svg)](https://david-dm.org/nypl/staff-picks?type=dev)
 
 ### Version
-> v4.0.10
+> v4.0.11
 
 ## Technology
 * Universal React
@@ -46,13 +46,18 @@ $ CLIENT_ID=[clientId] CLIENT_SECRET=[clientSecret] npm run dev-api-start
 > Navigate to http://localhost:3001/books-music-dvds/recommendations/best-books/ya or http://localhost:3001/books-music-dvds/recommendations/best-books/childrens
 
 ### Production Mode
+
+Note: The following must be run before running the app in production mode:
+
+```npm run dist```
+
 To run locally in production mode using the `development` API, run:
 
 ```sh
 $ NODE_ENV=production npm run dev-api-start
 ```
 
-To use the `production` API, run:
+To use the `production` API (note this assumes encrypted creds), run:
 ```sh
 $ NODE_ENV=production npm run prod-api-start
 ```
@@ -65,7 +70,7 @@ We follow a [feature-branch](https://www.atlassian.com/git/tutorials/comparing-w
 * Create a new branch off the `development` branch
 * Send a pull request pointing to the `development` branch upon completion
 * Once the pull request is approved, it should be merged into the `development` branch
-* Travis CI is setup to automatically build and deploy the `development` branch on our Elastic Beanstalk Development server
+* ~Travis CI is setup to automatically build and deploy the `development` branch on our Elastic Beanstalk Development server~ Development deploys are disabled for cost savings.
 * If there are several pull requests in process, a release should be scheduled by merging all completed pull requests into the `development` branch
 * When a release is scheduled to be deployed, the `development` branch `SHOULD` be merged into the `qa` branch
 * Travis CI will build and deploy the `qa` branch into our Elastic Beanstalk QA server
