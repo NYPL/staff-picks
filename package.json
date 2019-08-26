@@ -1,6 +1,6 @@
 {
   "name": "staff-picks",
-  "version": "4.0.11",
+  "version": "4.0.12",
   "description": "NYPL Staff Picks",
   "main": "index.js",
   "scripts": {
@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@nypl/design-toolkit": "0.1.27",
-    "@nypl/dgx-header-component": "2.5.6",
+    "@nypl/dgx-header-component": "2.5.8",
     "@nypl/dgx-react-footer": "0.5.2",
     "@nypl/dgx-svg-icons": "0.2.5",
     "@nypl/nypl-data-api-client": "0.2.5",
