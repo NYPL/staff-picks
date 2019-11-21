@@ -78,7 +78,7 @@ describe('Hero', () => {
 
     it('should have the correct image link.', () => {
       expect(component.find('img').node.props.src).to.equal(
-        'src/client/images/desktop.kids.cover.2017.png'
+        'src/client/images/2019-best-books-children-banner.png'
       );
     });
   });
