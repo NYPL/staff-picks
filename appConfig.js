@@ -121,7 +121,7 @@ const config = {
       category: '',
       header: 'Best Books for Kids',
       description: 'Explore our annual selection of outstanding children\'s titles.',
-      heroImageUrl: 'src/client/images/desktop.kids.cover.2017.png',
+      heroImageUrl: 'src/client/images/2019-best-books-children-banner.png',
       sectionTitle: '',
     },
   },
