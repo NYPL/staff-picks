@@ -5,7 +5,7 @@
 [![devDependencies Status](https://david-dm.org/nypl/staff-picks/dev-status.svg)](https://david-dm.org/nypl/staff-picks?type=dev)
 
 ### Version
-> v4.0.13
+> v4.0.14
 
 ## Technology
 * Universal React
