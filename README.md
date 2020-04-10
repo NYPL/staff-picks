@@ -1,3 +1,6 @@
+# Deprecated
+As of February 2020, this app is no longer in use at NYPL, and the current implementation is Drupal-based. Please contact the DXP/RENO team in Digital for more information. For NYPL developers, please see documentation on the update on [Confluence](https://confluence.nypl.org/pages/viewpage.action?pageId=24150584).
+
 # Staff Picks
 [![GitHub version](https://badge.fury.io/gh/nypl%2Fstaff-picks.svg)](https://badge.fury.io/gh/nypl%2Fstaff-picks)
 [![Build Status](https://travis-ci.org/NYPL/staff-picks.svg?branch=master)](https://travis-ci.org/NYPL/staff-picks)
