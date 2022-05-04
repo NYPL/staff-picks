@@ -11,8 +11,8 @@ li.filter-item {
   }
 
   button {
-    background: $nypl-white;
-    color: $nypl-blue;
+    background: $nypl-blue;
+    color: $nypl-white;
     border-radius: 25px;
     width: 11rem;
     text-align: center;
@@ -24,7 +24,7 @@ li.filter-item {
     position: relative;
 
     svg {
-      fill: $nypl-blue;
+      fill: $nypl-white;
       float: left;
       height: 1.25rem;
       width: 1.25rem;
@@ -46,9 +46,9 @@ li.filter-item {
     }
 
     &:disabled {
-      background-color: $nypl-white;
+      background-color: $nypl-blue;
       border-color: $nypl-gray;
-      color: $nypl-gray;
+      color: $nypl-blue-sky;
 
       &:hover {
         background-color: $nypl-white;
@@ -58,11 +58,11 @@ li.filter-item {
     }
 
     &:hover {
-      background: $nypl-blue;
-      color: $nypl-white;
+      background: $nypl-white;
+      color: $nypl-blue;
 
       svg {
-        fill: $nypl-white;
+        fill: $nypl-blue;
       }
     }
 
@@ -91,12 +91,12 @@ li.filter-item {
     }
 
     &.active {
-      color: $nypl-white;
+      color: $nypl-blue;
       border: 0.04167rem solid $nypl-blue;
-      background: $nypl-blue;
+      background: $nypl-white;
 
       svg {
-        fill: $nypl-white;
+        fill: $nypl-blue;
       }
     }
   }

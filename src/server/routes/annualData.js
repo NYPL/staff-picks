@@ -8,7 +8,7 @@ import modelListOptions from '../../app/utils/ModelListOptionsService';
 import { matchListDate } from '../../app/utils/DateService';
 
 const nyplApiClientGet = endpoint =>
-  nyplApiClient().then(client => client.get(endpoint, { cache: false }));
+  nyplApiClient().then(client => client.get(endpoint, { cache: false, authenticate: false }));
 
 /**
  * annualCurrentListData(req, res, next)
@@ -23,7 +23,6 @@ function annualCurrentListData(req, res, next) {
   let annualListOptions = [];
   let latestYear = '';
   const dataType = utils.getDataType(type);
-
   nyplApiClientGet(platformConfig.endpoints.annualLists[dataType])
     .then((data) => {
       // Models the options based on the data returned
